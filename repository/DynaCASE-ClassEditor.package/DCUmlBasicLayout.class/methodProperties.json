@@ -1,0 +1,16 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"adjustHierarchy" : "PeterUhnak 7/1/2015 12:26:53",
+		"collectClassFigures" : "PeterUhnak 7/1/2015 12:26:53",
+		"collectFiguresByClass:" : "PeterUhnak 7/1/2015 12:26:53",
+		"collectGeneralizationFigures" : "PeterUhnak 7/1/2015 12:26:53",
+		"initialize" : "PeterUhnak 7/1/2015 12:26:53",
+		"layoutAssociations" : "PeterUhnak 7/1/2015 12:26:53",
+		"layoutHierarchy" : "PeterUhnak 7/1/2015 12:26:53",
+		"layoutLabels" : "PeterUhnak 7/1/2015 12:26:53",
+		"liveUpdate:" : "PeterUhnak 7/1/2015 12:26:53",
+		"onController:" : "PeterUhnak 7/1/2015 12:26:53",
+		"updateView" : "PeterUhnak 7/1/2015 12:26:53",
+		"verticalFlip" : "PeterUhnak 7/1/2015 12:26:53" } }
