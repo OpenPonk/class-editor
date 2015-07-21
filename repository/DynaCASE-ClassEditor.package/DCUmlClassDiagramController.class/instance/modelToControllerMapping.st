@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 modelToControllerMapping
 	^ {DCUmlClass -> DCUmlClassController.
 	DCUmlAssociation -> DCUmlAssociationController.

@@ -8,7 +8,7 @@
 	"instvars" : [
 		"stereotype",
 		"attributes",
-		"operations" ],
+		"methods" ],
 	"name" : "DCUmlClass",
 	"pools" : [
 		 ],

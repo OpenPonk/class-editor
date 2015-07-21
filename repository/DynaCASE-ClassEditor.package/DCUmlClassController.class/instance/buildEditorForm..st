@@ -1,22 +1,17 @@
-as yet unclassified
+ui hooks
 buildEditorForm: aForm
-	aForm
-		addTextInput: 'stereotype'
-		label: 'Stereotype'
-		value: self model stereotype
-		onChange: [ :newValue | self model stereotype: newValue ].
-	aForm
-		addTextInput: 'name'
-		label: 'Name'
-		value: self model name
-		onChange: [ :newValue | self model name: newValue ].
-	aForm
-		addTextArea: 'attrs'
-		label: 'Attributes'
-		value: self model attributes asStringWithCr
-		onChange: [ :newValue | self model attributes: newValue asString lines ].
-	aForm
-		addTextArea: 'methods'
-		label: 'Operations'
-		value: self model operations asStringWithCr
-		onChange: [ :newValue | self model operations: newValue asString lines ]
+	(aForm addTextInput: 'Stereotype')
+		text: self model stereotype;
+		whenTextIsAccepted: [ :newValue | self model stereotype: newValue ].
+		
+	(aForm addTextInput: 'Name')
+		text: self model name;
+		whenTextIsAccepted: [ :newValue | self model name: newValue ].
+		
+	(aForm addText: 'Attributes')
+		text: self model attributes asStringWithCr;
+		whenTextIsAccepted: [ :newValue | self model attributes: newValue asString lines ].
+		
+	(aForm addText: 'Methods')
+		text: self model methods asStringWithCr;
+		whenTextIsAccepted: [ :newValue | self model methods: newValue asString lines ]

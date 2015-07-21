@@ -4,4 +4,4 @@ initialize
 	self name: 'Object'.
 	stereotype := ''.
 	attributes := #().
-	operations := #()
+	methods := #()

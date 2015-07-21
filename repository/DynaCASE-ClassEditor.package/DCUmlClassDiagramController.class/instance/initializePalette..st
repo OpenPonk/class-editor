@@ -1,4 +1,4 @@
-initialization
+ui hooks
 initializePalette: aPalette
 	aPalette
 		newCreationTool: 'Class' factory: [ DCUmlClassController new ] icon: DCIcons current dcOmlBoxIcon;
