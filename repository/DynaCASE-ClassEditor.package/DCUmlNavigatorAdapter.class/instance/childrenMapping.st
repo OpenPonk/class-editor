@@ -1,0 +1,3 @@
+accessing
+childrenMapping
+	^ {DCUmlClassDiagram -> #ownedElements}

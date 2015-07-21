@@ -1,3 +1,3 @@
 private - layout
 layoutAssociations
-	self shouldBeImplemented
+	"self shouldBeImplemented"

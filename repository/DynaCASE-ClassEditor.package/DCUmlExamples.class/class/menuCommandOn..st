@@ -1,6 +1,6 @@
 menu
 menuCommandOn: aBuilder
-	"<worldMenu>"
+	<worldMenu>
 	(aBuilder item: #DynaUML)
 		icon: DCIcons current dcOmlDiagramIcon;
 		label: 'UML Class Diagram';

@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Plugin",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlClassPlugin",
+	"pools" : [
+		 ],
+	"super" : "DCPlugin",
+	"type" : "normal" }
