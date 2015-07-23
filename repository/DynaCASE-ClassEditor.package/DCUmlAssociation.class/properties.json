@@ -4,12 +4,13 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "PeterUhnak 7/21/2015 21:32",
 	"instvars" : [
 		"sourceName",
 		"targetName",
 		"sourceMultiplicity",
-		"targetMultiplicity" ],
+		"targetMultiplicity",
+		"memberEnds" ],
 	"name" : "DCUmlAssociation",
 	"pools" : [
 		 ],

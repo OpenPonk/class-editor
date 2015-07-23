@@ -1,0 +1,1 @@
+I contain a single UML Class Diagram.

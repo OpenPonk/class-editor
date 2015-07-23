@@ -1,0 +1,1 @@
+I represent a class in a class diagram.

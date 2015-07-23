@@ -1,9 +1,10 @@
 ui hooks
 initializePalette: aPalette
 	aPalette
-		newCreationTool: 'Class' factory: [ DCUmlClassController new ] icon: DCIcons current dcOmlBoxIcon;
-		newSeparator;
+		newCreationTool: 'Class' factory: [ DCUmlClassController new ] icon: DCUmlIcons current diagramIcon;
+		newConnectionCreationTool: 'Generalization'
+			factory: [ DCUmlGeneralizationController new ]
+			icon: DCUmlIcons current generalizationIcon;
 		newConnectionCreationTool: 'Association'
 			factory: [ DCUmlAssociationController new ]
-			icon: DCIcons current dcFsmTransitionIcon.
-		
+			icon: DCUmlIcons current associationIcon
