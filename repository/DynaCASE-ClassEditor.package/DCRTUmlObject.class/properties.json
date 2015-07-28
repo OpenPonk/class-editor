@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Figures",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 7/28/2015 12:36",
+	"instvars" : [
+		 ],
+	"name" : "DCRTUmlObject",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

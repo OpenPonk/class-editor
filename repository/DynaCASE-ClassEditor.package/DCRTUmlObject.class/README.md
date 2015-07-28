@@ -1,0 +1,1 @@
+I am base class for figure-based roassal elements and I am implementing some of RTAnnouncableObject/RTShapedObject/RTElement interface.

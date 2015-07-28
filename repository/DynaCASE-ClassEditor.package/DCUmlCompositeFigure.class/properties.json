@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-ClassEditor-Figures",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"figures",
+		"view" ],
+	"name" : "DCUmlCompositeFigure",
+	"pools" : [
+		 ],
+	"super" : "DCRTUmlFigure",
+	"type" : "normal" }
