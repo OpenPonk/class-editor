@@ -1,4 +1,4 @@
-as yet unclassified
+commands
 doNest
 	RTNestingBehavior new
 		centerOn: element elements: figures;

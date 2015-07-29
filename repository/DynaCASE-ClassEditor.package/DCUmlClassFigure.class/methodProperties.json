@@ -1,8 +1,11 @@
 {
 	"class" : {
-		 },
+		"createFull" : "PeterUhnak 7/29/2015 17:45" },
 	"instance" : {
+		"attributesFigure" : "PeterUhnak 7/29/2015 17:47",
 		"doNest" : "PeterUhnak 7/28/2015 13:40",
+		"methodsFigure" : "PeterUhnak 7/29/2015 17:47",
+		"nameFigure" : "PeterUhnak 7/29/2015 17:48",
 		"newCompartment" : "PeterUhnak 7/28/2015 12:56",
 		"newElement" : "PeterUhnak 7/28/2015 12:55",
 		"renderIn:" : "PeterUhnak 7/28/2015 12:56",
