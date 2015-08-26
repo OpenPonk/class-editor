@@ -12,6 +12,6 @@ buildEditorForm: aForm
 		text: self model attributes asStringWithCr;
 		whenTextIsAccepted: [ :newValue | self model attributes: newValue asString lines ].
 		
-	(aForm addText: 'Methods')
-		text: self model methods asStringWithCr;
-		whenTextIsAccepted: [ :newValue | self model methods: newValue asString lines ]
+	(aForm addText: 'Operations')
+		text: self model operations asStringWithCr;
+		whenTextIsAccepted: [ :newValue | self model operations: newValue asString lines ]

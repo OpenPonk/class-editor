@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-ClassEditor-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"upper",
+		"lower" ],
+	"name" : "DCUmlMultiplicity",
+	"pools" : [
+		 ],
+	"super" : "DCNamedElement",
+	"type" : "normal" }

@@ -1,3 +1,3 @@
 grammar
 operation
-	^ visibility optional , opName , $( asParser , parameterList , $) asParser , returnValue optional
+	^ visibility optional , opName , parameters , returnValue optional

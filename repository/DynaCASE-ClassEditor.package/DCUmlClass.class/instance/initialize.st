@@ -1,7 +1,7 @@
 initialization
 initialize
 	super initialize.
-	self name: 'Object'.
-	stereotype := ''.
-	attributes := #().
-	methods := #()
+	features := DCUmlFeature new.
+	associations := OrderedCollection new.
+	attributes := OrderedCollection new.
+	operations := OrderedCollection new.

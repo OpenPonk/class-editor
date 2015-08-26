@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Parsers-Builders",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 8/26/2015 02:39",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlOperationBuilder",
+	"pools" : [
+		 ],
+	"super" : "DCUmlOperationGrammar",
+	"type" : "normal" }

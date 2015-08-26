@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-ClassEditor-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"isNavigable",
+		"multiplicity" ],
+	"name" : "DCUmlAssociationEnd",
+	"pools" : [
+		 ],
+	"super" : "DCNamedElement",
+	"type" : "normal" }

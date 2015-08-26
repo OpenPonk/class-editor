@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlInterfaceRealization",
+	"pools" : [
+		 ],
+	"super" : "DCUmlAssociation",
+	"type" : "normal" }

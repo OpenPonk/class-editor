@@ -10,7 +10,8 @@
 		"returnValue",
 		"operation",
 		"parameter",
-		"opName" ],
+		"opName",
+		"parameters" ],
 	"name" : "DCUmlOperationGrammar",
 	"pools" : [
 		 ],

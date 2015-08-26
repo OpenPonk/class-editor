@@ -1,0 +1,1 @@
+I am a parser / builder that parses textual representation of an attribute and creates an DCUmlAttribute instance.

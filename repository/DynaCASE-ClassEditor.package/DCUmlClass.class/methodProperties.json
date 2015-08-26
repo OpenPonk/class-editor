@@ -2,10 +2,16 @@
 	"class" : {
 		 },
 	"instance" : {
-		"attributes" : "PeterUhnak 7/29/2015 17:49:46",
-		"attributes:" : "PeterUhnak 7/29/2015 17:49:46",
-		"initialize" : "PeterUhnak 7/29/2015 17:49:46",
-		"methods" : "PeterUhnak 7/29/2015 17:49:46",
-		"methods:" : "PeterUhnak 7/29/2015 17:49:46",
-		"stereotype" : "PeterUhnak 7/29/2015 17:49:46",
-		"stereotype:" : "PeterUhnak 7/29/2015 17:49:46" } }
+		"addAttribute:" : "PeterUhnak 8/29/2014 23:25:33",
+		"addOperation:" : "PeterUhnak 8/29/2014 23:25:33",
+		"associateWith:through:" : "PeterUhnak 8/29/2014 23:25:33",
+		"associations" : "PeterUhnak 8/29/2014 23:25:33",
+		"attributes" : "PeterUhnak 8/29/2014 23:25:33",
+		"attributes:" : "PeterUhnak 7/1/2015 12:26:53",
+		"features" : "PeterUhnak 8/29/2014 23:25:33",
+		"features:" : "PeterUhnak 8/29/2014 23:25:33",
+		"initialize" : "PeterUhnak 8/29/2014 23:25:33",
+		"operations" : "PeterUhnak 8/29/2014 23:25:33",
+		"operations:" : "PeterUhnak 7/1/2015 12:26:53",
+		"stereotype" : "PeterUhnak 7/1/2015 12:26:53",
+		"stereotype:" : "PeterUhnak 7/1/2015 12:26:53" } }

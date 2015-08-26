@@ -6,11 +6,7 @@
 		 ],
 	"commentStamp" : "PeterUhnak 7/21/2015 21:32",
 	"instvars" : [
-		"sourceName",
-		"targetName",
-		"sourceMultiplicity",
-		"targetMultiplicity",
-		"memberEnds" ],
+		"ends" ],
 	"name" : "DCUmlAssociation",
 	"pools" : [
 		 ],

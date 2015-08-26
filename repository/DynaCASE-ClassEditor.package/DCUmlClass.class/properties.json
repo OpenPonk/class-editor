@@ -6,9 +6,10 @@
 		 ],
 	"commentStamp" : "PeterUhnak 7/21/2015 21:31",
 	"instvars" : [
-		"stereotype",
+		"features",
+		"associations",
 		"attributes",
-		"methods" ],
+		"operations" ],
 	"name" : "DCUmlClass",
 	"pools" : [
 		 ],

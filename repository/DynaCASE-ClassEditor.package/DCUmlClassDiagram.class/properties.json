@@ -10,5 +10,5 @@
 	"name" : "DCUmlClassDiagram",
 	"pools" : [
 		 ],
-	"super" : "DCNamedElement",
+	"super" : "DCDiagram",
 	"type" : "normal" }

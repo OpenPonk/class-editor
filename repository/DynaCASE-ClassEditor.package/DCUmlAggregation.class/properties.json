@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlAggregation",
+	"pools" : [
+		 ],
+	"super" : "DCUmlAssociation",
+	"type" : "normal" }

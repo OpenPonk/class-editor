@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Parsers-Builders",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlAttributeBuilderTest",
+	"pools" : [
+		 ],
+	"super" : "DCUmlPropertyGrammarTest",
+	"type" : "normal" }
