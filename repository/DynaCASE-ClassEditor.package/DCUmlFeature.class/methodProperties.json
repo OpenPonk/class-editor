@@ -1,15 +1,15 @@
 {
 	"class" : {
-		"private" : "PeterUhnak 8/29/2014 23:25:33",
-		"protected" : "PeterUhnak 8/29/2014 23:25:33",
-		"public" : "PeterUhnak 8/29/2014 23:25:33" },
+		"private" : "PeterUhnak 8/26/2015 21:51:00",
+		"protected" : "PeterUhnak 8/26/2015 21:51:00",
+		"public" : "PeterUhnak 8/26/2015 21:51:00" },
 	"instance" : {
-		"initialize" : "PeterUhnak 8/29/2014 23:25:33",
-		"isAbstract" : "PeterUhnak 8/29/2014 23:25:33",
-		"isAbstract:" : "PeterUhnak 8/29/2014 23:25:33",
-		"isClassSide" : "PeterUhnak 8/29/2014 23:25:33",
-		"isClassSide:" : "PeterUhnak 8/29/2014 23:25:33",
-		"stereotype" : "PeterUhnak 8/29/2014 23:25:33",
-		"stereotype:" : "PeterUhnak 8/29/2014 23:25:33",
-		"visibility" : "PeterUhnak 8/29/2014 23:25:33",
-		"visibility:" : "PeterUhnak 8/29/2014 23:25:33" } }
+		"initialize" : "PeterUhnak 8/26/2015 21:51:00",
+		"isAbstract" : "PeterUhnak 8/26/2015 21:51:00",
+		"isAbstract:" : "PeterUhnak 8/26/2015 21:51:00",
+		"isClassSide" : "PeterUhnak 8/26/2015 21:51:00",
+		"isClassSide:" : "PeterUhnak 8/26/2015 21:51:00",
+		"stereotype" : "PeterUhnak 8/26/2015 21:51:00",
+		"stereotype:" : "PeterUhnak 8/26/2015 21:51:00",
+		"visibility" : "PeterUhnak 8/26/2015 21:51:00",
+		"visibility:" : "PeterUhnak 8/26/2015 21:51:00" } }
