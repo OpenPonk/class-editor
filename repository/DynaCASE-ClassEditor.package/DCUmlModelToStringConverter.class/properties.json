@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Visitors",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlModelToStringConverter",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

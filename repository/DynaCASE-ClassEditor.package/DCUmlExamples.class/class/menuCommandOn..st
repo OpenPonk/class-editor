@@ -5,7 +5,7 @@ menuCommandOn: aBuilder
 		icon: DCIcons current dcOmlDiagramIcon;
 		label: 'UML Class Diagram';
 		parent: #MostUsedTools;
-		action: [ self openEmpty ];
+		action: [ self exampleEmpty ];
 		with: [ 
 					(aBuilder item: #DynaUMLExamples)
 						parent: #DynaUML;

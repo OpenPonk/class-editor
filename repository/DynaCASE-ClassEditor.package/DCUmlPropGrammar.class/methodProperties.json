@@ -1,10 +1,10 @@
 {
 	"class" : {
-		"dependencies" : "PeterUhnak 8/26/2015 21:51:00",
-		"isAbstract" : "PeterUhnak 8/26/2015 21:51:00" },
+		"dependencies" : "PeterUhnak 8/27/2015 22:08:41",
+		"isAbstract" : "PeterUhnak 8/27/2015 22:08:41" },
 	"instance" : {
-		"multiplicity" : "PeterUhnak 8/26/2015 21:51:00",
-		"multiplicityRange" : "PeterUhnak 8/26/2015 21:51:00",
-		"symbol" : "PeterUhnak 8/26/2015 21:51:00",
-		"type" : "PeterUhnak 8/26/2015 21:51:00",
-		"visibility" : "PeterUhnak 8/26/2015 21:51:00" } }
+		"multiplicity" : "PeterUhnak 8/27/2015 22:08:41",
+		"multiplicityRange" : "PeterUhnak 8/27/2015 22:08:41",
+		"symbol" : "PeterUhnak 8/27/2015 22:08:41",
+		"type" : "PeterUhnak 8/27/2015 22:08:41",
+		"visibility" : "PeterUhnak 8/27/2015 22:08:41" } }

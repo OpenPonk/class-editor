@@ -1,14 +1,14 @@
 {
 	"class" : {
-		"lower:upper:" : "PeterUhnak 8/26/2015 21:51:00",
-		"one" : "PeterUhnak 8/26/2015 21:51:00",
-		"oneToMany" : "PeterUhnak 8/26/2015 21:51:00",
-		"zeroToMany" : "PeterUhnak 8/26/2015 21:51:00",
-		"zeroToOne" : "PeterUhnak 8/26/2015 21:51:00" },
+		"lower:upper:" : "PeterUhnak 8/27/2015 22:08:41",
+		"one" : "PeterUhnak 8/27/2015 22:08:41",
+		"oneToMany" : "PeterUhnak 8/27/2015 22:08:41",
+		"zeroToMany" : "PeterUhnak 8/27/2015 22:08:41",
+		"zeroToOne" : "PeterUhnak 8/27/2015 22:08:41" },
 	"instance" : {
-		"initialize" : "PeterUhnak 8/26/2015 21:51:00",
-		"lower" : "PeterUhnak 8/26/2015 21:51:00",
-		"lower:" : "PeterUhnak 8/26/2015 21:51:00",
-		"printOn:" : "PeterUhnak 8/26/2015 21:51:00",
-		"upper" : "PeterUhnak 8/26/2015 21:51:00",
-		"upper:" : "PeterUhnak 8/26/2015 21:51:00" } }
+		"initialize" : "PeterUhnak 8/27/2015 22:08:41",
+		"lower" : "PeterUhnak 8/27/2015 22:08:41",
+		"lower:" : "PeterUhnak 8/27/2015 22:08:41",
+		"printOn:" : "PeterUhnak 8/27/2015 22:08:41",
+		"upper" : "PeterUhnak 8/27/2015 22:08:41",
+		"upper:" : "PeterUhnak 8/27/2015 22:08:41" } }

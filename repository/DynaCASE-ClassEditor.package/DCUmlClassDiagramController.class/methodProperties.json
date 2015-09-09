@@ -2,8 +2,9 @@
 	"class" : {
 		 },
 	"instance" : {
-		"canBeTargetFor:" : "PeterUhnak 8/26/2015 21:51:00",
-		"initializePalette:" : "PeterUhnak 8/26/2015 21:51:00",
-		"modelClass" : "PeterUhnak 8/26/2015 21:51:00",
-		"modelToControllerMapping" : "PeterUhnak 8/26/2015 21:51:00",
-		"rebuild" : "PeterUhnak 8/26/2015 21:51:00" } }
+		"addModelElement:" : "PeterUhnak 8/30/2015 19:00",
+		"canBeTargetFor:" : "PeterUhnak 8/27/2015 22:08:41",
+		"initializePalette:" : "PeterUhnak 8/27/2015 22:08:41",
+		"modelClass" : "PeterUhnak 8/27/2015 22:08:41",
+		"modelToControllerMapping" : "PeterUhnak 8/30/2015 19:01",
+		"rebuild" : "PeterUhnak 8/30/2015 00:40" } }

@@ -1,5 +1,5 @@
 accessing
 modelToControllerMapping
-	^ {DCUmlClass -> DCUmlClassController.
-	DCUmlAssociation -> DCUmlAssociationController.
-	DCUmlGeneralization -> DCUmlGeneralizationController} asDictionary
+	^ {(FAMIXClass -> DCUmlClassController).
+	(DCUmlAssociation -> DCUmlAssociationController).
+	(DCUmlGeneralization -> DCUmlGeneralizationController)} asDictionary
