@@ -4,4 +4,4 @@ newElement
 		size: 0;
 		borderColor: Color black;
 		borderWidth: 2;
-		elementOn: ''
+		elementOn: self

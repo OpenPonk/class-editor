@@ -1,5 +1,5 @@
 instance creation
 newNameFigure
 	^ DCUmlLabelFigure new
-		fontSize: 15;
+		fontSize: 12;
 		yourself

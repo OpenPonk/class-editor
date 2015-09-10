@@ -2,7 +2,8 @@ updating
 update
 	| maxWidth |
 	super update.
-	maxWidth := figures upper: [ :each | each extent x ].
+	maxWidth := figures max: [ :each | each extent x ].
+	maxWidth := maxWidth max: minWidth.
 
 	self
 		figuresDo: [ :each | 

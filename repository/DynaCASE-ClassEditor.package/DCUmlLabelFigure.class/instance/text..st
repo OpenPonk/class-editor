@@ -1,4 +1,4 @@
 accessing
 text: aString
-	element model: aString.
+	element shape text: aString.
 	self update
