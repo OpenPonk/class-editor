@@ -1,10 +1,14 @@
 ui hooks
 initializePalette: aPalette
-	aPalette
-		newCreationTool: 'Class' factory: [ DCUmlClassController new ] icon: DCUmlIcons current diagramIcon;
-		newConnectionCreationTool: 'Generalization'
-			factory: [ DCUmlGeneralizationController new ]
-			icon: DCUmlIcons current generalizationIcon;
-		newConnectionCreationTool: 'Association'
-			factory: [ DCUmlAssociationController new ]
-			icon: DCUmlIcons current associationIcon
+	(aPalette newCreationTool: [ DCUmlClassController new ])
+		label: 'Class';
+		shortcut: $c asShortcut;
+		icon: DCUmlIcons current classIcon.
+	(aPalette newConnectionCreationTool: [ DCUmlGeneralizationController new ])
+		label: 'Generalization';
+		shortcut: $g asShortcut;
+		icon: DCUmlIcons current generalizationIcon.
+	(aPalette newConnectionCreationTool: [ DCUmlAssociationController new ])
+		label: 'Association';
+		shortcut: $a asShortcut;
+		icon: DCUmlIcons current associationIcon
