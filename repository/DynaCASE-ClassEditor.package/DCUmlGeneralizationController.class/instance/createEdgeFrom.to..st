@@ -4,5 +4,5 @@ createEdgeFrom: fromElement to: toElement
 		block: [ :view | 
 			| fig |
 			fig := self edgeBuilder createFigureFrom: fromElement to: toElement view: view.
-			fig @ DCRTLineHandles.
+			fig @ DCRTConnectionHandles.
 			fig ]
