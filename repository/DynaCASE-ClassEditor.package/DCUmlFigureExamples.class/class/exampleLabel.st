@@ -1,5 +1,5 @@
 examples
-exampleFigure
+exampleLabel
 	| v l |
 	v := RTView new.
 
