@@ -10,7 +10,11 @@
 		"initialize" : "PeterUhnak 8/27/2015 22:08:41",
 		"lower" : "PeterUhnak 8/27/2015 22:08:41",
 		"lower:" : "PeterUhnak 8/27/2015 22:08:41",
+		"lowerAsString" : "PeterUhnak 9/20/2015 21:26",
+		"lowerFromString:" : "PeterUhnak 9/20/2015 21:28",
 		"printOn:" : "PeterUhnak 9/19/2015 01:25",
-		"printRange" : "PeterUhnak 9/19/2015 01:26",
+		"printRange" : "PeterUhnak 9/20/2015 21:26",
 		"upper" : "PeterUhnak 8/27/2015 22:08:41",
-		"upper:" : "PeterUhnak 8/27/2015 22:08:41" } }
+		"upper:" : "PeterUhnak 8/27/2015 22:08:41",
+		"upperAsString" : "PeterUhnak 9/20/2015 21:26",
+		"upperFromString:" : "PeterUhnak 9/20/2015 21:28" } }

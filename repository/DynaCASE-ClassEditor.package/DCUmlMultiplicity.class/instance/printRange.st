@@ -5,14 +5,10 @@ printRange
 			[ :stream | 
 			stream
 				nextPut: $[;
-				nextPutAll: self lower asString.
+				nextPutAll: self lowerAsString.
 			self lower = self upper
-				ifFalse:
-					[ 
+				ifFalse: [ 
 					stream
 						nextPutAll: '..';
-						nextPutAll:
-							(self upper isInfinite
-								ifTrue: [ '*' ]
-								ifFalse: [ self upper asString ]) ].
+						nextPutAll: self upperAsString ].
 			stream nextPut: $] ]

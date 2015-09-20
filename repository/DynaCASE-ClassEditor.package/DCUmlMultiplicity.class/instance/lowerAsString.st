@@ -1,0 +1,3 @@
+accessing
+lowerAsString
+	^ lower asString
