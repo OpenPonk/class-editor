@@ -1,10 +1,12 @@
 {
 	"class" : {
-		"exampleClass" : "PeterUhnak 8/27/2015 22:08:41",
+		"exampleClass" : "PeterUhnak 9/20/2015 12:56",
 		"exampleCompartment" : "PeterUhnak 8/27/2015 22:08:41",
-		"exampleFamixClass" : "PeterUhnak 9/20/2015 02:27",
+		"exampleFamixClass" : "PeterUhnak 9/20/2015 12:56",
 		"exampleLabel" : "PeterUhnak 9/19/2015 02:10",
 		"exampleNameCompartment" : "PeterUhnak 8/27/2015 22:08:41",
-		"exampleStyledLabels" : "PeterUhnak 9/19/2015 16:57" },
+		"exampleStyledLabels" : "PeterUhnak 9/19/2015 16:57",
+		"sampleClass" : "PeterUhnak 9/20/2015 12:55",
+		"sampleFamixClass" : "PeterUhnak 9/20/2015 12:54" },
 	"instance" : {
 		 } }
