@@ -4,13 +4,13 @@ update
 	super update.
 	maxWidth := figures max: [ :each | each extent x ].
 	maxWidth := maxWidth max: minWidth.
-
+"
 	self
-		figuresDo: [ :each | 
+		figuresDo:
+			[ :each | 
 			| delta |
 			delta := (each width - maxWidth) / 2.
 			each width: maxWidth.
-			each figuresDo: [ :f | f translateBy: delta @ 0 ] ].
+			each figuresDo: [ :f | f translateBy: delta @ 0 ] ]."
 
-	self applyLayout.
-	self doNest
+	self layout

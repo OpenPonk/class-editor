@@ -2,12 +2,12 @@
 	"class" : {
 		 },
 	"instance" : {
-		"childChanged" : "PeterUhnak 8/27/2015 22:08:41",
+		"changed:" : "PeterUhnak 9/20/2015 00:10",
 		"element" : "PeterUhnak 8/27/2015 22:08:41",
 		"initialize" : "PeterUhnak 8/27/2015 22:08:41",
 		"newElement" : "PeterUhnak 8/27/2015 22:08:41",
 		"parent" : "PeterUhnak 8/27/2015 22:08:41",
 		"parent:" : "PeterUhnak 8/27/2015 22:08:41",
 		"update" : "PeterUhnak 8/27/2015 22:08:41",
-		"updateParent" : "PeterUhnak 8/27/2015 22:08:41",
+		"update:" : "PeterUhnak 9/20/2015 00:16",
 		"view" : "PeterUhnak 8/27/2015 22:08:41" } }

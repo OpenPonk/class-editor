@@ -1,4 +1,4 @@
-actions
+adding/removing
 remove
 	| view |
 	view := element view.

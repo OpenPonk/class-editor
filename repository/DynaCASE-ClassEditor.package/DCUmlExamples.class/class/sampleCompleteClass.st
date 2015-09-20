@@ -4,24 +4,32 @@ sampleCompleteClass
 	model := MooseModel named: 'Something'.
 	class := FAMIXClass named: 'CompleteClass'.
 	model add: class.
+	class addAttribute: (FAMIXAttribute named: 'normal' type: (FAMIXClass named: 'Integer')).
 	class
 		addAttribute:
-			(FAMIXAttribute new
-				name: 'normal';
-				declaredType: (FAMIXClass named: 'Integer');
-				yourself).
+			((FAMIXAttribute named: 'collection' type: (FAMIXClass named: 'Float'))
+				multiplicity: DCUmlMultiplicity zeroToMany).
 	class
 		addAttribute:
-			(FAMIXAttribute new
-				name: 'collection';
-				declaredType: (FAMIXClass named: 'Float');
-				multiplicity: DCUmlMultiplicity zeroToMany;
-				yourself).
+			((FAMIXAttribute named: 'static' type: (FAMIXClass named: 'String')) isStatic: true).
 	class
 		addAttribute:
-			(FAMIXAttribute new
-				name: 'static';
+			((FAMIXAttribute named: 'abstract' type: (FAMIXClass named: 'Object')) isAbstract: true).
+
+	class addMethod: (FAMIXMethod named: 'basicMethod').
+	class
+		addMethod:
+			((FAMIXMethod named: 'staticMethod')
+				addParameter: (FAMIXParameter named: 'number' type: (FAMIXClass named: 'Number'));
+				isStatic: true).
+	class
+		addMethod:
+			((FAMIXMethod named: 'abstractMethod')
 				declaredType: (FAMIXClass named: 'String');
-				isStatic: true;
-				yourself).
+				addParameter: (FAMIXParameter named: 'arg1' type: (FAMIXClass named: 'Number'));
+				addParameter:
+					((FAMIXParameter named: 'arg2' type: (FAMIXClass named: 'String'))
+						multiplicity: DCUmlMultiplicity zeroToOne);
+				isAbstract: true).
+
 	^ model

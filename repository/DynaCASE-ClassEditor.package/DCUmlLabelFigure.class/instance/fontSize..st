@@ -1,3 +1,4 @@
-instance creation
+accessing
 fontSize: aNumber
-	self element trachelShape fontSize: aNumber
+	element shape height: aNumber.
+	self changed

@@ -1,4 +1,4 @@
-adding
+adding/removing
 remove
 	figures select: [ :each | each view isNotNil ] thenDo: #remove.
 	figures removeAll.

@@ -1,0 +1,3 @@
+accessing
+minWidth
+	^ element width
