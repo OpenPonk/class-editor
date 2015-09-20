@@ -3,12 +3,16 @@
 		"createFull" : "PeterUhnak 8/27/2015 22:08:41" },
 	"instance" : {
 		"attributesFigure" : "PeterUhnak 8/27/2015 22:08:41",
-		"initialize" : "PeterUhnak 9/9/2015 17:24",
+		"famixClass:" : "PeterUhnak 9/20/2015 16:29",
+		"famixUpdate" : "PeterUhnak 9/20/2015 20:36",
+		"initialize" : "PeterUhnak 9/20/2015 16:28",
 		"layout" : "PeterUhnak 9/20/2015 01:35",
 		"methodsFigure" : "PeterUhnak 8/27/2015 22:08:41",
 		"minWidth" : "PeterUhnak 9/20/2015 02:26",
+		"model" : "PeterUhnak 9/20/2015 16:30",
+		"model:" : "PeterUhnak 9/20/2015 16:30",
 		"nameFigure" : "PeterUhnak 8/27/2015 22:08:41",
 		"newCompartment" : "PeterUhnak 8/27/2015 22:08:41",
-		"newElement" : "PeterUhnak 8/27/2015 22:08:41",
+		"newElement" : "PeterUhnak 9/20/2015 20:06",
 		"renderIn:" : "PeterUhnak 8/27/2015 22:08:41",
 		"update" : "PeterUhnak 9/20/2015 02:17" } }

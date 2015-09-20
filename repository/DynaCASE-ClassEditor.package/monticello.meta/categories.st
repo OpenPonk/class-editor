@@ -8,4 +8,3 @@ SystemOrganization addCategory: 'DynaCASE-ClassEditor-Models'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Parsers'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Parsers-Builders'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Plugin'!
-SystemOrganization addCategory: 'DynaCASE-ClassEditor-Visitors'!

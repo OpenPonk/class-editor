@@ -3,5 +3,5 @@ newElement
 	^ RTBox new
 		size: 0;
 		borderColor: Color black;
-		borderWidth: 2;
+		borderWidth: 1;
 		elementOn: self
