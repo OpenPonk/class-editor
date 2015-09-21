@@ -1,3 +1,7 @@
 accessing
 displayMapping
-	^ {DCNamedElement -> [ :o | self classNameFor: o ]}
+	^ {(DCNamedElement -> #name).
+	(MooseEntity -> #name).
+	(FAMIXAttribute
+		->
+			[ :o | o name , (o declaredType ifNil: [ '' ] ifNotNil: [ ' : ' , o declaredType name ]) ])}

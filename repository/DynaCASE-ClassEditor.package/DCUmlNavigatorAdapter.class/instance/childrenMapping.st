@@ -1,3 +1,6 @@
 accessing
 childrenMapping
-	^ {DCUmlClassDiagram -> #ownedElements}
+	^ {(DCUmlClassDiagram -> #ownedElements).
+	(MooseModel -> #allClasses).
+	(MooseEntity -> #()).
+	(FAMIXClass -> [ :o | o attributes , o methods ])}
