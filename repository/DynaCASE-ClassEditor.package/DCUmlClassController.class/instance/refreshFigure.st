@@ -1,4 +1,4 @@
 figures
 refreshFigure
-	self updateFigure: figure model from: self model.
+	self realFigure changed.
 	super refreshFigure

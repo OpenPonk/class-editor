@@ -1,0 +1,3 @@
+accessing - figures
+methodsBox
+	^ methodsBox

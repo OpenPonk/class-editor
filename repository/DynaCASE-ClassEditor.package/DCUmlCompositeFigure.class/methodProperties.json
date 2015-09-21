@@ -2,11 +2,13 @@
 	"class" : {
 		 },
 	"instance" : {
-		"add:" : "PeterUhnak 9/20/2015 00:33",
+		"add:" : "PeterUhnak 9/21/2015 23:36",
+		"add:afterIndex:" : "PeterUhnak 9/21/2015 23:42",
+		"addLast:" : "PeterUhnak 9/21/2015 23:43",
 		"figures" : "PeterUhnak 8/27/2015 22:08:41",
-		"figuresDo:" : "PeterUhnak 8/27/2015 22:08:41",
+		"figuresDo:" : "PeterUhnak 9/21/2015 23:36",
 		"initialize" : "PeterUhnak 8/27/2015 22:08:41",
-		"layout" : "PeterUhnak 9/20/2015 00:59",
+		"layout" : "PeterUhnak 9/21/2015 23:35",
 		"minWidth" : "PeterUhnak 9/20/2015 15:07",
 		"remove" : "PeterUhnak 8/27/2015 22:08:41",
 		"remove:" : "PeterUhnak 9/20/2015 01:00",

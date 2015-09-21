@@ -1,3 +1,3 @@
 accessing - figures
-nameFigure
+nameLabel
 	^ self figures last

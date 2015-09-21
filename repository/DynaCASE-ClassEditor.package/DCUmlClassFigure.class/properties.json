@@ -6,7 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"minWidth" ],
+		"minWidth",
+		"attributesBox",
+		"methodsBox" ],
 	"name" : "DCUmlClassFigure",
 	"pools" : [
 		 ],

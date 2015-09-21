@@ -1,0 +1,3 @@
+accessing - figures
+attributesBox
+	^ attributesBox

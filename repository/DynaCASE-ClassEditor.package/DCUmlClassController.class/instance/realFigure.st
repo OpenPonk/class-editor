@@ -1,0 +1,3 @@
+figures
+realFigure
+	^ figure model

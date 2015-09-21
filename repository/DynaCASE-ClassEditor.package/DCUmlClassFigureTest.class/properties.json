@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"class" ],
+	"name" : "DCUmlClassFigureTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
