@@ -1,5 +1,5 @@
 *DynaCASE-ClassEditor-FAMIX
 famixAttribute: anAttribute
 	self model: anAttribute.
-	self text: [ :m | m name , ' : ' , m declaredType name , m multiplicity asOptionalString ].
+	self text: [ :m | self famixAttributeFor: m ].
 	self emphasis: [ :m | self famixEmphasisFor: m ]
