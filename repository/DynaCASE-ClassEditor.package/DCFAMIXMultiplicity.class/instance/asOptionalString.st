@@ -1,4 +1,4 @@
-accessing
+printing
 asOptionalString
 	"Return string representation if needed ([1] is ignored)"
 

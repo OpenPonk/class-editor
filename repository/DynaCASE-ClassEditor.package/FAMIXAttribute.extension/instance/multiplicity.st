@@ -1,5 +1,5 @@
 *DynaCASE-ClassEditor-Extensions
 multiplicity
-	<MSEProperty: #multiplicity type: #DCUmlMultiplicity>
+	<MSEProperty: #multiplicity type: #DCFAMIXMultiplicity>
 	<MSEComment: 'A multiplicity of the attribute'>
-	^ self privateState propertyAt: #multiplicity ifAbsentPut: [ DCUmlMultiplicity new ]
+	^ self privateState propertyAt: #multiplicity ifAbsentPut: [ DCFAMIXMultiplicity new ]

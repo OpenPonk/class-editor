@@ -1,4 +1,4 @@
 initialization
 initialize
 	super initialize.
-	multiplicity := DCUmlMultiplicity one
+	multiplicity := DCFAMIXMultiplicity one

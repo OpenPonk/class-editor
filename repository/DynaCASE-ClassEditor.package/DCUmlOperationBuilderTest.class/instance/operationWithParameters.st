@@ -5,6 +5,6 @@ operationWithParameters
 	(p1 := DCUmlParameter named: 'first') type: 'String'.
 	(p2 := DCUmlParameter named: 'second')
 		type: 'Number';
-		multiplicity: (DCUmlMultiplicity lower: 2 upper: 5).
+		multiplicity: (DCFAMIXMultiplicity lower: 2 upper: 5).
 	op parameters: (OrderedCollection with: p1 with: p2).
 	^ op

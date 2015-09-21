@@ -3,12 +3,11 @@ printRange
 	^ String
 		streamContents:
 			[ :stream | 
-			stream
-				nextPut: $[;
-				nextPutAll: self lowerAsString.
+			stream nextPut: $[.
+			stream nextPutAll: self printLower.
 			self lower = self upper
 				ifFalse: [ 
 					stream
 						nextPutAll: '..';
-						nextPutAll: self upperAsString ].
+						nextPutAll: self printUpper ].
 			stream nextPut: $] ]

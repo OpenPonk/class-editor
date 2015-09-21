@@ -1,3 +1,0 @@
-accessing
-lowerAsString
-	^ lower asString

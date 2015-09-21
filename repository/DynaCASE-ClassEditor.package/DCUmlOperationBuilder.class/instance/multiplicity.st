@@ -4,7 +4,7 @@ multiplicity
 		==>
 			[ :nodes | 
 			| m |
-			m := DCUmlMultiplicity new.
+			m := DCFAMIXMultiplicity new.
 			nodes
 				ifNotNil: [ 
 					m

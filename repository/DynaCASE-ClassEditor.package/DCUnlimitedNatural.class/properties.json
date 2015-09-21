@@ -6,10 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"upper",
-		"lower" ],
-	"name" : "DCUmlMultiplicity",
+		"value" ],
+	"name" : "DCUnlimitedNatural",
 	"pools" : [
 		 ],
-	"super" : "DCNamedElement",
+	"super" : "FAMIXEntity",
 	"type" : "normal" }

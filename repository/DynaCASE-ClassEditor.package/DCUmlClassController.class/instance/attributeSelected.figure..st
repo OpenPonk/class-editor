@@ -22,18 +22,27 @@ attributeSelected: anAttribute figure: aFigure
 			anAttribute isStatic: val.
 			aFigure changed ].
 	(form addTextInput: 'Multiplicity min')
-		text: anAttribute multiplicity lowerAsString;
+		text: anAttribute multiplicity printLower;
 		whenTextIsAccepted:
 				[ :val | 
-			anAttribute multiplicity lowerFromString: (val ifEmpty: [ '1' ]).
-			aFigure changed ].
+			val
+				ifNotEmpty: [ 
+					anAttribute multiplicity lower: val asString.
+					aFigure changed ] ].
 
 	(form addTextInput: 'Multiplicity max')
-		text: anAttribute multiplicity upperAsString;
+		text: anAttribute multiplicity printUpper;
 		whenTextIsAccepted:
 				[ :val | 
-			anAttribute multiplicity upperFromString: (val ifEmpty: [ '1' ]).
-			aFigure changed ].
+			val
+				ifNotEmpty:
+					[ 
+					anAttribute multiplicity
+						upper:
+							(val = '*'
+								ifTrue: [ -1 ]
+								ifFalse: [ val asNumber ]).
+					aFigure changed ] ].
 
 	form rebuildWidget.
 	form takeKeyboardFocus

@@ -8,7 +8,7 @@ sampleCompleteClass
 	class
 		addAttribute:
 			((FAMIXAttribute named: 'collection' type: (FAMIXClass named: 'Float'))
-				multiplicity: DCUmlMultiplicity zeroToMany).
+				multiplicity: DCFAMIXMultiplicity zeroToMany).
 	class
 		addAttribute:
 			((FAMIXAttribute named: 'static' type: (FAMIXClass named: 'String')) isStatic: true).
@@ -29,7 +29,7 @@ sampleCompleteClass
 				addParameter: (FAMIXParameter named: 'arg1' type: (FAMIXClass named: 'Number'));
 				addParameter:
 					((FAMIXParameter named: 'arg2' type: (FAMIXClass named: 'String'))
-						multiplicity: DCUmlMultiplicity zeroToOne);
+						multiplicity: DCFAMIXMultiplicity zeroToOne);
 				isAbstract: true).
 
 	^ model

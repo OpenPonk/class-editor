@@ -1,3 +1,3 @@
 *DynaCASE-ClassEditor-Extensions
 multiplicity: aMultiplicity
-	self privateState propertyAt: #multiplicity put: aMultiplicity
+	self privateState attributeAt: #multiplicity put: aMultiplicity

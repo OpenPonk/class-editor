@@ -6,6 +6,6 @@ model: a equals: b
 		ifTrue: [ ^ self operation: a equals: b ].
 	a class = DCUmlParameter
 		ifTrue: [ ^ self parameter: a equals: b ].
-	a class = DCUmlMultiplicity
+	a class = DCFAMIXMultiplicity
 		ifTrue: [ ^ self multiplicity: a equals: b ].
 	^ self notYetImplemented

@@ -1,0 +1,3 @@
+constants
+UNLIMITED
+	^ -1
