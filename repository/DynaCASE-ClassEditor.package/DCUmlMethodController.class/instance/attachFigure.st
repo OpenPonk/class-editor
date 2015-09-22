@@ -1,0 +1,3 @@
+figures
+attachFigure
+	super attachFigure

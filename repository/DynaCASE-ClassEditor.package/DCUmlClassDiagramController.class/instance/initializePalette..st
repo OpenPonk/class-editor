@@ -3,9 +3,12 @@ initializePalette: aPalette
 	(aPalette newCreationTool: [ DCUmlClassController new ])
 		label: 'Class';
 		icon: DCUmlIcons current classIcon.
-	(aPalette newCreationTool: [DCUmlAttributeController new])
+	(aPalette newCreationTool: [ DCUmlAttributeController new ])
 		label: 'Attribute';
 		icon: Smalltalk ui theme icons abstractIcon.
+	(aPalette newCreationTool: [ DCUmlMethodController new ])
+		label: 'Method';
+		icon: Smalltalk ui theme icons blankIcon.
 	(aPalette newConnectionCreationTool: [ DCUmlGeneralizationController new ])
 		label: 'Generalization';
 		icon: DCUmlIcons current generalizationIcon.

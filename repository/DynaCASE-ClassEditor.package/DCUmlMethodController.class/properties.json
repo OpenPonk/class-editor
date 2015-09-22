@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-ClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"classController",
+		"feedback" ],
+	"name" : "DCUmlMethodController",
+	"pools" : [
+		 ],
+	"super" : "DCElementController",
+	"type" : "normal" }
