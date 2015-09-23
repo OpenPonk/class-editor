@@ -6,5 +6,4 @@ descriptionDeclaredType
 		label: 'Declared Type';
 		classes: {FAMIXClass};
 		priority: 20;
-		beRequired;
 		yourself

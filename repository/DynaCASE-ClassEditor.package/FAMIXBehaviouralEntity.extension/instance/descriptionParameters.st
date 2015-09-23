@@ -2,10 +2,12 @@
 descriptionParameters
 	<magritteDescription>
 	^ MAToManyRelationDescription new
-		accessor: #parameters;
+		accessor:
+			(MAPluggableAccessor
+				read: #parameters
+				write: [ :model :newValue | model parameters: newValue asArray copy ]);
 		label: 'Parameters';
 		classes: {FAMIXParameter};
 		ordered: true;
-		comment: 'new param?';
 		priority: 20;
 		yourself
