@@ -1,2 +1,3 @@
-# class-editor
-UML Class Diagram Editor
+# DynaCASE
+
+See https://dynacase.github.io/
