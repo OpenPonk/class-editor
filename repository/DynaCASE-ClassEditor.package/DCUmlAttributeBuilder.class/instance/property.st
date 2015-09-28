@@ -3,7 +3,7 @@ property
 	^ super property
 		==>
 			[ :nodes | 
-			DCUmlAttribute new
+			FAMIXAttribute new
 				name: nodes second;
-				type: nodes third;
+				declaredType: (nodes third ifNotNil: [ FAMIXClass named: nodes third ]);
 				multiplicity: nodes fourth ]

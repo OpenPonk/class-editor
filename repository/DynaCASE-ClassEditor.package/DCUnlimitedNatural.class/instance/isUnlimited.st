@@ -1,3 +1,3 @@
 testing
 isUnlimited
-	^ self value = self class UNLIMITED
+	^ self value = self class max

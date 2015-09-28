@@ -8,6 +8,17 @@ sampleModel
 	obj := FAMIXClass named: 'DCModelObject'.
 	obj addAttribute: (FAMIXAttribute named: 'dcID' type: (FAMIXClass named: 'UUID')).
 	obj addAttribute: (FAMIXAttribute named: 'dcName' type: (FAMIXClass named: 'String')).
+	proj
+		addMethod:
+			((FAMIXMethod named: 'addDiagram')
+				addParameter: (FAMIXParameter named: 'aDiagram' type: dia);
+				yourself).
+	proj
+		addMethod:
+			(FAMIXMethod new
+				name: 'addDiagram';
+				declaredType: (FAMIXClass named: 'String');
+				yourself).
 	model
 		add: proj;
 		add: dia;

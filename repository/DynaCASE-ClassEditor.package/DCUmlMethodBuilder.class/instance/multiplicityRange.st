@@ -7,10 +7,10 @@ multiplicityRange
 			min := nodes first.
 			max := nodes second.
 			max = $*
-				ifTrue: [ max := Float infinity ].
+				ifTrue: [ max := DCUnlimitedNatural max ].
 			min
 				ifNil: [ 
-					min := max isInfinite
+					min := max = DCUnlimitedNatural max
 						ifTrue: [ 0 ]
 						ifFalse: [ max ] ].
 			Array with: min with: max ]

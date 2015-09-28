@@ -1,3 +1,3 @@
 constants
-UNLIMITED
+max
 	^ -1

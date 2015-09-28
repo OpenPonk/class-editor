@@ -4,11 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "PeterUhnak 8/26/2015 02:39",
 	"instvars" : [
 		 ],
-	"name" : "DCUmlOperationBuilderTest",
+	"name" : "DCUmlMethodBuilder",
 	"pools" : [
 		 ],
-	"super" : "DCUmlOperationGrammarTest",
+	"super" : "DCUmlOperationGrammar",
 	"type" : "normal" }

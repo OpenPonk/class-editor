@@ -4,9 +4,17 @@ operation: a equals: b
 		ifFalse: [ ^ false ].
 	a parameters size = b parameters size
 		ifFalse: [ ^ false ].
-	(a returnParameter = nil & (b returnParameter = nil)
-		or: [ self parameter: a returnParameter equals: b returnParameter ])
+	(a declaredType = nil & (b declaredType = nil)
+		or:
+			[ 
+			(self name: a declaredType name equals: b declaredType)
+				and:
+					[ 
+					self
+						multiplicity: a declaredType multiplicity
+						equals: b declaredType multiplicity ] ])
 		ifFalse: [ ^ false ].
+
 	a parameters
 		withIndexDo:
 			[ :each :i | 
