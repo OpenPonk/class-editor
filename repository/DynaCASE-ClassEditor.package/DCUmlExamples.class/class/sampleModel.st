@@ -15,9 +15,8 @@ sampleModel
 				yourself).
 	proj
 		addMethod:
-			(FAMIXMethod new
-				name: 'addDiagram';
-				declaredType: (FAMIXClass named: 'String');
+			((FAMIXMethod named: 'layoutFor' type: (FAMIXClass named: 'Dictionary'))
+				addParameter: (FAMIXParameter named: 'aDiagram' type: dia);
 				yourself).
 	model
 		add: proj;
