@@ -4,7 +4,7 @@ initializePaletteWithShortcuts: aPalette
 		label: 'Class';
 		shortcut: $c asShortcut;
 		icon: DCUmlIcons current classIcon.
-	(aPalette newConnectionCreationTool: [ DCUmlGeneralizationController new ])
+	(aPalette newConnectionCreationTool: [ DCUmlInheritanceController new ])
 		label: 'Generalization';
 		shortcut: $g asShortcut;
 		icon: DCUmlIcons current generalizationIcon.

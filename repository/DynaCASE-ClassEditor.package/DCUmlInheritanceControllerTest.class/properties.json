@@ -1,0 +1,17 @@
+{
+	"category" : "DynaCASE-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"parent",
+		"child",
+		"parentController",
+		"childController" ],
+	"name" : "DCUmlInheritanceControllerTest",
+	"pools" : [
+		 ],
+	"super" : "DCUmlControllerTest",
+	"type" : "normal" }

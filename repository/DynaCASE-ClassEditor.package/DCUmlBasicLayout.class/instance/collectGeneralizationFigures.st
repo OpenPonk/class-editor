@@ -1,3 +1,3 @@
 private - collecting
 collectGeneralizationFigures
-	^ self collectFiguresByClass: DCUmlGeneralizationController
+	^ self collectFiguresByClass: DCUmlInheritanceController

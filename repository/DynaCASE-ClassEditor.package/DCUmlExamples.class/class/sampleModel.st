@@ -23,6 +23,14 @@ sampleModel
 		add: dia;
 		add: el;
 		add: obj.
+
+	model
+		add:
+			(FAMIXInheritance new
+				subclass: el;
+				superclass: obj;
+				yourself).
+
 	"diagram
 		add: (DCUmlGeneralization from: el to: obj);
 		add: (DCUmlGeneralization from: dia to: obj);

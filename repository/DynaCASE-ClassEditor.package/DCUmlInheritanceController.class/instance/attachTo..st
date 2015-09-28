@@ -1,5 +1,4 @@
-adding
+events - registering
 attachTo: aDiagramController
 	super attachTo: aDiagramController.
-	self attachProperties.
-	self attachAssociations
+	aDiagramController model add: self model

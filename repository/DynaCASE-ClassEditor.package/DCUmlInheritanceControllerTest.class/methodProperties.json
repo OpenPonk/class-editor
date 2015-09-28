@@ -1,0 +1,12 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"controllerClass" : "PeterUhnak 9/28/2015 19:28",
+		"newSimpleInheritance" : "PeterUhnak 9/28/2015 19:45",
+		"setUp" : "PeterUhnak 9/28/2015 19:55",
+		"testAttach" : "PeterUhnak 9/28/2015 20:12",
+		"testBuild" : "PeterUhnak 9/28/2015 20:28",
+		"testBuild2" : "PeterUhnak 9/28/2015 20:28",
+		"testLoadModel" : "PeterUhnak 9/28/2015 20:12",
+		"testSetUp" : "PeterUhnak 9/28/2015 19:55" } }
