@@ -3,9 +3,14 @@ removeModelElement: aModelElement
 	"Remove self as target of aModelElement"
 
 	aModelElement isAttribute
-		ifTrue: [ self model attributes remove: aModelElement ifAbsent: [ self error ] ].
+		ifTrue: [ self model attributes remove: aModelElement ].
 	aModelElement isMethod
-		ifTrue: [ self model methods remove: aModelElement ifAbsent: [ self error ] ].
+		ifTrue: [ self model methods remove: aModelElement ].
+	aModelElement isInheritance
+		ifTrue:
+			[ 
+			aModelElement superclass subInheritances remove: aModelElement.
+			aModelElement subclass superInheritances remove: aModelElement ].
 
 	self diagramController removeControllerOf: aModelElement.
 	self diagramController updateView
