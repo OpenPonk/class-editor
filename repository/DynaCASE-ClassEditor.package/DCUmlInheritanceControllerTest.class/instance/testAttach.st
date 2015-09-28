@@ -1,7 +1,7 @@
 tests
 testAttach
 	| inheritance ic |
-	inheritance := FAMIXInheritance superclass: parent subclass: child.
+	inheritance := FAMIXInheritance subclass: child superclass: parent.
 	ic := DCUmlInheritanceController new.
 	ic model: inheritance.
 	self assert: (parentController canBeTargetFor: ic).

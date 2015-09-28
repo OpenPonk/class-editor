@@ -1,5 +1,5 @@
 *DynaCASE-ClassEditor-FAMIX
-superclass: aSuperClass subclass: aSubClass
+subclass: aSubClass superclass: aSuperClass
 	^ self new
 		superclass: aSuperClass;
 		subclass: aSubClass;

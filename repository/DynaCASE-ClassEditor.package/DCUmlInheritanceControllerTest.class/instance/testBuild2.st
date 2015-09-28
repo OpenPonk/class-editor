@@ -1,7 +1,7 @@
 tests
 testBuild2
 	| inheritance |
-	inheritance := FAMIXInheritance superclass: child subclass: parent.
+	inheritance := FAMIXInheritance subclass: parent superclass: child.
 	diagramController model add: inheritance.
 	diagramController rebuild.
 	self assert: diagramController controllers size equals: 3.

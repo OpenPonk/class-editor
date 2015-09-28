@@ -1,3 +1,3 @@
 hooks
 createModel
-	^ self model ifNil: [ self modelClass superclass: target model subclass: source model ]
+	^ self model ifNil: [ self modelClass subclass: source model superclass: target model ]
