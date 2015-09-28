@@ -10,7 +10,7 @@ initializePalette: aPalette
 		label: 'Method';
 		icon: Smalltalk ui theme icons blankIcon.
 	(aPalette newConnectionCreationTool: [ DCUmlInheritanceController new ])
-		label: 'Generalization';
+		label: 'Inheritance';
 		icon: DCUmlIcons current generalizationIcon.
 	(aPalette newConnectionCreationTool: [ DCUmlAssociationController new ])
 		label: 'Association';
