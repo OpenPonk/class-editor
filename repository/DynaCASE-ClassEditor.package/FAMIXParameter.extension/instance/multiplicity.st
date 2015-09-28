@@ -1,4 +1,4 @@
-*DynaCASE-ClassEditor-Extensions
+*DynaCASE-ClassEditor-FAMIX
 multiplicity
 	<MSEProperty: #multiplicity type: #DCFAMIXMultiplicity>
 	<MSEComment: 'A multiplicity of the attribute'>

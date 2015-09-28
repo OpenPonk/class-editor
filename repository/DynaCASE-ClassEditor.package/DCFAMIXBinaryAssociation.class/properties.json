@@ -1,0 +1,17 @@
+{
+	"category" : "DynaCASE-ClassEditor-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/28/2015 22:45",
+	"instvars" : [
+		"from",
+		"to",
+		"source",
+		"target" ],
+	"name" : "DCFAMIXBinaryAssociation",
+	"pools" : [
+		 ],
+	"super" : "FAMIXAssociation",
+	"type" : "normal" }
