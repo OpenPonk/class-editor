@@ -1,0 +1,10 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"attachTo:" : "PeterUhnak 9/29/2015 01:05",
+		"createEdgeFrom:to:" : "PeterUhnak 9/28/2015 23:39",
+		"createModel" : "PeterUhnak 9/28/2015 23:54",
+		"edgeBuilder" : "PeterUhnak 9/28/2015 23:58",
+		"modelClass" : "PeterUhnak 9/28/2015 23:53",
+		"registerModelEvents:" : "PeterUhnak 9/28/2015 23:39" } }

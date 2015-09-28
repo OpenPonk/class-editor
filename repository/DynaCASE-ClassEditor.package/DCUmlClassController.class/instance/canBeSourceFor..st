@@ -1,3 +1,3 @@
 testing
 canBeSourceFor: aController
-	^ aController isKindOf: DCUmlInheritanceController
+	^ aController isKindOf: DCUmlRelationshipController

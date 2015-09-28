@@ -1,21 +1,20 @@
 adding
 attachAssociations
-	| models inheritances |
+	| models associations |
 	models := self diagramController controllers
 		select:
-			[ :each | each class = DCUmlClassController | (each class = DCUmlInheritanceController) ]
+			[ :each | each class = DCUmlClassController | (each class = DCUmlAssociationController) ]
 		thenCollect: #model.
 
-	inheritances := ((self model subInheritances , self model superInheritances
-		reject: [ :each | models includes: each ])
-		select: [ :each | models includes: each superclass ])
-		select: [ :each | models includes: each subclass ].
+	associations := ((self model associations reject: [ :each | models includes: each ])
+		select: [ :each | models includes: each from ])
+		select: [ :each | models includes: each to ].
 
-	inheritances
+	associations
 		do:
 			[ :link | 
 			| lc |
-			lc := DCUmlInheritanceController new.
+			lc := DCUmlAssociationController new.
 			lc model: link.
-			lc source: (self diagramController controllerForModel: link subclass).
-			(self diagramController controllerForModel: link superclass) addAsTargetFor: lc ]
+			lc source: (self diagramController controllerForModel: link from).
+			(self diagramController controllerForModel: link to) addAsTargetFor: lc ]

@@ -11,6 +11,13 @@ removeModelElement: aModelElement
 			[ 
 			aModelElement superclass subInheritances remove: aModelElement.
 			aModelElement subclass superInheritances remove: aModelElement ].
+	aModelElement isBinaryAssociation
+		ifTrue:
+			[ 
+			aModelElement from outgoingAssociations remove: aModelElement.
+			aModelElement to incomingAssociations remove: aModelElement ].
 
 	self diagramController removeControllerOf: aModelElement.
+	self diagramController ensureNotInModel: aModelElement.
+
 	self diagramController updateView

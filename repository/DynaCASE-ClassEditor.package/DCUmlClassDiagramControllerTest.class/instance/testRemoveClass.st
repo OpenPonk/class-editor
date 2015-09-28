@@ -2,6 +2,7 @@ tests
 testRemoveClass
 	| class |
 	class := FAMIXClass named: 'Something'.
+
 	controller model add: class.
 	controller rebuild.
 

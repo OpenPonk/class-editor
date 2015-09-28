@@ -1,3 +1,3 @@
 accessing
 parentSelector
-	^ #subclass
+	^ #from
