@@ -9,4 +9,4 @@ testBuildClass
 	cc := controller controllers first.
 	self assert: cc class equals: DCUmlClassController.
 	self assert: cc model equals: class.
-	self assert: controller model allClasses size equals: 1
+	self assert: controller model elements size equals: 1

@@ -5,7 +5,9 @@ famixMethodFor: aMethod
 			[ :s | 
 			s nextPutAll: aMethod name.
 			s nextPut: $(.
-			aMethod parameters do: [ :p | s nextPutAll: (self famixParameterFor: p) ].
+			s
+				nextPutAll:
+					((aMethod parameters collect: [ :p | self famixParameterFor: p ]) joinUsing: ', ').
 			s nextPut: $).
 			aMethod declaredType
 				ifNotNil:

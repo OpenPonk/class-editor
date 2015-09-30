@@ -8,7 +8,7 @@ sampleFamixClass
 		ifTrue: [ '' ]
 		ifFalse: [ mul ] ].
 
-	class := DCUmlExamples sampleCompleteClass allClasses first.
+	class := DCUmlExamples sampleCompleteClass elements first.
 
 	c0 := DCUmlNameCompartmentFigure new.
 	(n := c0 newNameFigure) text: class name.

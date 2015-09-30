@@ -1,3 +1,3 @@
 generators
 classNameFor: aModel
-	^ self uniqueNameIn: aModel allClasses baseName: 'Class'
+	^ self uniqueNameIn: aModel elements baseName: 'Class'
