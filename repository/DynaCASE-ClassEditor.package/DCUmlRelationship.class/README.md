@@ -1,1 +1,0 @@
-I am abstract superclass for relationship classes.

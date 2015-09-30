@@ -9,7 +9,10 @@
 		"from",
 		"to",
 		"source",
-		"target" ],
+		"target",
+		"sourceEnd",
+		"targetEnd",
+		"associationEnds" ],
 	"name" : "DCFAMIXBinaryAssociation",
 	"pools" : [
 		 ],

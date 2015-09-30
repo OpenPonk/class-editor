@@ -1,3 +1,4 @@
 grammar
 returnValue
-	^ ($: asParser , type , multiplicity) ==> [ :nodes | nodes allButFirst ]
+	^ (Character space asParser star , $: asParser , type , multiplicity)
+		==> [ :nodes | nodes allButFirst: 2 ]

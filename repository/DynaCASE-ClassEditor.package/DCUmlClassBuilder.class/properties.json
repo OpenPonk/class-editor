@@ -1,0 +1,16 @@
+{
+	"category" : "DynaCASE-ClassEditor-Parsers-Builders",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/29/2015 22:41",
+	"instvars" : [
+		"symbol",
+		"famixClass",
+		"dslName" ],
+	"name" : "DCUmlClassBuilder",
+	"pools" : [
+		 ],
+	"super" : "PPCompositeParser",
+	"type" : "normal" }

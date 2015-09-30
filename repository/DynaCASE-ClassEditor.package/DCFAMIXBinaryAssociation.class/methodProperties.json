@@ -3,10 +3,14 @@
 		"annotation" : "PeterUhnak 9/28/2015 23:14",
 		"source:target:" : "PeterUhnak 9/28/2015 22:51" },
 	"instance" : {
+		"associationEnds" : "PeterUhnak 9/29/2015 17:08",
 		"from" : "PeterUhnak 9/28/2015 22:46",
+		"initialize" : "PeterUhnak 9/29/2015 17:03",
 		"isBinaryAssociation" : "PeterUhnak 9/28/2015 23:03",
 		"source" : "PeterUhnak 9/28/2015 23:02",
 		"source:" : "PeterUhnak 9/28/2015 23:02",
+		"sourceEnd" : "PeterUhnak 9/29/2015 17:09",
 		"target" : "PeterUhnak 9/28/2015 23:03",
 		"target:" : "PeterUhnak 9/28/2015 23:03",
+		"targetEnd" : "PeterUhnak 9/29/2015 17:09",
 		"to" : "PeterUhnak 9/28/2015 22:46" } }

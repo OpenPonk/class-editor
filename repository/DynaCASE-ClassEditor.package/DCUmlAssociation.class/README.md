@@ -1,1 +1,0 @@
-I model an association between two classes.

@@ -1,0 +1,16 @@
+{
+	"category" : "DynaCASE-ClassEditor-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/29/2015 18:31",
+	"instvars" : [
+		"isNavigable",
+		"multiplicity",
+		"association" ],
+	"name" : "DCFAMIXAssociationEnd",
+	"pools" : [
+		 ],
+	"super" : "FAMIXStructuralEntity",
+	"type" : "normal" }

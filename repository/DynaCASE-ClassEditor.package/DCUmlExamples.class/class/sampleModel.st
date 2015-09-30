@@ -1,6 +1,6 @@
 examples
 sampleModel
-	| model obj el dia proj |
+	| model obj el dia proj a |
 	model := MooseModel named: 'UML Class Diagram'.
 	proj := FAMIXClass named: 'DCProject'.
 	dia := FAMIXClass named: 'DCDiagram'.
@@ -24,33 +24,29 @@ sampleModel
 		add: el;
 		add: obj.
 
-	model
-		add:
-			(FAMIXInheritance new
-				subclass: el;
-				superclass: obj;
-				yourself).
+	model add: (FAMIXInheritance subclass: el superclass: obj).
+	model add: (FAMIXInheritance subclass: dia superclass: obj).
 
-	"diagram
-		add: (DCUmlGeneralization from: el to: obj);
-		add: (DCUmlGeneralization from: dia to: obj);
-		add:
-			((DCUmlAssociation from: dia to: el)
-				sourceName: '+owner';
-				sourceMultiplicity: '0..1';
-				targetName: '+elements';
-				targetMultiplicity: '*';
-				yourself);
-		add:
-			((DCUmlAssociation from: obj to: obj)
-				targetName: '+owner';
-				sourceMultiplicity: '*';
-				targetMultiplicity: '0..1';
-				yourself);
-		add:
-			((DCUmlAssociation from: proj to: dia)
-				targetName: '+diagrams';
-				targetMultiplicity: '*';
-				sourceMultiplicity: '0..1';
-				yourself)."
+	a := DCFAMIXBinaryAssociation source: dia target: el.
+	a sourceEnd
+		name: 'owner';
+		multiplicity: DCFAMIXMultiplicity zeroToOne.
+	a targetEnd
+		name: 'elements';
+		multiplicity: DCFAMIXMultiplicity zeroToMany.
+	model add: a.
+
+	a := DCFAMIXBinaryAssociation source: proj target: dia.
+	a sourceEnd multiplicity: DCFAMIXMultiplicity zeroToOne.
+	a targetEnd
+		name: 'diagrams';
+		multiplicity: DCFAMIXMultiplicity zeroToMany.
+	model add: a.
+
+	a := DCFAMIXBinaryAssociation source: obj target: obj.
+	a sourceEnd multiplicity: DCFAMIXMultiplicity zeroToMany.
+	a targetEnd
+		name: 'owner';
+		multiplicity: DCFAMIXMultiplicity zeroToOne.
+
 	^ model

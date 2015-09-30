@@ -9,7 +9,7 @@ rebuild
 			[ 
 			RTGridLayout new
 				gapSize: 80;
-				on: els.
-			DCUmlBasicLayout new onController: self ].
+				on: els
+			"DCUmlBasicLayout new onController: self " ].
 	self updateView.
 	self view canvas camera focusOnCenter

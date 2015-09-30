@@ -1,1 +1,0 @@
-I model a parent/child relationship between two classes.

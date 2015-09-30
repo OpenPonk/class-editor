@@ -1,0 +1,16 @@
+{
+	"category" : "DynaCASE-ClassEditor-Model-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/29/2015 18:42",
+	"instvars" : [
+		"classBuilder",
+		"methodBuilder",
+		"attributeBuilder" ],
+	"name" : "DCUmlDSLFactory",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

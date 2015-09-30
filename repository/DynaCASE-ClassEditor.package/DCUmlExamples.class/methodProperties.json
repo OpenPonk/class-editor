@@ -1,11 +1,12 @@
 {
 	"class" : {
 		"exampleCompleteClass" : "PeterUhnak 9/19/2015 02:05",
+		"exampleDsl" : "PeterUhnak 9/29/2015 18:41",
 		"exampleEmpty" : "PeterUhnak 8/29/2015 18:28",
 		"exampleSimple" : "PeterUhnak 9/19/2015 01:22",
-		"exampleSimpleOld" : "PeterUhnak 8/30/2015 00:27",
 		"menuCommandOn:" : "PeterUhnak 8/29/2015 18:28",
 		"sampleCompleteClass" : "PeterUhnak 9/21/2015 14:11",
-		"sampleModel" : "PeterUhnak 9/28/2015 17:07" },
+		"sampleDsl" : "PeterUhnak 9/29/2015 22:52",
+		"sampleModel" : "PeterUhnak 9/29/2015 18:28" },
 	"instance" : {
 		 } }
