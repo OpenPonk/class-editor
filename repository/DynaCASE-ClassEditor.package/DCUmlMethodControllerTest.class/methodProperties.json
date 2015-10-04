@@ -2,4 +2,10 @@
 	"class" : {
 		 },
 	"instance" : {
-		 } }
+		"controllerClass" : "PeterUhnak 10/4/2015 18:07",
+		"preconfigureController" : "PeterUhnak 10/4/2015 18:07",
+		"setUp" : "PeterUhnak 10/4/2015 18:08",
+		"testCreateDiagramElement" : "PeterUhnak 10/4/2015 18:10",
+		"testUpdateDiagramElement" : "PeterUhnak 10/4/2015 18:10",
+		"testUpdateDiagramElementWithParameter" : "PeterUhnak 10/4/2015 18:11",
+		"testUpdateDiagramElementWithType" : "PeterUhnak 10/4/2015 18:11" } }

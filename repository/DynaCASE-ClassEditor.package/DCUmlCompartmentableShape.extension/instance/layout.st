@@ -6,7 +6,8 @@ layout
 
 	RTNestingBehavior new
 		centerOn: self rtElement elements: self figures;
-		resize: self rtElement for: self figures.
+		resize: self rtElement for: self figures padding: 5.
+
 	self labels
 		do:
-			[ :each | each translateTo: self rtElement position x @ each rtElement position y ]
+			[ :each | each translateTo: self rtElement position x @ each rtElement position y - (0 @ 2.5) ]

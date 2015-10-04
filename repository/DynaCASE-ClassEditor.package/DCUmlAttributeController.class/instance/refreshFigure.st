@@ -4,4 +4,5 @@ refreshFigure
 	self diagramElement localStyle
 		fontUnderline: self model isStatic;
 		fontItalic: self model isAbstract.
-	self diagramElement changed
+	self diagramElement changed.
+	classController refreshFigure
