@@ -2,5 +2,6 @@ accessing
 modelToControllerMapping
 	^ {(FAMIXClass -> DCUmlClassController).
 	(FAMIXAttribute -> DCUmlAttributeController).
-	(DCUmlAssociation -> DCUmlAssociationController).
-	(DCUmlGeneralization -> DCUmlInheritanceController)} asDictionary
+	(FAMIXMethod -> DCUmlMethodController).
+	(DCFAMIXBinaryAssociation -> DCUmlAssociationController).
+	(FAMIXInheritance -> DCUmlInheritanceController)} asDictionary

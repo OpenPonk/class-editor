@@ -1,4 +1,3 @@
-accessing
+figures
 figure
-	^ self rtElement
-	"^ (edge ifNil: [ edge := self createEdge ]) rtElement"
+	^ self diagramElement rtEdge

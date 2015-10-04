@@ -23,10 +23,10 @@ sampleModel
 		add: dia;
 		add: el;
 		add: obj.
-"
+
 	model add: (FAMIXInheritance subclass: el superclass: obj).
 	model add: (FAMIXInheritance subclass: dia superclass: obj).
-
+"
 	a := DCFAMIXBinaryAssociation source: dia target: el.
 	a sourceEnd
 		name: 'owner';

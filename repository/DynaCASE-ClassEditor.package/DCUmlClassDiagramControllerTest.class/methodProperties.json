@@ -6,4 +6,7 @@
 		"setUp" : "PeterUhnak 9/21/2015 22:32",
 		"testAddClassController" : "PeterUhnak 9/30/2015 18:11",
 		"testBuildClass" : "PeterUhnak 9/30/2015 18:11",
-		"testRemoveClass" : "PeterUhnak 9/30/2015 18:11" } }
+		"testRemoveClass" : "PeterUhnak 9/30/2015 18:11",
+		"testRemoveClassWithLinks" : "PeterUhnak 10/4/2015 19:37",
+		"testRemoveClassWithLinks2" : "PeterUhnak 10/4/2015 19:42",
+		"testRemoveClassWithProperties" : "PeterUhnak 10/4/2015 19:35" } }

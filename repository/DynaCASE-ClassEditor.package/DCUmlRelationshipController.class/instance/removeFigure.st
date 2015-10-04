@@ -4,5 +4,4 @@ removeFigure
 	diagramElement view
 		ifNotNil: [ 
 			diagramElement remove.
-			diagramElement := nil.
-			nameLabel := nil ]
+			diagramElement := nil ]

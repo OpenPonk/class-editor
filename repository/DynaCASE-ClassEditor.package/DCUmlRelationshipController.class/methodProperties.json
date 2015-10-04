@@ -2,8 +2,9 @@
 	"class" : {
 		 },
 	"instance" : {
-		"createEdge" : "PeterUhnak 10/3/2015 22:54",
-		"edge" : "PeterUhnak 10/3/2015 22:54",
-		"figure" : "PeterUhnak 10/3/2015 22:53",
+		"attachFigure" : "PeterUhnak 10/4/2015 19:14",
+		"createDiagramElement" : "PeterUhnak 10/4/2015 18:56",
+		"diagramElement" : "PeterUhnak 10/4/2015 18:57",
+		"figure" : "PeterUhnak 10/4/2015 18:56",
 		"parentSelector" : "PeterUhnak 9/29/2015 00:03",
-		"rtElement" : "PeterUhnak 10/3/2015 22:53" } }
+		"removeFigure" : "PeterUhnak 10/4/2015 19:15" } }

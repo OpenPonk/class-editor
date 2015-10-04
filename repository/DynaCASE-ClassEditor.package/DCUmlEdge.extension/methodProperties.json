@@ -1,0 +1,13 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"createRtEdge" : "PeterUhnak 10/4/2015 18:48",
+		"headDecorator" : "PeterUhnak 10/4/2015 18:50",
+		"headDecorator:" : "PeterUhnak 10/4/2015 18:50",
+		"remove" : "PeterUhnak 10/4/2015 19:03",
+		"renderIn:" : "PeterUhnak 10/4/2015 19:02",
+		"rtEdge" : "PeterUhnak 10/4/2015 18:36",
+		"tailDecorator" : "PeterUhnak 10/4/2015 18:50",
+		"tailDecorator:" : "PeterUhnak 10/4/2015 18:50",
+		"view" : "PeterUhnak 10/4/2015 19:02" } }
