@@ -5,7 +5,7 @@
 		"addAsSourceFor:" : "PeterUhnak 8/27/2015 22:08:41",
 		"addAsTargetFor:" : "PeterUhnak 8/27/2015 22:08:41",
 		"attachAssociations" : "PeterUhnak 9/28/2015 23:55",
-		"attachFigure" : "PeterUhnak 10/4/2015 17:42",
+		"attachFigure" : "PeterUhnak 10/4/2015 21:22",
 		"attachInheritances" : "PeterUhnak 9/28/2015 23:57",
 		"attachProperties" : "PeterUhnak 9/28/2015 20:17",
 		"attachTo:" : "PeterUhnak 9/29/2015 01:08",
@@ -15,7 +15,6 @@
 		"createDiagramElement" : "PeterUhnak 10/4/2015 18:28",
 		"createFigure" : "PeterUhnak 10/4/2015 02:52",
 		"createModel" : "PeterUhnak 9/21/2015 23:00",
-		"diagramElement" : "PeterUhnak 10/4/2015 19:06",
 		"figure" : "PeterUhnak 10/4/2015 03:03",
 		"hideSelectionFeedback" : "PeterUhnak 9/22/2015 04:29",
 		"modelClass" : "PeterUhnak 8/29/2015 21:51",
@@ -23,5 +22,4 @@
 		"refreshFigure" : "PeterUhnak 10/4/2015 18:29",
 		"registerModelEvents:" : "PeterUhnak 8/29/2015 21:58",
 		"removeFigure" : "PeterUhnak 10/4/2015 19:19",
-		"removeModelElement:" : "PeterUhnak 9/29/2015 01:05",
-		"showSelectionFeedback" : "PeterUhnak 9/22/2015 04:30" } }
+		"removeModelElement:" : "PeterUhnak 9/29/2015 01:05" } }

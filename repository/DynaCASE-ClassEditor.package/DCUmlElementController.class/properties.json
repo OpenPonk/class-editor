@@ -6,9 +6,10 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"classController" ],
-	"name" : "DCUmlAttributeController",
+		"diagramElement",
+		"feedback" ],
+	"name" : "DCUmlElementController",
 	"pools" : [
 		 ],
-	"super" : "DCUmlElementController",
+	"super" : "DCElementController",
 	"type" : "normal" }

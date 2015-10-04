@@ -2,9 +2,11 @@
 	"class" : {
 		 },
 	"instance" : {
-		"attachFigure" : "PeterUhnak 10/4/2015 19:14",
+		"attachFigure" : "PeterUhnak 10/4/2015 21:14",
+		"attachTo:" : "PeterUhnak 10/4/2015 21:15",
 		"createDiagramElement" : "PeterUhnak 10/4/2015 18:56",
 		"diagramElement" : "PeterUhnak 10/4/2015 18:57",
 		"figure" : "PeterUhnak 10/4/2015 18:56",
 		"parentSelector" : "PeterUhnak 9/29/2015 00:03",
+		"registerModelEvents:" : "PeterUhnak 10/4/2015 21:16",
 		"removeFigure" : "PeterUhnak 10/4/2015 19:15" } }

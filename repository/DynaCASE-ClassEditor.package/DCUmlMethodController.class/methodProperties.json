@@ -6,7 +6,6 @@
 		"buildEditorForm:" : "PeterUhnak 9/22/2015 21:04",
 		"createDiagramElement" : "PeterUhnak 10/4/2015 18:05",
 		"createModel" : "PeterUhnak 9/22/2015 18:31",
-		"diagramElement" : "PeterUhnak 10/4/2015 03:10",
 		"famixParameterFor:" : "PeterUhnak 10/4/2015 18:09",
 		"famixTextFor:" : "PeterUhnak 10/4/2015 18:09",
 		"figure" : "PeterUhnak 10/4/2015 03:10",
@@ -16,5 +15,4 @@
 		"refreshFigure" : "PeterUhnak 10/4/2015 18:12",
 		"registerModelEvents:" : "PeterUhnak 9/22/2015 18:30",
 		"removeFigure" : "PeterUhnak 10/4/2015 03:11",
-		"showSelectionFeedback" : "PeterUhnak 9/22/2015 18:30",
 		"target:" : "PeterUhnak 9/22/2015 18:30" } }

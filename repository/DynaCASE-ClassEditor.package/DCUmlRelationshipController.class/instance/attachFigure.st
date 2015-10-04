@@ -1,4 +1,4 @@
-as yet unclassified
+events - registering
 attachFigure
 	"add figure to the view"
 
@@ -6,4 +6,5 @@ attachFigure
 	el := self diagramElement.
 	el view ifNil: [ el renderIn: self diagramController view ].
 	self diagramController figureAdded: self figure.
-	self refreshFigure
+	self refreshFigure.
+	self figure @ DCRTConnectionHandles
