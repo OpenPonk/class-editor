@@ -1,6 +1,6 @@
 figures
 createDiagramElement
-	| el nameLabel attributesCompartment operationsCompartment |
+	| el attributesCompartment operationsCompartment |
 	el := DCUmlClassifierShape new.
 	el modelElement: self model.
 
