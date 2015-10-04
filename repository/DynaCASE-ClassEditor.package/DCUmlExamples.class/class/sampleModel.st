@@ -26,7 +26,7 @@ sampleModel
 
 	model add: (FAMIXInheritance subclass: el superclass: obj).
 	model add: (FAMIXInheritance subclass: dia superclass: obj).
-"
+
 	a := DCFAMIXBinaryAssociation source: dia target: el.
 	a sourceEnd
 		name: 'owner';
@@ -47,6 +47,6 @@ sampleModel
 	a sourceEnd multiplicity: DCFAMIXMultiplicity zeroToMany.
 	a targetEnd
 		name: 'owner';
-		multiplicity: DCFAMIXMultiplicity zeroToOne."
+		multiplicity: DCFAMIXMultiplicity zeroToOne.
 
 	^ model

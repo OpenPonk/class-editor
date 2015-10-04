@@ -2,10 +2,9 @@
 	"class" : {
 		 },
 	"instance" : {
-		"attachTo:" : "PeterUhnak 9/29/2015 01:05",
-		"createEdgeFrom:to:" : "PeterUhnak 9/28/2015 23:39",
+		"attachTo:" : "PeterUhnak 10/4/2015 19:44",
+		"createEdgeFrom:to:" : "PeterUhnak 10/4/2015 19:44",
 		"createModel" : "PeterUhnak 9/28/2015 23:54",
 		"edgeBuilder" : "PeterUhnak 9/28/2015 23:58",
-		"figure" : "PeterUhnak 10/3/2015 23:02",
 		"modelClass" : "PeterUhnak 9/28/2015 23:53",
 		"registerModelEvents:" : "PeterUhnak 9/28/2015 23:39" } }
