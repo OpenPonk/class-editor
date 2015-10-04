@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 target: aDiagramElement
 	target := FMMultivalueLink
 		on: self

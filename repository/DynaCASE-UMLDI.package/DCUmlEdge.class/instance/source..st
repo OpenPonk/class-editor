@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 source: aDiagramElement
 	source := FMMultivalueLink
 		on: self

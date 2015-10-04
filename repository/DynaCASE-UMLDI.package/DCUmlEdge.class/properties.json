@@ -8,7 +8,11 @@
 	"instvars" : [
 		"source",
 		"target",
-		"waypoints" ],
+		"waypoints",
+		"rtEdge",
+		"headDecorator",
+		"tailDecorator",
+		"view" ],
 	"name" : "DCUmlEdge",
 	"pools" : [
 		 ],
