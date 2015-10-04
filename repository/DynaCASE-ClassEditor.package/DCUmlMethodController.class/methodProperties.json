@@ -2,18 +2,17 @@
 	"class" : {
 		 },
 	"instance" : {
-		"attachFigure" : "PeterUhnak 9/22/2015 18:30",
 		"attachTo:" : "PeterUhnak 9/29/2015 01:05",
 		"buildEditorForm:" : "PeterUhnak 9/22/2015 21:04",
-		"createFigure" : "PeterUhnak 9/22/2015 18:30",
+		"createDiagramElement" : "PeterUhnak 10/4/2015 03:11",
 		"createModel" : "PeterUhnak 9/22/2015 18:31",
-		"figure" : "PeterUhnak 9/22/2015 18:30",
+		"diagramElement" : "PeterUhnak 10/4/2015 03:10",
+		"figure" : "PeterUhnak 10/4/2015 03:10",
 		"hideSelectionFeedback" : "PeterUhnak 9/22/2015 18:30",
 		"modelClass" : "PeterUhnak 9/22/2015 18:31",
 		"parentSelector" : "PeterUhnak 9/22/2015 18:30",
-		"realFigure" : "PeterUhnak 9/22/2015 18:30",
-		"refreshFigure" : "PeterUhnak 9/22/2015 18:30",
+		"refreshFigure" : "PeterUhnak 10/4/2015 03:11",
 		"registerModelEvents:" : "PeterUhnak 9/22/2015 18:30",
-		"removeFigure" : "PeterUhnak 9/22/2015 18:30",
+		"removeFigure" : "PeterUhnak 10/4/2015 03:11",
 		"showSelectionFeedback" : "PeterUhnak 9/22/2015 18:30",
 		"target:" : "PeterUhnak 9/22/2015 18:30" } }

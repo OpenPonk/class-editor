@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"attribute",
+		"diagramElement" ],
+	"name" : "DCUmlAttributeControllerTest",
+	"pools" : [
+		 ],
+	"super" : "DCUmlControllerTest",
+	"type" : "normal" }

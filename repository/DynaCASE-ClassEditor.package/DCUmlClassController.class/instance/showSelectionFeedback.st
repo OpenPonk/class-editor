@@ -1,4 +1,4 @@
-as yet unclassified
+canvas actions
 showSelectionFeedback
 	feedback := DCElementADFeedback new
 		noBorder;

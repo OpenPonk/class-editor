@@ -23,7 +23,7 @@ sampleModel
 		add: dia;
 		add: el;
 		add: obj.
-
+"
 	model add: (FAMIXInheritance subclass: el superclass: obj).
 	model add: (FAMIXInheritance subclass: dia superclass: obj).
 
@@ -47,6 +47,6 @@ sampleModel
 	a sourceEnd multiplicity: DCFAMIXMultiplicity zeroToMany.
 	a targetEnd
 		name: 'owner';
-		multiplicity: DCFAMIXMultiplicity zeroToOne.
+		multiplicity: DCFAMIXMultiplicity zeroToOne."
 
 	^ model

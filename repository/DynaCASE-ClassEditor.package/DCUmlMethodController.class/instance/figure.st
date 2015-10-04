@@ -1,3 +1,3 @@
-accessing
+figures
 figure
-	^ figure ifNil: [ figure := self createFigure ]
+	^ self diagramElement rtElement

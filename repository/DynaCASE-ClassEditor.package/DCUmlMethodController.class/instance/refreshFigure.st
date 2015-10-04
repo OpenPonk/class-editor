@@ -1,3 +1,3 @@
 figures
 refreshFigure
-	self realFigure changed
+	self diagramElement changed

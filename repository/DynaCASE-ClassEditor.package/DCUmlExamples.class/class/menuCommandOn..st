@@ -11,4 +11,4 @@ menuCommandOn: aBuilder
 						parent: #DynaUML;
 						label: 'Simple Class Diagram';
 						icon: DCIcons current dcOmlDiagramIcon;
-						action: [ self exampleSimple ] ]
+						action: [ self exampleModel ] ]

@@ -1,4 +1,4 @@
 figures
 refreshFigure
-	self realFigure changed.
-	super refreshFigure
+"	self realFigure changed.
+	super refreshFigure"
