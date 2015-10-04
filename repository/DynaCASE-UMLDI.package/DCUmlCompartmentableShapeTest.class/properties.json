@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UMLDI-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlCompartmentableShapeTest",
+	"pools" : [
+		 ],
+	"super" : "DCDITestCase",
+	"type" : "normal" }

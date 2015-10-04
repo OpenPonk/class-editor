@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-UMLDI-DiagramInterchange",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"sharedStyle",
+		"localStyle" ],
+	"name" : "DCDIDiagramElement",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

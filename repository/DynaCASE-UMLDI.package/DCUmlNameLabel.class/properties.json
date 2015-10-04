@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UMLDI-UML",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 10/3/2015 21:53",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlNameLabel",
+	"pools" : [
+		 ],
+	"super" : "DCUmlLabel",
+	"type" : "normal" }

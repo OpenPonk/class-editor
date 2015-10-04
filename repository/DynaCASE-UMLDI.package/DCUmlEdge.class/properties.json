@@ -1,0 +1,16 @@
+{
+	"category" : "DynaCASE-UMLDI-UML",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 10/3/2015 21:53",
+	"instvars" : [
+		"source",
+		"target",
+		"waypoints" ],
+	"name" : "DCUmlEdge",
+	"pools" : [
+		 ],
+	"super" : "DCUmlDiagramElement",
+	"type" : "normal" }

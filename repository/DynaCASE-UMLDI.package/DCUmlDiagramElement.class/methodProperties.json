@@ -1,0 +1,15 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"initialize" : "PeterUhnak 10/4/2015 01:24",
+		"modelElement" : "PeterUhnak 10/3/2015 22:28",
+		"modelElement:" : "PeterUhnak 10/3/2015 22:21",
+		"ownedElements" : "PeterUhnak 10/3/2015 23:07",
+		"ownedElements:" : "PeterUhnak 10/3/2015 22:27",
+		"owningElement" : "PeterUhnak 10/3/2015 23:08",
+		"owningElement:" : "PeterUhnak 10/3/2015 22:27",
+		"sourceEdges" : "PeterUhnak 10/3/2015 23:09",
+		"sourceEdges:" : "PeterUhnak 10/3/2015 22:27",
+		"targetEdges" : "PeterUhnak 10/3/2015 23:09",
+		"targetEdges:" : "PeterUhnak 10/3/2015 22:27" } }
