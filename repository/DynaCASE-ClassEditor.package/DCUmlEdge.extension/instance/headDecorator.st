@@ -1,3 +1,3 @@
 *DynaCASE-ClassEditor-Accessing
 headDecorator
-	^ headDecorator ifNil: [ headDecorator := RTNoDecorationShape asHead ]
+	^ headDecorator ifNil: [ headDecorator := RTNoDecorationShape ]

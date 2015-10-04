@@ -1,4 +1,5 @@
 initialize-release
 initialize
 	super initialize.
-	multiplicity := DCFAMIXMultiplicity one
+	multiplicity := DCFAMIXMultiplicity one.
+	isNavigable := false

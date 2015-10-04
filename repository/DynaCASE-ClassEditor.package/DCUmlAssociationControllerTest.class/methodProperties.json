@@ -7,6 +7,8 @@
 		"testAttach" : "PeterUhnak 9/29/2015 00:02",
 		"testBuild" : "PeterUhnak 9/29/2015 01:05",
 		"testBuild2" : "PeterUhnak 9/28/2015 23:56",
+		"testCreateDiagramElement" : "PeterUhnak 10/4/2015 20:14",
 		"testLoadModel" : "PeterUhnak 9/28/2015 23:51",
+		"testRefreshDiagramElement" : "PeterUhnak 10/4/2015 20:14",
 		"testRemove" : "PeterUhnak 9/29/2015 00:05",
 		"testSetUp" : "PeterUhnak 9/28/2015 23:46" } }

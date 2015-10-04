@@ -4,5 +4,5 @@ createEdgeFrom: fromElement to: toElement
 		modelElement: self model;
 		source: fromElement;
 		target: toElement;
-		headDecorator: RTEmptyNarrowArrow asHead;
+		headDecorator: RTEmptyNarrowArrow;
 		yourself
