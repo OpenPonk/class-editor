@@ -1,6 +1,5 @@
 canvas actions
 showSelectionFeedback
-	feedback := DCElementADFeedback new
-		noBorder;
+	feedback := DCEdgeADFeedback new
 		feedbackFor: self figure color: Color orange;
 		yourself

@@ -7,6 +7,8 @@
 		"createDiagramElement" : "PeterUhnak 10/4/2015 18:56",
 		"diagramElement" : "PeterUhnak 10/4/2015 18:57",
 		"figure" : "PeterUhnak 10/4/2015 18:56",
+		"hideSelectionFeedback" : "PeterUhnak 10/5/2015 19:02",
 		"parentSelector" : "PeterUhnak 9/29/2015 00:03",
 		"registerModelEvents:" : "PeterUhnak 10/4/2015 21:16",
-		"removeFigure" : "PeterUhnak 10/4/2015 19:15" } }
+		"removeFigure" : "PeterUhnak 10/4/2015 19:15",
+		"showSelectionFeedback" : "PeterUhnak 10/5/2015 19:03" } }
