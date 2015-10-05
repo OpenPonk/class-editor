@@ -2,6 +2,9 @@
 	"class" : {
 		 },
 	"instance" : {
+		"addAssociationEndFigures:at:" : "PeterUhnak 10/5/2015 20:15",
+		"addAssociationFigures" : "PeterUhnak 10/5/2015 20:16",
+		"attachFigure" : "PeterUhnak 10/5/2015 20:13",
 		"buildEditorForm:" : "PeterUhnak 10/4/2015 21:09",
 		"createEdgeFrom:to:" : "PeterUhnak 10/4/2015 19:44",
 		"createModel" : "PeterUhnak 9/28/2015 23:54",
