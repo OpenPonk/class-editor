@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 associationEnds
 	<MSEProperty: #associationEnds type: #DCFAMIXAssociationEnd opposite: #association>
 	<multivalue>

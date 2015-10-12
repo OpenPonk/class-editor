@@ -34,9 +34,12 @@ buildEditorForm: form
 			val
 				ifNotEmpty:
 					[ 
-					self model multiplicity
-						upper:
-							(val = '*'
-								ifTrue: [ -1 ]
-								ifFalse: [ val asNumber ]).
-					self refreshFigure ] ]
+					| num |
+					num := val = '*'
+						ifTrue: [ -1 ]
+						ifFalse: [ 
+							(NumberParser on: val)
+								failBlock: [  ];
+								nextNumber ].
+					num ifNotNil: [ self model multiplicity upper: num ].
+					self refreshFigure ] ].

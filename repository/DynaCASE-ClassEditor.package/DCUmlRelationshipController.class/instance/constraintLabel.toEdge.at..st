@@ -3,36 +3,33 @@ constraintLabel: aLabel toEdge: anEdge at: aPosition
 	aPosition = #start
 		ifTrue:
 			[ 
-			DCRTEdgeEndConstraint
-				stick: aLabel
-				nearStartOfEdge: anEdge
-				distance: 10
-				offset: 20.
-			DCRTElementsConstraint
-				whenDragging: aLabel
-				drawLineToPoint:
-					[ (anEdge shape endingPointOf: anEdge) * 0.9 + ((anEdge shape startingPointOf: anEdge) * 0.1) ] ].
+			| anchor |
+			anchor := DCRTAnchorConstraint new.
+			anchor
+				element: aLabel;
+				edge: anEdge;
+				balance: 10;
+				minDistance: 10;
+				build ].
 	aPosition = #end
 		ifTrue:
 			[ 
-			DCRTEdgeEndConstraint
-				stick: aLabel
-				nearStartOfEdge: anEdge
-				distance: 10
-				offset: 20.
-			DCRTElementsConstraint
-				whenDragging: aLabel
-				drawLineToPoint:
-					[ (anEdge shape startingPointOf: anEdge) * 0.9 + ((anEdge shape endingPointOf: anEdge) * 0.1) ] ].
+			| anchor |
+			anchor := DCRTAnchorConstraint new.
+			anchor
+				element: aLabel;
+				edge: anEdge;
+				balance: -10;
+				minDistance: 10;
+				build ].
 	aPosition = #middle
 		ifTrue:
 			[ 
-			DCRTEdgeAlongConstraint
-				stick: aLabel
-				alongEdge: anEdge
-				balance: 10
-				offset: 20.
-			DCRTElementsConstraint
-				whenDragging: aLabel
-				drawLineToPoint:
-					[ ((anEdge shape startingPointOf: anEdge) + (anEdge shape endingPointOf: anEdge)) / 2 ] ]
+			| anchor |
+			anchor := DCRTAnchorConstraint new.
+			anchor
+				element: aLabel;
+				edge: anEdge;
+				balance: 0.5;
+				minDistance: 10;
+				build ]
