@@ -14,7 +14,7 @@ baseline: spec
 					loads: #('Parser');
 					repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ].
 		spec 
+			package: 'DynaCASE-UMLDI';
 			package: 'DynaCASE-ClassEditor' with: [
-				spec requires: #('DynaCASE' 'PetitParser' ). ];
-			package: 'DynaCASE-UMLDI'.
-		spec group: 'default' with: #('DynaCASE-ClassEditor' 'DynaCASE-UMLDI' ). ]
+				spec requires: #('DynaCASE' 'PetitParser' 'DynaCASE-UMLDI' ). ].
+		spec group: 'default' with: #('DynaCASE-UMLDI' 'DynaCASE-ClassEditor'). ]
