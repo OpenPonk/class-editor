@@ -16,4 +16,4 @@ baseline: spec
 		spec 
 			package: 'DynaCASE-ClassEditor' with: [
 				spec requires: #('DynaCASE' 'PetitParser' ). ].
-		spec group: 'default' with: #('DynaCASE-ClassEditor' ). ]
+		spec group: 'default' with: #('DynaCASE-ClassEditor' 'DynaCASE-UMLDI' ). ]
