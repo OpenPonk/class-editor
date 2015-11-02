@@ -1,0 +1,22 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"classWithAttributes" : "PeterUhnak 10/24/2015 19:45",
+		"setUp" : "PeterUhnak 10/24/2015 18:59",
+		"suspendedDo:" : "PeterUhnak 10/25/2015 17:58",
+		"tearDown" : "PeterUhnak 10/25/2015 17:58",
+		"testCreateAccessors" : "PeterUhnak 10/25/2015 18:24",
+		"testCreateAttribute" : "PeterUhnak 10/25/2015 18:24",
+		"testCreateCollectionAccessors" : "PeterUhnak 10/24/2015 21:20",
+		"testCreateCollectionAttribute" : "PeterUhnak 10/24/2015 20:58",
+		"testCreateEmptyClass" : "PeterUhnak 10/24/2015 19:41",
+		"testCreateMethod" : "PeterUhnak 10/28/2015 13:02",
+		"testCreateSetOfClasses" : "PeterUhnak 10/24/2015 19:40",
+		"testCreateStaticAccessors" : "PeterUhnak 10/24/2015 20:35",
+		"testCreateStaticAttribute" : "PeterUhnak 10/24/2015 20:28",
+		"testCreateSubclassClass" : "PeterUhnak 10/24/2015 19:30",
+		"testGetterPragma" : "PeterUhnak 10/24/2015 20:20",
+		"testGetterPragma2" : "PeterUhnak 10/24/2015 20:20",
+		"testMethodPragma" : "PeterUhnak 10/26/2015 11:54",
+		"testSpecifyCategory" : "PeterUhnak 10/24/2015 19:40" } }

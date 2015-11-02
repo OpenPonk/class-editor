@@ -1,0 +1,16 @@
+{
+	"category" : "DynaCASE-Generator",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"generator",
+		"cls",
+		"model" ],
+	"name" : "DCUmlToCodeGeneratorTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-Generator",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 10/24/2015 18:55",
+	"instvars" : [
+		"category" ],
+	"name" : "DCUmlToCodeGenerator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

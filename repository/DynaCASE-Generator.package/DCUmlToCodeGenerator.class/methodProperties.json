@@ -1,0 +1,18 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"appendToInitialize:in:" : "PeterUhnak 10/24/2015 21:18",
+		"createAccessorsFor:in:" : "PeterUhnak 10/24/2015 20:48",
+		"createAttributeFor:in:" : "PeterUhnak 10/24/2015 21:05",
+		"createClassFor:" : "PeterUhnak 10/24/2015 19:33",
+		"createClassesFor:" : "PeterUhnak 10/24/2015 19:40",
+		"createCollectionAccessorsFor:in:" : "PeterUhnak 10/24/2015 20:57",
+		"createMethodFor:in:" : "PeterUhnak 10/28/2015 13:03",
+		"defaultCategory:" : "PeterUhnak 10/24/2015 19:32",
+		"ensureHasInitialize:" : "PeterUhnak 10/24/2015 21:16",
+		"getterPragmaFor:" : "PeterUhnak 10/24/2015 20:21",
+		"initialize" : "PeterUhnak 10/24/2015 19:32",
+		"methodPragmaFor:" : "PeterUhnak 10/26/2015 11:53",
+		"specifyDefaultValueFor:in:" : "PeterUhnak 10/24/2015 21:19",
+		"typeNameFor:" : "PeterUhnak 10/24/2015 20:10" } }
