@@ -2,12 +2,12 @@
 	"class" : {
 		 },
 	"instance" : {
-		"addAssociationEndFigures:at:" : "PeterUhnak 10/5/2015 20:15",
-		"addAssociationFigures" : "PeterUhnak 10/5/2015 20:16",
-		"attachFigure" : "PeterUhnak 10/5/2015 20:13",
-		"buildEditorForm:" : "PeterUhnak 10/12/2015 15:09",
-		"createEdgeFrom:to:" : "PeterUhnak 10/4/2015 19:44",
-		"createModel" : "PeterUhnak 9/28/2015 23:54",
-		"edgeBuilder" : "PeterUhnak 9/28/2015 23:58",
-		"modelClass" : "PeterUhnak 9/28/2015 23:53",
-		"refreshFigure" : "PeterUhnak 10/12/2015 14:32" } }
+		"addAssociationEndFigures:at:" : "PeterUhnak 10/26/2015 17:09",
+		"addAssociationFigures" : "PeterUhnak 10/12/2015 15:44:20",
+		"attachFigure" : "PeterUhnak 10/12/2015 15:44:20",
+		"buildEditorForm:" : "PeterUhnak 10/12/2015 15:44:20",
+		"createEdgeFrom:to:" : "PeterUhnak 10/12/2015 15:44:20",
+		"createModel" : "PeterUhnak 10/12/2015 15:44:20",
+		"edgeBuilder" : "PeterUhnak 10/12/2015 15:44:20",
+		"modelClass" : "PeterUhnak 10/12/2015 15:44:20",
+		"refreshFigure" : "PeterUhnak 10/12/2015 15:44:20" } }

@@ -2,15 +2,15 @@
 	"class" : {
 		 },
 	"instance" : {
-		"controllerClass" : "PeterUhnak 9/21/2015 23:08",
-		"newClassWithAttributes" : "PeterUhnak 9/21/2015 23:10",
-		"newClassWithMethod" : "PeterUhnak 9/22/2015 21:01",
-		"newCompleteClass" : "PeterUhnak 9/21/2015 23:07",
-		"newEmptyClass" : "PeterUhnak 9/21/2015 23:10",
-		"testBuildClass" : "PeterUhnak 9/22/2015 20:56",
-		"testBuildClassWithAttributes" : "PeterUhnak 9/29/2015 00:09",
-		"testBuildClassWithMethod" : "PeterUhnak 9/22/2015 20:57",
-		"testCreateDiagramElement" : "PeterUhnak 10/4/2015 18:26",
-		"testRefreshFigure" : "PeterUhnak 10/4/2015 18:28",
-		"testRemoveAttribute" : "PeterUhnak 9/29/2015 00:08",
-		"testRemoveMethod" : "PeterUhnak 9/22/2015 21:02" } }
+		"controllerClass" : "PeterUhnak 10/12/2015 15:44:20",
+		"newClassWithAttributes" : "PeterUhnak 10/12/2015 15:44:20",
+		"newClassWithMethod" : "PeterUhnak 10/12/2015 15:44:20",
+		"newCompleteClass" : "PeterUhnak 10/12/2015 15:44:20",
+		"newEmptyClass" : "PeterUhnak 10/12/2015 15:44:20",
+		"testBuildClass" : "PeterUhnak 10/12/2015 15:44:20",
+		"testBuildClassWithAttributes" : "PeterUhnak 10/12/2015 15:44:20",
+		"testBuildClassWithMethod" : "PeterUhnak 10/12/2015 15:44:20",
+		"testCreateDiagramElement" : "PeterUhnak 10/12/2015 15:44:20",
+		"testRefreshFigure" : "PeterUhnak 10/12/2015 15:44:20",
+		"testRemoveAttribute" : "PeterUhnak 10/12/2015 15:44:20",
+		"testRemoveMethod" : "PeterUhnak 10/12/2015 15:44:20" } }

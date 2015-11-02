@@ -2,15 +2,16 @@
 	"class" : {
 		 },
 	"instance" : {
-		"attachFigure" : "PeterUhnak 10/4/2015 21:14",
-		"attachTo:" : "PeterUhnak 10/4/2015 21:15",
-		"constraintLabel:toEdge:at:" : "PeterUhnak 10/12/2015 14:07",
-		"constraintLabelOld:toEdge:at:" : "PeterUhnak 10/11/2015 17:19",
-		"createDiagramElement" : "PeterUhnak 10/4/2015 18:56",
-		"diagramElement" : "PeterUhnak 10/4/2015 18:57",
-		"figure" : "PeterUhnak 10/4/2015 18:56",
-		"hideSelectionFeedback" : "PeterUhnak 10/5/2015 19:02",
-		"parentSelector" : "PeterUhnak 9/29/2015 00:03",
-		"registerModelEvents:" : "PeterUhnak 10/4/2015 21:16",
-		"removeFigure" : "PeterUhnak 10/4/2015 19:15",
-		"showSelectionFeedback" : "PeterUhnak 10/5/2015 19:03" } }
+		"attachFigure" : "PeterUhnak 10/12/2015 15:44:20",
+		"attachTo:" : "PeterUhnak 10/12/2015 15:44:20",
+		"constraintLabel:toEdge:at:" : "PeterUhnak 10/12/2015 15:44:20",
+		"constraintLabel:toEdge:at:side:" : "PeterUhnak 10/26/2015 17:09",
+		"constraintLabelOld:toEdge:at:" : "PeterUhnak 10/12/2015 15:44:20",
+		"createDiagramElement" : "PeterUhnak 10/12/2015 15:44:20",
+		"diagramElement" : "PeterUhnak 10/12/2015 15:44:20",
+		"figure" : "PeterUhnak 10/12/2015 15:44:20",
+		"hideSelectionFeedback" : "PeterUhnak 10/12/2015 15:44:20",
+		"parentSelector" : "PeterUhnak 10/12/2015 15:44:20",
+		"registerModelEvents:" : "PeterUhnak 10/12/2015 15:44:20",
+		"removeFigure" : "PeterUhnak 10/12/2015 15:44:20",
+		"showSelectionFeedback" : "PeterUhnak 10/12/2015 15:44:20" } }

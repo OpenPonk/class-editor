@@ -1,9 +1,10 @@
 {
 	"class" : {
-		"uniqueNameIn:" : "PeterUhnak 9/22/2015 18:32" },
+		"uniqueNameIn:" : "PeterUhnak 10/12/2015 15:44:20" },
 	"instance" : {
-		"descriptionIsStatic" : "PeterUhnak 9/23/2015 00:36",
-		"isStatic" : "PeterUhnak 9/19/2015 01:50",
-		"isStatic:" : "PeterUhnak 9/19/2015 01:48",
-		"multiplicity" : "PeterUhnak 9/21/2015 15:22",
-		"multiplicity:" : "PeterUhnak 9/21/2015 15:00" } }
+		"descriptionIsStatic" : "PeterUhnak 10/12/2015 15:44:20",
+		"isStatic" : "PeterUhnak 10/12/2015 15:44:20",
+		"isStatic:" : "PeterUhnak 10/12/2015 15:44:20",
+		"multiplicity" : "PeterUhnak 10/12/2015 15:44:20",
+		"multiplicity:" : "PeterUhnak 10/12/2015 15:44:20",
+		"umlSignature" : "PeterUhnak 10/28/2015 12:42" } }

@@ -1,7 +1,7 @@
 {
 	"class" : {
-		"isAbstract" : "PeterUhnak 9/21/2015 23:51" },
+		"isAbstract" : "PeterUhnak 10/12/2015 15:44:20" },
 	"instance" : {
-		"controllerClass" : "PeterUhnak 9/21/2015 22:26",
-		"newDiagramController" : "PeterUhnak 9/21/2015 23:09",
-		"setUp" : "PeterUhnak 9/21/2015 23:05" } }
+		"controllerClass" : "PeterUhnak 10/12/2015 15:44:20",
+		"newDiagramController" : "PeterUhnak 10/12/2015 15:44:20",
+		"setUp" : "PeterUhnak 10/12/2015 15:44:20" } }
