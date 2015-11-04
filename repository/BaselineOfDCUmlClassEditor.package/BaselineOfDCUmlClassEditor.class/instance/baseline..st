@@ -16,8 +16,7 @@ baseline: spec
 			project: 'MooseCore' with: [
 				spec
 					className: #ConfigurationOfMoose;
-					versionString: #development;
-					loads: #('Moose-Core');
+					version: #minimal;
 					repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/'
 			].
 		spec 
