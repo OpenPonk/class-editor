@@ -12,9 +12,17 @@ baseline: spec
 					className: #ConfigurationOfPetitParser;
 					versionString: #development;
 					loads: #('Parser');
-					repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ].
+					repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ];
+			project: 'MooseCore' with: [
+				spec
+					className: #ConfigurationOfMoose;
+					versionString: #development;
+					loads: #('Moose-Core');
+					repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/'
+			].
 		spec 
 			package: 'DynaCASE-UMLDI';
+			package: 'DynaCASE-Generator';
 			package: 'DynaCASE-ClassEditor' with: [
-				spec requires: #('DynaCASE' 'PetitParser' 'DynaCASE-UMLDI' ). ].
-		spec group: 'default' with: #('DynaCASE-UMLDI' 'DynaCASE-ClassEditor'). ]
+				spec requires: #('DynaCASE' 'PetitParser' 'DynaCASE-UMLDI' 'DynaCASE-Generator' ). ].
+		spec group: 'default' with: #('DynaCASE-UMLDI' 'DynaCASE-ClassEditor' 'DynaCASE-Generator'). ]
