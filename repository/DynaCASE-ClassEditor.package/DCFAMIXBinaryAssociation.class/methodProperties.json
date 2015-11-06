@@ -1,18 +1,18 @@
 {
 	"class" : {
-		"annotation" : "PeterUhnak 10/12/2015 15:44:20",
-		"source:target:" : "PeterUhnak 10/12/2015 15:44:20" },
+		"annotation" : "PeterUhnak 11/2/2015 14:01:17",
+		"source:target:" : "PeterUhnak 11/2/2015 14:01:17" },
 	"instance" : {
-		"associationEnds" : "PeterUhnak 10/12/2015 15:44:20",
-		"from" : "PeterUhnak 10/12/2015 15:44:20",
-		"initialize" : "PeterUhnak 10/12/2015 15:44:20",
-		"isBinaryAssociation" : "PeterUhnak 10/12/2015 15:44:20",
-		"name" : "PeterUhnak 10/12/2015 15:44:20",
-		"name:" : "PeterUhnak 10/12/2015 15:44:20",
-		"source" : "PeterUhnak 10/12/2015 15:44:20",
-		"source:" : "PeterUhnak 10/12/2015 15:44:20",
-		"sourceEnd" : "PeterUhnak 10/12/2015 15:44:20",
-		"target" : "PeterUhnak 10/12/2015 15:44:20",
-		"target:" : "PeterUhnak 10/12/2015 15:44:20",
-		"targetEnd" : "PeterUhnak 10/12/2015 15:44:20",
-		"to" : "PeterUhnak 10/12/2015 15:44:20" } }
+		"associationEnds" : "PeterUhnak 11/2/2015 14:01:17",
+		"from" : "PeterUhnak 11/2/2015 14:01:17",
+		"initialize" : "PeterUhnak 11/2/2015 14:01:17",
+		"isBinaryAssociation" : "PeterUhnak 11/2/2015 14:01:17",
+		"name" : "PeterUhnak 11/2/2015 14:01:17",
+		"name:" : "PeterUhnak 11/2/2015 14:01:17",
+		"source" : "PeterUhnak 11/2/2015 14:01:17",
+		"source:" : "PeterUhnak 11/2/2015 14:01:17",
+		"sourceEnd" : "PeterUhnak 11/2/2015 14:01:17",
+		"target" : "PeterUhnak 11/2/2015 14:01:17",
+		"target:" : "PeterUhnak 11/2/2015 14:01:17",
+		"targetEnd" : "PeterUhnak 11/2/2015 14:01:17",
+		"to" : "PeterUhnak 11/2/2015 14:01:17" } }

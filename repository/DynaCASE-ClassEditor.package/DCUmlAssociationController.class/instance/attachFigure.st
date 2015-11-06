@@ -4,8 +4,8 @@ attachFigure
 	constraints := OrderedCollection new.
 	self addAssociationFigures.
 	self diagramElement ownedElements
-		do:
-			[ :each | 
+		do: [ :each | 
 			each renderIn: self diagramElement view.
 			each rtElement @ RTDraggable ].
-	constraints do: #value
+	constraints do: #value.
+	self figure from translateBy: 0 @ 0
