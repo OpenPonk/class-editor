@@ -1,6 +1,5 @@
 tests
 testSpecifyCategory
-	| model |
 	model := FAMIXClass named: 'SomethingGenerated'.
 	generator defaultCategory: 'Somewhere'.
 	cls := generator createClassFor: model.

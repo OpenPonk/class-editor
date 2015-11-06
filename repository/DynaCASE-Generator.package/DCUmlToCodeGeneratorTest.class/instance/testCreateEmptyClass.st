@@ -1,6 +1,5 @@
 tests
 testCreateEmptyClass
-	| model |
 	model := FAMIXClass named: 'SomethingGenerated'.
 	self deny: (Smalltalk globals includesKey: #SomethingGenerated).
 	cls := generator createClassFor: model.

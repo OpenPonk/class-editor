@@ -1,6 +1,8 @@
 generators
 createAccessorsFor: aFamixAttribute in: aClass
 	| typeName prefix suffix isCollection |
+	generateAccessors
+		ifFalse: [ ^ self ].
 	typeName := self typeNameFor: aFamixAttribute declaredType.
 	isCollection := aFamixAttribute multiplicity upper > 1.
 	prefix := typeName first isVowel
@@ -14,8 +16,7 @@ createAccessorsFor: aFamixAttribute in: aClass
 			('{1}
 	{2}
 	^ {1}'
-				format:
-					(Array with: aFamixAttribute name with: (self getterPragmaFor: aFamixAttribute)))
+				format: (Array with: aFamixAttribute name with: (self getterPragmaFor: aFamixAttribute)))
 		classified: 'accessing'.
 	aClass
 		compile:

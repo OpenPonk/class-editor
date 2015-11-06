@@ -1,0 +1,3 @@
+options
+withAccessors
+	^ generateAccessors := true

@@ -1,1 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.1' message 'WIP code generation' id '7ffdfb6d-50eb-4b9b-ba4a-daf94075cfb4' date '2 November 2015' time '2:00:53.612278 pm' author 'PeterUhnak' ancestors () stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.2' message 'Accessors are now optional.' id '81edb14a-6386-44d7-908e-75a1e46cd7b1' date '6 November 2015' time '7:43:12.644199 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.1' message 'WIP code generation
+' id 'e34251d6-00ff-52c4-ba44-5aee2ed1df53' date '2 November 2015' time '2:00:55 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -1,3 +1,4 @@
 running
 setUp
-	generator := DCUmlToCodeGenerator new
+	generator := DCUmlToCodeGenerator new.
+	generator withAccessors
