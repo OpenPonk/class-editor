@@ -4,6 +4,7 @@ testAssociationEndNavigable
 	model := self unidirectionalAssociation.
 	sourceCls := self newClassNamed: model source name.
 	generator resolveAssociationEndFor: model targetEnd opposite: model sourceEnd.
+	self assert: sourceCls instVarNames equals: #(#elements).
 	self
 		assertCollection: sourceCls selectors
 		hasSameElements: #(#elements #elements: #addElement: #removeElement: #initialize).

@@ -1,8 +1,9 @@
 generator - association
 resolveAssociationEndFor: anAssociationEnd opposite: anOppositeEnd
+	| cls |
 	anAssociationEnd isNavigable
 		ifFalse: [ ^ self ].
-	self createAccessorsFor: anAssociationEnd in: (self classFor: anOppositeEnd property name).
-	self
-		specifyDefaultValueFor: anAssociationEnd
-		in: (self classFor: anOppositeEnd property name)
+	cls := self classFor: anOppositeEnd property name.
+	cls addInstVarNamed: anAssociationEnd name.
+	self createAccessorsFor: anAssociationEnd in: cls.
+	self specifyDefaultValueFor: anAssociationEnd in: cls
