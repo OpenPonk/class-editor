@@ -1,8 +1,7 @@
 generator - method
 ensureHasInitialize: aClass
-	(aClass selectors includes: #initialize)
-		ifFalse:
-			[ aClass
+	(aClass includesSelector: #initialize)
+		ifFalse: [ aClass
 				compile:
 					'initialize
 	super initialize'
