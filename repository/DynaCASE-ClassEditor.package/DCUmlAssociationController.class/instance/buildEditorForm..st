@@ -5,7 +5,6 @@ buildEditorForm: form
 		whenTextIsAccepted: [ :newValue | 
 			self model name: newValue.
 			self refreshFigure ].
-
 	(form addCheckbox: 'Source Navigable')
 		state: self model sourceEnd isNavigable;
 		whenChangedDo: [ :val | 
@@ -21,27 +20,22 @@ buildEditorForm: form
 		whenTextIsAccepted:
 				[ :val | 
 			val
-				ifNotEmpty: [ 
-					self model sourceEnd multiplicity lower: val asString.
+				ifNotEmpty: [ self model sourceEnd multiplicity lower: val asString.
 					self refreshFigure ] ].
-
 	(form addTextInput: 'Multiplicity max')
 		text: self model sourceEnd multiplicity printUpper;
 		whenTextIsAccepted:
 				[ :val | 
 			val
 				ifNotEmpty:
-					[ 
-					| num |
+					[ | num |
 					num := val = '*'
-						ifTrue: [ -1 ]
-						ifFalse: [ 
-							(NumberParser on: val)
+						ifTrue: [ DCUnlimitedNatural max ]
+						ifFalse: [ (NumberParser on: val)
 								failBlock: [  ];
 								nextNumber ].
 					num ifNotNil: [ self model sourceEnd multiplicity upper: num ].
 					self refreshFigure ] ].
-
 	(form addCheckbox: 'Target Navigable')
 		state: self model targetEnd isNavigable;
 		whenChangedDo: [ :val | 
@@ -57,22 +51,18 @@ buildEditorForm: form
 		whenTextIsAccepted:
 				[ :val | 
 			val
-				ifNotEmpty: [ 
-					self model targetEnd multiplicity lower: val asString.
+				ifNotEmpty: [ self model targetEnd multiplicity lower: val asString.
 					self refreshFigure ] ].
-
 	(form addTextInput: 'Multiplicity max')
 		text: self model targetEnd multiplicity printUpper;
 		whenTextIsAccepted:
 				[ :val | 
 			val
 				ifNotEmpty:
-					[ 
-					| num |
+					[ | num |
 					num := val = '*'
-						ifTrue: [ -1 ]
-						ifFalse: [ 
-							(NumberParser on: val)
+						ifTrue: [ DCUnlimitedNatural max ]
+						ifFalse: [ (NumberParser on: val)
 								failBlock: [  ];
 								nextNumber ].
 					num ifNotNil: [ self model targetEnd multiplicity upper: num ].

@@ -28,23 +28,19 @@ buildEditorForm: form
 		whenTextIsAccepted:
 				[ :val | 
 			val
-				ifNotEmpty: [ 
-					self model multiplicity lower: val asString.
+				ifNotEmpty: [ self model multiplicity lower: val asString.
 					self refreshFigure ] ].
-
 	(form addTextInput: 'Multiplicity max')
 		text: self model multiplicity printUpper;
 		whenTextIsAccepted:
 				[ :val | 
 			val
 				ifNotEmpty:
-					[ 
-					| num |
+					[ | num |
 					num := val = '*'
-						ifTrue: [ -1 ]
-						ifFalse: [ 
-							(NumberParser on: val)
+						ifTrue: [ DCUnlimitedNatural max ]
+						ifFalse: [ (NumberParser on: val)
 								failBlock: [  ];
 								nextNumber ].
 					num ifNotNil: [ self model multiplicity upper: num ].
-					self refreshFigure ] ].
+					self refreshFigure ] ]
