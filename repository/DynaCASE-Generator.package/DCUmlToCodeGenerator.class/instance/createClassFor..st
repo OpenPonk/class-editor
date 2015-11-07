@@ -1,4 +1,4 @@
-generators
+generator - class
 createClassFor: aFamixClass
 	| parentName |
 	parentName := aFamixClass superInheritances

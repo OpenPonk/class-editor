@@ -1,4 +1,4 @@
-generators
+generator - method
 ensureHasInitialize: aClass
 	(aClass selectors includes: #initialize)
 		ifFalse:

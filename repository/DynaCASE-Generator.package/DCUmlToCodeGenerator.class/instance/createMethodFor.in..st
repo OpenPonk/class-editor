@@ -1,4 +1,4 @@
-generators
+generator - method
 createMethodFor: aFamixMethod in: aClass
 	| name selector |
 	name := $: split: aFamixMethod name.

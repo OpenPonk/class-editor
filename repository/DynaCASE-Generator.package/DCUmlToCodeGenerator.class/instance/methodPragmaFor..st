@@ -1,3 +1,3 @@
-generators
+generator - method
 methodPragmaFor: aFamixMethod
-	^ '<DCMethod: ''' , aFamixMethod umlSignature , '''>'
+	^ Pragma keyword: #DCMethod: arguments: {aFamixMethod umlSignature}

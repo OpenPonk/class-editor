@@ -1,27 +1,18 @@
-generators
-createAccessorsFor: aFamixAttribute in: aClass
-	| typeName prefix suffix isCollection |
+generator - accessors
+createAccessorsFor: anEntity in: aClass
+	"aFamixEntity is FAMIXAttribute or DCFAMIXAssociationEnd"
+
+	| parameterName prefix isCollection |
 	generateAccessors
 		ifFalse: [ ^ self ].
-	typeName := self typeNameFor: aFamixAttribute declaredType.
-	isCollection := aFamixAttribute multiplicity upper > 1.
-	prefix := typeName first isVowel
+	isCollection := anEntity multiplicity upper > 1.
+	parameterName := isCollection
+		ifTrue: [ 'Collection' ]
+		ifFalse: [ self typeNameFor: anEntity ].
+	prefix := parameterName first isVowel
 		ifTrue: [ 'an' ]
 		ifFalse: [ 'a' ].
-	suffix := isCollection
-		ifTrue: [ 'Collection' ]
-		ifFalse: [ '' ].
-	aClass
-		compile:
-			('{1}
-	{2}
-	^ {1}'
-				format: (Array with: aFamixAttribute name with: (self getterPragmaFor: aFamixAttribute)))
-		classified: 'accessing'.
-	aClass
-		compile:
-			('{1}: {2}
-	{1} := {2}' format: (Array with: aFamixAttribute name with: prefix , typeName , suffix))
-		classified: 'accessing'.
+	self createGetter: anEntity name pragma: (self getterPragmaFor: anEntity) in: aClass.
+	self createSetter: anEntity name parameter: parameterName in: aClass.
 	isCollection
-		ifTrue: [ self createCollectionAccessorsFor: aFamixAttribute in: aClass ]
+		ifTrue: [ self createCollectionAccessorsFor: anEntity in: aClass ]

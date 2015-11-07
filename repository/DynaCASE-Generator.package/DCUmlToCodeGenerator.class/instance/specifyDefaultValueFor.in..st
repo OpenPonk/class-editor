@@ -1,7 +1,7 @@
-generators
-specifyDefaultValueFor: aFamixAttribute in: aClass
-	aFamixAttribute multiplicity upper > 1
+generator - method
+specifyDefaultValueFor: aFamixEntity in: aClass
+	aFamixEntity multiplicity upper > 1
 		ifTrue:
 			[ self
-				appendToInitialize: ('{1} := OrderedCollection new' format: {aFamixAttribute name})
+				appendToInitialize: ('{1} := OrderedCollection new' format: {aFamixEntity name})
 				in: aClass ]

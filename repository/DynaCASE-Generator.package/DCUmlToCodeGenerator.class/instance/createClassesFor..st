@@ -1,4 +1,4 @@
-generators
+generator - class
 createClassesFor: aCollection
 	"Super must be created before subclasses."
 

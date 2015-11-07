@@ -1,4 +1,4 @@
-generators
+generator - method
 appendToInitialize: aCodeString in: aClass
 	self ensureHasInitialize: aClass.
 	"Maybe ast addNode: anAssignemntNode?"

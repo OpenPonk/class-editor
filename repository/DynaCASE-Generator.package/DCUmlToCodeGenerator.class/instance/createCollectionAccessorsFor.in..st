@@ -1,22 +1,18 @@
-generators
-createCollectionAccessorsFor: aFamixAttribute in: aClass
-	| typeName prefix isCollection |
-	typeName := self typeNameFor: aFamixAttribute declaredType.
-	isCollection := aFamixAttribute multiplicity upper > 1.
+generator - accessors
+createCollectionAccessorsFor: aFamixEntity in: aClass
+	| name typeName prefix |
+	name := aFamixEntity name asEnglishSingular.
+	typeName := self typeNameFor: aFamixEntity.
 	prefix := typeName first isVowel
 		ifTrue: [ 'an' ]
 		ifFalse: [ 'a' ].
 	aClass
 		compile:
 			('add{1}: {2}
-	{1} add: {2}'
-				format:
-					(Array with: aFamixAttribute name capitalized asEnglishSingular with: prefix , typeName))
+	{3} add: {2}' format: (Array with: name capitalized with: prefix , typeName with: name))
 		classified: 'adding/removing'.
 	aClass
 		compile:
 			('remove{1}: {2}
-	{1} remove: {2}'
-				format:
-					(Array with: aFamixAttribute name capitalized asEnglishSingular with: prefix , typeName))
+	{3} remove: {2}' format: (Array with: name capitalized with: prefix , typeName with: name))
 		classified: 'adding/removing'

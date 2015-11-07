@@ -1,6 +1,6 @@
 tests
 testGetterPragma2
-	| pragma |
 	(model := FAMIXAttribute named: 'string') multiplicity: DCFAMIXMultiplicity zeroToMany.
-	pragma := generator getterPragmaFor: model.
-	self assert: pragma equals: '<DCType: #Object multiplicity: #(0 *)>'
+	self
+		assert: (generator getterPragmaFor: model)
+		equals: (Pragma keyword: #DCType:multiplicity: arguments: #(#Object #(0 #*)))

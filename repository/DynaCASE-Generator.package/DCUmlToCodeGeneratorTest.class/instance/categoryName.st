@@ -1,0 +1,3 @@
+accessing
+categoryName
+	^ 'DynaCASE-GeneratorTest'

@@ -7,4 +7,6 @@ testMethodPragma
 	self
 		assert: pragma
 		equals:
-			'<DCMethod: ''method(anArg : String, aCollection : Number[2..5]) : Integer''>'
+			(Pragma
+				keyword: #DCMethod:
+				arguments: #('method(anArg : String, aCollection : Number[2..5]) : Integer'))
