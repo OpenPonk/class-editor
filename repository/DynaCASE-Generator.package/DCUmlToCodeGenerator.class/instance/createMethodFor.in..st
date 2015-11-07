@@ -1,8 +1,12 @@
 generator - method
 createMethodFor: aFamixMethod in: aClass
 	| name selector |
+	overrideMethods not & (aClass selectors includes: aFamixMethod name)
+		ifTrue: [ ^ self ].
 	name := $: split: aFamixMethod name.
 	selector := String new writeStream.
+	aFamixMethod parameters size = 0
+		ifTrue: [ selector nextPutAll: aFamixMethod name ].
 	aFamixMethod parameters
 		withIndexDo:
 			[ :each :i | 

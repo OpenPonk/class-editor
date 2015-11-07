@@ -1,5 +1,5 @@
 options
-overrideMethods
+doNotOverrideMethods
 	"Should existing methods be overriden?"
 
-	overrideMethods := true
+	overrideMethods := false

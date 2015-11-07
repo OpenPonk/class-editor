@@ -1,8 +1,6 @@
 tests
 testCreateMethod
-	| parser |
-	parser := DCUmlMethodBuilder new.
-	model := parser parse: 'method(anArg: String, aCollection: Number[2..5]): Integer'.
+	model := factory method: 'method(anArg: String, aCollection: Number[2..5]): Integer'.
 	self flag: 'parser needs support for colon in the selector name'.
 	model name: 'method:in:'.
 	self assert: cls selectors equals: #().

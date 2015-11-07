@@ -1,11 +1,8 @@
 tests
 testMethodPragma
-	| pragma parser |
-	parser := DCUmlMethodBuilder new.
-	model := parser parse: 'method(anArg: String, aCollection: Number[2..5]): Integer'.
-	pragma := generator methodPragmaFor: model.
+	model := factory method: 'method(anArg: String, aCollection: Number[2..5]): Integer'.
 	self
-		assert: pragma
+		assert: (generator methodPragmaFor: model)
 		equals:
 			(Pragma
 				keyword: #DCMethod:

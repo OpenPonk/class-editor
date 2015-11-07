@@ -1,5 +1,5 @@
 options
 defaultOptions
-	overrideMethods := false.
 	category := #Unclassified.
-	self withoutAccessors
+	self withoutAccessors.
+	self doNotOverrideMethods
