@@ -15,6 +15,7 @@
 		"createCollectionAccessorsFor:in:" : "PeterUhnak 11/7/2015 14:59",
 		"createGetter:pragma:in:" : "PeterUhnak 11/7/2015 14:55",
 		"createMethodFor:in:" : "PeterUhnak 11/7/2015 15:57",
+		"createNonNavigableGetter:pragma:in:" : "PeterUhnak 11/15/2015 13:26",
 		"createSetter:parameter:in:" : "PeterUhnak 11/7/2015 15:02",
 		"defaultCategory:" : "PeterUhnak 11/2/2015 14:00:55",
 		"defaultOptions" : "PeterUhnak 11/7/2015 15:57",
@@ -25,8 +26,8 @@
 		"methodPragmaFor:" : "PeterUhnak 11/7/2015 13:32",
 		"multiplicityFor:" : "PeterUhnak 11/7/2015 13:30",
 		"overrideMethods" : "PeterUhnak 11/7/2015 15:55",
-		"resolveAssociationEndFor:opposite:" : "PeterUhnak 11/7/2015 15:42",
-		"specifyDefaultValueFor:in:" : "PeterUhnak 11/7/2015 15:59",
+		"resolveAssociationEndFor:opposite:" : "PeterUhnak 11/15/2015 13:23",
+		"specifyDefaultValueFor:in:" : "PeterUhnak 11/15/2015 13:00",
 		"typeNameFor:" : "PeterUhnak 11/7/2015 14:35",
 		"withAccessors" : "PeterUhnak 11/6/2015 19:40",
 		"withoutAccessors" : "PeterUhnak 11/6/2015 19:41" } }

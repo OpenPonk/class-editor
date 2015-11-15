@@ -3,6 +3,8 @@
 		"isAbstract" : "PeterUhnak 11/14/2015 22:39" },
 	"instance" : {
 		"categoryName" : "PeterUhnak 11/14/2015 16:46",
+		"newClassNamed:" : "PeterUhnak 11/15/2015 12:50",
+		"newClassNamed:inCategory:" : "PeterUhnak 11/15/2015 12:51",
 		"setUp" : "PeterUhnak 11/14/2015 16:51",
 		"suspendedDo:" : "PeterUhnak 11/14/2015 16:47",
 		"tearDown" : "PeterUhnak 11/14/2015 16:47" } }

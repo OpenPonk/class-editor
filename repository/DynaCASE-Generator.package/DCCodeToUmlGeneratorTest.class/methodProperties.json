@@ -2,8 +2,6 @@
 	"class" : {
 		 },
 	"instance" : {
-		"newClassNamed:" : "PeterUhnak 11/14/2015 16:49",
-		"newClassNamed:inCategory:" : "PeterUhnak 11/14/2015 16:48",
 		"setUp" : "PeterUhnak 11/14/2015 16:49",
 		"testAttribute" : "PeterUhnak 11/14/2015 22:41",
 		"testAttributeMultiplicity" : "PeterUhnak 11/14/2015 21:13",

@@ -3,5 +3,5 @@ specifyDefaultValueFor: aFamixEntity in: aClass
 	aFamixEntity multiplicity upper > 1
 		ifTrue:
 			[ self
-				addToIntialize: ('{1} := OrderedCollection new' format: {aFamixEntity name})
+				addToInitialize: ('{1} := OrderedCollection new' format: {aFamixEntity name})
 				in: aClass ]
