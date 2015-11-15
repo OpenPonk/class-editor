@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testInitializeNoDuplicates
 	generator addToInitialize: '1 + 1' in: cls.
 	generator addToInitialize: '1 + 1' in: cls.

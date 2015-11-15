@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testInitialize
 	generator addToInitialize: '1 + 1' in: cls.
 	self

@@ -6,9 +6,11 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"generator" ],
-	"name" : "DCUmlToCodeGeneratorTest",
+		"factory",
+		"model",
+		"cls" ],
+	"name" : "DCGeneratorTest",
 	"pools" : [
 		 ],
-	"super" : "DCGeneratorTest",
+	"super" : "TestCase",
 	"type" : "normal" }

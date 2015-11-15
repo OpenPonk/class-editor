@@ -1,0 +1,15 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"attributeTypeFor:in:" : "PeterUhnak 11/14/2015 17:34",
+		"attributeTypeNameFor:in:" : "PeterUhnak 11/14/2015 21:12",
+		"createAttributeNamed:in:" : "PeterUhnak 11/14/2015 21:10",
+		"createClassFor:" : "PeterUhnak 11/14/2015 17:02",
+		"createMethodFor:in:" : "PeterUhnak 11/15/2015 11:38",
+		"initialize" : "PeterUhnak 11/15/2015 11:29",
+		"lowerBoundFor:" : "PeterUhnak 11/14/2015 21:30",
+		"methodParametersFor:in:" : "PeterUhnak 11/15/2015 11:23",
+		"methodTypeFor:in:" : "PeterUhnak 11/15/2015 11:19",
+		"multiplicityFor:in:" : "PeterUhnak 11/14/2015 21:31",
+		"upperBoundFor:" : "PeterUhnak 11/14/2015 21:28" } }

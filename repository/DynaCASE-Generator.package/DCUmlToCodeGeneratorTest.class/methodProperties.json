@@ -2,12 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
-		"categoryName" : "PeterUhnak 11/7/2015 15:23",
-		"newClassNamed:" : "PeterUhnak 11/7/2015 15:15",
-		"newClassNamed:inCategory:" : "PeterUhnak 11/7/2015 15:32",
-		"setUp" : "PeterUhnak 11/7/2015 15:26",
-		"suspendedDo:" : "PeterUhnak 11/2/2015 14:00:55",
-		"tearDown" : "PeterUhnak 11/7/2015 15:25",
+		"setUp" : "PeterUhnak 11/14/2015 16:50",
 		"testAssociationEndNavigable" : "PeterUhnak 11/7/2015 15:46",
 		"testAssociationEndNavigable2" : "PeterUhnak 11/7/2015 15:46",
 		"testAssociationEndNonNavigable" : "PeterUhnak 11/7/2015 15:46",

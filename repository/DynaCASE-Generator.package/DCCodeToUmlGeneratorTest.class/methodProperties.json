@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"newClassNamed:" : "PeterUhnak 11/14/2015 16:49",
+		"newClassNamed:inCategory:" : "PeterUhnak 11/14/2015 16:48",
+		"setUp" : "PeterUhnak 11/14/2015 16:49",
+		"testAttribute" : "PeterUhnak 11/14/2015 22:41",
+		"testAttributeMultiplicity" : "PeterUhnak 11/14/2015 21:13",
+		"testAttributePragma" : "PeterUhnak 11/14/2015 21:09",
+		"testAttributeType" : "PeterUhnak 11/14/2015 17:08",
+		"testAttributeTypeDefault" : "PeterUhnak 11/14/2015 18:09",
+		"testAttributeTypePragma" : "PeterUhnak 11/14/2015 19:05",
+		"testAttributeTypeRoel" : "PeterUhnak 11/14/2015 18:27",
+		"testEmptyClass" : "PeterUhnak 11/14/2015 17:03",
+		"testLowerBound" : "PeterUhnak 11/14/2015 21:30",
+		"testMethod" : "PeterUhnak 11/15/2015 10:36",
+		"testMethodWithParams" : "PeterUhnak 11/15/2015 11:21",
+		"testMethodWithPragma" : "PeterUhnak 11/15/2015 11:38",
+		"testUpperBound" : "PeterUhnak 11/14/2015 21:28" } }

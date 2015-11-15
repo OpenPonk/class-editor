@@ -4,11 +4,12 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "PeterUhnak 11/14/2015 16:40",
 	"instvars" : [
-		"generator" ],
-	"name" : "DCUmlToCodeGeneratorTest",
+		"category",
+		"factory" ],
+	"name" : "DCCodeToUmlGenerator",
 	"pools" : [
 		 ],
-	"super" : "DCGeneratorTest",
+	"super" : "Object",
 	"type" : "normal" }
