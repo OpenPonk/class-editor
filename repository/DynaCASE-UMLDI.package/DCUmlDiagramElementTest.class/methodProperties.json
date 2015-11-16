@@ -2,8 +2,8 @@
 	"class" : {
 		 },
 	"instance" : {
-		"elementClass" : "PeterUhnak 10/3/2015 22:34",
-		"testAddEdge" : "PeterUhnak 10/3/2015 22:38",
-		"testAddOwnedElement" : "PeterUhnak 10/3/2015 22:36",
-		"testAddSelfEdge" : "PeterUhnak 10/4/2015 00:33",
-		"testEmpty" : "PeterUhnak 10/4/2015 00:32" } }
+		"elementClass" : "PeterUhnak 10/4/2015 19:43:32",
+		"testAddEdge" : "PeterUhnak 10/4/2015 19:43:32",
+		"testAddOwnedElement" : "PeterUhnak 10/4/2015 19:43:32",
+		"testAddSelfEdge" : "PeterUhnak 10/4/2015 19:43:32",
+		"testEmpty" : "PeterUhnak 10/4/2015 19:43:32" } }

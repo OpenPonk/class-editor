@@ -2,8 +2,8 @@
 	"class" : {
 		 },
 	"instance" : {
-		"elementClass" : "PeterUhnak 10/4/2015 01:21",
-		"testLocalStyleNotInherited" : "PeterUhnak 10/4/2015 01:35",
-		"testPropertyInheritance" : "PeterUhnak 10/4/2015 02:13",
-		"testSharedStyleIsInherited" : "PeterUhnak 10/4/2015 01:36",
-		"testSharedStyleOverriden" : "PeterUhnak 10/4/2015 01:38" } }
+		"elementClass" : "PeterUhnak 10/4/2015 19:43:32",
+		"testLocalStyleNotInherited" : "PeterUhnak 10/4/2015 19:43:32",
+		"testPropertyInheritance" : "PeterUhnak 10/4/2015 19:43:32",
+		"testSharedStyleIsInherited" : "PeterUhnak 10/4/2015 19:43:32",
+		"testSharedStyleOverriden" : "PeterUhnak 10/4/2015 19:43:32" } }
