@@ -1,15 +1,15 @@
 {
 	"class" : {
-		"annotation" : "PeterUhnak 11/2/2015 14:01:17",
-		"on:" : "PeterUhnak 11/2/2015 14:01:17" },
+		"annotation" : "PeterUhnak 11/15/2015 11:37:08",
+		"on:" : "PeterUhnak 11/15/2015 11:37:08" },
 	"instance" : {
-		"association" : "PeterUhnak 11/2/2015 14:01:17",
-		"association:" : "PeterUhnak 11/2/2015 14:01:17",
-		"beNavigable" : "PeterUhnak 11/2/2015 14:01:17",
-		"beNonNavigable" : "PeterUhnak 11/7/2015 10:48",
-		"initialize" : "PeterUhnak 11/6/2015 17:57",
-		"isNavigable" : "PeterUhnak 11/2/2015 14:01:17",
-		"isNavigable:" : "PeterUhnak 11/2/2015 14:01:17",
-		"multiplicity" : "PeterUhnak 11/2/2015 14:01:17",
-		"multiplicity:" : "PeterUhnak 11/2/2015 14:01:17",
-		"property" : "PeterUhnak 11/7/2015 13:45" } }
+		"association" : "PeterUhnak 11/15/2015 11:37:08",
+		"association:" : "PeterUhnak 11/15/2015 11:37:08",
+		"beNavigable" : "PeterUhnak 11/15/2015 11:37:08",
+		"beNonNavigable" : "PeterUhnak 11/15/2015 11:37:08",
+		"initialize" : "PeterUhnak 11/15/2015 11:37:08",
+		"isNavigable" : "PeterUhnak 11/15/2015 11:37:08",
+		"isNavigable:" : "PeterUhnak 11/15/2015 11:37:08",
+		"multiplicity" : "PeterUhnak 11/15/2015 11:37:08",
+		"multiplicity:" : "PeterUhnak 11/15/2015 11:37:08",
+		"property" : "PeterUhnak 11/15/2015 11:37:08" } }

@@ -2,15 +2,15 @@
 	"class" : {
 		 },
 	"instance" : {
-		"addAsTargetFor:" : "PeterUhnak 11/2/2015 14:01:17",
-		"addModelElement:" : "PeterUhnak 11/2/2015 14:01:17",
-		"canBeTargetFor:" : "PeterUhnak 11/2/2015 14:01:17",
-		"ensureInModel:" : "PeterUhnak 11/2/2015 14:01:17",
-		"ensureNotInModel:" : "PeterUhnak 11/2/2015 14:01:17",
-		"initializePalette:" : "PeterUhnak 11/2/2015 14:01:17",
-		"initializePaletteWithShortcuts:" : "PeterUhnak 11/2/2015 14:01:17",
-		"modelClass" : "PeterUhnak 11/2/2015 14:01:17",
-		"modelToControllerMapping" : "PeterUhnak 11/2/2015 14:01:17",
-		"rebuild" : "PeterUhnak 11/2/2015 14:01:17",
-		"removeFromModel:" : "PeterUhnak 11/2/2015 14:01:17",
-		"removeModelElement:" : "PeterUhnak 11/2/2015 14:01:17" } }
+		"addAsTargetFor:" : "PeterUhnak 11/15/2015 11:37:08",
+		"addModelElement:" : "PeterUhnak 11/15/2015 11:37:08",
+		"canBeTargetFor:" : "PeterUhnak 11/15/2015 11:37:08",
+		"ensureInModel:" : "PeterUhnak 11/15/2015 11:37:08",
+		"ensureNotInModel:" : "PeterUhnak 11/15/2015 11:37:08",
+		"initializePalette:" : "PeterUhnak 11/15/2015 11:37:08",
+		"initializePaletteWithShortcuts:" : "PeterUhnak 11/15/2015 11:37:08",
+		"modelClass" : "PeterUhnak 11/15/2015 11:37:08",
+		"modelToControllerMapping" : "PeterUhnak 11/15/2015 11:37:08",
+		"rebuild" : "PeterUhnak 11/15/2015 11:37:08",
+		"removeFromModel:" : "PeterUhnak 11/15/2015 11:37:08",
+		"removeModelElement:" : "PeterUhnak 11/15/2015 11:37:08" } }
