@@ -3,7 +3,7 @@ buildEditorForm: aForm
 	(aForm addTextInput: 'Name')
 		text: self model name;
 		whenTextIsAccepted: [ :newValue | 
-			self model name: newValue.
+			self model name: newValue capitalized.
 			self refreshFigure ].
 	(aForm addCheckbox: 'Is Abstract')
 		state: self model isAbstract;
