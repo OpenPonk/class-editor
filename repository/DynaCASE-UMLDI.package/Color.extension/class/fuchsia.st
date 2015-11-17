@@ -1,3 +1,3 @@
 *DynaCASE-UMLDI-KnownColor
 fuchsia
-	^ self fromHexString: 'ff00ff'
+	^ ColorRegistry at: #fuchsia ifAbsentPut: [ self fromHexString: 'ff00ff' ]

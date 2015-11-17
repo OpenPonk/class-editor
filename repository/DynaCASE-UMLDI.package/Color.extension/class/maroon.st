@@ -1,3 +1,3 @@
 *DynaCASE-UMLDI-KnownColor
 maroon
-	^ self fromHexString: '800000'
+	^ ColorRegistry at: #maroon ifAbsentPut: [ self fromHexString: '800000' ]

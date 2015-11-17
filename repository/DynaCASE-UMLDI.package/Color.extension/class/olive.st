@@ -1,3 +1,3 @@
 *DynaCASE-UMLDI-KnownColor
 olive
-	^ self fromHexString: '808000'
+	^ ColorRegistry at: #olive ifAbsentPut: [ self fromHexString: '808000' ]

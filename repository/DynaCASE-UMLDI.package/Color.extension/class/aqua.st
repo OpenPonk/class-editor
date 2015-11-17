@@ -1,3 +1,3 @@
 *DynaCASE-UMLDI-KnownColor
 aqua
-	^ self fromHexString: '00ffff'
+	^ ColorRegistry at: #aqua ifAbsentPut: [ self fromHexString: '00ffff' ]

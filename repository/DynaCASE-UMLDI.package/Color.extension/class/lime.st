@@ -1,3 +1,3 @@
 *DynaCASE-UMLDI-KnownColor
 lime
-	^ self fromHexString: '00ff00'
+	^ ColorRegistry at: #lime ifAbsentPut: [ self fromHexString: '00ff00' ]

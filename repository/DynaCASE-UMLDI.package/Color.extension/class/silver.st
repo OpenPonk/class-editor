@@ -1,3 +1,3 @@
 *DynaCASE-UMLDI-KnownColor
 silver
-	^ self fromHexString: 'c0c0c0'
+	^ ColorRegistry at: #silver ifAbsentPut: [ self fromHexString: 'c0c0c0' ]

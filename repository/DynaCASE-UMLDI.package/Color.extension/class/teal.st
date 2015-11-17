@@ -1,3 +1,3 @@
 *DynaCASE-UMLDI-KnownColor
 teal
-	^ self fromHexString: '008080'
+	^ ColorRegistry at: #teal ifAbsentPut: [ self fromHexString: '008080' ]
