@@ -9,4 +9,13 @@ buildEditorForm: aForm
 		state: self model isAbstract;
 		whenChangedDo: [ :val | 
 			self model isAbstract: val.
+			self refreshFigure ].
+	(aForm addDroplist: 'Color')
+		items: Color knownColors;
+		displayBlock: [ :each | each asString ];
+		iconHolder: [ :each | Morph new color: (Color perform: each)  ];
+		setSelectedItem: self diagramElement localStyle fillColor name;
+		whenSelectedItemChanged:
+				[ :newValue | 
+			self diagramElement localStyle fillColor: (Color perform: newValue).
 			self refreshFigure ]
