@@ -5,12 +5,12 @@ buildEditorForm: form
 		whenTextIsAccepted: [ :newValue | 
 			self model name: newValue.
 			self refreshFigure ].
-	(form addCheckbox: 'Source Navigable')
+	(form addCheckbox: self model source name, ' end navigable')
 		state: self model sourceEnd isNavigable;
 		whenChangedDo: [ :val | 
 			self model sourceEnd isNavigable: val.
 			self refreshFigure ].
-	(form addTextInput: 'Source Name')
+	(form addTextInput: self model source name, ' end name')
 		text: self model sourceEnd name;
 		whenTextIsAccepted: [ :newValue | 
 			self model sourceEnd name: newValue.
@@ -36,12 +36,12 @@ buildEditorForm: form
 								nextNumber ].
 					num ifNotNil: [ self model sourceEnd multiplicity upper: num ].
 					self refreshFigure ] ].
-	(form addCheckbox: 'Target Navigable')
+	(form addCheckbox: self model target name, ' navigable')
 		state: self model targetEnd isNavigable;
 		whenChangedDo: [ :val | 
 			self model targetEnd isNavigable: val.
 			self refreshFigure ].
-	(form addTextInput: 'Target Name')
+	(form addTextInput: self model target name, ' end name')
 		text: self model targetEnd name;
 		whenTextIsAccepted: [ :newValue | 
 			self model targetEnd name: newValue.

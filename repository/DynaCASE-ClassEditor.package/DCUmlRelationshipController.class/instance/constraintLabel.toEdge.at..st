@@ -8,7 +8,7 @@ constraintLabel: aLabel toEdge: anEdge at: aPosition
 			anchor
 				element: aLabel;
 				edge: anEdge;
-				balance: 10;
+				balance: -10;
 				minDistance: 10;
 				build ].
 	aPosition = #end
@@ -19,7 +19,7 @@ constraintLabel: aLabel toEdge: anEdge at: aPosition
 			anchor
 				element: aLabel;
 				edge: anEdge;
-				balance: -10;
+				balance: 10;
 				minDistance: 10;
 				build ].
 	aPosition = #middle
