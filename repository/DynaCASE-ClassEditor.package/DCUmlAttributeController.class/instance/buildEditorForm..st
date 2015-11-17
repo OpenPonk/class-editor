@@ -13,6 +13,14 @@ buildEditorForm: form
 				ifEmpty: [ self model declaredType: nil ]
 				ifNotEmpty: [ self model declaredType: (FAMIXClass named: newValue) ].
 			self refreshFigure ].
+	(form addTextInput: 'Default Value')
+		text: (self model defaultValue ifNil: [ '' ] ifNotNil: [ :v | v valueExpression ]);
+		whenTextIsAccepted:
+				[ :newValue | 
+			newValue
+				ifEmpty: [ self model defaultValue: nil ]
+				ifNotEmpty: [ self model defaultValue: (DCFAMIXValueSpecification from: newValue) ].
+			self refreshFigure ].
 	(form addCheckbox: 'Class')
 		state: self model isStatic;
 		whenChangedDo: [ :val | 

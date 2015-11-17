@@ -2,6 +2,8 @@
 	"class" : {
 		"uniqueNameIn:" : "PeterUhnak 11/15/2015 11:37:08" },
 	"instance" : {
+		"defaultValue" : "PeterUhnak 11/16/2015 22:50",
+		"defaultValue:" : "PeterUhnak 11/16/2015 22:50",
 		"descriptionIsStatic" : "PeterUhnak 11/15/2015 11:37:08",
 		"descriptionMultiplicity" : "PeterUhnak 11/15/2015 11:37:08",
 		"isStatic" : "PeterUhnak 11/15/2015 11:37:08",

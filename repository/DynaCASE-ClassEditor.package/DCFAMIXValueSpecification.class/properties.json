@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 11/16/2015 22:54",
+	"instvars" : [
+		"valueExpression" ],
+	"name" : "DCFAMIXValueSpecification",
+	"pools" : [
+		 ],
+	"super" : "FAMIXStructuralEntity",
+	"type" : "normal" }

@@ -1,4 +1,4 @@
-as yet unclassified
+meta
 annotation
 	<MSEClass: #FAMIXMultiplicity super: #FAMIXEntity>
 	<package: #DC>
