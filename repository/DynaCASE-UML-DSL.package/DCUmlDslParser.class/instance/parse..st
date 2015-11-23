@@ -3,7 +3,7 @@ parse: aString
 	| builder statements classes model |
 	model := MooseModel new.
 	builder := DCUmlDslBuilder new.
-	statements := builder parse: aString.
+	statements := builder parse: (self normalize: aString).
 	classes := (statements select: #isClass thenCollect: [ :each | each name -> each ])
 		asOrderedDictionary.
 	statements
