@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-DI-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlStyleTest",
+	"pools" : [
+		 ],
+	"super" : "DCDITestCase",
+	"type" : "normal" }
