@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-DSL-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlOperationGrammarTest",
+	"pools" : [
+		 ],
+	"super" : "DCUmlPropGrammarTest",
+	"type" : "normal" }
