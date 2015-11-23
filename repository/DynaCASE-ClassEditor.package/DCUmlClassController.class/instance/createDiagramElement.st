@@ -3,7 +3,7 @@ createDiagramElement
 	| el attributesCompartment operationsCompartment |
 	el := DCUmlClassifierShape new.
 	el modelElement: self model.
-	el localStyle: (DCUmlStyle new fillColor: Color silver).
+	el localStyle: (DCUmlStyle new fillColor: Color white).
 	nameLabel := DCUmlNameLabel new.
 	nameLabel modelElement: self model.
 	nameLabel text: self model name.

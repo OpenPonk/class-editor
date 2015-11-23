@@ -20,7 +20,7 @@ buildEditorForm: form
 		whenTextIsAccepted:
 				[ :val | 
 			val
-				ifNotEmpty: [ self model sourceEnd multiplicity lower: val asString.
+				ifNotEmpty: [ self model sourceEnd multiplicity lower: val asNumber.
 					self refreshFigure ] ].
 	(form addTextInput: 'Multiplicity max')
 		text: self model sourceEnd multiplicity printUpper;
@@ -51,7 +51,7 @@ buildEditorForm: form
 		whenTextIsAccepted:
 				[ :val | 
 			val
-				ifNotEmpty: [ self model targetEnd multiplicity lower: val asString.
+				ifNotEmpty: [ self model targetEnd multiplicity lower: val asNumber.
 					self refreshFigure ] ].
 	(form addTextInput: 'Multiplicity max')
 		text: self model targetEnd multiplicity printUpper;

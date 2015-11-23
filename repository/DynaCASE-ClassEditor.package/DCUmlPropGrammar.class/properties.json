@@ -10,7 +10,8 @@
 		"type",
 		"multiplicity",
 		"symbol",
-		"multiplicityRange" ],
+		"multiplicityRange",
+		"prefix" ],
 	"name" : "DCUmlPropGrammar",
 	"pools" : [
 		 ],

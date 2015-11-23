@@ -4,6 +4,7 @@ property
 		==>
 			[ :nodes | 
 			FAMIXAttribute new
-				name: nodes second;
-				declaredType: (nodes third ifNotNil: [ FAMIXClass named: nodes third ]);
-				multiplicity: nodes fourth ]
+				name: nodes third;
+				isStatic: (nodes first includes: $_);
+				declaredType: (nodes fourth ifNotNil: [ FAMIXClass named: nodes fourth ]);
+				multiplicity: nodes fifth ]

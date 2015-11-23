@@ -7,6 +7,4 @@ famixTextFor: anAttribute
 						, anAttribute multiplicity asOptionalString ]
 				ifFalse: [ '' ])
 		,
-			(anAttribute defaultValue
-				ifNil: [ '' ]
-				ifNotNil: [ :v | ' = ' , (v asStringOfType: anAttribute declaredType) ])
+			(anAttribute defaultValue ifNil: [ '' ] ifNotNil: [ :v | ' = ' , v valueExpression ])

@@ -1,3 +1,3 @@
 grammar
 property
-	^ visibility optional , propName , (($: asParser , propType) ==> [ :n | n second ]) optional , multiplicity
+	^ prefix, visibility optional , propName , (($: asParser , propType) ==> [ :n | n second ]) optional , multiplicity, defaultValue optional

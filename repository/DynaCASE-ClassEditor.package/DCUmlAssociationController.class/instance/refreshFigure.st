@@ -20,12 +20,12 @@ refreshFigure
 			self diagramElement ownedElements second text: (self model sourceEnd name ifNil: [ '' ]).
 			self diagramElement ownedElements second changed.
 			self diagramElement ownedElements third
-				text: self model sourceEnd multiplicity printRange allButFirst allButLast.
+				text: (self multiplicityRangeFor: self model sourceEnd multiplicity).
 			self diagramElement ownedElements third changed.
 
 			(self diagramElement ownedElements at: 4) text: (self model targetEnd name ifNil: [ '' ]).
 			(self diagramElement ownedElements at: 4) changed.
 			(self diagramElement ownedElements at: 5)
-				text: self model targetEnd multiplicity printRange allButFirst allButLast.
+				text: (self multiplicityRangeFor: self model targetEnd multiplicity).
 			(self diagramElement ownedElements at: 5) changed ].
 	super refreshFigure

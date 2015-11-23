@@ -1,3 +1,3 @@
 grammar
 operation
-	^ visibility optional , opName , parameters , returnValue optional
+	^ prefix, visibility optional , opName , parameters , returnValue optional
