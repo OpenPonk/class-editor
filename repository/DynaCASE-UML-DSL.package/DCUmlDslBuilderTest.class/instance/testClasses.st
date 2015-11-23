@@ -1,5 +1,5 @@
 tests
-testStatements
+testClasses
 	self
 		parse:
 			'One {}

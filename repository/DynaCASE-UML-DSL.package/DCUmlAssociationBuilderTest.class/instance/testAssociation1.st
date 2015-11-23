@@ -1,7 +1,5 @@
 tests
 testAssociation1
-	true
-		ifTrue: [ self skip ].
 	super testAssociation1.
 	self assert: result class equals: DCFAMIXBinaryAssociation.
 	self assert: result source name equals: 'Left'.

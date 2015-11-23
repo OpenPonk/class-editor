@@ -1,7 +1,5 @@
 tests
 testAssociation3
-	true
-		ifTrue: [ self skip ].
 	super testAssociation3.
 	self assert: result source name equals: 'Left'.
 	self assert: result target name equals: 'Right'.

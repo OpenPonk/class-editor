@@ -1,4 +1,3 @@
 tests
 testAssociation1
-	self parse: 'Left --- Right
-' rule: #association
+	self parse: 'Left --- Right' rule: #association

@@ -1,3 +1,4 @@
 accessing
 statements
-	^ (association , #newline asParser plus) star
+	^ ((classBlock / association separatedBy: #newline asParser plus) withoutSeparators , #newline asParser star)
+		==> [ :nodes | nodes first ]
