@@ -9,7 +9,8 @@
 		"classBlock",
 		"statements",
 		"association",
-		"statement" ],
+		"umlClassName",
+		"inheritance" ],
 	"name" : "DCUmlDslBuilder",
 	"pools" : [
 		 ],
