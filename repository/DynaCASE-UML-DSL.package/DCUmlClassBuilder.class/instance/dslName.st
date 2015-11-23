@@ -1,5 +1,5 @@
 accessing
 dslName
-	^ (symbol ==> [ :smb | Array with: smb with: false ])
-		/
-			(($/ asParser , symbol , $/ asParser) ==> [ :nodes | Array with: nodes second with: true ])
+	^ ($/ asParser optional , symbol)
+		==>
+			[ :nodes | Array with: (nodes first ifNil: [ false ] ifNotNil: [ nodes first = $/ ]) with: nodes second ]

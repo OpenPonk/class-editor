@@ -1,0 +1,4 @@
+accessing
+dependencies
+	^ {DCUmlClassBuilder.
+	DCUmlMultiplicityGrammar}

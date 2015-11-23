@@ -1,0 +1,18 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"parserClass" : "PeterUhnak 11/23/2015 22:18",
+		"testAssociation1" : "PeterUhnak 11/23/2015 22:31",
+		"testAssociation3" : "PeterUhnak 11/23/2015 22:42",
+		"testAssociationName" : "PeterUhnak 11/23/2015 22:10",
+		"testEndName" : "PeterUhnak 11/23/2015 22:10",
+		"testEndSymbol1" : "PeterUhnak 11/23/2015 22:23",
+		"testLeftEnd" : "PeterUhnak 11/23/2015 22:29",
+		"testLeftEndWithRole" : "PeterUhnak 11/23/2015 22:29",
+		"testRightEnd" : "PeterUhnak 11/23/2015 22:34",
+		"testRightEndWithRole" : "PeterUhnak 11/23/2015 22:35",
+		"testStartSymbol" : "PeterUhnak 11/23/2015 22:22",
+		"testStartSymbol1" : "PeterUhnak 11/23/2015 22:23",
+		"testTypeSymbol" : "PeterUhnak 11/23/2015 22:21",
+		"testTypeSymbol2" : "PeterUhnak 11/23/2015 22:21" } }

@@ -1,0 +1,3 @@
+accessing
+endSymbol
+	^ typeSymbol / '>' asParser

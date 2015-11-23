@@ -1,3 +1,3 @@
 accessing
 start
-	^ famixClass end
+	^ classBlock end

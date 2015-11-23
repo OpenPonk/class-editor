@@ -3,7 +3,12 @@
 		 },
 	"instance" : {
 		"parserClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"testAbstractClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"testClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"testDslName" : "PeterUhnak 11/15/2015 11:37:08",
-		"testDslName1" : "PeterUhnak 11/15/2015 11:37:08" } }
+		"testAbstractClass" : "PeterUhnak 11/23/2015 20:02",
+		"testClass" : "PeterUhnak 11/23/2015 20:02",
+		"testClassWithStatements" : "PeterUhnak 11/23/2015 20:02",
+		"testDslName" : "PeterUhnak 11/23/2015 19:12",
+		"testDslName1" : "PeterUhnak 11/23/2015 19:12",
+		"testEmptyBlock" : "PeterUhnak 11/23/2015 19:15",
+		"testStatement" : "PeterUhnak 11/23/2015 19:30",
+		"testStatement2" : "PeterUhnak 11/23/2015 19:40",
+		"testStatements" : "PeterUhnak 11/23/2015 19:49" } }

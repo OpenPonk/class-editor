@@ -1,3 +1,3 @@
 accessing
 symbol
-	^ #word asParser plus flatten trim
+	^ #word asParser plus ==> [ :nodes | nodes joinUsing: '' ]
