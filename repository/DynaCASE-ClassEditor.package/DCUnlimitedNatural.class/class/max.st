@@ -1,3 +1,0 @@
-constants
-max
-	^ Float infinity
