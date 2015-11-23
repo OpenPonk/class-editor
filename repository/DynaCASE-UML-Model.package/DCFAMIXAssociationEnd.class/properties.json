@@ -8,7 +8,8 @@
 	"instvars" : [
 		"isNavigable",
 		"multiplicity",
-		"association" ],
+		"association",
+		"aggregation" ],
 	"name" : "DCFAMIXAssociationEnd",
 	"pools" : [
 		 ],
