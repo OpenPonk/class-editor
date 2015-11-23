@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-Model-Utilities",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/21/2015 22:47",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlUniqueNameGenerator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
