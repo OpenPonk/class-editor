@@ -20,8 +20,14 @@ baseline: spec
 					repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/'
 			].
 		spec 
-			package: 'DynaCASE-UMLDI';
-			package: 'DynaCASE-Generator';
+			package: 'DynaCASE-UML-Model';
+			package: 'DynaCASE-UML-DSL' with: [
+				spec requires: #('DynaCASE-UML-Model' 'PetitParser')
+			];
+			package: 'DynaCASE-UML-DI';
+			package: 'DynaCASE-Generator' with: [
+				spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL')
+			];
 			package: 'DynaCASE-ClassEditor' with: [
-				spec requires: #('DynaCASE' 'PetitParser' 'DynaCASE-UMLDI' 'DynaCASE-Generator' ). ].
-		spec group: 'default' with: #('DynaCASE-UMLDI' 'DynaCASE-ClassEditor' 'DynaCASE-Generator'). ]
+				spec requires: #('DynaCASE' 'DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' ) ].
+		spec group: 'default' with: #('DynaCASE-ClassEditor' 'DynaCASE-Generator'). ]
