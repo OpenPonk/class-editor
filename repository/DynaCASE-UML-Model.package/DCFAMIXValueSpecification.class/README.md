@@ -1,0 +1,1 @@
+DCFAMIXValueSpecification is a specification of some value; primary use case is a default value of an attribute.

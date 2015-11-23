@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-UML-Model-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/28/2015 22:31",
+	"instvars" : [
+		"lower",
+		"upperValue" ],
+	"name" : "DCFAMIXMultiplicity",
+	"pools" : [
+		 ],
+	"super" : "FAMIXEntity",
+	"type" : "normal" }

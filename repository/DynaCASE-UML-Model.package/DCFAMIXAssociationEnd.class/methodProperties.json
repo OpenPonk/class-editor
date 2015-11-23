@@ -1,0 +1,15 @@
+{
+	"class" : {
+		"annotation" : "PeterUhnak 11/15/2015 11:37:08",
+		"on:" : "PeterUhnak 11/15/2015 11:37:08" },
+	"instance" : {
+		"association" : "PeterUhnak 11/15/2015 11:37:08",
+		"association:" : "PeterUhnak 11/15/2015 11:37:08",
+		"beNavigable" : "PeterUhnak 11/15/2015 11:37:08",
+		"beNonNavigable" : "PeterUhnak 11/15/2015 11:37:08",
+		"initialize" : "PeterUhnak 11/15/2015 11:37:08",
+		"isNavigable" : "PeterUhnak 11/15/2015 11:37:08",
+		"isNavigable:" : "PeterUhnak 11/15/2015 11:37:08",
+		"multiplicity" : "PeterUhnak 11/15/2015 11:37:08",
+		"multiplicity:" : "PeterUhnak 11/15/2015 11:37:08",
+		"property" : "PeterUhnak 11/15/2015 11:37:08" } }
