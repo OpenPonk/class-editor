@@ -1,5 +1,7 @@
 tests
 testStatements1
+	true
+		ifTrue: [ self skip ].
 	self
 		parse:
 			'Left --- Right

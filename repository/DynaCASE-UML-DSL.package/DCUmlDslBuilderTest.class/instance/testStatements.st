@@ -1,5 +1,7 @@
 tests
 testStatements
+	true
+		ifTrue: [ self skip ].
 	self
 		parse:
 			'One {}
