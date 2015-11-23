@@ -4,8 +4,6 @@ SystemOrganization addCategory: 'DynaCASE-ClassEditor-Examples'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Layouting'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Model-Generators'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Models'!
-SystemOrganization addCategory: 'DynaCASE-ClassEditor-Parsers'!
-SystemOrganization addCategory: 'DynaCASE-ClassEditor-Parsers-Builders'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Plugin'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Tests'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Utilities'!
