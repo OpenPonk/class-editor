@@ -4,4 +4,3 @@ SystemOrganization addCategory: 'DynaCASE-ClassEditor-Examples'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Layouting'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Plugin'!
 SystemOrganization addCategory: 'DynaCASE-ClassEditor-Tests'!
-SystemOrganization addCategory: 'DynaCASE-ClassEditor-Utilities'!
