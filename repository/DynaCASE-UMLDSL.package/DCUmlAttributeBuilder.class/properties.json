@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UMLDSL-Builders",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/29/2015 22:45",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlAttributeBuilder",
+	"pools" : [
+		 ],
+	"super" : "DCUmlPropertyGrammar",
+	"type" : "normal" }
