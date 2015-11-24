@@ -20,7 +20,9 @@ baseline: spec
 					repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/'
 			].
 		spec 
-			package: 'DynaCASE-UML-Model';
+			package: 'DynaCASE-UML-Model' with: [
+				spec requires: #('MooseCore')
+			];
 			package: 'DynaCASE-UML-DSL' with: [
 				spec requires: #('DynaCASE-UML-Model' 'PetitParser')
 			];
