@@ -9,10 +9,10 @@ createCollectionAccessorsFor: aFamixEntity in: aClass
 	aClass
 		compile:
 			('add{1}: {2}
-	{3} add: {2}' format: (Array with: name capitalized with: prefix , typeName with: name))
+	{3} add: {2}' format: (Array with: name capitalized with: prefix , typeName with: aFamixEntity name))
 		classified: 'adding/removing'.
 	aClass
 		compile:
 			('remove{1}: {2}
-	{3} remove: {2}' format: (Array with: name capitalized with: prefix , typeName with: name))
+	{3} remove: {2}' format: (Array with: name capitalized with: prefix , typeName with: aFamixEntity name))
 		classified: 'adding/removing'

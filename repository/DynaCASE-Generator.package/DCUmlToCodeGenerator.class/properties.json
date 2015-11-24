@@ -8,7 +8,8 @@
 	"instvars" : [
 		"category",
 		"generateAccessors",
-		"overrideMethods" ],
+		"overrideMethods",
+		"useProgressBar" ],
 	"name" : "DCUmlToCodeGenerator",
 	"pools" : [
 		 ],
