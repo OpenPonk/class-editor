@@ -9,5 +9,5 @@ testCreateDiagramElement
 
 	self assert: edge class equals: DCUmlEdge.
 	self assert: edge modelElement equals: association.
-	self assert: edge headDecorator equals: RTSimpleArrow.
-	self assert: edge tailDecorator equals: RTSimpleArrow
+	self assert: edge headDecorator equals: RTNoDecorationShape.
+	self assert: edge tailDecorator equals: RTNoDecorationShape
