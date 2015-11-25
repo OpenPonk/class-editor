@@ -1,4 +1,5 @@
 tests
 testGetterOneToOne
-	result := generator getter: oneToOne targetEnd.
-	self ast: result equals: 'university <DCAssociation: ''''> ^ university'
+	self
+		ast: (generator getter: oneToOne targetEnd)
+		equals: 'university <DCAssociation: ''''> ^ university'

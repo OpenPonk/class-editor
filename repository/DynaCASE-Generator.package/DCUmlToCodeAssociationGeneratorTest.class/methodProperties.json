@@ -8,10 +8,10 @@
 		"setUp" : "PeterUhnak 11/25/2015 01:24",
 		"testAdderManyToMany" : "PeterUhnak 11/25/2015 02:07",
 		"testAdderOneToMany" : "PeterUhnak 11/25/2015 01:59",
-		"testGetterOneToOne" : "PeterUhnak 11/25/2015 01:36",
+		"testGetterOneToOne" : "PeterUhnak 11/25/2015 02:14",
 		"testRemoverManyToMany" : "PeterUhnak 11/25/2015 02:10",
 		"testRemoverOneToMany" : "PeterUhnak 11/25/2015 02:05",
 		"testSetterManyToOne" : "PeterUhnak 11/25/2015 01:53",
-		"testSetterOneToMany" : "PeterUhnak 11/25/2015 01:48",
-		"testSetterOneToNone" : "PeterUhnak 11/25/2015 01:37",
-		"testSetterOneToOne" : "PeterUhnak 11/25/2015 01:42" } }
+		"testSetterOneToMany" : "PeterUhnak 11/25/2015 02:14",
+		"testSetterOneToNone" : "PeterUhnak 11/25/2015 02:14",
+		"testSetterOneToOne" : "PeterUhnak 11/25/2015 02:15" } }

@@ -1,8 +1,7 @@
 tests
 testSetterOneToOne
-	result := generator setter: oneToOne targetEnd.
 	self
-		ast: result
+		ast: (generator setter: oneToOne targetEnd)
 		equals:
 			'university: anUniversity
 		|oldRef|

@@ -1,8 +1,7 @@
 tests
 testSetterOneToMany
-	result := generator setter: oneToMany targetEnd.
 	self
-		ast: result
+		ast: (generator setter: oneToMany targetEnd)
 		equals:
 			'departments: aCollection
 	[ departments isNotEmpty ] whileTrue: [ self removeDepartment: departments anyOne ].

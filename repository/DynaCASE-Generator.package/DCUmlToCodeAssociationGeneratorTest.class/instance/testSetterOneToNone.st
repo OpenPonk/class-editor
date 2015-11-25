@@ -1,4 +1,3 @@
 tests
 testSetterOneToNone
-	result := generator setter: oneToNone targetEnd.
-	self ast: result equals: 'name: aName name := aName'
+	self ast: (generator setter: oneToNone targetEnd) equals: 'name: aName name := aName'
