@@ -1,1 +1,0 @@
-I take [FAMIX] model and generate annotated source code for it.

@@ -18,16 +18,8 @@
 		"createNonNavigableGetter:pragma:in:" : "PeterUhnak 11/16/2015 00:19:42",
 		"createSetter:parameter:in:" : "PeterUhnak 11/16/2015 00:19:42",
 		"defaultCategory:" : "PeterUhnak 11/16/2015 00:19:42",
-		"defaultOptions" : "PeterUhnak 11/24/2015 11:58",
-		"doNotOverrideMethods" : "PeterUhnak 11/16/2015 00:19:42",
-		"generateFromModel:" : "PeterUhnak 11/24/2015 12:00",
-		"generateWithProgressBar:" : "PeterUhnak 11/24/2015 19:43",
 		"getterPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
-		"initialize" : "PeterUhnak 11/25/2015 02:12",
+		"initialize" : "PeterUhnak 11/25/2015 18:16",
 		"methodPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"multiplicityFor:" : "PeterUhnak 11/16/2015 00:19:42",
-		"overrideMethods" : "PeterUhnak 11/16/2015 00:19:42",
-		"typeNameFor:" : "PeterUhnak 11/16/2015 00:19:42",
-		"withAccessors" : "PeterUhnak 11/16/2015 00:19:42",
-		"withProgressBar" : "PeterUhnak 11/24/2015 11:58",
-		"withoutAccessors" : "PeterUhnak 11/16/2015 00:19:42" } }
+		"typeNameFor:" : "PeterUhnak 11/16/2015 00:19:42" } }

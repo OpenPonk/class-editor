@@ -1,7 +1,7 @@
 running
 setUp
 	super setUp.
-	(generator := DCUmlToCodeGenerator new)
+	(generator := DCUmlToCodeMixedGenerator new)
 		withAccessors;
 		defaultCategory: self categoryName.
 	cls := self newClassNamed: #SomethingGenerated
