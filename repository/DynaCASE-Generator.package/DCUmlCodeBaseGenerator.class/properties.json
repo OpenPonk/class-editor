@@ -4,13 +4,13 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "PeterUhnak 11/25/2015 18:15",
+	"commentStamp" : "PeterUhnak 11/25/2015 21:08",
 	"instvars" : [
 		"category",
 		"generateAccessors",
 		"overrideMethods",
 		"useProgressBar" ],
-	"name" : "DCUmlCodeGenerator",
+	"name" : "DCUmlCodeBaseGenerator",
 	"pools" : [
 		 ],
 	"super" : "Object",

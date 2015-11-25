@@ -1,3 +1,3 @@
 accessing
-defaultCategory: aName
+category: aName
 	category := aName

@@ -4,7 +4,6 @@
 	"instance" : {
 		"associationGetterPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"attributeGetterPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
-		"classFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"createAccessorsFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
 		"createAssociationFor:" : "PeterUhnak 11/25/2015 02:13",
 		"createAttributeFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
@@ -17,7 +16,8 @@
 		"createMethodFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
 		"createNonNavigableGetter:pragma:in:" : "PeterUhnak 11/16/2015 00:19:42",
 		"createSetter:parameter:in:" : "PeterUhnak 11/16/2015 00:19:42",
-		"defaultCategory:" : "PeterUhnak 11/16/2015 00:19:42",
+		"generateFromModel:" : "PeterUhnak 11/25/2015 21:08",
+		"generateWithProgressBar:" : "PeterUhnak 11/25/2015 21:16",
 		"getterPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"initialize" : "PeterUhnak 11/25/2015 18:16",
 		"methodPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",

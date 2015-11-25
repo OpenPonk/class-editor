@@ -10,5 +10,5 @@
 	"name" : "DCUmlToCodeAssociationGenerator",
 	"pools" : [
 		 ],
-	"super" : "DCUmlCodeGenerator",
+	"super" : "DCUmlCodeBaseGenerator",
 	"type" : "normal" }

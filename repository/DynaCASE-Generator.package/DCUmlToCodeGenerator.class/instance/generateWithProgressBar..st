@@ -1,6 +1,6 @@
 generator - model
 generateWithProgressBar: aModel
-	[ 'Generating...'
+	'Generating...'
 		displayProgressFrom: 0
 		to: aModel allClasses size + aModel allBinaryAssociations size
 		during:
@@ -17,4 +17,4 @@ generateWithProgressBar: aModel
 					[ :each | 
 					bar title: 'Generating association ' , each asString.
 					self createAssociationFor: each.
-					bar increment ] ] ] value
+					bar increment ] ]
