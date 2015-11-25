@@ -2,7 +2,6 @@
 	"class" : {
 		 },
 	"instance" : {
-		"addToInitialize:in:" : "PeterUhnak 11/16/2015 00:19:42",
 		"associationGetterPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"attributeGetterPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"classFor:" : "PeterUhnak 11/16/2015 00:19:42",
@@ -21,7 +20,6 @@
 		"defaultCategory:" : "PeterUhnak 11/16/2015 00:19:42",
 		"defaultOptions" : "PeterUhnak 11/24/2015 11:58",
 		"doNotOverrideMethods" : "PeterUhnak 11/16/2015 00:19:42",
-		"ensureHasInitialize:" : "PeterUhnak 11/16/2015 00:19:42",
 		"generateFromModel:" : "PeterUhnak 11/24/2015 12:00",
 		"generateWithProgressBar:" : "PeterUhnak 11/24/2015 19:43",
 		"getterPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
@@ -29,7 +27,6 @@
 		"methodPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"multiplicityFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"overrideMethods" : "PeterUhnak 11/16/2015 00:19:42",
-		"specifyDefaultValueFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
 		"typeNameFor:" : "PeterUhnak 11/16/2015 00:19:42",
 		"withAccessors" : "PeterUhnak 11/16/2015 00:19:42",
 		"withProgressBar" : "PeterUhnak 11/24/2015 11:58",

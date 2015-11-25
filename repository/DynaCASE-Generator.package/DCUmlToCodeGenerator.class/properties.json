@@ -14,5 +14,5 @@
 	"name" : "DCUmlToCodeGenerator",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "DCUmlCodeGenerator",
 	"type" : "normal" }

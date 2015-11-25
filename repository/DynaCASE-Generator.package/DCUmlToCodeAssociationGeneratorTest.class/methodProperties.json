@@ -8,6 +8,8 @@
 		"setUp" : "PeterUhnak 11/25/2015 01:24",
 		"testAdderManyToMany" : "PeterUhnak 11/25/2015 02:07",
 		"testAdderOneToMany" : "PeterUhnak 11/25/2015 01:59",
+		"testGeneratedManyToOne" : "PeterUhnak 11/25/2015 17:54",
+		"testGeneratedOneToMany" : "PeterUhnak 11/25/2015 17:53",
 		"testGetterOneToOne" : "PeterUhnak 11/25/2015 02:14",
 		"testRemoverManyToMany" : "PeterUhnak 11/25/2015 02:10",
 		"testRemoverOneToMany" : "PeterUhnak 11/25/2015 02:05",
