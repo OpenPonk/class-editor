@@ -2,10 +2,12 @@
 	"class" : {
 		 },
 	"instance" : {
+		"oneToManyAssociation" : "PeterUhnak 11/24/2015 22:48",
 		"setUp" : "PeterUhnak 11/16/2015 00:19:42",
 		"testAssociationEndNavigable" : "PeterUhnak 11/16/2015 00:19:42",
 		"testAssociationEndNavigable2" : "PeterUhnak 11/16/2015 00:19:42",
 		"testAssociationEndNonNavigable" : "PeterUhnak 11/16/2015 00:19:42",
+		"testAssociationOneToMany" : "PeterUhnak 11/24/2015 22:59",
 		"testAssociationPragma" : "PeterUhnak 11/16/2015 00:19:42",
 		"testCreateAccessors" : "PeterUhnak 11/16/2015 00:19:42",
 		"testCreateAccessorsNot" : "PeterUhnak 11/16/2015 00:19:42",

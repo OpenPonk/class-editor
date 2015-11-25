@@ -1,0 +1,24 @@
+{
+	"category" : "DynaCASE-Generator-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"generator",
+		"president",
+		"university",
+		"department",
+		"teacher",
+		"name",
+		"oneToOne",
+		"oneToMany",
+		"manyToMany",
+		"oneToNone",
+		"result" ],
+	"name" : "DCUmlToCodeAssociationGeneratorTest",
+	"pools" : [
+		 ],
+	"super" : "DCGeneratorTest",
+	"type" : "normal" }

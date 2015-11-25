@@ -9,5 +9,8 @@ resolveAssociationEndFor: anAssociationEnd opposite: anOppositeEnd
 				pragma: (self getterPragmaFor: anAssociationEnd)
 				in: cls ].
 	cls addInstVarNamed: anAssociationEnd name.
-	self createAccessorsFor: anAssociationEnd in: cls.
+	anOppositeEnd isNavigable
+		ifTrue:
+			[ self createBidirectionalAccessorsFor: anAssociationEnd opposite: anOppositeEnd in: cls ]
+		ifFalse: [ self createAccessorsFor: anAssociationEnd in: cls ].
 	self specifyDefaultValueFor: anAssociationEnd in: cls
