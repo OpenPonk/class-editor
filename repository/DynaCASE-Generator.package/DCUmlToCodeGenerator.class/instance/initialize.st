@@ -1,4 +1,5 @@
 initialization
 initialize
 	super initialize.
-	self defaultOptions
+	self defaultOptions.
+	associationsGenerator := DCUmlToCodeAssociationGenerator new

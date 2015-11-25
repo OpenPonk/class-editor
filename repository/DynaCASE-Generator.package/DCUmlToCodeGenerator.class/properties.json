@@ -9,7 +9,8 @@
 		"category",
 		"generateAccessors",
 		"overrideMethods",
-		"useProgressBar" ],
+		"useProgressBar",
+		"associationsGenerator" ],
 	"name" : "DCUmlToCodeGenerator",
 	"pools" : [
 		 ],

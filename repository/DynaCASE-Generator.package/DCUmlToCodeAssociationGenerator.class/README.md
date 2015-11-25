@@ -1,0 +1,1 @@
+Subgenerator for associations.
