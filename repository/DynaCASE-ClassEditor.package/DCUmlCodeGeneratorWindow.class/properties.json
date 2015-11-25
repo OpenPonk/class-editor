@@ -1,0 +1,18 @@
+{
+	"category" : "DynaCASE-ClassEditor-Windows",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"categoryLabel",
+		"categoryInput",
+		"generateButton",
+		"accessorsCheckbox",
+		"model" ],
+	"name" : "DCUmlCodeGeneratorWindow",
+	"pools" : [
+		 ],
+	"super" : "ComposableModel",
+	"type" : "normal" }

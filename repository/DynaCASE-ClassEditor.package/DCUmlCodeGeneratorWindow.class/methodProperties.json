@@ -1,0 +1,12 @@
+{
+	"class" : {
+		"defaultSpec" : "PeterUhnak 11/26/2015 00:47" },
+	"instance" : {
+		"accessorsCheckbox" : "PeterUhnak 11/26/2015 00:40",
+		"categoryInput" : "PeterUhnak 11/26/2015 00:33",
+		"categoryLabel" : "PeterUhnak 11/26/2015 00:33",
+		"generateButton" : "PeterUhnak 11/26/2015 00:33",
+		"initializeWidgets" : "PeterUhnak 11/26/2015 00:46",
+		"model:" : "PeterUhnak 11/26/2015 00:41",
+		"runGenerator" : "PeterUhnak 11/26/2015 00:44",
+		"title" : "PeterUhnak 11/26/2015 00:34" } }
