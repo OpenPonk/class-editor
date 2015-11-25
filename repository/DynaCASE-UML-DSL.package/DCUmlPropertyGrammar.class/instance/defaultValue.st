@@ -1,3 +1,4 @@
 grammar
 defaultValue
-	^ #blank asParser star, $= asParser , #any asParser plus ==> [ :nodes | (nodes third joinUsing: '') trim ]
+	^ (#blank asParser star , $= asParser , (#any asParser starLazy: #endOfLine asParser and))
+		==> [ :nodes | (nodes third joinUsing: '') trim ]

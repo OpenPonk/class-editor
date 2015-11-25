@@ -3,7 +3,7 @@
 		 },
 	"instance" : {
 		"parserClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"testDefaultValue" : "PeterUhnak 11/23/2015 12:27",
+		"testDefaultValue" : "PeterUhnak 11/25/2015 21:36",
 		"testMultiplicity" : "PeterUhnak 11/15/2015 11:37:08",
 		"testMultiplicity1" : "PeterUhnak 11/15/2015 11:37:08",
 		"testMultiplicity2" : "PeterUhnak 11/15/2015 11:37:08",
@@ -11,6 +11,7 @@
 		"testMultiplicity4" : "PeterUhnak 11/15/2015 11:37:08",
 		"testProperty" : "PeterUhnak 11/15/2015 11:37:08",
 		"testPropertyWithDefaultValue" : "PeterUhnak 11/23/2015 13:31",
+		"testPropertyWithDefaultValue2" : "PeterUhnak 11/25/2015 21:26",
 		"testPropertyWithMultiplicity" : "PeterUhnak 11/15/2015 11:37:08",
 		"testPropertyWithType" : "PeterUhnak 11/15/2015 11:37:08",
 		"testStatic" : "PeterUhnak 11/23/2015 02:48" } }
