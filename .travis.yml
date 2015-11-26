@@ -9,6 +9,6 @@ smalltalk:
 env:
     global:
         - BASELINE="DCUmlClassEditor"
-        - TESTS="DC.*"
+        - TESTS="DynaCASE.*"
         - PACKAGES="/repository"
         - BASELINE_GROUP="default"
