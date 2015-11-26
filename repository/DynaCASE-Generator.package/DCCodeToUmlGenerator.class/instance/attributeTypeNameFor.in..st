@@ -5,4 +5,4 @@ attributeTypeNameFor: aSymbol in: aClass
 			[ (aClass >> aSymbol) pragmas
 				detect: [ :each | each keyword = #DCType:multiplicity: | (each keyword = #DCType:) ]
 				ifFound: [ :pragma | ^ pragma arguments first ] ].
-	^ FAMIXClass named: #Object
+	^ #Object
