@@ -13,12 +13,12 @@ baseline: spec
 					versionString: #development;
 					loads: #('Parser');
 					repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ];
-			project: 'Fame-Core' with: [
+			project: 'Fame' with: [
 				spec
 					className: #ConfigurationOfFame;
 					versionString: #'development';
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ];
-			project: 'Famix-Core' with: [
+			project: 'Famix' with: [
 				spec
 					className: #ConfigurationOfMoose;
 					versionString: #'development';
