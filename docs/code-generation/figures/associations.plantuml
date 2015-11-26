@@ -1,0 +1,11 @@
+@startuml
+
+Source - "target 1" Target : unidirectional >
+
+
+Class1 "1" - "0..1" Class2 : association >
+Class3 "1..*" *- "0..*" Class4 : composition >
+Class5 o- Class6 : aggregation >
+
+
+@enduml

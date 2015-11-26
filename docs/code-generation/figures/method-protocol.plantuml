@@ -1,0 +1,19 @@
+@startuml
+start
+:protocol := "as yet unclassified";
+if (user specified protocol?) then (yes)
+	:protocol := user-specified;
+else (no)
+	if (should autocategorize?) then (yes)
+		:run autocategorization;
+	endif
+endif
+if (method is extension?) then (yes)
+	if (protocol = 'as yet unclassified'?) then (yes)
+		:protocol := '*', pkgName;
+	else
+		:protocol := '*', pkgName, protocol;
+	endif
+endif
+stop
+@enduml
