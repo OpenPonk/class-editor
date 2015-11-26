@@ -22,7 +22,7 @@ baseline: spec
 				spec
 					className: #ConfigurationOfMoose;
 					versionString: #'development';
-					loads: #('Famix-Core' 'Moose-Core' 'Moose-Query' 'Famix-Extensions');
+					loads: #('Famix-Core' 'Moose-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation');
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ].
 		spec 
 			package: 'DynaCASE-UML-Model' with: [
