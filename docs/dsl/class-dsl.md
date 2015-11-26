@@ -4,14 +4,14 @@ A model of a class diagram can be created via textual notation.
 
 Note however that not all features of UML are supported. This limitation is caused by lack of support of features in the underlying meta-model. The rule of thumb is, if it is not mentioned in this document, it is not supported.
 
-```st
+```txt
 Person {
 	name : String
 	contact: Contact[1..*]
 }
 
 Teacher {
-	gradeTests(test: Test[*]): Number[*]
+	gradeTests:(test: Test[*]): Number[*]
 }
 
 Teacher extends Person;
