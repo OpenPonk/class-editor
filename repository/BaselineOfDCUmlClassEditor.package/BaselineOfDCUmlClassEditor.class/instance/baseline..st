@@ -22,28 +22,21 @@ baseline: spec
 				spec
 					className: #ConfigurationOfMoose;
 					versionString: #'development';
-					loads: #('Famix-Core' 'Moose-Core');
-					repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
-			project: 'Moose-Core' with: [
-				spec
-					className: #ConfigurationOfMoose;
-					version: #development;
-					loads: #('Moose-Core' 'Moose-Query');
-					repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/'
-			].
+					loads: #('Famix-Core' 'Moose-Core' 'Moose-Query' 'Famix-Extensions');
+					repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ].
 		spec 
 			package: 'DynaCASE-UML-Model' with: [
-				spec requires: #('Fame-Core' 'Famix-Core' 'Moose-Core')
+				spec requires: #('Fame' 'Famix')
 			];
 			package: 'DynaCASE-UML-DSL' with: [
-				spec requires: #('DynaCASE-UML-Model' 'Famix-Core' 'Moose-Core' 'PetitParser')
+				spec requires: #('DynaCASE-UML-Model' 'Famix' 'PetitParser')
 			];
 			package: 'DynaCASE-UML-DI' with: [
-				spec requires: #('Fame-Core')
+				spec requires: #('Fame')
 			];
 			package: 'DynaCASE-Generator' with: [
-				spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'Famix-Core')
+				spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'Famix')
 			];
 			package: 'DynaCASE-ClassEditor' with: [
-				spec requires: #('DynaCASE' 'DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'Fame-Core' 'Famix-Core' 'Moose-Core' ) ].
+				spec requires: #('DynaCASE' 'DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'Fame' 'Famix' ) ].
 		spec group: 'default' with: #('DynaCASE-ClassEditor' 'DynaCASE-Generator'). ]
