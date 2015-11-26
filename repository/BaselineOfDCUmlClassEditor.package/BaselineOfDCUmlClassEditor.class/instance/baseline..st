@@ -44,7 +44,6 @@ baseline: spec
 			package: 'DynaCASE-Generator' with: [
 				spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'Famix-Core')
 			];
-			package: ''
 			package: 'DynaCASE-ClassEditor' with: [
 				spec requires: #('DynaCASE' 'DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'Fame-Core' 'Famix-Core' 'Moose-Core' ) ].
 		spec group: 'default' with: #('DynaCASE-ClassEditor' 'DynaCASE-Generator'). ]
