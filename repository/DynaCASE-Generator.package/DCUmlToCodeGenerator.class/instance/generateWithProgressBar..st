@@ -9,6 +9,7 @@ generateWithProgressBar: aModel
 				sorted: [ :a :b | (b superInheritances collect: #superclass) includes: a ])
 				do:
 					[ :each | 
+					self logCr: each name.
 					bar title: 'Generating class ' , each name.
 					self createFullClassFor: each.
 					bar increment ].
@@ -17,4 +18,4 @@ generateWithProgressBar: aModel
 					[ :each | 
 					bar title: 'Generating association ' , each asString.
 					self createAssociationFor: each.
-					bar increment ] ]
+					bar increment ] ].
