@@ -38,6 +38,7 @@ Pharo has three types of attributes that we are concerned with [[UPBE](https://c
 
 For the rest, a variable is added to the appropriate side.
 
+
 ### Accessors
 
 In addition, a user may want to generate accessors for the variables.
@@ -144,6 +145,19 @@ Forager new
 ```
 
 > Note: Class-side variables will always use lazy initialization.
+
+#### Overriding variables
+
+![override-attribute](figures/override-attribute.png)
+
+There may be a situation when overriding an attribute may be needed. The primary reason is to change it's default value.
+
+In this scenario the algorithm will not add the variable again (since that would result in an error), however the subclass's initialize method will contain the new definition. Likewise accessors will not be added again.
+
+?? maybe ??
+
+If lazy initialization is done via accessor method, then the subclass will also have to specify it's default value in the subclassed method.
+
 
 ## Methods
 
