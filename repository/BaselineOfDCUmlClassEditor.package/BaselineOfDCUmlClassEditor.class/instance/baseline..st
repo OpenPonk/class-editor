@@ -18,13 +18,17 @@ baseline: spec
 					className: #ConfigurationOfFame;
 					versionString: #'development';
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ];
-		"	package: 'Moose-Core' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];"
-			project: 'Famix' with: [
+		package: 'Moose-Core' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
+		package: 'Famix-Core' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
+		package: 'Moose-Query' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
+		package: 'Famix-Extensions' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
+		package: 'Famix-Implementation' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ].
+			"project: 'Famix' with: [
 				spec
 					className: #ConfigurationOfMoose;
 					versionString: #development;
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
-					loads: #( 'Moose-Core' 'Famix-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation') ].
+					loads: #( 'Moose-Core' 'Famix-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation') ]."
 		spec 
 			package: 'DynaCASE-UML-Model' with: [
 				spec requires: #('Fame' 'Famix')
