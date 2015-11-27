@@ -18,21 +18,12 @@ baseline: spec
 					className: #ConfigurationOfFame;
 					versionString: #'development';
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ];
+		"	package: 'Moose-Core' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];"
 			project: 'Famix' with: [
 				spec
 					className: #ConfigurationOfMoose;
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
-					load: #( 'Moose-Core' 'Famix-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation')
-					"package: 'Moose-Core';
-					package: 'Famix-Core';
-					package: 'MooseAlgos';
-					package: 'Famix-Extensions';
-					package: 'Famix-Implementation';
-					package: 'Moose-Query'."
-					
-					
-					"loads: #( 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation');"
-					 ].
+					loads: #( 'Moose-Core' 'Famix-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation') ].
 		spec 
 			package: 'DynaCASE-UML-Model' with: [
 				spec requires: #('Fame' 'Famix')
