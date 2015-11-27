@@ -21,7 +21,7 @@ baseline: spec
 			project: 'Famix' with: [
 				spec
 					className: #ConfigurationOfMoose;
-					versionString: #'development';
+					"versionString: #'development';"
 					loads: #('Famix-Core' 'Moose-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation');
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ].
 		spec 
