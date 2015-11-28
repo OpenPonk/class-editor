@@ -18,11 +18,24 @@ baseline: spec
 					className: #ConfigurationOfFame;
 					versionString: #'development';
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ];
-		package: 'Moose-Core' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
-		package: 'Famix-Core' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
+		package: 'Moose-Core' with: [
+			spec
+				repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
+				requires: #('Fame' 'Moose-Query') ];
+		package: 'Famix-Core' with: [
+			spec
+				repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
+				requires: #('Moose-Core')
+			 ];
 		package: 'Moose-Query' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
-		package: 'Famix-Extensions' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
-		package: 'Famix-Implementation' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ].
+		package: 'Famix-Extensions' with: [
+			spec
+				repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
+				requires: #('Famix-Core') ];
+		package: 'Famix-Implementation' with: [
+			spec
+				repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
+				requires: #('Famix-Core') ].
 			"project: 'Famix' with: [
 				spec
 					className: #ConfigurationOfMoose;
