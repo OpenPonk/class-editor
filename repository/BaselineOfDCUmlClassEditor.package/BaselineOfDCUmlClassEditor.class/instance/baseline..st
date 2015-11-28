@@ -57,5 +57,5 @@ baseline: spec
 			];
 			package: 'DynaCASE-ClassEditor' with: [
 				spec requires: #('DynaCASE' 'DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'Fame' 'famix' ) ].
-		spec group: 'famix' with: #('Famix-Core' 'Famix-Extensions' 'Famix-Implementations').
+		spec group: 'famix' with: #('Famix-Core' 'Famix-Extensions' 'Famix-Implementation').
 		spec group: 'default' with: #('DynaCASE-ClassEditor' 'DynaCASE-Generator'). ]
