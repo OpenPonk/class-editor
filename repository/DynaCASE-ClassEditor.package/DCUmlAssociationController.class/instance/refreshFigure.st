@@ -1,14 +1,7 @@
 events - registering
 refreshFigure
-	self diagramElement
-		headDecorator:
-			(self model sourceEnd isNavigable not & self model targetEnd isNavigable
-				ifTrue: [ RTSimpleArrow ]
-				ifFalse: [ RTNoDecorationShape ]);
-		tailDecorator:
-			(self model targetEnd isNavigable not & self model sourceEnd isNavigable
-				ifTrue: [ RTSimpleArrow ]
-				ifFalse: [ RTNoDecorationShape ]).
+	self refreshEndFigure: self model sourceEnd decoratorSelector: #tailDecorator:.
+	self refreshEndFigure: self model targetEnd decoratorSelector: #headDecorator:.
 	self diagramElement changed.
 
 	self diagramElement ownedElements size = 5
