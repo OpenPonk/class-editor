@@ -44,7 +44,7 @@ baseline: spec
 					loads: #( 'Moose-Core' 'Famix-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation') ]."
 		spec 
 			package: 'DynaCASE-UML-Model' with: [
-				spec requires: #('Fame' 'Famix-Core')
+				spec requires: #('Fame' 'famix')
 			];
 			package: 'DynaCASE-UML-DSL' with: [
 				spec requires: #('DynaCASE-UML-Model' 'Famix-Core' 'PetitParser')
@@ -53,8 +53,9 @@ baseline: spec
 				spec requires: #('Fame')
 			];
 			package: 'DynaCASE-Generator' with: [
-				spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'Famix-Core')
+				spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix')
 			];
 			package: 'DynaCASE-ClassEditor' with: [
-				spec requires: #('DynaCASE' 'DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'Fame' 'Famix-Core' ) ].
+				spec requires: #('DynaCASE' 'DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'Fame' 'famix' ) ].
+		spec group: 'famix' with: #('Famix-Core' 'Famix-Extensions' 'Famix-Implementations').
 		spec group: 'default' with: #('DynaCASE-ClassEditor' 'DynaCASE-Generator'). ]
