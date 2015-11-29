@@ -1,6 +1,6 @@
 accessing
 inheritance
-	^ (umlClassName , ('<<' asParser / 'extends' asParser) trim , umlClassName , $; asParser)
+	^ (umlClassName , ('>>' asParser / 'extends' asParser) trim , umlClassName , $; asParser)
 		==>
 			[ :nodes | 
 			FAMIXInheritance
