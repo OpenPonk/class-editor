@@ -15,8 +15,8 @@ Teacher {
 }
 
 Teacher extends Person;
-Student << Person;
-President << Person;
+Student >> Person;
+President >> Person;
 
 President president --- university University;
 University[1] university <*>-- departments Department[*];
@@ -52,7 +52,7 @@ To add inheritance, use
 ```
 <del>SubClass < ParentClass { }</del> "@todo"
 
-SubClass << ParentClass;
+SubClass >> ParentClass;
 "or"
 SubClass extends ParentClass;
 ```
@@ -125,8 +125,8 @@ Examples:
 ```st
 id "default type Object"
 name : String "default multiplicity 1..1"
-middleNames : String[*] "deafult type nil"
-_workDays_ : String[5] = #(Monday Tuesday Wednesday Thursday Friday)
+middleNames : String[*] "default type nil"
+_workDays : String[5] = #(Monday Tuesday Wednesday Thursday Friday)
 ```
 
 > Property modifiers are not supported.
