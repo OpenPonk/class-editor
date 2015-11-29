@@ -3,7 +3,7 @@ refreshEndFigure: anEnd decoratorSelector: aSelector
 	| decorator |
 	anEnd aggregation = DCUmlAggregationKind none
 		ifTrue:
-			[ decorator := anEnd isNavigable & anEnd opposite isNavigable
+			[ decorator := anEnd isNavigable & anEnd opposite isNavigable not
 				ifTrue: [ RTSimpleArrow ]
 				ifFalse: [ RTNoDecorationShape ] ].
 	anEnd aggregation = DCUmlAggregationKind shared
