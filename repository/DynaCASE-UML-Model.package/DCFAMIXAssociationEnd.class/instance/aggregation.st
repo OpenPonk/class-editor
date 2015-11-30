@@ -3,4 +3,4 @@ aggregation
 	<MSEProperty: #aggregation type: #Symbol>
 	<MSEComment: 'AggregationKind'>
 	<package: #DC>
-	^ aggregation
+	^ aggregation ifNil: [ DCUmlAggregationKind none ]
