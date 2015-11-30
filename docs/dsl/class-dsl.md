@@ -6,17 +6,19 @@ Note however that not all features of UML are supported. This limitation is caus
 
 ```txt
 Person {
-	name : String
-	contact: Contact[1..*]
+	    name : String
+		    contact: Contact[1..*]
 }
 
 Teacher {
-	gradeTests:(test: Test[*]): Number[*]
+	    gradeTests:(test: Test[*]): Number[*]
 }
 
-Teacher extends Person;
-Student >> Person;
-President >> Person;
+Teacher extends Role;
+Student >> Role;
+President >> Role;
+
+Person --> roles Role[*];
 
 President president --- university University;
 University[1] university <*>-- departments Department[*];
@@ -50,7 +52,7 @@ Create an empty class `SubClass` as a subclass of a `ParentClass`. If the parent
 To add inheritance, use
 
 ```
-<del>SubClass < ParentClass { }</del> "@todo"
+~~SubClass < ParentClass { }~~ "@todo"
 
 SubClass >> ParentClass;
 "or"
@@ -78,11 +80,11 @@ Furthermore if both bounds are equal, or the lower bound is `0` and upper bound 
 
 Examples:
 
-|full range|shortcut|
-|-|-|
-|0..1||
-|10..10|10|
-|0..\*|\*|
+full range | shortcut
+---------- | --------
+0..1|
+10..10|10
+0..\*|\*
 
 > Designators (`isUnique` and `isOrdered`) are not supported.
 
