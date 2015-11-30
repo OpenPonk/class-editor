@@ -4,11 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "PeterUhnak 11/25/2015 21:08",
+	"commentStamp" : "PeterUhnak 11/25/2015 02:11",
 	"instvars" : [
-		"context" ],
-	"name" : "DCUmlCodeBaseGenerator",
+		 ],
+	"name" : "DCUmlCodeAssociationGenerator",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "DCUmlCodeBaseGenerator",
 	"type" : "normal" }

@@ -2,7 +2,7 @@ tests
 testOverrideMethodNot
 	model := FAMIXMethod named: 'something'.
 	cls compile: 'something "unchanged content"'.
-	generator doNotOverrideMethods.
+	generator context doNotOverrideMethods.
 	generator createMethodFor: model in: cls.
 	self
 		assert: (cls >> #something) ast

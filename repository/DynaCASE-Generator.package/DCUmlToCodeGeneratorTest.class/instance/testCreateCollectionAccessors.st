@@ -1,5 +1,6 @@
 tests
 testCreateCollectionAccessors
+	generator context useEagerInitialization.
 	(model := FAMIXAttribute named: 'numbers' type: (FAMIXClass named: 'Float'))
 		multiplicity: DCFAMIXMultiplicity zeroToMany.
 	generator createAttributeFor: model in: cls.

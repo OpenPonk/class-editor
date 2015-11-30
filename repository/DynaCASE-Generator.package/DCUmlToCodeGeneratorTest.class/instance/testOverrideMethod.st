@@ -2,7 +2,7 @@ tests
 testOverrideMethod
 	model := FAMIXMethod named: 'something'.
 	cls compile: 'something "some content"'.
-	generator overrideMethods.
+	generator context overrideMethods.
 	generator createMethodFor: model in: cls.
 	self
 		assert: (cls >> #something) ast

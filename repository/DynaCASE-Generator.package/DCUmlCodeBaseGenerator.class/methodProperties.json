@@ -2,16 +2,13 @@
 	"class" : {
 		 },
 	"instance" : {
+		"addEagerValueFor:in:" : "PeterUhnak 11/30/2015 15:36",
+		"addLazyValueFor:in:" : "PeterUhnak 11/30/2015 15:36",
 		"addToInitialize:in:" : "PeterUhnak 11/25/2015 17:50",
-		"category:" : "PeterUhnak 11/25/2015 21:11",
 		"classFor:" : "PeterUhnak 11/25/2015 21:13",
-		"createGetterWithLazyValueFor:in:" : "PeterUhnak 11/26/2015 09:44",
-		"defaultOptions" : "PeterUhnak 11/25/2015 18:16",
-		"doNotOverrideMethods" : "PeterUhnak 11/25/2015 18:16",
+		"context" : "PeterUhnak 11/30/2015 14:36",
+		"context:" : "PeterUhnak 11/30/2015 14:36",
+		"defaultValueExpressionFor:" : "PeterUhnak 11/30/2015 15:33",
 		"ensureHasInitialize:" : "PeterUhnak 11/25/2015 17:50",
-		"initialize" : "PeterUhnak 11/25/2015 18:16",
-		"overrideMethods" : "PeterUhnak 11/25/2015 18:16",
-		"specifyDefaultValueFor:in:" : "PeterUhnak 11/26/2015 09:42",
-		"withAccessors" : "PeterUhnak 11/25/2015 18:16",
-		"withProgressBar" : "PeterUhnak 11/25/2015 18:16",
-		"withoutAccessors" : "PeterUhnak 11/25/2015 18:16" } }
+		"ensureInstVariable:in:" : "PeterUhnak 11/30/2015 15:50",
+		"paramNameForType:" : "PeterUhnak 11/30/2015 15:04" } }

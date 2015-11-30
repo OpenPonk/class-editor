@@ -1,0 +1,21 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"createAccessorsFor:in:" : "PeterUhnak 11/30/2015 15:28",
+		"createAssociationFor:" : "PeterUhnak 11/25/2015 02:13",
+		"createAttributeFor:in:" : "PeterUhnak 11/30/2015 15:49",
+		"createClassFor:" : "PeterUhnak 11/30/2015 15:46",
+		"createClassesFor:" : "PeterUhnak 11/24/2015 11:20",
+		"createCollectionAccessorsFor:in:" : "PeterUhnak 11/24/2015 19:52",
+		"createFullClassFor:" : "PeterUhnak 11/24/2015 11:25",
+		"createGetter:pragma:in:" : "PeterUhnak 11/16/2015 00:19:42",
+		"createMethodFor:in:" : "PeterUhnak 11/30/2015 15:28",
+		"createSetter:parameter:in:" : "PeterUhnak 11/16/2015 00:19:42",
+		"generateFromModel:" : "PeterUhnak 11/30/2015 15:28",
+		"generateWithProgressBar:" : "PeterUhnak 11/26/2015 01:53",
+		"getterPragmaFor:" : "PeterUhnak 11/30/2015 15:54",
+		"initialize" : "PeterUhnak 11/30/2015 14:59",
+		"methodPragmaFor:" : "PeterUhnak 11/16/2015 00:19:42",
+		"multiplicityFor:" : "PeterUhnak 11/16/2015 00:19:42",
+		"typeNameFor:" : "PeterUhnak 11/16/2015 00:19:42" } }

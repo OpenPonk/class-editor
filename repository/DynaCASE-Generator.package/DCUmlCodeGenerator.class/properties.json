@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "PeterUhnak 11/25/2015 21:08",
 	"instvars" : [
-		"context" ],
-	"name" : "DCUmlCodeBaseGenerator",
+		"associationsGenerator" ],
+	"name" : "DCUmlCodeGenerator",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "DCUmlCodeBaseGenerator",
 	"type" : "normal" }

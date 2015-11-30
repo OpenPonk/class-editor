@@ -1,3 +1,0 @@
-options
-withProgressBar
-	useProgressBar := true
