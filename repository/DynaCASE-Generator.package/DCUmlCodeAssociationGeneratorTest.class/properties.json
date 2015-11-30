@@ -17,7 +17,7 @@
 		"manyToMany",
 		"oneToNone",
 		"result" ],
-	"name" : "DCUmlToCodeAssociationGeneratorTest",
+	"name" : "DCUmlCodeAssociationGeneratorTest",
 	"pools" : [
 		 ],
 	"super" : "DCGeneratorTest",

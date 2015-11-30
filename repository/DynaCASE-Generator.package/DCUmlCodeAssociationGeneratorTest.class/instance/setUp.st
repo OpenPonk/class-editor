@@ -1,6 +1,6 @@
 running
 setUp
 	super setUp.
-	generator := DCUmlToCodeAssociationGenerator new.
+	generator := DCUmlCodeAssociationGenerator new.
 	cls := self newClassNamed: #SomethingGenerated.
 	self createModel
