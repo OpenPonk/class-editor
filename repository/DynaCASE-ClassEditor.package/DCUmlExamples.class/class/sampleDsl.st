@@ -11,9 +11,11 @@ Teacher {
     gradeTests:(test: Test[*]): Number[*]
 }
 
-Teacher extends Person;
-Student << Person;
-President << Person;
+Teacher extends Role;
+Student >> Role;
+President >> Role;
+
+Person --> roles Role[*];
 
 President president --- university University;
 University[1] university <*>-- departments Department[*];
