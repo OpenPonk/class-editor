@@ -1,12 +1,19 @@
 {
 	"class" : {
-		"defaultSpec" : "PeterUhnak 11/26/2015 00:47" },
+		"defaultSpec" : "PeterUhnak 11/30/2015 23:25" },
 	"instance" : {
 		"accessorsCheckbox" : "PeterUhnak 11/26/2015 00:40",
 		"categoryInput" : "PeterUhnak 11/26/2015 00:33",
 		"categoryLabel" : "PeterUhnak 11/26/2015 00:33",
+		"clashPrefixInput" : "PeterUhnak 11/30/2015 23:25",
+		"clashPrefixLabel" : "PeterUhnak 11/30/2015 23:25",
+		"createContext" : "PeterUhnak 11/30/2015 23:28",
 		"generateButton" : "PeterUhnak 11/26/2015 00:33",
-		"initializeWidgets" : "PeterUhnak 11/26/2015 00:46",
+		"initializeWidgets" : "PeterUhnak 11/30/2015 23:26",
+		"lazyInitialization" : "PeterUhnak 11/30/2015 23:25",
+		"methodsCheckbox" : "PeterUhnak 11/30/2015 23:25",
 		"model:" : "PeterUhnak 11/26/2015 00:41",
-		"runGenerator" : "PeterUhnak 11/26/2015 00:44",
+		"prefixInput" : "PeterUhnak 11/30/2015 23:25",
+		"prefixLabel" : "PeterUhnak 11/30/2015 23:25",
+		"runGenerator" : "PeterUhnak 11/30/2015 23:33",
 		"title" : "PeterUhnak 11/26/2015 00:34" } }
