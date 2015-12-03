@@ -5,6 +5,7 @@ attachFigure
 	| el |
 	el := self diagramElement.
 	el view ifNil: [ el renderIn: self diagramController view ].
+	self figure @ DCRTConnectionHandles.
+	"self figure @ DCRTOrthogonalHandles."
 	self diagramController figureAdded: self figure.
-	self refreshFigure.
-	self figure @ DCRTConnectionHandles
+	self refreshFigure
