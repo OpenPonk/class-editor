@@ -51,13 +51,13 @@ Create an empty class `SubClass` as a subclass of a `ParentClass`. If the parent
 
 To add inheritance, use
 
-```
-~~SubClass < ParentClass { }~~ "@todo"
+<pre>
+<del>SubClass < ParentClass { }</del> "@todo"
 
 SubClass >> ParentClass;
 "or"
 SubClass extends ParentClass;
-```
+</pre>
 
 ## Commonalities
 
@@ -159,14 +159,17 @@ reject:(rejectBlock : BlockClosure[1]) : Object[*]
 Only simple binary associations are supported.
 
 ```
-SourceClass[range] "sourceName" --- "targetName" TargetClass[range] : "association name";
+SourceClass[range] sourceName --- targetName TargetClass[range] : associationName;
 ```
+
+> @todo: allow quoted space-separated sourceName/targetName/associationName
+
 
 All names and both multiplicity ranges are optional. To use aggregation or composition, or explicitly define a navigable end point use the appropriate symbols as shown.
 
 ```
-Class[0..1] "class" --- "operations" Operation[*]; "association"
-Community[*] "memberships" <>-- "members" Person[*]; "aggregation"
-University[1] university <*>-- departments Department[*]; "composition"
-Order[*] --> "products" Product[1..*]; "navigable in a single directon"
+Class[0..1] class --- operations Operation[*]; association
+Community[*] memberships <>-- members Person[*]; aggregation
+University[1] university <*>-- departments Department[*]; composition
+Order[*] --> products Product[1..*]; navigable in a single directon
 ```
