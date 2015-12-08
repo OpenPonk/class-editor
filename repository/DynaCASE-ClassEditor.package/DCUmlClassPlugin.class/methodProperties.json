@@ -1,6 +1,7 @@
 {
 	"class" : {
-		 },
+		"toolbarMenu:" : "PeterUhnak 12/8/2015 19:21",
+		"toolbarMenuRetriever:" : "PeterUhnak 12/8/2015 19:24" },
 	"instance" : {
 		"diagramClass" : "PeterUhnak 11/15/2015 11:37:08",
 		"diagramControllerClass" : "PeterUhnak 11/15/2015 11:37:08",
