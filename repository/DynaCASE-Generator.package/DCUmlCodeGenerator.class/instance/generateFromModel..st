@@ -1,6 +1,6 @@
 generator - model
 generateFromModel: aModel
-	self context shouldUseProgressBar
+	self context shouldShowProgressBar
 		ifTrue: [ ^ self generateWithProgressBar: aModel ].
 	(aModel allClasses
 		sorted: [ :a :b | (b superInheritances collect: #superclass) includes: a ])

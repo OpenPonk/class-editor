@@ -1,10 +1,10 @@
 {
 	"class" : {
-		"isAbstract" : "PeterUhnak 11/16/2015 00:19:42" },
+		"isAbstract" : "PeterUhnak 11/30/2015 23:34:01" },
 	"instance" : {
-		"categoryName" : "PeterUhnak 11/16/2015 00:19:42",
-		"newClassNamed:" : "PeterUhnak 11/16/2015 00:19:42",
-		"newClassNamed:inCategory:" : "PeterUhnak 11/16/2015 00:19:42",
-		"setUp" : "PeterUhnak 11/16/2015 00:19:42",
-		"suspendedDo:" : "PeterUhnak 11/16/2015 00:19:42",
-		"tearDown" : "PeterUhnak 11/16/2015 00:19:42" } }
+		"categoryName" : "PeterUhnak 11/30/2015 23:34:01",
+		"newClassNamed:" : "PeterUhnak 11/30/2015 23:34:01",
+		"newClassNamed:inCategory:" : "PeterUhnak 11/30/2015 23:34:01",
+		"setUp" : "PeterUhnak 11/30/2015 23:34:01",
+		"suspendedDo:" : "PeterUhnak 11/30/2015 23:34:01",
+		"tearDown" : "PeterUhnak 11/30/2015 23:34:01" } }

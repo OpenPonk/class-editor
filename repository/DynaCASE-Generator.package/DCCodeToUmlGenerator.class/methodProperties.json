@@ -2,14 +2,14 @@
 	"class" : {
 		 },
 	"instance" : {
-		"attributeTypeFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
-		"attributeTypeNameFor:in:" : "PeterUhnak 11/26/2015 23:45",
-		"createAttributeNamed:in:" : "PeterUhnak 11/16/2015 00:19:42",
-		"createClassFor:" : "PeterUhnak 11/16/2015 00:19:42",
-		"createMethodFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
-		"initialize" : "PeterUhnak 11/16/2015 00:19:42",
-		"lowerBoundFor:" : "PeterUhnak 11/16/2015 00:19:42",
-		"methodParametersFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
-		"methodTypeFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
-		"multiplicityFor:in:" : "PeterUhnak 11/16/2015 00:19:42",
-		"upperBoundFor:" : "PeterUhnak 11/16/2015 00:19:42" } }
+		"attributeTypeFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
+		"attributeTypeNameFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
+		"createAttributeNamed:in:" : "PeterUhnak 11/30/2015 23:34:01",
+		"createClassFor:" : "PeterUhnak 11/30/2015 23:34:01",
+		"createMethodFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
+		"initialize" : "PeterUhnak 11/30/2015 23:34:01",
+		"lowerBoundFor:" : "PeterUhnak 11/30/2015 23:34:01",
+		"methodParametersFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
+		"methodTypeFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
+		"multiplicityFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
+		"upperBoundFor:" : "PeterUhnak 11/30/2015 23:34:01" } }
