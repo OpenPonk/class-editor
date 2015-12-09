@@ -2,13 +2,13 @@
 	"class" : {
 		 },
 	"instance" : {
-		"controllerClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"setUp" : "PeterUhnak 11/15/2015 11:37:08",
-		"testAttach" : "PeterUhnak 11/15/2015 11:37:08",
-		"testBuild" : "PeterUhnak 11/15/2015 11:37:08",
-		"testBuild2" : "PeterUhnak 11/15/2015 11:37:08",
-		"testCreateDiagramElement" : "PeterUhnak 11/24/2015 01:16",
-		"testLoadModel" : "PeterUhnak 11/15/2015 11:37:08",
-		"testRefreshDiagramElement" : "PeterUhnak 11/24/2015 01:17",
-		"testRemove" : "PeterUhnak 11/15/2015 11:37:08",
-		"testSetUp" : "PeterUhnak 11/15/2015 11:37:08" } }
+		"controllerClass" : "PeterUhnak 12/8/2015 22:17:52",
+		"setUp" : "PeterUhnak 12/8/2015 22:17:52",
+		"testAttach" : "PeterUhnak 12/8/2015 22:17:52",
+		"testBuild" : "PeterUhnak 12/8/2015 22:17:52",
+		"testBuild2" : "PeterUhnak 12/8/2015 22:17:52",
+		"testCreateDiagramElement" : "PeterUhnak 12/8/2015 22:17:52",
+		"testLoadModel" : "PeterUhnak 12/8/2015 22:17:52",
+		"testRefreshDiagramElement" : "PeterUhnak 12/8/2015 22:17:52",
+		"testRemove" : "PeterUhnak 12/8/2015 22:17:52",
+		"testSetUp" : "PeterUhnak 12/8/2015 22:17:52" } }

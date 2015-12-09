@@ -1,6 +1,6 @@
 figures
 edgeBuilder
 	^ DCRTEdgeBuilder new
-		multiLine;
+		line;
 		emptyNarrowArrowHead;
 		yourself

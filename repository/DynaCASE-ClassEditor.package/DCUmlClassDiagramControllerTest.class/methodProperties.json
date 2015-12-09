@@ -2,11 +2,11 @@
 	"class" : {
 		 },
 	"instance" : {
-		"controllerClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"setUp" : "PeterUhnak 11/15/2015 11:37:08",
-		"testAddClassController" : "PeterUhnak 11/15/2015 11:37:08",
-		"testBuildClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"testRemoveClass" : "PeterUhnak 11/15/2015 11:37:08",
-		"testRemoveClassWithLinks" : "PeterUhnak 11/15/2015 11:37:08",
-		"testRemoveClassWithLinks2" : "PeterUhnak 11/15/2015 11:37:08",
-		"testRemoveClassWithProperties" : "PeterUhnak 11/15/2015 11:37:08" } }
+		"controllerClass" : "PeterUhnak 12/8/2015 22:17:52",
+		"setUp" : "PeterUhnak 12/8/2015 22:17:52",
+		"testAddClassController" : "PeterUhnak 12/8/2015 22:17:52",
+		"testBuildClass" : "PeterUhnak 12/8/2015 22:17:52",
+		"testRemoveClass" : "PeterUhnak 12/8/2015 22:17:52",
+		"testRemoveClassWithLinks" : "PeterUhnak 12/8/2015 22:17:52",
+		"testRemoveClassWithLinks2" : "PeterUhnak 12/8/2015 22:17:52",
+		"testRemoveClassWithProperties" : "PeterUhnak 12/8/2015 22:17:52" } }
