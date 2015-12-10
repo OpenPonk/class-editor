@@ -15,8 +15,9 @@
 		"oneToOne",
 		"oneToMany",
 		"manyToMany",
-		"oneToNone",
-		"result" ],
+		"result",
+		"noneToMany",
+		"noneToOne" ],
 	"name" : "DCUmlCodeAssociationGeneratorTest",
 	"pools" : [
 		 ],

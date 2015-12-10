@@ -3,7 +3,8 @@ createModel
 	model := 'President president --- university University;
 University[1] university <*>-- departments Department[*];
 Department[*] memberOf <>-- teachers Teacher[*];
-President --> name Name;' asClassDiagram.
+President --> name Name;
+Teacher --> names Name[*];' asClassDiagram.
 	president := model detect: [ :each | each name = #President ].
 	university := model detect: [ :each | each name = #University ].
 	department := model detect: [ :each | each name = #Department ].
@@ -12,4 +13,5 @@ President --> name Name;' asClassDiagram.
 	oneToOne := model detect: [ :each | each asString = 'President -> University' ].
 	oneToMany := model detect: [ :each | each asString = 'University -> Department' ].
 	manyToMany := model detect: [ :each | each asString = 'Department -> Teacher' ].
-	oneToNone := model detect: [ :each | each asString = 'President -> Name' ].
+	noneToOne := model detect: [ :each | each asString = 'President -> Name' ].
+	noneToMany := model detect: [ :each | each asString = 'Teacher -> Name' ].
