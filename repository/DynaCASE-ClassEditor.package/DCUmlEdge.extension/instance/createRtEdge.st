@@ -1,7 +1,7 @@
 *DynaCASE-ClassEditor-Manipulation
 createRtEdge
 	^ DCRTStyledConnection new
-		withContinuousRectangleAttachPoint;
+		withOrthogonalAttachPoint;
 		head: self headDecorator asHead;
 		tail: self tailDecorator asTail;
 		color: self style strokeColor;

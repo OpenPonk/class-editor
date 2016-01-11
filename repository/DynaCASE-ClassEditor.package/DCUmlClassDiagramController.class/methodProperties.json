@@ -4,6 +4,7 @@
 	"instance" : {
 		"addAsTargetFor:" : "PeterUhnak 12/8/2015 22:17:52",
 		"addModelElement:" : "PeterUhnak 12/8/2015 22:17:52",
+		"applyAutoLayout" : "PeterUhnak 12/17/2015 23:12",
 		"canBeTargetFor:" : "PeterUhnak 12/8/2015 22:17:52",
 		"ensureInModel:" : "PeterUhnak 12/8/2015 22:17:52",
 		"ensureNotInModel:" : "PeterUhnak 12/8/2015 22:17:52",
@@ -11,6 +12,6 @@
 		"initializePaletteWithShortcuts:" : "PeterUhnak 12/8/2015 22:17:52",
 		"modelClass" : "PeterUhnak 12/8/2015 22:17:52",
 		"modelToControllerMapping" : "PeterUhnak 12/8/2015 22:17:52",
-		"rebuild" : "PeterUhnak 12/8/2015 22:17:52",
+		"rebuild" : "PeterUhnak 12/17/2015 11:14",
 		"removeFromModel:" : "PeterUhnak 12/8/2015 22:17:52",
 		"removeModelElement:" : "PeterUhnak 12/8/2015 22:17:52" } }
