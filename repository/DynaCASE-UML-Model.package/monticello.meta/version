@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.6' message 'Odd issues with symbol.' id '0da3e724-d460-4235-9f56-77dc0ae35252' date '12 February 2016' time '2:34:36.789914 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.5' message 'Uncommited changes in model.
-' id 'edeac95a-549f-578c-ba09-cd548dad9865' date '30 November 2015' time '12:59:38 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.7' message 'Changed moose display name.' id '030e3c30-9598-41e3-b9b0-2907584c969a' date '12 February 2016' time '2:50:47.251592 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.6' message 'Odd issues with symbol.
+' id '34bfc56a-4d5a-5126-a05c-87c130949c97' date '12 February 2016' time '2:34:38 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
