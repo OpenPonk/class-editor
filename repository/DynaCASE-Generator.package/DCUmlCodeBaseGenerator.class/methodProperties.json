@@ -2,13 +2,13 @@
 	"class" : {
 		 },
 	"instance" : {
-		"addEagerValueFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
-		"addLazyValueFor:in:" : "PeterUhnak 11/30/2015 23:34:01",
-		"addToInitialize:in:" : "PeterUhnak 11/30/2015 23:34:01",
-		"classFor:" : "PeterUhnak 11/30/2015 23:34:01",
-		"context" : "PeterUhnak 11/30/2015 23:34:01",
-		"context:" : "PeterUhnak 11/30/2015 23:34:01",
-		"defaultValueExpressionFor:" : "PeterUhnak 11/30/2015 23:34:01",
-		"ensureHasInitialize:" : "PeterUhnak 11/30/2015 23:34:01",
-		"ensureInstVariable:in:" : "PeterUhnak 11/30/2015 23:34:01",
-		"paramNameForType:" : "PeterUhnak 11/30/2015 23:34:01" } }
+		"addEagerValueFor:in:" : "PeterUhnak 12/10/2015 23:33:34",
+		"addLazyValueFor:in:" : "PeterUhnak 12/10/2015 23:33:34",
+		"addToInitialize:in:" : "PeterUhnak 12/10/2015 23:33:34",
+		"classFor:" : "PeterUhnak 12/10/2015 23:33:34",
+		"context" : "PeterUhnak 12/10/2015 23:33:34",
+		"context:" : "PeterUhnak 12/10/2015 23:33:34",
+		"defaultValueExpressionFor:" : "PeterUhnak 12/10/2015 23:33:34",
+		"ensureHasInitialize:" : "PeterUhnak 12/10/2015 23:33:34",
+		"ensureInstVariable:in:" : "PeterUhnak 12/10/2015 23:33:34",
+		"paramNameForType:" : "PeterUhnak 12/10/2015 23:33:34" } }
