@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.87' message 'Disable #refreshFigure before first opening of diagram.' id 'd304e6a8-185e-42c1-ae9c-b3656ce604d7' date '26 February 2016' time '5:30:05.095141 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.86' message 'Use GraphViz layouter if available.
-' id '11ef8eac-cb0d-54ab-a437-c787ec13bf3a' date '11 January 2016' time '10:57:31 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.88' message 'Added more examples.' id '1573b95c-f625-400d-9811-9377071130c9' date '26 February 2016' time '5:38:44.803798 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.87' message 'Disable #refreshFigure before first opening of diagram.
+' id '8414b4bc-60e4-5b53-b996-1d10e8ee542c' date '26 February 2016' time '5:30:10 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
