@@ -15,7 +15,10 @@ baseline: spec
 						versionString: #development;
 						loads: #('Parser');
 						repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ];
-				project: 'Fame'
+				project: 'CollectionExtensions'
+					with: [ spec
+						repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ];
+				project: 'Fame'	
 					with:
 						[ spec
 						className: #ConfigurationOfFame;
@@ -25,7 +28,7 @@ baseline: spec
 					with:
 						[ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
-						requires: #('Fame' 'Moose-Query') ];
+						requires: #('Fame' 'Moose-Query' 'CollectionExtensions') ];
 				package: 'Famix-Core'
 					with:
 						[ spec

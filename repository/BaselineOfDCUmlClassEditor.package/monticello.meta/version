@@ -1,2 +1,2 @@
-(name 'BaselineOfDCUmlClassEditor-PeterUhnak.27' message 'Isolating dynacase dependency.' id '24449933-11d5-40c3-a820-b63114d4d007' date '13 February 2016' time '9:10:57.233877 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfDCUmlClassEditor-PeterUhnak.26' message 'Typo.
-' id 'd5f77e8b-d792-5593-976d-5d2cdc06f5a5' date '28 November 2015' time '2:36:59 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'BaselineOfDCUmlClassEditor-PeterUhnak.28' message 'Depend on CollectionExtensions.' id '655d5ce0-452a-4838-9567-5ca6d5bebfed' date '2 March 2016' time '11:01:02.378355 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfDCUmlClassEditor-PeterUhnak.27' message 'Isolating dynacase dependency.
+' id '33fb86ad-597d-5fcf-bf35-a7767f8438d3' date '13 February 2016' time '9:10:59 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
