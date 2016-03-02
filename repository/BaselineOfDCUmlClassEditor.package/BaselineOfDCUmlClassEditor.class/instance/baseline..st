@@ -15,15 +15,15 @@ baseline: spec
 						versionString: #development;
 						loads: #('Parser');
 						repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ];
-				project: 'CollectionExtensions'
-					with: [ spec
-						repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ];
 				project: 'Fame'	
 					with:
 						[ spec
 						className: #ConfigurationOfFame;
 						versionString: #development;
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ];
+				package: 'CollectionExtensions'
+					with: [ spec
+						repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ];
 				package: 'Moose-Core'
 					with:
 						[ spec
