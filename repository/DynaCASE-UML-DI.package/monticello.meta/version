@@ -1,1 +1,2 @@
-(name 'DynaCASE-UML-DI-PeterUhnak.1' message 'Renamed package.' id '3e01bdee-742b-4d80-992b-6df44a793e51' date '23 November 2015' time '2:38:12.320924 pm' author 'PeterUhnak' ancestors () stepChildren ())
+(name 'DynaCASE-UML-DI-PeterUhnak.2' message 'Remove edge labels on edge removal.' id '505aa7eb-7c67-4345-97d7-9b8df30a73c6' date '3 March 2016' time '1:31:49.452434 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DI-PeterUhnak.1' message 'Renamed package.
+' id 'aaa0d4e2-6069-5f1e-8077-dc89e6a9d1dd' date '23 November 2015' time '2:38:12 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
