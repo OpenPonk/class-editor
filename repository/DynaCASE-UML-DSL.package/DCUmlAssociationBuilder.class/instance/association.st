@@ -11,7 +11,6 @@ association
 			assoc instVarNamed: #targetEnd put: nodes third second.
 			nodes first second association: assoc.
 			nodes third second association: assoc.
-			self haltOnce.
 			nodes first third = false & (nodes third third = true)
 				ifTrue: [ assoc sourceEnd isNavigable: false ].
 			nodes first third = true & (nodes third third = false)
