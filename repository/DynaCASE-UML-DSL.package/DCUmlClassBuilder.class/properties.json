@@ -11,7 +11,8 @@
 		"dslName",
 		"block",
 		"statements",
-		"statement" ],
+		"statement",
+		"fqn" ],
 	"name" : "DCUmlClassBuilder",
 	"pools" : [
 		 ],
