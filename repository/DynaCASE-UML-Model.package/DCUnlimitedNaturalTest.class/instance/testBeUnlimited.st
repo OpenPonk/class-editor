@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testBeUnlimited
 	| num |
 	num := DCUnlimitedNatural new.

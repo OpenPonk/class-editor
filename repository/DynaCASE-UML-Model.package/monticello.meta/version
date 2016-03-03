@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.7' message 'Changed moose display name.' id '030e3c30-9598-41e3-b9b0-2907584c969a' date '12 February 2016' time '2:50:47.251592 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.6' message 'Odd issues with symbol.
-' id '34bfc56a-4d5a-5126-a05c-87c130949c97' date '12 February 2016' time '2:34:38 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.8' message 'Added models for Stereotypes and it''s Icons.' id '05d90c0f-d9c0-4d57-9cd0-095211418092' date '3 March 2016' time '3:39:22.856467 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.7' message 'Changed moose display name.
+' id 'd5e3ba75-cd7b-5243-88d3-4136e6e3a1ce' date '12 February 2016' time '2:50:48 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

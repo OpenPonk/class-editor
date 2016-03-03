@@ -1,4 +1,4 @@
-as yet unclassified
+printing
 mooseNameOn: aStream
 	aStream nextPutAll: self name.
 	aStream nextPutAll: ' ('.

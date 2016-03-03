@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testSetValue
 	| num |
 	num := DCUnlimitedNatural new.

@@ -1,18 +1,18 @@
 {
 	"class" : {
-		"annotation" : "PeterUhnak 11/30/2015 12:59:38",
-		"on:" : "PeterUhnak 11/30/2015 12:59:38" },
+		"annotation" : "PeterUhnak 2/12/2016 14:50:48",
+		"on:" : "PeterUhnak 2/12/2016 14:50:48" },
 	"instance" : {
-		"aggregation" : "PeterUhnak 2/12/2016 14:34",
-		"aggregation:" : "PeterUhnak 11/30/2015 12:59:38",
-		"association" : "PeterUhnak 11/30/2015 12:59:38",
-		"association:" : "PeterUhnak 11/30/2015 12:59:38",
-		"beNavigable" : "PeterUhnak 11/30/2015 12:59:38",
-		"beNonNavigable" : "PeterUhnak 11/30/2015 12:59:38",
-		"initialize" : "PeterUhnak 11/30/2015 12:59:38",
-		"isNavigable" : "PeterUhnak 11/30/2015 12:59:38",
-		"isNavigable:" : "PeterUhnak 11/30/2015 12:59:38",
-		"multiplicity" : "PeterUhnak 11/30/2015 12:59:38",
-		"multiplicity:" : "PeterUhnak 11/30/2015 12:59:38",
-		"opposite" : "PeterUhnak 11/30/2015 12:59:38",
-		"property" : "PeterUhnak 11/30/2015 12:59:38" } }
+		"aggregation" : "PeterUhnak 2/12/2016 14:50:48",
+		"aggregation:" : "PeterUhnak 2/12/2016 14:50:48",
+		"association" : "PeterUhnak 2/12/2016 14:50:48",
+		"association:" : "PeterUhnak 2/12/2016 14:50:48",
+		"beNavigable" : "PeterUhnak 2/12/2016 14:50:48",
+		"beNonNavigable" : "PeterUhnak 2/12/2016 14:50:48",
+		"initialize" : "PeterUhnak 2/12/2016 14:50:48",
+		"isNavigable" : "PeterUhnak 2/12/2016 14:50:48",
+		"isNavigable:" : "PeterUhnak 2/12/2016 14:50:48",
+		"multiplicity" : "PeterUhnak 2/12/2016 14:50:48",
+		"multiplicity:" : "PeterUhnak 2/12/2016 14:50:48",
+		"opposite" : "PeterUhnak 2/12/2016 14:50:48",
+		"property" : "PeterUhnak 2/12/2016 14:50:48" } }
