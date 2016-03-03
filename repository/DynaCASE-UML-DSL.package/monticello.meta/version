@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.11' message 'Added preliminary support for NS separator.' id '406e2e58-c218-4485-8e13-7f05496b3c61' date '4 March 2016' time '12:14:28.996076 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.10' message 'Tests << => >>
-' id '6a8ecd1d-75c8-5049-985c-d442ce4a96ad' date '30 November 2015' time '12:11:46 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.12' message 'Added support for uni-directional associations.' id '22d009cd-e8eb-4135-9745-51f1cd56bdcd' date '4 March 2016' time '12:36:21.062606 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.11' message 'Added preliminary support for NS separator.
+' id '62089111-e999-51a1-bc5b-00aa4544d5ee' date '4 March 2016' time '12:14:32 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
