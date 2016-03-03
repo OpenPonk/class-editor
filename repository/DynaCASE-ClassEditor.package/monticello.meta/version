@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.89' message 'refreshing everything is still required.' id '723360f9-133e-4297-975e-6c4d9dcde402' date '1 March 2016' time '1:51:27.269862 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.88' message 'Added more examples.
-' id '1d8c0b18-bce2-556b-b70d-7e93e22a04e5' date '26 February 2016' time '5:38:46 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.90' message 'Remove ownedElements of RTEdge.' id '97bbcefd-ca8f-48e5-b34e-d3fa7421d5b7' date '3 March 2016' time '1:39:38.861267 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.89' message 'refreshing everything is still required.
+' id 'a8b9a4d6-6c38-50e9-9629-4fd1c0f6896d' date '1 March 2016' time '1:51:30 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
