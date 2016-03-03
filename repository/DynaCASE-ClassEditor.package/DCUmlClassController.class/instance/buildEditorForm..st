@@ -1,19 +1,12 @@
 ui hooks
 buildEditorForm: aForm
-	(aForm addTextInput: 'Name')
-		text: self model name;
-		whenTextIsAccepted: [ :newValue | 
-			self model name: newValue capitalized.
-			self refreshFigure ].
-	(aForm addCheckbox: 'Is Abstract')
-		state: self model isAbstract;
-		whenChangedDo: [ :val | 
-			self model isAbstract: val.
-			self refreshFigure ].
+	self buildStereotypeEditorForm: aForm.
+	self buildNameEditorForm: aForm.
+	self buildAbstractEditorForm: aForm.
 	(aForm addDroplist: 'Color')
 		items: Color knownColors;
 		displayBlock: [ :each | each asString ];
-		iconHolder: [ :each | Morph new color: (Color perform: each)  ];
+		iconHolder: [ :each | Morph new color: (Color perform: each) ];
 		setSelectedItem: self diagramElement localStyle fillColor name;
 		whenSelectedItemChanged:
 				[ :newValue | 

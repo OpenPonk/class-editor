@@ -6,4 +6,6 @@ iconMapping
 	(MooseEntity -> Smalltalk ui theme icons blankIcon).
 	(MooseModel -> DCUmlIcons current diagramIcon).
 	(FAMIXClass -> DCUmlIcons current classIcon).
-	(FAMIXAttribute -> Smalltalk ui theme icons abstractIcon)}
+	(FAMIXAttribute -> Smalltalk ui theme icons abstractIcon).
+	(DCFAMIXStereotype -> Smalltalk ui theme icons blankIcon).
+	}

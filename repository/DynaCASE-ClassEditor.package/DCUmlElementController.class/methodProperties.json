@@ -2,9 +2,16 @@
 	"class" : {
 		 },
 	"instance" : {
+		"addStereotype" : "PeterUhnak 3/3/2016 22:05",
+		"buildAbstractEditorForm:" : "PeterUhnak 3/3/2016 22:46",
+		"buildIsClassSideEditorForm:" : "PeterUhnak 3/3/2016 22:46",
+		"buildNameEditorForm:" : "PeterUhnak 3/3/2016 22:44",
+		"buildStereotypeEditorForm:" : "PeterUhnak 3/3/2016 22:43",
 		"diagramElement" : "PeterUhnak 1/11/2016 22:57:31",
 		"figure" : "PeterUhnak 1/11/2016 22:57:31",
 		"hideSelectionFeedback" : "PeterUhnak 1/11/2016 22:57:31",
+		"refreshStereotype" : "PeterUhnak 3/3/2016 22:14",
 		"registerModelEvents:" : "PeterUhnak 1/11/2016 22:57:31",
 		"removeFigure" : "PeterUhnak 1/11/2016 22:57:31",
+		"removeStereotype" : "PeterUhnak 3/3/2016 22:06",
 		"showSelectionFeedback" : "PeterUhnak 1/11/2016 22:57:31" } }

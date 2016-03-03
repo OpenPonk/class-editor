@@ -1,5 +1,6 @@
 figures
 refreshFigure
+	self refreshStereotype.
 	self diagramElement text: (self famixTextFor: self model).
 	self diagramElement localStyle
 		fontUnderline: self model isStatic;

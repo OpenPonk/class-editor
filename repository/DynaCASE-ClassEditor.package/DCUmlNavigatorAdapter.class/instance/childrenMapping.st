@@ -2,4 +2,4 @@ accessing
 childrenMapping
 	^ {(MooseModel -> #allModelClasses).
 	(MooseEntity -> #()).
-	(FAMIXClass -> [ :o | o attributes , o methods ])}
+	(FAMIXClass -> [ :o | o stereotypes , o attributes , o methods ])}

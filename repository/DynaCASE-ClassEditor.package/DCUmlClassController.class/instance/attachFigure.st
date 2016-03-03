@@ -1,4 +1,4 @@
-adding
+figures
 attachFigure
 	| el |
 	el := self diagramElement.

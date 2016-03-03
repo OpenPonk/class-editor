@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.90' message 'Remove ownedElements of RTEdge.' id '97bbcefd-ca8f-48e5-b34e-d3fa7421d5b7' date '3 March 2016' time '1:39:38.861267 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.89' message 'refreshing everything is still required.
-' id 'a8b9a4d6-6c38-50e9-9629-4fd1c0f6896d' date '1 March 2016' time '1:51:30 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.91' message 'Added basic stereotype support.Some form refactoring.' id '167ae4b1-9f98-4a38-8f32-86c21ef15724' date '3 March 2016' time '10:49:06.277487 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.90' message 'Remove ownedElements of RTEdge.
+' id 'e0cb75a1-40fd-5249-9f8b-5458781d2149' date '3 March 2016' time '1:39:42 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

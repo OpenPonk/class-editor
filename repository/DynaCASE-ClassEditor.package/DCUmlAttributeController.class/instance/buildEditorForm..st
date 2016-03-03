@@ -1,11 +1,8 @@
 ui hooks
-buildEditorForm: form
-	(form addTextInput: 'Name')
-		text: self model name;
-		whenTextIsAccepted: [ :newValue | 
-			self model name: newValue.
-			self refreshFigure ].
-	(form addTextInput: 'Type')
+buildEditorForm: aForm
+	self buildStereotypeEditorForm: aForm.
+	self buildNameEditorForm: aForm.
+	(aForm addTextInput: 'Type')
 		text: (self model declaredType ifNil: [ '' ] ifNotNil: [ :t | t name ]);
 		whenTextIsAccepted:
 				[ :newValue | 
@@ -13,7 +10,7 @@ buildEditorForm: form
 				ifEmpty: [ self model declaredType: nil ]
 				ifNotEmpty: [ self model declaredType: (FAMIXClass named: newValue) ].
 			self refreshFigure ].
-	(form addTextInput: 'Default Value')
+	(aForm addTextInput: 'Default Value')
 		text: (self model defaultValue ifNil: [ '' ] ifNotNil: [ :v | v valueExpression ]);
 		whenTextIsAccepted:
 				[ :newValue | 
@@ -21,19 +18,15 @@ buildEditorForm: form
 				ifEmpty: [ self model defaultValue: nil ]
 				ifNotEmpty: [ self model defaultValue: (DCFAMIXValueSpecification from: newValue) ].
 			self refreshFigure ].
-	(form addCheckbox: 'Class')
-		state: self model isStatic;
-		whenChangedDo: [ :val | 
-			self model isStatic: val.
-			self refreshFigure ].
-	(form addTextInput: 'Multiplicity min')
+	self buildIsClassSideEditorForm: aForm.
+	(aForm addTextInput: 'Multiplicity min')
 		text: self model multiplicity printLower;
 		whenTextIsAccepted:
 				[ :val | 
 			val
 				ifNotEmpty: [ self model multiplicity lower: val asString.
 					self refreshFigure ] ].
-	(form addTextInput: 'Multiplicity max')
+	(aForm addTextInput: 'Multiplicity max')
 		text: self model multiplicity printUpper;
 		whenTextIsAccepted:
 				[ :val | 
