@@ -12,7 +12,8 @@
 		"block",
 		"statements",
 		"statement",
-		"fqn" ],
+		"fqn",
+		"keyword" ],
 	"name" : "DCUmlClassBuilder",
 	"pools" : [
 		 ],

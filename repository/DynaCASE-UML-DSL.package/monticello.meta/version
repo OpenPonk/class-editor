@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.14' message 'Fixed navigability for aggregations.Fixed parsing for namespaces.' id '9425c6eb-d61d-41ea-af24-fb0050d4e9c2' date '4 March 2016' time '1:05:33.057851 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.13' message 'Bad halt.
-' id '96fea6d6-70e3-5d7a-afe9-98e24fa5a23a' date '4 March 2016' time '12:36:32 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.15' message 'Added class stereotypes to DSL.' id '73496017-1db7-4d68-a9f2-57a86b9f3982' date '4 March 2016' time '11:39:40.273034 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.14' message 'Fixed navigability for aggregations.Fixed parsing for namespaces.
+' id '4cd1fbaa-2565-558a-9e35-7e074bd88974' date '4 March 2016' time '1:05:34 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
