@@ -1,0 +1,19 @@
+{
+	"category" : "DynaCASE-UML-DSL-UI",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 3/4/2016 15:33",
+	"instvars" : [
+		"editor",
+		"autoUpdate",
+		"toolbar",
+		"location",
+		"model",
+		"parser" ],
+	"name" : "DCUmlDslEditor",
+	"pools" : [
+		 ],
+	"super" : "ComposableModel",
+	"type" : "normal" }

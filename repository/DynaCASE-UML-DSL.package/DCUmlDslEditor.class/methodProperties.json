@@ -1,0 +1,17 @@
+{
+	"class" : {
+		"defaultSpec" : "PeterUhnak 3/4/2016 16:12" },
+	"instance" : {
+		"autoUpdate" : "PeterUhnak 3/4/2016 15:39",
+		"buildToolbar:" : "PeterUhnak 3/4/2016 17:20",
+		"editor" : "PeterUhnak 3/4/2016 15:39",
+		"initialize" : "PeterUhnak 3/4/2016 17:03",
+		"initializePresenter" : "PeterUhnak 3/4/2016 16:12",
+		"initializeWidgets" : "PeterUhnak 3/4/2016 16:13",
+		"model:" : "PeterUhnak 3/4/2016 16:24",
+		"openFromFile" : "PeterUhnak 3/4/2016 16:35",
+		"saveToFile:" : "PeterUhnak 3/4/2016 16:31",
+		"textUpdated:" : "PeterUhnak 3/4/2016 16:20",
+		"title" : "PeterUhnak 3/4/2016 15:34",
+		"toolbar" : "PeterUhnak 3/4/2016 15:43",
+		"updateModel" : "PeterUhnak 3/4/2016 17:20" } }
