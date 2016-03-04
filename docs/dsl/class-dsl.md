@@ -6,12 +6,12 @@ Note however that not all features of UML are supported. This limitation is caus
 
 ```txt
 Person {
-	    name : String
-		    contact: Contact[1..*]
+	name : String
+	contact: Contact[1..*]
 }
 
 Teacher {
-	    gradeTests:(test: Test[*]): Number[*]
+	gradeTests:(test: Test[*]): Number[*]
 }
 
 Teacher extends Role;
@@ -47,6 +47,23 @@ Create an empty class `Class`:
 Class { }
 ```
 
+![Class definition](figures/class-def.png)
+
+### Namespaces
+
+Use `::` to separate namespaces and create FQN. Additionally you can prepend `::` before the whole name, which is useful for describing global objects.
+
+```txt
+::Object { }
+DynaCASE::Object { }
+
+DynaCASE::Object >> ::Object;
+```
+
+![Inheritance with namespaces](figures/ns-inheritance.png)
+
+### Inheritance
+
 Create an empty class `SubClass` as a subclass of a `ParentClass`. If the parent class wasn't defined the model is ill-defined.
 
 To add inheritance, use
@@ -59,7 +76,7 @@ SubClass >> ParentClass;
 SubClass extends ParentClass;
 </pre>
 
-## Commonalities
+## Common properties
 
 ### Visibility
 
