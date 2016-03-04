@@ -1,3 +1,3 @@
 grammar
 parameter
-	^ (symbol , $: asParser) ==> [ :nodes | nodes first ] , type , multiplicity
+	^ symbol , (($: asParser , type) ==> [ :nodes | nodes second ]) optional , multiplicity

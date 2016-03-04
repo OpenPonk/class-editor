@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.15' message 'Added class stereotypes to DSL.' id '73496017-1db7-4d68-a9f2-57a86b9f3982' date '4 March 2016' time '11:39:40.273034 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.14' message 'Fixed navigability for aggregations.Fixed parsing for namespaces.
-' id '4cd1fbaa-2565-558a-9e35-7e074bd88974' date '4 March 2016' time '1:05:34 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.16' message 'More DSL fixes.' id 'ba88b554-bd94-4e03-ae14-f75e87c7d696' date '4 March 2016' time '12:11:24.655019 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.15' message 'Added class stereotypes to DSL.
+' id '5f98d8ff-6bbf-5c46-bed6-11f56ca070b0' date '4 March 2016' time '11:39:43 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

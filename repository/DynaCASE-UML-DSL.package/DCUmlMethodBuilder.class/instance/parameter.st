@@ -5,6 +5,6 @@ parameter
 			[ :nodes | 
 			(FAMIXParameter
 				named: nodes first
-				type: (nodes second ifNotNil: [ FAMIXClass named: nodes second ]))
+				type: (FAMIXClass named: (nodes second ifNil: [ 'Object' ])))
 				multiplicity: nodes third;
 				yourself ]
