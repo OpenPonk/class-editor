@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testNavigable2
 	super testNavigable2.
 	self assert: result sourceEnd isNavigable.

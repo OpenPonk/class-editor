@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testNavigable1
 	super testNavigable1.
 	self deny: result sourceEnd isNavigable.

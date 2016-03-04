@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.13' message 'Bad halt.' id '315605b1-317c-442a-a3b1-b444040dec88' date '4 March 2016' time '12:36:31.462679 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.12' message 'Added support for uni-directional associations.
-' id '5e4bf333-1725-5de3-9a48-5856892d6e08' date '4 March 2016' time '12:36:22 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.14' message 'Fixed navigability for aggregations.Fixed parsing for namespaces.' id '9425c6eb-d61d-41ea-af24-fb0050d4e9c2' date '4 March 2016' time '1:05:33.057851 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.13' message 'Bad halt.
+' id '96fea6d6-70e3-5d7a-afe9-98e24fa5a23a' date '4 March 2016' time '12:36:32 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

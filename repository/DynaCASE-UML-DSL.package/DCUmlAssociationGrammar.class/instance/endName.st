@@ -1,3 +1,3 @@
 accessing
 endName
-	^ #word asParser plus flatten trim
+	^ #word asParser plus flatten
