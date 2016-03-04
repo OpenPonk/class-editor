@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.16' message 'More DSL fixes.' id 'ba88b554-bd94-4e03-ae14-f75e87c7d696' date '4 March 2016' time '12:11:24.655019 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.15' message 'Added class stereotypes to DSL.
-' id '5f98d8ff-6bbf-5c46-bed6-11f56ca070b0' date '4 March 2016' time '11:39:43 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.17' message 'Added model exporter.' id 'b4a8021c-0b94-4996-a77a-ecf5bf267cc4' date '4 March 2016' time '2:08:11.991216 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.16' message 'More DSL fixes.
+' id 'a3d370ed-2b84-52ed-89a6-cf9fa789b974' date '4 March 2016' time '12:11:26 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

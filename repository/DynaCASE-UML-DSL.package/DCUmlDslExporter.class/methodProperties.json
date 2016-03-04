@@ -1,0 +1,15 @@
+{
+	"class" : {
+		"export:" : "PeterUhnak 3/4/2016 14:07" },
+	"instance" : {
+		"export:" : "PeterUhnak 3/4/2016 14:01",
+		"line" : "PeterUhnak 3/4/2016 14:06",
+		"visitAssociation:" : "PeterUhnak 3/4/2016 13:58",
+		"visitAttribute:" : "PeterUhnak 3/4/2016 13:08",
+		"visitClass:" : "PeterUhnak 3/4/2016 14:07",
+		"visitInheritance:" : "PeterUhnak 3/4/2016 13:58",
+		"visitMethod:" : "PeterUhnak 3/4/2016 13:15",
+		"visitModel:" : "PeterUhnak 3/4/2016 14:06",
+		"visitParameter:" : "PeterUhnak 3/4/2016 13:10",
+		"visitType:withMultiplicity:separator:" : "PeterUhnak 3/4/2016 13:57",
+		"visitTypeWithMultiplicity:" : "PeterUhnak 3/4/2016 13:57" } }

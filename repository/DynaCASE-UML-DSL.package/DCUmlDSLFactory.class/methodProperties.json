@@ -2,8 +2,10 @@
 	"class" : {
 		"sampleDsl" : "PeterUhnak 11/30/2015 12:11:46" },
 	"instance" : {
+		"association:" : "PeterUhnak 3/4/2016 13:40",
 		"attribute:" : "PeterUhnak 11/30/2015 12:11:46",
 		"class:" : "PeterUhnak 11/30/2015 12:11:46",
-		"initialize" : "PeterUhnak 11/30/2015 12:11:46",
+		"inheritance:" : "PeterUhnak 3/4/2016 13:39",
+		"initialize" : "PeterUhnak 3/4/2016 13:39",
 		"method:" : "PeterUhnak 11/30/2015 12:11:46",
 		"model:" : "PeterUhnak 11/30/2015 12:11:46" } }

@@ -1,0 +1,28 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"export:" : "PeterUhnak 3/4/2016 12:43",
+		"export:equals:" : "PeterUhnak 3/4/2016 12:43",
+		"parseAssociation:" : "PeterUhnak 3/4/2016 13:40",
+		"parseAttribute:" : "PeterUhnak 3/4/2016 13:26",
+		"parseClass:" : "PeterUhnak 3/4/2016 13:25",
+		"parseInheritance:" : "PeterUhnak 3/4/2016 13:40",
+		"parseMethod:" : "PeterUhnak 3/4/2016 13:26",
+		"parseModel:" : "PeterUhnak 3/4/2016 14:00",
+		"setUp" : "PeterUhnak 3/4/2016 13:25",
+		"testAssociation" : "PeterUhnak 3/4/2016 13:43",
+		"testAssociation1" : "PeterUhnak 3/4/2016 13:58",
+		"testAttribute" : "PeterUhnak 3/4/2016 13:15",
+		"testAttribute1" : "PeterUhnak 3/4/2016 13:01",
+		"testAttribute2" : "PeterUhnak 3/4/2016 13:02",
+		"testAttributeWithDefaultValue" : "PeterUhnak 3/4/2016 13:01",
+		"testClass" : "PeterUhnak 3/4/2016 13:16",
+		"testClassWithStereotype" : "PeterUhnak 3/4/2016 13:18",
+		"testClassWithStuff" : "PeterUhnak 3/4/2016 13:34",
+		"testInheritance" : "PeterUhnak 3/4/2016 13:42",
+		"testMethod" : "PeterUhnak 3/4/2016 13:05",
+		"testMethod1" : "PeterUhnak 3/4/2016 13:11",
+		"testMethod2" : "PeterUhnak 3/4/2016 13:12",
+		"testMethod3" : "PeterUhnak 3/4/2016 13:22",
+		"testModel" : "PeterUhnak 3/4/2016 14:06" } }

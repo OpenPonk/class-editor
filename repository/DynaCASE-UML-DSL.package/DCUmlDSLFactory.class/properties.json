@@ -4,11 +4,12 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "PeterUhnak 9/29/2015 18:42",
+	"commentStamp" : "PeterUhnak 3/4/2016 13:38",
 	"instvars" : [
 		"classBuilder",
 		"methodBuilder",
-		"attributeBuilder" ],
+		"attributeBuilder",
+		"dslBuilder" ],
 	"name" : "DCUmlDSLFactory",
 	"pools" : [
 		 ],

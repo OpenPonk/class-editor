@@ -1,1 +1,1 @@
-I produce parts of a DCFAMIX model.
+I produce fragments of a DCFAMIX model.
