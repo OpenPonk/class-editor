@@ -25,6 +25,10 @@ University[1] university <*>-- departments Department[*];
 Department[*] memberOf <>-- teachers Teacher[*];
 ```
 
+![diagram](figures/diagram.png)
+
+### Parsing
+
 To parse the above text and open a diagram, run
 
 ```st
@@ -35,7 +39,31 @@ or
 (DCUmlDslParser parse: ' ... DSL ... ') open
 ```
 
-![diagram](figures/diagram.png)
+
+### Exporting
+
+To export your model back into the DSL use `DCUmlDslExporter`.
+
+```
+model := (DCUmlDsLParser parse: '... DSL ...').
+
+DCUmlDslExporter export: model. "returns a DSL string"
+```
+
+Keep in mind that there are often multiple ways how the same thing can be represented, for example:
+```
+id
+id : Object
+id : Object[1]
+id : Object[1..1]
+
+"or"
+
+names : String[*]
+names : String[0..*]
+```
+
+The exporter will always use the minimal version available. In the examples above it would be the first option.
 
 
 ## Class definition
@@ -109,7 +137,8 @@ Examples:
 
 full range | shortcut
 ---------- | --------
-0..1|
+1..1|(1..1 is the default multiplicity, no need to specify at all)
+0..1|0..1 (no shortcut)
 10..10|10
 0..\*|\*
 
