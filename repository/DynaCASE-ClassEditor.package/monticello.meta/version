@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.92' message 'Rebuild diagram when model content changed.' id '88f3149c-a921-4f12-8088-8ba3852c8d3f' date '4 March 2016' time '5:28:38.562003 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.91' message 'Added basic stereotype support.Some form refactoring.
-' id 'cbe2b5eb-0473-5bf9-9792-93542e5f76fe' date '3 March 2016' time '10:49:12 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.93' message 'Added shortcut to DSL editor.' id 'f9682ef8-b66d-44bd-88d5-991f69a1e7e4' date '5 March 2016' time '12:55:40.713625 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.92' message 'Rebuild diagram when model content changed.
+' id 'ecd4a373-39ed-5d8b-af85-daae9403fa23' date '4 March 2016' time '5:28:40 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
