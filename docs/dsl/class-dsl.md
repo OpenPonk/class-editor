@@ -28,13 +28,11 @@ Department[*] memberOf <>-- teachers Teacher[*];
 To parse the above text and open a diagram, run
 
 ```st
-'Person {
-	...
-' asClassDiagram open
+' ... DSL ... ' asClassDiagram open
 ```
 or
 ```st
-(DCUmlDslParser parse: 'Person { ... ') open
+(DCUmlDslParser parse: ' ... DSL ... ') open
 ```
 
 ![diagram](figures/diagram.png)
@@ -48,6 +46,18 @@ Class { }
 ```
 
 ![Class definition](figures/class-def.png)
+
+
+### Stereotypes
+
+Currently only class stereotypes are supported.
+
+```txt
+ParticipantKind <<enumeration>> { }
+```
+
+![Class stereotype](figures/class-stereotype.png)
+
 
 ### Namespaces
 
@@ -126,9 +136,16 @@ _classVariable
 When combined, the order doesn't matter.
 
 ```st
-_/staticAbstract()
-/_abstractStatic()
+/Abstract {
+	_static
+	_static()
+	/abstract()
+	_/staticAbstract()
+	/_abstractStatic()
+}
 ```
+
+![Abstract](figures/abstract.png)
 
 
 ## Attributes
@@ -142,11 +159,15 @@ The only mandatory segment is `<property-name>`, however adding multiplicity als
 Examples:
 
 ```st
-id "default type Object"
-name : String "default multiplicity 1..1"
-middleNames : String[*] "default type nil"
-_workDays : String[5] = #(Monday Tuesday Wednesday Thursday Friday)
+Mixin {
+	id "default type Object"
+	name : String "default multiplicity 1..1"
+	middleNames : String[*] "default type nil"
+	_workDays : String[5] = #(Monday Tuesday Wednesday Thursday Friday)
+}
 ```
+
+![Attributes](figures/attributes.png)
 
 > Property modifiers are not supported.
 
@@ -165,15 +186,19 @@ Note that operations describing Pharo methods should be named accordingly (with 
 Examples:
 
 ```st
-function()
-inject:into:(aValue, aCollection)
-add:afterIndex:(anObject : Object, anIndex: Integer) : Object
-reject:(rejectBlock : BlockClosure[1]) : Object[*]
+Behavior {
+	function()
+	inject:into:(aValue, aCollection)
+	add:afterIndex:(anObject : Object, anIndex: Integer) : Object
+	reject:(rejectBlock : BlockClosure[1]) : Object[*]
+}
 ```
+
+![Methods](figures/methods.png)
 
 ## Associations
 
-Only simple binary associations are supported.
+Only binary associations are supported.
 
 ```
 SourceClass[range] sourceName --- targetName TargetClass[range] : associationName;
@@ -190,3 +215,6 @@ Community[*] memberships <>-- members Person[*]; aggregation
 University[1] university <*>-- departments Department[*]; composition
 Order[*] --> products Product[1..*]; navigable in a single directon
 ```
+
+![Associations](figures/association-types.png)
+
