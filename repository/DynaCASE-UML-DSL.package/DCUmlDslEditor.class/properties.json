@@ -11,7 +11,8 @@
 		"toolbar",
 		"location",
 		"model",
-		"parser" ],
+		"parser",
+		"exporter" ],
 	"name" : "DCUmlDslEditor",
 	"pools" : [
 		 ],

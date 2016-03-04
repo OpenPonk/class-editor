@@ -1,4 +1,5 @@
-as yet unclassified
+initialization
 initialize
 	super initialize.
-	parser := DCUmlDslParser new
+	parser := DCUmlDslParser new.
+	exporter := DCUmlDslExporter new

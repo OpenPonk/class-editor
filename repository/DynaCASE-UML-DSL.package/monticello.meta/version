@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.18' message 'Added UI Editor.' id 'dff240be-1d83-48ec-82b2-da225215c881' date '4 March 2016' time '5:28:15.97858 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.17' message 'Added model exporter.
-' id '81089fee-ff65-5671-b0d7-c0d0ecf842b1' date '4 March 2016' time '2:08:13 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.19' message 'Load from model.' id '08f5a283-2ef4-40c4-a30d-938f0b9bcd80' date '5 March 2016' time '12:55:27.369531 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.18' message 'Added UI Editor.
+' id '30b4cf05-82d1-5d5a-8cc8-57e9ba38344d' date '4 March 2016' time '5:28:18 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

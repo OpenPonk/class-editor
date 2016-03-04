@@ -1,3 +1,3 @@
 event handling
 textUpdated: aString
-	self saveToFile: location
+	location ifNil: [ self updateModel ] ifNotNil: [ self saveToFile: location ]
