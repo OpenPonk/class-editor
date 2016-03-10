@@ -1,2 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.27' message 'Export association dsl.' id '1ee0267d-fc7f-4d42-8329-bde141cf62dc' date '10 March 2016' time '12:19:56.908604 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.26' message 'Fixed associations retrieval in tests.
-' id 'dd4e377a-46cb-5f6d-ba3d-26af6e8508ab' date '12 February 2016' time '2:51:04 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.28' message 'Fixed test.' id '72894ab4-535b-425e-a73e-37bcdbd54cc5' date '10 March 2016' time '12:31:41.030032 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.27' message 'Export association dsl.
+' id '71978902-3fe8-5fb1-bfaa-260fcd4c39d2' date '10 March 2016' time '12:19:58 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
