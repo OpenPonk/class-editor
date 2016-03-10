@@ -1,2 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.26' message 'Fixed associations retrieval in tests.' id '4ab96360-6bba-4caf-ac41-7d67dcc1cb54' date '12 February 2016' time '2:51:02.112306 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.25' message 'Fixed generation of noneToMany collection accessors.
-' id 'a28f9ab3-6b85-5e62-a6b5-9b40899eca47' date '10 December 2015' time '11:33:34 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.27' message 'Export association dsl.' id '1ee0267d-fc7f-4d42-8329-bde141cf62dc' date '10 March 2016' time '12:19:56.908604 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.26' message 'Fixed associations retrieval in tests.
+' id 'dd4e377a-46cb-5f6d-ba3d-26af6e8508ab' date '12 February 2016' time '2:51:04 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
