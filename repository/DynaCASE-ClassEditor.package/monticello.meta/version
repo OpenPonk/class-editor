@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.93' message 'Added shortcut to DSL editor.' id 'f9682ef8-b66d-44bd-88d5-991f69a1e7e4' date '5 March 2016' time '12:55:40.713625 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.92' message 'Rebuild diagram when model content changed.
-' id 'ecd4a373-39ed-5d8b-af85-daae9403fa23' date '4 March 2016' time '5:28:40 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.94' message 'umm... uuid?' id '75e9fd15-d4f5-4bfc-9d10-7786fde5fc29' date '10 March 2016' time '12:01:13.756717 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.93' message 'Added shortcut to DSL editor.
+' id '9a9b878c-34ed-5b10-b0b4-9bd502979ed8' date '5 March 2016' time '12:55:42 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
