@@ -2,5 +2,8 @@
 	"class" : {
 		 },
 	"instance" : {
-		"testOneToMany" : "PeterUhnak 2/12/2016 14:50:48",
-		"testPrintRange" : "PeterUhnak 3/4/2016 13:13" } }
+		"testFromArray" : "PeterUhnak 3/10/2016 12:57",
+		"testFromArray1" : "PeterUhnak 3/10/2016 12:58",
+		"testFromArray2" : "PeterUhnak 3/10/2016 12:58",
+		"testOneToMany" : "PeterUhnak 3/4/2016 13:16:25",
+		"testPrintRange" : "PeterUhnak 3/4/2016 13:16:25" } }

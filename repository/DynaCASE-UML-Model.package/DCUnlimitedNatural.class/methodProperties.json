@@ -1,13 +1,13 @@
 {
 	"class" : {
-		"annotation" : "PeterUhnak 2/12/2016 14:50:48",
-		"max" : "PeterUhnak 2/12/2016 14:50:48",
-		"unlimited" : "PeterUhnak 2/12/2016 14:50:48",
-		"value:" : "PeterUhnak 2/12/2016 14:50:48" },
+		"annotation" : "PeterUhnak 3/4/2016 13:16:25",
+		"max" : "PeterUhnak 3/4/2016 13:16:25",
+		"unlimited" : "PeterUhnak 3/4/2016 13:16:25",
+		"value:" : "PeterUhnak 3/4/2016 13:16:25" },
 	"instance" : {
-		"beUnlimited" : "PeterUhnak 2/12/2016 14:50:48",
-		"initialize" : "PeterUhnak 2/12/2016 14:50:48",
-		"isUnlimited" : "PeterUhnak 2/12/2016 14:50:48",
-		"printValue" : "PeterUhnak 2/12/2016 14:50:48",
-		"value" : "PeterUhnak 2/12/2016 14:50:48",
-		"value:" : "PeterUhnak 2/12/2016 14:50:48" } }
+		"beUnlimited" : "PeterUhnak 3/4/2016 13:16:25",
+		"initialize" : "PeterUhnak 3/4/2016 13:16:25",
+		"isUnlimited" : "PeterUhnak 3/4/2016 13:16:25",
+		"printValue" : "PeterUhnak 3/4/2016 13:16:25",
+		"value" : "PeterUhnak 3/4/2016 13:16:25",
+		"value:" : "PeterUhnak 3/4/2016 13:16:25" } }
