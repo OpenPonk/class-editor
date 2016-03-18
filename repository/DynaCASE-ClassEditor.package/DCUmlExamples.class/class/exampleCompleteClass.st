@@ -2,5 +2,5 @@ examples
 exampleCompleteClass
 	DCProject new
 		projectName: 'Complete Class Example';
-		addDiagram: self sampleCompleteClass;
+		addModel: self sampleCompleteClass;
 		open

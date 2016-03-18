@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Plugin",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlSerializer",
+	"pools" : [
+		 ],
+	"super" : "DCAbstractSerializer",
+	"type" : "normal" }

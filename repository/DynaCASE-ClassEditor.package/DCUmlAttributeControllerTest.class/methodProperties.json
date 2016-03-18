@@ -2,9 +2,9 @@
 	"class" : {
 		 },
 	"instance" : {
-		"controllerClass" : "PeterUhnak 3/4/2016 17:28:40",
-		"preconfigureController" : "PeterUhnak 3/4/2016 17:28:40",
-		"setUp" : "PeterUhnak 3/4/2016 17:28:40",
-		"testCreateDiagramElement" : "PeterUhnak 3/4/2016 17:28:40",
-		"testUpdateDiagramElement" : "PeterUhnak 3/4/2016 17:28:40",
-		"testUpdateDiagramElementWithType" : "PeterUhnak 3/4/2016 17:28:40" } }
+		"controllerClass" : "PeterUhnak 3/10/2016 12:01:15",
+		"preconfigureController" : "PeterUhnak 3/10/2016 12:01:15",
+		"setUp" : "PeterUhnak 3/10/2016 12:01:15",
+		"testCreateDiagramElement" : "PeterUhnak 3/10/2016 12:01:15",
+		"testUpdateDiagramElement" : "PeterUhnak 3/10/2016 12:01:15",
+		"testUpdateDiagramElementWithType" : "PeterUhnak 3/10/2016 12:01:15" } }
