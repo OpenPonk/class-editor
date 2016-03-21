@@ -2,5 +2,5 @@ accessing
 initialize
 	super initialize.
 	name := ''.
-	sourceEnd := DCFAMIXAssociationEnd on: self.
-	targetEnd := DCFAMIXAssociationEnd on: self
+	(sourceEnd := DCFAMIXProperty new) belongsTo: self.
+	(targetEnd := DCFAMIXProperty new) belongsTo: self

@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.10' message 'More uncommited stuff.' id '83e1009d-b4da-4c68-a2fe-e2283c72f916' date '13 March 2016' time '11:47:50.797425 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.9' message 'multiplicity printRange [0..*] -> [*]
-' id 'ae9f86c4-2bbe-5da6-a033-f5582140ff1c' date '4 March 2016' time '1:16:25 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.11' message 'Replaced AssociationEnd with a Property.' id '759aee8f-bcf6-47af-bf65-1c9baef4c6fc' date '21 March 2016' time '5:13:16.172568 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.10' message 'More uncommited stuff.
+' id 'ea071c63-b39d-54a8-92a2-db34f60afddd' date '13 March 2016' time '11:47:54 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
