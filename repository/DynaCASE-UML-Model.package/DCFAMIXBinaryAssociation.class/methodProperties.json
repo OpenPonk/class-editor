@@ -1,7 +1,7 @@
 {
 	"class" : {
 		"annotation" : "PeterUhnak 3/13/2016 23:47:54",
-		"source:target:" : "PeterUhnak 3/13/2016 23:47:54" },
+		"source:target:" : "PeterUhnak 3/21/2016 18:08" },
 	"instance" : {
 		"associationEnds" : "PeterUhnak 3/21/2016 16:37",
 		"from" : "PeterUhnak 3/13/2016 23:47:54",
@@ -11,10 +11,10 @@
 		"name" : "PeterUhnak 3/13/2016 23:47:54",
 		"name:" : "PeterUhnak 3/13/2016 23:47:54",
 		"propertyFor:" : "PeterUhnak 3/13/2016 23:47:54",
-		"source" : "PeterUhnak 3/13/2016 23:47:54",
-		"source:" : "PeterUhnak 3/13/2016 23:47:54",
+		"source" : "PeterUhnak 3/21/2016 17:53",
+		"source:" : "PeterUhnak 3/21/2016 18:08",
 		"sourceEnd" : "PeterUhnak 3/21/2016 16:37",
-		"target" : "PeterUhnak 3/13/2016 23:47:54",
-		"target:" : "PeterUhnak 3/13/2016 23:47:54",
+		"target" : "PeterUhnak 3/21/2016 17:53",
+		"target:" : "PeterUhnak 3/21/2016 18:08",
 		"targetEnd" : "PeterUhnak 3/21/2016 16:37",
 		"to" : "PeterUhnak 3/13/2016 23:47:54" } }

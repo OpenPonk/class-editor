@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.11' message 'Replaced AssociationEnd with a Property.' id '759aee8f-bcf6-47af-bf65-1c9baef4c6fc' date '21 March 2016' time '5:13:16.172568 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.10' message 'More uncommited stuff.
-' id 'ea071c63-b39d-54a8-92a2-db34f60afddd' date '13 March 2016' time '11:47:54 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.12' message 'Properties now hold the type.' id '93f74b25-dad9-43f7-891f-9104ca18054f' date '21 March 2016' time '6:12:18.299992 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.11' message 'Replaced AssociationEnd with a Property.
+' id '46cf9ed6-627c-5ade-93f9-983bcf1e36dc' date '21 March 2016' time '5:13:18 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
