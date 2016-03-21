@@ -7,20 +7,20 @@ visitAssociation: anAssociation
 			stream
 				nextPutAll: n;
 				nextPut: Character space ].
-	anAssociation sourceEnd aggregation = DCUmlAggregationKind shared
-		ifTrue: [ stream nextPutAll: '<>' ].
-	anAssociation sourceEnd aggregation = DCUmlAggregationKind composite
-		ifTrue: [ stream nextPutAll: '<*>' ].
-	anAssociation sourceEnd aggregation = DCUmlAggregationKind none
-		ifTrue: [ (anAssociation sourceEnd isNavigable not or: [ anAssociation targetEnd isNavigable ])
-				ifTrue: [ stream nextPut: $- ]
-				ifFalse: [ stream nextPut: $< ] ].
-	stream nextPut: $-.
 	anAssociation targetEnd aggregation = DCUmlAggregationKind shared
 		ifTrue: [ stream nextPutAll: '<>' ].
 	anAssociation targetEnd aggregation = DCUmlAggregationKind composite
 		ifTrue: [ stream nextPutAll: '<*>' ].
 	anAssociation targetEnd aggregation = DCUmlAggregationKind none
+		ifTrue: [ (anAssociation sourceEnd isNavigable not or: [ anAssociation targetEnd isNavigable ])
+				ifTrue: [ stream nextPut: $- ]
+				ifFalse: [ stream nextPut: $< ] ].
+	stream nextPut: $-.
+	anAssociation sourceEnd aggregation = DCUmlAggregationKind shared
+		ifTrue: [ stream nextPutAll: '<>' ].
+	anAssociation sourceEnd aggregation = DCUmlAggregationKind composite
+		ifTrue: [ stream nextPutAll: '<*>' ].
+	anAssociation sourceEnd aggregation = DCUmlAggregationKind none
 		ifTrue: [ (anAssociation targetEnd isNavigable not or: [ anAssociation sourceEnd isNavigable ])
 				ifTrue: [ stream nextPut: $- ]
 				ifFalse: [ stream nextPut: $> ] ].

@@ -1,11 +1,10 @@
 accessing
 leftEnd
 	^ super leftEnd
-		==>
-			[ :nodes | 
+		==> [ :nodes | 
 			{nodes first.
-			(DCFAMIXAssociationEnd new
+			(DCFAMIXProperty new
 				name: nodes third;
-				multiplicity: nodes second;
-				aggregation: nodes fourth first).
+				multiplicity: nodes second).
+			nodes fourth first.
 			nodes fourth second} ]

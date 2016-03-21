@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.19' message 'Load from model.' id '08f5a283-2ef4-40c4-a30d-938f0b9bcd80' date '5 March 2016' time '12:55:27.369531 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.18' message 'Added UI Editor.
-' id '30b4cf05-82d1-5d5a-8cc8-57e9ba38344d' date '4 March 2016' time '5:28:18 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.20' message 'Replaced AssociationEnd with a Property.' id '8e944477-c6d5-4ad7-935e-23f82170f563' date '21 March 2016' time '5:13:42.743393 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.19' message 'Load from model.
+' id '973e25d2-9795-53b5-9abd-b2b5749ab516' date '5 March 2016' time '12:55:28 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
