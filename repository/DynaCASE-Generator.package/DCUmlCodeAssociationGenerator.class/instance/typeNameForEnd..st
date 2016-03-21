@@ -1,3 +1,3 @@
 utilities
 typeNameForEnd: anEnd
-	^ self paramNameForType: anEnd property
+	^ self paramNameForType: anEnd declaredType

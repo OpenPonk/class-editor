@@ -1,2 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.30' message 'Fixed associations importing.' id '25b296c2-c445-4686-8b71-af1e451eabcb' date '14 March 2016' time '12:05:31.678571 am' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.29' message 'WIP code -> model
-' id '0df106b4-3456-5b09-82b0-ee615293b87c' date '13 March 2016' time '8:37:37 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.31' message 'Replaced AssociationEnd with a Property.' id '8d57d7b6-427f-458f-a619-e3ae67cd8f3b' date '21 March 2016' time '5:13:50.333966 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.30' message 'Fixed associations importing.
+' id 'a32cfb3b-c005-5eb5-af8f-0e1251cb608d' date '14 March 2016' time '12:05:33 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
