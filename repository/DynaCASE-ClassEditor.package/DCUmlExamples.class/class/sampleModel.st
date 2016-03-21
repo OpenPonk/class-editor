@@ -23,30 +23,33 @@ sampleModel
 		add: dia;
 		add: el;
 		add: obj.
-
 	model add: (FAMIXInheritance subclass: el superclass: obj).
 	model add: (FAMIXInheritance subclass: dia superclass: obj).
-
-	a := DCFAMIXBinaryAssociation source: dia target: el.
+	a := DCFAMIXBinaryAssociation new.
 	a sourceEnd
 		name: 'owner';
+		declaredType: dia;
 		multiplicity: DCFAMIXMultiplicity zeroToOne.
 	a targetEnd
 		name: 'elements';
+		declaredType: el;
 		multiplicity: DCFAMIXMultiplicity zeroToMany.
 	model add: a.
-
-	a := DCFAMIXBinaryAssociation source: proj target: dia.
-	a sourceEnd multiplicity: DCFAMIXMultiplicity zeroToOne.
+	a := DCFAMIXBinaryAssociation new.
+	a sourceEnd
+		declaredType: proj;
+		multiplicity: DCFAMIXMultiplicity zeroToOne.
 	a targetEnd
 		name: 'diagrams';
+		declaredType: dia;
 		multiplicity: DCFAMIXMultiplicity zeroToMany.
 	model add: a.
-
-	a := DCFAMIXBinaryAssociation source: obj target: obj.
-	a sourceEnd multiplicity: DCFAMIXMultiplicity zeroToMany.
+	a := DCFAMIXBinaryAssociation new.
+	a sourceEnd
+		declaredType: obj;
+		multiplicity: DCFAMIXMultiplicity zeroToMany.
 	a targetEnd
 		name: 'owner';
+		declaredType: obj;
 		multiplicity: DCFAMIXMultiplicity zeroToOne.
-
 	^ model
