@@ -1,6 +1,6 @@
 ui hooks
 buildEditorForm: form for: anEnd
-	form addLabel: 'End: ' , anEnd property name.
+	form addLabel: 'End: ' , anEnd declaredType name.
 	(form addCheckbox: 'Is navigable?')
 		state: anEnd isNavigable;
 		whenChangedDo: [ :val | 
