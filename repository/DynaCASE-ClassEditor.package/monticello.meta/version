@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.97' message 'Properties now hold the type.' id '41cf6338-1644-4aac-988c-3b6bc1f5cd54' date '21 March 2016' time '6:12:44.784186 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.96' message 'Replaced AssociationEnd with a Property.
-' id '0e1603d4-d8dd-5830-946b-5fe9a02df1e4' date '21 March 2016' time '5:14:06 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.98' message 'Minor.' id 'ca32a120-f67f-4d51-b750-4d284c2d8483' date '22 March 2016' time '2:17:07.626966 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.97' message 'Properties now hold the type.
+' id '7cdaa70a-67af-5ab2-9f17-da98f9b73c62' date '21 March 2016' time '6:12:47 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
