@@ -1,10 +1,9 @@
 grammar
 parameter
 	^ super parameter
-		==>
-			[ :nodes | 
-			(FAMIXParameter
-				named: nodes first
-				type: (FAMIXClass named: (nodes second ifNil: [ 'Object' ])))
+		==> [ :nodes | 
+			FAMIXParameter new
+				name: nodes first;
+				declaredType: (FAMIXClass named: (nodes second ifNil: [ 'Object' ]));
 				multiplicity: nodes third;
 				yourself ]

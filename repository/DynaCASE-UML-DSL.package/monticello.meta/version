@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.21' message 'Properties now hold the type.' id '48fd2004-82e4-4cd5-a568-5e5ab3df4082' date '21 March 2016' time '6:12:31.953634 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.20' message 'Replaced AssociationEnd with a Property.
-' id '87238389-57a4-52af-88f2-d3460fdbe00e' date '21 March 2016' time '5:13:44 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.22' message 'DSL now treats return as parameter.' id '552aae87-9991-45e5-908a-4c99e2b0ad24' date '22 March 2016' time '3:01:14.671376 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.21' message 'Properties now hold the type.
+' id '78746064-59cb-55b8-8660-ccf5949cbb23' date '21 March 2016' time '6:12:33 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

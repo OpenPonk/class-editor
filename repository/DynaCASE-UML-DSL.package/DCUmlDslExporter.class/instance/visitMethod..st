@@ -6,7 +6,7 @@ visitMethod: aMethod
 		ifTrue: [ stream nextPut: $/ ].
 	stream nextPutAll: aMethod name.
 	stream nextPut: $(.
-	aMethod parameters
+	(aMethod parameters reject: #isReturn)
 		do: [ :each | self visitParameter: each ]
 		separatedBy: [ stream nextPutAll: ', ' ].
 	stream nextPut: $).

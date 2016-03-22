@@ -1,7 +1,10 @@
 grammar
 returnValue
 	^ super returnValue
-		==>
-			[ :nodes | 
-			{(nodes first ifNotNil: [ FAMIXClass named: nodes first ]).
-			nodes second} ]
+		==> [ :nodes | 
+			FAMIXParameter new
+				name: 'return';
+				declaredType: (FAMIXClass named: (nodes first ifNil: [ 'Object' ]));
+				direction: DCUmlParameterDirectionKind return;
+				multiplicity: nodes second;
+				yourself ]
