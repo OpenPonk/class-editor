@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.14' message 'Added Parameter direction.' id '17671919-d8f5-4f26-8814-be4790ad0c45' date '22 March 2016' time '1:51:57.869948 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.13' message 'Removed unused variables, reprotocolized.
-' id '3fffe496-a682-5e8a-ba5d-01a2a8352eb4' date '22 March 2016' time '1:35:48 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.15' message 'Added signature tests and a convenience method.' id '4757d58d-942c-49b8-9d6f-ec03388c7ebe' date '22 March 2016' time '3:06:31.576218 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.14' message 'Added Parameter direction.
+' id '0f0fa56f-1389-5dc0-8651-15bc1fb2a4aa' date '22 March 2016' time '1:51:59 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

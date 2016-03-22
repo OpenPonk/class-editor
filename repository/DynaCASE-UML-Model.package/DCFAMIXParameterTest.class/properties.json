@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-Model-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"parameter" ],
+	"name" : "DCFAMIXParameterTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
