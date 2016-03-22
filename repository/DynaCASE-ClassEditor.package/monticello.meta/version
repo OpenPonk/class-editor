@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.98' message 'Minor.' id 'ca32a120-f67f-4d51-b750-4d284c2d8483' date '22 March 2016' time '2:17:07.626966 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.97' message 'Properties now hold the type.
-' id '7cdaa70a-67af-5ab2-9f17-da98f9b73c62' date '21 March 2016' time '6:12:47 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.99' message 'Method''s return is now a parameter.' id '3c175575-292a-4737-8d5c-ca871aed6f99' date '22 March 2016' time '2:41:07.300334 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.98' message 'Minor.
+' id '113c917b-1eac-5990-87fa-d93d6df7f5eb' date '22 March 2016' time '2:17:10 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -15,8 +15,13 @@ sampleModel
 				yourself).
 	proj
 		addMethod:
-			((FAMIXMethod named: 'layoutFor' type: (FAMIXClass named: 'Dictionary'))
+			((FAMIXMethod named: 'layoutFor')
 				addParameter: (FAMIXParameter named: 'aDiagram' type: dia);
+				addParameter:
+					(FAMIXParameter new
+						name: 'return';
+						direction: DCUmlParameterDirectionKind return;
+						declaredType: (FAMIXClass named: 'Dictionary'));
 				yourself).
 	model
 		add: proj;

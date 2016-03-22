@@ -4,12 +4,17 @@ umlSignature
 		streamContents: [ :s | 
 			s nextPutAll: self name.
 			s nextPut: $(.
-			s nextPutAll: ((self parameters collect: #umlSignature) joinUsing: ', ').
+			(self parameters
+				reject: [ :each | each direction = DCUmlParameterDirectionKind return ])
+				do: [ :each | s nextPutAll: each umlSignature ]
+				separatedBy: [ s nextPutAll: ', ' ].
 			s nextPut: $).
-			(self declaredType isNotNil
-				and: [ self declaredType name ~= 'Object' | (self multiplicity lower ~= 1)
-						| (self multiplicity upper ~= 1) ])
-				ifTrue: [ s
-						nextPutAll: ' : ';
-						nextPutAll: self declaredType name;
-						nextPutAll: self multiplicity asOptionalString ] ]
+			self parameters
+				detect: [ :each | each direction = DCUmlParameterDirectionKind return ]
+				ifFound: [ :param | 
+					param declaredType name ~= 'Object' | (param multiplicity lower ~= 1)
+						| (self multiplicity upper ~= 1)
+						ifTrue: [ s
+								nextPutAll: ' : ';
+								nextPutAll: param declaredType name;
+								nextPutAll: param multiplicity asOptionalString ] ] ]
