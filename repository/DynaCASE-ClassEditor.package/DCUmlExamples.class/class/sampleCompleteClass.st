@@ -29,7 +29,9 @@ QmCC').
 	class
 		addMethod:
 			((FAMIXMethod named: 'abstractMethod')
-				declaredType: (FAMIXClass named: 'String');
+				addParameter:
+					((FAMIXParameter named: 'return' type: (FAMIXClass named: 'String'))
+						direction: DCUmlParameterDirectionKind return);
 				addParameter: (FAMIXParameter named: 'arg1' type: (FAMIXClass named: 'Number'));
 				addParameter:
 					((FAMIXParameter named: 'arg2' type: (FAMIXClass named: 'String'))

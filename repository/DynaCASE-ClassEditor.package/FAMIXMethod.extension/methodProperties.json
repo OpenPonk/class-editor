@@ -2,9 +2,10 @@
 	"class" : {
 		"uniqueNameIn:" : "PeterUhnak 3/10/2016 12:01:15" },
 	"instance" : {
+		"declaredType" : "PeterUhnak 3/22/2016 14:53",
+		"declaredType:" : "PeterUhnak 3/22/2016 15:04",
 		"descriptionIsStatic" : "PeterUhnak 3/10/2016 12:01:15",
 		"isStatic" : "PeterUhnak 3/10/2016 12:01:15",
 		"isStatic:" : "PeterUhnak 3/10/2016 12:01:15",
-		"multiplicity" : "PeterUhnak 3/10/2016 12:01:15",
-		"multiplicity:" : "PeterUhnak 3/10/2016 12:01:15",
+		"multiplicity" : "PeterUhnak 3/22/2016 14:54",
 		"umlSignature" : "PeterUhnak 3/22/2016 14:39" } }
