@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-XMI",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "XmiElement",
+	"pools" : [
+		 ],
+	"super" : "XMLElement",
+	"type" : "normal" }

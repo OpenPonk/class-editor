@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-XMI",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"elementVisitor" ],
+	"name" : "DCUmlXmiVisitor",
+	"pools" : [
+		 ],
+	"super" : "XmlDomVisitor",
+	"type" : "normal" }
