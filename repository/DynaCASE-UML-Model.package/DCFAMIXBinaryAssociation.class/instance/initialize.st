@@ -1,6 +1,6 @@
-accessing
+initialization
 initialize
 	super initialize.
 	name := ''.
-	(sourceEnd := DCFAMIXProperty new) belongsTo: self.
-	(targetEnd := DCFAMIXProperty new) belongsTo: self
+	(sourceEnd := DCFAMIXProperty new) association: self.
+	(targetEnd := DCFAMIXProperty new) association: self

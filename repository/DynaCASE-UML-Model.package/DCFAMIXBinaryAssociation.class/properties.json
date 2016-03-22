@@ -7,13 +7,8 @@
 	"commentStamp" : "PeterUhnak 9/28/2015 22:45",
 	"instvars" : [
 		"name",
-		"from",
-		"to",
-		"source",
-		"target",
 		"sourceEnd",
-		"targetEnd",
-		"associationEnds" ],
+		"targetEnd" ],
 	"name" : "DCFAMIXBinaryAssociation",
 	"pools" : [
 		 ],
