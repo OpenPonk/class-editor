@@ -1,1 +1,0 @@
-I compare two models and decide if they are equal.
