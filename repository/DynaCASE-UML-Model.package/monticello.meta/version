@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.15' message 'Added signature tests and a convenience method.' id '4757d58d-942c-49b8-9d6f-ec03388c7ebe' date '22 March 2016' time '3:06:31.576218 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.14' message 'Added Parameter direction.
-' id '0f0fa56f-1389-5dc0-8651-15bc1fb2a4aa' date '22 March 2016' time '1:51:59 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.16' message 'Convenience method for enum.' id '69c5fdf3-835b-4b2a-badd-7794bbeba3e1' date '22 March 2016' time '3:20:42.65506 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.15' message 'Added signature tests and a convenience method.
+' id '441989d2-ef3c-565d-a229-8213b73bcb8c' date '22 March 2016' time '3:06:33 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
