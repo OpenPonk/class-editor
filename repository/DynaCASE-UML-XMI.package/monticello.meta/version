@@ -1,1 +1,2 @@
-(name 'DynaCASE-UML-XMI-PeterUhnak.1' message 'Added WIP XMI importer.' id '2cc8c630-5d15-4ffa-b7e4-ae88a5663204' date '22 March 2016' time '2:16:20.313414 pm' author 'PeterUhnak' ancestors () stepChildren ())
+(name 'DynaCASE-UML-XMI-PeterUhnak.2' message 'Convenience method for enum.' id '80aae1e3-1e99-499b-a54f-9e6a5a67b50f' date '22 March 2016' time '3:20:50.549624 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.1' message 'Added WIP XMI importer.
+' id '085ed17a-e754-5158-ad96-ad6e01bd1968' date '22 March 2016' time '2:16:20 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
