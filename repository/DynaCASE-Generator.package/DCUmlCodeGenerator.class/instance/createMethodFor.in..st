@@ -1,13 +1,14 @@
 generator - method
 createMethodFor: aFamixMethod in: aClass
-	| name selector |
+	| name selector parameters|
 	self context shouldOverrideMethods not & (aClass selectors includes: aFamixMethod name)
 		ifTrue: [ ^ self ].
+	parameters := aFamixMethod parameters reject: #isReturn.
 	name := $: split: aFamixMethod name.
 	selector := String new writeStream.
-	aFamixMethod parameters size = 0
+	parameters size = 0
 		ifTrue: [ selector nextPutAll: aFamixMethod name ].
-	aFamixMethod parameters
+	parameters
 		withIndexDo:
 			[ :each :i | 
 			selector
