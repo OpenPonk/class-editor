@@ -18,5 +18,9 @@ visitOwnedAttribute: anOwnedAttribute
 					isSource
 						ifTrue: [ assoc instVarNamed: #sourceEnd put: prop ]
 						ifFalse: [ assoc instVarNamed: #targetEnd put: prop ] ].
+			anOwnedAttribute @ #isAbstract = 'true'
+				ifTrue: [ prop isAbstract: true ].
+			anOwnedAttribute @ #isStatic = 'true'
+				ifTrue: [ prop isStatic: true ].
 			prop ].
 	self visitChildren: anOwnedAttribute

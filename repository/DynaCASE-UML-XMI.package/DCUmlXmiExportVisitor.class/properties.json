@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-UML-XMI",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"writer",
+		"types" ],
+	"name" : "DCUmlXmiExportVisitor",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

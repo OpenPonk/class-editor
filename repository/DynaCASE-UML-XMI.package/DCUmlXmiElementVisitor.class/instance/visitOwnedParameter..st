@@ -13,4 +13,5 @@ visitOwnedParameter: anElement
 			anElement @ #direction
 				ifNotEmpty: [ :dir | param direction: (DCUmlParameterDirectionKind valueAt: dir) ].
 			(self elementAt: anElement parent xmiId) addParameter: param.
-			param ]
+			param ].
+	self visitChildren: anElement

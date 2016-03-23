@@ -1,7 +1,7 @@
 visitor
 visitLowerValue: anElement
 	elements
-		at: anElement xmiId
+		at: anElement
 		put: [ | num |
 			num := (anElement @ #value) asNumber.
 			(self elementAt: anElement parent xmiId) multiplicity

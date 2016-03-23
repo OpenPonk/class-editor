@@ -1,10 +1,10 @@
 visitor
-visitUmlClass: anElement
+visitUmlPrimitiveType: anElement
 	elements
 		at: anElement xmiId
 		put: [ FAMIXClass new
 				name: anElement @ #name;
+				addStereotype: (DCFAMIXStereotype named: 'primitive');
 				instVarNamed: #mooseID put: anElement xmiId;
 				mooseModel: (self elementAt: anElement parent xmiId);
-				isAbstract: anElement @ #isAbstract = 'true';
 				yourself ]

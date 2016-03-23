@@ -1,7 +1,7 @@
 visitor
 visitUpperValue: anElement
 	elements
-		at: anElement xmiId
+		at: anElement
 		put: [ | mul |
 			mul := (self elementAt: anElement parent xmiId) multiplicity.
 			anElement @ #value = '*' | (anElement @ #value = '-1')
