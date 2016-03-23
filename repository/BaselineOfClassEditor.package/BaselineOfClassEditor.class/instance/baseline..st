@@ -13,7 +13,7 @@ baseline: spec
 				project: 'XMLDOMVisitor'
 				with: [ spec
 						className: #ConfigurationOfXmlDomVisitor;
-						versionString: #stable;
+						versionString: #development;
 						repository: 'http://smalltalkhub.com/mc/peteruhnak/XmlDomVisitor/main/' ].
 			spec
 				project: 'XPath'
