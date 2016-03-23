@@ -5,5 +5,4 @@ createMethodFor: aSelector in: aClass
 		ifFound: [ :pragma | ^ factory method: pragma arguments first ].
 	^ FAMIXMethod new
 		name: aSelector;
-		parameters: (self methodParametersFor: aSelector in: aClass);
-		declaredType: (self methodTypeFor: aSelector in: aClass)
+		parameters: (self methodParametersFor: aSelector in: aClass)
