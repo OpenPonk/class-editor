@@ -64,7 +64,7 @@ baseline: spec
 				package: 'DynaCASE-UML-XMI'
 					with: [ spec
 						requires:
-							#('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'Mustache' 'XMLParser' 'XPath') ];
+							#('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'XMLParser' 'XPath') ];
 				package: 'DynaCASE-Generator'
 					with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix') ];
 				package: 'DynaCASE-ClassEditor'

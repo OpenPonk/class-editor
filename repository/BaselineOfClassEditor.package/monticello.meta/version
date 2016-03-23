@@ -1,1 +1,2 @@
-(name 'BaselineOfClassEditor-PeterUhnak.1' message 'DCUmlClassEditor -> ClassEditor.' id 'e7dab026-1bf0-4832-b803-c89a903da3ad' date '23 March 2016' time '8:44:50.72498 pm' author 'PeterUhnak' ancestors () stepChildren ())
+(name 'BaselineOfClassEditor-PeterUhnak.2' message 'Mustache was dropped.' id '6dc36b17-9840-46d0-84a3-f57d465d4b4b' date '23 March 2016' time '9:04:35.878809 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfClassEditor-PeterUhnak.1' message 'DCUmlClassEditor -> ClassEditor.
+' id '71676a21-73c2-5ee7-92af-c45071c1f0e3' date '23 March 2016' time '8:44:52 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
