@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.101' message 'minor stuff' id 'e09385a1-22de-4445-9dc7-33a904f0f85b' date '23 March 2016' time '6:03:17.272197 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.100' message 'Fixed an example.
-' id '61d52efd-a7b8-5cfa-a4ac-a48b452d6e5c' date '22 March 2016' time '3:06:08 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.102' message 'No longer possible to edit type/multiplicity for method directly.' id '5f86048e-ec59-4dc1-81f4-bd23b2fd51d3' date '23 March 2016' time '6:07:02.737755 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.101' message 'minor stuff
+' id 'c9df9772-efa6-5112-a3d0-f78e96b4c600' date '23 March 2016' time '6:03:19 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

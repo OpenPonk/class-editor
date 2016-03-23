@@ -1,35 +1,4 @@
 ui hooks
 buildEditorForm: aForm
 	self buildStereotypeEditorForm: aForm.
-	self buildNameEditorForm: aForm.
-	(aForm addTextInput: 'Type')
-		text: (self model declaredType ifNil: [ '' ] ifNotNil: [ :t | t name ]);
-		whenTextIsAccepted:
-				[ :newValue | 
-			newValue
-				ifEmpty: [ self model declaredType: nil ]
-				ifNotEmpty: [ self model declaredType: (FAMIXClass named: newValue) ].
-			self refreshFigure ].
-	self buildIsClassSideEditorForm: aForm.
-	self buildAbstractEditorForm: aForm.
-	(aForm addTextInput: 'Multiplicity min')
-		text: self model multiplicity printLower;
-		whenTextIsAccepted:
-				[ :val | 
-			val
-				ifNotEmpty: [ self model multiplicity lower: val asString.
-					self refreshFigure ] ].
-	(aForm addTextInput: 'Multiplicity max')
-		text: self model multiplicity printUpper;
-		whenTextIsAccepted:
-				[ :val | 
-			val
-				ifNotEmpty:
-					[ | num |
-					num := val = '*'
-						ifTrue: [ DCUnlimitedNatural max ]
-						ifFalse: [ (NumberParser on: val)
-								failBlock: [  ];
-								nextNumber ].
-					num ifNotNil: [ self model multiplicity upper: num ].
-					self refreshFigure ] ]
+	self buildNameEditorForm: aForm
