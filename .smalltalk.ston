@@ -1,7 +1,7 @@
 SmalltalkCISpec {
 	#loading : [
 		SCIMetacelloLoadSpec {
-			#baseline : 'DCUmlClassEditor',
+			#baseline : 'ClassEditor',
 			#directory : 'repository',
 			#platforms : [ #pharo ]
 		}
