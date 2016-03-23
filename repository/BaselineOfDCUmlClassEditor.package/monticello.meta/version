@@ -1,2 +1,2 @@
-(name 'BaselineOfDCUmlClassEditor-PeterUhnak.29' message 'project -> packages' id '2863f99a-7ecc-47f6-a1b0-b3c1b8d10b94' date '3 March 2016' time '12:43:39.252729 am' author 'PeterUhnak' ancestors ((name 'BaselineOfDCUmlClassEditor-PeterUhnak.28' message 'Depend on CollectionExtensions.
-' id 'ae1f241b-c94a-5d00-933c-ddbd93422a1f' date '2 March 2016' time '11:01:05 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'BaselineOfDCUmlClassEditor-PeterUhnak.30' message 'Added XMLParser & XPath deps.' id '0640539d-4ca3-47fb-a38c-b7fe7cb0355f' date '23 March 2016' time '6:05:02.230487 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfDCUmlClassEditor-PeterUhnak.29' message 'project -> packages
+' id '663c769c-3018-55fb-80fb-44bcd24695e1' date '3 March 2016' time '12:43:40 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

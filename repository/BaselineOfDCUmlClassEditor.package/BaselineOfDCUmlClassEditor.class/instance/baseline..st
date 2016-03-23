@@ -3,47 +3,51 @@ baseline: spec
 	<baseline>
 	spec
 		for: #common
-		do:
-			[ spec
+		do: [ spec
+				project: 'XMLParser'
+				with: [ spec
+						className: #ConfigurationOfXMLParser;
+						versionString: #stable;
+						repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ].
+			spec
+				project: 'XPath'
+				with: [ spec
+						className: #ConfigurationOfXPath;
+						versionString: #stable;
+						repository: 'http://smalltalkhub.com/mc/PharoExtras/XPath/main/' ].
+			spec
 				baseline: 'DynaCASE'
 				with: [ spec repository: 'github://dynacase/dynacase/repository' ].
 			spec
 				project: 'PetitParser'
-					with:
-						[ spec
+					with: [ spec
 						className: #ConfigurationOfPetitParser;
 						versionString: #development;
 						loads: #('Parser');
 						repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ];
-				project: 'Fame'	
-					with:
-						[ spec
+				project: 'Fame'
+					with: [ spec
 						className: #ConfigurationOfFame;
 						versionString: #development;
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ];
 				package: 'CollectionExtensions'
-					with: [ spec
-						repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ];
+					with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ];
 				package: 'Moose-Core'
-					with:
-						[ spec
+					with: [ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
 						requires: #('Fame' 'Moose-Query' 'CollectionExtensions') ];
 				package: 'Famix-Core'
-					with:
-						[ spec
+					with: [ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
 						requires: #('Moose-Core') ];
 				package: 'Moose-Query'
 					with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
 				package: 'Famix-Extensions'
-					with:
-						[ spec
+					with: [ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
 						requires: #('Famix-Core') ];
 				package: 'Famix-Implementation'
-					with:
-						[ spec
+					with: [ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
 						requires: #('Famix-Core') ].
 			"project: 'Famix' with: [
@@ -57,12 +61,16 @@ baseline: spec
 				package: 'DynaCASE-UML-DSL'
 					with: [ spec requires: #('DynaCASE-UML-Model' 'Famix-Core' 'PetitParser') ];
 				package: 'DynaCASE-UML-DI' with: [ spec requires: #('Fame') ];
+				package: 'DynaCASE-UML-XMI'
+					with: [ spec
+						requires:
+							#('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'Mustache' 'XMLParser' 'XPath') ];
 				package: 'DynaCASE-Generator'
 					with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix') ];
 				package: 'DynaCASE-ClassEditor'
-					with:
-						[ spec
-						requires: #('DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'Fame' 'famix') ].
+					with: [ spec
+						requires:
+							#('DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'DynaCASE-UML-XMI' 'Fame' 'famix') ].
 			spec group: 'famix' with: #('Famix-Core' 'Famix-Extensions' 'Famix-Implementation').
 			spec group: 'plugin' with: #('DynaCASE-ClassEditor' 'DynaCASE-Generator').
 			spec group: 'default' with: #('plugin' 'DynaCASE') ]
