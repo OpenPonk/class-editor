@@ -10,6 +10,12 @@ baseline: spec
 						versionString: #stable;
 						repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ].
 			spec
+				project: 'XMLDOMVisitor'
+				with: [ spec
+						className: #ConfigurationOfXmlDomVisitor;
+						versionString: #stable;
+						repository: 'http://smalltalkhub.com/mc/peteruhnak/XmlDomVisitor/main/' ].
+			spec
 				project: 'XPath'
 				with: [ spec
 						className: #ConfigurationOfXPath;
@@ -64,7 +70,7 @@ baseline: spec
 				package: 'DynaCASE-UML-XMI'
 					with: [ spec
 						requires:
-							#('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'XMLParser' 'XPath') ];
+							#('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
 				package: 'DynaCASE-Generator'
 					with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix') ];
 				package: 'DynaCASE-ClassEditor'
