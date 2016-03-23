@@ -9,6 +9,11 @@ menuCommandOn: aBuilder
 		with: [ 
 					(aBuilder item: #DynaUMLExamples)
 						parent: #DynaUML;
-						label: 'Simple Class Diagram';
+						label: 'Simple Model';
 						icon: DCIcons current dcOmlDiagramIcon;
-						action: [ self exampleModel ] ]
+						action: [ self exampleModel ].
+					(aBuilder item: #DynaUMLExamples)
+						parent: #DynaUML;
+						label: 'University';
+						icon: DCIcons current dcOmlDiagramIcon;
+						action: [ self exampleDsl ]  ]

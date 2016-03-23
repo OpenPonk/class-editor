@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.100' message 'Fixed an example.' id '0f8bd49b-2dd0-4e05-ab93-890875047518' date '22 March 2016' time '3:06:06.145435 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.99' message 'Method''s return is now a parameter.
-' id 'ea1dbc1e-200a-591e-9f94-ed70236dfac9' date '22 March 2016' time '2:41:09 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.101' message 'minor stuff' id 'e09385a1-22de-4445-9dc7-33a904f0f85b' date '23 March 2016' time '6:03:17.272197 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.100' message 'Fixed an example.
+' id '61d52efd-a7b8-5cfa-a4ac-a48b452d6e5c' date '22 March 2016' time '3:06:08 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
