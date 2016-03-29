@@ -1,2 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.33' message 'Fixed model reengineering.' id 'e8e40cad-37f5-415d-b714-dff499041114' date '23 March 2016' time '11:11:09.127537 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.32' message 'Select correct parameters during generation.
-' id '9b4278ab-88c0-589c-bb25-8575bfcbe9df' date '23 March 2016' time '6:05:41 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.34' message 'Maybe fixed class generation ordering.' id '101044de-2280-4101-bb8a-0eec96e0888d' date '29 March 2016' time '8:55:36.274834 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.33' message 'Fixed model reengineering.
+' id 'bac8c33a-5d07-5f28-9264-e6951eed990e' date '23 March 2016' time '11:11:10 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
