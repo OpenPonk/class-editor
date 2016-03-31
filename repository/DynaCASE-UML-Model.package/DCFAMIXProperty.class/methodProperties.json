@@ -1,18 +1,18 @@
 {
 	"class" : {
-		"annotation" : "PeterUhnak 3/21/2016 16:35" },
+		"annotation" : "PeterUhnak 3/22/2016 15:20:44" },
 	"instance" : {
-		"aggregation" : "PeterUhnak 3/21/2016 16:38",
-		"aggregation:" : "PeterUhnak 3/21/2016 16:38",
-		"association" : "PeterUhnak 3/21/2016 16:53",
-		"association:" : "PeterUhnak 3/21/2016 16:48",
-		"beNavigable" : "PeterUhnak 3/21/2016 16:39",
-		"beNonNavigable" : "PeterUhnak 3/21/2016 16:39",
-		"belongsTo" : "PeterUhnak 3/21/2016 16:48",
-		"belongsTo:" : "PeterUhnak 3/21/2016 16:48",
-		"declaredType:" : "PeterUhnak 3/22/2016 11:23",
-		"initialize" : "PeterUhnak 3/21/2016 16:40",
-		"isNavigable" : "PeterUhnak 3/21/2016 16:39",
-		"isNavigable:" : "PeterUhnak 3/21/2016 16:39",
-		"isSourceEnd" : "PeterUhnak 3/21/2016 17:57",
-		"opposite" : "PeterUhnak 3/21/2016 16:41" } }
+		"aggregation" : "PeterUhnak 3/22/2016 15:20:44",
+		"aggregation:" : "PeterUhnak 3/22/2016 15:20:44",
+		"association" : "PeterUhnak 3/22/2016 15:20:44",
+		"association:" : "PeterUhnak 3/22/2016 15:20:44",
+		"beNavigable" : "PeterUhnak 3/22/2016 15:20:44",
+		"beNonNavigable" : "PeterUhnak 3/22/2016 15:20:44",
+		"belongsTo" : "PeterUhnak 3/22/2016 15:20:44",
+		"belongsTo:" : "PeterUhnak 3/22/2016 15:20:44",
+		"declaredType:" : "PeterUhnak 3/22/2016 15:20:44",
+		"initialize" : "PeterUhnak 3/22/2016 15:20:44",
+		"isNavigable" : "PeterUhnak 3/22/2016 15:20:44",
+		"isNavigable:" : "PeterUhnak 3/22/2016 15:20:44",
+		"isSourceEnd" : "PeterUhnak 3/22/2016 15:20:44",
+		"opposite" : "PeterUhnak 3/22/2016 15:20:44" } }

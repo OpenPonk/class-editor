@@ -10,5 +10,5 @@
 	"name" : "DCUmlAggregationKind",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "FAMIXEntity",
 	"type" : "normal" }

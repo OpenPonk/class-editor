@@ -10,5 +10,5 @@
 	"name" : "DCUmlParameterDirectionKind",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "FAMIXEntity",
 	"type" : "normal" }
