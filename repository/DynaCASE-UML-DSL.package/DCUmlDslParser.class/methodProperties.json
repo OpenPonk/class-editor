@@ -1,9 +1,9 @@
 {
 	"class" : {
-		"parse:" : "PeterUhnak 3/5/2016 00:55:28" },
+		"parse:" : "PeterUhnak 3/22/2016 15:01:16" },
 	"instance" : {
-		"normalize:" : "PeterUhnak 3/5/2016 00:55:28",
-		"parse:" : "PeterUhnak 3/5/2016 00:55:28",
-		"parseStatements:" : "PeterUhnak 3/5/2016 00:55:28",
-		"parseStatements:into:" : "PeterUhnak 3/5/2016 00:55:28",
-		"replaceModel:withStatements:" : "PeterUhnak 3/5/2016 00:55:28" } }
+		"normalize:" : "PeterUhnak 3/22/2016 15:01:16",
+		"parse:" : "PeterUhnak 3/22/2016 15:01:16",
+		"parseStatements:" : "PeterUhnak 3/31/2016 17:23",
+		"parseStatements:into:" : "PeterUhnak 3/22/2016 15:01:16",
+		"replaceModel:withStatements:" : "PeterUhnak 3/22/2016 15:01:16" } }

@@ -12,7 +12,8 @@
 		"location",
 		"model",
 		"parser",
-		"exporter" ],
+		"exporter",
+		"errorAttribute" ],
 	"name" : "DCUmlDslEditor",
 	"pools" : [
 		 ],

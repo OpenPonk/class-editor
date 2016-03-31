@@ -1,18 +1,18 @@
 {
 	"class" : {
-		"defaultSpec" : "PeterUhnak 3/5/2016 00:55:28" },
+		"defaultSpec" : "PeterUhnak 3/22/2016 15:01:16" },
 	"instance" : {
-		"autoUpdate" : "PeterUhnak 3/5/2016 00:55:28",
-		"buildToolbar:" : "PeterUhnak 3/5/2016 00:55:28",
-		"editor" : "PeterUhnak 3/5/2016 00:55:28",
-		"initialize" : "PeterUhnak 3/5/2016 00:55:28",
-		"initializePresenter" : "PeterUhnak 3/5/2016 00:55:28",
-		"initializeWidgets" : "PeterUhnak 3/5/2016 00:55:28",
-		"model:" : "PeterUhnak 3/5/2016 00:55:28",
-		"openFromFile" : "PeterUhnak 3/5/2016 00:55:28",
-		"saveToFile:" : "PeterUhnak 3/5/2016 00:55:28",
-		"textUpdated:" : "PeterUhnak 3/5/2016 00:55:28",
-		"title" : "PeterUhnak 3/5/2016 00:55:28",
-		"toolbar" : "PeterUhnak 3/5/2016 00:55:28",
-		"updateFromModel" : "PeterUhnak 3/5/2016 00:55:28",
-		"updateModel" : "PeterUhnak 3/5/2016 00:55:28" } }
+		"autoUpdate" : "PeterUhnak 3/22/2016 15:01:16",
+		"buildToolbar:" : "PeterUhnak 3/22/2016 15:01:16",
+		"editor" : "PeterUhnak 3/22/2016 15:01:16",
+		"initialize" : "PeterUhnak 3/22/2016 15:01:16",
+		"initializePresenter" : "PeterUhnak 3/22/2016 15:01:16",
+		"initializeWidgets" : "PeterUhnak 3/22/2016 15:01:16",
+		"model:" : "PeterUhnak 3/22/2016 15:01:16",
+		"openFromFile" : "PeterUhnak 3/22/2016 15:01:16",
+		"saveToFile:" : "PeterUhnak 3/22/2016 15:01:16",
+		"textUpdated:" : "PeterUhnak 3/22/2016 15:01:16",
+		"title" : "PeterUhnak 3/22/2016 15:01:16",
+		"toolbar" : "PeterUhnak 3/22/2016 15:01:16",
+		"updateFromModel" : "PeterUhnak 3/31/2016 17:30",
+		"updateModel" : "PeterUhnak 3/31/2016 17:55" } }

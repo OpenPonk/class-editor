@@ -1,4 +1,6 @@
 event handling
 updateFromModel
+	| text |
 	model ifNil: [ ^ self ].
-	editor text: (exporter export: model)
+	text := (exporter export: model) asText.
+	editor text: text

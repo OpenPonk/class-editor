@@ -1,11 +1,11 @@
 {
 	"class" : {
-		"dependencies" : "PeterUhnak 3/5/2016 00:55:28",
-		"isAbstract" : "PeterUhnak 3/5/2016 00:55:28" },
+		"dependencies" : "PeterUhnak 3/22/2016 15:01:16",
+		"isAbstract" : "PeterUhnak 3/22/2016 15:01:16" },
 	"instance" : {
-		"multiplicity" : "PeterUhnak 3/5/2016 00:55:28",
-		"multiplicityRange" : "PeterUhnak 3/5/2016 00:55:28",
-		"prefix" : "PeterUhnak 3/5/2016 00:55:28",
-		"symbol" : "PeterUhnak 3/5/2016 00:55:28",
-		"type" : "PeterUhnak 3/5/2016 00:55:28",
-		"visibility" : "PeterUhnak 3/5/2016 00:55:28" } }
+		"multiplicity" : "PeterUhnak 3/22/2016 15:01:16",
+		"multiplicityRange" : "PeterUhnak 3/22/2016 15:01:16",
+		"prefix" : "PeterUhnak 3/22/2016 15:01:16",
+		"symbol" : "PeterUhnak 3/22/2016 15:01:16",
+		"type" : "PeterUhnak 3/22/2016 15:01:16",
+		"visibility" : "PeterUhnak 3/22/2016 15:01:16" } }

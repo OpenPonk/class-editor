@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.22' message 'DSL now treats return as parameter.' id '552aae87-9991-45e5-908a-4c99e2b0ad24' date '22 March 2016' time '3:01:14.671376 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.21' message 'Properties now hold the type.
-' id '78746064-59cb-55b8-8660-ccf5949cbb23' date '21 March 2016' time '6:12:33 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.23' message 'PPFailure is now properly fired.DSL editor highlights error line.' id 'cfb44780-0ac2-4835-a50c-f1a950502c85' date '31 March 2016' time '6:01:44.091498 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.22' message 'DSL now treats return as parameter.
+' id '85e604e0-8861-51c4-8ee5-27495574a463' date '22 March 2016' time '3:01:16 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

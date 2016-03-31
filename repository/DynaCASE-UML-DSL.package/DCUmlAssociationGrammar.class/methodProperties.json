@@ -1,17 +1,17 @@
 {
 	"class" : {
-		"dependencies" : "PeterUhnak 3/5/2016 00:55:28" },
+		"dependencies" : "PeterUhnak 3/22/2016 15:01:16" },
 	"instance" : {
-		"association" : "PeterUhnak 3/5/2016 00:55:28",
-		"associationName" : "PeterUhnak 3/5/2016 00:55:28",
-		"endName" : "PeterUhnak 3/5/2016 00:55:28",
-		"endSymbol" : "PeterUhnak 3/5/2016 00:55:28",
-		"leftEnd" : "PeterUhnak 3/5/2016 00:55:28",
-		"multiplicity" : "PeterUhnak 3/5/2016 00:55:28",
-		"multiplicityRange" : "PeterUhnak 3/5/2016 00:55:28",
-		"rightEnd" : "PeterUhnak 3/5/2016 00:55:28",
-		"start" : "PeterUhnak 3/5/2016 00:55:28",
-		"startSymbol" : "PeterUhnak 3/5/2016 00:55:28",
-		"type" : "PeterUhnak 3/5/2016 00:55:28",
-		"typeSymbol" : "PeterUhnak 3/5/2016 00:55:28",
-		"umlClassName" : "PeterUhnak 3/5/2016 00:55:28" } }
+		"association" : "PeterUhnak 3/22/2016 15:01:16",
+		"associationName" : "PeterUhnak 3/31/2016 15:54",
+		"endName" : "PeterUhnak 3/22/2016 15:01:16",
+		"endSymbol" : "PeterUhnak 3/22/2016 15:01:16",
+		"leftEnd" : "PeterUhnak 3/22/2016 15:01:16",
+		"multiplicity" : "PeterUhnak 3/22/2016 15:01:16",
+		"multiplicityRange" : "PeterUhnak 3/22/2016 15:01:16",
+		"rightEnd" : "PeterUhnak 3/22/2016 15:01:16",
+		"start" : "PeterUhnak 3/22/2016 15:01:16",
+		"startSymbol" : "PeterUhnak 3/22/2016 15:01:16",
+		"type" : "PeterUhnak 3/22/2016 15:01:16",
+		"typeSymbol" : "PeterUhnak 3/22/2016 15:01:16",
+		"umlClassName" : "PeterUhnak 3/22/2016 15:01:16" } }
