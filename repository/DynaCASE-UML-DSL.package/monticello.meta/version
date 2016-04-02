@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.23' message 'PPFailure is now properly fired.DSL editor highlights error line.' id 'cfb44780-0ac2-4835-a50c-f1a950502c85' date '31 March 2016' time '6:01:44.091498 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.22' message 'DSL now treats return as parameter.
-' id '85e604e0-8861-51c4-8ee5-27495574a463' date '22 March 2016' time '3:01:16 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.24' message 'Use theme colors.' id '21d98932-f2af-4fb4-bd0b-8e42505fb311' date '2 April 2016' time '6:01:26.758917 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.23' message 'PPFailure is now properly fired.DSL editor highlights error line.
+' id '3a6f2951-3806-58c4-8068-6b9199888518' date '31 March 2016' time '6:01:46 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

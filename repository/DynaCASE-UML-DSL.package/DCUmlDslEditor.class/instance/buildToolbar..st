@@ -39,4 +39,4 @@ buildToolbar: aMenu
 						description: 'Open Editor';
 						icon: Smalltalk ui icons openIcon;
 						action: [ model ifNil: [ self updateModel ].
-							DCWorkbench openOnDiagram: model ] ] ]
+							DCWorkbench openModel: model ] ] ]
