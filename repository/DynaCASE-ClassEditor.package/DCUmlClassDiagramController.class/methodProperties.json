@@ -3,9 +3,10 @@
 		 },
 	"instance" : {
 		"addAsTargetFor:" : "PeterUhnak 3/23/2016 18:07:05",
-		"addLayoutMenu:parent:" : "PeterUhnak 4/2/2016 15:52",
+		"addLayoutMenu:parent:" : "PeterUhnak 4/2/2016 17:16",
 		"addModelElement:" : "PeterUhnak 3/23/2016 18:07:05",
 		"applyAutoLayout" : "PeterUhnak 3/23/2016 18:07:05",
+		"applyLayout:" : "PeterUhnak 4/2/2016 17:14",
 		"canBeTargetFor:" : "PeterUhnak 3/23/2016 18:07:05",
 		"disableRefresh" : "PeterUhnak 3/23/2016 18:07:05",
 		"enableRefresh" : "PeterUhnak 3/23/2016 18:07:05",

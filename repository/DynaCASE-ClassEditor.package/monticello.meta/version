@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.103' message 'Use new toolbar menu.' id 'bec10ae4-4595-4011-a716-739033dd2b70' date '2 April 2016' time '4:39:26.820097 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.102' message 'No longer possible to edit type/multiplicity for method directly.
-' id 'cbd877e4-7e7b-5955-a5f8-b65ac5ae6573' date '23 March 2016' time '6:07:05 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.104' message 'Fixed layout application.' id '49684bf6-72e3-4f7b-aec1-95fabffd4cf2' date '2 April 2016' time '5:17:15.457987 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.103' message 'Use new toolbar menu.
+' id '08127493-ca7d-5e69-9450-f1506730620c' date '2 April 2016' time '4:39:30 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
