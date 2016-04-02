@@ -1,0 +1,18 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"ensureDefaultValue:fromMethod:" : "PeterUhnak 4/1/2016 10:37",
+		"extractDefaultValue:" : "PeterUhnak 4/1/2016 10:16",
+		"genericTypeFor:" : "PeterUhnak 4/1/2016 10:35",
+		"importFromClasses:" : "PeterUhnak 4/1/2016 09:41",
+		"importFromPackageNamed:" : "PeterUhnak 4/1/2016 09:38",
+		"mergeAttribute:" : "PeterUhnak 4/1/2016 11:40",
+		"mergeClass:" : "PeterUhnak 4/1/2016 11:42",
+		"modelName" : "PeterUhnak 4/1/2016 01:55",
+		"modelName:" : "PeterUhnak 4/1/2016 01:55",
+		"removeAccessors:" : "PeterUhnak 4/1/2016 11:38",
+		"removeDefaultValueMethods:" : "PeterUhnak 4/1/2016 10:44",
+		"removeMetaMethods:" : "PeterUhnak 4/1/2016 11:34",
+		"removeMethod:" : "PeterUhnak 4/1/2016 10:44",
+		"returnNodeFor:" : "PeterUhnak 4/1/2016 11:23" } }

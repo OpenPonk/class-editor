@@ -1,15 +1,14 @@
 public - importer
-importFromPackageNamed: aPackageName
+importFromClasses: aCollection
 	| model importer |
 	model := MooseModel new.
-	model name: aPackageName.
 	importer := MoosePharoImporterTask new.
 	importer importingContext mergeClassAndMetaclass.
 	importer runCandidateOperator.
 	importer
 		model: model;
-		addFromPackageNamed: aPackageName;
+		addClasses: aCollection;
 		runWithProgress.
-	self processClassSide: model.
 	self processPragmasFor: model.
+	self processClassSide: model.
 	^ model
