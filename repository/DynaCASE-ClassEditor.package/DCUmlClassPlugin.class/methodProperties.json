@@ -1,10 +1,10 @@
 {
 	"class" : {
-		"toolbarMenu:" : "PeterUhnak 3/10/2016 12:01:15",
-		"toolbarMenuRetriever:" : "PeterUhnak 3/10/2016 12:01:15" },
+		"canvasToolbarFor:" : "PeterUhnak 4/2/2016 16:11",
+		"toolbarMenu:" : "PeterUhnak 4/2/2016 16:15" },
 	"instance" : {
-		"diagramClass" : "PeterUhnak 3/10/2016 12:01:15",
-		"diagramControllerClass" : "PeterUhnak 3/10/2016 12:01:15",
-		"icon" : "PeterUhnak 3/10/2016 12:01:15",
-		"name" : "PeterUhnak 3/10/2016 12:01:15",
-		"serializerClass" : "PeterUhnak 3/16/2016 17:07" } }
+		"diagramClass" : "PeterUhnak 3/23/2016 18:07:05",
+		"diagramControllerClass" : "PeterUhnak 3/23/2016 18:07:05",
+		"icon" : "PeterUhnak 3/23/2016 18:07:05",
+		"name" : "PeterUhnak 3/23/2016 18:07:05",
+		"serializerClass" : "PeterUhnak 3/23/2016 18:07:05" } }

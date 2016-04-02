@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.102' message 'No longer possible to edit type/multiplicity for method directly.' id '5f86048e-ec59-4dc1-81f4-bd23b2fd51d3' date '23 March 2016' time '6:07:02.737755 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.101' message 'minor stuff
-' id 'c9df9772-efa6-5112-a3d0-f78e96b4c600' date '23 March 2016' time '6:03:19 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.103' message 'Use new toolbar menu.' id 'bec10ae4-4595-4011-a716-739033dd2b70' date '2 April 2016' time '4:39:26.820097 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.102' message 'No longer possible to edit type/multiplicity for method directly.
+' id 'cbd877e4-7e7b-5955-a5f8-b65ac5ae6573' date '23 March 2016' time '6:07:05 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

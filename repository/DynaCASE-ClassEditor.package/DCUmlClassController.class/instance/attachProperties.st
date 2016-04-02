@@ -1,15 +1,13 @@
 adding
 attachProperties
 	self model attributes
-		do:
-			[ :attr | 
+		do: [ :attr | 
 			| ac |
 			ac := DCUmlAttributeController new.
 			ac model: attr.
 			self addAsTargetFor: ac ].
 	self model methods
-		do:
-			[ :method | 
+		do: [ :method | 
 			| mc |
 			mc := DCUmlMethodController new.
 			mc model: method.
