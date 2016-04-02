@@ -1,5 +1,0 @@
-accessing
-diagramClass
-	"^ DCUmlClassDiagram"
-
-	^ MooseModel
