@@ -1,7 +1,7 @@
 as yet unclassified
-mergeAttribute: anAttribute
+mergeAttribute: anAttribute in: aClass
 	(Array with: anAttribute name with: anAttribute name , ':')
 		do: [ :name | 
-			anAttribute parentType methods
+			aClass methods
 				detect: [ :each | each name = name & (each isStatic = anAttribute isStatic) ]
-				ifFound: [ :method | self removeMethod: method ] ]
+				ifFound: [ :method | self removeMethod: method from: aClass ] ]

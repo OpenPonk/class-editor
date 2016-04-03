@@ -4,4 +4,4 @@ removeMetaMethods: aClass
 		detect: [ :each | each name = 'isAbstract' & each isStatic ]
 		ifFound: [ :each | 
 			aClass isAbstract: each sourceAnchor pharoEntity methodClass theNonMetaClass isAbstract.
-			self removeMethod: each ]
+			self removeMethod: each from: aClass ]

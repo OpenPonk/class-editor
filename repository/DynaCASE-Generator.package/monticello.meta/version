@@ -1,2 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.35' message 'bump' id 'e8d49a31-fca9-4694-b9c5-bdfee7752dbb' date '2 April 2016' time '5:20:22.890076 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.34' message 'Maybe fixed class generation ordering.
-' id '27c02440-5f3a-5328-817d-df6f56d369f4' date '29 March 2016' time '8:55:38 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.36' message 'Fixes in attributes merging.' id '7d1f0232-aeb3-4377-b933-2e6dc5bf1d4e' date '3 April 2016' time '6:02:56.633355 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.35' message 'bump
+' id 'e0edfc9c-fd43-5961-bb09-3241c2b59d6f' date '2 April 2016' time '5:20:24 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
