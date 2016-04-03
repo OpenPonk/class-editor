@@ -18,6 +18,6 @@ applyAutoLayout
 				undirected: associations.
 			^ self ].
 	^ RTGridLayout new
-		gapSize: 80;
+		gapSize: 140;
 		on: classes
 	"DCUmlBasicLayout new onController: self "

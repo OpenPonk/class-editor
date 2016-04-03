@@ -39,4 +39,4 @@ addLayoutMenu: builder parent: aParent
 					cls do: [ :each | each translateBy: 0 @ 2 * (centerY - each position y) ] ] ].
 	(builder item: 'Circle')
 		parent: aParent;
-		action: [ self applyLayout: [ :cls :inh :assoc | RTWeightedCircleLayout new on: cls ] ]
+		action: [ self applyLayout: [ :cls :inh :assoc | RTWeightedCircleLayout new scaleBy: 20; on: cls ] ]
