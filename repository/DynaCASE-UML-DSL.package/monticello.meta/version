@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.26' message 'Added visibility.' id 'a1f6cc73-77b0-4b84-ab37-3bb1e2d23777' date '3 April 2016' time '5:06:56.024155 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.25' message 'Moved DslEditor to DC-Spec.
-' id '533277c4-b866-59dd-936e-86c4f183c074' date '3 April 2016' time '3:56:11 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.27' message 'visibility tests.' id '69bba400-65c3-40e1-b4c6-e4bb6a9ff2ee' date '3 April 2016' time '5:14:44.789211 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.26' message 'Added visibility.
+' id '15474325-e3be-5de5-807c-4d67098ee0fe' date '3 April 2016' time '5:06:58 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -14,4 +14,5 @@
 		"testPropertyWithDefaultValue2" : "PeterUhnak 3/22/2016 15:01:16",
 		"testPropertyWithMultiplicity" : "PeterUhnak 3/22/2016 15:01:16",
 		"testPropertyWithType" : "PeterUhnak 3/22/2016 15:01:16",
-		"testStatic" : "PeterUhnak 3/22/2016 15:01:16" } }
+		"testStatic" : "PeterUhnak 3/22/2016 15:01:16",
+		"testVisibility" : "PeterUhnak 4/3/2016 17:13" } }
