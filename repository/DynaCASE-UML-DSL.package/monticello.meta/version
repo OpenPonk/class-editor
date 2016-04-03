@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.24' message 'Use theme colors.' id '21d98932-f2af-4fb4-bd0b-8e42505fb311' date '2 April 2016' time '6:01:26.758917 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.23' message 'PPFailure is now properly fired.DSL editor highlights error line.
-' id '3a6f2951-3806-58c4-8068-6b9199888518' date '31 March 2016' time '6:01:46 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.25' message 'Moved DslEditor to DC-Spec.' id '427b6bb7-e5d0-4b24-9e36-03f6941f6330' date '3 April 2016' time '3:56:08.337922 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.24' message 'Use theme colors.
+' id 'ac22e91a-cba9-51b9-babd-465467778ed0' date '2 April 2016' time '6:01:28 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

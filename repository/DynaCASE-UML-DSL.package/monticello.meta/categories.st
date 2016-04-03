@@ -4,4 +4,3 @@ SystemOrganization addCategory: 'DynaCASE-UML-DSL-Exporter'!
 SystemOrganization addCategory: 'DynaCASE-UML-DSL-Grammar'!
 SystemOrganization addCategory: 'DynaCASE-UML-DSL-Parser'!
 SystemOrganization addCategory: 'DynaCASE-UML-DSL-Tests'!
-SystemOrganization addCategory: 'DynaCASE-UML-DSL-UI'!
