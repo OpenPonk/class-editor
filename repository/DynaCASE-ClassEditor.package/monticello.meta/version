@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.108' message 'Minor fixes in relayouting.' id '511d9898-1b61-4274-9c53-1c8dbd15d63f' date '3 April 2016' time '4:06:32.324723 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.107' message 'Minor.
-' id 'faacc165-3fd1-5eac-95b6-c2fe319a227c' date '3 April 2016' time '3:58:41 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.109' message 'Added visibility.' id '409f645a-1105-4d00-97fe-e5d3727df579' date '3 April 2016' time '5:07:24.55166 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.108' message 'Minor fixes in relayouting.
+' id '67229b22-287b-5a8c-812c-e0df48a2aae5' date '3 April 2016' time '4:06:34 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -1,10 +1,17 @@
 converting
 famixTextFor: anAttribute
-	^ anAttribute name
-		,
-			(anAttribute hasDeclaredType
-				ifTrue: [ ' : ' , anAttribute declaredType name
-						, anAttribute multiplicity asOptionalString ]
-				ifFalse: [ '' ])
-		,
-			(anAttribute defaultValue ifNil: [ '' ] ifNotNil: [ :v | ' = ' , v valueExpression ])
+	^ String
+		streamContents: [ :stream | 
+			anAttribute visibility
+				ifNotNil: [ :v | stream nextPut: (DCUmlVisibilityKind toSymbol: v) ].
+			stream nextPutAll: anAttribute name.
+			anAttribute hasDeclaredType
+				ifTrue: [ stream
+						nextPutAll: ' : ';
+						nextPutAll: anAttribute declaredType name;
+						nextPutAll: anAttribute multiplicity asOptionalString ].
+			anAttribute defaultValue
+				ifNotNil: [ :v | 
+					stream
+						nextPutAll: ' = ';
+						nextPutAll: v valueExpression ] ]

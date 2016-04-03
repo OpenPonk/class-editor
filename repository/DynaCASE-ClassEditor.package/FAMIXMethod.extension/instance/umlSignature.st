@@ -2,6 +2,7 @@
 umlSignature
 	^ String
 		streamContents: [ :s | 
+			self visibility ifNotNil: [ :v | s nextPut: (DCUmlVisibilityKind toSymbol: v) ].
 			s nextPutAll: self name.
 			s nextPut: $(.
 			(self parameters
