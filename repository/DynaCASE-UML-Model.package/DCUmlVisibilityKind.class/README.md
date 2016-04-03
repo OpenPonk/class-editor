@@ -1,0 +1,1 @@
+UML VisibilityKind enum.

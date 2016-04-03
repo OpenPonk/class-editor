@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-Model-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "DCUmlEnumeration",
+	"pools" : [
+		 ],
+	"super" : "DCUmlDataType",
+	"type" : "normal" }
