@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.106' message 'removed method' id '2c16e9c3-2a50-4651-8434-11d29595daa0' date '2 April 2016' time '11:47:43.166502 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.105' message 'diagramClass -> modelClass
-' id 'e51e4499-520e-5291-b22c-35c20b1ee6c5' date '2 April 2016' time '5:48 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.107' message 'Minor.' id 'ef4979e2-aa77-4394-82f9-6fa00c1ccf0e' date '3 April 2016' time '3:58:38.961356 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.106' message 'removed method
+' id '2d8cfe92-d563-57ef-84ea-eb2feeb406a2' date '2 April 2016' time '11:47:46 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

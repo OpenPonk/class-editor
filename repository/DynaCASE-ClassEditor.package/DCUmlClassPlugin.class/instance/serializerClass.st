@@ -1,3 +1,3 @@
 as yet unclassified
 serializerClass
-	^ DCUmlSerializer
+	^ DCNullSerializer
