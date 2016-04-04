@@ -1,2 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.37' message 'Extracting default value from accessors.' id '511f5de9-0b23-48b2-a447-6233d66ca18a' date '3 April 2016' time '6:14:06.952624 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.36' message 'Fixes in attributes merging.
-' id '4f41c146-01da-59cf-ba1d-25915779230f' date '3 April 2016' time '6:02:58 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.38' message 'Type fixes.' id '92f8d8fc-d711-4eec-927a-5d8d923f7329' date '4 April 2016' time '1:31:00.753565 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.37' message 'Extracting default value from accessors.
+' id '33406aa7-d90b-5f31-bad5-a84d1f8241c2' date '3 April 2016' time '6:14:09 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

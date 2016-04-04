@@ -5,4 +5,5 @@ genericTypeFor: aValue
 	aValue isFloat
 		ifTrue: [ ^ 'Float' ].
 	aValue isString
-		ifTrue: [ ^ 'String' ]
+		ifTrue: [ ^ 'String' ].
+	^ aValue className

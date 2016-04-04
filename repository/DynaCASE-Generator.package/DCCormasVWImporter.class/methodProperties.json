@@ -2,10 +2,10 @@
 	"class" : {
 		 },
 	"instance" : {
-		"ensureDefaultValue:fromMethod:" : "PeterUhnak 4/3/2016 17:27",
-		"extractDefaultValue:" : "PeterUhnak 4/3/2016 18:08",
-		"extractDefaultValueFromAccessor:" : "PeterUhnak 4/3/2016 18:13",
-		"genericTypeFor:" : "PeterUhnak 4/1/2016 10:35",
+		"ensureDefaultValue:fromMethod:" : "PeterUhnak 4/3/2016 18:24",
+		"extractDefaultValue:" : "PeterUhnak 4/3/2016 18:21",
+		"extractDefaultValueFromAccessor:" : "PeterUhnak 4/3/2016 18:21",
+		"genericTypeFor:" : "PeterUhnak 4/3/2016 18:18",
 		"importFromClasses:" : "PeterUhnak 4/1/2016 09:41",
 		"importFromPackageNamed:" : "PeterUhnak 4/3/2016 18:02",
 		"mergeAttribute:in:" : "PeterUhnak 4/3/2016 18:11",
