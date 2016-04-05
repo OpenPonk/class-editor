@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.109' message 'Added visibility.' id '409f645a-1105-4d00-97fe-e5d3727df579' date '3 April 2016' time '5:07:24.55166 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.108' message 'Minor fixes in relayouting.
-' id '67229b22-287b-5a8c-812c-e0df48a2aae5' date '3 April 2016' time '4:06:34 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.110' message 'Separated layout application from controllers rebuilding.' id '4513a1ab-1d18-43a9-bb25-1722cbe85803' date '5 April 2016' time '12:54:08.506352 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.109' message 'Added visibility.
+' id '46f70ad5-9a00-5827-b5df-c17f42570a8a' date '3 April 2016' time '5:07:26 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
