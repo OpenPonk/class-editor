@@ -6,4 +6,6 @@ genericTypeFor: aValue
 		ifTrue: [ ^ 'Float' ].
 	aValue isString
 		ifTrue: [ ^ 'String' ].
+	(aValue isMemberOf: RBMessageNode)
+		ifTrue: [ ^ aValue receiver name ].
 	^ aValue className

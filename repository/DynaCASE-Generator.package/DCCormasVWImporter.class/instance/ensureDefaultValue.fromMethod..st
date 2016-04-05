@@ -1,9 +1,6 @@
 as yet unclassified
 ensureDefaultValue: aValue fromMethod: aMethod
-	| attr value |
-	value := aValue.
-	(value isMemberOf: RBMessageNode)
-		ifTrue: [ value := value receiver name asClass ].
+	| attr |
 	attr := aMethod parentType attributes
 		detect: [ :each | each name = (aMethod name withoutSuffix: '_default') ]
 		ifNone: [ | a |
@@ -13,5 +10,6 @@ ensureDefaultValue: aValue fromMethod: aMethod
 			aMethod mooseModel add: a.
 			aMethod parentType attributes add: a.
 			a ].
-	attr declaredType: (FAMIXClass named: (self genericTypeFor: value)).
-	attr defaultValue: (DCFAMIXValueSpecification from: value asString)
+	attr declaredType: (FAMIXClass named: (self genericTypeFor: aValue)).
+	attr
+		defaultValue: (DCFAMIXValueSpecification from: (self stringSpecificationFor: aValue))

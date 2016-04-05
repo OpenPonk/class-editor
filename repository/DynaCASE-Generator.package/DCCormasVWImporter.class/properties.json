@@ -6,7 +6,8 @@
 		 ],
 	"commentStamp" : "PeterUhnak 4/1/2016 01:53",
 	"instvars" : [
-		"modelName" ],
+		"modelName",
+		"shouldMergeInheritances" ],
 	"name" : "DCCormasVWImporter",
 	"pools" : [
 		 ],
