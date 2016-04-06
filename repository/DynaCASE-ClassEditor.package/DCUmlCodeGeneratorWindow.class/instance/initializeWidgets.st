@@ -7,13 +7,11 @@ initializeWidgets
 	(prefixLabel := self newLabel) label: 'Prefix for class names'.
 	(prefixInput := self newTextInput)
 		autoAccept: true;
-		text: '';
-		disable.
+		text: ''.
 	(clashPrefixLabel := self newLabel) label: 'Prefix for name conflicts'.
 	(clashPrefixInput := self newTextInput)
 		autoAccept: true;
-		text: '';
-		disable.
+		text: ''.
 	(accessorsCheckbox := self newCheckBox)
 		label: 'Add acessors';
 		state: true.

@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.110' message 'Separated layout application from controllers rebuilding.' id '4513a1ab-1d18-43a9-bb25-1722cbe85803' date '5 April 2016' time '12:54:08.506352 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.109' message 'Added visibility.
-' id '46f70ad5-9a00-5827-b5df-c17f42570a8a' date '3 April 2016' time '5:07:26 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.111' message 'Stereotypes for cormas.' id '4040d63c-184b-485e-b196-1823e8abb0ea' date '6 April 2016' time '2:29:49.057579 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.110' message 'Separated layout application from controllers rebuilding.
+' id '453beed8-693f-5d7c-bebd-1afbac5d9932' date '5 April 2016' time '12:54:10 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
