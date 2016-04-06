@@ -2,9 +2,9 @@ generator - model
 generateWithProgressBar: aModel
 	'Generating...'
 		displayProgressFrom: 0
-		to: aModel allClasses size + aModel allBinaryAssociations size
+		to: aModel allModelClasses size + aModel allBinaryAssociations size
 		during: [ :bar | 
-			(aModel allClasses asArray sorted: [ :a :b | b superclassHierarchy includes: a ])
+			(aModel allModelClasses asArray sorted: [ :a :b | b superclassHierarchy includes: a ])
 				do: [ :each | 
 					self logCr: each name.
 					bar title: 'Generating class ' , each name.

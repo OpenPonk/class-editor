@@ -1,2 +1,2 @@
-(name 'DynaCASE-Generator-PeterUhnak.39' message 'Merging classes.' id 'd46c3d77-f9e2-4ec2-945f-ac087dc8e86b' date '5 April 2016' time '2:15:48.081491 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.37' message 'Extracting default value from accessors.
-' id '33406aa7-d90b-5f31-bad5-a84d1f8241c2' date '3 April 2016' time '6:14:09 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-Generator-PeterUhnak.40' message 'Generate only model classes.' id '73bfb581-b374-4a1f-ba78-296626efe23c' date '6 April 2016' time '2:29:20.008309 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-Generator-PeterUhnak.39' message 'Merging classes.
+' id '182467d7-77f3-5e2d-a779-c3d753f807d1' date '5 April 2016' time '2:15:50 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -1,11 +1,12 @@
 generator - class
-createClassFor: aFamixClass
+createClassFor: aClass
 	| parentName |
-	parentName := aFamixClass superInheritances
+	parentName := aClass superInheritances
 		ifEmpty: [ 'Object' ]
 		ifNotEmpty: [ :supers | supers first superclass name ].
+	aClass stereotypes ifNotEmpty: [ :s | parentName := s first name ].
 	^ parentName asClass
-		subclass: aFamixClass name
+		subclass: aClass name
 		instanceVariableNames: ''
 		classVariableNames: ''
 		category: self context category
