@@ -1,0 +1,14 @@
+{
+	"class" : {
+		"defaultSpec" : "PeterUhnak 4/6/2016 13:47" },
+	"instance" : {
+		"exportButton" : "PeterUhnak 4/6/2016 13:39",
+		"exportCode" : "PeterUhnak 4/6/2016 14:28",
+		"importButton" : "PeterUhnak 4/6/2016 13:39",
+		"importCode" : "PeterUhnak 4/6/2016 13:51",
+		"initializePresenter" : "PeterUhnak 4/6/2016 13:47",
+		"initializeWidgets" : "PeterUhnak 4/6/2016 13:46",
+		"packageDropList" : "PeterUhnak 4/6/2016 13:39",
+		"packageLabel" : "PeterUhnak 4/6/2016 13:43",
+		"selectFileButton" : "PeterUhnak 4/6/2016 13:39",
+		"selectedFileLabel" : "PeterUhnak 4/6/2016 13:39" } }
