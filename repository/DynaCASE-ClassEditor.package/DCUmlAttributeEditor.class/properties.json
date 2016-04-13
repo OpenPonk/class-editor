@@ -1,0 +1,31 @@
+{
+	"category" : "DynaCASE-ClassEditor-Windows",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"model",
+		"noDefaultRadio",
+		"numberRadio",
+		"booleanRadio",
+		"stringRadio",
+		"collectionRadio",
+		"codeRadio",
+		"numberInput",
+		"unitLabel",
+		"unitInput",
+		"booleanSelect",
+		"stringInput",
+		"collectionSelect",
+		"codeInput",
+		"declaredTypeName",
+		"defaultValue",
+		"declaredType",
+		"onAccept" ],
+	"name" : "DCUmlAttributeEditor",
+	"pools" : [
+		 ],
+	"super" : "ComposableModel",
+	"type" : "normal" }
