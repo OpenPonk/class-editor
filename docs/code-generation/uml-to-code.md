@@ -116,8 +116,9 @@ For collection attributes, if no default value is specified by the user, then an
 
 
 Table 7.1. Collection types for MultiplicityElements [[section 7.5.3.2](www.omg.org/spec/UML/2.5/)]
+
 | isOrdered | isUnique | Collection Type |
-|--|--|--|
+|---|---|---|
 | false | true | Set |
 | true  | true | OrderedSet |
 | false | false | Bag |
@@ -366,29 +367,8 @@ Department>>removeTeacher: aTeacher
 ![some-to-some](figures/some-to-some.png)
 
 |Relation|Side|Reference|
-|-|-|-|
+|---|---|---|
 |One-To-One|President>>university:| <pre>university := aUniversity<br>aUniversity president: self</pre>|
 |One-To-Many|University>>addDepartment:| <pre>departments add: aDepartment<br>aDepartment university: self</pre>|
 |One-To-Many|Department>>university:| <pre>university := aUniversity<br>aUniversity addDepartment: self</pre>|
 |Many-To-Many|Department>>addTeacher:|<pre>teachers add: aTeacher<br>aTeacher addMemberOf: self</pre>|
-
-.
-.
-.
-.
-
-
-.
-
-.
-
-.
-
-.
-
-
-.
-
-.
-
-
