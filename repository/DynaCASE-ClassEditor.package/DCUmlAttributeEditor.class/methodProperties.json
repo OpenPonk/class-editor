@@ -1,6 +1,7 @@
 {
 	"class" : {
-		"defaultSpec" : "PeterUhnak 4/13/2016 11:20",
+		"defaultSpec" : "PeterUhnak 4/14/2016 14:54",
+		"defaultSpec2" : "PeterUhnak 4/14/2016 14:45",
 		"openOn:" : "PeterUhnak 4/13/2016 13:49",
 		"openOn:onAccept:" : "PeterUhnak 4/13/2016 13:49" },
 	"instance" : {
@@ -19,8 +20,9 @@
 		"collectionSelect:" : "PeterUhnak 4/13/2016 11:16",
 		"declaredTypeName" : "PeterUhnak 4/13/2016 13:27",
 		"defaultValue" : "PeterUhnak 4/13/2016 13:27",
+		"initialExtent" : "PeterUhnak 4/14/2016 14:32",
 		"initializePresenter" : "PeterUhnak 4/13/2016 13:51",
-		"initializeWidgets" : "PeterUhnak 4/13/2016 13:07",
+		"initializeWidgets" : "PeterUhnak 4/14/2016 14:55",
 		"model" : "PeterUhnak 4/12/2016 11:44",
 		"model:" : "PeterUhnak 4/12/2016 11:44",
 		"noDefaultRadio" : "PeterUhnak 4/13/2016 11:16",
@@ -31,7 +33,7 @@
 		"numberRadio:" : "PeterUhnak 4/13/2016 11:16",
 		"onAccept:" : "PeterUhnak 4/13/2016 13:49",
 		"open" : "PeterUhnak 4/13/2016 13:33",
-		"populateFromModel:" : "PeterUhnak 4/13/2016 13:53",
+		"populateFromModel:" : "PeterUhnak 4/15/2016 20:23",
 		"setRadioGroup" : "PeterUhnak 4/13/2016 13:41",
 		"stringInput" : "PeterUhnak 4/13/2016 11:16",
 		"stringInput:" : "PeterUhnak 4/13/2016 11:16",

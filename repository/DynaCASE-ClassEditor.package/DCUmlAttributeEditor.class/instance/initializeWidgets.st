@@ -11,7 +11,7 @@ initializeWidgets
 	(collectionRadio := self newRadioButton) label: 'Collection'.
 	(codeRadio := self newRadioButton) label: 'Code'.
 	(numberInput := self newTextInput) autoAccept: true.
-	(unitLabel := self newLabel) label: 'Unit:'.
+	(unitLabel := self newLabel) label: 'Unit'.
 	(unitInput := self newTextInput) autoAccept: true.
 	(booleanSelect := self newDropList) items: #(true false).
 	(stringInput := self newTextInput) autoAccept: true.

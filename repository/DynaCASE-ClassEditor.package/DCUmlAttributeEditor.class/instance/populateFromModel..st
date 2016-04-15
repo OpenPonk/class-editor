@@ -18,7 +18,8 @@ populateFromModel: anAttribute
 		ifTrue: [ stringRadio toggleState.
 			stringInput text: (self unwrapString: value).
 			^ self ].
-	(type asClass isKindOf: Collection class)
+	((type asClass isKindOf: Collection class)
+		and: [ (type asClass isKindOf: ByteArray class) not ])
 		ifTrue: [ collectionRadio toggleState.
 			collectionSelect setSelectedItem: type.
 			^ self ].
