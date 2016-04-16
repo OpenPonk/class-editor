@@ -1,0 +1,14 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addEagerValueFor:in:" : "PeterUhnak 3/29/2016 20:55:38",
+		"addLazyValueFor:in:" : "PeterUhnak 3/29/2016 20:55:38",
+		"addToInitialize:in:" : "PeterUhnak 3/29/2016 20:55:38",
+		"classFor:" : "PeterUhnak 3/29/2016 20:55:38",
+		"context" : "PeterUhnak 3/29/2016 20:55:38",
+		"context:" : "PeterUhnak 3/29/2016 20:55:38",
+		"defaultValueExpressionFor:" : "PeterUhnak 3/29/2016 20:55:38",
+		"ensureHasInitialize:" : "PeterUhnak 3/29/2016 20:55:38",
+		"ensureInstVariable:in:" : "PeterUhnak 3/29/2016 20:55:38",
+		"paramNameForType:" : "PeterUhnak 3/29/2016 20:55:38" } }

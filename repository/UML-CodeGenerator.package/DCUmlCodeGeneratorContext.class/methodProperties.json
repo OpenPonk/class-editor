@@ -1,0 +1,25 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"category" : "PeterUhnak 3/29/2016 20:55:38",
+		"category:" : "PeterUhnak 3/29/2016 20:55:38",
+		"clashPrefix" : "PeterUhnak 3/29/2016 20:55:38",
+		"clashPrefix:" : "PeterUhnak 3/29/2016 20:55:38",
+		"defaultOptions" : "PeterUhnak 3/29/2016 20:55:38",
+		"doNotOverrideMethods" : "PeterUhnak 3/29/2016 20:55:38",
+		"initialize" : "PeterUhnak 3/29/2016 20:55:38",
+		"overrideMethods" : "PeterUhnak 3/29/2016 20:55:38",
+		"prefix" : "PeterUhnak 3/29/2016 20:55:38",
+		"prefix:" : "PeterUhnak 3/29/2016 20:55:38",
+		"shouldAddAccessors" : "PeterUhnak 3/29/2016 20:55:38",
+		"shouldOverrideMethods" : "PeterUhnak 3/29/2016 20:55:38",
+		"shouldShowProgressBar" : "PeterUhnak 3/29/2016 20:55:38",
+		"shouldUseEagerInitialization" : "PeterUhnak 3/29/2016 20:55:38",
+		"shouldUseLazyInitialization" : "PeterUhnak 3/29/2016 20:55:38",
+		"useEagerInitialization" : "PeterUhnak 3/29/2016 20:55:38",
+		"useLazyInitialization" : "PeterUhnak 3/29/2016 20:55:38",
+		"withAccessors" : "PeterUhnak 3/29/2016 20:55:38",
+		"withProgressBar" : "PeterUhnak 3/29/2016 20:55:38",
+		"withoutAccessors" : "PeterUhnak 3/29/2016 20:55:38",
+		"withoutProgressBar" : "PeterUhnak 3/29/2016 20:55:38" } }

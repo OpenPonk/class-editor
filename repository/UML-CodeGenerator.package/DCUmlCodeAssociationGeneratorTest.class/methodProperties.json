@@ -1,0 +1,22 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"ast:equals:" : "PeterUhnak 3/29/2016 20:55:38",
+		"astFor:" : "PeterUhnak 3/29/2016 20:55:38",
+		"createModel" : "PeterUhnak 3/29/2016 20:55:38",
+		"setUp" : "PeterUhnak 3/29/2016 20:55:38",
+		"testAdderManyToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testAdderNoneToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testAdderOneToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testGeneratedManyToOne" : "PeterUhnak 3/29/2016 20:55:38",
+		"testGeneratedOneToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testGetterOneToOne" : "PeterUhnak 3/29/2016 20:55:38",
+		"testRemoverManyToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testRemoverNoneToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testRemoverOneToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testSetterManyToOne" : "PeterUhnak 3/29/2016 20:55:38",
+		"testSetterNoneToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testSetterNoneToOne" : "PeterUhnak 3/29/2016 20:55:38",
+		"testSetterOneToMany" : "PeterUhnak 3/29/2016 20:55:38",
+		"testSetterOneToOne" : "PeterUhnak 3/29/2016 20:55:38" } }

@@ -1,0 +1,16 @@
+{
+	"category" : "UML-CodeGenerator-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"factory",
+		"model",
+		"cls" ],
+	"name" : "DCGeneratorTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

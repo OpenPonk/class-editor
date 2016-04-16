@@ -1,0 +1,14 @@
+{
+	"category" : "UML-CodeGenerator-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"context" ],
+	"name" : "DCUmlCodeBaseGenerator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
