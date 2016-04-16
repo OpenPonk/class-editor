@@ -1,3 +1,3 @@
 grammar
 symbol
-	^ #word asParser plus flatten trim
+	^ (#word asParser / $_ asParser) plus flatten trim

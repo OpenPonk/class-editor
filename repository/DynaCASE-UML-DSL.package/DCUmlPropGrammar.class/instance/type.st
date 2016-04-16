@@ -1,3 +1,3 @@
-as yet unclassified
+grammar
 type
 	^ symbol
