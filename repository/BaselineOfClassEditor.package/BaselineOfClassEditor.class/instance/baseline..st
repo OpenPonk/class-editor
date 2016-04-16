@@ -71,12 +71,12 @@ baseline: spec
 					with: [ spec
 						requires:
 							#('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
-				package: 'DynaCASE-Generator'
+				package: 'UML-CodeGenerator'
 					with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix') ];
 				package: 'DynaCASE-ClassEditor'
 					with: [ spec
 						requires:
 							#('DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'DynaCASE-UML-XMI' 'Fame' 'famix') ].
 			spec group: 'famix' with: #('Famix-Core' 'Famix-Extensions' 'Famix-Implementation').
-			spec group: 'plugin' with: #('DynaCASE-ClassEditor' 'DynaCASE-Generator').
+			spec group: 'plugin' with: #('DynaCASE-ClassEditor' 'UML-CodeGenerator').
 			spec group: 'default' with: #('plugin' 'DynaCASE') ]

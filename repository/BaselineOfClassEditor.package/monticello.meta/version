@@ -1,2 +1,2 @@
-(name 'BaselineOfClassEditor-PeterUhnak.4' message 'Don''t load fucking stable.' id '0bc9af9c-ed13-4641-be5d-9ad354315d92' date '23 March 2016' time '10:50:00.032367 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfClassEditor-PeterUhnak.3' message 'Added XMLDOMVisitor dependency.
-' id '4ace2257-aba4-5c0e-99e2-49003eb12486' date '23 March 2016' time '10:23:37 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'BaselineOfClassEditor-PeterUhnak.5' message 'Package rename.' id '0dd07214-1776-4fa8-a2d9-086a0f039d36' date '16 April 2016' time '6:31:49.085939 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfClassEditor-PeterUhnak.4' message 'Don''t load fucking stable.
+' id '9d5af847-a0f7-5619-a1c7-128588be3800' date '23 March 2016' time '10:50:01 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
