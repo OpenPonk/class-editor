@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.113' message 'Better layout.' id '1bc1f50d-926c-4d35-af60-7bac17f4056a' date '15 April 2016' time '8:28:40.265265 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.112' message 'Added initial value editor.
-' id 'b989b7a5-64cf-531f-9a70-6dc69184e974' date '13 April 2016' time '1:55:21 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.114' message 'Do not use cormas stereotypes if cormas is not loaded.' id '892a50e1-e369-4755-a92e-94a311ac5070' date '16 April 2016' time '12:35:26.442941 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.113' message 'Better layout.
+' id '85ea8a03-26d9-5592-aec5-1eeac7c87f47' date '15 April 2016' time '8:28:42 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

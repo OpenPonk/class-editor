@@ -1,6 +1,8 @@
 ui hooks
 buildStereotypeEditorForm: aForm
 	| stereotypes repeat |
+	(Smalltalk hasClassNamed: #CormasModel)
+		ifFalse: [ ^ super buildStereotypeEditorForm: aForm ].
 	repeat := [ :str :num | String withAll: ((1 to: num) flatCollect: [ :i | str ]) ].
 	stereotypes := OrderedCollection with: 'CormasModel' -> 0 with: 'CormasEntity' -> 0.
 	CormasEntity
