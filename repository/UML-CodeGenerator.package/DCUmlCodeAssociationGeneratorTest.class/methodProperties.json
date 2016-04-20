@@ -2,8 +2,6 @@
 	"class" : {
 		 },
 	"instance" : {
-		"ast:equals:" : "PeterUhnak 3/29/2016 20:55:38",
-		"astFor:" : "PeterUhnak 3/29/2016 20:55:38",
 		"createModel" : "PeterUhnak 3/29/2016 20:55:38",
 		"setUp" : "PeterUhnak 3/29/2016 20:55:38",
 		"testAdderManyToMany" : "PeterUhnak 3/29/2016 20:55:38",

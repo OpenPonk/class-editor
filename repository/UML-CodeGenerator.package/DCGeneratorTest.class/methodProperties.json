@@ -2,6 +2,8 @@
 	"class" : {
 		"isAbstract" : "PeterUhnak 3/29/2016 20:55:38" },
 	"instance" : {
+		"ast:equals:" : "PeterUhnak 4/20/2016 14:25",
+		"astFor:" : "PeterUhnak 4/20/2016 14:25",
 		"categoryName" : "PeterUhnak 3/29/2016 20:55:38",
 		"newClassNamed:" : "PeterUhnak 3/29/2016 20:55:38",
 		"newClassNamed:inCategory:" : "PeterUhnak 3/29/2016 20:55:38",

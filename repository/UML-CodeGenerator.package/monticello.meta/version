@@ -1,1 +1,2 @@
-(name 'UML-CodeGenerator-PeterUhnak.1' message 'DynaCASE-Generator -> UML-CodeGenerator rename.' id 'faf114b6-1baf-4988-b55e-2de17ec823c3' date '16 April 2016' time '6:31:06.565221 pm' author 'PeterUhnak' ancestors () stepChildren ())
+(name 'UML-CodeGenerator-PeterUhnak.2' message 'Enum codegen.' id 'ae5064f4-04b5-40e0-9a0d-6532fe160504' date '20 April 2016' time '3:29:24.993173 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.1' message 'DynaCASE-Generator -> UML-CodeGenerator rename.
+' id 'd4868cd7-9d30-59b9-9a48-7a8f4d49c525' date '16 April 2016' time '6:31:06 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

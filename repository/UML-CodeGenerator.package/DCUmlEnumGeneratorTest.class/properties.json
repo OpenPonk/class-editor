@@ -1,0 +1,15 @@
+{
+	"category" : "UML-CodeGenerator-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"generator",
+		"enum" ],
+	"name" : "DCUmlEnumGeneratorTest",
+	"pools" : [
+		 ],
+	"super" : "DCGeneratorTest",
+	"type" : "normal" }
