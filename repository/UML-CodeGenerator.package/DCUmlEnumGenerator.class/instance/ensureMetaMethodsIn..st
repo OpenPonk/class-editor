@@ -7,6 +7,6 @@ ensureMetaMethodsIn: aClass
 	"Generated method"
 
 	^ Default ifNil: [ Default := self new ]'.
-	1 halt.
+"	1 halt."
 	((aClass includesSelector: #meta) and: [ (aClass >> #meta) sourceCode = method ])
 		ifFalse: [ aClass compile: method classified: 'accessing' ]
