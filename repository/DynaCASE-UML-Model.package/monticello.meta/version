@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.18' message 'Added visibility.' id '8d8643a5-a145-4080-afe5-27fb15f6d9d8' date '3 April 2016' time '5:06:42.413369 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.17' message 'Annotation & superclasses change.
-' id '31ff43a0-e77d-5560-913c-ac53901876bc' date '31 March 2016' time '6:01 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.19' message 'Removed Enum/DataType because it''s not used atm.' id '8d65fc4a-7e9c-4eb8-b95a-888a66a21459' date '28 May 2016' time '1:16:55.480873 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.18' message 'Added visibility.
+' id '0eca4c5d-6830-5eb9-b194-8a29f246ba91' date '3 April 2016' time '5:06:44 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
