@@ -2,15 +2,15 @@
 	"class" : {
 		 },
 	"instance" : {
-		"adjustHierarchy" : "PeterUhnak 3/23/2016 18:07:05",
-		"collectClassFigures" : "PeterUhnak 3/23/2016 18:07:05",
-		"collectFiguresByClass:" : "PeterUhnak 3/23/2016 18:07:05",
-		"collectGeneralizationFigures" : "PeterUhnak 3/23/2016 18:07:05",
-		"initialize" : "PeterUhnak 3/23/2016 18:07:05",
-		"layoutAssociations" : "PeterUhnak 3/23/2016 18:07:05",
-		"layoutHierarchy" : "PeterUhnak 3/23/2016 18:07:05",
-		"layoutLabels" : "PeterUhnak 3/23/2016 18:07:05",
-		"liveUpdate:" : "PeterUhnak 3/23/2016 18:07:05",
-		"onController:" : "PeterUhnak 3/23/2016 18:07:05",
-		"updateView" : "PeterUhnak 3/23/2016 18:07:05",
-		"verticalFlip" : "PeterUhnak 3/23/2016 18:07:05" } }
+		"adjustHierarchy" : "PeterUhnak 4/16/2016 12:35:31",
+		"collectClassFigures" : "PeterUhnak 4/16/2016 12:35:31",
+		"collectFiguresByClass:" : "PeterUhnak 4/16/2016 12:35:31",
+		"collectGeneralizationFigures" : "PeterUhnak 4/16/2016 12:35:31",
+		"initialize" : "PeterUhnak 4/16/2016 12:35:31",
+		"layoutAssociations" : "PeterUhnak 4/16/2016 12:35:31",
+		"layoutHierarchy" : "PeterUhnak 4/16/2016 12:35:31",
+		"layoutLabels" : "PeterUhnak 4/16/2016 12:35:31",
+		"liveUpdate:" : "PeterUhnak 4/16/2016 12:35:31",
+		"onController:" : "PeterUhnak 4/16/2016 12:35:31",
+		"updateView" : "PeterUhnak 4/16/2016 12:35:31",
+		"verticalFlip" : "PeterUhnak 4/16/2016 12:35:31" } }

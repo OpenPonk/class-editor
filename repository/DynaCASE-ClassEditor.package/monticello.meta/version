@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.114' message 'Do not use cormas stereotypes if cormas is not loaded.' id '892a50e1-e369-4755-a92e-94a311ac5070' date '16 April 2016' time '12:35:26.442941 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.113' message 'Better layout.
-' id '85ea8a03-26d9-5592-aec5-1eeac7c87f47' date '15 April 2016' time '8:28:42 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.115' message 'Use XMI Serializer.Use GraphViz layout if available.' id 'c933c32d-3b04-44f2-8a0b-460c29ab1de8' date '30 May 2016' time '3:17:51.109451 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.114' message 'Do not use cormas stereotypes if cormas is not loaded.
+' id '1942cd2e-3784-5198-8547-d52dc15ab052' date '16 April 2016' time '12:35:31 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

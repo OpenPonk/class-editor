@@ -1,11 +1,11 @@
 ui hooks
 addLayoutMenu: builder parent: aParent
-	(Smalltalk globals includesKey: #DCGraphVizLayout)
+	(Smalltalk globals includesKey: #RTGraphVizLayout)
 		ifTrue: [ (builder item: 'GraphViz')
 				parent: aParent;
 				action: [ self
 						applyLayout:
-							[ :cls :inh :assoc | #DCGraphVizLayout asClass new on: cls directed: inh undirected: assoc ] ] ].
+							[ :cls :inh :assoc | #RTGraphVizLayout asClass new on: cls directed: inh undirected: assoc ] ] ].
 	(builder item: 'Grid')
 		parent: aParent;
 		action: [ self
@@ -39,4 +39,8 @@ addLayoutMenu: builder parent: aParent
 					cls do: [ :each | each translateBy: 0 @ 2 * (centerY - each position y) ] ] ].
 	(builder item: 'Circle')
 		parent: aParent;
-		action: [ self applyLayout: [ :cls :inh :assoc | RTWeightedCircleLayout new scaleBy: 20; on: cls ] ]
+		action: [ self
+				applyLayout: [ :cls :inh :assoc | 
+					RTWeightedCircleLayout new
+						scaleBy: 20;
+						on: cls ] ]

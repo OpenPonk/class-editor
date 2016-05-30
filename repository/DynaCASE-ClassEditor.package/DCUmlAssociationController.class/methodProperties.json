@@ -2,15 +2,15 @@
 	"class" : {
 		 },
 	"instance" : {
-		"addAssociationEndFigures:at:" : "PeterUhnak 3/23/2016 18:07:05",
-		"addAssociationFigures" : "PeterUhnak 3/23/2016 18:07:05",
-		"attachFigure" : "PeterUhnak 3/23/2016 18:07:05",
-		"buildEditorForm:" : "PeterUhnak 3/23/2016 18:07:05",
-		"buildEditorForm:for:" : "PeterUhnak 3/23/2016 18:07:05",
-		"createEdgeFrom:to:" : "PeterUhnak 3/23/2016 18:07:05",
-		"createModel" : "PeterUhnak 3/23/2016 18:07:05",
-		"edgeBuilder" : "PeterUhnak 3/23/2016 18:07:05",
-		"modelClass" : "PeterUhnak 3/23/2016 18:07:05",
-		"multiplicityRangeFor:" : "PeterUhnak 3/23/2016 18:07:05",
-		"refreshEndFigure:decoratorSelector:" : "PeterUhnak 3/23/2016 18:07:05",
-		"refreshFigure" : "PeterUhnak 3/30/2016 23:17" } }
+		"addAssociationEndFigures:at:" : "PeterUhnak 4/16/2016 12:35:31",
+		"addAssociationFigures" : "PeterUhnak 4/16/2016 12:35:31",
+		"attachFigure" : "PeterUhnak 4/16/2016 12:35:31",
+		"buildEditorForm:" : "PeterUhnak 4/16/2016 12:35:31",
+		"buildEditorForm:for:" : "PeterUhnak 4/16/2016 12:35:31",
+		"createEdgeFrom:to:" : "PeterUhnak 4/16/2016 12:35:31",
+		"createModel" : "PeterUhnak 4/16/2016 12:35:31",
+		"edgeBuilder" : "PeterUhnak 4/16/2016 12:35:31",
+		"modelClass" : "PeterUhnak 4/16/2016 12:35:31",
+		"multiplicityRangeFor:" : "PeterUhnak 4/16/2016 12:35:31",
+		"refreshEndFigure:decoratorSelector:" : "PeterUhnak 4/16/2016 12:35:31",
+		"refreshFigure" : "PeterUhnak 4/16/2016 12:35:31" } }
