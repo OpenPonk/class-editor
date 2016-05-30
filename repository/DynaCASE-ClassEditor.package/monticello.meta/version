@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.115' message 'Use XMI Serializer.Use GraphViz layout if available.' id 'c933c32d-3b04-44f2-8a0b-460c29ab1de8' date '30 May 2016' time '3:17:51.109451 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.114' message 'Do not use cormas stereotypes if cormas is not loaded.
-' id '1942cd2e-3784-5198-8547-d52dc15ab052' date '16 April 2016' time '12:35:31 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.116' message 'Actually use it.' id 'f22fbad1-4081-4598-8a1d-416ea84c7131' date '30 May 2016' time '3:56:09.318225 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.115' message 'Use XMI Serializer.Use GraphViz layout if available.
+' id 'd9fe9522-9ce0-515a-91e4-76cf4e5709b1' date '30 May 2016' time '3:18:36 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
