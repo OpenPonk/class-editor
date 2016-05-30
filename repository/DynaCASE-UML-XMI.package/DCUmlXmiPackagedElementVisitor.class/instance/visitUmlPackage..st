@@ -5,7 +5,7 @@ visitUmlPackage: anElement
 		put: [ | model |
 			(model := MooseModel new)
 				name: anElement @ #name;
-				instVarNamed: #mooseID put: anElement xmiId.
+				instVarNamed: #mooseID put: anElement xmiId asNumber.
 			(anElement parent name = 'packagedElement'
 				and: [ anElement parent @ #xmi:type = 'uml:Package' ])
 				ifTrue: [ elements at: (self elementAt: anElement parent xmiId) put: model ].

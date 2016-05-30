@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-XMI-PeterUhnak.3' message 'More work on import/export.' id '8d668090-0e5e-4e21-bbcb-7ce1b853a412' date '23 March 2016' time '6:02:45.192952 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.2' message 'Convenience method for enum.
-' id '807e5386-7dc1-5bc5-b2bd-d1dc2cf6f9fc' date '22 March 2016' time '3:20:50 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-XMI-PeterUhnak.4' message 'MooseID should be a number.Ignore XMLString nodes.' id '15283a1f-76d5-44d2-a48d-f462596527e5' date '30 May 2016' time '3:24:51.585277 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.3' message 'More work on import/export.
+' id '0ca2f04f-b9af-5f0b-8daf-0ea8d5767247' date '23 March 2016' time '6:02:47 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
