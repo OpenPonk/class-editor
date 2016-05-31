@@ -22,6 +22,12 @@ baseline: spec
 						versionString: #stable;
 						repository: 'http://smalltalkhub.com/mc/PharoExtras/XPath/main/' ].
 			spec
+				project: 'Merlin'
+				with: [ spec
+					className: #ConfigurationOfMerlin;
+					versionString: #'development';
+					repository: 'http://www.smalltalkhub.com/mc/Moose/Merlin/main' ].
+			spec
 				baseline: 'DynaCASE'
 				with: [ spec repository: 'github://dynacase/dynacase/repository' ].
 			spec
@@ -72,7 +78,7 @@ baseline: spec
 						requires:
 							#('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
 				package: 'UML-CodeGenerator'
-					with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix') ];
+					with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix' 'Merlin') ];
 				package: 'DynaCASE-ClassEditor'
 					with: [ spec
 						requires:

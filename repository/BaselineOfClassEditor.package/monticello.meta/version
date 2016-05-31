@@ -1,2 +1,2 @@
-(name 'BaselineOfClassEditor-PeterUhnak.5' message 'Package rename.' id '0dd07214-1776-4fa8-a2d9-086a0f039d36' date '16 April 2016' time '6:31:49.085939 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfClassEditor-PeterUhnak.4' message 'Don''t load fucking stable.
-' id '9d5af847-a0f7-5619-a1c7-128588be3800' date '23 March 2016' time '10:50:01 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'BaselineOfClassEditor-PeterUhnak.6' message 'Added Merlin dependency.' id '79504662-0ce1-4c50-84fb-18600b3e5c17' date '31 May 2016' time '11:32:52.075885 pm' author 'PeterUhnak' ancestors ((name 'BaselineOfClassEditor-PeterUhnak.5' message 'Package rename.
+' id '8d5fc2af-a1ab-5387-8571-550654463e6f' date '16 April 2016' time '6:31:51 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
