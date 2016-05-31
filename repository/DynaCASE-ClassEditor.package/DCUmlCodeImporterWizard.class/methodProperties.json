@@ -1,0 +1,10 @@
+{
+	"class" : {
+		"open" : "PeterUhnak 5/31/2016 23:11",
+		"openOn:" : "PeterUhnak 5/31/2016 23:20" },
+	"instance" : {
+		"addPackagePane" : "PeterUhnak 5/31/2016 23:13",
+		"importWith:" : "PeterUhnak 5/31/2016 23:24",
+		"initialize" : "PeterUhnak 5/31/2016 23:15",
+		"model:" : "PeterUhnak 5/31/2016 23:22",
+		"replaceModel:with:" : "PeterUhnak 5/31/2016 23:24" } }

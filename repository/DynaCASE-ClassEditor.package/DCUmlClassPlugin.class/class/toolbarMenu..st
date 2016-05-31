@@ -9,7 +9,6 @@ toolbarMenu: aBuilder
 				model: aBuilder model diagramController model;
 				openWithSpec ].
 	(aBuilder item: 'Generate Code...')
-		withSeparatorAfter;
-		action: [ DCUmlCodeGeneratorWindow new
-				model: aBuilder model diagramController model;
-				openWithSpec ]
+		action: [ DCUmlCodeGeneratorWizard openOn: aBuilder model diagramController model ].
+	(aBuilder item: 'Import Code...')
+		action: [ DCUmlCodeImporterWizard openOn: aBuilder model diagramController model ]

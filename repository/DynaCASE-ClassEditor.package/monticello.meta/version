@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.116' message 'Actually use it.' id 'f22fbad1-4081-4598-8a1d-416ea84c7131' date '30 May 2016' time '3:56:09.318225 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.115' message 'Use XMI Serializer.Use GraphViz layout if available.
-' id 'd9fe9522-9ce0-515a-91e4-76cf4e5709b1' date '30 May 2016' time '3:18:36 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.117' message 'Replaced old generator window with a wizzard. Added code import wizard.Fix with DSL relayouting.' id 'ca56dfd3-abea-416c-b938-e890f772ac11' date '31 May 2016' time '11:31:59.321169 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.116' message 'Actually use it.
+' id 'cfeaedc6-e13b-552e-b408-1f182487c955' date '30 May 2016' time '3:56:41 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

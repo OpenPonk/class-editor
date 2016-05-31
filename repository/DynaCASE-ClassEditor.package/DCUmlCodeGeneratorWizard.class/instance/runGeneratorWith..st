@@ -1,5 +1,5 @@
 actions
-runGenerator
+runGeneratorWith: aContext
 	DCUmlCodeGenerator new
-		context: self createContext;
+		context: aContext;
 		generateFromModel: model
