@@ -1,5 +1,5 @@
 options
-category: aString
+package: aString
 	"Name of the package/category where the classes should be placed"
 
-	category := aString
+	package := aString

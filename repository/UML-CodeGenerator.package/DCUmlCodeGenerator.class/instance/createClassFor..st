@@ -9,4 +9,4 @@ createClassFor: aClass
 		subclass: aClass name
 		instanceVariableNames: ''
 		classVariableNames: ''
-		category: self context category
+		category: self context package

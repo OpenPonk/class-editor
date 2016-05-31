@@ -1,8 +1,8 @@
 initialization
 defaultOptions
-	self category: #Unclassified.
+	self package: #Unclassified.
 	self prefix: ''.
-	self clashPrefix: ''.
+	self conflictPrefix: ''.
 	self withProgressBar.
 	self withAccessors.
 	self doNotOverrideMethods.
