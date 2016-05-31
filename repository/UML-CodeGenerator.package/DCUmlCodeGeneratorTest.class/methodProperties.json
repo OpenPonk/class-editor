@@ -3,7 +3,7 @@
 		 },
 	"instance" : {
 		"oneToManyAssociation" : "PeterUhnak 4/25/2016 16:36:27",
-		"setUp" : "PeterUhnak 4/25/2016 16:36:27",
+		"setUp" : "PeterUhnak 5/31/2016 23:45",
 		"testCreateAccessors" : "PeterUhnak 4/25/2016 16:36:27",
 		"testCreateAccessorsNot" : "PeterUhnak 4/25/2016 16:36:27",
 		"testCreateAttribute" : "PeterUhnak 4/25/2016 16:36:27",

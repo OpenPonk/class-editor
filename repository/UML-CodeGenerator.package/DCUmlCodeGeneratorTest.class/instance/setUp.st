@@ -3,5 +3,5 @@ setUp
 	super setUp.
 	(generator := DCUmlCodeGenerator new) context
 		withAccessors;
-		category: self categoryName.
+		package: self categoryName.
 	cls := self newClassNamed: #SomethingGenerated
