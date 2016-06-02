@@ -1,2 +1,2 @@
-(name 'UML-CodeGenerator-PeterUhnak.5' message 'Missed accessor.' id 'afcb1930-7742-46e4-89aa-23e99b5a6c6c' date '31 May 2016' time '11:45:42.083473 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.4' message 'Context renames.
-' id 'a782240b-4d50-5519-aba8-e2be6997540b' date '31 May 2016' time '11:30:01 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'UML-CodeGenerator-PeterUhnak.6' message 'Fixed class hierarchy sorting.' id '599f4db4-57e4-445e-b5da-11c1530ab23c' date '2 June 2016' time '11:07:54.215415 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.5' message 'Missed accessor.
+' id 'f59dbbc1-6d9a-5c87-94f0-fdb310aaddf5' date '31 May 2016' time '11:46:13 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -4,7 +4,7 @@ generateWithProgressBar: aModel
 		displayProgressFrom: 0
 		to: aModel allModelClasses size + aModel allBinaryAssociations size
 		during: [ :bar | 
-			(aModel allModelClasses asArray sorted: [ :a :b | b superclassHierarchy includes: a ])
+			(self sortedHierarchyFor: aModel allModelClasses)
 				do: [ :each | 
 					self logCr: each name.
 					bar title: 'Generating class ' , each name.

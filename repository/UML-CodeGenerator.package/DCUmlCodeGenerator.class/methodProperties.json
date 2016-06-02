@@ -12,10 +12,11 @@
 		"createGetter:pragma:in:" : "PeterUhnak 4/25/2016 16:36:27",
 		"createMethodFor:in:" : "PeterUhnak 4/25/2016 16:36:27",
 		"createSetter:parameter:in:" : "PeterUhnak 4/25/2016 16:36:27",
-		"generateFromModel:" : "PeterUhnak 4/25/2016 16:36:27",
-		"generateWithProgressBar:" : "PeterUhnak 4/25/2016 16:36:27",
+		"generateFromModel:" : "PeterUhnak 6/2/2016 23:07",
+		"generateWithProgressBar:" : "PeterUhnak 6/2/2016 23:07",
 		"getterPragmaFor:" : "PeterUhnak 4/25/2016 16:36:27",
 		"initialize" : "PeterUhnak 4/25/2016 16:36:27",
 		"methodPragmaFor:" : "PeterUhnak 4/25/2016 16:36:27",
 		"multiplicityFor:" : "PeterUhnak 4/25/2016 16:36:27",
+		"sortedHierarchyFor:" : "PeterUhnak 6/2/2016 23:05",
 		"typeNameFor:" : "PeterUhnak 4/25/2016 16:36:27" } }
