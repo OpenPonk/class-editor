@@ -198,6 +198,8 @@ The generator is non-destructive, thus if there is already method defined it wil
 
 ### Method categorization
 
+(method categorization is todo)
+
 The user has an option to specify the protocol from editable droplist, or let the system autocategorize it; if the method is part of a class extension, the protocol will be prefixed appropriately.
 
 ![method-categorization](figures/method-protocol.png)
