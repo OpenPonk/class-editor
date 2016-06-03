@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-XMI-PeterUhnak.4' message 'MooseID should be a number.Ignore XMLString nodes.' id '15283a1f-76d5-44d2-a48d-f462596527e5' date '30 May 2016' time '3:24:51.585277 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.3' message 'More work on import/export.
-' id '0ca2f04f-b9af-5f0b-8daf-0ea8d5767247' date '23 March 2016' time '6:02:47 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-XMI-PeterUhnak.5' message 'empty multiplicity.' id '28696041-6a65-4a75-8abb-d673c88a198e' date '3 June 2016' time '12:54:07.402867 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.4' message 'MooseID should be a number.Ignore XMLString nodes.
+' id 'cdaaffb2-b6d4-5f4a-98b9-9c10b4a30ff4' date '30 May 2016' time '3:25:22 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
