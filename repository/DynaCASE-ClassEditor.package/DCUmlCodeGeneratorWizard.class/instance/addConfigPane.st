@@ -13,15 +13,23 @@ addConfigPane
 	pane
 		addPart:
 			(TextFieldPart new
-				inGroupboxNamed: 'Prefix for class names';
+				inGroupboxNamed: 'Prefix for class names (TODO)';
 				defaultValue: (defaultValues at: #classPrefix))
 		associatedTo: #classPrefix.
+	"pane
+		addPart:
+			(CheckboxPart
+				disable;
+				label: 'Always use prefix*';
+				defaultValue: (defaultValues at: #alwaysUsePrefix))
+		associatedTo: #alwaysUsePrefix.
+		
 	pane
 		addPart:
-			(TextFieldPart new
-				inGroupboxNamed: 'Prefix for name conflicts';
-				defaultValue: (defaultValues at: #conflictPrefix))
-		associatedTo: #conflictPrefix.
+			(TextPart new
+				text: '*If unchecked, existing classes not in the target package
+will not be generated, so you can subclass system classes.')
+		associatedTo: #textPart."
 	pane
 		addPart:
 			(CheckboxPart new

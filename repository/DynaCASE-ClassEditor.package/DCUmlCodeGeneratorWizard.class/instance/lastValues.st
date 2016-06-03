@@ -3,7 +3,7 @@ lastValues
 	^ LastValues
 		ifNil: [ {#package -> 'Unclassified'.
 			#classPrefix -> ''.
-			#conflictPrefix -> ''.
+			#alwaysUsePrefix -> false.
 			#addAccessors -> true.
 			#overrideMethods -> true.
 			#initializationType -> #lazy} asDictionary ]

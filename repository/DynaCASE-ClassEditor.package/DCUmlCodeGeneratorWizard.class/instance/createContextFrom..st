@@ -4,8 +4,9 @@ createContextFrom: aDictionary
 	context := DCUmlCodeGeneratorContext new.
 	context
 		package: (aDictionary at: #package);
-		prefix: (aDictionary at: #classPrefix);
-		conflictPrefix: (aDictionary at: #conflictPrefix).
+		prefix: (aDictionary at: #classPrefix).
+	(aDictionary at: #alwaysUsePrefix)
+		ifTrue: [ context alwaysUsePrefix ].
 	(aDictionary at: #addAccessors)
 		ifTrue: [ context withAccessors ]
 		ifFalse: [ context withoutAccessors ].
