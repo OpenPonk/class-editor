@@ -1,0 +1,14 @@
+{
+	"category" : "UML-CodeGenerator-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"someVar" ],
+	"name" : "DCUmlGenTestForeign",
+	"pools" : [
+		 ],
+	"super" : "String",
+	"type" : "normal" }

@@ -1,6 +1,8 @@
 generator - class
 createClassFor: aClass
 	| parentName |
+	(self isForeignClass: aClass)
+		ifTrue: [ ^ aClass smalltalkClass ].
 	parentName := aClass superInheritances
 		ifEmpty: [ 'Object' ]
 		ifNotEmpty: [ :supers | supers first superclass name ].

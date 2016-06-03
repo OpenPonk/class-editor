@@ -1,2 +1,2 @@
-(name 'UML-CodeGenerator-PeterUhnak.7' message 'WIP class prefix... this is a bit more complex.' id '00b04977-1b0e-4e45-8e24-a550abfd9075' date '3 June 2016' time '9:10:07.474705 am' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.6' message 'Fixed class hierarchy sorting.
-' id 'b1a28b64-3b2b-5878-8d05-15da8b200041' date '2 June 2016' time '11:08:35 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'UML-CodeGenerator-PeterUhnak.8' message 'Don''t generate classes for foreign packages.' id '333bb1a1-955c-4af5-9679-1dd83c6802ff' date '3 June 2016' time '2:11:54.87902 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.7' message 'WIP class prefix... this is a bit more complex.
+' id '8f4cb0c1-2363-5cc3-baad-a111bf21b243' date '3 June 2016' time '9:10:51 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
