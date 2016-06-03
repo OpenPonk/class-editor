@@ -13,7 +13,8 @@
 		"useLazyLoading",
 		"useEagerLoading",
 		"package",
-		"conflictPrefix" ],
+		"conflictPrefix",
+		"alwaysUsePrefix" ],
 	"name" : "DCUmlCodeGeneratorContext",
 	"pools" : [
 		 ],

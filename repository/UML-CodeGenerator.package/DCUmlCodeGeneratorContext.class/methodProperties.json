@@ -2,9 +2,8 @@
 	"class" : {
 		 },
 	"instance" : {
-		"conflictPrefix" : "PeterUhnak 5/31/2016 22:01",
-		"conflictPrefix:" : "PeterUhnak 5/31/2016 22:01",
-		"defaultOptions" : "PeterUhnak 5/31/2016 22:03",
+		"alwaysUsePrefix" : "PeterUhnak 6/3/2016 01:23",
+		"defaultOptions" : "PeterUhnak 6/3/2016 01:23",
 		"doNotOverrideMethods" : "PeterUhnak 4/25/2016 16:36:27",
 		"initialize" : "PeterUhnak 4/25/2016 16:36:27",
 		"overrideMethods" : "PeterUhnak 4/25/2016 16:36:27",
@@ -13,6 +12,7 @@
 		"prefix" : "PeterUhnak 4/25/2016 16:36:27",
 		"prefix:" : "PeterUhnak 4/25/2016 16:36:27",
 		"shouldAddAccessors" : "PeterUhnak 4/25/2016 16:36:27",
+		"shouldAlwaysUsePrefix" : "PeterUhnak 6/3/2016 01:23",
 		"shouldOverrideMethods" : "PeterUhnak 4/25/2016 16:36:27",
 		"shouldShowProgressBar" : "PeterUhnak 4/25/2016 16:36:27",
 		"shouldUseEagerInitialization" : "PeterUhnak 4/25/2016 16:36:27",

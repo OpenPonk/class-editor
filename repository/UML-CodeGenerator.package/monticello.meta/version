@@ -1,2 +1,2 @@
-(name 'UML-CodeGenerator-PeterUhnak.6' message 'Fixed class hierarchy sorting.' id '599f4db4-57e4-445e-b5da-11c1530ab23c' date '2 June 2016' time '11:07:54.215415 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.5' message 'Missed accessor.
-' id 'f59dbbc1-6d9a-5c87-94f0-fdb310aaddf5' date '31 May 2016' time '11:46:13 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'UML-CodeGenerator-PeterUhnak.7' message 'WIP class prefix... this is a bit more complex.' id '00b04977-1b0e-4e45-8e24-a550abfd9075' date '3 June 2016' time '9:10:07.474705 am' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.6' message 'Fixed class hierarchy sorting.
+' id 'b1a28b64-3b2b-5878-8d05-15da8b200041' date '2 June 2016' time '11:08:35 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -4,6 +4,9 @@
 	"instance" : {
 		"oneToManyAssociation" : "PeterUhnak 4/25/2016 16:36:27",
 		"setUp" : "PeterUhnak 5/31/2016 23:45",
+		"testClassName" : "PeterUhnak 6/3/2016 01:19",
+		"testClassNameAlwaysPrefixed" : "PeterUhnak 6/3/2016 01:22",
+		"testClassNamePrefixed" : "PeterUhnak 6/3/2016 01:20",
 		"testCreateAccessors" : "PeterUhnak 4/25/2016 16:36:27",
 		"testCreateAccessorsNot" : "PeterUhnak 4/25/2016 16:36:27",
 		"testCreateAttribute" : "PeterUhnak 4/25/2016 16:36:27",

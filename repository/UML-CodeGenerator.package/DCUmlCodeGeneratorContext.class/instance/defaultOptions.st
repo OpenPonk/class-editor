@@ -2,7 +2,7 @@ initialization
 defaultOptions
 	self package: #Unclassified.
 	self prefix: ''.
-	self conflictPrefix: ''.
+	alwaysUsePrefix := false.
 	self withProgressBar.
 	self withAccessors.
 	self doNotOverrideMethods.
