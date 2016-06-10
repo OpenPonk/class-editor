@@ -4,8 +4,10 @@ addLayoutMenu: builder parent: aParent
 		ifTrue: [ (builder item: 'GraphViz')
 				parent: aParent;
 				action: [ self
-						applyLayout:
-							[ :cls :inh :assoc | #RTGraphVizLayout asClass new on: cls directed: inh undirected: assoc ] ] ].
+						applyLayout: [ :cls :inh :assoc | 
+							#RTGraphVizLayout asClass new
+								orthogonalLines;
+								on: cls directed: inh undirected: assoc ] ] ].
 	(builder item: 'Grid')
 		parent: aParent;
 		action: [ self
