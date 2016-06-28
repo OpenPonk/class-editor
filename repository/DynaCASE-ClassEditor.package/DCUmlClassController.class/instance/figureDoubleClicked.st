@@ -1,0 +1,3 @@
+figures
+figureDoubleClicked
+	DCRenameElementCommand executeOn: self model

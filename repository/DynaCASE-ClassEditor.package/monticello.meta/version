@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.119' message 'Use orthogonal graphviz layout if available.' id '3c9e286c-be7b-4c2a-9438-9ca7ba16fcee' date '10 June 2016' time '2:03:38.455551 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.118' message 'WIP class prefix... this is a bit more complex.
-' id '1c8493bc-a804-5065-a790-2beb07c078e1' date '3 June 2016' time '9:14:15 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.120' message 'Association styles for code gen.' id 'ea1c14e5-e776-4195-bcf5-e75f827068c1' date '28 June 2016' time '12:34:41.529067 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.119' message 'Use orthogonal graphviz layout if available.
+' id '839102fb-3ed1-5fc3-b336-080ea5504e68' date '10 June 2016' time '2:04:34 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

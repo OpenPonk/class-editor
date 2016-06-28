@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testCreateContext
 	| dict context |
 	dict := {#package -> 'Target'.
@@ -6,7 +6,8 @@ testCreateContext
 	#addAccessors -> true.
 	#overrideMethods -> true.
 	#classPrefix -> 'Cls'.
-	#initializationType -> #lazy} asDictionary.
+	#initializationType -> #lazy.
+	#accessorsStyle -> #fame} asDictionary.
 	context := DCUmlCodeGeneratorWizard new createContextFrom: dict.
 	self assert: context package equals: 'Target'.
 	self assert: context shouldAddAccessors.
@@ -14,4 +15,5 @@ testCreateContext
 	self assert: context prefix equals: 'Cls'.
 	self assert: context shouldAlwaysUsePrefix.
 	self assert: context shouldUseLazyInitialization.
+	self assert: context accessorsStyle equals: #fame.
 	self deny: context shouldUseEagerInitialization

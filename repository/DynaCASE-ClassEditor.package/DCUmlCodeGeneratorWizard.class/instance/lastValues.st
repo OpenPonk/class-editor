@@ -5,5 +5,6 @@ lastValues
 			#classPrefix -> ''.
 			#alwaysUsePrefix -> false.
 			#addAccessors -> true.
+			#accessorsStyle -> #simple.
 			#overrideMethods -> true.
 			#initializationType -> #lazy} asDictionary ]

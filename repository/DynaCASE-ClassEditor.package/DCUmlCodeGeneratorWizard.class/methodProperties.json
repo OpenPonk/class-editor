@@ -1,11 +1,12 @@
 {
 	"class" : {
-		"open" : "PeterUhnak 6/3/2016 09:14:15",
-		"openOn:" : "PeterUhnak 6/3/2016 09:14:15" },
+		"open" : "PeterUhnak 6/10/2016 14:04:34",
+		"openOn:" : "PeterUhnak 6/10/2016 14:04:34" },
 	"instance" : {
-		"addConfigPane" : "PeterUhnak 6/3/2016 09:14:15",
-		"createContextFrom:" : "PeterUhnak 6/3/2016 09:14:15",
-		"initialize" : "PeterUhnak 6/3/2016 09:14:15",
-		"lastValues" : "PeterUhnak 6/3/2016 09:14:15",
-		"model:" : "PeterUhnak 6/3/2016 09:14:15",
-		"runGeneratorWith:" : "PeterUhnak 6/3/2016 09:14:15" } }
+		"addAccessorsPartTo:" : "PeterUhnak 6/17/2016 16:18",
+		"addConfigPane" : "PeterUhnak 6/17/2016 16:13",
+		"createContextFrom:" : "PeterUhnak 6/28/2016 11:22",
+		"initialize" : "PeterUhnak 6/10/2016 14:04:34",
+		"lastValues" : "PeterUhnak 6/17/2016 16:16",
+		"model:" : "PeterUhnak 6/10/2016 14:04:34",
+		"runGeneratorWith:" : "PeterUhnak 6/10/2016 14:04:34" } }

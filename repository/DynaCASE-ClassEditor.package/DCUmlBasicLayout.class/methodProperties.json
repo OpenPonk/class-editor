@@ -2,15 +2,15 @@
 	"class" : {
 		 },
 	"instance" : {
-		"adjustHierarchy" : "PeterUhnak 6/3/2016 09:14:15",
-		"collectClassFigures" : "PeterUhnak 6/3/2016 09:14:15",
-		"collectFiguresByClass:" : "PeterUhnak 6/3/2016 09:14:15",
-		"collectGeneralizationFigures" : "PeterUhnak 6/3/2016 09:14:15",
-		"initialize" : "PeterUhnak 6/3/2016 09:14:15",
-		"layoutAssociations" : "PeterUhnak 6/3/2016 09:14:15",
-		"layoutHierarchy" : "PeterUhnak 6/3/2016 09:14:15",
-		"layoutLabels" : "PeterUhnak 6/3/2016 09:14:15",
-		"liveUpdate:" : "PeterUhnak 6/3/2016 09:14:15",
-		"onController:" : "PeterUhnak 6/3/2016 09:14:15",
-		"updateView" : "PeterUhnak 6/3/2016 09:14:15",
-		"verticalFlip" : "PeterUhnak 6/3/2016 09:14:15" } }
+		"adjustHierarchy" : "PeterUhnak 6/10/2016 14:04:34",
+		"collectClassFigures" : "PeterUhnak 6/10/2016 14:04:34",
+		"collectFiguresByClass:" : "PeterUhnak 6/10/2016 14:04:34",
+		"collectGeneralizationFigures" : "PeterUhnak 6/10/2016 14:04:34",
+		"initialize" : "PeterUhnak 6/10/2016 14:04:34",
+		"layoutAssociations" : "PeterUhnak 6/10/2016 14:04:34",
+		"layoutHierarchy" : "PeterUhnak 6/10/2016 14:04:34",
+		"layoutLabels" : "PeterUhnak 6/10/2016 14:04:34",
+		"liveUpdate:" : "PeterUhnak 6/10/2016 14:04:34",
+		"onController:" : "PeterUhnak 6/10/2016 14:04:34",
+		"updateView" : "PeterUhnak 6/10/2016 14:04:34",
+		"verticalFlip" : "PeterUhnak 6/10/2016 14:04:34" } }

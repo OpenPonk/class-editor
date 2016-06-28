@@ -30,12 +30,7 @@ addConfigPane
 				text: '*If unchecked, existing classes not in the target package
 will not be generated, so you can subclass system classes.')
 		associatedTo: #textPart."
-	pane
-		addPart:
-			(CheckboxPart new
-				label: 'Add accessors';
-				defaultValue: (defaultValues at: #addAccessors))
-		associatedTo: #addAccessors.
+	self addAccessorsPartTo: pane.
 	pane
 		addPart:
 			(CheckboxPart new
