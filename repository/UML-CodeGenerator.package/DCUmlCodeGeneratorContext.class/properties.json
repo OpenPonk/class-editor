@@ -14,7 +14,8 @@
 		"useEagerLoading",
 		"package",
 		"conflictPrefix",
-		"alwaysUsePrefix" ],
+		"alwaysUsePrefix",
+		"accessorsStyle" ],
 	"name" : "DCUmlCodeGeneratorContext",
 	"pools" : [
 		 ],

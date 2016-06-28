@@ -1,2 +1,2 @@
-(name 'UML-CodeGenerator-PeterUhnak.8' message 'Don''t generate classes for foreign packages.' id '333bb1a1-955c-4af5-9679-1dd83c6802ff' date '3 June 2016' time '2:11:54.87902 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.7' message 'WIP class prefix... this is a bit more complex.
-' id '8f4cb0c1-2363-5cc3-baad-a111bf21b243' date '3 June 2016' time '9:10:51 am' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'UML-CodeGenerator-PeterUhnak.9' message 'Association styles for code gen.' id '3629b09a-3ae2-4278-bc8c-d1e91d6eb57f' date '28 June 2016' time '12:35:39.702213 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.8' message 'Don''t generate classes for foreign packages.
+' id '4039b2ec-2b68-5ddf-93ca-10a2e18afb8c' date '3 June 2016' time '2:12:25 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

@@ -4,10 +4,10 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "PeterUhnak 6/28/2016 12:18",
+	"commentStamp" : "PeterUhnak 6/28/2016 12:19",
 	"instvars" : [
-		 ],
-	"name" : "DCUmlCodeAssociationGenerator",
+		"container" ],
+	"name" : "DCUmlCodeSimpleAssociationGenerator",
 	"pools" : [
 		 ],
 	"super" : "DCUmlCodeAbstractAssociationGenerator",

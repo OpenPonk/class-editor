@@ -1,0 +1,18 @@
+{
+	"category" : "UML-CodeGenerator-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"generator",
+		"result",
+		"university",
+		"department",
+		"uniToDept" ],
+	"name" : "DCUmlCodeSimpleAssociationGeneratortest",
+	"pools" : [
+		 ],
+	"super" : "DCGeneratorTest",
+	"type" : "normal" }
