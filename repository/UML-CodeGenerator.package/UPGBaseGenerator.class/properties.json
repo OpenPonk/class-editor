@@ -1,14 +1,14 @@
 {
-	"category" : "UML-CodeGenerator-Tests",
+	"category" : "UML-CodeGenerator-Generators",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "DCCodeToUmlGeneratorTest",
+		"context" ],
+	"name" : "UPGBaseGenerator",
 	"pools" : [
 		 ],
-	"super" : "UPGBaseGeneratorTest",
+	"super" : "Object",
 	"type" : "normal" }

@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "DCCodeToUmlGeneratorTest",
+		"someVar" ],
+	"name" : "UPGTestForeign",
 	"pools" : [
 		 ],
-	"super" : "UPGBaseGeneratorTest",
+	"super" : "String",
 	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "UML-CodeGenerator-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 6/28/2016 12:18",
+	"instvars" : [
+		 ],
+	"name" : "UPGDirectAssociationGenerator",
+	"pools" : [
+		 ],
+	"super" : "UPGBaseAssociationGenerator",
+	"type" : "normal" }

@@ -7,7 +7,7 @@
 	"commentStamp" : "",
 	"instvars" : [
 		 ],
-	"name" : "DCCodeToUmlGeneratorTest",
+	"name" : "UPGGeneratorTest",
 	"pools" : [
 		 ],
 	"super" : "UPGBaseGeneratorTest",

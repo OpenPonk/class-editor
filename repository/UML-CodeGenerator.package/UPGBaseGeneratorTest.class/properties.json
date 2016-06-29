@@ -6,9 +6,12 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "DCCodeToUmlGeneratorTest",
+		"factory",
+		"model",
+		"cls",
+		"generator" ],
+	"name" : "UPGBaseGeneratorTest",
 	"pools" : [
 		 ],
-	"super" : "UPGBaseGeneratorTest",
+	"super" : "TestCase",
 	"type" : "normal" }

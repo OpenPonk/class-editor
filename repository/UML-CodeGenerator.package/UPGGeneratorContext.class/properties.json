@@ -1,0 +1,23 @@
+{
+	"category" : "UML-CodeGenerator-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 11/30/2015 13:29",
+	"instvars" : [
+		"showProgressBar",
+		"overrideMethods",
+		"generateAccessors",
+		"prefix",
+		"useLazyLoading",
+		"useEagerLoading",
+		"package",
+		"conflictPrefix",
+		"alwaysUsePrefix",
+		"accessorsStyle" ],
+	"name" : "UPGGeneratorContext",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

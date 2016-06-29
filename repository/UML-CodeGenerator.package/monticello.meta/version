@@ -1,2 +1,2 @@
-(name 'UML-CodeGenerator-PeterUhnak.9' message 'Association styles for code gen.' id '3629b09a-3ae2-4278-bc8c-d1e91d6eb57f' date '28 June 2016' time '12:35:39.702213 pm' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.8' message 'Don''t generate classes for foreign packages.
-' id '4039b2ec-2b68-5ddf-93ca-10a2e18afb8c' date '3 June 2016' time '2:12:25 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'UML-CodeGenerator-PeterUhnak.10' message 'Refactoring code generator.' id 'aca598ec-131f-4844-a58b-704426dc8a3c' date '29 June 2016' time '10:44:19.291041 am' author 'PeterUhnak' ancestors ((name 'UML-CodeGenerator-PeterUhnak.9' message 'Association styles for code gen.
+' id 'ac3e3fa1-90e1-5f00-9296-1058e3749aa5' date '28 June 2016' time '12:36:04 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
