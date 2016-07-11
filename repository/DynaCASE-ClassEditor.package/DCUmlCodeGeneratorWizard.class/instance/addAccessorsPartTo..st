@@ -10,7 +10,7 @@ addAccessorsPartTo: aPane
 		associatedTo: #addAccessors.
 	types := {#simple -> 'Simple (no synchronization)'.
 	#direct -> 'Direct synchronization (updating both sides)'.
-	#fame -> 'Intermediate object (use Fame MultiValueLinks)'}.
+	#fame -> 'Intermediate object (FAME) (todo)'}.
 	aPane
 		addPart:
 			(DropListPart new
