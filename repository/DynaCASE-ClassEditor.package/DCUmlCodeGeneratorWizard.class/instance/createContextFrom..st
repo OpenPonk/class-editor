@@ -1,12 +1,12 @@
 actions
 createContextFrom: aDictionary
 	| context |
-	context := DCUmlCodeGeneratorContext new.
+	context := UPGGeneratorContext new.
 	context
 		package: (aDictionary at: #package);
 		prefix: (aDictionary at: #classPrefix).
-	"(aDictionary at: #alwaysUsePrefix)
-		ifTrue: [ context alwaysUsePrefix ]."
+	(aDictionary at: #alwaysUsePrefix)
+		ifTrue: [ context alwaysUsePrefix ].
 	(aDictionary at: #addAccessors)
 		ifTrue: [ context withAccessors ]
 		ifFalse: [ context withoutAccessors ].
