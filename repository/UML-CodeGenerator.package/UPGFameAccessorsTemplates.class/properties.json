@@ -1,0 +1,15 @@
+{
+	"category" : "UML-CodeGenerator-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"value",
+		"attribute" ],
+	"name" : "UPGFameAccessorsTemplates",
+	"pools" : [
+		 ],
+	"super" : "UPGSimpleAccessorsTemplates",
+	"type" : "normal" }

@@ -1,0 +1,16 @@
+{
+	"category" : "UML-CodeGenerator-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"university",
+		"department",
+		"uniToDept" ],
+	"name" : "UPGFameAssociationsGeneratorTest",
+	"pools" : [
+		 ],
+	"super" : "UPGBaseGeneratorTest",
+	"type" : "normal" }

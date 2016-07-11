@@ -1,0 +1,15 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"createModel" : "PeterUhnak 6/29/2016 11:37",
+		"generatorClass" : "PeterUhnak 6/29/2016 11:44",
+		"setUp" : "PeterUhnak 6/29/2016 11:44",
+		"testAdder" : "PeterUhnak 6/29/2016 11:39",
+		"testGetter" : "PeterUhnak 6/29/2016 11:39",
+		"testGetter1" : "PeterUhnak 6/29/2016 11:39",
+		"testGetterEager" : "PeterUhnak 6/29/2016 11:39",
+		"testGetterLazy" : "PeterUhnak 6/29/2016 11:43",
+		"testRemover" : "PeterUhnak 6/29/2016 11:39",
+		"testSetterMany" : "PeterUhnak 6/29/2016 11:40",
+		"testSetterOne" : "PeterUhnak 6/29/2016 11:42" } }
