@@ -1,4 +1,4 @@
 visitor
 visitDefaultValue: aDefaultValue
 	aDefaultValue ifNil: [ ^ self ].
-	self shouldBeImplemented
+	"self shouldBeImplemented"
