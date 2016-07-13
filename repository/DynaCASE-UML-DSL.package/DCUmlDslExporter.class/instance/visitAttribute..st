@@ -10,4 +10,4 @@ visitAttribute: anAttribute
 			[ :val | 
 			stream
 				nextPutAll: ' = ';
-				nextPutAll: val valueExpression ]
+				nextPutAll: val valueExpression asString ]

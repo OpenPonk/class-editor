@@ -1,15 +1,15 @@
 {
 	"class" : {
-		"export:" : "PeterUhnak 3/22/2016 15:01:16" },
+		"export:" : "PeterUhnak 4/16/2016 16:58:45" },
 	"instance" : {
-		"export:" : "PeterUhnak 3/22/2016 15:01:16",
-		"line" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitAssociation:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitAttribute:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitClass:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitInheritance:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitMethod:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitModel:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitParameter:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitType:withMultiplicity:separator:" : "PeterUhnak 3/22/2016 15:01:16",
-		"visitTypeWithMultiplicity:" : "PeterUhnak 3/22/2016 15:01:16" } }
+		"export:" : "PeterUhnak 4/16/2016 16:58:45",
+		"line" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitAssociation:" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitAttribute:" : "PeterUhnak 7/13/2016 16:27",
+		"visitClass:" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitInheritance:" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitMethod:" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitModel:" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitParameter:" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitType:withMultiplicity:separator:" : "PeterUhnak 4/16/2016 16:58:45",
+		"visitTypeWithMultiplicity:" : "PeterUhnak 4/16/2016 16:58:45" } }

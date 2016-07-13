@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-DSL-PeterUhnak.28' message 'Permit _ in method names.' id 'e9f3023d-96fe-411f-8419-bc094c7a9f8e' date '16 April 2016' time '4:58:40.755779 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.27' message 'visibility tests.
-' id '174f8429-6a51-5aaa-9b45-7860b95e4cf8' date '3 April 2016' time '5:14:46 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-DSL-PeterUhnak.29' message 'cast attribute to string.' id 'b63a0de2-2a44-4660-8104-c3bfd13554ba' date '13 July 2016' time '4:28:52.33042 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-DSL-PeterUhnak.28' message 'Permit _ in method names.
+' id 'b184fed4-6bff-5978-bafc-c0a3cee6d33a' date '16 April 2016' time '4:58:45 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
