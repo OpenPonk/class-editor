@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.122' message 'fame associations are todo' id 'dd290330-5d1e-4cfd-9dda-2a2ac215cc39' date '11 July 2016' time '1:09:38.421987 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.121' message 'code recovery.
-' id '486bb283-4d07-5189-9251-e7ab2ce5acb1' date '11 July 2016' time '12:34:34 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.123' message 'Minor fixes.' id '87e3c6bf-7ced-446e-af0c-bbef40c60ef4' date '13 July 2016' time '4:26:41.760337 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.122' message 'fame associations are todo
+' id 'f811e7ef-144f-5465-9f3d-16ddc85a2afb' date '11 July 2016' time '1:09:59 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

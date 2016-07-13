@@ -14,4 +14,4 @@ famixTextFor: anAttribute
 				ifNotNil: [ :v | 
 					stream
 						nextPutAll: ' = ';
-						nextPutAll: v valueExpression ] ]
+						nextPutAll: v valueExpression asString ] ]

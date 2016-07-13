@@ -6,6 +6,11 @@ populateFromModel: anAttribute
 	value
 		ifEmpty: [ noDefaultRadio toggleState.
 			^ self ].
+	(Smalltalk hasClassNamed: type)
+		ifFalse: [ value
+				ifNotEmpty: [ codeRadio toggleState.
+					codeInput text: value.
+					^ self ] ].
 	(type asClass isKindOf: Number class)
 		ifTrue: [ numberRadio toggleState.
 			numberInput text: value.
