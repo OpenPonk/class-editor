@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.123' message 'Minor fixes.' id '87e3c6bf-7ced-446e-af0c-bbef40c60ef4' date '13 July 2016' time '4:26:41.760337 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.122' message 'fame associations are todo
-' id 'f811e7ef-144f-5465-9f3d-16ddc85a2afb' date '11 July 2016' time '1:09:59 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.124' message 'Smaller association diamonds.' id '236f34db-edd2-4dfd-a5b2-49f465a554be' date '14 July 2016' time '4:37:11.520431 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.123' message 'Minor fixes.
+' id 'c7cf907c-38aa-518d-8ea7-e2c7f7f921e1' date '13 July 2016' time '4:27:22 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
