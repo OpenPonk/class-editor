@@ -3,9 +3,10 @@
 		 },
 	"instance" : {
 		"contents" : "PeterUhnak 6/3/2016 12:54:38",
-		"ensureType:" : "PeterUhnak 6/3/2016 12:54:38",
+		"ensureType:" : "PeterUhnak 8/6/2016 16:32",
 		"export:" : "PeterUhnak 6/3/2016 12:54:38",
 		"initialize" : "PeterUhnak 6/3/2016 12:54:38",
+		"isPrimitiveType:" : "PeterUhnak 8/6/2016 16:39",
 		"visitAttribute:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitBinaryAssociation:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitClass:" : "PeterUhnak 6/3/2016 12:54:38",
@@ -18,5 +19,5 @@
 		"visitMultiplicity:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitOwnedEnd:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitParameter:" : "PeterUhnak 6/3/2016 12:54:38",
-		"visitType:" : "PeterUhnak 6/3/2016 12:54:38",
+		"visitType:" : "PeterUhnak 8/6/2016 16:42",
 		"visitUpperValue:" : "PeterUhnak 6/3/2016 12:54:38" } }

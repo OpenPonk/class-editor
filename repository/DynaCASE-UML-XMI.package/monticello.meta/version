@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-XMI-PeterUhnak.6' message 'code recovery.' id '271487f1-d13f-440b-b075-19367b449e1a' date '11 July 2016' time '12:35:15.464686 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.5' message 'empty multiplicity.
-' id '5e5b8e37-4540-5781-876d-99a64550bb2d' date '3 June 2016' time '12:54:38 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-XMI-PeterUhnak.7' message 'Be less stupid about primitive types.' id '12d5339e-28c6-442d-be85-8afcac336488' date '6 August 2016' time '4:54:12.432984 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.6' message 'code recovery.
+' id '2913b7ba-7c21-530e-8214-ef57c0730e4d' date '11 July 2016' time '12:35:35 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
