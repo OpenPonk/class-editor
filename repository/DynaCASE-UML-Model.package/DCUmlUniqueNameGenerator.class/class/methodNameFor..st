@@ -1,3 +1,3 @@
 generators
 methodNameFor: aModel
-	^ self uniqueNameIn: aModel methods baseName: 'Method'
+	^ self uniqueNameIn: aModel methods baseName: 'method'
