@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.20' message 'Lowercase default attribute/method name.' id 'e6592179-99df-4542-91c1-af5c41c03480' date '6 August 2016' time '3:22:51.069359 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.19' message 'Removed Enum/DataType because it''s not used atm.
-' id 'f3a3a46c-ca79-5ea5-a041-a182a20e2a63' date '28 May 2016' time '1:17:44 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.21' message 'Lowercase attr/method name test fix.' id '2da67862-556f-4f15-8282-f7fdb2ad93c7' date '6 August 2016' time '5:26:08.673236 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.20' message 'Lowercase default attribute/method name.
+' id '53457fb2-ffdf-5010-8cbe-eb35004e8732' date '6 August 2016' time '3:23:02 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

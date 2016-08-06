@@ -3,8 +3,8 @@ testMethodName
 	| model name |
 	model := FAMIXClass new.
 	name := generator methodNameFor: model.
-	self assert: name equals: 'Method'.
+	self assert: name equals: 'method'.
 	model addMethod: (FAMIXMethod named: name).
 
 	name := generator methodNameFor: model.
-	self assert: name equals: 'Method1'
+	self assert: name equals: 'method1'
