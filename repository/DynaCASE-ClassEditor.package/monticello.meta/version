@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.127' message 'Increased default class box size and line separation.' id '7b1bb4aa-b0ad-4423-bf2e-2f4c5548089b' date '6 August 2016' time '5:25:17.078844 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.126' message 'Changed provider ordering.
-' id 'fcefcc74-991e-5600-b161-f8fd289b0c17' date '6 August 2016' time '4:55:06 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.128' message 'BorderAttachPoint doesn''t work with connections.' id '7f8d87ca-8801-4762-a4ed-c6575a6968b7' date '6 August 2016' time '6:25:15.985134 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.127' message 'Increased default class box size and line separation.
+' id '483820d0-9ccf-53f7-92c9-4907072e0a17' date '6 August 2016' time '5:25:20 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
