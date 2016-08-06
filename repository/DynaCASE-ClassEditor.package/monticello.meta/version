@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.125' message 'Specifying types for attributes now uses DCSelectEntity.' id '05b5a9c0-c129-4178-8813-4011260e2086' date '6 August 2016' time '3:23:22.338892 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.124' message 'Smaller association diamonds.
-' id '3ed639b1-29f0-5cc8-87f4-1f0a3b9356e0' date '14 July 2016' time '4:37:45 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.126' message 'Changed provider ordering.' id '97a26496-fe55-422a-9ca1-53cc4f1554f1' date '6 August 2016' time '4:55:03.08322 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.125' message 'Specifying types for attributes now uses DCSelectEntity.
+' id 'c8c6f25c-c543-5c28-a93f-c97e91f6f1ea' date '6 August 2016' time '3:23:25 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

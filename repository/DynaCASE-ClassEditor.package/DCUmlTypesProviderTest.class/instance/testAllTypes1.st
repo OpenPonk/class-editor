@@ -5,6 +5,6 @@ testAllTypes1
 	profile := Array with: (FAMIXClass named: 'MyProfileClass').
 	provider modelTypes: model.
 	provider profileTypes: profile.
-	self assert: provider allTypes keys equals: #(primitives collections model profile).
+	self assert: provider allTypes keys equals: #(model profile primitives collections).
 	self assert: (provider allTypes at: #model) equals: model.
 	self assert: (provider allTypes at: #profile) equals: profile
