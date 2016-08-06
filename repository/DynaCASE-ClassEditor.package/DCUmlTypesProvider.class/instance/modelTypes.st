@@ -1,0 +1,3 @@
+accessing
+modelTypes
+	^ modelTypes ifNil: [ #() ]

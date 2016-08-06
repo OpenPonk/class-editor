@@ -1,14 +1,21 @@
 ui hooks
 buildEditorForm: aForm
+	| provider |
 	self buildStereotypeEditorForm: aForm.
 	self buildNameEditorForm: aForm.
-	(aForm addTextInput: 'Type')
-		text: (self model declaredType ifNil: [ '' ] ifNotNil: [ :t | t name ]);
-		whenTextIsAccepted: [ :newValue | 
-			newValue
-				ifEmpty: [ self model declaredType: nil ]
-				ifNotEmpty: [ self model declaredType: (FAMIXClass named: newValue) ].
-			self refreshFigure ].
+	provider := DCUmlTypesProvider new.
+	provider modelTypes: self diagramController model allTypes.
+	(aForm addEntity: 'Type')
+		displaySymbol: #name;
+		possibleEntities: [ provider allTypes values flatten ];
+		entity: self model declaredType;
+		whenEntityChanged: [ :e | 
+			(e isKindOf: Association)
+				ifFalse: [ e name = 'nil'
+						ifTrue: [ self model declaredType: nil ]
+						ifFalse: [ self model declaredType: e ] ].
+			self refreshFigure ];
+		selectDialog: [ DCUmlTypeListPresenter new itemsBlock: [ provider allTypes ] ].
 	aForm addLabel: 'Default value'.
 	(aForm addButton: 'change...')
 		action: [ DCUmlAttributeEditor openOn: self model onAccept: [ self refreshFigure ] ].

@@ -1,0 +1,17 @@
+{
+	"class" : {
+		"defaultSpec" : "PeterUhnak 8/6/2016 14:37" },
+	"instance" : {
+		"addEntryButton" : "PeterUhnak 8/6/2016 12:51",
+		"addEntryLabel:" : "PeterUhnak 8/6/2016 12:51",
+		"entriesList" : "PeterUhnak 8/6/2016 12:51",
+		"initialize" : "PeterUhnak 8/6/2016 12:51",
+		"initializePresenter" : "PeterUhnak 8/6/2016 14:37",
+		"initializeWidgets" : "PeterUhnak 8/6/2016 14:43",
+		"itemsBlock:" : "PeterUhnak 8/6/2016 12:51",
+		"openEntryEditor" : "PeterUhnak 8/6/2016 12:51",
+		"openEntryEditorOn:" : "PeterUhnak 8/6/2016 12:51",
+		"openEntryEditorOn:isNew:" : "PeterUhnak 8/6/2016 12:51",
+		"refreshList" : "PeterUhnak 8/6/2016 14:34",
+		"searchInput" : "PeterUhnak 8/6/2016 12:51",
+		"selectedItem" : "PeterUhnak 8/6/2016 14:54" } }

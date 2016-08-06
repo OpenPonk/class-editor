@@ -1,0 +1,19 @@
+{
+	"category" : "DynaCASE-ClassEditor-Windows",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 8/6/2016 12:52",
+	"instvars" : [
+		"searchInput",
+		"addEntryButton",
+		"entriesList",
+		"itemsBlock",
+		"displayNameBlock",
+		"orphanedItems" ],
+	"name" : "DCUmlTypeListPresenter",
+	"pools" : [
+		 ],
+	"super" : "ComposableModel",
+	"type" : "normal" }
