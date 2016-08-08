@@ -1,2 +1,2 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.128' message 'BorderAttachPoint doesn''t work with connections.' id '7f8d87ca-8801-4762-a4ed-c6575a6968b7' date '6 August 2016' time '6:25:15.985134 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.127' message 'Increased default class box size and line separation.
-' id '483820d0-9ccf-53f7-92c9-4907072e0a17' date '6 August 2016' time '5:25:20 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-ClassEditor-PeterUhnak.129' message 'Adding cls/attr/method or doubleclicking will ask for a new name.' id 'c9703728-a9ed-480a-b6ff-d16f799b56d1' date '8 August 2016' time '7:53:31.360696 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.128' message 'BorderAttachPoint doesn''t work with connections.
+' id '1a4f6fe6-a733-5ab6-8e1a-e336fd3e0640' date '6 August 2016' time '6:25:20 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

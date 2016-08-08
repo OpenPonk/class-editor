@@ -1,14 +1,17 @@
 ui hooks
 initializePalette: aPalette
-	(aPalette newCreationTool: [ DCUmlClassController new ])
+	(aPalette newCreationEntry: [ DCUmlClassController new ])
 		label: 'Class';
-		icon: DCUmlIcons current classIcon.
-	(aPalette newCreationTool: [ DCUmlAttributeController new ])
+		icon: DCUmlIcons current classIcon;
+		whenCompletedRename.
+	(aPalette newCreationEntry: [ DCUmlAttributeController new ])
 		label: 'Attribute';
-		icon: Smalltalk ui theme icons abstractIcon.
-	(aPalette newCreationTool: [ DCUmlMethodController new ])
+		icon: Smalltalk ui theme icons abstractIcon;
+		whenCompletedRename.
+	(aPalette newCreationEntry: [ DCUmlMethodController new ])
 		label: 'Method';
-		icon: Smalltalk ui theme icons blankIcon.
+		icon: Smalltalk ui theme icons blankIcon;
+		whenCompletedRename.
 	(aPalette newConnectionCreationTool: [ DCUmlInheritanceController new ])
 		label: 'Inheritance';
 		icon: DCUmlIcons current generalizationIcon.
