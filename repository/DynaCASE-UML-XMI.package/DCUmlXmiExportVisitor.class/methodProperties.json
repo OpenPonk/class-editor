@@ -4,13 +4,14 @@
 	"instance" : {
 		"contents" : "PeterUhnak 6/3/2016 12:54:38",
 		"ensureType:" : "PeterUhnak 8/6/2016 16:32",
-		"export:" : "PeterUhnak 6/3/2016 12:54:38",
+		"export:" : "PeterUhnak 8/9/2016 15:55",
 		"initialize" : "PeterUhnak 6/3/2016 12:54:38",
 		"isPrimitiveType:" : "PeterUhnak 8/6/2016 16:39",
 		"visitAttribute:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitBinaryAssociation:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitClass:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitDefaultValue:" : "PeterUhnak 6/28/2016 15:00",
+		"visitExtension:" : "PeterUhnak 8/9/2016 17:20",
 		"visitInheritance:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitLowerValue:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitMemberEnd:" : "PeterUhnak 6/3/2016 12:54:38",
@@ -19,5 +20,6 @@
 		"visitMultiplicity:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitOwnedEnd:" : "PeterUhnak 6/3/2016 12:54:38",
 		"visitParameter:" : "PeterUhnak 6/3/2016 12:54:38",
+		"visitStereotype:" : "PeterUhnak 8/9/2016 17:18",
 		"visitType:" : "PeterUhnak 8/6/2016 16:42",
 		"visitUpperValue:" : "PeterUhnak 6/3/2016 12:54:38" } }

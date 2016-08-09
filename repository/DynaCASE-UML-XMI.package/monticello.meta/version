@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-XMI-PeterUhnak.7' message 'Be less stupid about primitive types.' id '12d5339e-28c6-442d-be85-8afcac336488' date '6 August 2016' time '4:54:12.432984 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.6' message 'code recovery.
-' id '2913b7ba-7c21-530e-8214-ef57c0730e4d' date '11 July 2016' time '12:35:35 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-XMI-PeterUhnak.8' message 'Persistence of pseudo-stereotypes (no profile).Fixed Moose ID loading.' id '2ba1552e-24b2-43e9-87c3-f37ac99c1ade' date '9 August 2016' time '6:02:40.823262 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-XMI-PeterUhnak.7' message 'Be less stupid about primitive types.
+' id 'feb83ed4-3503-502e-b3bf-8534b9fae26e' date '6 August 2016' time '4:54:15 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())

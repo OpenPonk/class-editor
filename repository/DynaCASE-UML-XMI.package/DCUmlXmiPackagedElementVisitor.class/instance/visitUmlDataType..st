@@ -5,6 +5,6 @@ visitUmlDataType: anElement
 		put: [ FAMIXClass new
 				name: anElement @ #name;
 				addStereotype: (DCFAMIXStereotype named: 'dataType');
-				instVarNamed: #mooseID put: anElement xmiId;
+				instVarNamed: #mooseID put: (self idFrom: anElement xmiId);
 				mooseModel: (self elementAt: anElement parent xmiId);
 				yourself ]
