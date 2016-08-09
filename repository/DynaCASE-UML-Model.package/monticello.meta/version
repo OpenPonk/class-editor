@@ -1,2 +1,2 @@
-(name 'DynaCASE-UML-Model-PeterUhnak.21' message 'Lowercase attr/method name test fix.' id '2da67862-556f-4f15-8282-f7fdb2ad93c7' date '6 August 2016' time '5:26:08.673236 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.20' message 'Lowercase default attribute/method name.
-' id '53457fb2-ffdf-5010-8cbe-eb35004e8732' date '6 August 2016' time '3:23:02 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
+(name 'DynaCASE-UML-Model-PeterUhnak.22' message 'Added stereotype>>acept:' id '9ea75b0f-14d6-4f3d-836d-da67445ccba9' date '9 August 2016' time '6:03:04.801692 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-UML-Model-PeterUhnak.21' message 'Lowercase attr/method name test fix.
+' id '3bebd100-dfc1-52a7-8f51-4d245b258a70' date '6 August 2016' time '5:26:11 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
