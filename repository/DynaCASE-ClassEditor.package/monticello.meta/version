@@ -1,2 +1,0 @@
-(name 'DynaCASE-ClassEditor-PeterUhnak.130' message 'Thinking about diagram interchange storage.' id 'ba0f412a-9d5c-490e-a0ea-d8304b250d81' date '9 August 2016' time '11:42:39.786298 pm' author 'PeterUhnak' ancestors ((name 'DynaCASE-ClassEditor-PeterUhnak.129' message 'Adding cls/attr/method or doubleclicking will ask for a new name.
-' id '1e131e24-9cd0-5c32-ab5d-bff153e9be40' date '8 August 2016' time '7:53:43 pm' author 'PeterUhnak' ancestors () stepChildren ())) stepChildren ())
