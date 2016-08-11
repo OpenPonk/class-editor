@@ -1,6 +1,10 @@
 examples
 exampleDsl
+	| model diagramInterchange |
+	model := self sampleDsl.
+	diagramInterchange := self sampleDslDIFor: model.
 	DCProject new
-		projectName: 'UML Class Diagram';
-		addModel: self sampleDsl;
+		projectName: 'University Model';
+		addModel: model;
+		layout: diagramInterchange for: model;
 		open
