@@ -15,4 +15,4 @@ example
 	el renderIn: v.
 	el rtElement when: TRMouseLeftClick do: [ :evt |  ].
 	el rtElement @ RTResizable @ RTDraggable.
-	v
+	v inspect

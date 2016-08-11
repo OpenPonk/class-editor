@@ -1,9 +1,0 @@
-{
-	"class" : {
-		 },
-	"instance" : {
-		"elementClass" : "PeterUhnak 11/23/2015 14:38:12",
-		"testLocalStyleNotInherited" : "PeterUhnak 11/23/2015 14:38:12",
-		"testPropertyInheritance" : "PeterUhnak 11/23/2015 14:38:12",
-		"testSharedStyleIsInherited" : "PeterUhnak 11/23/2015 14:38:12",
-		"testSharedStyleOverriden" : "PeterUhnak 11/23/2015 14:38:12" } }
