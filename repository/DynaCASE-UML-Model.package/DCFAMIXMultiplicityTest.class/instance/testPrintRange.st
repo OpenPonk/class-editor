@@ -1,4 +1,4 @@
-tests
+tests-printing
 testPrintRange
 	self assert: DCFAMIXMultiplicity zeroToMany printRange equals: '[*]'.
 	self assert: DCFAMIXMultiplicity oneToMany printRange equals: '[1..*]'.
