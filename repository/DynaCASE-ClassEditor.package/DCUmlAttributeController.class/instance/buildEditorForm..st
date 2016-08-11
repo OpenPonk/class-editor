@@ -20,21 +20,9 @@ buildEditorForm: aForm
 	(aForm addButton: 'change...')
 		action: [ DCUmlAttributeEditor openOn: self model onAccept: [ self refreshFigure ] ].
 	self buildIsClassSideEditorForm: aForm.
-	(aForm addTextInput: 'Multiplicity min')
-		text: self model multiplicity printLower;
-		whenTextIsAccepted: [ :val | 
-			val
-				ifNotEmpty: [ self model multiplicity lower: val asString.
-					self refreshFigure ] ].
-	(aForm addTextInput: 'Multiplicity max')
-		text: self model multiplicity printUpper;
-		whenTextIsAccepted: [ :val | 
-			val
-				ifNotEmpty: [ | num |
-					num := val = '*'
-						ifTrue: [ DCUnlimitedNatural max ]
-						ifFalse: [ (NumberParser on: val)
-								failBlock: [  ];
-								nextNumber ].
-					num ifNotNil: [ self model multiplicity upper: num ].
-					self refreshFigure ] ]
+	(aForm addEditableDroplist: 'Multiplicity')
+		items: #('0..1' '1..1' '0..*' '1..*');
+		setSelectedItem: self model multiplicity printFullRange;
+		whenSelectedItemChanged: [ :val | 
+			self model multiplicity: (DCFAMIXMultiplicity fromString: val).
+			self refreshFigure ]

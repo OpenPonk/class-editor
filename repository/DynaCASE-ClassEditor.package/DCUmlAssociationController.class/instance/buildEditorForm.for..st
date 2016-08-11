@@ -22,25 +22,9 @@ buildEditorForm: form for: anEnd
 		whenSelectedItemChanged: [ :newValue | 
 			anEnd aggregation: newValue.
 			self refreshFigure ].
-
-	(form addTextInput: 'Multiplicity min')
-		text: anEnd multiplicity printLower;
-		whenTextIsAccepted:
-				[ :val | 
-			val
-				ifNotEmpty: [ anEnd multiplicity lower: val asNumber.
-					self refreshFigure ] ].
-	(form addTextInput: 'Multiplicity max')
-		text: anEnd multiplicity printUpper;
-		whenTextIsAccepted:
-				[ :val | 
-			val
-				ifNotEmpty:
-					[ | num |
-					num := val = '*'
-						ifTrue: [ DCUnlimitedNatural max ]
-						ifFalse: [ (NumberParser on: val)
-								failBlock: [  ];
-								nextNumber ].
-					num ifNotNil: [ anEnd multiplicity upper: num ].
-					self refreshFigure ] ]
+	(form addEditableDroplist: 'Multiplicity')
+		items: #('0..1' '1..1' '0..*' '1..*');
+		setSelectedItem: anEnd multiplicity printFullRange;
+		whenSelectedItemChanged: [ :val | 
+			anEnd multiplicity: (DCFAMIXMultiplicity fromString: val).
+			self refreshFigure ]
