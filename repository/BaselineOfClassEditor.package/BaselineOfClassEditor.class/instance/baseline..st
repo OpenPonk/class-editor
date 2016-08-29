@@ -29,7 +29,7 @@ baseline: spec
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Merlin/main' ].
 			spec
 				baseline: 'DynaCASE'
-				with: [ spec repository: 'github://dynacase/dynacase/repository' ].
+				with: [ spec repository: 'github://openponk/openponk/repository' ].
 			spec
 				project: 'PetitParser'
 					with: [ spec
