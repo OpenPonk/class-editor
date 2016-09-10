@@ -14,6 +14,7 @@ populateFromModel: anAttribute
 	(type asClass isKindOf: Number class)
 		ifTrue: [ numberRadio toggleState.
 			numberInput text: value.
+			unitInput text: (anAttribute unit ifNil: [ '' ]).
 			^ self ].
 	type = #Boolean
 		ifTrue: [ booleanRadio toggleState.
