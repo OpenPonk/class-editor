@@ -4,7 +4,7 @@ testSetterMultipleSourceFor
 	input multiplicity upper: 2.
 	result := transformer setterSourceFor: input.
 	self
-		assert: result source
+		assert: result body
 		equals:
 			'item: aCollection
 	item = aCollection ifTrue: [ ^ self ]. "for optimization"

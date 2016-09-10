@@ -4,7 +4,7 @@ testDefaultMethodSourceFor
 		defaultValue: (DCFAMIXValueSpecification from: '15').
 	result := transformer defaultMethodSourceFor: input.
 	self
-		assert: result source
+		assert: result body
 		equals:
 			'item_default
 	^ 15'

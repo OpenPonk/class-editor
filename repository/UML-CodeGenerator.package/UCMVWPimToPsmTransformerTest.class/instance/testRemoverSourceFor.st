@@ -4,7 +4,7 @@ testRemoverSourceFor
 	input multiplicity upper: 2.
 	result := transformer removerSourceFor: input.
 	self
-		assert: result source
+		assert: result body
 		equals:
 			'removeItem: anObject
 	items remove: anObject'

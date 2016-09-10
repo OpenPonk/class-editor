@@ -3,7 +3,7 @@ testIsAbstractMethodSourceFor
 	input := FAMIXClass named: 'Item'.
 	result := transformer isAbstractMethodSourceFor: input.
 	self
-		assert: result source
+		assert: result body
 		equals:
 			'isAbstract
 	^ self = Item'

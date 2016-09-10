@@ -15,7 +15,7 @@ writeMethodsIn: aModel
 											writer
 												tag: 'body'
 												attributes: (Dictionary with: #package -> packageName with: 'selector' -> method name)
-												with: method sourceText ] ] ] ].
+												with: method body ] ] ] ].
 			((cls methods select: #isStatic) groupedBy: #protocol)
 				valuesDo: [ :group | 
 					group
@@ -29,4 +29,4 @@ writeMethodsIn: aModel
 											writer
 												tag: 'body'
 												attributes: (Dictionary with: #package -> packageName with: 'selector' -> method name)
-												with: method sourceText ] ] ] ] ]
+												with: method body ] ] ] ] ]

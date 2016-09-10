@@ -4,7 +4,7 @@ testLazyGetterSourceFor
 		defaultValue: (DCFAMIXValueSpecification from: '15').
 	result := transformer getterSourceFor: input.
 	self
-		assert: result source
+		assert: result body
 		equals:
 			'item
 	^ item ifNil: [ item := 15 ]'
