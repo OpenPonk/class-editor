@@ -1,7 +1,11 @@
 as yet unclassified
 writeModel: aModel
 	namespaceEnvironment := 'CormasNS.Models'.
-	packageName := 'MyPSM'.
+	packageName := 'UnknownModel'.
+	aModel
+		detect:
+			[ :each | each stereotypes isNotEmpty and: [ each stereotypes first name = 'CormasModel' ] ]
+		ifFound: [ :each | packageName := each name ].
 	environment := namespaceEnvironment , '.' , packageName.
 	writer := XMLWriter new.
 	writer
