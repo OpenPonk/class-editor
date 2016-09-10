@@ -8,7 +8,9 @@ toolbarMenu: aBuilder
 				modelClass: MooseModel;
 				model: aBuilder model diagramController model;
 				openWithSpec ].
-	(aBuilder item: 'Generate Code...')
+	(aBuilder item: 'Generate VW Code...')
+		action: [ CECMVWGeneratorWizard openOn: aBuilder model diagramController model ]
+	"	(aBuilder item: 'Generate Code...')
 		action: [ DCUmlCodeGeneratorWizard openOn: aBuilder model diagramController model ].
 	(aBuilder item: 'Import Code...')
-		action: [ DCUmlCodeImporterWizard openOn: aBuilder model diagramController model ]
+		action: [ DCUmlCodeImporterWizard openOn: aBuilder model diagramController model ]"
