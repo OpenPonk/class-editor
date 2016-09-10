@@ -7,4 +7,4 @@ createGetterFor: anAssociationEnd in: aClass
 			(FAMIXMethod new
 				name: source lines first;
 				protocol: 'accessing';
-				sourceAnchor: (FAMIXSourceTextAnchor new source: source))
+				sourceAnchor: (DCUmlSingleOpaqueBehavior body: source))

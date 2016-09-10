@@ -1,7 +1,7 @@
 transforming - accessors
 eagerGetterSourceFor: anAttribute
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('{1}
 	^ {1}'
 				format:

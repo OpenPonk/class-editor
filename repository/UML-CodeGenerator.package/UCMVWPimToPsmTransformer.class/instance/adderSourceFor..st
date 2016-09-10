@@ -6,8 +6,12 @@ adderSourceFor: aFamixEntity
 	prefix := typeName first isVowel
 		ifTrue: [ 'an' ]
 		ifFalse: [ 'a' ].
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('add{1}: {2}
 	{3} add: {2}'
-				format: (Array with: name capitalized with: prefix , typeName with: aFamixEntity name))
+				format:
+					(Array
+						with: name capitalized
+						with: prefix , typeName
+						with: aFamixEntity name))

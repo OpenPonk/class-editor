@@ -6,8 +6,12 @@ removerSourceFor: aFamixEntity
 	prefix := typeName first isVowel
 		ifTrue: [ 'an' ]
 		ifFalse: [ 'a' ].
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('remove{1}: {2}
 	{3} remove: {2}'
-				format: (Array with: name capitalized with: prefix , typeName with: aFamixEntity name))
+				format:
+					(Array
+						with: name capitalized
+						with: prefix , typeName
+						with: aFamixEntity name))

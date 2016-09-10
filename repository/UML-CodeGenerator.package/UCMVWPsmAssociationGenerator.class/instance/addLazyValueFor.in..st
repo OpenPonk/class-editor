@@ -3,8 +3,8 @@ addLazyValueFor: anAttribute in: aClass
 	| expression source |
 	expression := self defaultValueExpressionFor: anAttribute.
 	expression ifNil: [ ^ self ].
-	source := FAMIXSourceTextAnchor new
-		source:
+	source := DCUmlSingleOpaqueBehavior
+		body:
 			('{name}
 	^ {name} ifNil: [ {name} := {value} ]'
 				format: (Dictionary with: #name -> anAttribute name with: #value -> expression)).

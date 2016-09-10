@@ -1,7 +1,7 @@
 transforming - accessors
 lazyGetterSourceFor: anAttribute
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('{1}
 	^ {1} ifNil: [ {1} := {3} ]'
 				format:

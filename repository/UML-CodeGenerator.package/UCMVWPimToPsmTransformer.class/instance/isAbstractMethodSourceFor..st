@@ -1,6 +1,6 @@
 transforming - meta
 isAbstractMethodSourceFor: aClass
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('isAbstract
 	^ self = {1}' format: {aClass name})

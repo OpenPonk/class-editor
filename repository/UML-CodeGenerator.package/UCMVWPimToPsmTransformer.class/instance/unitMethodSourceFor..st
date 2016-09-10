@@ -1,7 +1,7 @@
 transforming - meta
 unitMethodSourceFor: anAttribute
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('{1}_unit
 	^ ''{2}'''
 				format:

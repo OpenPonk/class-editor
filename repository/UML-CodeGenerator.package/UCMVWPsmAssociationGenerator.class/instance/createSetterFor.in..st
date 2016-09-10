@@ -5,6 +5,6 @@ createSetterFor: anAssociationEnd in: aClass
 	aClass
 		addMethod:
 			(FAMIXMethod new
-				name: (source lines first splitOn: ':') first, ':';
+				name: (source lines first splitOn: ':') first , ':';
 				protocol: 'accessing';
-				sourceAnchor: (FAMIXSourceTextAnchor new source: source))
+				sourceAnchor: (DCUmlSingleOpaqueBehavior body: source))

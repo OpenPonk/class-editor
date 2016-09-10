@@ -1,7 +1,7 @@
 transforming - accessors
 setterSourceFor: anAttribute
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('{1}: {2}
 	{1} = {2} ifTrue: [ ^ self ]. "for optimization"
 	{1} := {2}.

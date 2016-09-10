@@ -1,7 +1,7 @@
 transforming - meta
 defaultMethodSourceFor: anAttribute
-	^ FAMIXSourceTextAnchor new
-		source:
+	^ DCUmlSingleOpaqueBehavior
+		body:
 			('{1}_default
 	^ {2}'
 				format:
