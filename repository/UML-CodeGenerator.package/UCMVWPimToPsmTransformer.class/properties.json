@@ -1,0 +1,16 @@
+{
+	"category" : "UML-CodeGenerator-VW-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/5/2016 17:04",
+	"instvars" : [
+		"context",
+		"typesLookup",
+		"associationsGenerator" ],
+	"name" : "UCMVWPimToPsmTransformer",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

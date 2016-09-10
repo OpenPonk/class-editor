@@ -1,5 +1,5 @@
 templates
 getter
 	^ '{name}
-	<DCAssociation: ''{dsl}''>
+	"<DCAssociation: ''{dsl}''>"
 	^ {name}'

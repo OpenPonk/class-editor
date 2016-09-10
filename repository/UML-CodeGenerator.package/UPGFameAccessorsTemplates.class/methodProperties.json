@@ -1,9 +1,0 @@
-{
-	"class" : {
-		 },
-	"instance" : {
-		"setterMany:" : "PeterUhnak 6/29/2016 11:48",
-		"setterManyToNone:" : "PeterUhnak 6/29/2016 12:06",
-		"setterOneToMany:" : "PeterUhnak 6/29/2016 12:07",
-		"setterOneToNone:" : "PeterUhnak 6/29/2016 12:06",
-		"setterOneToOne:" : "PeterUhnak 6/29/2016 12:08" } }

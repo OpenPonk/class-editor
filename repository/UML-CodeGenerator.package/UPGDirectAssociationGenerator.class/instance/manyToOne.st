@@ -5,5 +5,6 @@ manyToOne
 	{name} = {param} ifTrue: [ ^ self ].
 	oldRef := {name}.
 	{name} := {param}.
-	oldRef ifNotNil: [ oldRef remove{otherNameSg}: self ].
-	{name} ifNotNil: [ {name} add{otherNameSg}: self ]'
+	"oldRef ifNotNil: [ oldRef remove{otherNameSgCapitalized}: self ]."
+	oldRef ifNotNil: [ oldRef forgetAttribute: #{otherNameSg} ].
+	{name} ifNotNil: [ {name} add{otherNameSgCapitalized}: self ]'

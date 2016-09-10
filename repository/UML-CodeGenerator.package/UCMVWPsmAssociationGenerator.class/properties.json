@@ -1,0 +1,14 @@
+{
+	"category" : "UML-CodeGenerator-VW-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"typesLookup" ],
+	"name" : "UCMVWPsmAssociationGenerator",
+	"pools" : [
+		 ],
+	"super" : "UPGDirectAssociationGenerator",
+	"type" : "normal" }

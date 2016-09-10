@@ -1,0 +1,18 @@
+{
+	"category" : "UML-CodeGenerator-VW-Generators",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"xmlWriter",
+		"writer",
+		"packageName",
+		"environment",
+		"namespaceEnvironment" ],
+	"name" : "UCMVWXmlExporter",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

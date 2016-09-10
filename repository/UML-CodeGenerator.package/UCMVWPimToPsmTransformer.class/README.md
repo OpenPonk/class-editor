@@ -1,0 +1,1 @@
+I take PIM model and transform it into VisualWorks PSM by appling patterns specific to the CORMAS platform.
