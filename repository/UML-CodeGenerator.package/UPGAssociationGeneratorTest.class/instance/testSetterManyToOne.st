@@ -8,5 +8,6 @@ testSetterManyToOne
 	university = anUniversity ifTrue: [ ^ self ].
 	oldRef := university.
 	university := anUniversity.
-	oldRef ifNotNil: [ oldRef removeDepartment: self ].
+	"oldRef ifNotNil: [ oldRef removeDepartment: self ]."
+	oldRef ifNotNil: [ oldRef forgetAttribute: #department ].
 	university ifNotNil: [ university addDepartment: self ]'

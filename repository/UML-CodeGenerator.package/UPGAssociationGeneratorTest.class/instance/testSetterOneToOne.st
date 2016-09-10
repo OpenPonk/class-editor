@@ -8,5 +8,6 @@ testSetterOneToOne
 		university = anUniversity ifTrue: [ ^ self ].
 		oldRef := university.
 		university := anUniversity.
-		oldRef ifNotNil: [ oldRef president: nil ].
+		"oldRef ifNotNil: [ oldRef president: nil ]."
+		oldRef ifNotNil: [ oldRef forgetAttribute: #president ].
 		university ifNotNil: [ university president: self ]'
