@@ -1,0 +1,14 @@
+{
+	"category" : "UMLClassEditor-Cormas",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "CormasUMLExamples",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
