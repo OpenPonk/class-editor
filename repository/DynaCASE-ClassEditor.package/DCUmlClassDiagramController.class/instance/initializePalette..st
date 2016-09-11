@@ -3,7 +3,11 @@ initializePalette: aPalette
 	(aPalette newCreationEntry: [ DCUmlClassController new ])
 		label: 'Class';
 		icon: DCUmlIcons current classIcon;
-		whenCompletedRename.
+		whenCompleted: [ :ctrl | 
+			DCRenameElementCommand executeOn: ctrl model.
+			ctrl refreshFigure.
+			self model isCormasModel
+				ifTrue: [ ctrl addAutomaticCormasAssociation ] ].
 	(aPalette newCreationEntry: [ DCUmlAttributeController new ])
 		label: 'Attribute';
 		icon: Smalltalk ui theme icons abstractIcon;
