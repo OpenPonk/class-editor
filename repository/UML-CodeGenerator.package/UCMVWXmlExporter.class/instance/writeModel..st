@@ -1,7 +1,5 @@
 as yet unclassified
 writeModel: aModel
-	namespaceEnvironment := 'CormasNS.Models'.
-	packageName := 'UnknownModel'.
 	aModel
 		detect:
 			[ :each | each stereotypes isNotEmpty and: [ each stereotypes first name = 'CormasModel' ] ]

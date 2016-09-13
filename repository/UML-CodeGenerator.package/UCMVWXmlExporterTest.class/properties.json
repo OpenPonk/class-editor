@@ -1,0 +1,14 @@
+{
+	"category" : "UML-CodeGenerator-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"exporter" ],
+	"name" : "UCMVWXmlExporterTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
