@@ -1,0 +1,55 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class VegetationUnit_PIM {
+  biomass : Integer = 0 <<kg>>
+}
+
+VegetationUnit_PIM ..> VegetationUnit_PSM : transformation >
+
+class VegetationUnit_PSM {
+  -biomass
+  __
+  --accessing--
+  biomass() : Integer
+  biomass:(aNumber : Integer)
+  -- + parameter unit--
+  {static} biomass_type(): Class
+  {static} biomass_unit(): String
+  --- default value--
+  {static} biomass_default(): Integer
+}
+
+note right of VegetationUnit_PSM::biomass()
+"accessing"
+biomass
+  ^ biomass ifNil: [ biomass := 0 ]
+end note
+
+note right of VegetationUnit_PSM::biomass:
+"accessing"
+biomass: anInteger
+	biomass = anInteger ifTrue: [ ^ self ]. "for optimization"
+	biomass := anInteger.
+	self changed
+end note
+
+note right of VegetationUnit_PSM::biomass_type
+" + parameter unit"
+biomass_type
+	^ Integer
+end note
+
+note right of VegetationUnit_PSM::biomass_unit
+" + parameter unit"
+biomass_unit
+	^ 'kg'
+end note
+
+note right of VegetationUnit_PSM::biomass_default
+" - default value"
+biomass_default
+	^ 0
+end note
+
+@enduml

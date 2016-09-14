@@ -1,0 +1,27 @@
+@startuml
+hide attributes
+
+class Forager_PIM {
+  customMethod()
+  /step()
+}
+
+Forager_PIM ..> Forager_PSM : transformation >
+
+class Forager_PSM {
+  customMethod()
+  /step()
+}
+
+note right of Forager_PSM::customMethod()
+  "as yet unclassified"
+  self shouldBeImplemented
+end note
+
+
+note right of Forager_PSM::/step()
+  "control"
+  self shouldBeImplemented
+end note
+
+@enduml

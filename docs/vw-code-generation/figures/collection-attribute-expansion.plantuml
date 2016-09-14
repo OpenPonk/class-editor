@@ -1,0 +1,59 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Person_PIM {
+  contacts : Contact[*] = OrderedCollection new
+}
+
+Person_PIM ..> Person_PSM : transformation >
+
+class Person_PSM {
+  -contacts
+  ____
+  --accessing--
+  contacts() : Contact[*]
+  contacts:(aCollection : Contact[*])
+  --adding/removing--
+  addContact:(aContact : Contact)
+  removeContact:(aContact : Contact)
+  -- + parameter unit --
+  {static} contacts_type() : Class
+  -- - default value --
+  {static} contacts_default() : Object
+}
+
+
+note right of Person_PSM::contacts()
+contacts
+	^ contacts ifNil: [ contacts := OrderedCollection new ]
+end note
+
+note right of Person_PSM::contacts:
+contacts: aCollection
+	contacts = aCollection ifTrue: [ ^ self ]. "for optimization"
+	contacts := aCollection.
+	self changed
+end note
+
+note right of Person_PSM::addContact:
+addContact: aContact
+	self contacts add: aContact
+end note
+
+
+note right of Person_PSM::removeContact:
+removeContact: aContact
+	self contacts remove: aContact
+end note
+
+note right of Person_PSM::contacts_type
+contacts_type
+	^ Contact
+end note
+
+note right of Person_PSM::contacts_default
+contacts_default
+	^ OrderedCollection new
+end note
+
+@enduml

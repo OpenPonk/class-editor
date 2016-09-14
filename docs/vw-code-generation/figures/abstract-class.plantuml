@@ -1,0 +1,19 @@
+@startuml
+hide attributes
+
+abstract class Forager_PIM {
+}
+
+Forager_PIM ..> Forager_PSM : transformation >
+
+class Forager_PSM {
+  {static} isAbstract() : Boolean
+}
+
+note right of Forager_PSM::isAbstract()
+"testing"
+isAbstract
+  ^ self = Forager_PSM
+end note
+
+@enduml
