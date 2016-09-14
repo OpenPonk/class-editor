@@ -63,13 +63,13 @@ Smalltalk has no abstract classes, instead class-side `isAbstract` method is use
 
 Test for abstract class is always against the class itself (instead of returning `true`/`false`), that way there is no need for extra tests in the subclasses.
 
-![abstract-class](figures/abstract-class.svg)
+![abstract-class](figures/abstract-class.png)
 
 ## Attribute expansion
 
 An attribute is expanded as follows:
 
-![attribute-expansion](figures/attribute-expansion.svg)
+![attribute-expansion](figures/attribute-expansion.png)
 
 * Smalltalk has no concept of default value, so getter is used instead
   * an alternative is to use `#initialize`, however that is not used in Cormas
@@ -82,11 +82,11 @@ An attribute is expanded as follows:
 
 Collection attribute has slightly different code, and `addX:` and `removeX:` methods are added.
 
-![collection-attribute-expansion](figures/collection-attribute-expansion.svg)
+![collection-attribute-expansion](figures/collection-attribute-expansion.png)
 
 ## Method expansion
 
-![method-expansion](figures/method-expansion.svg)
+![method-expansion](figures/method-expansion.png)
 
 * (TODO implementation) parameters
 * (TODO implementation) if the category can be inferred on Pharo side (from Pharo's CORMAS model) it will be used
