@@ -1,0 +1,14 @@
+{
+	"category" : "LiveClassEditor-Plugin",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LiveUMLClassEditorPlugin",
+	"pools" : [
+		 ],
+	"super" : "DCUmlClassPlugin",
+	"type" : "normal" }

@@ -1,0 +1,14 @@
+{
+	"category" : "LiveClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LUClassDiagramController",
+	"pools" : [
+		 ],
+	"super" : "DCUmlClassDiagramController",
+	"type" : "normal" }
