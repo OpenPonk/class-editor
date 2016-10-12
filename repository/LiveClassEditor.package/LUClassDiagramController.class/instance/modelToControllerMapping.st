@@ -1,7 +1,7 @@
 as yet unclassified
 modelToControllerMapping
 	^ {FAMIXClass -> LUCDClassController.
-	FAMIXAttribute -> DCUmlAttributeController.
-	FAMIXMethod -> DCUmlMethodController.
+	FAMIXAttribute -> LUCDAttributeController.
+	FAMIXMethod -> LUCDMethodController.
 	DCFAMIXBinaryAssociation -> DCUmlAssociationController.
 	FAMIXInheritance -> DCUmlInheritanceController} asDictionary

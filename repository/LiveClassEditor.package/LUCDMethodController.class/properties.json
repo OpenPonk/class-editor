@@ -1,0 +1,14 @@
+{
+	"category" : "LiveClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LUCDMethodController",
+	"pools" : [
+		 ],
+	"super" : "DCUmlMethodController",
+	"type" : "normal" }
