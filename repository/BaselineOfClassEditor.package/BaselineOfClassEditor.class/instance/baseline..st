@@ -14,7 +14,7 @@ baseline: spec
 				with: [ spec
 						className: #ConfigurationOfXmlDomVisitor;
 						versionString: #development;
-						repository: 'http://smalltalkhub.com/mc/peteruhnak/XmlDomVisitor/main/' ].
+						repository: 'github://peteruhnak/xml-dom-visitor/repository' ].
 			spec
 				project: 'XPath'
 				with: [ spec
