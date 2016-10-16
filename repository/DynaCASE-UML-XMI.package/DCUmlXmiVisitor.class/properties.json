@@ -10,5 +10,5 @@
 	"name" : "DCUmlXmiVisitor",
 	"pools" : [
 		 ],
-	"super" : "XmlDomVisitor",
+	"super" : "XMLDOMVisitor",
 	"type" : "normal" }
