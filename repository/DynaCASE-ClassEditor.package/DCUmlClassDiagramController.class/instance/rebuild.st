@@ -4,7 +4,7 @@ rebuild
 	super rebuild.
 	self enableRefresh.
 	self controllers
-		select: [ :each | each isMemberOf: DCUmlClassController ]
+		select: [ :each | each isKindOf: DCUmlClassController ]
 		thenDo: [ :each | each refreshFigure ].
 	self controllers do: #refreshFigure.
 	self updateView
