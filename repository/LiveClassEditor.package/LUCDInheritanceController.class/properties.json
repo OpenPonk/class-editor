@@ -1,0 +1,14 @@
+{
+	"category" : "LiveClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LUCDInheritanceController",
+	"pools" : [
+		 ],
+	"super" : "DCUmlInheritanceController",
+	"type" : "normal" }

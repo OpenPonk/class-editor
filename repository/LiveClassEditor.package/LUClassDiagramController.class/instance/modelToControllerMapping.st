@@ -4,4 +4,4 @@ modelToControllerMapping
 	FAMIXAttribute -> LUCDAttributeController.
 	FAMIXMethod -> LUCDMethodController.
 	DCFAMIXBinaryAssociation -> DCUmlAssociationController.
-	FAMIXInheritance -> DCUmlInheritanceController} asDictionary
+	FAMIXInheritance -> LUCDInheritanceController} asDictionary
