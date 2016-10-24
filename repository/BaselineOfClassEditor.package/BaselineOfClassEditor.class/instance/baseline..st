@@ -9,12 +9,7 @@ baseline: spec
 						className: #ConfigurationOfXMLParser;
 						versionString: #stable;
 						repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ].
-			spec
-				project: 'XMLDOMVisitor'
-				with: [ spec
-						className: #ConfigurationOfXmlDomVisitor;
-						versionString: #development;
-						repository: 'github://peteruhnak/xml-dom-visitor/repository' ].
+			spec baseline: 'XMLDOMVisitor' with: [ spec repository: 'github://peteruhnak/xml-dom-visitor/repository' ].
 			spec
 				project: 'XPath'
 				with: [ spec
