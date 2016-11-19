@@ -1,0 +1,14 @@
+{
+	"category" : "LiveGenerator",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"object" ],
+	"name" : "LGGenerator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
