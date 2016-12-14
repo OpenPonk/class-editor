@@ -1,8 +1,9 @@
 updating
 refreshList
-	| search dictionary |
+	| search list items|
 	search := searchInput text asLowercase.
-	dictionary := itemsBlock value associations.
+	items := itemsBlock value.
+	list := items isDictionary ifTrue: [ items associations ] ifFalse: [ items ].
 	entriesList
-		roots: dictionary;
+		roots: list;
 		expandAll
