@@ -1,4 +1,4 @@
-as yet unclassified
+meta
 annotation
 	<MSEClass: #UmlModel super: #MooseModel>
 	<package: #DC>
