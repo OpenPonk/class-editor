@@ -1,0 +1,15 @@
+{
+	"category" : "OpenPonk-ClassEditor-Layouting",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 5/1/2015 13:55",
+	"instvars" : [
+		"diagramController",
+		"updateAfterEachStep" ],
+	"name" : "OPUmlBasicLayout",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

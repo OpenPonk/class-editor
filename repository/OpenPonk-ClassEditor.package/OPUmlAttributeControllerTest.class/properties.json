@@ -1,0 +1,15 @@
+{
+	"category" : "OpenPonk-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"attribute",
+		"diagramElement" ],
+	"name" : "OPUmlAttributeControllerTest",
+	"pools" : [
+		 ],
+	"super" : "OPUmlControllerTest",
+	"type" : "normal" }

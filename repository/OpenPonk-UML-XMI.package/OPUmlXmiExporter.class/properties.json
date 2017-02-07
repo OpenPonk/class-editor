@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-UML-XMI-Exporter",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlXmiExporter",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,3 +1,0 @@
-*DynaCASE-ClassEditor
-dcID
-	^ mooseID

@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-ClassEditor-Windows",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"LastValues" ],
+	"commentStamp" : "PeterUhnak 5/31/2016 23:00",
+	"instvars" : [
+		"model" ],
+	"name" : "OPUmlCodeGeneratorWizard",
+	"pools" : [
+		 ],
+	"super" : "WizardControl",
+	"type" : "normal" }

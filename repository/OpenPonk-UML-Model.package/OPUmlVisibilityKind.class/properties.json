@@ -1,0 +1,15 @@
+{
+	"category" : "OpenPonk-UML-Model-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"Current",
+		"Mapping" ],
+	"commentStamp" : "PeterUhnak 4/3/2016 16:19",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlVisibilityKind",
+	"pools" : [
+		 ],
+	"super" : "FAMIXEntity",
+	"type" : "normal" }

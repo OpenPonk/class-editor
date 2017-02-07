@@ -1,0 +1,25 @@
+{
+	"category" : "OpenPonk-UML-DSL-Grammar",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 3/4/2016 00:15",
+	"instvars" : [
+		"multiplicityRange",
+		"multiplicity",
+		"association",
+		"typeSymbol",
+		"startSymbol",
+		"endSymbol",
+		"type",
+		"umlClassName",
+		"endName",
+		"associationName",
+		"leftEnd",
+		"rightEnd" ],
+	"name" : "OPUmlAssociationGrammar",
+	"pools" : [
+		 ],
+	"super" : "PPCompositeParser",
+	"type" : "normal" }

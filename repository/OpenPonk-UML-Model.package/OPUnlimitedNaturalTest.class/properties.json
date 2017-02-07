@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-UML-Model-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUnlimitedNaturalTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

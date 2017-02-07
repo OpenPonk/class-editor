@@ -1,0 +1,17 @@
+{
+	"category" : "OpenPonk-UML-DSL-Builders",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 3/4/2016 13:38",
+	"instvars" : [
+		"classBuilder",
+		"methodBuilder",
+		"attributeBuilder",
+		"dslBuilder" ],
+	"name" : "OPUmlDSLFactory",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
