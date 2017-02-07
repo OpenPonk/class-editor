@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-UML-DSL-Builders",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/29/2015 22:45",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlAttributeBuilder",
+	"pools" : [
+		 ],
+	"super" : "OPUmlPropertyGrammar",
+	"type" : "normal" }
