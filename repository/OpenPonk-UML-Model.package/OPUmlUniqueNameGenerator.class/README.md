@@ -1,0 +1,1 @@
+I create a model-wide unique name for objects.

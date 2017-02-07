@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-UML-Model-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"generator" ],
+	"name" : "OPUmlUniqueNameGeneratorTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

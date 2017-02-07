@@ -1,0 +1,15 @@
+{
+	"category" : "OpenPonk-UML-Model-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/10/2016 19:23",
+	"instvars" : [
+		"body",
+		"language" ],
+	"name" : "OPUmlSingleOpaqueBehavior",
+	"pools" : [
+		 ],
+	"super" : "FAMIXSourceAnchor",
+	"type" : "normal" }

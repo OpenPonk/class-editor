@@ -1,0 +1,16 @@
+{
+	"category" : "OpenPonk-UML-Model-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 3/21/2016 16:35",
+	"instvars" : [
+		"aggregation",
+		"isNavigable",
+		"association" ],
+	"name" : "OPFAMIXProperty",
+	"pools" : [
+		 ],
+	"super" : "FAMIXAttribute",
+	"type" : "normal" }

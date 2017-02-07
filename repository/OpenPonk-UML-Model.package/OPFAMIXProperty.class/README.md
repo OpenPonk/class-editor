@@ -1,0 +1,1 @@
+I am a property (class' attribute or association' property).
