@@ -1,5 +1,5 @@
 running
 setUp
 	super setUp.
-	factory := DCUmlDSLFactory new.
+	factory := OPUmlDSLFactory new.
 	self suspendedDo: [ RPackage organizer registerPackageNamed: self categoryName ]

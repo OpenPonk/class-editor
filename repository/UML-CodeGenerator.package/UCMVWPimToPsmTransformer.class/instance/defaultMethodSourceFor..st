@@ -1,6 +1,6 @@
 transforming - meta
 defaultMethodSourceFor: anAttribute
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('{1}_default
 	^ {2}'

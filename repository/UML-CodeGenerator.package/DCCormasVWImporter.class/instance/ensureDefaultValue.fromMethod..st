@@ -12,4 +12,4 @@ ensureDefaultValue: aValue fromMethod: aMethod
 			a ].
 	attr declaredType: (FAMIXClass named: (self genericTypeFor: aValue)).
 	attr
-		defaultValue: (DCFAMIXValueSpecification from: (self stringSpecificationFor: aValue))
+		defaultValue: (OPFAMIXValueSpecification from: (self stringSpecificationFor: aValue))

@@ -1,7 +1,7 @@
 tests - meta
 testDefaultMethodSourceFor
 	(input := FAMIXAttribute named: 'item')
-		defaultValue: (DCFAMIXValueSpecification from: '15').
+		defaultValue: (OPFAMIXValueSpecification from: '15').
 	result := transformer defaultMethodSourceFor: input.
 	self
 		assert: result body

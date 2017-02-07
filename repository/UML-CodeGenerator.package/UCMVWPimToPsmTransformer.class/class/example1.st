@@ -7,14 +7,14 @@ pim name: 'Model'.
 psm := UCMVWPimToPsmTransformer new
 	generateFor: pim with: nil.
 
-(wb := DCWorkbench new) openProject: (DCProject new).
+(wb := OPWorkbench new) openProject: (OPProject new).
 
-v1 := ((e1 := DCEditor new)
+v1 := ((e1 := OPEditor new)
 	workbench: wb;
 	buildWithSpec;
 	openModel: pim) canvasModel roassalView.
 
-v2 := ((e1 := DCEditor new)
+v2 := ((e1 := OPEditor new)
 	workbench: wb;
 	buildWithSpec;
 	openModel: psm) canvasModel roassalView.
@@ -22,5 +22,5 @@ v2 := ((e1 := DCEditor new)
 v1 addAll: v2 elements.
 RTGridLayout new
 	gapSize: 150;
-	on: (v1 elements select: [ :each | each model isKindOf: DCUmlClassifierShape]).
+	on: (v1 elements select: [ :each | each model isKindOf: OPUmlClassifierShape]).
 v1

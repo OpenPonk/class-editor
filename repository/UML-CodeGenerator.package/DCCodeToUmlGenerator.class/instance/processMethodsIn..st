@@ -11,7 +11,7 @@ processMethodsIn: aClass
 				detect: [ :pragma | pragma keyword = 'DCMethod:' ]
 				ifFound: [ :pragma | 
 					| parsed |
-					parsed := DCUmlDSLFactory new method: pragma arguments first.
+					parsed := OPUmlDSLFactory new method: pragma arguments first.
 					each parameters: parsed parameters asArray.
 					"each declaredType: parsed declaredType."
 					"each multiplicity: parsed multiplicity" ] ]

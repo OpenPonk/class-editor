@@ -4,7 +4,7 @@ processAssociationsIn: aClass
 		select: [ :each | each keyword = #DCAssociation: ]
 		thenDo: [ :pragma | 
 			| assoc name |
-			assoc := DCUmlDSLFactory new association: pragma arguments first , ';'.
+			assoc := OPUmlDSLFactory new association: pragma arguments first , ';'.
 			(aClass mooseModel allBinaryAssociations
 				anySatisfy: [ :each | 
 					each sourceEnd name = assoc sourceEnd name & (each targetEnd name = assoc targetEnd name)

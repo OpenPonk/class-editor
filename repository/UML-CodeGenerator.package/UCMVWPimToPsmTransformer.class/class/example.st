@@ -10,7 +10,7 @@ example
 	psm := UCMVWPimToPsmTransformer new generateFor: pim with: nil.
 	psm allClasses first name: 'VegetationUnit (PSM)'.
 	psm add: pim allClasses first.
-	DCProject new
+	OPProject new
 		addModel: psm;
 		addModel: pim;
 		open

@@ -1,6 +1,6 @@
 transforming - accessors
 lazyGetterSourceFor: anAttribute
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('{1}
 	^ {1} ifNil: [ {1} := {3} ]'

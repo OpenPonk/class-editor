@@ -12,4 +12,4 @@ replaceSuperclassWithStereotype: aClass
 		ifFalse: [ ^ self ].
 	aClass mooseModel remove: aClass superInheritances first.
 	aClass superInheritances remove: aClass superInheritances first.
-	aClass addStereotype: (DCFAMIXStereotype named: parent name)
+	aClass addStereotype: (OPFAMIXStereotype named: parent name)

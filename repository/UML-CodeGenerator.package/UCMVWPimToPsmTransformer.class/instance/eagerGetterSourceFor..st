@@ -1,6 +1,6 @@
 transforming - accessors
 eagerGetterSourceFor: anAttribute
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('{1}
 	^ {1}'

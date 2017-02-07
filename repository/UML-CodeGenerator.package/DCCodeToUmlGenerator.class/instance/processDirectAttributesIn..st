@@ -15,7 +15,7 @@ processDirectAttributesIn: aClass
 										ifFound: [ :cls | cls ]
 										ifNone: [ FAMIXClass named: pragma arguments first ]).
 							attr
-								multiplicity: (DCFAMIXMultiplicity fromArray: pragma arguments second).
+								multiplicity: (OPFAMIXMultiplicity fromArray: pragma arguments second).
 							getter removeFromModel.
 							aClass methods remove: getter.
 							(Array

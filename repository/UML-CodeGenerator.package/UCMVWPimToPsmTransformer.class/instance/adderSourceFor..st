@@ -6,7 +6,7 @@ adderSourceFor: aFamixEntity
 	prefix := typeName first isVowel
 		ifTrue: [ 'an' ]
 		ifFalse: [ 'a' ].
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('add{1}: {2}
 	{3} add: {2}'

@@ -1,6 +1,6 @@
 transforming - meta
 isAbstractMethodSourceFor: aClass
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('isAbstract
 	^ self = {1}' format: {aClass name})

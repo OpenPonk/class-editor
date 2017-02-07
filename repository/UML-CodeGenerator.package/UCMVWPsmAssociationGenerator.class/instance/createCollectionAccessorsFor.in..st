@@ -7,11 +7,11 @@ createCollectionAccessorsFor: anEnd in: aClass
 			(FAMIXMethod new
 				name: (adder lines first splitOn: ':') first , ':';
 				protocol: 'adding/removing';
-				sourceAnchor: (DCUmlSingleOpaqueBehavior body: adder)).
+				sourceAnchor: (OPUmlSingleOpaqueBehavior body: adder)).
 	remover := self remover: anEnd.
 	aClass
 		addMethod:
 			(FAMIXMethod new
 				name: (remover lines first splitOn: ':') first , ':';
 				protocol: 'adding/removing';
-				sourceAnchor: (DCUmlSingleOpaqueBehavior body: remover))
+				sourceAnchor: (OPUmlSingleOpaqueBehavior body: remover))

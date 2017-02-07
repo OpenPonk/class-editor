@@ -1,6 +1,6 @@
 transforming - meta
 unitMethodSourceFor: anAttribute
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('{1}_unit
 	^ ''{2}'''

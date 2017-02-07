@@ -1,7 +1,7 @@
 tests - accessors
 testLazyGetterSourceFor
 	(input := FAMIXAttribute named: 'item')
-		defaultValue: (DCFAMIXValueSpecification from: '15').
+		defaultValue: (OPFAMIXValueSpecification from: '15').
 	result := transformer getterSourceFor: input.
 	self
 		assert: result body

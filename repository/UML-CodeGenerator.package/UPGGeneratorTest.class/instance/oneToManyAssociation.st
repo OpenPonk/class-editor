@@ -3,12 +3,12 @@ oneToManyAssociation
 	| source target association |
 	source := FAMIXClass named: 'University'.
 	target := FAMIXClass named: 'Department'.
-	association := DCFAMIXBinaryAssociation source: source target: target.
+	association := OPFAMIXBinaryAssociation source: source target: target.
 	association sourceEnd
 		name: 'university';
-		multiplicity: DCFAMIXMultiplicity one.
+		multiplicity: OPFAMIXMultiplicity one.
 	association targetEnd
 		name: 'departments';
-		aggregation: DCUmlAggregationKind composite;
-		multiplicity: DCFAMIXMultiplicity zeroToMany.
+		aggregation: OPUmlAggregationKind composite;
+		multiplicity: OPFAMIXMultiplicity zeroToMany.
 	^ association

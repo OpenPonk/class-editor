@@ -1,3 +1,3 @@
 accessing
 categoryName
-	^ 'DynaCASE-GeneratorTest'
+	^ 'OpenPonk-GeneratorTest'

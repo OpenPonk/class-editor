@@ -15,8 +15,13 @@ testMethodWithPragma
 	self assert: model parameters first declaredType name equals: #Float.
 	self assert: model parameters second class equals: FAMIXParameter.
 	self assert: model parameters second name equals: #anotherNumber.
-	self assert: model parameters second declaredType name equals: #Integer.
+	self
+		assert: model parameters second declaredType name
+		equals: #Integer.
 	self assert: model parameters third class equals: FAMIXParameter.
 	self assert: model parameters third name equals: #return.
 	self assert: model parameters third declaredType name equals: #Number.
-	self assert: model parameters third direction equals: DCUmlParameterDirectionKind return
+	self
+		assert: model parameters third direction
+		equals:
+			OPUmlParameterDirectionKind return

@@ -1,6 +1,6 @@
 transforming - meta
 typeMethodSourceFor: anAttribute
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('{1}_type
 	^ {2}'

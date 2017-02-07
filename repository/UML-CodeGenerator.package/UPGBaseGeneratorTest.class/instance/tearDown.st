@@ -3,5 +3,5 @@ tearDown
 	super tearDown.
 	self
 		suspendedDo:
-			[ (RPackage organizer packageNamed: 'DynaCASE-GeneratorTest') classes
+			[ (RPackage organizer packageNamed: 'OpenPonk-GeneratorTest') classes
 				do: [ :each | each removeFromSystemUnlogged ] ]

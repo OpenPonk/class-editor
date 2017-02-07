@@ -7,4 +7,4 @@ createSetterFor: anAssociationEnd in: aClass
 			(FAMIXMethod new
 				name: (source lines first splitOn: ':') first , ':';
 				protocol: 'accessing';
-				sourceAnchor: (DCUmlSingleOpaqueBehavior body: source))
+				sourceAnchor: (OPUmlSingleOpaqueBehavior body: source))

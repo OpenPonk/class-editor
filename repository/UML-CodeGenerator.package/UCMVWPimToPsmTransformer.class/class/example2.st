@@ -9,14 +9,14 @@ pim allClasses first attributes first unit: 'kg'.
 
 psm := UCMVWPimToPsmTransformer new generateFor: pim with: nil.
 
-(wb := DCWorkbench new) openProject: (DCProject new).
+(wb := OPWorkbench new) openProject: (OPProject new).
 
-v1 := ((e1 := DCEditor new)
+v1 := ((e1 := OPEditor new)
 	workbench: wb;
 	buildWithSpec;
 	openModel: pim) canvasModel roassalView.
 
-v2 := ((e1 := DCEditor new)
+v2 := ((e1 := OPEditor new)
 	workbench: wb;
 	buildWithSpec;
 	openModel: psm) canvasModel roassalView.

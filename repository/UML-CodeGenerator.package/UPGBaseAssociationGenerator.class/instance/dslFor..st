@@ -1,3 +1,3 @@
 utilities
 dslFor: anAssociation
-	^ (DCUmlDslExporter export: anAssociation) allButLast
+	^ (OPUmlDslExporter export: anAssociation) allButLast

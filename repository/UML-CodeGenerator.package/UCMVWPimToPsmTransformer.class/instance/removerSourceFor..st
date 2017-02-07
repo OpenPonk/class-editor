@@ -6,7 +6,7 @@ removerSourceFor: aFamixEntity
 	prefix := typeName first isVowel
 		ifTrue: [ 'an' ]
 		ifFalse: [ 'a' ].
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('remove{1}: {2}
 	{3} remove: {2}'

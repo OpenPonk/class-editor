@@ -1,6 +1,6 @@
 transforming - accessors
 setterSourceFor: anAttribute
-	^ DCUmlSingleOpaqueBehavior
+	^ OPUmlSingleOpaqueBehavior
 		body:
 			('{1}: {2}
 	{1} = {2} ifTrue: [ ^ self ]. "for optimization"

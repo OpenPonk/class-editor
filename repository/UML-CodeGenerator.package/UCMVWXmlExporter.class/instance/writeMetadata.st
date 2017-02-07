@@ -7,7 +7,7 @@ writeMetadata
 		with:
 			('OpenPonk UML Class Editor v{1}, on {2}'
 				format:
-					{DCUmlClassPlugin new version.
+					{OPUmlClassPlugin new version.
 					time asDate asString , ' at ' , time asTime asString}).
 	writer
 		tag: 'component-property'
@@ -29,6 +29,8 @@ writeMetadata
 				tag: 'name' with: packageName;
 				tag: 'environment' with: namespaceEnvironment;
 				tag: 'private' with: 'false';
-				tag: 'imports' with: 'private Smalltalk.*' , String lf , 'private CormasNS.Kernel.*';
+				tag: 'imports'
+					with: 'private Smalltalk.*' , String lf , 'private CormasNS.Kernel.*';
 				tag: 'category' with: packageName , 'Category';
-				tag: 'attributes' with: [ writer tag: 'package' with: packageName ] ]
+				tag: 'attributes'
+					with: [ writer tag: 'package' with: packageName ] ]
