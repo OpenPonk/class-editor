@@ -3,8 +3,8 @@ toolbarMenu: aBuilder
 	<dcEditorToolbarMenu: #OPUmlClassPlugin>
 	(aBuilder item: 'DSL Editor')
 		action: [ OPDslEditor new
-				parser: DCUmlDslParser new;
-				exporter: DCUmlDslExporter new;
+				parser: OPUmlDslParser new;
+				exporter: OPUmlDslExporter new;
 				modelClass: MooseModel;
 				model: aBuilder model diagramController model;
 				openWithSpec ].

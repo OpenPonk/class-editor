@@ -10,11 +10,11 @@ sampleCompleteClass
 	class := FAMIXClass named: 'CompleteClass'.
 	class isAbstract: true.
 	model add: class.
-	class addStereotype: (DCFAMIXStereotype named: 'class').
-	class addStereotype: (DCFAMIXStereotype named: 'example').
+	class addStereotype: (OPFAMIXStereotype named: 'class').
+	class addStereotype: (OPFAMIXStereotype named: 'example').
 	class stereotypes first
 		addIcon:
-			(DCFAMIXImage new
+			(OPFAMIXImage new
 				content:
 					'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gwRESYZc+TopwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAABDSURBVDjLY2CgEDBC6f9EqMEL/pMoDgdMlHqBhRTbCPnvP6n+JsvPVA+DgTeAUEJiJBA+jPgk/xPDZ6E0VqjmhYEDAKlHDwzayLTLAAAAAElFTkSu
 QmCC').
@@ -22,7 +22,7 @@ QmCC').
 	class
 		addAttribute:
 			((FAMIXAttribute named: 'collection' type: float)
-				multiplicity: DCFAMIXMultiplicity zeroToMany).
+				multiplicity: OPFAMIXMultiplicity zeroToMany).
 	class addAttribute: ((FAMIXAttribute named: 'static' type: string) isStatic: true).
 	class addAttribute: ((FAMIXAttribute named: 'abstract' type: object) isAbstract: true).
 	class addMethod: (FAMIXMethod named: 'basicMethod').
@@ -36,8 +36,8 @@ QmCC').
 			((FAMIXMethod named: 'abstractMethod')
 				addParameter:
 					((FAMIXParameter named: 'return' type: string)
-						direction: DCUmlParameterDirectionKind return);
+						direction: OPUmlParameterDirectionKind return);
 				addParameter: (FAMIXParameter named: 'arg1' type: number);
-				addParameter: ((FAMIXParameter named: 'arg2' type: string) multiplicity: DCFAMIXMultiplicity zeroToOne);
+				addParameter: ((FAMIXParameter named: 'arg2' type: string) multiplicity: OPFAMIXMultiplicity zeroToOne);
 				isAbstract: true).
 	^ model

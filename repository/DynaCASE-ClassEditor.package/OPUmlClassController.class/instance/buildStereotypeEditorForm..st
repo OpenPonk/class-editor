@@ -10,7 +10,7 @@ buildStereotypeEditorForm: aForm
 		whenSelectedItemChanged: [ :newValue | 
 			| kw |
 			kw := Array with: newValue key.
-			kw size - self model stereotypes size timesRepeat: [ self model addStereotype: DCFAMIXStereotype new ].
+			kw size - self model stereotypes size timesRepeat: [ self model addStereotype: OPFAMIXStereotype new ].
 			self model stereotypes size - kw size timesRepeat: [ self model stereotypes removeLast ].
 			kw doWithIndex: [ :each :i | (self model stereotypes at: i) name: each ].
 			self refreshFigure ]

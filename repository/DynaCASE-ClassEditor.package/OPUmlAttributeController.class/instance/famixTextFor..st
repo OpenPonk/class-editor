@@ -3,7 +3,7 @@ famixTextFor: anAttribute
 	^ String
 		streamContents: [ :stream | 
 			anAttribute visibility
-				ifNotNil: [ :v | stream nextPut: (DCUmlVisibilityKind toSymbol: v) ].
+				ifNotNil: [ :v | stream nextPut: (OPUmlVisibilityKind toSymbol: v) ].
 			stream nextPutAll: anAttribute name.
 			anAttribute hasDeclaredType
 				ifTrue: [ stream

@@ -1,6 +1,6 @@
 examples
 sampleDsl
-	^ DCUmlDslParser
+	^ OPUmlDslParser
 		parse:
 			'Person {
     name : String

@@ -1,6 +1,6 @@
 *DynaCASE-ClassEditor-FAMIX
 outgoingAssociations
-	<MSEProperty: #outgoingAssociations type: #DCFAMIXBinaryAssociation opposite: #source>
+	<MSEProperty: #outgoingAssociations type: #OPFAMIXBinaryAssociation opposite: #source>
 	<multivalued>
 	<derived>
 	<MSEComment: 'Associations originating from this entity.'>

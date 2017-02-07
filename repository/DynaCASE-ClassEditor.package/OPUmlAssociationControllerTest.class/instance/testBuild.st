@@ -1,7 +1,7 @@
 tests
 testBuild
 	| association |
-	association := DCFAMIXBinaryAssociation source: source target: target.
+	association := OPFAMIXBinaryAssociation source: source target: target.
 	diagramController model add: association.
 	diagramController rebuild.
 	self assert: diagramController controllers size equals: 3.

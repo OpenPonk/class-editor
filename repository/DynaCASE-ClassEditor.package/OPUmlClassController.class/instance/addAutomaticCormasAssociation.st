@@ -16,7 +16,7 @@ addAutomaticCormasAssociation
 		whenCompleted: [ :ctrl | 
 			ctrl model targetEnd
 				name: 'the' , self model name , 's';
-				multiplicity: DCFAMIXMultiplicity zeroToMany.
+				multiplicity: OPFAMIXMultiplicity zeroToMany.
 			ctrl refreshFigure ].
 	tool targetSelected: self.
 	paletteModel selectedTool targetSelected: self

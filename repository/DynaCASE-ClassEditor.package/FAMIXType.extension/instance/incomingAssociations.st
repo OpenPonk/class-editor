@@ -1,6 +1,6 @@
 *DynaCASE-ClassEditor-FAMIX
 incomingAssociations
-	<MSEProperty: #incomingAssociations type: #DCFAMIXBinaryAssociation opposite: #target>
+	<MSEProperty: #incomingAssociations type: #OPFAMIXBinaryAssociation opposite: #target>
 	<multivalued>
 	<derived>
 	<MSEComment: 'Associations ending in this entity.'>

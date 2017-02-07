@@ -14,9 +14,9 @@ buildEditorForm: form for: anEnd
 	(form addDroplist: 'Aggregation')
 		items:
 			(Array
-				with: DCUmlAggregationKind none
-				with: DCUmlAggregationKind shared
-				with: DCUmlAggregationKind composite);
+				with: OPUmlAggregationKind none
+				with: OPUmlAggregationKind shared
+				with: OPUmlAggregationKind composite);
 		displayBlock: [ :each | each asString ];
 		setSelectedItem: anEnd aggregation;
 		whenSelectedItemChanged: [ :newValue | 
@@ -26,5 +26,5 @@ buildEditorForm: form for: anEnd
 		items: #('0..1' '1..1' '0..*' '1..*');
 		setSelectedItem: anEnd multiplicity printFullRange;
 		whenSelectedItemChanged: [ :val | 
-			anEnd multiplicity: (DCFAMIXMultiplicity fromString: val).
+			anEnd multiplicity: (OPFAMIXMultiplicity fromString: val).
 			self refreshFigure ]

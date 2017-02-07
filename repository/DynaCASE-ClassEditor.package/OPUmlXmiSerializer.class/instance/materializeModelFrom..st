@@ -1,3 +1,3 @@
 serialize/materialize
 materializeModelFrom: aString
-	^ DCUmlXmiImporter new importFromString: aString
+	^ OPUmlXmiImporter new importFromString: aString

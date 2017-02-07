@@ -1,3 +1,3 @@
 *DynaCASE-ClassEditor-FAMIX
 uniqueNameIn: aClass
-	^ self named: (DCUmlUniqueNameGenerator methodNameFor: aClass)
+	^ self named: (OPUmlUniqueNameGenerator methodNameFor: aClass)

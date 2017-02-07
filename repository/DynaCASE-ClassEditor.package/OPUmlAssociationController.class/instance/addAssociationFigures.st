@@ -1,7 +1,7 @@
 figures
 addAssociationFigures
 	| nameLabel |
-	(nameLabel := DCUmlNameLabel new)
+	(nameLabel := OPUmlNameLabel new)
 		modelElement: self model;
 		text: self model name;
 		owningElement: self diagramElement.

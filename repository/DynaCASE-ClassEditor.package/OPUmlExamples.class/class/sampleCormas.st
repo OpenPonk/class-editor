@@ -1,6 +1,6 @@
 examples
 sampleCormas
-	^ DCUmlDslParser
+	^ OPUmlDslParser
 		parse:
 			'
 MyECEC <<CormasModel>> {

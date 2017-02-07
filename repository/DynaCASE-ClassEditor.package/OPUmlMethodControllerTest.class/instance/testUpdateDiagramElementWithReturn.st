@@ -3,7 +3,7 @@ testUpdateDiagramElementWithReturn
 	method
 		addParameter:
 			((FAMIXParameter named: 'return' type: (FAMIXClass named: 'String'))
-				direction: DCUmlParameterDirectionKind return).
+				direction: OPUmlParameterDirectionKind return).
 	controller refreshFigure.
 	self assert: diagramElement text equals: 'method() : String'.
 	method parameters first multiplicity upper: 5.

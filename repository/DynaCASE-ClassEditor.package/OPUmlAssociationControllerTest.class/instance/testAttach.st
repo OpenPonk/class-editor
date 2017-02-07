@@ -1,7 +1,7 @@
 tests
 testAttach
 	| association ac |
-	association := DCFAMIXBinaryAssociation source: source target: target.
+	association := OPFAMIXBinaryAssociation source: source target: target.
 	ac := self controllerClass new.
 	ac model: association.
 	self assert: (targetController canBeTargetFor: ac).

@@ -20,7 +20,7 @@ sampleModel
 				addParameter:
 					(FAMIXParameter new
 						name: 'return';
-						direction: DCUmlParameterDirectionKind return;
+						direction: OPUmlParameterDirectionKind return;
 						declaredType: (FAMIXClass named: 'Dictionary'));
 				yourself).
 	model
@@ -30,31 +30,31 @@ sampleModel
 		add: obj.
 	model add: (FAMIXInheritance subclass: el superclass: obj).
 	model add: (FAMIXInheritance subclass: dia superclass: obj).
-	a := DCFAMIXBinaryAssociation new.
+	a := OPFAMIXBinaryAssociation new.
 	a sourceEnd
 		name: 'owner';
 		declaredType: dia;
-		multiplicity: DCFAMIXMultiplicity zeroToOne.
+		multiplicity: OPFAMIXMultiplicity zeroToOne.
 	a targetEnd
 		name: 'elements';
 		declaredType: el;
-		multiplicity: DCFAMIXMultiplicity zeroToMany.
+		multiplicity: OPFAMIXMultiplicity zeroToMany.
 	model add: a.
-	a := DCFAMIXBinaryAssociation new.
+	a := OPFAMIXBinaryAssociation new.
 	a sourceEnd
 		declaredType: proj;
-		multiplicity: DCFAMIXMultiplicity zeroToOne.
+		multiplicity: OPFAMIXMultiplicity zeroToOne.
 	a targetEnd
 		name: 'diagrams';
 		declaredType: dia;
-		multiplicity: DCFAMIXMultiplicity zeroToMany.
+		multiplicity: OPFAMIXMultiplicity zeroToMany.
 	model add: a.
-	a := DCFAMIXBinaryAssociation new.
+	a := OPFAMIXBinaryAssociation new.
 	a sourceEnd
 		declaredType: obj;
-		multiplicity: DCFAMIXMultiplicity zeroToMany.
+		multiplicity: OPFAMIXMultiplicity zeroToMany.
 	a targetEnd
 		name: 'owner';
 		declaredType: obj;
-		multiplicity: DCFAMIXMultiplicity zeroToOne.
+		multiplicity: OPFAMIXMultiplicity zeroToOne.
 	^ model

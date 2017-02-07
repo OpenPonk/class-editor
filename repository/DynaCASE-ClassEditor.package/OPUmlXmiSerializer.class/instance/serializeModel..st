@@ -1,3 +1,3 @@
 serialize/materialize
 serializeModel: aModel
-	^ DCUmlXmiExporter new export: aModel
+	^ OPUmlXmiExporter new export: aModel

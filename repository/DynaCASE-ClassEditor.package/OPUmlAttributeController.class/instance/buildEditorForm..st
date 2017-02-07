@@ -24,5 +24,5 @@ buildEditorForm: aForm
 		items: #('0..1' '1..1' '0..*' '1..*');
 		setSelectedItem: self model multiplicity printFullRange;
 		whenSelectedItemChanged: [ :val | 
-			self model multiplicity: (DCFAMIXMultiplicity fromString: val).
+			self model multiplicity: (OPFAMIXMultiplicity fromString: val).
 			self refreshFigure ]

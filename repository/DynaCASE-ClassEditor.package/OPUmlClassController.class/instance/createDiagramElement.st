@@ -1,13 +1,13 @@
 figures
 createDiagramElement
 	| el attributesCompartment operationsCompartment |
-	el := DCUmlClassifierShape new.
+	el := OPUmlClassifierShape new.
 	el sharedStyle fillColor: Color white.
 	el modelElement: self model.
-	nameLabel := DCUmlNameLabel new.
+	nameLabel := OPUmlNameLabel new.
 	nameLabel modelElement: self model.
 	nameLabel text: self model name.
-	nameLabel localStyle: (DCUmlStyle new fontSize: 11).
+	nameLabel localStyle: (OPUmlStyle new fontSize: 11).
 	nameLabel owningElement: el.
 	attributesCompartment := OPUmlCompartment new.
 	attributesCompartment owningElement: el.

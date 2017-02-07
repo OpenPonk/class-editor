@@ -1,7 +1,7 @@
 tests
 testLoadModel
 	| ac model |
-	model := DCFAMIXBinaryAssociation new.
+	model := OPFAMIXBinaryAssociation new.
 	ac := self controllerClass new.
 	ac model: model.
 	ac loadModel.

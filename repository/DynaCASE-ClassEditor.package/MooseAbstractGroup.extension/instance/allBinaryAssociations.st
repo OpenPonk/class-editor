@@ -2,4 +2,4 @@
 allBinaryAssociations
 	<navigation: 'All binary associations'>
 	<package: #DC>
-	^ self allWithType: DCFAMIXBinaryAssociation
+	^ self allWithType: OPFAMIXBinaryAssociation

@@ -12,7 +12,7 @@ addAssociationEndFigures: anAssociationEnd at: aPosition
 				toEdge: self figure
 				at: aPosition
 				side: 1 ].
-	(multiplicityLabel := DCUmlMultiplicityLabel new)
+	(multiplicityLabel := OPUmlMultiplicityLabel new)
 		modelElement: anAssociationEnd multiplicity;
 		text: anAssociationEnd multiplicity printRange allButFirst allButLast;
 		owningElement: self diagramElement.

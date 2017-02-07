@@ -1,7 +1,7 @@
 tests
 testCreateDiagramElement
 	| association ac edge |
-	association := DCFAMIXBinaryAssociation source: target target: source.
+	association := OPFAMIXBinaryAssociation source: target target: source.
 	diagramController model add: association.
 	diagramController rebuild.
 	ac := diagramController controllers last.

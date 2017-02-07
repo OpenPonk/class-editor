@@ -4,6 +4,6 @@ descriptionMultiplicity
 	^ MAToOneRelationDescription new
 		selectorAccessor: #multiplicity;
 		label: 'Multiplicity';
-		classes: {DCFAMIXMultiplicity};
+		classes: {OPFAMIXMultiplicity};
 		priority: 20;
 		yourself

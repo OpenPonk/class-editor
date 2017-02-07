@@ -1,6 +1,6 @@
 figures
 addStereotype
-	(stereotypeLabel := DCUmlKeywordLabel new)
+	(stereotypeLabel := OPUmlKeywordLabel new)
 		text: '<<' , ((self model stereotypes collect: #name) joinUsing: ',') , '>>';
-		localStyle: (DCUmlStyle new fontSize: 10);
+		localStyle: (OPUmlStyle new fontSize: 10);
 		owningElement: self diagramElement

@@ -3,5 +3,5 @@ modelToControllerMapping
 	^ {(FAMIXClass -> OPUmlClassController).
 	(FAMIXAttribute -> OPUmlAttributeController).
 	(FAMIXMethod -> OPUmlMethodController).
-	(DCFAMIXBinaryAssociation -> OPUmlAssociationController).
+	(OPFAMIXBinaryAssociation -> OPUmlAssociationController).
 	(FAMIXInheritance -> OPUmlInheritanceController)} asDictionary

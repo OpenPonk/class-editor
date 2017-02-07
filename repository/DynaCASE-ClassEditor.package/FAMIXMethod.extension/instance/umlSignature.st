@@ -2,16 +2,16 @@
 umlSignature
 	^ String
 		streamContents: [ :s | 
-			self visibility ifNotNil: [ :v | s nextPut: (DCUmlVisibilityKind toSymbol: v) ].
+			self visibility ifNotNil: [ :v | s nextPut: (OPUmlVisibilityKind toSymbol: v) ].
 			s nextPutAll: self name.
 			s nextPut: $(.
 			(self parameters
-				reject: [ :each | each direction = DCUmlParameterDirectionKind return ])
+				reject: [ :each | each direction = OPUmlParameterDirectionKind return ])
 				do: [ :each | s nextPutAll: each umlSignature ]
 				separatedBy: [ s nextPutAll: ', ' ].
 			s nextPut: $).
 			self parameters
-				detect: [ :each | each direction = DCUmlParameterDirectionKind return ]
+				detect: [ :each | each direction = OPUmlParameterDirectionKind return ]
 				ifFound: [ :param | 
 					param declaredType name ~= 'Object' | (param multiplicity lower ~= 1)
 						| (self multiplicity upper ~= 1)
