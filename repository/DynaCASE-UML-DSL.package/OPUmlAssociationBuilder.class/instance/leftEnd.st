@@ -3,7 +3,7 @@ leftEnd
 	^ super leftEnd
 		==> [ :nodes | 
 			{nodes first.
-			(DCFAMIXProperty new
+			(OPFAMIXProperty new
 				name: nodes third;
 				multiplicity: nodes second).
 			nodes fourth first.

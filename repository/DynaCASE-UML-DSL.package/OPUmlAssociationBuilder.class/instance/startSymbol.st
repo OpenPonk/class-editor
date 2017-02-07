@@ -4,6 +4,6 @@ startSymbol
 		==>
 			[ :nodes | 
 			nodes = '<'
-				ifTrue: [ {DCUmlAggregationKind none.
+				ifTrue: [ {OPUmlAggregationKind none.
 					true} ]
 				ifFalse: [ nodes ] ]

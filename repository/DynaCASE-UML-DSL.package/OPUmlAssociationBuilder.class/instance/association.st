@@ -3,7 +3,7 @@ association
 	^ super association
 		==> [ :nodes | 
 			| assoc |
-			assoc := DCFAMIXBinaryAssociation new.
+			assoc := OPFAMIXBinaryAssociation new.
 			assoc name: (nodes fourth ifNil: [ '' ]).
 			nodes first second association: assoc.
 			nodes third second association: assoc.

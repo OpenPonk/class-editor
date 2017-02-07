@@ -4,5 +4,5 @@ testTypeSymbol
 	self
 		assert: result
 		equals:
-			{DCUmlAggregationKind none.
+			{OPUmlAggregationKind none.
 			false}

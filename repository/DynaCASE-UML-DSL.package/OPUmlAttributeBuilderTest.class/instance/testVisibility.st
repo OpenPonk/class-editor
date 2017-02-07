@@ -1,6 +1,6 @@
 tests
 testVisibility
-	DCUmlVisibilityKind symbolMapping
+	OPUmlVisibilityKind symbolMapping
 		keysAndValuesDo: [ :symbol :literal | 
 			self parse: symbol asString rule: #visibility.
 			self assert: result equals: literal ].

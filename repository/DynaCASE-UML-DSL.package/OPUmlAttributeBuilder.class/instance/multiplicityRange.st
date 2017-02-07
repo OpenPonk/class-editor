@@ -7,10 +7,10 @@ multiplicityRange
 			min := nodes first.
 			max := nodes second.
 			max = $*
-				ifTrue: [ max := DCUnlimitedNatural max ].
+				ifTrue: [ max := OPUnlimitedNatural max ].
 			min
 				ifNil: [ 
-					min := max = DCUnlimitedNatural max
+					min := max = OPUnlimitedNatural max
 						ifTrue: [ 0 ]
 						ifFalse: [ max ] ].
 			Array with: min with: max ]

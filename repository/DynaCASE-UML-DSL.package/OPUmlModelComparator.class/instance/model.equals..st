@@ -6,6 +6,6 @@ model: a equals: b
 		ifTrue: [ ^ self operation: a equals: b ].
 	a class = FAMIXParameter
 		ifTrue: [ ^ self parameter: a equals: b ].
-	a class = DCFAMIXMultiplicity
+	a class = OPFAMIXMultiplicity
 		ifTrue: [ ^ self multiplicity: a equals: b ].
 	^ self notYetImplemented

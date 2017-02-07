@@ -6,4 +6,4 @@ keyword
 			nodes
 				ifNil: [ OrderedCollection new ]
 				ifNotNil:
-					[ (nodes second removeAllSuchThat: #isEmpty) collect: [ :each | DCFAMIXStereotype named: each ] as: OrderedCollection ] ]
+					[ (nodes second removeAllSuchThat: #isEmpty) collect: [ :each | OPFAMIXStereotype named: each ] as: OrderedCollection ] ]

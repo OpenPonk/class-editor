@@ -15,7 +15,7 @@ rightEnd
 						ifFalse: [ nil ])
 				with: n first.
 			{nodes first.
-			(DCFAMIXProperty new
+			(OPFAMIXProperty new
 				name: nodes third;
 				multiplicity: nodes second).
 			nodes fourth first.

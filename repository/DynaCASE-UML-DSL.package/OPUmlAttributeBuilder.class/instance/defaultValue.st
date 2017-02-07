@@ -1,3 +1,3 @@
 building
 defaultValue
-	^ super defaultValue ==> [ :expression | DCFAMIXValueSpecification from: expression ]
+	^ super defaultValue ==> [ :expression | OPFAMIXValueSpecification from: expression ]

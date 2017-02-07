@@ -5,7 +5,7 @@ typeSymbol
 			[ :symbol | 
 			Array
 				with:
-					({($- -> DCUmlAggregationKind none).
-					('<>' -> DCUmlAggregationKind shared).
-					('<*>' -> DCUmlAggregationKind composite)} asDictionary at: symbol)
+					({($- -> OPUmlAggregationKind none).
+					('<>' -> OPUmlAggregationKind shared).
+					('<*>' -> OPUmlAggregationKind composite)} asDictionary at: symbol)
 				with: false ]

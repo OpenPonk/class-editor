@@ -4,5 +4,5 @@ testTypeSymbol2
 	self
 		assert: result
 		equals:
-			{DCUmlAggregationKind shared.
+			{OPUmlAggregationKind shared.
 			false}

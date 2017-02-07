@@ -1,3 +1,3 @@
 grammar
 visibility
-	^ super visibility ==> [ :aSymbol | DCUmlVisibilityKind fromSymbol: aSymbol ]
+	^ super visibility ==> [ :aSymbol | OPUmlVisibilityKind fromSymbol: aSymbol ]
