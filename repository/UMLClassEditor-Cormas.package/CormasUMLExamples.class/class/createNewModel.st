@@ -3,14 +3,14 @@ createNewModel
 	| modelName projectName project model |
 	projectName := UIManager default request: 'New model name'.
 	modelName := ((projectName splitOn: ' ') collect: #capitalized) joinUsing: ''.
-	project := DCProject named: projectName.
+	project := OPProject named: projectName.
 	(model := MooseModel new)
 		name: projectName;
 		isCormasModel: true.
 	model
 		add:
 			((FAMIXClass named: modelName)
-				addStereotype: (DCFAMIXStereotype named: 'CormasModel');
+				addStereotype: (OPFAMIXStereotype named: 'CormasModel');
 				yourself).
 	project addModel: model.
-	DCWorkbench openProject: project
+	OPWorkbench openProject: project

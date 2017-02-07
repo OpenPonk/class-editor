@@ -4,5 +4,5 @@ menuCommandOn: aBuilder
 	(aBuilder item: #CormasUMLExamples)
 		parent: #UMLClassEditor;
 		label: 'New Cormas Model';
-		icon: DCIcons current dcOmlDiagramIcon;
+		icon: OPIcons current dcOmlDiagramIcon;
 		action: [ self createNewModel ]
