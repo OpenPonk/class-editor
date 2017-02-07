@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-UML-XMI-Importer",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"packagedElementVisitor",
+		"elements" ],
+	"name" : "OPUmlXmiElementVisitor",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-UML-XMI-Exporter",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"writer",
+		"types" ],
+	"name" : "OPUmlXmiExportVisitor",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
