@@ -1,4 +1,0 @@
-accessing
-dependencies
-	^ {DCUmlAttributeBuilder.
-	DCUmlMethodBuilder}

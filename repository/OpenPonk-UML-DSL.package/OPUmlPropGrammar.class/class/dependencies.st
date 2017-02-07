@@ -1,0 +1,4 @@
+accessing
+dependencies
+	^ {OPUmlLiteralGrammar.
+	OPUmlMultiplicityGrammar}

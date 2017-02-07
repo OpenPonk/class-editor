@@ -1,0 +1,19 @@
+{
+	"category" : "OpenPonk-UML-DSL-Grammar",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 6/22/2015 12:18",
+	"instvars" : [
+		"visibility",
+		"type",
+		"multiplicity",
+		"symbol",
+		"multiplicityRange",
+		"prefix" ],
+	"name" : "OPUmlPropGrammar",
+	"pools" : [
+		 ],
+	"super" : "PPCompositeParser",
+	"type" : "normal" }

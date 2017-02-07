@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-UML-DSL-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlOperationGrammarTest",
+	"pools" : [
+		 ],
+	"super" : "OPUmlPropGrammarTest",
+	"type" : "normal" }

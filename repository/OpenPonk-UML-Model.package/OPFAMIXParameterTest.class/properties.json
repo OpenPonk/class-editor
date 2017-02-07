@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-UML-Model-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"parameter" ],
+	"name" : "OPFAMIXParameterTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
