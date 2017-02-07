@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlXmiSerializerTest",
+	"pools" : [
+		 ],
+	"super" : "OPAbstractSerializerTest",
+	"type" : "normal" }

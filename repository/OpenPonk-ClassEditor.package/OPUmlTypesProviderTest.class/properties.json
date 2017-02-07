@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "<historical>",
+	"instvars" : [
+		"provider" ],
+	"name" : "OPUmlTypesProviderTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
