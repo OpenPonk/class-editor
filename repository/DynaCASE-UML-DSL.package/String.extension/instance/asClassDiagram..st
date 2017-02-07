@@ -1,5 +1,5 @@
 *DynaCASE-UML-DSL
 asClassDiagram: aDiagramName
-	^ (DCUmlDslParser parse: self)
+	^ (OPUmlDslParser parse: self)
 		name: aDiagramName;
 		yourself

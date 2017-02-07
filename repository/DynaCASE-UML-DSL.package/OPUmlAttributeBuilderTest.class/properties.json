@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-DSL-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlAttributeBuilderTest",
+	"pools" : [
+		 ],
+	"super" : "OPUmlPropertyGrammarTest",
+	"type" : "normal" }

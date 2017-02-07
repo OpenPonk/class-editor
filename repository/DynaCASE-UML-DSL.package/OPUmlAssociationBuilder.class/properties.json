@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-DSL-Builders",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 11/23/2015 20:17",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlAssociationBuilder",
+	"pools" : [
+		 ],
+	"super" : "OPUmlAssociationGrammar",
+	"type" : "normal" }
