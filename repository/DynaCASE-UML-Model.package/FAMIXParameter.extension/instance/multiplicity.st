@@ -1,5 +1,5 @@
 *DynaCASE-UML-Model
 multiplicity
-	<MSEProperty: #multiplicity type: #DCFAMIXMultiplicity>
+	<MSEProperty: #multiplicity type: #OPFAMIXMultiplicity>
 	<MSEComment: 'A multiplicity of the attribute'>
-	^ self privateState propertyAt: #multiplicity ifAbsentPut: [ DCFAMIXMultiplicity new ]
+	^ self privateState propertyAt: #multiplicity ifAbsentPut: [ OPFAMIXMultiplicity new ]

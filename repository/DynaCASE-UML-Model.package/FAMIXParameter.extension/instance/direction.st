@@ -1,5 +1,5 @@
 *DynaCASE-UML-Model
 direction
-	<MSEProperty: #direction type: #DCUmlParameterDirectionKind>
+	<MSEProperty: #direction type: #OPUmlParameterDirectionKind>
 	<MSEComment: 'Parameter direction type'>
-	^ self privateState propertyAt: #direction ifAbsentPut: [ DCUmlParameterDirectionKind in ]
+	^ self privateState propertyAt: #direction ifAbsentPut: [ OPUmlParameterDirectionKind in ]

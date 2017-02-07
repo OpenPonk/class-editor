@@ -1,0 +1,16 @@
+{
+	"category" : "DynaCASE-UML-Model-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 9/28/2015 22:45",
+	"instvars" : [
+		"name",
+		"sourceEnd",
+		"targetEnd" ],
+	"name" : "OPFAMIXBinaryAssociation",
+	"pools" : [
+		 ],
+	"super" : "FAMIXAssociation",
+	"type" : "normal" }

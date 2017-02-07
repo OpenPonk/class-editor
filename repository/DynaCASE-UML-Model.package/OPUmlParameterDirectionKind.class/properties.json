@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-Model-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 3/22/2016 13:45",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlParameterDirectionKind",
+	"pools" : [
+		 ],
+	"super" : "FAMIXEntity",
+	"type" : "normal" }

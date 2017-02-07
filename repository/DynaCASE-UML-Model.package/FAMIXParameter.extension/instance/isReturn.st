@@ -1,3 +1,3 @@
 *DynaCASE-UML-Model
 isReturn
-	^ self direction = DCUmlParameterDirectionKind return
+	^ self direction = OPUmlParameterDirectionKind return
