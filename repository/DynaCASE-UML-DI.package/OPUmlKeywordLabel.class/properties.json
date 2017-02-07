@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-DI-UML",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlKeywordLabel",
+	"pools" : [
+		 ],
+	"super" : "OPUmlLabel",
+	"type" : "normal" }

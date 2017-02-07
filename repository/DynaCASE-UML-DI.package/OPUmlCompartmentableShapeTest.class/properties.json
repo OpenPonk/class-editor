@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-UML-DI-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlCompartmentableShapeTest",
+	"pools" : [
+		 ],
+	"super" : "OPDITestCase",
+	"type" : "normal" }

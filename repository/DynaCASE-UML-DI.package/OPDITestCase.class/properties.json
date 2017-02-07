@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-UML-DI-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"element",
+		"rt" ],
+	"name" : "OPDITestCase",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
