@@ -9,7 +9,9 @@ baseline: spec
 						className: #ConfigurationOfXMLParser;
 						versionString: #stable;
 						repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ].
-			spec baseline: 'XMLDOMVisitor' with: [ spec repository: 'github://peteruhnak/xml-dom-visitor/repository' ].
+			spec
+				baseline: 'XMLDOMVisitor'
+				with: [ spec repository: 'github://peteruhnak/xml-dom-visitor/repository' ].
 			spec
 				project: 'XPath'
 				with: [ spec
@@ -22,7 +24,9 @@ baseline: spec
 						className: #ConfigurationOfMerlin;
 						versionString: #development;
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Merlin/main' ].
-			spec baseline: 'DynaCASE' with: [ spec repository: 'github://openponk/openponk/repository' ].
+			spec
+				baseline: 'OpenPonk'
+				with: [ spec repository: 'github://openponk/openponk/repository' ].
 			spec
 				project: 'PetitParser'
 					with: [ spec
@@ -35,7 +39,8 @@ baseline: spec
 						className: #ConfigurationOfFame;
 						versionString: #development;
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ];
-				package: 'CollectionExtensions' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ];
+				package: 'CollectionExtensions'
+					with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ];
 				package: 'Moose-Core'
 					with: [ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
@@ -44,7 +49,8 @@ baseline: spec
 					with: [ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
 						requires: #('Moose-Core') ];
-				package: 'Moose-Query' with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
+				package: 'Moose-Query'
+					with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main' ];
 				package: 'Famix-Extensions'
 					with: [ spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
@@ -60,13 +66,21 @@ baseline: spec
 					repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
 					loads: #( 'Moose-Core' 'Famix-Core' 'Moose-Query' 'Famix-Extensions' 'Famix-Implementation') ]."
 			spec
-				package: 'DynaCASE-UML-Model' with: [ spec requires: #('Fame' 'famix') ];
-				package: 'DynaCASE-UML-DSL' with: [ spec requires: #('DynaCASE-UML-Model' 'Famix-Core' 'PetitParser') ];
-				package: 'DynaCASE-UML-DI' with: [ spec requires: #('Fame') ];
-				package: 'DynaCASE-UML-XMI' with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'DynaCASE-UML-DI' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
-				package: 'UML-CodeGenerator' with: [ spec requires: #('DynaCASE-UML-Model' 'DynaCASE-UML-DSL' 'famix' 'Merlin') ];
+				package: 'OpenPonk-UML-Model' with: [ spec requires: #('Fame' 'famix') ];
+				package: 'OpenPonk-UML-DSL'
+					with: [ spec requires: #('OpenPonk-UML-Model' 'Famix-Core' 'PetitParser') ];
+				package: 'OpenPonk-UML-DI' with: [ spec requires: #('Fame') ];
+				package: 'OpenPonk-UML-XMI'
+					with: [ spec
+						requires:
+							#('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'OpenPonk-UML-DI' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
+				package: 'UML-CodeGenerator'
+					with: [ spec requires: #('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'famix' 'Merlin') ];
 				package: 'UMLClassEditor-Cormas' with: [ spec requires: #('Moose-Core') ];
-				package: 'DynaCASE-ClassEditor' with: [ spec requires: #('DynaCASE-UML-DI' 'DynaCASE-UML-DSL' 'DynaCASE-UML-Model' 'DynaCASE-UML-XMI' 'UMLClassEditor-Cormas' 'Fame' 'famix') ].
+				package: 'OpenPonk-ClassEditor'
+					with: [ spec
+						requires:
+							#('OpenPonk-UML-DI' 'OpenPonk-UML-DSL' 'OpenPonk-UML-Model' 'OpenPonk-UML-XMI' 'UMLClassEditor-Cormas' 'Fame' 'famix') ].
 			spec group: 'famix' with: #('Famix-Core' 'Famix-Extensions' 'Famix-Implementation').
-			spec group: 'plugin' with: #('DynaCASE-ClassEditor' 'UML-CodeGenerator').
-			spec group: 'default' with: #('plugin' 'DynaCASE') ]
+			spec group: 'plugin' with: #('OpenPonk-ClassEditor' 'UML-CodeGenerator').
+			spec group: 'default' with: #('plugin' 'OpenPonk') ]
