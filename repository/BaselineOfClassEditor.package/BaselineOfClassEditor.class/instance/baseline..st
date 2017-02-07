@@ -47,6 +47,7 @@ baseline: spec
 						requires: #('Fame' 'Moose-Query' 'CollectionExtensions') ];
 				package: 'Famix-Core'
 					with: [ spec
+						file: 'Famix-Core-TudorGirba.279';
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Moose/main';
 						requires: #('Moose-Core') ];
 				package: 'Moose-Query'
