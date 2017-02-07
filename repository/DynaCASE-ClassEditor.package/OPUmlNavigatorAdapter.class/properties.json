@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Plugin",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"suffixMapping" ],
+	"name" : "OPUmlNavigatorAdapter",
+	"pools" : [
+		 ],
+	"super" : "OPNavigatorAdapter",
+	"type" : "normal" }

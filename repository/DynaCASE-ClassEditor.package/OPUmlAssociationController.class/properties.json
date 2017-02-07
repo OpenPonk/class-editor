@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"constraints" ],
+	"name" : "OPUmlAssociationController",
+	"pools" : [
+		 ],
+	"super" : "OPUmlRelationshipController",
+	"type" : "normal" }

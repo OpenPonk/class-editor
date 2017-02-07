@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"nameLabel" ],
+	"name" : "OPUmlClassController",
+	"pools" : [
+		 ],
+	"super" : "OPUmlElementController",
+	"type" : "normal" }

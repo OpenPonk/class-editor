@@ -1,0 +1,17 @@
+{
+	"category" : "DynaCASE-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"source",
+		"target",
+		"sourceController",
+		"targetController" ],
+	"name" : "OPUmlAssociationControllerTest",
+	"pools" : [
+		 ],
+	"super" : "OPUmlControllerTest",
+	"type" : "normal" }

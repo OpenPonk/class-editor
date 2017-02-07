@@ -1,6 +1,6 @@
 *DynaCASE-ClassEditor
 openAs: aProjectName
-	DCProject new
+	OPProject new
 		projectName: aProjectName;
 		addModel: self;
 		open

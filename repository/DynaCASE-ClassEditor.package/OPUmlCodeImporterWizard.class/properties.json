@@ -1,0 +1,14 @@
+{
+	"category" : "DynaCASE-ClassEditor-Windows",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 5/31/2016 23:00",
+	"instvars" : [
+		"model" ],
+	"name" : "OPUmlCodeImporterWizard",
+	"pools" : [
+		 ],
+	"super" : "WizardControl",
+	"type" : "normal" }

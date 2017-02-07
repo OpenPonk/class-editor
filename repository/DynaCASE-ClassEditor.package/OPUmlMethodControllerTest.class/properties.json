@@ -1,0 +1,15 @@
+{
+	"category" : "DynaCASE-ClassEditor-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"method",
+		"diagramElement" ],
+	"name" : "OPUmlMethodControllerTest",
+	"pools" : [
+		 ],
+	"super" : "OPUmlControllerTest",
+	"type" : "normal" }

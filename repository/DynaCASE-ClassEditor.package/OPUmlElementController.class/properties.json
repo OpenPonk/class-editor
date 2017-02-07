@@ -1,0 +1,16 @@
+{
+	"category" : "DynaCASE-ClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"diagramElement",
+		"feedback",
+		"stereotypeLabel" ],
+	"name" : "OPUmlElementController",
+	"pools" : [
+		 ],
+	"super" : "OPElementController",
+	"type" : "normal" }
