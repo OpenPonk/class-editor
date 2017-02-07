@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-UML-XMI-Importer",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"elementVisitor" ],
+	"name" : "OPUmlXmiVisitor",
+	"pools" : [
+		 ],
+	"super" : "XMLDOMVisitor",
+	"type" : "normal" }
