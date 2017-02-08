@@ -10,5 +10,5 @@
 	"name" : "LUCDClassController",
 	"pools" : [
 		 ],
-	"super" : "DCUmlClassController",
+	"super" : "OPUmlClassController",
 	"type" : "normal" }

@@ -10,5 +10,5 @@
 	"name" : "LUClassDiagramController",
 	"pools" : [
 		 ],
-	"super" : "DCUmlClassDiagramController",
+	"super" : "OPUmlClassDiagramController",
 	"type" : "normal" }

@@ -10,5 +10,5 @@
 	"name" : "LUCDInheritanceController",
 	"pools" : [
 		 ],
-	"super" : "DCUmlInheritanceController",
+	"super" : "OPUmlInheritanceController",
 	"type" : "normal" }

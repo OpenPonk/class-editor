@@ -10,5 +10,5 @@
 	"name" : "LiveUMLClassEditorPlugin",
 	"pools" : [
 		 ],
-	"super" : "DCUmlClassPlugin",
+	"super" : "OPUmlClassPlugin",
 	"type" : "normal" }

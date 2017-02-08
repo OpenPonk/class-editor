@@ -10,5 +10,5 @@
 	"name" : "LUCDAttributeController",
 	"pools" : [
 		 ],
-	"super" : "DCUmlAttributeController",
+	"super" : "OPUmlAttributeController",
 	"type" : "normal" }
