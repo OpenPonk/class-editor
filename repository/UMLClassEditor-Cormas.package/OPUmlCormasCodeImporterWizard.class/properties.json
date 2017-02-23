@@ -1,0 +1,14 @@
+{
+	"category" : "UMLClassEditor-Cormas-Windows",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 2/23/2017 22:32",
+	"instvars" : [
+		"model" ],
+	"name" : "OPUmlCormasCodeImporterWizard",
+	"pools" : [
+		 ],
+	"super" : "WizardControl",
+	"type" : "normal" }
