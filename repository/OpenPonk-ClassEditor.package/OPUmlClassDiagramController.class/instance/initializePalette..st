@@ -5,9 +5,7 @@ initializePalette: aPalette
 		icon: OPUmlIcons current classIcon;
 		whenCompleted: [ :ctrl | 
 			OPRenameElementCommand executeOn: ctrl model.
-			ctrl refreshFigure.
-			self model isCormasModel
-				ifTrue: [ ctrl addAutomaticCormasAssociation ] ].
+			ctrl refreshFigure ].
 	(aPalette newCreationEntry: [ OPUmlAttributeController new ])
 		label: 'Attribute';
 		icon: Smalltalk ui theme icons abstractIcon;
