@@ -1,0 +1,14 @@
+{
+	"category" : "LiveInstanceVisualization",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LIVSelectableModelElementContextInteraction",
+	"pools" : [
+		 ],
+	"super" : "RTAbstractContextInteraction",
+	"type" : "normal" }
