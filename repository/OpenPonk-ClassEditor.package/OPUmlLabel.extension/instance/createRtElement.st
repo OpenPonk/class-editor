@@ -2,7 +2,7 @@
 createRtElement
 	^ RTStyledLabel new
 		height: self style fontSize;
-		color: self style fontColor;
+		color: #fontColor;
 		text: #text;
 		emphasis: #emphasis;
 		elementOn: self
