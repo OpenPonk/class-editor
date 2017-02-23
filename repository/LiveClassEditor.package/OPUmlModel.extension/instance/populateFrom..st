@@ -3,7 +3,7 @@ populateFrom: aPackage
 	| clsMapping |
 	self name: aPackage name.
 	clsMapping := Dictionary new.
-	aPackage definedClasses
+	aPackage classes
 		do: [ :each | 
 			| cls |
 			cls := FAMIXClass named: each name.
@@ -27,12 +27,12 @@ populateFrom: aPackage
 								protocol: meth protocol;
 								isStatic: true;
 								yourself) ] ].
-	aPackage definedClasses
+	aPackage classes
 		do: [ :cls | 
 			cls superclass = Object
 				ifFalse: [ | parent |
 					parent := self allClasses
 						detect: [ :each | each name = cls superclass name ]
 						ifFound: #yourself
-						ifNone: [ :each | FAMIXClass named: each name ].
+						ifNone: [  FAMIXClass named: cls superclass name ].
 					self add: (FAMIXInheritance subclass: (clsMapping at: cls) superclass: parent) ] ]
