@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #FAMIXImage super: #FAMIXEntity>
-	<package: #DC>
+	<package: #OP>
 	^ self

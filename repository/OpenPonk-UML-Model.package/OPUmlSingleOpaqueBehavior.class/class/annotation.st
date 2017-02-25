@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #OpaqueBehavior super: #FAMIXSourceAnchor>
-	<package: #DC>
+	<package: #OP>
 	^ self

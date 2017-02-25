@@ -2,5 +2,5 @@ accessing
 aggregation
 	<MSEProperty: #aggregation type: #String>
 	<MSEComment: 'AggregationKind'>
-	<package: #DC>
+	<package: #OP>
 	^ aggregation ifNil: [ OPUmlAggregationKind none ]

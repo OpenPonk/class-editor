@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #FAMIXStereotype super: #FAMIXClass>
-	<package: #DC>
+	<package: #OP>
 	^ self

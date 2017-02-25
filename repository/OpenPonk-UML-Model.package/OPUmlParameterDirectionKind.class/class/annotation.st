@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #UmlParameterDirectionKind super: #Object>
-	<package: #DC>
+	<package: #OP>
 	^ self
