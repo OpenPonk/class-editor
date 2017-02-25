@@ -4,7 +4,7 @@ outgoingAssociations
 	<multivalued>
 	<derived>
 	<MSEComment: 'Associations originating from this entity.'>
-	<package: #DC>
+	<package: #OP>
 	^ self privateState
 		attributeAt: #outgoingAssociations
 		ifAbsentPut: [ FMMultivalueLink on: self opposite: #source: ]

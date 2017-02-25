@@ -1,5 +1,5 @@
 *OpenPonk-ClassEditor
 allBinaryAssociations
 	<navigation: 'All binary associations'>
-	<package: #DC>
+	<package: #OP>
 	^ self allWithType: OPFAMIXBinaryAssociation

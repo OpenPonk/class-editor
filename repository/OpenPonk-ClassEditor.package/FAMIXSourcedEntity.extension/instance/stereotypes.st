@@ -3,5 +3,5 @@ stereotypes
 	<MSEProperty: #stereotypes type: #OPFAMIXStereotype>
 	<multivalued>
 	<MSEComment: 'Stereotypes associated with this entity.'>
-	<package: #DC>
+	<package: #OP>
 	^ self privateState attributeAt: #stereotypes ifAbsentPut: [ OrderedCollection new ]

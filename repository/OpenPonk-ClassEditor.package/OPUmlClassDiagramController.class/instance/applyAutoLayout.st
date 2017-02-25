@@ -4,7 +4,7 @@ applyAutoLayout
 	classes := self controllers
 		select: [ :ctrl | ctrl isKindOf: OPUmlClassController ]
 		thenCollect: #figure.
-	(Smalltalk globals includesKey: #DCGraphVizLayout) & true
+	(Smalltalk globals includesKey: #OPGraphVizLayout) & true
 		ifTrue:
 			[ inheritance := self controllers
 				select: [ :ctrl | ctrl isKindOf: OPUmlInheritanceController ]
@@ -12,7 +12,7 @@ applyAutoLayout
 			associations := self controllers
 				select: [ :ctrl | ctrl isKindOf: OPUmlAssociationController ]
 				thenCollect: #figure.
-			#DCGraphVizLayout asClass new
+			#OPGraphVizLayout asClass new
 				on: classes
 				directed: inheritance
 				undirected: associations.

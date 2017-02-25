@@ -1,4 +1,4 @@
 *OpenPonk-ClassEditor
 elements
-	<package: #DC>
+	<package: #OP>
 	^ self allModelClasses
