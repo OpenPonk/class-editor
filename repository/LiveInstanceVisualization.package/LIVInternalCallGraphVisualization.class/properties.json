@@ -1,0 +1,14 @@
+{
+	"category" : "LiveInstanceVisualization-Inspector-Extensions",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LIVInternalCallGraphVisualization",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
