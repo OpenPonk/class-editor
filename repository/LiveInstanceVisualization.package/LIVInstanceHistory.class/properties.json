@@ -1,0 +1,14 @@
+{
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"models" ],
+	"name" : "LIVInstanceHistory",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

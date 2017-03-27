@@ -1,0 +1,14 @@
+{
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LIVInstanceDiffColorer",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

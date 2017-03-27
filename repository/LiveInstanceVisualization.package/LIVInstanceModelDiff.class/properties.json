@@ -1,0 +1,14 @@
+{
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "LIVInstanceModelDiff",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

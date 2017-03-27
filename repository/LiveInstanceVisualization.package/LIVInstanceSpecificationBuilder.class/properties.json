@@ -1,0 +1,15 @@
+{
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"name",
+		"slots" ],
+	"name" : "LIVInstanceSpecificationBuilder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

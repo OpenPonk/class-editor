@@ -1,0 +1,15 @@
+{
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"source",
+		"target" ],
+	"name" : "LIVLinkBuilder",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

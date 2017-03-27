@@ -1,0 +1,16 @@
+{
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"owningInstance",
+		"value",
+		"definingFeature" ],
+	"name" : "LIVSlot",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
