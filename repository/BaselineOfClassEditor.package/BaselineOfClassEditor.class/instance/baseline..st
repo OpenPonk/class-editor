@@ -25,6 +25,9 @@ baseline: spec
 						versionString: #development;
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Merlin/main' ].
 			spec
+				baseline: 'UMLShapes'
+				with: [ spec repository: 'github://openponk/uml-shapes/repository' ].
+			spec
 				baseline: 'OpenPonk'
 				with: [ spec repository: 'github://openponk/openponk/repository' ].
 			spec
@@ -50,16 +53,14 @@ baseline: spec
 				package: 'OpenPonk-UML-Model' with: [ spec requires: #('Fame' 'Famix') ];
 				package: 'OpenPonk-UML-DSL'
 					with: [ spec requires: #('OpenPonk-UML-Model' 'Famix' 'PetitParser') ];
-				package: 'OpenPonk-UML-DI' with: [ spec requires: #('Fame') ];
 				package: 'OpenPonk-UML-XMI'
 					with: [ spec
 						requires:
-							#('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'OpenPonk-UML-DI' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
+							#('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'UMLShapes' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
 				package: 'UML-CodeGenerator'
 					with: [ spec requires: #('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'Famix' 'Merlin') ];
 				package: 'OpenPonk-ClassEditor'
 					with: [ spec
-						requires:
-							#('OpenPonk-UML-DI' 'OpenPonk-UML-DSL' 'OpenPonk-UML-Model' 'OpenPonk-UML-XMI' 'Fame' 'Famix') ].
+						requires: #('UMLShapes' 'OpenPonk-UML-DSL' 'OpenPonk-UML-Model' 'OpenPonk-UML-XMI' 'Fame' 'Famix') ].
 			spec group: 'plugin' with: #('OpenPonk-ClassEditor' 'UML-CodeGenerator').
 			spec group: 'default' with: #('plugin' 'OpenPonk') ]
