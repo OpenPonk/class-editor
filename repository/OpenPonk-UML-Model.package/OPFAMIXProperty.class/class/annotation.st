@@ -1,5 +1,5 @@
 meta
 annotation
-	<MSEClass: #FAMIXProperty super: FAMIXAttribute>
+	<MSEClass: #FAMIXProperty super: #FAMIXAttribute>
 	<package: #OP>
 	^ self
