@@ -1,14 +1,14 @@
 {
-	"category" : "LiveInstanceVisualization-Models",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"models" ],
-	"name" : "LIVInstanceHistory",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"models",
+		"specificationBuilder"
+	],
+	"name" : "LIVInstanceHistory",
+	"type" : "normal"
+}

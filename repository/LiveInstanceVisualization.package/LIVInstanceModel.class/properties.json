@@ -1,16 +1,15 @@
 {
-	"category" : "LiveInstanceVisualization-Models",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "LiveInstanceVisualization-Models",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"name",
 		"elements",
-		"history" ],
+		"history"
+	],
 	"name" : "LIVInstanceModel",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

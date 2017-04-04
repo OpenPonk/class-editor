@@ -6,6 +6,7 @@ renderIn: aView
 		do: [ :each | 
 			each renderIn: aView.
 			each rtElement when: TRMouseLeftClick do: [ :evt |  ].
+			self addMenuFor: each.
 			each rtElement @ RTResizable @ RTDraggable ].
 	shapes do: [ :each | self renderShape: each fromShapes: shapes in: aView ].
 	RTHorizontalFlowLayout new

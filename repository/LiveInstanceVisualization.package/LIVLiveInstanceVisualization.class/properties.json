@@ -1,14 +1,11 @@
 {
-	"category" : "LiveInstanceVisualization",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "LIVLiveInstanceVisualization",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "LiveInstanceVisualization",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "LIVLiveInstanceVisualization",
+	"type" : "normal"
+}

@@ -1,14 +1,11 @@
 {
-	"category" : "LiveInstanceVisualization",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "LIVInteractiveViewContext",
-	"pools" : [
-		 ],
 	"super" : "RTAbstractViewContext",
-	"type" : "normal" }
+	"category" : "LiveInstanceVisualization",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "LIVInteractiveViewContext",
+	"type" : "normal"
+}
