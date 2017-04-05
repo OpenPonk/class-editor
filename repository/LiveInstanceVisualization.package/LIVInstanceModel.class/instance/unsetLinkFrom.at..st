@@ -1,5 +1,5 @@
 adding
-removeLinkFrom: sourceObject at: aSlot
+unsetLinkFrom: sourceObject at: aSlot
 	| object removed |
 	object := self specificationFor: sourceObject.
 	removed := object slots at: aSlot.

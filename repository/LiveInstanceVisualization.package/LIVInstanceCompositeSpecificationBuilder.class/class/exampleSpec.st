@@ -42,7 +42,7 @@ link
 	control: #after;
 	action: [ :object |
 		history inNewState: [ :model |
-			model addLinkFrom: object to: object instance at: #instance.
+			model setLinkFrom: object to: object instance at: #instance.
 		]
 	]
 ].
@@ -75,7 +75,7 @@ link
 	control: #after;
 	action: [ :object |
 		history inNewState: [ :model |
-			model addLinkFrom: object to: object spec at: #spec.
+			model setLinkFrom: object to: object spec at: #spec.
 		]
 	]
 ].

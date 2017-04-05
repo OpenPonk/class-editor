@@ -1,4 +1,4 @@
-as yet unclassified
+converting
 asShape
 	| el lbl comp compLbl |
 	el := OPUmlCompartmentableShape new.
@@ -22,7 +22,7 @@ asShape
 	lbl owningElement: el.
 	comp := OPUmlCompartment new.
 	comp owningElement: el.
-	(slots" reject: [ :each | each isKindOf: self class ]")
+	slots
 		keysAndValuesDo: [ :key :value | 
 			(compLbl := OPUmlTypedElementLabel new)
 				owningElement: comp;
@@ -31,5 +31,13 @@ asShape
 					(String
 						streamContents: [ :stream | 
 							stream << key.
-							stream << ' = ' << value printString ]) ].
+							stream << ' = '.
+							(value isCollection and: [ value allSatisfy: [ :each | each isKindOf: LIVInstanceSpecification ] ])
+								ifTrue: [ stream
+										<< 'a';
+										<< value class printString;
+										<< '(size=';
+										<< value size;
+										<< ')' ]
+								ifFalse: [ stream << value printString ] ]) ].
 	^ el
