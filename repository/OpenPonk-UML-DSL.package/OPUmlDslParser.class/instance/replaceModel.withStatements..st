@@ -29,5 +29,5 @@ replaceModel: aModel withStatements: statements
 				ifAbsent: [ classes at: each superclass name put: each superclass ] ].
 	aModel entityStorage removeAll.
 	aModel addAll: classes.
-	aModel addAll: (statements select: #isAssociation).
+	aModel addAll: (statements select: [:each | each isBinaryAssociation | each isInheritance ]).
 	^ aModel

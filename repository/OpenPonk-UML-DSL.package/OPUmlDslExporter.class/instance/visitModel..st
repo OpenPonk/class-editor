@@ -4,14 +4,14 @@ visitModel: aModel
 		do: [ :each | self visitClass: each ]
 		separatedBy: [ self line.
 			self line ].
-	aModel allInheritanceDefinitions
-		ifNotEmpty: [ self line.
+	aModel allInheritanceDefinitions isNotEmpty
+		ifTrue: [ self line.
 			self line ].
 	aModel allInheritanceDefinitions
 		do: [ :each | self visitInheritance: each ]
 		separatedBy: [ self line ].
-	aModel allBinaryAssociations
-		ifNotEmpty: [ self line.
+	aModel allBinaryAssociations isNotEmpty
+		ifTrue: [ self line.
 			self line ].
 	aModel allBinaryAssociations
 		do: [ :each | self visitAssociation: each ]
