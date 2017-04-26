@@ -1,12 +1,28 @@
 SmalltalkCISpec {
 	#loading : [
 		SCIMetacelloLoadSpec {
+			#platforms : [
+				#pharo
+			],
 			#baseline : 'ClassEditor',
-			#directory : 'repository',
-			#platforms : [ #pharo ]
+			#directory : 'repository'
 		}
 	],
 	#testing : {
-		#packages : [ 'OpenPonk.*', 'UML.*' ]
+		#coverage : {
+			#packages : [
+				'OpenPonk-UML-Model',
+				'OpenPonk-UML-DSL',
+				'OpenPonk-UML-XMI',
+				'OpenPonk-ClassEditor'
+			]
+		},
+		#packages : [
+			'OpenPonk-UML-Model',
+			'OpenPonk-UML-DSL',
+			'OpenPonk-UML-XMI',
+			'OpenPonk-ClassEditor',
+			'OpenPonk-*'
+		]
 	}
 }
