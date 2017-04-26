@@ -28,6 +28,9 @@ baseline: spec
 				baseline: 'UMLShapes'
 				with: [ spec repository: 'github://openponk/uml-shapes/repository' ].
 			spec
+				baseline: 'UMLMetamodel'
+				with: [ spec repository: 'github://openponk/uml-metamodel/repository' ].
+			spec
 				baseline: 'OpenPonk'
 				with: [ spec repository: 'github://openponk/openponk/repository' ].
 			spec
@@ -59,6 +62,6 @@ baseline: spec
 					with: [ spec requires: #('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'Famix' 'Merlin') ];"
 				package: 'OpenPonk-ClassEditor'
 					with: [ spec
-						requires: #('UMLShapes' 'OpenPonk-UML-DSL' 'OpenPonk-UML-Model' 'OpenPonk-UML-XMI' 'Fame' 'Famix') ].
-			spec group: 'plugin' with: #('OpenPonk-ClassEditor' 'UML-CodeGenerator').
+						requires: #('UMLShapes' 'UMLMetamodel' 'OpenPonk-UML-DSL' 'OpenPonk-UML-Model' 'OpenPonk-UML-XMI' 'Fame' 'Famix') ].
+			spec group: 'plugin' with: #('OpenPonk-ClassEditor').
 			spec group: 'default' with: #('plugin' 'OpenPonk') ]
