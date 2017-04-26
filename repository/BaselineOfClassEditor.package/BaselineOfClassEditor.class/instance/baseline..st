@@ -46,9 +46,7 @@ baseline: spec
 					with: [ spec
 						className: #ConfigurationOfFamix;
 						versionString: #stable;
-						repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/' ];
-				package: 'CollectionExtensions'
-					with: [ spec repository: 'http://www.smalltalkhub.com/mc/Moose/CollectionExtensions/main' ].
+						repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/' ].
 			spec
 				package: 'OpenPonk-UML-Model' with: [ spec requires: #('Fame' 'Famix') ];
 				package: 'OpenPonk-UML-DSL'
@@ -57,8 +55,8 @@ baseline: spec
 					with: [ spec
 						requires:
 							#('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'UMLShapes' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
-				package: 'UML-CodeGenerator'
-					with: [ spec requires: #('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'Famix' 'Merlin') ];
+				"package: 'UML-CodeGenerator'
+					with: [ spec requires: #('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'Famix' 'Merlin') ];"
 				package: 'OpenPonk-ClassEditor'
 					with: [ spec
 						requires: #('UMLShapes' 'OpenPonk-UML-DSL' 'OpenPonk-UML-Model' 'OpenPonk-UML-XMI' 'Fame' 'Famix') ].

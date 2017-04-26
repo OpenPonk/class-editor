@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "BaselineOf",
 	"category" : "BaselineOfClassEditor",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "BaselineOfClassEditor",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "BaselineOf",
+	"type" : "normal" }
