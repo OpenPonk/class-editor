@@ -1,3 +1,3 @@
 figures
 figure
-	^ self diagramElement rtElement
+	^ diagramElement rtElement

@@ -1,3 +1,3 @@
 instance creation
 newEmptyClass
-	^ FAMIXClass named: 'Something'
+	^ OPUMLClass new name: 'Something'

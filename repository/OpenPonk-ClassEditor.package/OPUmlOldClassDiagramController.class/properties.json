@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-ClassEditor-OldControllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlOldClassDiagramController",
+	"pools" : [
+		 ],
+	"super" : "OPDiagramController",
+	"type" : "normal" }

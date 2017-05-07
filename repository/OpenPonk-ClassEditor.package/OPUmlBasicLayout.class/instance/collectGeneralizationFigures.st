@@ -1,3 +1,3 @@
 private - collecting
 collectGeneralizationFigures
-	^ self collectFiguresByClass: OPUmlInheritanceController
+	^ self collectFiguresByClass: OPUmlOldInheritanceController

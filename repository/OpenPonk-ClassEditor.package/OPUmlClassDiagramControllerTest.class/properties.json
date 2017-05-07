@@ -6,9 +6,10 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "OPUmlClassDiagramControllerTest",
+		"plugin",
+		"controller" ],
+	"name" : "OPUMLClassDiagramControllerTest",
 	"pools" : [
 		 ],
-	"super" : "OPUmlControllerTest",
+	"super" : "TestCase",
 	"type" : "normal" }

@@ -5,18 +5,4 @@ initializePalette: aPalette
 		icon: OPUmlIcons current classIcon;
 		whenCompleted: [ :ctrl | 
 			OPRenameElementCommand executeOn: ctrl model.
-			ctrl refreshFigure ].
-	(aPalette newCreationEntry: [ OPUmlAttributeController new ])
-		label: 'Attribute';
-		icon: Smalltalk ui theme icons abstractIcon;
-		whenCompletedRename.
-	(aPalette newCreationEntry: [ OPUmlMethodController new ])
-		label: 'Method';
-		icon: Smalltalk ui theme icons blankIcon;
-		whenCompletedRename.
-	(aPalette newConnectionCreationTool: [ OPUmlInheritanceController new ])
-		label: 'Inheritance';
-		icon: OPUmlIcons current generalizationIcon.
-	(aPalette newConnectionCreationTool: [ OPUmlAssociationController new ])
-		label: 'Association';
-		icon: OPUmlIcons current associationIcon
+			ctrl refreshFigure ]

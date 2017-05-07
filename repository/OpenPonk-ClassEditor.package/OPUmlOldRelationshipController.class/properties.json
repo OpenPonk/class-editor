@@ -1,0 +1,15 @@
+{
+	"category" : "OpenPonk-ClassEditor-OldControllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"diagramElement",
+		"feedback" ],
+	"name" : "OPUmlOldRelationshipController",
+	"pools" : [
+		 ],
+	"super" : "OPRelationshipController",
+	"type" : "normal" }

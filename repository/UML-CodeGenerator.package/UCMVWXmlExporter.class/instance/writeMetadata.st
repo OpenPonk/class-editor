@@ -7,7 +7,7 @@ writeMetadata
 		with:
 			('OpenPonk UML Class Editor v{1}, on {2}'
 				format:
-					{OPUmlClassPlugin new version.
+					{OPUmlOldClassPlugin new version.
 					time asDate asString , ' at ' , time asTime asString}).
 	writer
 		tag: 'component-property'

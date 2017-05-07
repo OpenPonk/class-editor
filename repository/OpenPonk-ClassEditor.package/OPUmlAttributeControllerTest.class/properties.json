@@ -6,10 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"attribute",
-		"diagramElement" ],
+		 ],
 	"name" : "OPUmlAttributeControllerTest",
 	"pools" : [
 		 ],
-	"super" : "OPUmlControllerTest",
+	"super" : "OPUmlElementControllerTest",
 	"type" : "normal" }

@@ -1,3 +1,3 @@
 private - collecting
 collectClassFigures
-	^ self collectFiguresByClass: OPUmlClassController
+	^ self collectFiguresByClass: OPUmlOldClassController

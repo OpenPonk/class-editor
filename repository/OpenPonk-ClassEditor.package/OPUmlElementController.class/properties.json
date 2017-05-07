@@ -4,11 +4,9 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "",
+	"commentStamp" : "PeterUhnak 5/7/2017 09:11",
 	"instvars" : [
-		"diagramElement",
-		"feedback",
-		"stereotypeLabel" ],
+		"diagramElement" ],
 	"name" : "OPUmlElementController",
 	"pools" : [
 		 ],

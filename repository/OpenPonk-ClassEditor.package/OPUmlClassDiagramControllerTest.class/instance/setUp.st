@@ -1,5 +1,4 @@
-running
+mocks
 setUp
 	super setUp.
-	controller model: MooseModel new.
-	controller view: RTView new
+	controller := self connectedControllerOn: OPUMLModel new

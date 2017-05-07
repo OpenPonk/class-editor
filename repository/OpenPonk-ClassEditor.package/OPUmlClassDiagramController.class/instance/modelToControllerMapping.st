@@ -1,7 +1,5 @@
-accessing
+adding
 modelToControllerMapping
-	^ {(FAMIXClass -> OPUmlClassController).
-	(FAMIXAttribute -> OPUmlAttributeController).
-	(FAMIXMethod -> OPUmlMethodController).
-	(OPFAMIXBinaryAssociation -> OPUmlAssociationController).
-	(FAMIXInheritance -> OPUmlInheritanceController)} asDictionary
+	^ {OPUMLClass -> OPUmlClassController.
+	OPUMLProperty -> OPUmlAttributeController.
+	OPUMLOperation -> OPUmlOperationController} asDictionary

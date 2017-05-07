@@ -10,5 +10,5 @@
 	"name" : "OPUmlClassControllerTest",
 	"pools" : [
 		 ],
-	"super" : "OPUmlControllerTest",
+	"super" : "OPUmlElementControllerTest",
 	"type" : "normal" }
