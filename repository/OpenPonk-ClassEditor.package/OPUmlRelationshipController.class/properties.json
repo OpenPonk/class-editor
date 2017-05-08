@@ -1,0 +1,14 @@
+{
+	"category" : "OpenPonk-ClassEditor-Controllers",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "PeterUhnak 5/8/2017 10:41",
+	"instvars" : [
+		 ],
+	"name" : "OPUmlRelationshipController",
+	"pools" : [
+		 ],
+	"super" : "OPUmlElementController",
+	"type" : "normal" }
