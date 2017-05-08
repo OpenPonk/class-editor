@@ -3,4 +3,5 @@ modelToControllerMapping
 	^ {OPUMLClass -> OPUmlClassController.
 	OPUMLProperty -> OPUmlAttributeController.
 	OPUMLOperation -> OPUmlOperationController.
-	OPUMLGeneralization -> OPUmlGeneralizationController} asDictionary
+	OPUMLGeneralization -> OPUmlGeneralizationController.
+	OPUMLAssociation -> OPUmlAssociationController} asDictionary

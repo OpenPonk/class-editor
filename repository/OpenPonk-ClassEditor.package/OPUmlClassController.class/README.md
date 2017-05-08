@@ -1,1 +1,1 @@
-I am a controller for a class box
+I am a controller for a Class(ifier)

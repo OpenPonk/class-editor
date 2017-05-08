@@ -1,3 +1,3 @@
 tests
 testCreateDiagramElement
-	self assert: controller createDiagramElement class equals: OPUmlClassifierShape
+	self assert: controller createDiagramElement class equals: OPUmlClassShape

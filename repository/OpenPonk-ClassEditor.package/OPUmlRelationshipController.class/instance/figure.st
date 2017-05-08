@@ -1,3 +1,3 @@
-figures
+accessing
 figure
 	^ diagramElement rtEdge

@@ -12,5 +12,7 @@ allShowableElementsInModel: aModel
 			each generalizations
 				do: [ :gen | 
 					queue addIfNotPresent: gen general.
-					queue add: gen ] ].
+					queue add: gen ].
+			(each attributes select: [ :attr | attr association isNotNil ])
+				do: [ :attr | queue addIfNotPresent: attr association ] ].
 	^ queue asArray select: [ :each | self hasSupportForModel: each ]
