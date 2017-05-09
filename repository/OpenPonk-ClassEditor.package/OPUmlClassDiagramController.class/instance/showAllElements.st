@@ -1,3 +1,5 @@
 figures
 showAllElements
-	(self allShowableElementsInModel: model) do: [ :each | self showModelInDiagram: each ]
+	self disableRefresh.
+	(self allShowableElementsInModel: model) do: [ :each | self showModelInDiagram: each ].
+	self enableRefresh

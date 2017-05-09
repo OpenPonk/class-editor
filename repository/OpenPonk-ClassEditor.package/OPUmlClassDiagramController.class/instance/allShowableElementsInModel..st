@@ -6,13 +6,17 @@ allShowableElementsInModel: aModel
 	aModel packagedElements
 		select: [ :each | each isKindOf: OPUMLClass ]
 		thenDo: [ :each | 
-			queue addAll: each attributes.
+			queue addAll: each ownedAttributes.
 			queue addAll: each ownedOperations.
 			queue addAll: each ownedComments.
 			each generalizations
 				do: [ :gen | 
 					queue addIfNotPresent: gen general.
 					queue add: gen ].
-			(each attributes select: [ :attr | attr association isNotNil ])
+			(each ownedAttributes select: [ :attr | attr association isNotNil ])
 				do: [ :attr | queue addIfNotPresent: attr association ] ].
+	queue
+		removeAllSuchThat: [ :each | 
+			(each isKindOf: OPUMLAssociation)
+				and: [ each memberEnds anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ].
 	^ queue asArray select: [ :each | self hasSupportForModel: each ]

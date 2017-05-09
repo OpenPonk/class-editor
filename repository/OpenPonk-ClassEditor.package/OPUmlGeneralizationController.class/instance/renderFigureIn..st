@@ -1,7 +1,11 @@
 figures
 renderFigureIn: aView
+	| sourceElement |
 	diagramElement := self createDiagramElement.
-	diagramElement source: (diagramController diagramElementForModel: self model specific).
+	sourceElement := (diagramController controllers
+		detect: [ :each | each model generalizations includes: self model ]) diagramElement.
+	"	diagramElement source: (diagramController diagramElementForModel: self model specific)."
+	diagramElement source: sourceElement.
 	diagramElement target: (diagramController diagramElementForModel: self model general).
 	diagramElement renderIn: aView.
 	diagramController figureAdded: self figure.
