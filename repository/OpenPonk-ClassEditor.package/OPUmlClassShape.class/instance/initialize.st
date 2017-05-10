@@ -1,7 +1,7 @@
 initialization
 initialize
 	super initialize.
-	self sharedStyle fillColor: Color white.
+	self sharedStyle fillColor: Color veryVeryDarkGray.
 	nameLabel := OPUmlNameLabel new.
 	nameLabel text: [ :model | model name ].
 	nameLabel localStyle: (OPUmlStyle new fontSize: 11).

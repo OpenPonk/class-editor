@@ -1,6 +1,6 @@
 samples
 sampleSimpleGeneralization
-	| model project cls cls2 |
+	| model cls cls2 |
 	model := OPUMLModel new name: 'Model'.
 	cls := OPUMLClass new name: 'Item'.
 	cls2 := OPUMLClass new name: 'Thing'.
@@ -11,7 +11,4 @@ sampleSimpleGeneralization
 		packagedElements:
 			{cls.
 			cls2}.
-	(project := OPProject new)
-		name: 'Project';
-		addModel: model.
-	project open
+	^ model

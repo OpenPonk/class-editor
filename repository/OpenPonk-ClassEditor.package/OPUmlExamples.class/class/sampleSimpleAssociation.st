@@ -16,7 +16,4 @@ sampleSimpleAssociation
 			{element.
 			comment.
 			assoc}.
-	(project := OPProject new)
-		name: 'Project';
-		addModel: model.
-	project open
+	^ model

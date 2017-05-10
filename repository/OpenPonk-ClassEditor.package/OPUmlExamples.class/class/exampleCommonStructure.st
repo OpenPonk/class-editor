@@ -1,9 +1,9 @@
 examples
 exampleCommonStructure
-	| uml cs project |
+	| uml cs |
 	uml := OPUMLMetaElement umlMetamodel.
 	cs := uml packagedElements detect: [ :each | each name = 'CommonStructure' ].
-	(project := OPProject new)
+	^ OPProject new
 		name: 'Project';
-		addModel: cs.
-	project open
+		addModel: cs;
+		open

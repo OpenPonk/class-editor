@@ -1,6 +1,6 @@
 examples
 exampleModel
-	OPProject new
+	^ OPProject new
 		projectName: 'UML Class Diagram';
 		addModel: self sampleModel;
 		open
