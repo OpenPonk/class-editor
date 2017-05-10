@@ -2,6 +2,9 @@ figures
 createDiagramElement
 	^ OPUmlLabel new
 		modelElement: self model;
-		text: #name;
+		text: [ :aModel | self notationTextFor: aModel ];
+		emphasis: [ :aModel :aStyle | 
+			aStyle fontUnderline: aModel isStatic.
+			aStyle fontItalic: aModel isAbstract ];
 		localStyle: OPUmlStyle new;
 		yourself

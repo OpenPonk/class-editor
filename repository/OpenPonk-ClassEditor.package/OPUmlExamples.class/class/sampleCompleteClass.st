@@ -1,43 +1,76 @@
 examples
 sampleCompleteClass
 	| model class string object number float integer |
-	string := FAMIXClass named: 'String'.
-	object := FAMIXClass named: 'Object'.
-	number := FAMIXClass named: 'Number'.
-	float := FAMIXClass named: 'Float'.
-	integer := FAMIXClass named: 'Integer'.
-	model := MooseModel named: 'Something'.
-	class := FAMIXClass named: 'CompleteClass'.
+	string := OPUMLClass new name: 'String'.
+	object := OPUMLClass new name: 'Object'.
+	number := OPUMLClass new name: 'Number'.
+	float := OPUMLClass new name: 'Float'.
+	integer := OPUMLClass new name: 'Integer'.
+	model := OPUMLModel new name: 'Complete Class Model'.
+	class := OPUMLClass new name: 'CompleteClass'.
 	class isAbstract: true.
-	model add: class.
-	class addStereotype: (OPFAMIXStereotype named: 'class').
-	class addStereotype: (OPFAMIXStereotype named: 'example').
-	class stereotypes first
+	model packagedElements add: class.
+	"	class addStereotype: (OPFAMIXStereotype named: 'class').
+	class addStereotype: (OPFAMIXStereotype named: 'example')."
+	"class stereotypes first
 		addIcon:
 			(OPFAMIXImage new
 				content:
 					'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gwRESYZc+TopwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAABDSURBVDjLY2CgEDBC6f9EqMEL/pMoDgdMlHqBhRTbCPnvP6n+JsvPVA+DgTeAUEJiJBA+jPgk/xPDZ6E0VqjmhYEDAKlHDwzayLTLAAAAAElFTkSu
-QmCC').
-	class addAttribute: (FAMIXAttribute named: 'normal' type: integer).
-	class
-		addAttribute:
-			((FAMIXAttribute named: 'collection' type: float)
-				multiplicity: OPFAMIXMultiplicity zeroToMany).
-	class addAttribute: ((FAMIXAttribute named: 'static' type: string) isStatic: true).
-	class addAttribute: ((FAMIXAttribute named: 'abstract' type: object) isAbstract: true).
-	class addMethod: (FAMIXMethod named: 'basicMethod').
-	class
-		addMethod:
-			((FAMIXMethod named: 'staticMethod')
-				addParameter: (FAMIXParameter named: 'number' type: number);
+QmCC')."
+	class ownedAttributes
+		add:
+			(OPUMLProperty new
+				name: 'normal';
+				type: integer).
+	class ownedAttributes
+		add:
+			(OPUMLProperty new
+				name: 'derived';
+				isDerived: true).
+	class ownedAttributes
+		add:
+			(OPUMLProperty new
+				name: 'collection';
+				type: float;
+				lowerValue: (OPUMLLiteralInteger new value: 0);
+				upperValue: (OPUMLLiteralUnlimitedNatural new value: '*')).
+	class ownedAttributes
+		add:
+			(OPUMLProperty new
+				name: 'static';
+				type: string;
 				isStatic: true).
-	class
-		addMethod:
-			((FAMIXMethod named: 'abstractMethod')
-				addParameter:
-					((FAMIXParameter named: 'return' type: string)
-						direction: OPUmlParameterDirectionKind return);
-				addParameter: (FAMIXParameter named: 'arg1' type: number);
-				addParameter: ((FAMIXParameter named: 'arg2' type: string) multiplicity: OPFAMIXMultiplicity zeroToOne);
+	class ownedOperations add: (OPUMLOperation new name: 'basicMethod').
+	class ownedOperations
+		add:
+			((OPUMLOperation new name: 'staticMethod')
+				in: [ :op | 
+					op ownedParameters
+						add:
+							(OPUMLParameter new
+								name: 'number';
+								type: number) ];
+				isStatic: true).
+	class ownedOperations
+		add:
+			((OPUMLOperation new name: 'abstractMethod')
+				in: [ :op | 
+					op ownedParameters
+						add:
+							(OPUMLParameter new
+								name: 'return';
+								type: string;
+								direction: OPUmlParameterDirectionKind return);
+						add:
+							(OPUMLParameter new
+								name: 'arg1';
+								type: number);
+						add:
+							(OPUMLParameter new
+								name: 'arg2';
+								type: string;
+								lowerValue: (OPUMLLiteralInteger new value: 0);
+								upperValue: (OPUMLLiteralUnlimitedNatural new value: 1)) ];
 				isAbstract: true).
 	^ model

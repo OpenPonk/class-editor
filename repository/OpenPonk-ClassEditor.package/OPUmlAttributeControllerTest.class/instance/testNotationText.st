@@ -1,9 +1,9 @@
 tests
-testAttributeText
+testNotationText
 	self
 		assert:
 			(controller
-				attributeTextFor:
+				notationTextFor:
 					(OPUMLProperty new
 						name: 'attr';
 						isDerived: true))

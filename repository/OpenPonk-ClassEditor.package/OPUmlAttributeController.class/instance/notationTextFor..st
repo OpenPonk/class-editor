@@ -1,3 +1,3 @@
 figures
-attributeTextFor: aProperty
+notationTextFor: aProperty
 	^ aProperty notationString
