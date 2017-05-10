@@ -7,8 +7,7 @@ notationString
 					stream
 						nextPutAll: v;
 						nextPutAll: ' ' ].
-			self flag: 'https://github.com/OpenPonk/uml-bootstrap-generator/issues/10'.
-			self isDerived = true | (self isDerived = 'true')
+			self isDerived
 				ifTrue: [ stream << '/' ].
 			stream << self name.
 			self type
