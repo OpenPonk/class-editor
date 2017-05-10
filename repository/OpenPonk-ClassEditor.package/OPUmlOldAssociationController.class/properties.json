@@ -1,14 +1,13 @@
 {
-	"category" : "OpenPonk-ClassEditor-OldControllers",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"constraints" ],
-	"name" : "OPUmlOldAssociationController",
-	"pools" : [
-		 ],
 	"super" : "OPUmlOldRelationshipController",
-	"type" : "normal" }
+	"category" : "OpenPonk-ClassEditor-OldControllers",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"constraints"
+	],
+	"name" : "OPUmlOldAssociationController",
+	"type" : "normal"
+}

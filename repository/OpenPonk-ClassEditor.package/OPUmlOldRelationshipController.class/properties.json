@@ -1,15 +1,14 @@
 {
-	"category" : "OpenPonk-ClassEditor-OldControllers",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "OPRelationshipController",
+	"category" : "OpenPonk-ClassEditor-OldControllers",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"diagramElement",
-		"feedback" ],
+		"feedback"
+	],
 	"name" : "OPUmlOldRelationshipController",
-	"pools" : [
-		 ],
-	"super" : "OPRelationshipController",
-	"type" : "normal" }
+	"type" : "normal"
+}

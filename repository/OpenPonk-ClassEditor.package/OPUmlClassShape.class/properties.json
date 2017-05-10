@@ -1,16 +1,15 @@
 {
-	"category" : "OpenPonk-ClassEditor-Shapes",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "OPUmlClassifierShape",
+	"category" : "OpenPonk-ClassEditor-Shapes",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"nameLabel",
 		"attributes",
-		"operations" ],
+		"operations"
+	],
 	"name" : "OPUmlClassShape",
-	"pools" : [
-		 ],
-	"super" : "OPUmlClassifierShape",
-	"type" : "normal" }
+	"type" : "normal"
+}

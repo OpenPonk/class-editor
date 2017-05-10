@@ -1,14 +1,13 @@
 {
-	"category" : "OpenPonk-ClassEditor-Plugin",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"suffixMapping" ],
-	"name" : "OPUmlNavigatorAdapter",
-	"pools" : [
-		 ],
 	"super" : "OPNavigatorAdapter",
-	"type" : "normal" }
+	"category" : "OpenPonk-ClassEditor-Plugin",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"suffixMapping"
+	],
+	"name" : "OPUmlNavigatorAdapter",
+	"type" : "normal"
+}

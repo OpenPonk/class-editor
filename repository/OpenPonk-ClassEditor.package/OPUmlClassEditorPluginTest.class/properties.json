@@ -1,14 +1,13 @@
 {
-	"category" : "OpenPonk-ClassEditor-Tests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"plugin" ],
-	"name" : "OPUmlClassEditorPluginTest",
-	"pools" : [
-		 ],
 	"super" : "TestCase",
-	"type" : "normal" }
+	"category" : "OpenPonk-ClassEditor-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"plugin"
+	],
+	"name" : "OPUmlClassEditorPluginTest",
+	"type" : "normal"
+}

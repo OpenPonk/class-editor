@@ -1,17 +1,16 @@
 {
-	"category" : "OpenPonk-ClassEditor-OldTests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "OPUmlOldControllerTest",
+	"category" : "OpenPonk-ClassEditor-OldTests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"source",
 		"target",
 		"sourceController",
-		"targetController" ],
+		"targetController"
+	],
 	"name" : "OPUmlOldAssociationControllerTest",
-	"pools" : [
-		 ],
-	"super" : "OPUmlOldControllerTest",
-	"type" : "normal" }
+	"type" : "normal"
+}

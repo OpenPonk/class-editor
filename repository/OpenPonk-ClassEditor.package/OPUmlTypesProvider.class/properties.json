@@ -1,17 +1,16 @@
 {
-	"category" : "OpenPonk-ClassEditor-Support",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "PeterUhnak 8/6/2016 13:35",
+	"super" : "Object",
+	"category" : "OpenPonk-ClassEditor-Support",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"primitiveTypes",
 		"collectionTypes",
 		"modelTypes",
-		"profileTypes" ],
+		"profileTypes"
+	],
 	"name" : "OPUmlTypesProvider",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,16 +1,15 @@
 {
-	"category" : "OpenPonk-ClassEditor-OldControllers",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "OPElementController",
+	"category" : "OpenPonk-ClassEditor-OldControllers",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"diagramElement",
 		"feedback",
-		"stereotypeLabel" ],
+		"stereotypeLabel"
+	],
 	"name" : "OPUmlOldElementController",
-	"pools" : [
-		 ],
-	"super" : "OPElementController",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,14 +1,11 @@
 {
-	"category" : "OpenPonk-ClassEditor-Controllers",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "PeterUhnak 5/8/2017 12:45",
-	"instvars" : [
-		 ],
-	"name" : "OPUmlAssociationController",
-	"pools" : [
-		 ],
 	"super" : "OPUmlRelationshipController",
-	"type" : "normal" }
+	"category" : "OpenPonk-ClassEditor-Controllers",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "OPUmlAssociationController",
+	"type" : "normal"
+}

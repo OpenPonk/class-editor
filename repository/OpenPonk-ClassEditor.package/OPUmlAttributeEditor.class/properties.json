@@ -1,10 +1,10 @@
 {
-	"category" : "OpenPonk-ClassEditor-Windows",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "PeterUhnak 9/8/2016 17:46",
+	"super" : "ComposableModel",
+	"category" : "OpenPonk-ClassEditor-Windows",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"model",
 		"noDefaultRadio",
@@ -23,9 +23,8 @@
 		"declaredTypeName",
 		"defaultValue",
 		"declaredType",
-		"onAccept" ],
+		"onAccept"
+	],
 	"name" : "OPUmlAttributeEditor",
-	"pools" : [
-		 ],
-	"super" : "ComposableModel",
-	"type" : "normal" }
+	"type" : "normal"
+}

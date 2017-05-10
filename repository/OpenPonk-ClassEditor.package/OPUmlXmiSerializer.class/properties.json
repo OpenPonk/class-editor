@@ -1,14 +1,11 @@
 {
-	"category" : "OpenPonk-ClassEditor-Plugin",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "OPUmlXmiSerializer",
-	"pools" : [
-		 ],
 	"super" : "OPAbstractSerializer",
-	"type" : "normal" }
+	"category" : "OpenPonk-ClassEditor-Plugin",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "OPUmlXmiSerializer",
+	"type" : "normal"
+}
