@@ -6,15 +6,16 @@ menuCommandOn: aBuilder
 		label: 'UML Class Diagram';
 		parent: #MostUsedTools;
 		action: [ self exampleEmpty ];
-		with: [ (aBuilder item: #UMLClassEditorExamples)
+		with: [ (aBuilder item: #UMLCompleteClass)
 				parent: #UMLClassEditor;
-				label: 'Simple Model';
+				label: 'Rich Class';
 				icon: OPIcons current dcOmlDiagramIcon;
-				action: [ self exampleModel ].
+				action: [ self exampleCompleteClass ].
 			(aBuilder item: #UMLClassEditorExamples)
 				parent: #UMLClassEditor;
 				label: 'University';
 				icon: OPIcons current dcOmlDiagramIcon;
+				withSeparatorAfter;
 				action: [ self exampleDsl ].
 			(aBuilder item: #UMLMetamodelInspect)
 				parent: #UMLClassEditor;

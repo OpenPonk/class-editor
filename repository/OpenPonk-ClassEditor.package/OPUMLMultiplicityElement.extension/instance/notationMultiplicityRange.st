@@ -4,7 +4,7 @@ notationMultiplicityRange
 		ifTrue: [ ^ '' ].
 	^ String
 		streamContents: [ :stream | 
-			self lower = self upper
+			(self lower = self upper or: [ self lower = 0 & (self upper = '*') ])
 				ifFalse: [ stream
 						<< self lower asString;
 						<< '..' ].
