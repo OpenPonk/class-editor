@@ -2,7 +2,7 @@ figures
 createDiagramElement
 	| el attributesCompartment operationsCompartment |
 	el := OPUmlClassifierShape new.
-	el sharedStyle fillColor: Color white.
+	el sharedStyle fillColor: Color black.
 	el modelElement: self model.
 	nameLabel := OPUmlNameLabel new.
 	nameLabel modelElement: self model.
