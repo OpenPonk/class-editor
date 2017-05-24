@@ -19,4 +19,17 @@ notationString
 			(self defaultValue isKindOf: OPUMLOpaqueExpression)
 				ifTrue: [ stream
 						<< ' = ';
-						<< self defaultValue bodies first ] ]
+						<< self defaultValue bodies first ].
+			true
+				ifTrue: [ | props |
+					props := OrderedCollection new.
+					self isReadOnly
+						ifTrue: [ props add: #readOnly ].
+					self isOrdered
+						ifTrue: [ props add: #ordered ].
+					self isMultivalued & self isUnique not
+						ifTrue: [ props add: #nonunique ].
+					props
+						ifNotEmpty: [ stream << ' {'.
+							props do: [ :each | stream << each ] separatedBy: [ stream << ', ' ].
+							stream << '}' ] ] ]
