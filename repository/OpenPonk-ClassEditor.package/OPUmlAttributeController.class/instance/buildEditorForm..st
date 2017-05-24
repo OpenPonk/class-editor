@@ -1,4 +1,3 @@
 forms
 buildEditorForm: aForm
-	self buildNameEditorForm: aForm.
-	self buildIsDerivedEditorForm: aForm.
+	aForm fromMagritteDescriptions: self magritteDescription.
