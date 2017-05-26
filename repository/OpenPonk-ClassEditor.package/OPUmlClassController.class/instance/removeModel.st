@@ -1,3 +1,6 @@
 rendering
 removeModel
-	diagramController model packagedElements remove: self model
+	| ownerModel |
+	ownerModel := diagramController model.
+	self remove.
+	ownerModel packagedElements remove: self model
