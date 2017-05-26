@@ -9,7 +9,7 @@ notationString
 						nextPutAll: ' ' ].
 			self isDerived
 				ifTrue: [ stream << '/' ].
-			stream << self name.
+			self name ifNotNil: [ stream << self name ].
 			self type
 				ifNotNil: [ stream
 						<< ' : ';

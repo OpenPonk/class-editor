@@ -1,3 +1,3 @@
 tests
 testDiagramControlllerClass
-	self assert: plugin diagramControllerClass equals: OPUmlClassDiagramController
+	self assert: plugin diagramControllerClass equals: OPUmlPackageDiagramController

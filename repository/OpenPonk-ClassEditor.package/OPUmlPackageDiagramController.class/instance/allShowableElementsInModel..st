@@ -3,7 +3,7 @@ allShowableElementsInModel: aModel
 	| queue |
 	queue := OrderedCollection new.
 	queue addAll: aModel packagedElements.
-	aModel packagedElements
+"	aModel packagedElements
 		select: [ :each | each isKindOf: OPUMLClass ]
 		thenDo: [ :each | 
 			queue addAll: each ownedAttributes.
@@ -18,5 +18,5 @@ allShowableElementsInModel: aModel
 	queue
 		removeAllSuchThat: [ :each | 
 			(each isKindOf: OPUMLAssociation)
-				and: [ each memberEnds anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ].
+				and: [ each memberEnds anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ]."
 	^ queue asArray select: [ :each | self hasSupportForModel: each ]

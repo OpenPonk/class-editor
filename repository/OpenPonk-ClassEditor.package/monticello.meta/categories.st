@@ -1,5 +1,6 @@
 SystemOrganization addCategory: #'OpenPonk-ClassEditor'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Controllers'!
+SystemOrganization addCategory: 'OpenPonk-ClassEditor-Controllers-Tests'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Examples'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Layouting'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-OldControllers'!

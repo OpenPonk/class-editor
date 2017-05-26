@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "OPUmlClassDiagramController",
+	"name" : "OPUmlPackageDiagramController",
 	"type" : "normal"
 }
