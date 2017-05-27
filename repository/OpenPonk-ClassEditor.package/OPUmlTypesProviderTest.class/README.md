@@ -1,1 +1,0 @@
-A DCUmlTypesProviderTest is a test class for testing the behavior of DCUmlTypesProvider

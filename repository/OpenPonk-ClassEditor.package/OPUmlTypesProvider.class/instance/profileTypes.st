@@ -1,3 +1,0 @@
-accessing
-profileTypes
-	^ profileTypes ifNil: [ #() ]
