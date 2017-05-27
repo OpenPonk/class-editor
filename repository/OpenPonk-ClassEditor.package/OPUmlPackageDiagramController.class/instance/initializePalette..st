@@ -11,4 +11,8 @@ initializePalette: aPalette
 		label: 'Operation';
 		whenCompletedRename.
 	(aPalette newConnectionCreationTool: [ OPUmlGeneralizationController new ])
-		label: 'Generalization'
+		label: 'Generalization';
+		icon: OPUmlIcons current generalizationIcon.
+	(aPalette newConnectionCreationTool: [ OPUmlAssociationController new ])
+		label: 'Association';
+		icon: OPUmlIcons current associationIcon

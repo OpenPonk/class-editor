@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "OPUmlElementControllerTest",
+	"super" : "OPUmlRelationshipControllerTest",
 	"category" : "OpenPonk-ClassEditor-Controllers-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
