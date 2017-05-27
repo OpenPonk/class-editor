@@ -9,4 +9,6 @@ initializePalette: aPalette
 		whenCompletedRename.
 	(aPalette newCreationEntry: [ OPUmlOperationController new ])
 		label: 'Operation';
-		whenCompletedRename
+		whenCompletedRename.
+	(aPalette newConnectionCreationTool: [ OPUmlGeneralizationController new ])
+		label: 'Generalization'

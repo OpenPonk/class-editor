@@ -1,3 +1,3 @@
 adding
 addAsSourceFor: aController
-	self shouldBeImplemented
+	aController sourceController: self
