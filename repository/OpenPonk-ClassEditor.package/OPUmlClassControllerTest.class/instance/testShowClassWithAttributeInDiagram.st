@@ -1,4 +1,4 @@
-tests
+tests - diagram
 testShowClassWithAttributeInDiagram
 	| class prop |
 	class := OPUMLClass new.

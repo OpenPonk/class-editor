@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "TestCase",
+	"super" : "Object",
 	"category" : "OpenPonk-ClassEditor-OldTests",
 	"classinstvars" : [ ],
 	"pools" : [ ],

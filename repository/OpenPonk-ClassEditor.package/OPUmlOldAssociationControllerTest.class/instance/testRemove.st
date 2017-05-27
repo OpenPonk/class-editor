@@ -1,6 +1,7 @@
 tests
 testRemove
 	| association |
+	self skip: 'to be removed anyway'.
 	association := OPFAMIXBinaryAssociation source: source target: target.
 	diagramController model add: association.
 	diagramController rebuild.

@@ -1,4 +1,4 @@
-tests
+tests - diagram
 testShowClassInDiagram
 	| class |
 	class := OPUMLClass new.
