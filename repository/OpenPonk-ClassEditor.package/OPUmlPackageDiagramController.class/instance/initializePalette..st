@@ -10,6 +10,7 @@ initializePalette: aPalette
 	(aPalette newCreationEntry: [ OPUmlOperationController new ])
 		label: 'Operation';
 		whenCompletedRename.
+	aPalette newSeparator.
 	(aPalette newConnectionCreationTool: [ OPUmlGeneralizationController new ])
 		label: 'Generalization';
 		icon: OPUmlIcons current generalizationIcon.
