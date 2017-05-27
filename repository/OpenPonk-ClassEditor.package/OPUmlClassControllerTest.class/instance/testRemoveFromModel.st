@@ -1,4 +1,4 @@
-tests
+tests - removing
 testRemoveFromModel
 	| class |
 	class := OPUMLClass new.

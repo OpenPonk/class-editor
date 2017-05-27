@@ -1,4 +1,4 @@
-tests
+tests - removing
 testRemoveWithAttribute
 	| class |
 	class := OPUMLClass new.

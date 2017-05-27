@@ -1,4 +1,4 @@
-rendering
+removing
 removeModel
 	| ownerModel |
 	ownerModel := diagramController model.

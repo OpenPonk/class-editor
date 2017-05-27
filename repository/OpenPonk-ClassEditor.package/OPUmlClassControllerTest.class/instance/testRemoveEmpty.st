@@ -1,4 +1,4 @@
-tests
+tests - removing
 testRemoveEmpty
 	| class |
 	class := OPUMLClass new.
