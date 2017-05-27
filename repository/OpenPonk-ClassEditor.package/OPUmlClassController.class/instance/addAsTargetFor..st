@@ -1,3 +1,3 @@
 adding
 addAsTargetFor: aController
-	self shouldBeImplemented
+	aController createModelIn: self andShowInDiagram: self diagramController

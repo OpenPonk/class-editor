@@ -1,9 +1,8 @@
-as yet unclassified
-createModelAndShowInDiagram: aDiagramController
+construction
+createModelIn: aPackageController andShowInDiagram: aDiagramController
 	| newModel |
 	newModel := self modelClass new.
 	newModel name: 'New Class'.
-	OPRenameElementCommand executeOn: newModel.
 	model := newModel.
 	aDiagramController model packagedElements add: model.
 	aDiagramController addController: self.

@@ -7,7 +7,7 @@ notationString
 					stream
 						nextPutAll: v;
 						nextPutAll: ' ' ].
-			stream << self name.
+			self name ifNotNil: [ stream << self name ].
 			stream << '('.
 			(self ownedParameters
 				reject: [ :param | param direction = OPUMLParameterDirectionKind return ])

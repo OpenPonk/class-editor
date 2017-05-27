@@ -13,8 +13,12 @@ notationString
 						<< ' : ';
 						<< self type name ].
 			self notationMultiplicityRange
-				ifNotEmpty: [ :range | stream nextPutAll: '[' , range , ']' ].
-"			(self defaultValue isKindOf: OPUMLOpaqueExpression)
+				ifNotEmpty: [ :range | 
+					stream
+						<< '[';
+						<< range;
+						<< ']' ]
+			"			(self defaultValue isKindOf: OPUMLOpaqueExpression)
 				ifTrue: [ stream
 						<< ' = ';
 						<< self defaultValue bodies first ]" ]
