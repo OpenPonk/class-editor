@@ -10,11 +10,11 @@ allShowableElementsInModel: aModel
 				do: [ :gen | 
 					queue addIfNotPresent: gen general.
 					queue add: gen ].
-				]."
 			(each ownedAttributes select: [ :attr | attr association isNotNil ])
 				do: [ :attr | queue addIfNotPresent: attr association ] ].
 	queue
 		removeAllSuchThat: [ :each | 
 			(each isKindOf: OPUMLAssociation)
-				and: [ each memberEnds anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ]."
+				and:
+					[ each memberEnds anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ].
 	^ queue asArray select: [ :each | self hasSupportForModel: each ]

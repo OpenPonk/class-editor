@@ -1,7 +1,6 @@
-samples
-sampleSimpleAssociation
-	| model element ownedComment comment owningElement assoc |
-	model := OPUMLModel new name: 'Model'.
+tests - diagram
+testRemoveFromDiagram
+	| element ownedComment comment assoc owningElement |
 	element := OPUMLClass new name: 'Element'.
 	comment := OPUMLClass new name: 'Comment'.
 	assoc := OPUMLAssociation new.
@@ -17,9 +16,10 @@ sampleSimpleAssociation
 		memberEnds:
 			{ownedComment.
 			owningElement}.
-	model
-		packagedElements:
-			{element.
-			comment.
-			assoc}.
-	^ model
+	diagramController
+		showModelInDiagram: element;
+		showModelInDiagram: comment;
+		showModelInDiagram: assoc.
+	controller := diagramController controllerForModel: assoc.
+	controller remove.
+	self assert: diagramController view edges asArray equals: #()

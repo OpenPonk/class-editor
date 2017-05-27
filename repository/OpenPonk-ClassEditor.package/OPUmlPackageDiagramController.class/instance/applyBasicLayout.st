@@ -9,5 +9,5 @@ applyBasicLayout
 		horizontalGap: 70;
 		doNotAttachPoint;
 		on: (classes collect: [ :each | (self controllerForModel: each) figure ])
-			"edges: (generalizations collect: [ :each | (self controllerForModel: each) figure ])".
+			edges: (generalizations collect: [ :each | (self controllerForModel: each) figure ]).
 	self view canvas camera focusOnCenter
