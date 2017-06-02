@@ -1,8 +1,8 @@
 rendering
-allShowableElementsInModel: each
+allShowableElementsInModel: aClassModel
 	| queue |
 	queue := OrderedCollection new.
-	queue addAll: each ownedAttributes.
-	queue addAll: each ownedOperations.
+	queue addAll: aClassModel ownedAttributes.
+	queue addAll: aClassModel ownedOperations.
 	"queue addAll: each ownedComments."
-	^ queue asArray select: [ :eeach | diagramController hasSupportForModel: eeach ]
+	^ queue asArray select: [ :each | diagramController hasSupportForModel: each ]
