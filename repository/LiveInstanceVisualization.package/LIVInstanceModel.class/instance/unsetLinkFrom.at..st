@@ -1,8 +1,7 @@
-adding
+removing
 unsetLinkFrom: sourceObject at: aSlot
-	| object removed |
-	object := self specificationFor: sourceObject.
-	removed := object slots at: aSlot.
-	(elements noneSatisfy: [ :each | (each = object) not and: [ each slots associations includes: removed ] ])
-		ifTrue: [ elements removeAllSuchThat: [ :each | each instanceHash = removed instanceHash ] ].
-	object slots at: aSlot put: nil
+	| source removed |
+	source := self specificationFor: sourceObject ifNone: [ ^ self ].
+	removed := source slots at: aSlot.
+	source slots at: aSlot put: nil.
+	self removeInstance: removed

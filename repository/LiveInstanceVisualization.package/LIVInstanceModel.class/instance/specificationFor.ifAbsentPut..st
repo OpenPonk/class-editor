@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 specificationFor: anObject ifAbsentPut: aBlock
 	^ elements
 		detect: [ :each | each instanceHash = anObject hash ]

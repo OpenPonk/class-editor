@@ -1,11 +1,14 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "LiveInstanceVisualization-Diff",
+	"category" : "LiveInstanceVisualization-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "LIVInstanceModelDiff",
+	"instvars" : [
+		"items",
+		"capacity"
+	],
+	"name" : "LIVTestContainer",
 	"type" : "normal"
 }

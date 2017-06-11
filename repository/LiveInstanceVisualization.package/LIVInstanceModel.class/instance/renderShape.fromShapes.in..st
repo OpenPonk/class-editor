@@ -22,7 +22,7 @@ renderShape: aShape fromShapes: aCollection in: aView
 						target: target;
 						targetLabel:
 							(OPUmlNameLabel new
-								text: key;
+								text: key asString;
 								modelElement: key);
 						modelElement: aShape modelElement -> key;
 						headDecorator: RTSimpleArrow;

@@ -32,9 +32,13 @@ asShape
 						streamContents: [ :stream | 
 							stream << key.
 							stream << ' = '.
-							(value isCollection and: [ value allSatisfy: [ :each | each isKindOf: LIVInstanceSpecification ] ])
-								ifTrue: [ stream
-										<< 'a';
+							(value isCollection
+								and: [ value allSatisfy: [ :each | each isKindOf: LIVInstanceSpecification ] ])
+								ifTrue: [ (stream
+										<<
+										(value class printString first isVowel
+										ifTrue: [ 'an' ]
+										ifFalse: [ 'a' ]))
 										<< value class printString;
 										<< '(size=';
 										<< value size;

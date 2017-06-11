@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 specificationFor: anObject
 	^ elements detect: [ :each | each instanceHash = anObject hash ]
