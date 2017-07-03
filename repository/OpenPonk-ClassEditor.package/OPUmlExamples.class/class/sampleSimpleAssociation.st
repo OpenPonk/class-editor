@@ -14,6 +14,7 @@ sampleSimpleAssociation
 		owningAssociation: assoc;
 		type: element.
 	assoc
+		name: 'comments';
 		memberEnds:
 			{ownedComment.
 			owningElement}.

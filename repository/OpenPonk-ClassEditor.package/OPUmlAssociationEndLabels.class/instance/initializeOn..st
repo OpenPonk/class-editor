@@ -2,9 +2,8 @@ initialization
 initializeOn: anAssociationShape
 	self initialize.
 	associationShape := anAssociationShape.
-	nameLabel := OPUmlAssociationEndLabel new.
-	nameLabel
-		text: [ :model | model name ];
+	(nameLabel := OPUmlAssociationEndLabel new)
+		text: [ :model | model notationStringWithoutType ];
 		owningElement: anAssociationShape.
 	(multiplicityLabel := OPUmlMultiplicityLabel new)
 		text: [ :model | model notationAssociationMultiplicityRange ];

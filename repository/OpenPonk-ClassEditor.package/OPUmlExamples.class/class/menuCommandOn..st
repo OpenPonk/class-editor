@@ -11,12 +11,12 @@ menuCommandOn: aBuilder
 				label: 'Rich Class';
 				icon: OPIcons current dcOmlDiagramIcon;
 				action: [ self exampleCompleteClass ].
-			"(aBuilder item: #UMLClassEditorExamples)
+			(aBuilder item: #UMLExampleSimpleAssociation)
 				parent: #UMLClassEditor;
-				label: 'University';
+				label: 'Simple Association';
 				icon: OPIcons current dcOmlDiagramIcon;
 				withSeparatorAfter;
-				action: [ self exampleDsl ]."
+				action: [ self exampleSimpleAssociation ].
 			(aBuilder item: #UMLMetamodelInspect)
 				parent: #UMLClassEditor;
 				label: 'Inspect UML Metamodel';
