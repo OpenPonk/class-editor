@@ -10,5 +10,5 @@ sampleSimpleGeneralization
 	model
 		packagedElements:
 			{cls.
-			cls2}.
+			cls2} asOrderedCollection.
 	^ model

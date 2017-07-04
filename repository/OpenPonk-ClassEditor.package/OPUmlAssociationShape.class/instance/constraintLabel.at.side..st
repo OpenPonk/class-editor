@@ -10,6 +10,5 @@ constraintLabel: aLabel at: aPosition side: aSide
 		element: aLabel rtElement;
 		edge: self rtEdge;
 		balance: (config at: aPosition) first;
-		minDistance: (config at: aPosition) second;
-		build.
-	anchor update
+		minDistance: (config at: aPosition) second.
+	^ anchor

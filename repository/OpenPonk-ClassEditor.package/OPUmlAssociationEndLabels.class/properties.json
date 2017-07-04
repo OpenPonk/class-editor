@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "PeterUhnak 7/3/2017 15:31",
-	"super" : "OPUmlEdge",
+	"super" : "Object",
 	"category" : "OpenPonk-ClassEditor-Shapes",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -10,7 +10,8 @@
 		"multiplicityLabel",
 		"redefinesLabel",
 		"modifiersLabel",
-		"associationShape"
+		"associationShape",
+		"modelElement"
 	],
 	"name" : "OPUmlAssociationEndLabels",
 	"type" : "normal"

@@ -4,5 +4,5 @@ descriptionName
 	^ MAStringDescription new
 		accessor: (self descriptionAccessor: #name);
 		label: 'Name';
-		priority: 4;
+		priority: 2;
 		yourself

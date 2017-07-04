@@ -7,6 +7,7 @@ sampleSimpleAssociation
 	assoc := OPUMLAssociation new.
 	(ownedComment := OPUMLProperty new)
 		name: 'ownedComment';
+		aggregation: OPUMLAggregationKind composite;
 		owningClass: element;
 		type: comment.
 	(owningElement := OPUMLProperty new)
@@ -17,10 +18,10 @@ sampleSimpleAssociation
 		name: 'comments';
 		memberEnds:
 			{ownedComment.
-			owningElement}.
+			owningElement} asOrderedCollection.
 	model
 		packagedElements:
 			{element.
 			comment.
-			assoc}.
+			assoc} asOrderedCollection.
 	^ model

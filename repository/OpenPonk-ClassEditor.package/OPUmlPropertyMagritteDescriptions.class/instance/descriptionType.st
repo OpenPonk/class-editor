@@ -8,5 +8,5 @@ descriptionType
 				read: [ :me | (reader value: me) type name ]
 				write: [ :me :newValue |  ]);
 		label: labelPrefix;
-		priority: 5;
+		priority: 1;
 		yourself
