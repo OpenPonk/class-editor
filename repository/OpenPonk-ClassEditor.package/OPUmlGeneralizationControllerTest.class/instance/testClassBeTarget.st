@@ -1,8 +1,8 @@
-tests - creation
+tests
 testClassBeTarget
 	| sourceController targetController |
-	sourceController := diagramController newControllerFor: OPUMLClass new.
-	targetController := diagramController newControllerFor: OPUMLClass new.
+	sourceController := diagramController newControllerFor: (OPUMLClass new name: 'A').
+	targetController := diagramController newControllerFor: (OPUMLClass new name: 'B').
 	diagramController
 		addController: sourceController;
 		addController: targetController.

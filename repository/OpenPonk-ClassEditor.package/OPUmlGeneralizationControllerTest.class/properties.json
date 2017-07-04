@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"parent",
+		"child",
+		"generalization"
+	],
 	"name" : "OPUmlGeneralizationControllerTest",
 	"type" : "normal"
 }

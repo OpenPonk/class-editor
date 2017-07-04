@@ -5,7 +5,13 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"element",
+		"comment",
+		"association",
+		"ownedComment",
+		"owningElement"
+	],
 	"name" : "OPUmlAssociationControllerTest",
 	"type" : "normal"
 }
