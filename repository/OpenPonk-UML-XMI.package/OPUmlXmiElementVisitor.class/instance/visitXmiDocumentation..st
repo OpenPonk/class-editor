@@ -1,3 +1,0 @@
-visitor
-visitXmiDocumentation: aXMLElement
-	

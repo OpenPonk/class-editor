@@ -1,3 +1,0 @@
-visiting
-model
-	^ elementVisitor model
