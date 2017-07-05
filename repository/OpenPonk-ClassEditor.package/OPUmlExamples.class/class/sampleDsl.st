@@ -1,4 +1,4 @@
-examples
+samples
 sampleDsl
 	^ OPUmlDslParser
 		parse:

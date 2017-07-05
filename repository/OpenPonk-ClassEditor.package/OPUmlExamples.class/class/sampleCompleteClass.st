@@ -1,4 +1,4 @@
-examples
+samples
 sampleCompleteClass
 	| model class string object number float integer |
 	string := OPUMLClass new name: 'String'.

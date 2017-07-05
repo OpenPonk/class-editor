@@ -1,4 +1,4 @@
-examples
+samples
 sampleDslDIFor: aModel
 	"This method demonstrates hand-constructing the layout and style of the diagram. Normally information like this is stored by the editor to disk when the project is saved."
 

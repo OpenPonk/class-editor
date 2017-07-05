@@ -2,4 +2,8 @@ removing
 removeModel
 	self remove.
 	[ self model memberEnds isNotEmpty ]
-		whileTrue: [ self model memberEnds first association: nil ]
+		whileTrue: [ | end |
+			end := self model memberEnds first.
+			end association: nil.
+			end owningClass: nil.
+			end owningAssociation: nil ]

@@ -15,8 +15,13 @@ menuCommandOn: aBuilder
 				parent: #UMLClassEditor;
 				label: 'Simple Association';
 				icon: OPIcons current dcOmlDiagramIcon;
-				withSeparatorAfter;
 				action: [ self exampleSimpleAssociation ].
+			(aBuilder item: #UMLExampleGeneralizationSets)
+				parent: #UMLClassEditor;
+				label: 'Generalization Sets';
+				icon: OPIcons current dcOmlDiagramIcon;
+				withSeparatorAfter;
+				action: [ self exampleGeneralizationSets ].
 			(aBuilder item: #UMLMetamodelInspect)
 				parent: #UMLClassEditor;
 				label: 'Inspect UML Metamodel';
