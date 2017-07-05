@@ -1,3 +1,0 @@
-*OpenPonk-ClassEditor
-uuid
-	^ mooseID

@@ -4,21 +4,6 @@ baseline: spec
 	spec
 		for: #common
 		do: [ spec
-				project: 'XMLParser'
-				with: [ spec
-						className: #ConfigurationOfXMLParser;
-						versionString: #stable;
-						repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main/' ].
-			spec
-				baseline: 'XMLDOMVisitor'
-				with: [ spec repository: 'github://peteruhnak/xml-dom-visitor/repository' ].
-			spec
-				project: 'XPath'
-				with: [ spec
-						className: #ConfigurationOfXPath;
-						versionString: #stable;
-						repository: 'http://smalltalkhub.com/mc/PharoExtras/XPath/main/' ].
-			spec
 				project: 'Merlin'
 				with: [ spec
 						className: #ConfigurationOfMerlin;
@@ -37,43 +22,14 @@ baseline: spec
 				baseline: 'OpenPonk'
 				with: [ spec repository: 'github://openponk/openponk/repository' ].
 			spec
-				project: 'PetitParser'
-				with: [ spec
-						className: #ConfigurationOfPetitParser;
-						versionString: #development;
-						loads: #('Parser');
-						repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main/' ].
-			spec
 				project: 'Magritte'
 				with: [ spec
 						className: #ConfigurationOfMagritte3;
 						versionString: #stable;
 						repository: 'http://smalltalkhub.com/mc/Magritte/Magritte3/main/' ].
 			spec
-				project: 'Fame'
+				package: 'OpenPonk-ClassEditor'
 				with: [ spec
-						className: #ConfigurationOfFame;
-						versionString: #development;
-						repository: 'http://www.smalltalkhub.com/mc/Moose/Fame/main' ].
-			spec
-				project: 'Famix'
-				with: [ spec
-						className: #ConfigurationOfFamix;
-						versionString: #stable;
-						repository: 'http://smalltalkhub.com/mc/Moose/Moose/main/' ].
-			spec
-				package: 'OpenPonk-UML-Model' with: [ spec requires: #('Fame' 'Famix') ];
-				package: 'OpenPonk-UML-DSL'
-					with: [ spec requires: #('OpenPonk-UML-Model' 'Famix' 'PetitParser') ];
-				package: 'OpenPonk-UML-XMI'
-					with: [ spec
-						requires:
-							#('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'UMLShapes' 'XMLParser' 'XPath' 'XMLDOMVisitor') ];
-				"package: 'UML-CodeGenerator'
-					with: [ spec requires: #('OpenPonk-UML-Model' 'OpenPonk-UML-DSL' 'Famix' 'Merlin') ];"
-					package: 'OpenPonk-ClassEditor'
-					with: [ spec
-						requires:
-							#('UMLShapes' 'UMLMetamodel' 'UMLBootstrapGenerator' 'OpenPonk-UML-DSL' 'OpenPonk-UML-Model' 'OpenPonk-UML-XMI' 'Fame' 'Famix' 'Magritte') ].
+						requires: #('UMLShapes' 'UMLMetamodel' 'UMLBootstrapGenerator' 'Fame' 'Magritte' 'Merlin') ].
 			spec group: 'plugin' with: #('OpenPonk-ClassEditor').
 			spec group: 'default' with: #('plugin' 'OpenPonk') ]

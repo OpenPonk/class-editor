@@ -61,7 +61,7 @@ QmCC')."
 							(OPUMLParameter new
 								name: 'return';
 								type: string;
-								direction: OPUmlParameterDirectionKind return);
+								direction: OPUMLParameterDirectionKind return);
 						add:
 							(OPUMLParameter new
 								name: 'arg1';
