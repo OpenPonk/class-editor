@@ -1,1 +1,0 @@
-I am an opaque behavior, keep in mind that body and language is NOT a collection (SingleOpaqueBehavior cf. UML OpaqueBehavior).

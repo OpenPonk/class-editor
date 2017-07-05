@@ -1,3 +1,0 @@
-enumeration
-composite
-	^ #composite
