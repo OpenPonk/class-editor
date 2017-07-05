@@ -7,8 +7,9 @@ sampleGeneralizationSets
 	car := OPUMLClass new name: 'Car'.
 	insuredHouse := OPUMLClass new name: 'InsuredHouse'.
 	nonInsuredHouse := OPUMLClass new name: 'NonInsuredHouse'.
-	houseSet := OPUMLGeneralizationSet new isDisjoint: true.
+	houseSet := OPUMLGeneralizationSet new name: 'house gs'; isDisjoint: true.
 	insuredSet := OPUMLGeneralizationSet new
+		name: 'insured gs';
 		isDisjoint: true;
 		isCovering: true.
 	houseSet generalizations

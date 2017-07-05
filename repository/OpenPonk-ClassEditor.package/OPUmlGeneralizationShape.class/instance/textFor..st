@@ -8,7 +8,9 @@ textFor: aGeneralization
 				streamContents: [ :stream | 
 					| props |
 					(each name isNotNil and: [ each name isNotEmpty ])
-						ifTrue: [ stream << each name , ' ' ].
+						ifTrue: [ stream
+								<< each name;
+								<< ' ' ].
 					props := OrderedCollection new.
 					each isCovering
 						ifTrue: [ props add: 'complete' ].
