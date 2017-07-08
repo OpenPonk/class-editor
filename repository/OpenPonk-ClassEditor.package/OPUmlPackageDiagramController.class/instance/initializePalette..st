@@ -16,4 +16,19 @@ initializePalette: aPalette
 		icon: OPUmlIcons current generalizationIcon.
 	(aPalette newConnectionCreationTool: [ OPUmlAssociationController new ])
 		label: 'Association';
+		icon: OPUmlIcons current associationIcon.
+	(aPalette newCreationEntry: [ OPUmlPackageController new beForPackage ])
+		label: 'Package';
+		whenCompletedRename.
+	(aPalette newCreationEntry: [ OPUmlPackageController new beForModel ])
+		label: 'Model';
+		whenCompletedRename.
+	(aPalette newCreationEntry: [ OPUmlPackageController new beForProfile ])
+		label: 'Profile';
+		whenCompletedRename.
+	(aPalette newCreationEntry: [ OPUmlStereotypeController new ])
+		label: 'Stereotype';
+		whenCompletedRename.
+	(aPalette newConnectionCreationTool: [ OPUmlExtensionController new ])
+		label: 'Extension';
 		icon: OPUmlIcons current associationIcon

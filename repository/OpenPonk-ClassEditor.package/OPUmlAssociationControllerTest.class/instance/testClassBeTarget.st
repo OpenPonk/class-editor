@@ -10,4 +10,10 @@ testClassBeTarget
 	targetController showInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	targetController addAsTargetFor: controller.
-	self assert: (controller model memberEnds collect: #name) asArray equals: #(a b)
+	self assert: (controller model memberEnds collect: #name) asArray equals: #(a b).
+	self
+		assert: controller model memberEnds first owningClass
+		equals: targetController model.
+	self
+		assert: controller model memberEnds second owningClass
+		equals: sourceController model

@@ -1,3 +1,4 @@
 adding
 canBeTargetFor: aController
-	^ aController isKindOf: OPUmlClassController
+	^ (aController isKindOf: OPUmlClassController)
+		| (aController isKindOf: OPUmlPackageController)

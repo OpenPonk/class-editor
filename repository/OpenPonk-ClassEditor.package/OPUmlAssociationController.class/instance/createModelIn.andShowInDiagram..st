@@ -1,13 +1,13 @@
 construction
 createModelIn: aTargetController andShowInDiagram: aDiagramController
 	| sourceProp targetProp |
-	model := OPUMLAssociation new.
+	model := self createModel.
 	(sourceProp := OPUMLProperty new)
-		owningAssociation: model;
+		owningClass: aTargetController model;
 		name: sourceController model name uncapitalized;
 		type: sourceController model.
 	(targetProp := OPUMLProperty new)
-		owningAssociation: model;
+		owningClass: sourceController model;
 		name: aTargetController model name uncapitalized;
 		type: aTargetController model.
 	model memberEnds

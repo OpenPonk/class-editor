@@ -4,4 +4,9 @@ modelToControllerMapping
 	OPUMLProperty -> OPUmlAttributeController.
 	OPUMLOperation -> OPUmlOperationController.
 	OPUMLGeneralization -> OPUmlGeneralizationController.
-	OPUMLAssociation -> OPUmlAssociationController} asDictionary
+	OPUMLAssociation -> OPUmlAssociationController.
+	OPUMLPackage -> OPUmlPackageController.
+	OPUMLModel -> OPUmlPackageController.
+	OPUMLProfile -> OPUmlPackageController.
+	OPUMLExtension -> OPUmlExtensionController.
+	OPUMLStereotype -> OPUmlStereotypeController} asDictionary

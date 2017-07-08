@@ -1,3 +1,5 @@
 figures
 createDiagramElement
-	^ OPUmlClassShape new modelElement: self model
+	^ OPUmlClassShape new
+		stereotype: [ self stereotypeNames ];
+		modelElement: self model

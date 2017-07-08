@@ -8,7 +8,9 @@
 	"instvars" : [
 		"nameLabel",
 		"attributes",
-		"operations"
+		"operations",
+		"stereotypeLabel",
+		"stereotypeBlock"
 	],
 	"name" : "OPUmlClassShape",
 	"type" : "normal"

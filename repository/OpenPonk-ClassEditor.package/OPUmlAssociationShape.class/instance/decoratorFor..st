@@ -1,5 +1,7 @@
 accessing
 decoratorFor: aProperty
+	(aProperty opposite isKindOf: OPUMLExtensionEnd)
+		ifTrue: [ ^ OPUmlEdgeMarkers arrow ].
 	aProperty opposite aggregation = OPUMLAggregationKind composite
 		ifTrue: [ ^ OPUmlEdgeMarkers filledDiamond ].
 	aProperty opposite aggregation = OPUMLAggregationKind shared
