@@ -1,6 +1,6 @@
 examples
 exampleSimpleGeneralization
 	^ OPProject new
-		projectName: 'Simple Generalization';
+		name: 'Simple Generalization';
 		addModel: self sampleSimpleGeneralization;
 		open

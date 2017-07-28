@@ -1,6 +1,6 @@
 examples
 exampleGeneralizationSets
 	^ OPProject new
-		projectName: 'Generalization Sets';
+		name: 'Generalization Sets';
 		addModel: self sampleGeneralizationSets;
 		open

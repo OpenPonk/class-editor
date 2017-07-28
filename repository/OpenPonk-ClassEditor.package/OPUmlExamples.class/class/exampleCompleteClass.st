@@ -1,6 +1,6 @@
 examples
 exampleCompleteClass
 	^ OPProject new
-		projectName: 'Complete Class Example';
+		name: 'Complete Class Example';
 		addModel: self sampleCompleteClass;
 		open
