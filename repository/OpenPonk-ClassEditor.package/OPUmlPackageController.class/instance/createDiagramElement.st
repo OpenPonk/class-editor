@@ -4,6 +4,6 @@ createDiagramElement
 		modelElement: self model;
 		in: [ :shape | 
 			shape style
-				fillColor: Color veryVeryDarkGray;
+				fillColor: Color white;
 				fontColor: Color black ];
 		yourself

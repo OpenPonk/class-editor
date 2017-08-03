@@ -1,7 +1,7 @@
 initialization
 initialize
 	super initialize.
-	self sharedStyle fillColor: Color veryVeryDarkGray.
+	self sharedStyle fillColor: Color white.
 	stereotypeLabel := OPUmlKeywordLabel new.
 	stereotypeLabel text: [ :model | self stereotypeText ].
 	stereotypeLabel localStyle: OPUmlStyle new.
