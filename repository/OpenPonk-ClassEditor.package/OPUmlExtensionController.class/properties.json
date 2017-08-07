@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "PeterUhnak 7/8/2017 16:36",
-	"super" : "OPUmlAssociationController",
+	"super" : "OPUmlRelationshipController",
 	"category" : "OpenPonk-ClassEditor-Controllers",
 	"classinstvars" : [ ],
 	"pools" : [ ],

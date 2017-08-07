@@ -9,4 +9,5 @@ modelToControllerMapping
 	OPUMLModel -> OPUmlPackageController.
 	OPUMLProfile -> OPUmlPackageController.
 	OPUMLExtension -> OPUmlExtensionController.
+	OPUMLExtensionEnd -> OPUmlAttributeController.
 	OPUMLStereotype -> OPUmlStereotypeController} asDictionary

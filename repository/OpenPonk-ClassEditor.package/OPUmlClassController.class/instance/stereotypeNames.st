@@ -1,3 +1,3 @@
 accessing
 stereotypeNames
-	^ (self model extensions collect: #name) joinUsing: ','
+	^ self model appliedStereotypes collect: #name
