@@ -1,4 +1,4 @@
-tests - diagram
+tests
 testCreateDiagramElement
 	controller model: extension.
-	self assert: controller createDiagramElement class equals: OPUmlAssociationShape
+	self assert: controller createDiagramElement class equals: OPUmlExtensionShape
