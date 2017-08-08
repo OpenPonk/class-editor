@@ -4,3 +4,4 @@ canBeTargetFor: aController
 		| (aController isKindOf: OPUmlOperationController)
 		| (aController isKindOf: OPUmlGeneralizationController)
 		| (aController isKindOf: OPUmlAssociationController)
+		| (aController isKindOf: OPUmlExtensionController)
