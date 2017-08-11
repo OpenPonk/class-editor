@@ -1,6 +1,7 @@
 accessing
-modelElement: anObject
-	super modelElement: anObject.
-	nameLabel modelElement: anObject.
-	sourceEndLabels modelElement: anObject memberEnds first.
-	targetEndLabels modelElement: anObject memberEnds second
+modelElement: aModel
+	super modelElement: aModel.
+	nameLabel modelElement: aModel.
+	stereotypeLabel modelElement: aModel.
+	sourceEndLabels modelElement: aModel memberEnds first.
+	targetEndLabels modelElement: aModel memberEnds second

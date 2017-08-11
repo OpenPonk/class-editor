@@ -7,6 +7,8 @@ sampleSimpleAssociation
 	assoc := OPUMLAssociation new.
 	(ownedComment := OPUMLProperty new)
 		name: 'ownedComment';
+		lowerValue: (OPUMLLiteralInteger new value: 0);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: '*');
 		aggregation: OPUMLAggregationKind composite;
 		owningClass: element;
 		type: comment.

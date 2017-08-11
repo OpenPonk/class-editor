@@ -26,4 +26,4 @@ menuCommandOn: aBuilder
 				parent: #UMLClassEditor;
 				label: 'Inspect UML Metamodel';
 				icon: OPIcons current dcOmlDiagramIcon;
-				action: [ OPUMLMetaElement umlMetamodel inspect ] ]
+				action: [ OPUMLXMISpecsStorage umlMetamodel inspect ] ]

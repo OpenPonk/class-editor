@@ -1,5 +1,6 @@
 descriptions
 descriptionMultiplicity
+	<magritteDescription>
 	^ MASingleOptionDescription new
 		beExtensible;
 		options: #('0..1' '1..1' '0..*' '1..*');

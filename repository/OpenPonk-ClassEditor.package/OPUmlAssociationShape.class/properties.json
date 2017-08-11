@@ -9,7 +9,8 @@
 		"nameLabel",
 		"sourceEndLabels",
 		"targetEndLabels",
-		"constraints"
+		"constraints",
+		"stereotypeLabel"
 	],
 	"name" : "OPUmlAssociationShape",
 	"type" : "normal"

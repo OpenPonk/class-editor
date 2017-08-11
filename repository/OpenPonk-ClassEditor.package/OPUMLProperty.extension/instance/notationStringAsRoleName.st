@@ -1,5 +1,5 @@
 *OpenPonk-ClassEditor
-notationStringWithoutType
+notationStringAsRoleName
 	^ String
 		streamContents: [ :stream | 
 			(OPUMLVisibilityKind notationFor: self visibility)
@@ -10,8 +10,6 @@ notationStringWithoutType
 			self isDerived
 				ifTrue: [ stream << '/' ].
 			self name ifNotNil: [ stream << self name ].
-			self notationMultiplicityRange
-				ifNotEmpty: [ :range | stream nextPutAll: '[' , range , ']' ].
 			(self defaultValue isKindOf: OPUMLOpaqueExpression)
 				ifTrue: [ stream
 						<< ' = ';
