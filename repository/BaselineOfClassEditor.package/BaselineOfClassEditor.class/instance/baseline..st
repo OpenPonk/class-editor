@@ -16,6 +16,9 @@ baseline: spec
 				baseline: 'UMLMetamodel'
 				with: [ spec repository: 'github://openponk/uml-metamodel/repository' ].
 			spec
+				baseline: 'OPUMLXMI'
+				with: [ spec repository: 'github://openponk/uml-xmi/repository' ].
+			spec
 				baseline: 'UMLBootstrapGenerator'
 				with: [ spec repository: 'github://openponk/uml-bootstrap-generator/repository' ].
 			spec
@@ -30,6 +33,6 @@ baseline: spec
 			spec
 				package: 'OpenPonk-ClassEditor'
 				with: [ spec
-						requires: #('UMLShapes' 'UMLMetamodel' 'UMLBootstrapGenerator' 'Magritte' 'Merlin') ].
+						requires: #('UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'Magritte' 'Merlin') ].
 			spec group: 'plugin' with: #('OpenPonk-ClassEditor').
 			spec group: 'default' with: #('plugin' 'OpenPonk') ]
