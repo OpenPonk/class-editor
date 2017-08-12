@@ -1,7 +1,7 @@
 Roassal2 - manipulation
 createRtElement
 	| shape |
-	shape := OPUmlackageShape on: self.
+	shape := OPUmlPackageShape on: self.
 	shape style: self style.
 	shape shape
 		color: [ :model | model style fillColor ];

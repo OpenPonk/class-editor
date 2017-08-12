@@ -1,5 +1,7 @@
 accessing
 childrenMapping
-	^ {(MooseModel -> #allModelClasses).
-	(MooseEntity -> #()).
-	(FAMIXClass -> [ :o | o stereotypes , o attributes , o methods ])}
+	^ {OPUMLPackage -> #packagedElements.
+	OPUMLProfile -> #packagedElements.
+	OPUMLModel -> #packagedElements.
+	OPUMLClass -> [ :cls | cls ownedAttributes , cls ownedOperations ].
+	OPUMLEnumeration -> #ownedLiterals}
