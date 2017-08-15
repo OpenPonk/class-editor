@@ -1,11 +1,11 @@
 samples
 sampleCompleteClass
 	| model class string object number float integer |
-	string := OPUMLClass new name: 'String'.
-	object := OPUMLClass new name: 'Object'.
-	number := OPUMLClass new name: 'Number'.
-	float := OPUMLClass new name: 'Float'.
-	integer := OPUMLClass new name: 'Integer'.
+	string := OPUMLPrimitiveType new name: 'String'.
+	object := OPUMLPrimitiveType new name: 'Object'.
+	number := OPUMLPrimitiveType new name: 'Number'.
+	float := OPUMLPrimitiveType new name: 'Float'.
+	integer := OPUMLPrimitiveType new name: 'Integer'.
 	model := OPUMLModel new name: 'Complete Class Model'.
 	class := OPUMLClass new name: 'CompleteClass'.
 	class isAbstract: true.
