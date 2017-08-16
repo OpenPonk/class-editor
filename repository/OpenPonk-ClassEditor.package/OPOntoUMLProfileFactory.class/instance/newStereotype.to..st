@@ -17,4 +17,5 @@ newStereotype: aName to: aBaseClass
 			extensionProperty}.
 	extension ownedEnd: extensionProperty.
 	extensionProperty lowerValue: (OPUMLLiteralInteger new value: 0).
-	^ stereotype
+	^ {stereotype.
+	extension}

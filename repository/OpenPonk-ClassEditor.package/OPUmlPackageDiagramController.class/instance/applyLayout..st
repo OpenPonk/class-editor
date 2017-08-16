@@ -5,7 +5,9 @@ applyLayout: aThreeArgBlock
 		select: [ :ctrl | ctrl isKindOf: OPUmlClassController ]
 		thenCollect: #figure.
 	inheritance := self controllers
-		select: [ :ctrl | ctrl isKindOf: OPUmlGeneralizationController ]
+		select: [ :ctrl | 
+			(ctrl isKindOf: OPUmlGeneralizationController)
+				| (ctrl isKindOf: OPUmlExtensionController) ]
 		thenCollect: #figure.
 	associations := self controllers
 		select: [ :ctrl | ctrl isKindOf: OPUmlAssociationController ]

@@ -6,19 +6,18 @@ createProfile
 	sortals := #(Kind Quantity Collective SubKind Phase Role).
 	mixins := #(RoleMixin Mixin Category).
 	moments := #(Relator Mode Quality).
-	profile packagedElements add: classMetaclass.
 	(sortals , mixins , moments) sorted
-		do: [ :each | profile packagedElements add: (self newStereotype: each to: classMetaclass) ].
+		do:
+			[ :each | profile packagedElements addAll: (self newStereotype: each to: classMetaclass) ].
 	associationMetaclass := OPUMLClass new name: 'Association'.
 	associations := {#related -> #(Formal Material).
 	#dependency -> #(Characterization Mediation Derivation).
-	#meronymic -> #(subQuantityOf subCollectionOf memberOf componentOf)}
-		asOrderedDictionary.
+	#meronymic -> #(subQuantityOf subCollectionOf memberOf componentOf)} asOrderedDictionary.
 	associations values
 		do: [ :arr | 
 			arr sorted
 				do:
-					[ :each | profile packagedElements add: (self newStereotype: each to: associationMetaclass) ] ].
+					[ :each | profile packagedElements addAll: (self newStereotype: each to: associationMetaclass) ] ].
 	(associations at: #meronymic)
 		do: [ :each | 
 			| cls |

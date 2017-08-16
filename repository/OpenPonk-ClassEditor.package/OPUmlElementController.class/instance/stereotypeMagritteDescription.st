@@ -16,6 +16,6 @@ stereotypeMagritteDescription
 												write: [ :me :newValue | 
 													stereo tags at: attr name put: newValue.
 													me refreshFigure ]);
-										label: attr name;
+										label: 'Is ', attr name capitalized;
 										yourself) ] ] ].
 	^ descriptions
