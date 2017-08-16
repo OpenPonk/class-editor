@@ -1,5 +1,6 @@
 accessing
 decoratorFor: aProperty
+	(self ontoUmlDecoratorFor: aProperty) ifNotNil: [ :marker | ^ marker ].
 	aProperty opposite aggregation = OPUMLAggregationKind composite
 		ifTrue: [ ^ OPUmlEdgeMarkers filledDiamond ].
 	aProperty opposite aggregation = OPUMLAggregationKind shared

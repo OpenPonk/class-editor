@@ -7,6 +7,12 @@ initialize
 				ifTrue: [ '/' ]
 				ifFalse: [ '' ]) , (model name ifNil: [ '' ]) ];
 		owningElement: self.
+	(propertiesLabel := OPUmlLabel new)
+		text: [ :model | 
+			(self propertiesOfModel: model)
+				ifEmpty: [ '' ]
+				ifNotEmpty: [ :props | '{' , (props joinUsing: ',') , '}' ] ];
+		owningElement: self.
 	(stereotypeLabel := OPUmlNameLabel new)
 		text: [ :model | 
 			model appliedStereotypes

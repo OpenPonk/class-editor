@@ -4,7 +4,8 @@ constraintLabel: aLabel at: aPosition side: aSide
 	config := Dictionary
 		with: #source -> (Array with: 10 with: aSide * 10)
 		with: #target -> (Array with: -10 with: aSide * 10)
-		with: #middle -> (Array with: 0.5 with: aSide * 10).
+		with: #middle -> (Array with: 0.5 with: aSide * 10)
+		with: #center -> (Array with: 0.5 with: 0).
 	anchor := OPRTAnchorConstraint new.
 	anchor
 		element: aLabel rtElement;
