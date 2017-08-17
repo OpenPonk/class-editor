@@ -2,6 +2,7 @@ accessing
 stereotypeMagritteDescription
 	| descriptions |
 	descriptions := OrderedCollection new.
+	self model ifNil: [ ^ #() ].
 	self model appliedStereotypes
 		do: [ :stereo | 
 			stereo ownedAttributes
