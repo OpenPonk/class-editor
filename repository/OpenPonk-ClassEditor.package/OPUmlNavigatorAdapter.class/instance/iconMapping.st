@@ -7,6 +7,7 @@ iconMapping
 	OPUMLDataType -> OPUmlIcons dataTypeIcon.
 	OPUMLPrimitiveType -> OPUmlIcons primitiveIcon.
 	OPUMLEnumeration -> OPUmlIcons enumIcon.
+	OPUMLEnumerationLiteral -> OPUmlIcons literalIcon.
 	OPUMLProperty -> OPUmlIcons attributeIcon.
 	OPUMLOperation -> OPUmlIcons operationIcon.
 	OPUMLConstraint -> OPUmlIcons constraintIcon.

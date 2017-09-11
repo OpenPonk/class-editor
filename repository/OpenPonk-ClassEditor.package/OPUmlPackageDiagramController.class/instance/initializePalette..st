@@ -20,6 +20,15 @@ initializePalette: aPalette
 		label: 'Generalization';
 		icon: OPUmlIcons generalizationIcon.
 	aPalette newSeparator.
+	(aPalette newCreationEntry: [ OPUmlEnumerationController new ])
+		label: 'Enumeration';
+		icon: OPUmlIcons enumIcon;
+		whenCompletedRename.
+	(aPalette newCreationEntry: [ OPUmlEnumerationLiteralController new ])
+		label: 'Enumeration Literal';
+		icon: OPUmlIcons literalIcon;
+		whenCompletedRename.
+	aPalette newSeparator.
 	(aPalette newCreationEntry: [ OPUmlPackageController new beForPackage ])
 		label: 'Package';
 		icon: OPUmlIcons packageIcon;
