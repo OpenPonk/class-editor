@@ -1,13 +1,17 @@
-samples
-sampleGeneralizationSets
-	| model insuredItem house car insuredHouse nonInsuredHouse houseSet insuredSet |
-	model := OPUMLModel new name: 'Generalization Sets'.
+accessing
+generalizationSets: aModel
+	<gtExample>
+	<dependsOn: #emptyModel>
+	| insuredItem house car insuredHouse nonInsuredHouse houseSet insuredSet |
+	aModel name: 'Generalization Sets'.
 	insuredItem := OPUMLClass new name: 'InsuredItem'.
 	house := OPUMLClass new name: 'House'.
 	car := OPUMLClass new name: 'Car'.
 	insuredHouse := OPUMLClass new name: 'InsuredHouse'.
 	nonInsuredHouse := OPUMLClass new name: 'NonInsuredHouse'.
-	houseSet := OPUMLGeneralizationSet new name: 'house gs'; isDisjoint: true.
+	houseSet := OPUMLGeneralizationSet new
+		name: 'house gs';
+		isDisjoint: true.
 	insuredSet := OPUMLGeneralizationSet new
 		name: 'insured gs';
 		isDisjoint: true;
@@ -30,11 +34,11 @@ sampleGeneralizationSets
 			(OPUMLGeneralization new
 				general: house;
 				specific: nonInsuredHouse).
-	model
+	aModel
 		packagedElements:
 			{insuredItem.
 			house.
 			car.
 			insuredHouse.
 			nonInsuredHouse} asOrderedCollection.
-	^ model
+	^ aModel

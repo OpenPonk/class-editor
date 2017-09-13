@@ -1,7 +1,9 @@
-samples
-sampleSimpleAssociation
-	| model element ownedComment comment owningElement assoc |
-	model := OPUMLModel new name: 'Model'.
+accessing
+simpleAssociation: aModel
+	<gtExample>
+	<dependsOn: #emptyModel>
+	| element ownedComment comment owningElement assoc |
+	aModel name: 'Simple Association'.
 	element := OPUMLClass new name: 'Element'.
 	comment := OPUMLClass new name: 'Comment'.
 	assoc := OPUMLAssociation new.
@@ -21,9 +23,9 @@ sampleSimpleAssociation
 		memberEnds:
 			{ownedComment.
 			owningElement} asOrderedCollection.
-	model
+	aModel
 		packagedElements:
 			{element.
 			comment.
 			assoc} asOrderedCollection.
-	^ model
+	^ aModel

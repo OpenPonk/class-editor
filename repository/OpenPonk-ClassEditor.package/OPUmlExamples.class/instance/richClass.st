@@ -1,15 +1,14 @@
-samples
-sampleCompleteClass
-	| model class string object number float integer |
+accessing
+richClass
+	<gtExample>
+	| class string object number float integer |
 	string := OPUMLPrimitiveType new name: 'String'.
 	object := OPUMLPrimitiveType new name: 'Object'.
 	number := OPUMLPrimitiveType new name: 'Number'.
 	float := OPUMLPrimitiveType new name: 'Float'.
 	integer := OPUMLPrimitiveType new name: 'Integer'.
-	model := OPUMLModel new name: 'Complete Class Model'.
 	class := OPUMLClass new name: 'CompleteClass'.
 	class isAbstract: true.
-	model packagedElements add: class.
 	"	class addStereotype: (OPFAMIXStereotype named: 'class').
 	class addStereotype: (OPFAMIXStereotype named: 'example')."
 	"class stereotypes first
@@ -73,4 +72,4 @@ QmCC')."
 								lowerValue: (OPUMLLiteralInteger new value: 0);
 								upperValue: (OPUMLLiteralUnlimitedNatural new value: 1)) ];
 				isAbstract: true).
-	^ model
+	^ class
