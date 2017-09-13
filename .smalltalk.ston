@@ -11,18 +11,11 @@ SmalltalkCISpec {
 	#testing : {
 		#coverage : {
 			#packages : [
-				'OpenPonk-UML-Model',
-				'OpenPonk-UML-DSL',
-				'OpenPonk-UML-XMI',
 				'OpenPonk-ClassEditor'
 			]
 		},
 		#packages : [
-			'OpenPonk-UML-Model',
-			'OpenPonk-UML-DSL',
-			'OpenPonk-UML-XMI',
-			'OpenPonk-ClassEditor',
-			'OpenPonk-*'
+			'OpenPonk-ClassEditor'
 		]
 	}
 }
