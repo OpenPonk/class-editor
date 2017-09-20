@@ -9,10 +9,11 @@ smalltalk:
 
 cache:
   directories:
-    $HOME/package-cache
+    - $HOME/package-cache
 
 before_script:
   - wget -O- https://raw.githubusercontent.com/peteruhnak/hapao-coverage/master/package-cache.sh | bash
+  - ls $HOME/package-cache
 
 after_success:
   - wget -O- https://raw.githubusercontent.com/peteruhnak/hapao-coverage/master/hapao-coverage.sh | bash
