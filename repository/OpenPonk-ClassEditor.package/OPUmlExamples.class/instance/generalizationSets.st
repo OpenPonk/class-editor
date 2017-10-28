@@ -1,9 +1,9 @@
 accessing
-generalizationSets: aModel
+generalizationSets
 	<gtExample>
-	<dependsOn: #emptyModel>
-	| insuredItem house car insuredHouse nonInsuredHouse houseSet insuredSet |
-	aModel name: 'Generalization Sets'.
+	| model insuredItem house car insuredHouse nonInsuredHouse houseSet insuredSet |
+	model := self emptyModel.
+	model name: 'Generalization Sets'.
 	insuredItem := OPUMLClass new name: 'InsuredItem'.
 	house := OPUMLClass new name: 'House'.
 	car := OPUMLClass new name: 'Car'.
@@ -34,11 +34,11 @@ generalizationSets: aModel
 			(OPUMLGeneralization new
 				general: house;
 				specific: nonInsuredHouse).
-	aModel
+	model
 		packagedElements:
 			{insuredItem.
 			house.
 			car.
 			insuredHouse.
 			nonInsuredHouse} asOrderedCollection.
-	^ aModel
+	^ model

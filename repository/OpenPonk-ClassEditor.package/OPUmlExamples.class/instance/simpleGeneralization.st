@@ -1,16 +1,16 @@
 accessing
-simpleGeneralization: aModel
+simpleGeneralization
 	<gtExample>
-	<dependsOn: #emptyModel>
-	| cls cls2 |
-	aModel name: 'Simple Generalization'.
+	| cls cls2 model |
+	model := self emptyModel.
+	model name: 'Simple Generalization'.
 	cls := OPUMLClass new name: 'Item'.
 	cls2 := OPUMLClass new name: 'Thing'.
 	OPUMLGeneralization new
 		general: cls2;
 		specific: cls.
-	aModel
+	model
 		packagedElements:
 			{cls.
 			cls2} asOrderedCollection.
-	^ aModel
+	^ model

@@ -1,12 +1,15 @@
 forms
 descriptionStereotype
 	| profile names |
-	profile := OPOntoUMLProfileFactory new createProfile.
+	"	profile := OPOntoUMLProfileFactory new createProfile."
+	profile := OPUmlIssuesProfileFactory new createProfile.
 	names := profile packagedElements
 		select: [ :each | 
 			(each oclIsKindOf: #Stereotype)
 				and: [ each ownedAttributes
-						anySatisfy: [ :attr | attr name = ('base_' , self model umlClassName) ] ] ]
+						anySatisfy: [ :attr | 
+							(attr name beginsWith: 'base_')
+								and: [ self model oclIsKindOf: (attr name withoutPrefix: 'base_') ] ] ] ]
 		thenCollect: [ :each | each name -> each name ].
 	^ MASingleOptionDescription new
 		optionsAndLabels: {nil -> ''} , names;

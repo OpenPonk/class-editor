@@ -1,10 +1,11 @@
 accessing
-enumerationWithLiterals: anEnumeration
+enumerationWithLiterals
 	<gtExample>
-	<dependsOn: #emptyEnumeration>
+	| enumeration |
+	enumeration := self emptyEnumeration.
 	#(public private protected package)
 		do: [ :each | 
 			| literal |
 			literal := OPUMLEnumerationLiteral new name: each.
-			anEnumeration ownedLiterals add: literal ].
-	^ anEnumeration
+			enumeration ownedLiterals add: literal ].
+	^ enumeration

@@ -1,6 +1,6 @@
 toolbar
 contextMenu: aBuilder
-	<opModelNavigatorContextMenu>
+	<opModelNavigatorContextMenu: #OPUmlClassEditorPlugin>
 	| navigator selectedItem |
 	navigator := aBuilder model.
 	selectedItem := navigator selectedItem.
