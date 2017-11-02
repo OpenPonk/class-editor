@@ -1,8 +1,8 @@
 forms
 descriptionStereotype
 	| profile names |
-	"	profile := OPOntoUMLProfileFactory new createProfile."
-	profile := OPUmlIssuesProfileFactory new createProfile.
+	profile := OPOntoUMLProfileFactory new createProfile.
+"	profile := OPUmlIssuesProfileFactory new createProfile."
 	names := profile packagedElements
 		select: [ :each | 
 			(each oclIsKindOf: #Stereotype)
