@@ -7,6 +7,6 @@ descriptions
 		do: [ :stereo | 
 			| meta |
 			meta := stereo umlMetaClass.
-			meta ownedAttributes
+			meta allAttributes
 				do: [ :attr | self addTo: descriptions attribute: attr of: stereo ] ].
 	^ descriptions

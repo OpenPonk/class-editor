@@ -6,7 +6,7 @@ propertiesOfModel: aModel
 		do: [ :stereo | 
 			| meta |
 			meta := stereo umlMetaClass.
-			meta ownedAttributes reject: [ :attr | attr name beginsWith: 'base_' ]
+			meta allAttributes reject: [ :attr | attr name beginsWith: 'base_' ]
 				thenDo: [ :attr | 
 					(stereo perform: attr name asSymbol)
 						ifNotNil: [ :value | 

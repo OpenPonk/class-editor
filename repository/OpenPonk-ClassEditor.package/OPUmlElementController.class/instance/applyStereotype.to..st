@@ -4,4 +4,4 @@ applyStereotype: aStereotypeModel to: aModel
 		anySatisfy: [ :each | each umlClassName = aStereotypeModel umlClassName ])
 		ifTrue: [ ^ self ].
 	self removeStereotypesIn: aModel.
-	aModel applyStereotype: aStereotypeModel implementationClass asClass new
+	aModel applyStereotype: aStereotypeModel implementationClass new

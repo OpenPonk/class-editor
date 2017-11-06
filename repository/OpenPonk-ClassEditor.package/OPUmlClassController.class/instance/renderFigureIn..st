@@ -5,4 +5,4 @@ renderFigureIn: aView
 	diagramController figureAdded: self figure.
 	self figure @ (OPRTUmlAdornments new adornments: self adornments).
 	self refreshFigure.
-	self figure @ RTDraggable
+	self figure @ RTDraggableSnapToGrid

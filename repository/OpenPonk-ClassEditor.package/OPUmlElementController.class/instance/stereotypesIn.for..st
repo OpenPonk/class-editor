@@ -1,7 +1,6 @@
 as yet unclassified
 stereotypesIn: aProfile for: aModel
-	^ aProfile ownedStereotype
+	^ (aProfile ownedStereotype reject: #isAbstract)
 		select: [ :stereo | 
-			stereo ownedAttributes
-				anySatisfy:
-					[ :each | (each name beginsWith: 'base_') and: [ self model oclIsKindOf: each type umlClassName ] ] ]
+			stereo allAttributes
+				anySatisfy: [ :each | (each name beginsWith: 'base_') and: [ self model oclIsKindOf: each type name ] ] ]

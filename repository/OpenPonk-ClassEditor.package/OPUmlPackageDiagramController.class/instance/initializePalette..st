@@ -1,4 +1,4 @@
-ui hooks
+palette
 initializePalette: aPalette
 	(aPalette newCreationEntry: [ OPUmlClassController new ])
 		label: 'Class';
@@ -28,24 +28,13 @@ initializePalette: aPalette
 		label: 'Enumeration Literal';
 		icon: OPUmlIcons literalIcon;
 		whenCompletedRename.
-	aPalette newSeparator.
-	(aPalette newCreationEntry: [ OPUmlPackageController new beForPackage ])
-		label: 'Package';
-		icon: OPUmlIcons packageIcon;
-		whenCompletedRename.
-	(aPalette newCreationEntry: [ OPUmlPackageController new beForModel ])
-		label: 'Model';
-		icon: OPUmlIcons modelIcon;
-		whenCompletedRename.
-	aPalette newSeparator.
-	(aPalette newCreationEntry: [ OPUmlPackageController new beForProfile ])
-		label: 'Profile';
-		icon: OPUmlIcons profileIcon;
-		whenCompletedRename.
-	(aPalette newCreationEntry: [ OPUmlStereotypeController new ])
-		label: 'Stereotype';
-		icon: OPUmlIcons stereotypeIcon;
-		whenCompletedRename.
-	(aPalette newConnectionCreationTool: [ OPUmlExtensionController new ])
-		label: 'Extension';
-		icon: OPUmlIcons extensionIcon
+	(self model oclIsKindOf: #Profile)
+		ifTrue: [ aPalette newSeparator.
+			(aPalette newCreationEntry: [ OPUmlStereotypeController new ])
+				label: 'Stereotype';
+				icon: OPUmlIcons stereotypeIcon;
+				whenCompletedRename.
+			(aPalette newConnectionCreationTool: [ OPUmlExtensionController new ])
+				label: 'Extension';
+				icon: OPUmlIcons extensionIcon ].
+	self initializeProfilePalette: aPalette
