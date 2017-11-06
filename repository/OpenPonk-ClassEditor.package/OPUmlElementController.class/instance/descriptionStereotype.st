@@ -1,34 +1,27 @@
 forms
 descriptionStereotype
-	| profile names |
-	profile := OPOntoUMLProfileFactory new createProfile.
-"	profile := OPUmlIssuesProfileFactory new createProfile."
-	names := profile packagedElements
-		select: [ :each | 
-			(each oclIsKindOf: #Stereotype)
-				and: [ each ownedAttributes
-						anySatisfy: [ :attr | 
-							(attr name beginsWith: 'base_')
-								and: [ self model oclIsKindOf: (attr name withoutPrefix: 'base_') ] ] ] ]
-		thenCollect: [ :each | each name -> each name ].
+	| profile names stereotypes |
+	profile := self diagramController model profileApplications
+		ifEmpty: [ ^ nil ]
+		ifNotEmpty: [ :col | col first appliedProfile ].
+	stereotypes := self stereotypesIn: profile for: self model.
+	names := stereotypes asArray collect: [ :each | each name -> each name ].
 	^ MASingleOptionDescription new
 		optionsAndLabels: {nil -> ''} , names;
 		accessor:
 			(MAPluggableAccessor
-				read:
-					[ :me | me model appliedStereotypes ifEmpty: [ nil ] ifNotEmpty: [ :col | col first name ] ]
+				read: [ :me | 
+					me model appliedStereotypes
+						ifEmpty: [ nil ]
+						ifNotEmpty: [ :col | col first umlClassName ] ]
 				write: [ :me :newValue | 
-					| stereos |
-					stereos := me model appliedStereotypes.
-					(me model appliedStereotypes noneSatisfy: [ :each | each name = newValue ])
-						ifTrue: [ [ me model appliedStereotypes isNotEmpty ]
-								whileTrue: [ me model unapplyStereotype: me model appliedStereotypes first ].
-							newValue
-								ifNotNil: [ self
-										applyStereotype: (profile packagedElements detect: [ :each | each name = newValue ])
-										to: me model ].
-							me refreshFigure.
-							me refreshFigure ] ]);
+					newValue
+						ifNil: [ self removeStereotypesIn: me model ]
+						ifNotNil: [ self
+								applyStereotype: (stereotypes detect: [ :each | each name = newValue ])
+								to: me model ].
+					me refreshFigure.
+					me refreshFigure ]);
 		label: 'Stereotype';
 		priority: 4;
 		yourself

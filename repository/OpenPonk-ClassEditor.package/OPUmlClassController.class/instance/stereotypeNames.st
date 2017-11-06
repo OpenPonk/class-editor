@@ -1,3 +1,5 @@
 accessing
 stereotypeNames
-	^ self model appliedStereotypes collect: #name
+	(self diagramController model oclIsKindOf: #Profile)
+		ifTrue: [ ^ #(Metaclass) ].
+	^ self model appliedStereotypes collect: #umlClassName

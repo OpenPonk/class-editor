@@ -17,8 +17,8 @@ initialize
 		text: [ :model | 
 			model appliedStereotypes
 				ifEmpty: [ '' ]
-				ifNotEmpty: [ :s | '«' , ((s collect: #name) joinUsing: ',') , '»' ] ];
+				ifNotEmpty: [ :s | '«' , ((s collect: #umlClassName) joinUsing: ',') , '»' ] ];
 		owningElement: self.
-	sourceEndLabels := OPUmlAssociationEndLabels on: self.
-	targetEndLabels := OPUmlAssociationEndLabels on: self.
+	sourceEndLabels := self endLabelsClass on: self.
+	targetEndLabels := self endLabelsClass on: self.
 	constraints := OrderedCollection new

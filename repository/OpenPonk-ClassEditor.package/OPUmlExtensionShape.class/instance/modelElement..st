@@ -1,4 +1,4 @@
 accessing
-modelElement: anObject
-	super modelElement: anObject.
-	isRequiredLabel modelElement: anObject
+modelElement: aModel
+	super modelElement: aModel.
+	isRequiredLabel modelElement: aModel

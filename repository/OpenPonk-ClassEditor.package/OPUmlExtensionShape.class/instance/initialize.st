@@ -6,5 +6,4 @@ initialize
 			model isRequired
 				ifTrue: [ '{required}' ]
 				ifFalse: [ '' ] ];
-		owningElement: self.
-	constraints := OrderedCollection new
+		owningElement: self

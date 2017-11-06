@@ -4,11 +4,12 @@ propertiesOfModel: aModel
 	props := OrderedCollection new.
 	aModel appliedStereotypes
 		do: [ :stereo | 
-			stereo ownedAttributes
-				do: [ :attr | 
-					stereo tags
-						at: attr name
-						ifPresent: [ :value | 
+			| meta |
+			meta := stereo umlMetaClass.
+			meta ownedAttributes reject: [ :attr | attr name beginsWith: 'base_' ]
+				thenDo: [ :attr | 
+					(stereo perform: attr name asSymbol)
+						ifNotNil: [ :value | 
 							value = true
 								ifTrue: [ props add: attr name ]
 								ifFalse: [ value = false
