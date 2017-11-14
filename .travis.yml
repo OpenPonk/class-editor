@@ -8,8 +8,9 @@ addons:
   ssh_known_hosts: ccmi.fit.cvut.cz
 
 env:
-  - ARTIFACT_DIR=openponk-uml-image-$TRAVIS_BUILD_NUMBER
-  - KEY=.ssh/id_uml_travis
+  global:
+    - ARTIFACT_DIR=openponk-uml-image-$TRAVIS_BUILD_NUMBER
+    - KEY=.ssh/id_uml_travis
 
 smalltalk:
   - Pharo-6.1
