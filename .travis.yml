@@ -11,6 +11,8 @@ cache:
   directories:
     - $HOME/package-cache
 
+#  - openssl aes-256-cbc -K $encrypted_5f9336d727bf_key -iv $encrypted_5f9336d727bf_iv -in .ssh/id_uml_travis.enc -out .ssh/id_uml_travis -d
+
 before_script:
   - wget -O- https://raw.githubusercontent.com/peteruhnak/hapao-coverage/master/package-cache.sh | bash
   - ls $HOME/package-cache
