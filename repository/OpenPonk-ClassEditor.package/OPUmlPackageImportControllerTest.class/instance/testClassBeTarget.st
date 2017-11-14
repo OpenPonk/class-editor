@@ -1,5 +1,5 @@
 tests - construction
-testPackageBeTarget
+testClassBeTarget
 	| sourceController targetController |
 	sourceController := diagramController newControllerFor: (OPUMLPackage new name: 'A').
 	targetController := diagramController newControllerFor: (OPUMLPackage new name: 'B').
