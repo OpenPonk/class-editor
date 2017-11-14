@@ -1,8 +1,8 @@
 ui hooks
 applyBasicLayout
 	| classes generalizations |
-	classes := self model packagedElements select: [ :each | each isKindOf: OPUMLClass ].
-	generalizations := classes flatCollect: #generalizations.
+	classes := self model packagedElements select: [ :each | each oclIsKindOf: OPUMLClass ].
+	generalizations := classes flatCollect: [ :each | each generalizations, each extensions ].
 	RTDominanceTreeLayout new
 		verticallyReverse;
 		verticalGap: 100;

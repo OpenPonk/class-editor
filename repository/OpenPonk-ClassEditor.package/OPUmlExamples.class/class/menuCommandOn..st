@@ -2,8 +2,8 @@ menu
 menuCommandOn: aBuilder
 	<worldMenu>
 	(aBuilder item: #UMLClassEditor)
-		icon: OPIcons current dcOmlDiagramIcon;
-		label: 'UML Class Diagram';
+		icon: OPIcons current openponkIcon;
+		label: 'UML Class Diagram Editor';
 		parent: #MostUsedTools;
 		action: [ self exampleEmpty ];
 		with: [ (aBuilder item: #UMLCompleteClass)
