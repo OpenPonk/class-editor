@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "PeterUhnak 11/14/2017 20:22",
+	"super" : "Object",
+	"category" : "OpenPonk-ClassEditor-Layouting",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"packagedElements",
+		"diagramController"
+	],
+	"name" : "OPUmlLayouter",
+	"type" : "normal"
+}

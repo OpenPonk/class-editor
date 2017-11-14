@@ -1,5 +1,6 @@
 palette
 initializePackagePalette: aPalette
+	aPalette newSeparator.
 	(aPalette newCreationEntry: [ OPUmlPackageController new beForPackage ])
 		label: 'Package';
 		icon: OPUmlIcons packageIcon;
@@ -8,7 +9,9 @@ initializePackagePalette: aPalette
 		label: 'Model';
 		icon: OPUmlIcons modelIcon;
 		whenCompletedRename.
-	aPalette newSeparator.
+	(aPalette newConnectionCreationTool: [ OPUmlPackageImportController new ])
+		label: 'Package Import';
+		icon: OPUmlIcons directedAssociationIcon.
 	(aPalette newCreationEntry: [ OPUmlPackageController new beForProfile ])
 		label: 'Profile';
 		icon: OPUmlIcons profileIcon;

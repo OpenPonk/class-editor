@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"layouter"
+	],
 	"name" : "OPUmlPackageDiagramController",
 	"type" : "normal"
 }

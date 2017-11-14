@@ -1,0 +1,3 @@
+accessing
+textFor: aPackageImport
+	^ '<<import>>'

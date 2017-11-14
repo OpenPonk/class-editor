@@ -9,6 +9,13 @@ allShowableElementsInModel: aModel
 	OPUMLStereotype -> 3} asDictionary.
 	queue addAll: aModel packagedElements.
 	aModel packagedElements
+		select: [ :each | each oclIsKindOf: #Package ]
+		thenDo: [ :each | 
+			each packageImports
+				do: [ :import | 
+					queue addIfNotPresent: import importedPackage.
+					queue add: import ] ].
+	aModel packagedElements
 		select: [ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]
 		thenDo: [ :each | 
 			each generalizations

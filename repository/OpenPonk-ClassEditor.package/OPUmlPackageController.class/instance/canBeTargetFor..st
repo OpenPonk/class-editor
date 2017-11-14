@@ -1,3 +1,3 @@
 testing
 canBeTargetFor: aController
-	^ false
+	^ aController isKindOf: OPUmlPackageImportController

@@ -37,4 +37,5 @@ initializePalette: aPalette
 			(aPalette newConnectionCreationTool: [ OPUmlExtensionController new ])
 				label: 'Extension';
 				icon: OPUmlIcons extensionIcon ].
-	self initializeProfilePalette: aPalette
+	self initializeProfilePalette: aPalette.
+	self initializePackagePalette: aPalette

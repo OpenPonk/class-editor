@@ -1,3 +1,3 @@
 testing
 canBeSourceFor: aController
-	^ false
+	^ aController isKindOf: OPUmlPackageImportController
