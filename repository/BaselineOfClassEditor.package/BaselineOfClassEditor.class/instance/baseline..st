@@ -24,6 +24,9 @@ baseline: spec
 			spec
 				baseline: 'OpenPonk'
 				with: [ spec repository: 'github://openponk/openponk/repository' ].
+		spec
+				baseline: 'UMLProfiles'
+				with: [ spec repository: 'github://openponk/uml-profiles/repository' ].
 			spec
 				project: 'Magritte'
 				with: [ spec
@@ -33,6 +36,6 @@ baseline: spec
 			spec
 				package: 'OpenPonk-ClassEditor'
 				with: [ spec
-						requires: #('UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'Magritte' 'Merlin') ].
+						requires: #('UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'UMLProfiles' 'Magritte' 'Merlin') ].
 			spec group: 'plugin' with: #('OpenPonk-ClassEditor').
 			spec group: 'default' with: #('plugin' 'OpenPonk') ]
