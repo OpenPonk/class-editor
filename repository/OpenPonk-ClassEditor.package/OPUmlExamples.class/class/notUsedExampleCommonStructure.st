@@ -1,5 +1,5 @@
 examples
-exampleCommonStructure
+notUsedExampleCommonStructure
 	| uml cs |
 	uml := OPUMLXMISpecsStorage umlMetamodel.
 	cs := uml packagedElements
