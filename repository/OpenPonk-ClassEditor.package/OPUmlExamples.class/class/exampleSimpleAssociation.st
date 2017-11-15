@@ -1,3 +1,3 @@
 examples
 exampleSimpleAssociation
-	^ OPProject openOnModel: self new simpleAssociation
+	^ OPUmlProject openOnModel: self new simpleAssociation

@@ -1,3 +1,3 @@
 examples
 exampleRichClass
-	^ OPProject openOnModel: self new modelWithRichClass
+	^ OPUmlProject openOnModel: self new modelWithRichClass

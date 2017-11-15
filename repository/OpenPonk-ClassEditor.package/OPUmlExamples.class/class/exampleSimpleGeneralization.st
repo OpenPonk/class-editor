@@ -1,3 +1,3 @@
 examples
 exampleSimpleGeneralization
-	^ OPProject openOnModel: self new simpleGeneralization
+	^ OPUmlProject openOnModel: self new simpleGeneralization

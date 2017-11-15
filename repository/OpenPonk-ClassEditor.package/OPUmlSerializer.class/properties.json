@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "PeterUhnak 11/15/2017 11:44",
+	"super" : "OPAbstractSerializer",
+	"category" : "OpenPonk-ClassEditor-Persistence",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "OPUmlSerializer",
+	"type" : "normal"
+}

@@ -1,3 +1,3 @@
 examples
 exampleGeneralizationSets
-	^ OPProject openOnModel: self new generalizationSets
+	^ OPUmlProject openOnModel: self new generalizationSets

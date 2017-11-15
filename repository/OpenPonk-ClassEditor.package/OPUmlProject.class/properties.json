@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "OPProject",
+	"category" : "OpenPonk-ClassEditor-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "OPUmlProject",
+	"type" : "normal"
+}

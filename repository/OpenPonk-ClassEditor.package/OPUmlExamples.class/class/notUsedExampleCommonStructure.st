@@ -4,4 +4,4 @@ notUsedExampleCommonStructure
 	uml := OPUMLXMISpecsStorage umlMetamodel.
 	cs := uml packagedElements
 		detect: [ :each | each name = 'CommonStructure' ].
-	^ OPProject openOnModel: cs
+	^ OPUmlProject openOnModel: cs

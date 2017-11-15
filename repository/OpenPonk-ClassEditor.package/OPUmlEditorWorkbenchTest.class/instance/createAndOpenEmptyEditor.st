@@ -2,7 +2,7 @@ instance creation
 createAndOpenEmptyEditor
 	model := OPUMLPackage new.
 	model name: 'Click Package'.
-	project := OPProject new.
+	project := OPUmlProject new.
 	project name: 'Click Project'.
 	project addModel: model.
 	workbench := OPWorkbench new.

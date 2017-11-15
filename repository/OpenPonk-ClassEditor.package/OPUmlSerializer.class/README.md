@@ -1,0 +1,1 @@
+I serialize UML models into XMI, and the diagrams into STON.

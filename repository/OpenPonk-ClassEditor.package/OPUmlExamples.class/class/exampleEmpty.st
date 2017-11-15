@@ -1,3 +1,3 @@
 examples
 exampleEmpty
-	^ OPProject openOnModel: self new emptyModel
+	^ OPUmlProject openOnModel: self new emptyModel

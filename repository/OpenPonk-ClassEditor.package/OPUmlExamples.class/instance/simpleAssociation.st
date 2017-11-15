@@ -28,4 +28,5 @@ simpleAssociation
 			{element.
 			comment.
 			assoc} asOrderedCollection.
+	self useNiceIds: model.
 	^ model

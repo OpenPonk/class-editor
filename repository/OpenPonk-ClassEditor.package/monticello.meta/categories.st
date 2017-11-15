@@ -4,6 +4,8 @@ SystemOrganization addCategory: 'OpenPonk-ClassEditor-Controllers-Tests'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Examples'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Forms'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Layouting'!
+SystemOrganization addCategory: 'OpenPonk-ClassEditor-Model'!
+SystemOrganization addCategory: 'OpenPonk-ClassEditor-Persistence'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Plugin'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Profiles'!
 SystemOrganization addCategory: 'OpenPonk-ClassEditor-Shapes'!
