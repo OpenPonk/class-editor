@@ -1,5 +1,8 @@
 palette
 initializeProfileModelingPalette: aPalette
+	(self model oclIsKindOf: #Profile)
+		ifFalse: [ ^ self ].
+	aPalette newSeparator.
 	(aPalette newCreationEntry: [ OPUmlStereotypeController new ])
 		label: 'Stereotype';
 		icon: OPUmlIcons stereotypeIcon;

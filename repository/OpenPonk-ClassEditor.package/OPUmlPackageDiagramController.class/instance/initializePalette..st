@@ -33,14 +33,6 @@ initializePalette: aPalette
 		label: 'Enumeration Literal';
 		icon: OPUmlIcons literalIcon;
 		whenCompletedRename.
-	(self model oclIsKindOf: #Profile)
-		ifTrue: [ aPalette newSeparator.
-			(aPalette newCreationEntry: [ OPUmlStereotypeController new ])
-				label: 'Stereotype';
-				icon: OPUmlIcons stereotypeIcon;
-				whenCompletedRename.
-			(aPalette newConnectionCreationTool: [ OPUmlExtensionController new ])
-				label: 'Extension';
-				icon: OPUmlIcons extensionIcon ].
+	self initializeProfileModelingPalette: aPalette.
 	self initializeProfilePalette: aPalette.
 	self initializePackagePalette: aPalette

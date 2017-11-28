@@ -13,5 +13,12 @@ createModelIn: aTargetController andShowInDiagram: aDiagramController
 	model memberEnds
 		add: sourceProp;
 		add: targetProp.
+	aDiagramController model packagedElements add: model.
 	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+	self showInDiagram: aDiagramController.
+	model memberEnds
+		do: [ :each | 
+			| subCtrl |
+			subCtrl := aDiagramController newControllerFor: each.
+			aDiagramController addController: subCtrl.
+			subCtrl showInDiagram: aDiagramController ]

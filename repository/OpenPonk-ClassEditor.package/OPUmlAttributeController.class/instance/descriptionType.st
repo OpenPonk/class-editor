@@ -8,7 +8,7 @@ descriptionType
 				write: [ :me :newValue | 
 					newValue
 						ifEmpty: [ me model type: nil ]
-						ifNotEmpty: [ me model type: (OPUMLClass new name: newValue) ].
+						ifNotEmpty: [ me model type: (self typeNamed: newValue) ].
 					self refreshFigure ]);
 		label: 'Type';
 		priority: 5;

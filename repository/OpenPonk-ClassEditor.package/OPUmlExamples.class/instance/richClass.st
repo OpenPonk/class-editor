@@ -1,27 +1,20 @@
 accessing
 richClass
 	<gtExample>
-	| class string object number float integer |
-	string := OPUMLPrimitiveType new name: 'String'.
-	object := OPUMLPrimitiveType new name: 'Object'.
-	number := OPUMLPrimitiveType new name: 'Number'.
-	float := OPUMLPrimitiveType new name: 'Float'.
-	integer := OPUMLPrimitiveType new name: 'Integer'.
+	| class stateMachine comment enum |
 	class := OPUMLClass new name: 'CompleteClass'.
 	class isAbstract: true.
-	"	class addStereotype: (OPFAMIXStereotype named: 'class').
-	class addStereotype: (OPFAMIXStereotype named: 'example')."
-	"class stereotypes first
-		addIcon:
-			(OPFAMIXImage new
-				content:
-					'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gwRESYZc+TopwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAABDSURBVDjLY2CgEDBC6f9EqMEL/pMoDgdMlHqBhRTbCPnvP6n+JsvPVA+DgTeAUEJiJBA+jPgk/xPDZ6E0VqjmhYEDAKlHDwzayLTLAAAAAElFTkSu
-QmCC')."
-	class ownedAttributes
-		add:
-			(OPUMLProperty new
-				name: 'normal';
-				type: integer).
+	#('Boolean' 'Integer' 'Real' 'String' 'UnlimitedNatural')
+		do: [ :each | 
+			| type |
+			type := OPUMLXMISpecsStorage primitiveTypeNamed: each.
+			class ownedAttributes
+				add:
+					(OPUMLProperty new
+						name: 'primitive' , each;
+						type: type) ].
+	comment := OPUMLXMISpecsStorage metaClassNamed: 'Comment'.
+	stateMachine := OPUMLXMISpecsStorage metaClassNamed: 'StateMachine'.
 	class ownedAttributes
 		add:
 			(OPUMLProperty new
@@ -30,27 +23,29 @@ QmCC')."
 	class ownedAttributes
 		add:
 			(OPUMLProperty new
-				name: 'collection';
-				type: float;
+				name: 'comments';
+				type: comment;
 				lowerValue: (OPUMLLiteralInteger new value: 0);
 				upperValue: (OPUMLLiteralUnlimitedNatural new value: '*')).
 	class ownedAttributes
 		add:
 			(OPUMLProperty new
 				name: 'static';
-				type: string;
+				type: stateMachine;
 				isStatic: true).
 	class ownedOperations add: (OPUMLOperation new name: 'basicMethod').
-	class ownedOperations
+	enum := (OPUMLXMISpecsStorage umlMetamodel packagedElements
+		flatCollect: #packagedElements) detect: [ :each | each name = 'VisibilityKind' ].
+	"	class ownedOperations
 		add:
 			((OPUMLOperation new name: 'staticMethod')
 				in: [ :op | 
 					op ownedParameters
 						add:
 							(OPUMLParameter new
-								name: 'number';
-								type: number) ];
-				isStatic: true).
+								name: 'enum';
+								type: enum) ];
+				isStatic: true)."
 	class ownedOperations
 		add:
 			((OPUMLOperation new name: 'abstractMethod')
@@ -59,16 +54,16 @@ QmCC')."
 						add:
 							(OPUMLParameter new
 								name: 'return';
-								type: string;
+								type: (OPUMLXMISpecsStorage primitiveTypeNamed: 'String');
 								direction: OPUMLParameterDirectionKind return);
 						add:
 							(OPUMLParameter new
 								name: 'arg1';
-								type: number);
+								type: (OPUMLXMISpecsStorage primitiveTypeNamed: 'Integer'));
 						add:
 							(OPUMLParameter new
 								name: 'arg2';
-								type: string;
+								type: stateMachine;
 								lowerValue: (OPUMLLiteralInteger new value: 0);
 								upperValue: (OPUMLLiteralUnlimitedNatural new value: 1)) ];
 				isAbstract: true).

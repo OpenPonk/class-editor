@@ -14,5 +14,6 @@ iconMapping
 	OPUMLAssociation -> OPUmlIcons directedAssociationIcon.
 	OPUMLExtension -> OPUmlIcons extensionIcon.
 	OPUMLGeneralization -> OPUmlIcons generalizationIcon.
+	OPUMLStereotype -> OPUmlIcons stereotypeIcon.
 	OPUMLComment -> OPUmlIcons commentIcon.
 	Object -> OPUmlIcons unknownIcon}

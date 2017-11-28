@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "WizardControl",
+	"category" : "OpenPonk-ClassEditor-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"profile"
+	],
+	"name" : "OPUmlProfileGeneratorWizard",
+	"type" : "normal"
+}

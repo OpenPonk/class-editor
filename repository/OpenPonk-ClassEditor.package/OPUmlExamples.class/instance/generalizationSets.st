@@ -40,5 +40,7 @@ generalizationSets
 			house.
 			car.
 			insuredHouse.
-			nonInsuredHouse} asOrderedCollection.
+			nonInsuredHouse.
+			houseSet.
+			insuredSet} asOrderedCollection.
 	^ model
