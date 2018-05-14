@@ -4,7 +4,8 @@ set -euo pipefail
 IFS=$'\n\t'
 
 readonly BRANCH_NAME="${TRAVIS_BRANCH:-$CI_COMMIT_REF_NAME}"
-readonly TAG_NAME="${CI_COMMIT_TAG:-}"
+readonly _TAG_NAME="${CI_COMMIT_TAG:-}"
+readonly TAG_NAME="${TRAVIS_TAG:-$_TAG_NAME}"
 readonly TAG_VERSION="${TAG_NAME#v}"
 readonly CI_BUILD_ID="${TRAVIS_BUILD_NUMBER:-$CI_JOB_ID}"
 readonly BUILD_ID="${TAG_VERSION:-"${BRANCH_NAME}-${CI_BUILD_ID}"}"
