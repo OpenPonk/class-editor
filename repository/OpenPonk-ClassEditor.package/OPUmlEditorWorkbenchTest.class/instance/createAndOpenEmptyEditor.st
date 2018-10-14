@@ -8,7 +8,6 @@ createAndOpenEmptyEditor
 	workbench := OPWorkbench new.
 	window := workbench open.
 	workbench openProject: project.
-	editor := ((workbench instVarNamed: #editors) at: model) first.
+	editor := (workbench instVarNamed: #editors) values first first.
 	view := editor canvasModel roassalView.
-	paletteEntries := editor paletteModel widgets
-		select: [ :each | each isKindOf: OPPaletteEntry ]
+	paletteEntries := editor paletteModel widgets select: [ :each | each isKindOf: OPPaletteEntry ]
