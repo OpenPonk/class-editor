@@ -23,7 +23,7 @@ baseline: spec
 				with: [ spec repository: 'github://openponk/uml-bootstrap-generator:v1.x/repository' ].
 			spec
 				baseline: 'OpenPonk'
-				with: [ spec repository: 'github://openponk/openponk:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/openponk/repository' ].
 		spec
 				baseline: 'UMLProfiles'
 				with: [ spec repository: 'github://openponk/uml-profiles:v1.x/repository' ].
