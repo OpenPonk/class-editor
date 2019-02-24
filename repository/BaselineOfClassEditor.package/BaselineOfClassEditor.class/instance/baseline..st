@@ -11,25 +11,25 @@ baseline: spec
 						repository: 'http://www.smalltalkhub.com/mc/Moose/Merlin/main' ].
 			spec
 				baseline: 'UMLShapes'
-				with: [ spec repository: 'github://openponk/uml-shapes:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/uml-shapes:v1.0.1/repository' ].
 			spec
 				baseline: 'UMLMetamodel'
-				with: [ spec repository: 'github://openponk/uml-metamodel:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/uml-metamodel:v1.0.0/repository' ].
 			spec
 				baseline: 'OPUMLXMI'
-				with: [ spec repository: 'github://openponk/uml-xmi:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/uml-xmi:v1.0.1/repository' ].
 			spec
 				baseline: 'UMLBootstrapGenerator'
-				with: [ spec repository: 'github://openponk/uml-bootstrap-generator:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/uml-bootstrap-generator:v1.0.1/repository' ].
 			spec
 				baseline: 'OpenPonk'
 				with: [ spec repository: 'github://openponk/openponk:v1.x/repository' ].
 		spec
 				baseline: 'UMLProfiles'
-				with: [ spec repository: 'github://openponk/uml-profiles:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/uml-profiles:v1.0.1/repository' ].
 		spec
 				baseline: 'OntoUMLProfile'
-				with: [ spec repository: 'github://openponk/ontouml-profile:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/ontouml-profile:v1.0.0/repository' ].
 			spec
 				project: 'Magritte'
 				with: [ spec
