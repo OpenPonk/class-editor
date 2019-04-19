@@ -4,4 +4,4 @@ directedAssociationIcon
 	^ self icons
 		at: #directedAssociationIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self directedAssociationIconContents readStream) ]
+				fromBinaryStream: (self directedAssociationIconContents base64Decoded readStream) ]

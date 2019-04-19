@@ -4,4 +4,4 @@ ruleIcon
 	^ self icons
 		at: #ruleIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self ruleIconContents readStream) ]
+				fromBinaryStream: (self ruleIconContents base64Decoded readStream) ]

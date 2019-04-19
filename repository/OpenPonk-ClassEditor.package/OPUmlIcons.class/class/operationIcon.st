@@ -4,4 +4,4 @@ operationIcon
 	^ self icons
 		at: #operationIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self operationIconContents readStream) ]
+				fromBinaryStream: (self operationIconContents base64Decoded readStream) ]

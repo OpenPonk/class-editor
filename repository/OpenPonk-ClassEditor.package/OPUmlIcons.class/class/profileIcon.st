@@ -4,4 +4,4 @@ profileIcon
 	^ self icons
 		at: #profileIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self profileIconContents readStream) ]
+				fromBinaryStream: (self profileIconContents base64Decoded readStream) ]

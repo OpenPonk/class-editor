@@ -4,4 +4,4 @@ constraintIcon
 	^ self icons
 		at: #constraintIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self constraintIconContents readStream) ]
+				fromBinaryStream: (self constraintIconContents base64Decoded readStream) ]

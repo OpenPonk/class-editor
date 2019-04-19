@@ -4,4 +4,4 @@ dataTypeIcon
 	^ self icons
 		at: #dataTypeIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self dataTypeIconContents readStream) ]
+				fromBinaryStream: (self dataTypeIconContents base64Decoded readStream) ]

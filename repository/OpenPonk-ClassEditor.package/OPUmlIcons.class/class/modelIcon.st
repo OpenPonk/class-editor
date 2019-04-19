@@ -4,4 +4,4 @@ modelIcon
 	^ self icons
 		at: #modelIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self modelIconContents readStream) ]
+				fromBinaryStream: (self modelIconContents base64Decoded readStream) ]

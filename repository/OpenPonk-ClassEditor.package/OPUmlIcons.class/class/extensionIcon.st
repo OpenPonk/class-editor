@@ -4,4 +4,4 @@ extensionIcon
 	^ self icons
 		at: #extensionIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self extensionIconContents readStream) ]
+				fromBinaryStream: (self extensionIconContents base64Decoded readStream) ]

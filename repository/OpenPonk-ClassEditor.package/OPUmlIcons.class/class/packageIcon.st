@@ -4,4 +4,4 @@ packageIcon
 	^ self icons
 		at: #packageIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self packageIconContents readStream) ]
+				fromBinaryStream: (self packageIconContents base64Decoded readStream) ]

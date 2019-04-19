@@ -4,4 +4,4 @@ generalizationIcon
 	^ self icons
 		at: #generalizationIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self generalizationIconContents readStream) ]
+				fromBinaryStream: (self generalizationIconContents base64Decoded readStream) ]

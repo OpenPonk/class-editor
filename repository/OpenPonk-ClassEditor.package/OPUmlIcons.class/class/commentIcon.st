@@ -4,4 +4,4 @@ commentIcon
 	^ self icons
 		at: #commentIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self commentIconContents readStream) ]
+				fromBinaryStream: (self commentIconContents base64Decoded readStream) ]

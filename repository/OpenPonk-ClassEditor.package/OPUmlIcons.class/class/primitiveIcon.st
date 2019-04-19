@@ -4,4 +4,4 @@ primitiveIcon
 	^ self icons
 		at: #primitiveIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self primitiveIconContents readStream) ]
+				fromBinaryStream: (self primitiveIconContents base64Decoded readStream) ]

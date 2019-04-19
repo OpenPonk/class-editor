@@ -4,4 +4,4 @@ classIcon
 	^ self icons
 		at: #classIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self classIconContents readStream) ]
+				fromBinaryStream: (self classIconContents base64Decoded readStream) ]

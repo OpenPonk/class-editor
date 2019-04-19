@@ -4,4 +4,4 @@ stereotypeIcon
 	^ self icons
 		at: #stereotypeIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self stereotypeIconContents readStream) ]
+				fromBinaryStream: (self stereotypeIconContents base64Decoded readStream) ]

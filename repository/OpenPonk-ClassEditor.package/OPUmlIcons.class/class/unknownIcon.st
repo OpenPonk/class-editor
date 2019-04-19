@@ -4,4 +4,4 @@ unknownIcon
 	^ self icons
 		at: #unknownIcon
 		ifAbsentPut: [ Form
-				fromBinaryStream: (Base64MimeConverter mimeDecodeToBytes: self unknownIconContents readStream) ]
+				fromBinaryStream: (self unknownIconContents base64Decoded readStream) ]
