@@ -13,7 +13,7 @@ baseline: spec
 				with: [ spec repository: 'github://openponk/uml-shapes/repository' ].
 			spec
 				baseline: 'UMLMetamodel'
-				with: [ spec repository: 'github://openponk/uml-metamodel/repository' ].
+				with: [ spec repository: 'github://openponk/uml-metamodel:v1.x/repository' ].
 			spec
 				baseline: 'OPUMLXMI'
 				with: [ spec repository: 'github://openponk/uml-xmi/repository' ].
