@@ -31,7 +31,7 @@ baseline: spec
 					with: [ spec repository: 'github://openponk/ontouml-profile/repository' ].
 			spec 
 				baseline: 'Magritte' 
-				with: [ spec repository: 'github://magritte-metamodel/magritte:v3.5.4/source'; 
+				with: [ spec repository: 'github://magritte-metamodel/magritte:v3.6/source'; 
 		             loads: #(Core) ].
 			spec
 				package: 'OpenPonk-ClassEditor'
