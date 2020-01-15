@@ -6,7 +6,7 @@ baseline: spec
 		do: [ 
 			spec 
 				baseline: 'Moose' 
-				with: [ spec repository: 'github://moosetechnology/Moose:v7.x.x/src'; 
+				with: [ spec repository: 'github://moosetechnology/Moose:24a33d7/src'; 
 		             loads: #(Merlin) ].
 			spec
 				baseline: 'UMLShapes'
