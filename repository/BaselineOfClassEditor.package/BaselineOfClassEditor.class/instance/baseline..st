@@ -25,7 +25,7 @@ baseline: spec
 				with: [ spec repository: 'github://openponk/openponk/repository' ].
 			spec
 					baseline: 'UMLProfiles'
-					with: [ spec repository: 'github://openponk/uml-profiles/repository' ].
+					with: [ spec repository: 'github://openponk/uml-profiles:v1.x/repository' ].
 			spec
 					baseline: 'OntoUMLProfile'
 					with: [ spec repository: 'github://openponk/ontouml-profile/repository' ].
