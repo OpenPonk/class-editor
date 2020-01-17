@@ -12,6 +12,7 @@ setUpAssociation
 		owningAssociation: association;
 		type: element.
 	association
+		name: 'association';
 		memberEnds:
 			{ownedComment.
 			owningElement}
