@@ -1,5 +1,5 @@
 tests - diagram
-testRemovalOfClassRemovesAssociationLabels1
+testRemovalOfClassRemovesAssociation
 	| elementController |
 	diagramController
 		showModelInDiagram: element;
