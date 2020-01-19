@@ -4,8 +4,9 @@ menuCommandOn: aBuilder
 	(aBuilder item: #UMLClassEditor)
 		icon: OPIcons current openponkIcon;
 		label: 'UML Class Diagram Editor';
-		parent: #MostUsedTools;
 		action: [ self exampleEmptyPackage ];
+		parent: #MostUsedTools;
+		order: 25.705;
 		with: [ (aBuilder item: #UMLEmptyPackage)
 				parent: #UMLClassEditor;
 				label: 'New Empty Package';
