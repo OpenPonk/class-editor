@@ -1,19 +1,25 @@
 tests - diagram
-testRemovalOfClassRemovesAssociationLabels
+testRemovalOfClassRemovesAssociationLabels1
+	| elementController |
 	diagramController
 		showModelInDiagram: element;
 		showModelInDiagram: comment;
 		showModelInDiagram: association.
+	diagramController model packagedElements
+		addAll:
+			{element.
+			comment.
+			association}.
+	elementController := diagramController controllerForModel: element.
 	self
-		assert:
+		deny:
 			(diagramController view elements
 				count: [ :e | 
 					(e trachelShape respondsTo: #text)
 						and: [ {'owningElement' . 'ownedComment' . 'association' . '1'}
 								includes: e trachelShape text ] ])
-		equals: 5.
-	controller := diagramController controllerForModel: element.
-	controller remove.
+		equals: 0.
+	elementController removeModel.
 	self
 		assert:
 			(diagramController view elements
