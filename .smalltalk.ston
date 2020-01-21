@@ -8,6 +8,9 @@ SmalltalkCISpec {
 			#directory : 'repository'
 		}
 	],
+	#postLoading : [
+		'scripts/script.st'
+	],
 	#testing : {
 		#coverage : {
 			#packages : [
