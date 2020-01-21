@@ -1,1 +1,0 @@
-I am controller for managing the main class diagram presentation and handling items contained in the canvas.

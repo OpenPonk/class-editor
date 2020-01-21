@@ -1,1 +1,0 @@
-I provide context and configuration options for the code generator.

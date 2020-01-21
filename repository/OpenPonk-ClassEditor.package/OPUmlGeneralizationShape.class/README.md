@@ -1,1 +1,0 @@
-I represent a direct generalization line.

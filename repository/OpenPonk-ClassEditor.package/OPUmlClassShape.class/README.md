@@ -1,1 +1,0 @@
-I am a classifier shape composition to accomodate for the most common UML Class Diagram shape.

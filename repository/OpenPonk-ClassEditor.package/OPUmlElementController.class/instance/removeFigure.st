@@ -1,3 +1,0 @@
-figures
-removeFigure
-	self removeDiagramElement

@@ -1,3 +1,0 @@
-adding
-addAsSourceFor: aController
-	self shouldBeImplemented

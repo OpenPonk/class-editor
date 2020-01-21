@@ -1,1 +1,0 @@
-I am a collection of magritte descriptions for an association end.

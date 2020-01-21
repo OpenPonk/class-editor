@@ -1,3 +1,0 @@
-ui hooks
-applyBasicLayout
-	self layouter dominanceTreeLayout

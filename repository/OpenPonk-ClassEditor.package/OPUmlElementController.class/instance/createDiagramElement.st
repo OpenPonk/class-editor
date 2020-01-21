@@ -1,3 +1,0 @@
-figures
-createDiagramElement
-	^ self subclassResponsibility

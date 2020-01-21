@@ -1,1 +1,0 @@
-I am a plugin for UML Class Diagram

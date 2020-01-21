@@ -1,1 +1,0 @@
-I take a model element and provide a list of magritte descriptions for all the properties added by stereotypes applied to the model element.

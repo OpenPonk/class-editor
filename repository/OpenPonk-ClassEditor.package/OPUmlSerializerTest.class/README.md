@@ -1,1 +1,0 @@
-An OPUmlSerializerTest is a test class for testing the behavior of OPUmlSerializer

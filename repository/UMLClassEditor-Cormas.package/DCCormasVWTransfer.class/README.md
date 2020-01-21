@@ -1,1 +1,0 @@
-I transfer cormas code between Pharo and VW via SIF.

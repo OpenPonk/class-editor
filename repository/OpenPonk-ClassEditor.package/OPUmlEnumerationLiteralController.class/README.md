@@ -1,1 +1,0 @@
-I am a controller for an EnumerationLiteral.

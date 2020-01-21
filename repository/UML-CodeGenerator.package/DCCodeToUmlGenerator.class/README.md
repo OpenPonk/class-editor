@@ -1,1 +1,0 @@
-I take a smalltalk code and generate a FAMIX UML model. I use my pragma annotations as well as RoelTyper (if none are present) to infer the types.

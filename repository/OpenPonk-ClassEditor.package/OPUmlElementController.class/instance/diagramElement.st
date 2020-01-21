@@ -1,3 +1,0 @@
-figures
-diagramElement
-	^ diagramElement

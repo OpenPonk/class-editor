@@ -1,1 +1,0 @@
-I am a Wizard for generating Cormas VW code from MooseModel.

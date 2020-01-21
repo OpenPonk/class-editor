@@ -1,1 +1,0 @@
-I am grammar for associations.

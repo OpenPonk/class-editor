@@ -1,3 +1,0 @@
-rendering
-allShowableElementsInModel: aPackage
-	^ #()

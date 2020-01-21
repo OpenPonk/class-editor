@@ -1,1 +1,0 @@
-I manage layouts available for UML Editor and apply them.

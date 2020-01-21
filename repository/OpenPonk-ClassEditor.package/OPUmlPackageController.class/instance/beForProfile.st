@@ -1,3 +1,0 @@
-configuration
-beForProfile
-	modelClass := OPUMLProfile

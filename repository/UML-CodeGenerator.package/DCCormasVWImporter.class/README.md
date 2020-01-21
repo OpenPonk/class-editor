@@ -1,1 +1,0 @@
-I take code imported to Pharo from VW and try to reengineer class model for it.

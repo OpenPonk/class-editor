@@ -1,3 +1,0 @@
-accessing
-textFor: aPackageImport
-	^ '<<import>>'

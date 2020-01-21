@@ -1,3 +1,0 @@
-accessing
-start
-	^ classBlock end

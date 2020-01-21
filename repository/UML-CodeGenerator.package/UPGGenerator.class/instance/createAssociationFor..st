@@ -1,3 +1,0 @@
-generator - association
-createAssociationFor: anAssociation
-	self associationsGenerator createAssociationFor: anAssociation

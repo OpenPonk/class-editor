@@ -1,1 +1,0 @@
-I am a collection of labels for association's memberEnd.

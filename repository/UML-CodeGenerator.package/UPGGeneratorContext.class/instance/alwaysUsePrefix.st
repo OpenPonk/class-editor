@@ -1,3 +1,0 @@
-options
-alwaysUsePrefix
-	alwaysUsePrefix := true

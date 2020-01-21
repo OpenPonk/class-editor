@@ -1,3 +1,0 @@
-toolbar
-addModelTo: aProject
-	

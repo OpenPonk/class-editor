@@ -1,3 +1,0 @@
-options
-withoutProgressBar
-	showProgressBar := false
