@@ -4,12 +4,12 @@ I am a controller for an Enumeration
 Class {
 	#name : #OPUmlEnumerationController,
 	#superclass : #OPUmlElementController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #adding }
 OPUmlEnumerationController >> addAsSourceFor: aController [
-	aController sourceController: self
+	aController source: self
 ]
 
 { #category : #adding }

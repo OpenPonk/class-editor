@@ -4,7 +4,7 @@ I am a controller for a PackageImport.
 Class {
 	#name : #OPUmlPackageImportController,
 	#superclass : #OPUmlRelationshipController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
@@ -18,7 +18,7 @@ OPUmlPackageImportController >> createDiagramElement [
 OPUmlPackageImportController >> createModelIn: aTargetController andShowInDiagram: aDiagramController [
 	self model: OPUMLPackageImport new.
 	model importedPackage: aTargetController model.
-	model importingNamespace: sourceController model.
+	model importingNamespace: source model.
 	aDiagramController addController: self.
 	self showInDiagram: aDiagramController
 ]

@@ -4,7 +4,7 @@ I am a controller for Association
 Class {
 	#name : #OPUmlAssociationController,
 	#superclass : #OPUmlRelationshipController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
@@ -20,10 +20,10 @@ OPUmlAssociationController >> createModelIn: aTargetController andShowInDiagram:
 	self model: self createModel.
 	(sourceProp := OPUMLProperty new)
 		owningClass: aTargetController model;
-		name: sourceController model name uncapitalized;
-		type: sourceController model.
+		name: source model name uncapitalized;
+		type: source model.
 	(targetProp := OPUMLProperty new)
-		owningClass: sourceController model;
+		owningClass: source model;
 		name: aTargetController model name uncapitalized;
 		type: aTargetController model.
 	model memberEnds

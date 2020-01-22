@@ -7,12 +7,12 @@ Class {
 	#instVars : [
 		'modelClass'
 	],
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #adding }
 OPUmlPackageController >> addAsSourceFor: aController [
-	aController sourceController: self
+	aController source: self
 ]
 
 { #category : #adding }

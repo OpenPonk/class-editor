@@ -6,7 +6,7 @@ Class {
 		'importedPackage',
 		'packageImport'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -51,10 +51,10 @@ OPUmlPackageImportControllerTest >> testCanClassBeTarget [
 
 { #category : #'tests - construction' }
 OPUmlPackageImportControllerTest >> testClassBeSource [
-	| sourceController |
-	sourceController := OPUmlPackageController new.
-	sourceController addAsSourceFor: controller.
-	self assert: controller sourceController equals: sourceController
+	| source |
+	source := OPUmlPackageController new.
+	source addAsSourceFor: controller.
+	self assert: controller source equals: source
 ]
 
 { #category : #'tests - construction' }

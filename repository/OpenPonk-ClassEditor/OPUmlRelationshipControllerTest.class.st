@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlRelationshipControllerTest,
 	#superclass : #OPUmlElementControllerTest,
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #testing }
@@ -21,10 +21,10 @@ OPUmlRelationshipControllerTest >> testCanClassBeTarget [
 
 { #category : #'tests - creation' }
 OPUmlRelationshipControllerTest >> testClassBeSource [
-	| sourceController |
-	sourceController := OPUmlClassController new.
-	sourceController addAsSourceFor: controller.
-	self assert: controller sourceController equals: sourceController
+	| source |
+	source := OPUmlClassController new.
+	source addAsSourceFor: controller.
+	self assert: controller source equals: source
 ]
 
 { #category : #'tests - creation' }

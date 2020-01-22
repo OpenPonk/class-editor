@@ -4,7 +4,7 @@ I am a controller for UML Extensions
 Class {
 	#name : #OPUmlExtensionController,
 	#superclass : #OPUmlRelationshipController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
@@ -19,12 +19,12 @@ OPUmlExtensionController >> createModelIn: aTargetController andShowInDiagram: a
 	| sourceOwnedProp extensionOwnedProp |
 	self model: self createModel.
 	(sourceOwnedProp := OPUMLProperty new)
-		owningClass: sourceController model;
+		owningClass: source model;
 		name: 'base_' , aTargetController model name;
 		type: aTargetController model.
 	(extensionOwnedProp := OPUMLExtensionEnd new)
-		name: 'extension_' , sourceController model name;
-		type: sourceController model.
+		name: 'extension_' , source model name;
+		type: source model.
 	model ownedEnd: extensionOwnedProp.
 	model memberEnds
 		add: sourceOwnedProp;

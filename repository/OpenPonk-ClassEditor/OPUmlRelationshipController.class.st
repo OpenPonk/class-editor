@@ -5,16 +5,16 @@ Class {
 	#name : #OPUmlRelationshipController,
 	#superclass : #OPUmlElementController,
 	#instVars : [
-		'sourceController'
+		'source'
 	],
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
 OPUmlRelationshipController >> connectionFeedback [
 	^ OPInteractiveLine new
 		lineBuilder: [ :fromFigure :toFigure | RTLine edgeFrom: fromFigure to: toFigure ];
-		from: sourceController figure
+		from: source figure
 ]
 
 { #category : #accessing }
@@ -38,11 +38,11 @@ OPUmlRelationshipController >> showInDiagram: aDiagramController [
 ]
 
 { #category : #accessing }
-OPUmlRelationshipController >> sourceController [
-	^ sourceController
+OPUmlRelationshipController >> source [
+	^ source
 ]
 
 { #category : #accessing }
-OPUmlRelationshipController >> sourceController: anObject [
-	sourceController := anObject
+OPUmlRelationshipController >> source: anObject [
+	source := anObject
 ]

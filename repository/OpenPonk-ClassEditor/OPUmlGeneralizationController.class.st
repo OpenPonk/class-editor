@@ -4,7 +4,7 @@ I am a controller for UML Generalization.
 Class {
 	#name : #OPUmlGeneralizationController,
 	#superclass : #OPUmlRelationshipController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
@@ -18,7 +18,7 @@ OPUmlGeneralizationController >> createDiagramElement [
 OPUmlGeneralizationController >> createModelIn: aTargetController andShowInDiagram: aDiagramController [
 	self model: OPUMLGeneralization new.
 	model general: aTargetController model.
-	model specific: sourceController model.
+	model specific: source model.
 	aDiagramController addController: self.
 	self showInDiagram: aDiagramController
 ]

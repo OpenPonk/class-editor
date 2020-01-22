@@ -4,12 +4,12 @@ I am a controller for a Class(ifier)
 Class {
 	#name : #OPUmlClassController,
 	#superclass : #OPUmlElementController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #adding }
 OPUmlClassController >> addAsSourceFor: aController [
-	aController sourceController: self
+	aController source: self
 ]
 
 { #category : #adding }
