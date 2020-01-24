@@ -10,14 +10,14 @@ Class {
 		'view',
 		'paletteEntries'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests - UI'
+	#category : #'OpenPonk-ClassEditor-Tests - UI'
 }
 
 { #category : #'instance creation' }
 OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 	model := OPUMLPackage new.
 	model name: 'Click Package'.
-	project := OPUmlProject new.
+	project := OPProject new.
 	project name: 'Click Project'.
 	project addModel: model.
 	workbench := OPWorkbench new.

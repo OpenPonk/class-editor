@@ -10,42 +10,42 @@ see class-side
 Class {
 	#name : #OPUmlExamples,
 	#superclass : #Object,
-	#category : 'OpenPonk-ClassEditor-Examples'
+	#category : #'OpenPonk-ClassEditor-Examples'
 }
 
 { #category : #examples }
 OPUmlExamples class >> exampleEmptyModel [
-	^ OPUmlProject openOnModel: (OPUMLModel new name: 'Model')
+	^ OPProject openOnModel: (OPUMLModel new name: 'Model')
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleEmptyPackage [
-	^ OPUmlProject openOnModel: (OPUMLPackage new name: 'Package')
+	^ OPProject openOnModel: (OPUMLPackage new name: 'Package')
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleEmptyProfile [
-	^ OPUmlProject openOnModel: (OPUMLProfile new name: 'Profile')
+	^ OPProject openOnModel: (OPUMLProfile new name: 'Profile')
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleGeneralizationSets [
-	^ OPUmlProject openOnModel: self new generalizationSets
+	^ OPProject openOnModel: self new generalizationSets
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleRichClass [
-	^ OPUmlProject openOnModel: self new modelWithRichClass
+	^ OPProject openOnModel: self new modelWithRichClass
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleSimpleAssociation [
-	^ OPUmlProject openOnModel: self new simpleAssociation
+	^ OPProject openOnModel: self new simpleAssociation
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleSimpleGeneralization [
-	^ OPUmlProject openOnModel: self new simpleGeneralization
+	^ OPProject openOnModel: self new simpleGeneralization
 ]
 
 { #category : #menu }
@@ -102,7 +102,7 @@ OPUmlExamples class >> notUsedExampleCommonStructure [
 	uml := OPUMLXMISpecsStorage umlMetamodel.
 	cs := uml packagedElements
 		detect: [ :each | each name = 'CommonStructure' ].
-	^ OPUmlProject openOnModel: cs
+	^ OPProject openOnModel: cs
 ]
 
 { #category : #accessing }
