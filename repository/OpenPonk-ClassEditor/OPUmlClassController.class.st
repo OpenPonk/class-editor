@@ -47,12 +47,13 @@ OPUmlClassController >> adornments [
 ]
 
 { #category : #rendering }
-OPUmlClassController >> allShowableElementsInModel: aClassModel [
+OPUmlClassController >> allShowableElements [
 	| queue |
 	queue := OrderedCollection new.
-	queue addAll: aClassModel ownedAttributes.
-	queue addAll: aClassModel ownedOperations.
-	^ queue asArray select: [ :each | diagramController hasSupportForModel: each ]
+	queue addAll: self model ownedAttributes.
+	queue addAll: self model ownedOperations.
+	^ queue asArray
+		select: [ :each | diagramController hasSupportForModel: each ]
 ]
 
 { #category : #'events - registering' }
@@ -139,7 +140,7 @@ OPUmlClassController >> refreshFigure [
 
 { #category : #removing }
 OPUmlClassController >> remove [
-	(self allShowableElementsInModel: self model)
+	self allShowableElements
 		do: [ :each | 
 			diagramController controllers
 				detect: [ :ctrl | ctrl model = each ]
@@ -178,7 +179,7 @@ OPUmlClassController >> renderFigureIn: aView [
 { #category : #rendering }
 OPUmlClassController >> showInDiagram: aDiagramController [
 	self renderFigureIn: aDiagramController view.
-	(self allShowableElementsInModel: self model)
+	self allShowableElements
 		do: [ :each | 
 			| subCtrl |
 			subCtrl := aDiagramController newControllerFor: each.

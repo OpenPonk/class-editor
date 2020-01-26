@@ -21,7 +21,7 @@ OPUmlPackageController >> addAsTargetFor: aController [
 ]
 
 { #category : #rendering }
-OPUmlPackageController >> allShowableElementsInModel: aPackage [
+OPUmlPackageController >> allShowableElements [
 	^ #()
 ]
 
@@ -102,7 +102,7 @@ OPUmlPackageController >> refreshFigure [
 
 { #category : #removing }
 OPUmlPackageController >> remove [
-	(self allShowableElementsInModel: self model)
+	self allShowableElements
 		do: [ :each | 
 			diagramController controllers
 				detect: [ :ctrl | ctrl model = each ]
@@ -130,7 +130,7 @@ OPUmlPackageController >> renderFigureIn: aView [
 { #category : #rendering }
 OPUmlPackageController >> showInDiagram: aDiagramController [
 	self renderFigureIn: aDiagramController view.
-	(self allShowableElementsInModel: self model)
+	self allShowableElements
 		do: [ :each | 
 			| subCtrl |
 			subCtrl := aDiagramController newControllerFor: each.

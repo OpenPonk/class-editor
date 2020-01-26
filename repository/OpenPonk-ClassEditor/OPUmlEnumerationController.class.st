@@ -33,11 +33,12 @@ OPUmlEnumerationController >> adornments [
 ]
 
 { #category : #rendering }
-OPUmlEnumerationController >> allShowableElementsInModel: aClassModel [
+OPUmlEnumerationController >> allShowableElements [
 	| queue |
 	queue := OrderedCollection new.
-	queue addAll: aClassModel ownedLiterals.
-	^ queue asArray select: [ :each | diagramController hasSupportForModel: each ]
+	queue addAll: self model ownedLiterals.
+	^ queue asArray
+		select: [ :each | diagramController hasSupportForModel: each ]
 ]
 
 { #category : #'events - registering' }
@@ -94,7 +95,7 @@ OPUmlEnumerationController >> refreshFigure [
 
 { #category : #removing }
 OPUmlEnumerationController >> remove [
-	(self allShowableElementsInModel: self model)
+	self allShowableElements
 		do: [ :each | 
 			diagramController controllers
 				detect: [ :ctrl | ctrl model = each ]
@@ -123,7 +124,7 @@ OPUmlEnumerationController >> renderFigureIn: aView [
 { #category : #rendering }
 OPUmlEnumerationController >> showInDiagram: aDiagramController [
 	self renderFigureIn: aDiagramController view.
-	(self allShowableElementsInModel: self model)
+	self allShowableElements
 		do: [ :each | 
 			| subCtrl |
 			subCtrl := aDiagramController newControllerFor: each.
