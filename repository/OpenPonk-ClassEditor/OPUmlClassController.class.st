@@ -128,6 +128,11 @@ OPUmlClassController >> descriptionStereotype [
 	^ super descriptionStereotype
 ]
 
+{ #category : #testing }
+OPUmlClassController >> isHideable [
+	^ true
+]
+
 { #category : #accessing }
 OPUmlClassController >> modelClass [
 	^ OPUMLClass

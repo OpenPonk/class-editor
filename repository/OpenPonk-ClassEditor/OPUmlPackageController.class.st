@@ -89,6 +89,11 @@ OPUmlPackageController >> createModelIn: aPackageController andShowInDiagram: aD
 	self showInDiagram: aDiagramController
 ]
 
+{ #category : #testing }
+OPUmlPackageController >> isHideable [
+	^ true
+]
+
 { #category : #accessing }
 OPUmlPackageController >> modelClass [
 	modelClass ifNil: [ self beForPackage ].

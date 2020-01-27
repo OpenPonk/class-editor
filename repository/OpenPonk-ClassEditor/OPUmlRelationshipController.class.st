@@ -22,6 +22,11 @@ OPUmlRelationshipController >> figure [
 	^ diagramElement rtEdge
 ]
 
+{ #category : #testing }
+OPUmlRelationshipController >> isHideable [
+	^ true
+]
+
 { #category : #forms }
 OPUmlRelationshipController >> layout [
 	^ nil
