@@ -4,7 +4,7 @@ I am a plugin for UML Class Diagram
 Class {
 	#name : #OPUmlClassEditorPlugin,
 	#superclass : #OPPlugin,
-	#category : 'OpenPonk-ClassEditor-Plugin'
+	#category : #'OpenPonk-ClassEditor-Plugin'
 }
 
 { #category : #toolbar }
@@ -98,4 +98,9 @@ OPUmlClassEditorPlugin >> name [
 { #category : #accessing }
 OPUmlClassEditorPlugin >> serializerClass [
 	^ OPUmlSerializer
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin >> supportsHidingElements [
+	^ true
 ]

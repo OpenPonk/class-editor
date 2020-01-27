@@ -31,8 +31,8 @@ OPUmlPackageDiagramController >> addLayoutMenu: builder parent: aParent [
 	self layouter buildMenuOn: builder parent: aParent
 ]
 
-{ #category : #retrieving }
-OPUmlPackageDiagramController >> allShowableElements [
+{ #category : #figures }
+OPUmlPackageDiagramController >> allOwnedElementsInModel [
 	| queue priority |
 	queue := OrderedCollection new.
 	priority := {(OPUMLPackage -> 1).
