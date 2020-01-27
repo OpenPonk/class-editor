@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlEnumerationControllerTest,
 	#superclass : #OPUmlElementControllerTest,
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -48,7 +48,7 @@ OPUmlEnumerationControllerTest >> testRemoveEmpty [
 { #category : #'tests - removing' }
 OPUmlEnumerationControllerTest >> testRemoveFromModel [
 	diagramController model packagedElements add: model.
-	diagramController showModelInDiagram: model.
+	diagramController showInDiagramModel: model.
 	controller := diagramController controllerForModel: model.
 	controller removeModel.
 	self assert: diagramController view elements asArray equals: #().
@@ -69,7 +69,7 @@ OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 
 { #category : #'tests - diagram' }
 OPUmlEnumerationControllerTest >> testShowInDiagram [
-	diagramController showModelInDiagram: model.
+	diagramController showInDiagramModel: model.
 	self
 		assert:
 			(diagramController view elements
@@ -81,7 +81,7 @@ OPUmlEnumerationControllerTest >> testShowWithLiteralsInDiagram [
 	| literal |
 	literal := OPUMLEnumerationLiteral new name: 'enumLiteral'.
 	model ownedLiterals add: literal.
-	diagramController showModelInDiagram: model.
+	diagramController showInDiagramModel: model.
 	self
 		assert:
 			(diagramController view elements

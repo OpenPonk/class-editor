@@ -47,7 +47,7 @@ OPUmlEnumerationController >> attachTo: aDiagramController [
 	newModel := self createModel.
 	OPRenameElementCommand executeOn: newModel.
 	aDiagramController model packagedElements add: newModel.
-	aDiagramController showModelInDiagram: newModel
+	aDiagramController showInDiagramModel: newModel
 ]
 
 { #category : #adding }
@@ -123,6 +123,7 @@ OPUmlEnumerationController >> renderFigureIn: aView [
 
 { #category : #rendering }
 OPUmlEnumerationController >> showInDiagram: aDiagramController [
+	aDiagramController addController: self.
 	self renderFigureIn: aDiagramController view.
 	self allShowableElements
 		do: [ :each | 
@@ -130,4 +131,15 @@ OPUmlEnumerationController >> showInDiagram: aDiagramController [
 			subCtrl := aDiagramController newControllerFor: each.
 			aDiagramController addController: subCtrl.
 			subCtrl showInDiagram: aDiagramController ]
+]
+
+{ #category : #rendering }
+OPUmlEnumerationController >> showWithDependentInDiagram: aDiagramController [
+	self renderFigureIn: aDiagramController view.
+	self dependentElements
+		do: [ :each | 
+			| subCtrl |
+			subCtrl := aDiagramController newControllerFor: each.
+			aDiagramController addController: subCtrl.
+			subCtrl showWithDependentInDiagram: aDiagramController ]
 ]

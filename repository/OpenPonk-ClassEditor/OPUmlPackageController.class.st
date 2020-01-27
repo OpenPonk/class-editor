@@ -31,7 +31,7 @@ OPUmlPackageController >> attachTo: aDiagramController [
 	newModel := self createModel.
 	OPRenameElementCommand executeOn: newModel.
 	aDiagramController model packagedElements add: newModel.
-	aDiagramController showModelInDiagram: newModel
+	aDiagramController showInDiagramModel: newModel
 ]
 
 { #category : #configuration }
@@ -134,6 +134,7 @@ OPUmlPackageController >> renderFigureIn: aView [
 
 { #category : #rendering }
 OPUmlPackageController >> showInDiagram: aDiagramController [
+	aDiagramController addController: self.
 	self renderFigureIn: aDiagramController view.
 	self allShowableElements
 		do: [ :each | 
@@ -141,4 +142,16 @@ OPUmlPackageController >> showInDiagram: aDiagramController [
 			subCtrl := aDiagramController newControllerFor: each.
 			aDiagramController addController: subCtrl.
 			subCtrl showInDiagram: aDiagramController ]
+]
+
+{ #category : #rendering }
+OPUmlPackageController >> showWithDependentInDiagram: aDiagramController [
+	aDiagramController addController: self.
+	self renderFigureIn: aDiagramController view.
+	self dependentElements
+		do: [ :each | 
+			| subCtrl |
+			subCtrl := aDiagramController newControllerFor: each.
+			aDiagramController addController: subCtrl.
+			subCtrl showWithDependentInDiagram: aDiagramController ]
 ]

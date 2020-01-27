@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'classController'
 	],
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
@@ -62,5 +62,6 @@ OPUmlEnumerationLiteralController >> renderFigureIn: aView [
 
 { #category : #figures }
 OPUmlEnumerationLiteralController >> showInDiagram: aDiagramController [
+	aDiagramController addController: self.
 	self renderFigureIn: aDiagramController view
 ]

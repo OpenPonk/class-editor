@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlOperationControllerTest,
 	#superclass : #OPUmlElementControllerTest,
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -32,7 +32,7 @@ OPUmlOperationControllerTest >> testRemoveFromView [
 	class := OPUMLClass new.
 	op := OPUMLOperation new.
 	class ownedOperations add: op.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	controller := diagramController controllerForModel: op.
 	compartment := controller diagramElement owningElement.
 	controller remove.

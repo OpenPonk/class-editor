@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlPackageDiagramControllerTest,
 	#superclass : #OPUmlElementControllerTest,
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -24,7 +24,7 @@ OPUmlPackageDiagramControllerTest >> setUp [
 OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 	| class |
 	class := OPUMLClass new.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements
@@ -38,7 +38,7 @@ OPUmlPackageDiagramControllerTest >> testShowClassWithAttributeInDiagram [
 	prop := OPUMLProperty new.
 	prop name: 'prop'.
 	class ownedAttributes add: prop.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements

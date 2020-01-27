@@ -6,7 +6,7 @@ Class {
 		'child',
 		'generalization'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -64,9 +64,9 @@ OPUmlGeneralizationControllerTest >> testCreateDiagramElement [
 { #category : #'tests - diagram' }
 OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 	diagramController
-		showModelInDiagram: parent;
-		showModelInDiagram: child.
-	diagramController showModelInDiagram: generalization.
+		showInDiagramModel: parent;
+		showInDiagramModel: child.
+	diagramController showInDiagramModel: generalization.
 	controller := diagramController controllerForModel: generalization.
 	controller remove.
 	self assert: diagramController view edges asArray equals: #()
@@ -76,9 +76,9 @@ OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 	| gs |
 	diagramController
-		showModelInDiagram: parent;
-		showModelInDiagram: child;
-		showModelInDiagram: generalization.
+		showInDiagramModel: parent;
+		showInDiagramModel: child;
+		showInDiagramModel: generalization.
 	gs := OPUMLGeneralizationSet new.
 	gs generalizations add: generalization.
 	controller := diagramController controllerForModel: generalization.
@@ -91,9 +91,9 @@ OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 { #category : #'tests - diagram' }
 OPUmlGeneralizationControllerTest >> testShowInDiagram [
 	diagramController
-		showModelInDiagram: parent;
-		showModelInDiagram: child.
-	diagramController showModelInDiagram: generalization.
+		showInDiagramModel: parent;
+		showInDiagramModel: child.
+	diagramController showInDiagramModel: generalization.
 	self
 		assert:
 			(diagramController view edges

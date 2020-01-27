@@ -101,9 +101,9 @@ OPUmlPackageImportControllerTest >> testCreateDiagramElement [
 { #category : #'tests - diagram' }
 OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 	diagramController
-		showModelInDiagram: importingNamespace;
-		showModelInDiagram: importedPackage.
-	diagramController showModelInDiagram: packageImport.
+		showInDiagramModel: importingNamespace;
+		showInDiagramModel: importedPackage.
+	diagramController showInDiagramModel: packageImport.
 	controller := diagramController controllerForModel: packageImport.
 	controller remove.
 	self assert: diagramController view edges asArray equals: #()
@@ -112,9 +112,9 @@ OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 { #category : #'tests - model' }
 OPUmlPackageImportControllerTest >> testRemoveFromModel [
 	diagramController
-		showModelInDiagram: importingNamespace;
-		showModelInDiagram: importedPackage;
-		showModelInDiagram: packageImport.
+		showInDiagramModel: importingNamespace;
+		showInDiagramModel: importedPackage;
+		showInDiagramModel: packageImport.
 	controller := diagramController controllerForModel: packageImport.
 	controller removeModel.
 	self assert: importedPackage packageImports asArray equals: #()
@@ -123,9 +123,9 @@ OPUmlPackageImportControllerTest >> testRemoveFromModel [
 { #category : #'tests - diagram' }
 OPUmlPackageImportControllerTest >> testShowInDiagram [
 	diagramController
-		showModelInDiagram: importingNamespace;
-		showModelInDiagram: importedPackage.
-	diagramController showModelInDiagram: packageImport.
+		showInDiagramModel: importingNamespace;
+		showInDiagramModel: importedPackage.
+	diagramController showInDiagramModel: packageImport.
 	self
 		assert:
 			(diagramController view edges

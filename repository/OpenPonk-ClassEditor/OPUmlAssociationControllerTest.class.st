@@ -8,7 +8,7 @@ Class {
 		'ownedComment',
 		'owningElement'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -78,9 +78,9 @@ OPUmlAssociationControllerTest >> testCreateDiagramElement [
 OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 	| elementController |
 	diagramController
-		showModelInDiagram: element;
-		showModelInDiagram: comment;
-		showModelInDiagram: association.
+		showInDiagramModel: element;
+		showInDiagramModel: comment;
+		showInDiagramModel: association.
 	diagramController model packagedElements
 		addAll:
 			{element.
@@ -97,9 +97,9 @@ OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 OPUmlAssociationControllerTest >> testRemovalOfClassRemovesAssociation [
 	| elementController |
 	diagramController
-		showModelInDiagram: element;
-		showModelInDiagram: comment;
-		showModelInDiagram: association.
+		showInDiagramModel: element;
+		showInDiagramModel: comment;
+		showInDiagramModel: association.
 	diagramController model packagedElements
 		addAll:
 			{element.
@@ -128,9 +128,9 @@ OPUmlAssociationControllerTest >> testRemovalOfClassRemovesAssociation [
 { #category : #'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemoveFromDiagram [
 	diagramController
-		showModelInDiagram: element;
-		showModelInDiagram: comment;
-		showModelInDiagram: association.
+		showInDiagramModel: element;
+		showInDiagramModel: comment;
+		showInDiagramModel: association.
 	controller := diagramController controllerForModel: association.
 	self assert: diagramController view edges asArray isNotEmpty.
 	controller remove.
@@ -140,9 +140,9 @@ OPUmlAssociationControllerTest >> testRemoveFromDiagram [
 { #category : #'tests - model' }
 OPUmlAssociationControllerTest >> testRemoveFromModel [
 	diagramController
-		showModelInDiagram: element;
-		showModelInDiagram: comment;
-		showModelInDiagram: association.
+		showInDiagramModel: element;
+		showInDiagramModel: comment;
+		showInDiagramModel: association.
 	controller := diagramController controllerForModel: association.
 	diagramController model packagedElements add: association.
 	self assert: ownedComment association equals: association.
@@ -155,9 +155,9 @@ OPUmlAssociationControllerTest >> testRemoveFromModel [
 { #category : #tests }
 OPUmlAssociationControllerTest >> testShowInDiagram [
 	diagramController
-		showModelInDiagram: element;
-		showModelInDiagram: comment;
-		showModelInDiagram: association.
+		showInDiagramModel: element;
+		showInDiagramModel: comment;
+		showInDiagramModel: association.
 	self
 		assert:
 			(diagramController view edges

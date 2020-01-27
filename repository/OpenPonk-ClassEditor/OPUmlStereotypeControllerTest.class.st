@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlStereotypeControllerTest,
 	#superclass : #OPUmlElementControllerTest,
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -62,7 +62,7 @@ OPUmlStereotypeControllerTest >> testRemoveFromModel [
 	| class |
 	class := self newEmptyModel.
 	diagramController model packagedElements add: class.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	controller := diagramController controllerForModel: class.
 	controller removeModel.
 	self assert: diagramController view elements asArray equals: #().
@@ -87,7 +87,7 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 OPUmlStereotypeControllerTest >> testShowClassInDiagram [
 	| class |
 	class := self newEmptyModel.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements
@@ -100,7 +100,7 @@ OPUmlStereotypeControllerTest >> testShowClassWithAttributeInDiagram [
 	class := self newEmptyModel.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements

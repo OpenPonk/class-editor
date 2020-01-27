@@ -8,7 +8,7 @@ Class {
 		'baseArtifact',
 		'extensionLibrary'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -76,9 +76,9 @@ OPUmlExtensionControllerTest >> testCreateDiagramElement [
 { #category : #'tests - diagram' }
 OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 	diagramController
-		showModelInDiagram: artifact;
-		showModelInDiagram: library;
-		showModelInDiagram: extension.
+		showInDiagramModel: artifact;
+		showInDiagramModel: library;
+		showInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
 	controller remove.
 	self assert: diagramController view edges asArray equals: #()
@@ -87,9 +87,9 @@ OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 { #category : #'tests - model' }
 OPUmlExtensionControllerTest >> testRemoveFromModel [
 	diagramController
-		showModelInDiagram: artifact;
-		showModelInDiagram: library;
-		showModelInDiagram: extension.
+		showInDiagramModel: artifact;
+		showInDiagramModel: library;
+		showInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
 	diagramController model packagedElements add: extension.
 	controller removeModel.
@@ -101,9 +101,9 @@ OPUmlExtensionControllerTest >> testRemoveFromModel [
 { #category : #tests }
 OPUmlExtensionControllerTest >> testShowInDiagram [
 	diagramController
-		showModelInDiagram: artifact;
-		showModelInDiagram: library;
-		showModelInDiagram: extension.
+		showInDiagramModel: artifact;
+		showInDiagramModel: library;
+		showInDiagramModel: extension.
 	self
 		assert:
 			(diagramController view edges

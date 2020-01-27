@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlPackageControllerTest,
 	#superclass : #OPUmlElementControllerTest,
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -57,7 +57,7 @@ OPUmlPackageControllerTest >> testRemoveFromModel [
 	| model |
 	model := self newEmptyModel.
 	diagramController model packagedElements add: model.
-	diagramController showModelInDiagram: model.
+	diagramController showInDiagramModel: model.
 	controller := diagramController controllerForModel: model.
 	controller removeModel.
 	self assert: diagramController view elements asArray equals: #().
@@ -69,7 +69,7 @@ OPUmlPackageControllerTest >> testRemoveFromModel [
 OPUmlPackageControllerTest >> testShowClassInDiagram [
 	| class |
 	class := OPUMLClass new.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements
@@ -82,7 +82,7 @@ OPUmlPackageControllerTest >> testShowClassWithAttributeInDiagram [
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements

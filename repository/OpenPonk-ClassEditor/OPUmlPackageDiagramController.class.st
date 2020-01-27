@@ -32,50 +32,10 @@ OPUmlPackageDiagramController >> addLayoutMenu: builder parent: aParent [
 ]
 
 { #category : #figures }
-OPUmlPackageDiagramController >> allOwnedElementsInModel [
-	| queue priority |
-	queue := OrderedCollection new.
-	priority := {(OPUMLPackage -> 1).
-	(OPUMLModel -> 1).
-	(OPUMLProfile -> 1).
-	(OPUMLClass -> 2).
-	(OPUMLStereotype -> 3)} asDictionary.
-	queue addAll: self model packagedElements.
-	self model packagedElements
-		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each | 
-			each packageImports
-				do: [ :import | 
-					queue addIfNotPresent: import importedPackage.
-					queue add: import ] ].
-	self model packagedElements
-		select:
-			[ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]
-		thenDo: [ :each | 
-			each generalizations
-				do: [ :gen | 
-					queue addIfNotPresent: gen general.
-					queue add: gen ].
-			(each ownedAttributes select: [ :attr | attr association isNotNil ])
-				do: [ :attr | queue addIfNotPresent: attr association ] ].
-	self model packagedElements
-		select: [ :each | each isKindOf: OPUMLStereotype ]
-		thenDo: [ :each | 
-			each ownedAttributes
-				select: [ :attr | 
-					attr association isNotNil
-						and: [ attr association isKindOf: OPUMLExtension ] ]
-				thenDo: [ :attr | queue add: attr type ] ].
-	queue
-		removeAllSuchThat: [ :each | 
-			(each isKindOf: OPUMLAssociation)
-				and: [ each memberEnds
-						anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ].
-	^ (queue asSet asArray
-		sorted: [ :a :b | 
-			(priority at: a class ifAbsent: [ 100 ])
-				< (priority at: b class ifAbsent: [ 100 ]) ])
-		select: [ :each | self hasSupportForModel: each ]
+OPUmlPackageDiagramController >> allShowableElements [
+	"Should return all elements that could be directly hidden on diagram"
+
+	^ self elementsToShowInside
 ]
 
 { #category : #'ui hooks' }
@@ -228,6 +188,53 @@ OPUmlPackageDiagramController >> disableRefresh [
 				control: #instead.
 			(cls >> #refreshFigure) ast link: link ] ].
 	OPUmlElementController withAllSubAndSuperclassesDo: [ :each | install value: each ]
+]
+
+{ #category : #figures }
+OPUmlPackageDiagramController >> elementsToShowInside [
+	| queue priority |
+	queue := OrderedCollection new.
+	priority := {(OPUMLPackage -> 1).
+	(OPUMLModel -> 1).
+	(OPUMLProfile -> 1).
+	(OPUMLClass -> 2).
+	(OPUMLStereotype -> 3)} asDictionary.
+	queue addAll: self model packagedElements.
+	self model packagedElements
+		select: [ :each | each oclIsKindOf: #Package ]
+		thenDo: [ :each | 
+			each packageImports
+				do: [ :import | 
+					queue addIfNotPresent: import importedPackage.
+					queue add: import ] ].
+	self model packagedElements
+		select:
+			[ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]
+		thenDo: [ :each | 
+			each generalizations
+				do: [ :gen | 
+					queue addIfNotPresent: gen general.
+					queue add: gen ].
+			(each ownedAttributes select: [ :attr | attr association isNotNil ])
+				do: [ :attr | queue addIfNotPresent: attr association ] ].
+	self model packagedElements
+		select: [ :each | each isKindOf: OPUMLStereotype ]
+		thenDo: [ :each | 
+			each ownedAttributes
+				select: [ :attr | 
+					attr association isNotNil
+						and: [ attr association isKindOf: OPUMLExtension ] ]
+				thenDo: [ :attr | queue add: attr type ] ].
+	queue
+		removeAllSuchThat: [ :each | 
+			(each isKindOf: OPUMLAssociation)
+				and: [ each memberEnds
+						anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ].
+	^ (queue asSet asArray
+		sorted: [ :a :b | 
+			(priority at: a class ifAbsent: [ 100 ])
+				< (priority at: b class ifAbsent: [ 100 ]) ])
+		select: [ :each | self hasSupportForModel: each ]
 ]
 
 { #category : #userinterface }
@@ -427,17 +434,9 @@ OPUmlPackageDiagramController >> selectableFigures [
 OPUmlPackageDiagramController >> showAllElements [
 	self disableRefresh.
 	self allShowableElements
-		do: [ :each | self showModelInDiagram: each ].
+		do: [ :each | self showInDiagramModel: each ].
 	self enableRefresh.
 	self controllers
 		select: [ :each | each isKindOf: OPUmlClassController ]
 		thenDo: #refreshFigure
-]
-
-{ #category : #figures }
-OPUmlPackageDiagramController >> showModelInDiagram: aModel [
-	| controller |
-	controller := self newControllerFor: aModel.
-	self addController: controller.
-	controller showInDiagram: self
 ]

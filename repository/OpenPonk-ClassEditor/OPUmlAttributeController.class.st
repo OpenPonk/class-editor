@@ -4,7 +4,7 @@ I am a controller for an attribute of a classifier.
 Class {
 	#name : #OPUmlAttributeController,
 	#superclass : #OPUmlElementController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
@@ -174,6 +174,7 @@ OPUmlAttributeController >> renderFigureIn: aView [
 
 { #category : #figures }
 OPUmlAttributeController >> showInDiagram: aDiagramController [
+	aDiagramController addController: self.
 	self renderFigureIn: aDiagramController view
 ]
 

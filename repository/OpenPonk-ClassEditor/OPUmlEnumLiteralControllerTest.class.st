@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlEnumLiteralControllerTest,
 	#superclass : #OPUmlElementControllerTest,
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #accessing }
@@ -47,7 +47,7 @@ OPUmlEnumLiteralControllerTest >> testRemoveFromView [
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
-	diagramController showModelInDiagram: class.
+	diagramController showInDiagramModel: class.
 	controller := diagramController controllerForModel: prop.
 	compartment := controller diagramElement owningElement.
 	controller remove.

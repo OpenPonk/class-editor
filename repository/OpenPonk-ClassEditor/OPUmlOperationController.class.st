@@ -4,7 +4,7 @@ I am a controller for Operation.
 Class {
 	#name : #OPUmlOperationController,
 	#superclass : #OPUmlElementController,
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
@@ -87,5 +87,6 @@ OPUmlOperationController >> renderFigureIn: aView [
 
 { #category : #figures }
 OPUmlOperationController >> showInDiagram: aDiagramController [
+	aDiagramController addController: self.
 	self renderFigureIn: aDiagramController view
 ]
