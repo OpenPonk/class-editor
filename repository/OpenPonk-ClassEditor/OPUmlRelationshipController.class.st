@@ -37,12 +37,6 @@ OPUmlRelationshipController >> layout: aPoint [
 	
 ]
 
-{ #category : #figures }
-OPUmlRelationshipController >> showInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view
-]
-
 { #category : #accessing }
 OPUmlRelationshipController >> source [
 	^ source

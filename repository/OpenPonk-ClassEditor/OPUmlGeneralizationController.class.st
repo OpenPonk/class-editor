@@ -15,12 +15,11 @@ OPUmlGeneralizationController >> createDiagramElement [
 ]
 
 { #category : #figures }
-OPUmlGeneralizationController >> createModelIn: aTargetController andShowInDiagram: aDiagramController [
-	self model: OPUMLGeneralization new.
-	model general: aTargetController model.
+OPUmlGeneralizationController >> createModelIn: aParentModel [
+	self model: self modelClass new.
+	model general: aParentModel.
 	model specific: source model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+	^ model
 ]
 
 { #category : #forms }

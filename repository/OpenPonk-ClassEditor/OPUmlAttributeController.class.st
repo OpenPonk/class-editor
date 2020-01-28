@@ -18,14 +18,15 @@ OPUmlAttributeController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlAttributeController >> createModelIn: aClassifierController andShowInDiagram: aDiagramController [
-	| newModel |
-	newModel := self modelClass new.
-	newModel name: 'attribute'.
-	self model: newModel.
-	aClassifierController model ownedAttributes add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+OPUmlAttributeController >> createModelIn: aParentModel [
+	self
+		model:
+			(self modelClass new
+				name: 'attribute';
+				yourself).
+	aParentModel packagedElements add: model.
+	aParentModel ownedAttributes add: model.
+	^ model
 ]
 
 { #category : #forms }
@@ -137,6 +138,11 @@ OPUmlAttributeController >> descriptionType [
 		yourself
 ]
 
+{ #category : #testing }
+OPUmlAttributeController >> isHideable [
+	^ true
+]
+
 { #category : #accessing }
 OPUmlAttributeController >> modelClass [
 	^ OPUMLProperty
@@ -170,12 +176,6 @@ OPUmlAttributeController >> renderFigureIn: aView [
 	diagramElement renderIn: aView.
 	diagramController figureAdded: self figure.
 	self refreshFigure
-]
-
-{ #category : #figures }
-OPUmlAttributeController >> showInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view
 ]
 
 { #category : #accessing }

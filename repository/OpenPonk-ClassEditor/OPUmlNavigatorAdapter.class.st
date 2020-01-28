@@ -72,7 +72,13 @@ OPUmlNavigatorAdapter >> dependentMapping [
 						select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
 						flatCollectAsSet: [ :eachClass | 
 							eachClass generalizations
-								select: [ :eachGeneralization | eachGeneralization general = class ] ]) ]).
+								select: [ :eachGeneralization | eachGeneralization general = class ] ])
+				,
+					((model packagedElements
+						select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Association ])
+						select: [ :eachAssoc | 
+							eachAssoc memberEnds
+								anySatisfy: [ :any | any type = class or: [ any owningClass = class ] ] ]) ]).
 	(OPUMLEnumeration -> #())}
 ]
 

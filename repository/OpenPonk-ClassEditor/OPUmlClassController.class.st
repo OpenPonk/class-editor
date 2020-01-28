@@ -14,7 +14,9 @@ OPUmlClassController >> addAsSourceFor: aController [
 
 { #category : #adding }
 OPUmlClassController >> addAsTargetFor: aController [
-	aController createModelIn: self andShowInDiagram: self diagramController
+	aController
+		createModelIn: self model
+		andShowInDiagram: self diagramController
 ]
 
 { #category : #figures }
@@ -97,19 +99,15 @@ OPUmlClassController >> createDiagramElement [
 		modelElement: self model
 ]
 
-{ #category : #model }
-OPUmlClassController >> createModel [
-	^ self modelClass new
-		name: 'Class';
-		yourself
-]
-
 { #category : #construction }
-OPUmlClassController >> createModelIn: aPackageController andShowInDiagram: aDiagramController [
-	self model: self createModel.
-	aDiagramController model packagedElements add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+OPUmlClassController >> createModelIn: aParentModel [
+	self
+		model:
+			(self modelClass new
+				name: self modelClassName;
+				yourself).
+	aParentModel packagedElements add: model.
+	^ model
 ]
 
 { #category : #forms }
@@ -128,6 +126,11 @@ OPUmlClassController >> descriptionStereotype [
 	^ super descriptionStereotype
 ]
 
+{ #category : #accessing }
+OPUmlClassController >> elementsToShowInside [
+	^ model ownedOperations , model ownedAttributes
+]
+
 { #category : #testing }
 OPUmlClassController >> isHideable [
 	^ true
@@ -136,6 +139,11 @@ OPUmlClassController >> isHideable [
 { #category : #accessing }
 OPUmlClassController >> modelClass [
 	^ OPUMLClass
+]
+
+{ #category : #accessing }
+OPUmlClassController >> modelClassName [
+	^ #Class
 ]
 
 { #category : #figures }
@@ -179,29 +187,6 @@ OPUmlClassController >> renderFigureIn: aView [
 	self figure @ (OPRTUmlAdornments new adornments: self adornments).
 	self refreshFigure.
 	self figure @ RTDraggableSnapToGrid
-]
-
-{ #category : #rendering }
-OPUmlClassController >> showInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view.
-	self allShowableElements
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showInDiagram: aDiagramController ]
-]
-
-{ #category : #rendering }
-OPUmlClassController >> showWithDependentInDiagram: aDiagramController [
-	self renderFigureIn: aDiagramController view.
-	self dependentElements
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showWithDependentInDiagram: aDiagramController ]
 ]
 
 { #category : #accessing }

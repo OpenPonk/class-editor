@@ -20,14 +20,14 @@ OPUmlEnumerationLiteralController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlEnumerationLiteralController >> createModelIn: aClassifierController andShowInDiagram: aDiagramController [
-	| newModel |
-	newModel := self modelClass new.
-	newModel name: 'literal'.
-	self model: newModel.
-	aClassifierController model ownedLiterals add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
+	self
+		model:
+			(self modelClass new
+				name: 'literal';
+				yourself).
+	aParentModel ownedLiterals add: model.
+	^ model
 ]
 
 { #category : #accessing }
@@ -58,10 +58,4 @@ OPUmlEnumerationLiteralController >> renderFigureIn: aView [
 	diagramElement renderIn: aView.
 	diagramController figureAdded: self figure.
 	self refreshFigure
-]
-
-{ #category : #figures }
-OPUmlEnumerationLiteralController >> showInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view
 ]

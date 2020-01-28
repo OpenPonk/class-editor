@@ -15,12 +15,11 @@ OPUmlPackageImportController >> createDiagramElement [
 ]
 
 { #category : #figures }
-OPUmlPackageImportController >> createModelIn: aTargetController andShowInDiagram: aDiagramController [
-	self model: OPUMLPackageImport new.
-	model importedPackage: aTargetController model.
+OPUmlPackageImportController >> createModelIn: aParentModel [
+	self model: self modelClass new.
+	model importedPackage: aParentModel.
 	model importingNamespace: source model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+	^ model
 ]
 
 { #category : #forms }

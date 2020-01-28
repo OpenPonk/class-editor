@@ -14,7 +14,9 @@ OPUmlEnumerationController >> addAsSourceFor: aController [
 
 { #category : #adding }
 OPUmlEnumerationController >> addAsTargetFor: aController [
-	aController createModelIn: self andShowInDiagram: self diagramController
+	aController
+		createModelIn: self model
+		andShowInDiagram: self diagramController
 ]
 
 { #category : #figures }
@@ -76,11 +78,19 @@ OPUmlEnumerationController >> createModel [
 ]
 
 { #category : #construction }
-OPUmlEnumerationController >> createModelIn: aPackageController andShowInDiagram: aDiagramController [
-	self model: self createModel.
-	aDiagramController model packagedElements add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+OPUmlEnumerationController >> createModelIn: aParentModel [
+	self
+		model:
+			(self modelClass new
+				name: 'Enumeration';
+				yourself).
+	aParentModel packagedElements add: model.
+	^ model
+]
+
+{ #category : #testing }
+OPUmlEnumerationController >> isHideable [
+	^ true
 ]
 
 { #category : #accessing }
@@ -119,27 +129,4 @@ OPUmlEnumerationController >> renderFigureIn: aView [
 	self figure @ (OPRTUmlAdornments new adornments: self adornments).
 	self refreshFigure.
 	self figure @ RTDraggable
-]
-
-{ #category : #rendering }
-OPUmlEnumerationController >> showInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view.
-	self allShowableElements
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showInDiagram: aDiagramController ]
-]
-
-{ #category : #rendering }
-OPUmlEnumerationController >> showWithDependentInDiagram: aDiagramController [
-	self renderFigureIn: aDiagramController view.
-	self dependentElements
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showWithDependentInDiagram: aDiagramController ]
 ]

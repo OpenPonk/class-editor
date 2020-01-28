@@ -15,13 +15,13 @@ OPUmlExtensionController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlExtensionController >> createModelIn: aTargetController andShowInDiagram: aDiagramController [
+OPUmlExtensionController >> createModelIn: aParentModel [
 	| sourceOwnedProp extensionOwnedProp |
-	self model: self createModel.
+	self model: self modelClass new.
 	(sourceOwnedProp := OPUMLProperty new)
 		owningClass: source model;
-		name: 'base_' , aTargetController model name;
-		type: aTargetController model.
+		name: 'base_' , aParentModel name;
+		type: aParentModel.
 	(extensionOwnedProp := OPUMLExtensionEnd new)
 		name: 'extension_' , source model name;
 		type: source model.
@@ -29,15 +29,13 @@ OPUmlExtensionController >> createModelIn: aTargetController andShowInDiagram: a
 	model memberEnds
 		add: sourceOwnedProp;
 		add: extensionOwnedProp.
-	aDiagramController model packagedElements add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController.
-	{sourceOwnedProp}
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showInDiagram: aDiagramController ]
+	aParentModel packagedElements add: model.
+	^ model
+]
+
+{ #category : #accessing }
+OPUmlExtensionController >> elementsToShowInside [
+	^ {model memberEnds first}
 ]
 
 { #category : #accessing }

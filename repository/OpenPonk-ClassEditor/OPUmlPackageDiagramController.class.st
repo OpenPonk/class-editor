@@ -23,7 +23,7 @@ OPUmlPackageDiagramController >> addAsSourceFor: aController [
 { #category : #adding }
 OPUmlPackageDiagramController >> addAsTargetFor: aClassController [
 	self assert: (self canBeTargetFor: aClassController).
-	aClassController createModelIn: self andShowInDiagram: self
+	aClassController createModelIn: self model andShowInDiagram: self
 ]
 
 { #category : #'ui hooks' }
@@ -36,6 +36,11 @@ OPUmlPackageDiagramController >> allShowableElements [
 	"Should return all elements that could be directly hidden on diagram"
 
 	^ self elementsToShowInside
+		,
+			((self model packagedElements
+				select:
+					[ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ])
+				flatCollect: [ :each | each ownedAttributes , each ownedOperations ])
 ]
 
 { #category : #'ui hooks' }
@@ -216,9 +221,8 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 					queue addIfNotPresent: gen general.
 					queue add: gen ].
 			(each ownedAttributes
-				select: [ :attr | 
-					(attr isKindOf: OPUMLGeneralization) not
-						and: [ attr association isNotNil ] ])
+				select:
+					[ :attr | (attr isKindOf: OPUMLProperty) and: [ attr association isNotNil ] ])
 				do: [ :attr | queue addIfNotPresent: attr association ] ].
 	self model packagedElements
 		select: [ :each | each isKindOf: OPUMLStereotype ]

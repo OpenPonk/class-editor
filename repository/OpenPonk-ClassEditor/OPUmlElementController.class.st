@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'diagramElement'
 	],
-	#category : 'OpenPonk-ClassEditor-Controllers'
+	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #forms }
@@ -50,11 +50,6 @@ OPUmlElementController >> createDiagramElement [
 { #category : #figures }
 OPUmlElementController >> createFigure [
 	^ self shouldNotImplement
-]
-
-{ #category : #model }
-OPUmlElementController >> createModel [
-	^ self modelClass new
 ]
 
 { #category : #forms }

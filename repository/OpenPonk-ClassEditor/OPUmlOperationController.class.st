@@ -20,14 +20,14 @@ OPUmlOperationController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlOperationController >> createModelIn: aClassifierController andShowInDiagram: aDiagramController [
-	| newModel |
-	newModel := self modelClass new.
-	newModel name: 'operation'.
-	self model: newModel.
-	aClassifierController model ownedOperations add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+OPUmlOperationController >> createModelIn: aParentModel [
+	self
+		model:
+			(self modelClass new
+				name: 'operation';
+				yourself).
+	aParentModel ownedOperations add: model.
+	^ model
 ]
 
 { #category : #forms }
@@ -48,6 +48,11 @@ OPUmlOperationController >> descriptionIsStatic [
 		label: 'Is Static';
 		priority: 10;
 		yourself
+]
+
+{ #category : #testing }
+OPUmlOperationController >> isHideable [
+	^ true
 ]
 
 { #category : #accessing }
@@ -83,10 +88,4 @@ OPUmlOperationController >> renderFigureIn: aView [
 	diagramElement renderIn: aView.
 	diagramController figureAdded: self figure.
 	self refreshFigure
-]
-
-{ #category : #figures }
-OPUmlOperationController >> showInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view
 ]

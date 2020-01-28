@@ -17,7 +17,9 @@ OPUmlPackageController >> addAsSourceFor: aController [
 
 { #category : #adding }
 OPUmlPackageController >> addAsTargetFor: aController [
-	aController createModelIn: self andShowInDiagram: self diagramController
+	aController
+		createModelIn: self model
+		andShowInDiagram: self diagramController
 ]
 
 { #category : #rendering }
@@ -71,22 +73,16 @@ OPUmlPackageController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlPackageController >> createModel [
+OPUmlPackageController >> createModelIn: aParentModel [
 	| newModel names |
 	newModel := self modelClass new.
-	names := {OPUMLPackage -> 'Package'.
-	OPUMLModel -> 'Model'.
-	OPUMLProfile -> 'Profile'} asDictionary.
+	names := {(OPUMLPackage -> 'Package').
+	(OPUMLModel -> 'Model').
+	(OPUMLProfile -> 'Profile')} asDictionary.
 	newModel name: (names at: newModel class).
-	^ newModel
-]
-
-{ #category : #construction }
-OPUmlPackageController >> createModelIn: aPackageController andShowInDiagram: aDiagramController [
-	self model: self createModel.
-	aDiagramController model packagedElements add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController
+	self model: newModel.
+	aParentModel packagedElements add: model.
+	^ model
 ]
 
 { #category : #testing }
@@ -130,28 +126,4 @@ OPUmlPackageController >> renderFigureIn: aView [
 	diagramController figureAdded: self figure.
 	self refreshFigure.
 "	self figure @ RTDraggable""SnapToGrid"
-]
-
-{ #category : #rendering }
-OPUmlPackageController >> showInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view.
-	self allShowableElements
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showInDiagram: aDiagramController ]
-]
-
-{ #category : #rendering }
-OPUmlPackageController >> showWithDependentInDiagram: aDiagramController [
-	aDiagramController addController: self.
-	self renderFigureIn: aDiagramController view.
-	self dependentElements
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showWithDependentInDiagram: aDiagramController ]
 ]

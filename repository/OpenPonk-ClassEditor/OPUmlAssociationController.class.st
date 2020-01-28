@@ -15,29 +15,21 @@ OPUmlAssociationController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlAssociationController >> createModelIn: aTargetController andShowInDiagram: aDiagramController [
+OPUmlAssociationController >> createModelIn: aParentModel [
 	| sourceProp targetProp |
-	self model: self createModel.
+	self model: self modelClass new.
 	(sourceProp := OPUMLProperty new)
-		owningClass: aTargetController model;
+		owningClass: aParentModel;
 		name: source model name uncapitalized;
 		type: source model.
 	(targetProp := OPUMLProperty new)
 		owningClass: source model;
-		name: aTargetController model name uncapitalized;
-		type: aTargetController model.
+		name: aParentModel name uncapitalized;
+		type: aParentModel.
 	model memberEnds
 		add: sourceProp;
 		add: targetProp.
-	aDiagramController model packagedElements add: model.
-	aDiagramController addController: self.
-	self showInDiagram: aDiagramController.
-	model memberEnds
-		do: [ :each | 
-			| subCtrl |
-			subCtrl := aDiagramController newControllerFor: each.
-			aDiagramController addController: subCtrl.
-			subCtrl showInDiagram: aDiagramController ]
+	^ model
 ]
 
 { #category : #forms }
@@ -85,6 +77,11 @@ OPUmlAssociationController >> descriptionTargetEnd [
 ]
 
 { #category : #accessing }
+OPUmlAssociationController >> elementsToShowInside [
+	^ model memberEnds
+]
+
+{ #category : #accessing }
 OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
@@ -122,6 +119,12 @@ OPUmlAssociationController >> renderFigureIn: aView [
 	diagramElement renderIn: aView.
 	diagramController figureAdded: self figure.
 	self refreshFigure
+]
+
+{ #category : #construction }
+OPUmlAssociationController >> showInDiagram: aDiagramController [
+	super showInDiagram: aDiagramController.
+	aDiagramController model packagedElements addIfNotPresent: model
 ]
 
 { #category : #writing }
