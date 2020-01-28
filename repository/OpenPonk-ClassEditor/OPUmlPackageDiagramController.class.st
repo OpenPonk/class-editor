@@ -215,7 +215,10 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 				do: [ :gen | 
 					queue addIfNotPresent: gen general.
 					queue add: gen ].
-			(each ownedAttributes select: [ :attr | attr association isNotNil ])
+			(each ownedAttributes
+				select: [ :attr | 
+					(attr isKindOf: OPUMLGeneralization) not
+						and: [ attr association isNotNil ] ])
 				do: [ :attr | queue addIfNotPresent: attr association ] ].
 	self model packagedElements
 		select: [ :each | each isKindOf: OPUMLStereotype ]

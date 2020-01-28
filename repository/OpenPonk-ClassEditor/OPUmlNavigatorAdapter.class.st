@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'suffixMapping'
 	],
-	#category : 'OpenPonk-ClassEditor-Plugin'
+	#category : #'OpenPonk-ClassEditor-Plugin'
 }
 
 { #category : #accessing }
@@ -34,6 +34,49 @@ OPUmlNavigatorAdapter >> contextMenuMapping [
 ]
 
 { #category : #accessing }
+OPUmlNavigatorAdapter >> dependentMapping [
+	| mainElementTypes packageLikeBlock |
+	mainElementTypes := {#Class . #Package . #Enumeration . #Profile.
+	#Model}.
+	packageLikeBlock := [ :object :rootModel | 
+	(object packagedElements
+		select:
+			[ :each | mainElementTypes anySatisfy: [ :any | each oclIsKindOf: any ] ])
+		, object packageImports
+		,
+			((rootModel packagedElements
+				select: [ :each | 
+					{#Package . #Profile . #Model}
+						anySatisfy: [ :any | each isKindOf: any ] ])
+				flatCollectAsSet: [ :eachPackagedElement | 
+					eachPackagedElement packageImports
+						select: [ :eachImport | eachImport importingNamespace = object ] ]) ].
+	^ {(OPUMLPackage -> packageLikeBlock).
+	(OPUMLProfile -> packageLikeBlock).
+	(OPUMLModel -> packageLikeBlock).
+	(OPUMLClass
+		-> [ :class :model | 
+			class ownedAttributes asSet , class ownedOperations asSet
+				, class generalizations asSet
+				,
+					((model packagedElements
+						select:
+							[ :eachPackageElement | eachPackageElement oclIsKindOf: #GeneralizationSet ])
+						flatCollectAsSet: [ :eachSet | 
+							eachSet generalizations
+								select: [ :eachGeneralization | 
+									eachGeneralization general = class
+										or: [ eachGeneralization specific = class ] ] ])
+				,
+					((model packagedElements
+						select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
+						flatCollectAsSet: [ :eachClass | 
+							eachClass generalizations
+								select: [ :eachGeneralization | eachGeneralization general = class ] ]) ]).
+	(OPUMLEnumeration -> #())}
+]
+
+{ #category : #accessing }
 OPUmlNavigatorAdapter >> displayFor: anObject [
 	^ ((self mappingFor: anObject in: self retrieveDisplayMapping)
 		ifNil: [ '' ]
@@ -42,7 +85,11 @@ OPUmlNavigatorAdapter >> displayFor: anObject [
 
 { #category : #accessing }
 OPUmlNavigatorAdapter >> displayMapping [
-	^ {OPUMLElement -> #name}
+	^ {(OPUMLGeneralization
+		-> [ :o | o specific name , ' => ' , o general name ]).
+	(OPUMLPackageImport
+		-> [ :o | o importedPackage name , ' --> ' , o importingNamespace name ]).
+	(OPUMLElement -> #name)}
 ]
 
 { #category : #accessing }
