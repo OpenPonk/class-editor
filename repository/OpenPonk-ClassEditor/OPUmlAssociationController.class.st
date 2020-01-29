@@ -32,6 +32,11 @@ OPUmlAssociationController >> createModelIn: aParentModel [
 	^ model
 ]
 
+{ #category : #accessing }
+OPUmlAssociationController >> dependentElements [
+	^ model memberEnds
+]
+
 { #category : #forms }
 OPUmlAssociationController >> descriptionIsDerived [
 	<magritteDescription>
@@ -77,11 +82,6 @@ OPUmlAssociationController >> descriptionTargetEnd [
 ]
 
 { #category : #accessing }
-OPUmlAssociationController >> elementsToShowInside [
-	^ model memberEnds
-]
-
-{ #category : #accessing }
 OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
@@ -119,12 +119,6 @@ OPUmlAssociationController >> renderFigureIn: aView [
 	diagramElement renderIn: aView.
 	diagramController figureAdded: self figure.
 	self refreshFigure
-]
-
-{ #category : #construction }
-OPUmlAssociationController >> showInDiagram: aDiagramController [
-	super showInDiagram: aDiagramController.
-	aDiagramController model packagedElements addIfNotPresent: model
 ]
 
 { #category : #writing }

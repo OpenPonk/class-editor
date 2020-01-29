@@ -12,7 +12,7 @@ Class {
 		'stereotypeLabel',
 		'propertiesLabel'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #configuration }
@@ -157,9 +157,11 @@ OPUmlAssociationShape >> renderIn: aView [
 
 { #category : #'Roassal2 - updating' }
 OPUmlAssociationShape >> update [
-	self tailDecorator: (self decoratorFor: modelElement memberEnds first).
-	self headDecorator: (self decoratorFor: modelElement memberEnds second).
-	self rtEdge update.
+	self
+		tailDecorator: (self decoratorFor: modelElement memberEnds first).
+	self
+		headDecorator: (self decoratorFor: modelElement memberEnds second).
+	self rtEdge view ifNotNil: [ self rtEdge update ].
 	constraints do: #update.
 	self ownedElements do: #update
 ]
