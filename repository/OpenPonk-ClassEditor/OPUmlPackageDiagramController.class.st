@@ -41,6 +41,10 @@ OPUmlPackageDiagramController >> allShowableElements [
 				select:
 					[ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ])
 				flatCollect: [ :each | each ownedAttributes , each ownedOperations ])
+		,
+			((self model packagedElements
+				select: [ :each | each isKindOf: OPUMLEnumeration ])
+				flatCollect: [ :each | each ownedLiterals ])
 ]
 
 { #category : #'ui hooks' }
@@ -203,7 +207,8 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 	(OPUMLModel -> 1).
 	(OPUMLProfile -> 1).
 	(OPUMLClass -> 2).
-	(OPUMLStereotype -> 3)} asDictionary.
+	(OPUMLStereotype -> 3).
+	(OPUMLEnumeration -> 4)} asDictionary.
 	queue addAll: self model packagedElements.
 	self model packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
@@ -422,13 +427,6 @@ OPUmlPackageDiagramController >> removeFromModel: aModel [
 	| controller |
 	controller := self controllerForModel: aModel.
 	controller removeModel
-]
-
-{ #category : #removing }
-OPUmlPackageDiagramController >> removeFromView: aFigure [
-	"Remove a model object represented by aFigure from the model."
-
-	(self controllerForFigure: aFigure) removeModel
 ]
 
 { #category : #figures }

@@ -107,7 +107,6 @@ OPUmlPackageImportController >> refreshFigure [
 
 { #category : #removing }
 OPUmlPackageImportController >> removeModel [
-	self remove.
 	model importedPackage: nil.
 	model importingNamespace: nil
 ]

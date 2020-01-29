@@ -49,21 +49,26 @@ OPUmlExtensionController >> refreshFigure [
 ]
 
 { #category : #removing }
-OPUmlExtensionController >> removeModel [
-	| ctrls owner |
-	owner := self diagramController model.
-	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
+OPUmlExtensionController >> removeController [
+	".		
 	ctrls := self model memberEnds asArray
 		collect: [ :each | diagramController controllerForModel: each type ].
-	self remove.
-	owner packagedElements remove: self model.
+	ctrls do: #refreshFigure"
+
+	super removeController
+]
+
+{ #category : #removing }
+OPUmlExtensionController >> removeModel [
+	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
+
+	self diagramController model packagedElements remove: self model.
 	[ self model memberEnds isNotEmpty ]
 		whileTrue: [ | end |
 			end := self model memberEnds first.
 			end association: nil.
 			end owningClass: nil.
-			end owningAssociation: nil ].
-	ctrls do: #refreshFigure
+			end owningAssociation: nil ]
 ]
 
 { #category : #figures }

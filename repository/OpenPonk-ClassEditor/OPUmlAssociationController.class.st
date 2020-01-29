@@ -15,17 +15,18 @@ OPUmlAssociationController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlAssociationController >> createModelIn: aParentModel [
+OPUmlAssociationController >> createModelIn: aClass [
 	| sourceProp targetProp |
 	self model: self modelClass new.
 	(sourceProp := OPUMLProperty new)
-		owningClass: aParentModel;
+		owningAssociation: self model;
 		name: source model name uncapitalized;
 		type: source model.
 	(targetProp := OPUMLProperty new)
-		owningClass: source model;
-		name: aParentModel name uncapitalized;
-		type: aParentModel.
+		owningAssociation: self model;
+		name: aClass name uncapitalized;
+		type: aClass.
+	source diagramController model packagedElements add: self model.
 	model memberEnds
 		add: sourceProp;
 		add: targetProp.
@@ -93,20 +94,7 @@ OPUmlAssociationController >> refreshFigure [
 
 { #category : #removing }
 OPUmlAssociationController >> removeModel [
-	| owner ownerController |
-	ownerController := self diagramController.
-	owner := ownerController model.
-	self remove.
-	owner packagedElements remove: self model.
-	[ self model memberEnds isNotEmpty ]
-		whileTrue: [ ownerController
-				controllerForModel:
-					(self model memberEnds anyOne
-						association: nil;
-						owningClass: nil;
-						owningAssociation: nil;
-						yourself)
-				ifFound: [ :ctrl | ctrl removeModel ] ]
+	self diagramController model packagedElements remove: self model
 ]
 
 { #category : #rendering }

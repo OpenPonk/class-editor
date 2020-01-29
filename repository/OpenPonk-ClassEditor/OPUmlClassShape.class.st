@@ -11,7 +11,7 @@ Class {
 		'stereotypeLabel',
 		'stereotypeBlock'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }
@@ -68,9 +68,11 @@ OPUmlClassShape >> stereotypeText [
 
 { #category : #'Roassal2 - updating' }
 OPUmlClassShape >> update [
-	self hasStereotypes
-		ifTrue: [ stereotypeLabel localStyle fontSize: 10 ]
-		ifFalse: [ stereotypeLabel localStyle fontSize: 0 ].
+	stereotypeLabel localStyle
+		fontSize:
+			(self hasStereotypes
+				ifTrue: [ 10 ]
+				ifFalse: [ 0 ]).
 	stereotypeLabel update.
 	super update
 ]

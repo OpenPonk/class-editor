@@ -169,12 +169,6 @@ OPUmlElementController >> magritteDescription [
 	^ container
 ]
 
-{ #category : #model }
-OPUmlElementController >> remove [
-	self removeFigure.
-	diagramController removeController: self
-]
-
 { #category : #figures }
 OPUmlElementController >> removeDiagramElement [
 	self diagramController deselectAll.

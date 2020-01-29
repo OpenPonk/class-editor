@@ -47,7 +47,7 @@ OPUmlNavigatorAdapter >> dependentMapping [
 			((rootModel packagedElements
 				select: [ :each | 
 					{#Package . #Profile . #Model}
-						anySatisfy: [ :any | each isKindOf: any ] ])
+						anySatisfy: [ :any | each oclIsKindOf: any ] ])
 				flatCollectAsSet: [ :eachPackagedElement | 
 					eachPackagedElement packageImports
 						select: [ :eachImport | eachImport importingNamespace = object ] ]) ].
@@ -72,14 +72,16 @@ OPUmlNavigatorAdapter >> dependentMapping [
 						select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
 						flatCollectAsSet: [ :eachClass | 
 							eachClass generalizations
-								select: [ :eachGeneralization | eachGeneralization general = class ] ])
+								select: [ :eachGeneralization | 
+									eachGeneralization general = class
+										or: [ eachGeneralization specific = class ] ] ])
 				,
-					((model packagedElements
-						select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Association ])
+					(model packagedElements
 						select: [ :eachAssoc | 
-							eachAssoc memberEnds
-								anySatisfy: [ :any | any type = class or: [ any owningClass = class ] ] ]) ]).
-	(OPUMLEnumeration -> #())}
+							(eachAssoc oclIsKindOf: #Association)
+								and: [ eachAssoc memberEnds
+										anySatisfy: [ :any | any type = class or: [ any owningClass = class ] ] ] ]) ]).
+	(OPUMLEnumeration -> #ownedLiterals)}
 ]
 
 { #category : #accessing }

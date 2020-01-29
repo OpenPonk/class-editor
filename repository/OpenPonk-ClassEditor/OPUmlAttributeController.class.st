@@ -18,14 +18,13 @@ OPUmlAttributeController >> createDiagramElement [
 ]
 
 { #category : #construction }
-OPUmlAttributeController >> createModelIn: aParentModel [
+OPUmlAttributeController >> createModelIn: aClass [
 	self
 		model:
 			(self modelClass new
 				name: 'attribute';
 				yourself).
-	aParentModel packagedElements add: model.
-	aParentModel ownedAttributes add: model.
+	aClass ownedAttributes add: model.
 	^ model
 ]
 
@@ -161,8 +160,8 @@ OPUmlAttributeController >> refreshFigure [
 
 { #category : #removing }
 OPUmlAttributeController >> removeModel [
-	self remove.
 	"could be any of those, so just nil all of them"
+
 	model owningClass: nil.
 	model datatype: nil.
 	model interface: nil

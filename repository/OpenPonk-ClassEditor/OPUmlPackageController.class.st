@@ -85,6 +85,25 @@ OPUmlPackageController >> createModelIn: aParentModel [
 	^ model
 ]
 
+{ #category : #accessing }
+OPUmlPackageController >> dependentElements [
+	| mainElementTypes |
+	mainElementTypes := {#Class . #Package . #Enumeration . #Profile.
+	#Model}.
+	^ (self model packagedElements
+		select:
+			[ :each | mainElementTypes anySatisfy: [ :any | each oclIsKindOf: any ] ])
+		, self model packageImports
+		,
+			((diagramController model packagedElements
+				select: [ :each | 
+					{#Package . #Profile . #Model}
+						anySatisfy: [ :any | each oclIsKindOf: any ] ])
+				flatCollectAsSet: [ :eachPackagedElement | 
+					eachPackagedElement packageImports
+						select: [ :eachImport | eachImport importingNamespace = self model ] ])
+]
+
 { #category : #testing }
 OPUmlPackageController >> isHideable [
 	^ true
@@ -102,21 +121,8 @@ OPUmlPackageController >> refreshFigure [
 ]
 
 { #category : #removing }
-OPUmlPackageController >> remove [
-	self allShowableElements
-		do: [ :each | 
-			diagramController controllers
-				detect: [ :ctrl | ctrl model = each ]
-				ifFound: [ :ctrl | ctrl remove ] ].
-	super remove
-]
-
-{ #category : #removing }
 OPUmlPackageController >> removeModel [
-	| ownerModel |
-	ownerModel := diagramController model.
-	self remove.
-	ownerModel packagedElements remove: self model
+	diagramController model packagedElements remove: self model
 ]
 
 { #category : #rendering }

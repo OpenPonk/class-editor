@@ -76,20 +76,18 @@ OPUmlAssociationControllerTest >> testCreateDiagramElement [
 
 { #category : #'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
-	| elementController |
-	diagramController
-		showInDiagramModel: element;
-		showInDiagramModel: comment;
-		showInDiagramModel: association.
 	diagramController model packagedElements
 		addAll:
 			{element.
 			comment.
 			association}.
 	diagramController
-		removeFromModel: association;
-		removeFromModel: comment;
-		removeFromModel: element.
+		showInDiagramModel: element;
+		showInDiagramModel: comment;
+		showInDiagramModel: association.
+	(diagramController controllerForModel: association) removeFull.
+	(diagramController controllerForModel: comment) removeFull.
+	(diagramController controllerForModel: element) removeFull.
 	self assert: diagramController controllers asArray equals: #()
 ]
 

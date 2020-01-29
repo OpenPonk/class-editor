@@ -88,6 +88,11 @@ OPUmlEnumerationController >> createModelIn: aParentModel [
 	^ model
 ]
 
+{ #category : #figures }
+OPUmlEnumerationController >> elementsToShowInside [
+	^ self model ownedLiterals asSet
+]
+
 { #category : #testing }
 OPUmlEnumerationController >> isHideable [
 	^ true
@@ -104,21 +109,8 @@ OPUmlEnumerationController >> refreshFigure [
 ]
 
 { #category : #removing }
-OPUmlEnumerationController >> remove [
-	self allShowableElements
-		do: [ :each | 
-			diagramController controllers
-				detect: [ :ctrl | ctrl model = each ]
-				ifFound: [ :ctrl | ctrl remove ] ].
-	super remove
-]
-
-{ #category : #removing }
 OPUmlEnumerationController >> removeModel [
-	| ownerModel |
-	ownerModel := diagramController model.
-	self remove.
-	ownerModel packagedElements remove: self model
+	diagramController model packagedElements remove: self model
 ]
 
 { #category : #figures }

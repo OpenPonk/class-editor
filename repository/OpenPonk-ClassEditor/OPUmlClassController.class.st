@@ -110,6 +110,34 @@ OPUmlClassController >> createModelIn: aParentModel [
 	^ model
 ]
 
+{ #category : #accessing }
+OPUmlClassController >> dependentElements [
+	^ self elementsToShowInside , self model generalizations
+		,
+			((diagramController model packagedElements
+				select:
+					[ :eachPackageElement | eachPackageElement oclIsKindOf: #GeneralizationSet ])
+				flatCollectAsSet: [ :eachSet | 
+					eachSet generalizations
+						select: [ :eachGeneralization | 
+							eachGeneralization general = self model
+								or: [ eachGeneralization specific = self model ] ] ])
+		,
+			((diagramController model packagedElements
+				select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
+				flatCollectAsSet: [ :eachClass | 
+					eachClass generalizations
+						select: [ :eachGeneralization | 
+							eachGeneralization general = self model
+								or: [ eachGeneralization specific = self model ] ] ])
+		,
+			(diagramController model packagedElements
+				select: [ :eachAssoc | 
+					(eachAssoc oclIsKindOf: #Association)
+						and: [ eachAssoc memberEnds
+								anySatisfy: [ :any | any type = self model or: [ any owningClass = self model ] ] ] ])
+]
+
 { #category : #forms }
 OPUmlClassController >> descriptionIsAbstract [
 	<magritteDescription>
@@ -128,7 +156,7 @@ OPUmlClassController >> descriptionStereotype [
 
 { #category : #accessing }
 OPUmlClassController >> elementsToShowInside [
-	^ model ownedOperations , model ownedAttributes
+	^ model ownedOperations asSet , model ownedAttributes
 ]
 
 { #category : #testing }
@@ -152,31 +180,8 @@ OPUmlClassController >> refreshFigure [
 ]
 
 { #category : #removing }
-OPUmlClassController >> remove [
-	self allShowableElements
-		do: [ :each | 
-			diagramController controllers
-				detect: [ :ctrl | ctrl model = each ]
-				ifFound: [ :ctrl | ctrl remove ] ].
-	super remove
-]
-
-{ #category : #removing }
 OPUmlClassController >> removeModel [
-	| ownerModel connectedAssociations connectedGeneralizations |
-	ownerModel := diagramController model.
-	connectedAssociations := ownerModel packagedElements
-		select: [ :each | 
-			(each isKindOf: OPUMLAssociation)
-				and: [ each memberEnds anySatisfy: [ :any | any type = model ] ] ].
-	connectedGeneralizations := ((ownerModel packagedElements
-		select: [ :each | each isKindOf: OPUMLGeneralizationSet ])
-		flatCollect: [ :each | each generalizations ])
-		select: [ :each | each general = model or: [ each specific = model ] ].
-	connectedAssociations , connectedGeneralizations
-		do: [ :each | (diagramController controllerForModel: each) removeModel ].
-	self remove.
-	ownerModel packagedElements remove: self model
+	diagramController model packagedElements remove: self model
 ]
 
 { #category : #figures }
