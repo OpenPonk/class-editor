@@ -4,9 +4,6 @@ I am controller for managing the main class diagram presentation and handling it
 Class {
 	#name : #OPUmlPackageDiagramController,
 	#superclass : #OPDiagramController,
-	#instVars : [
-		'layouter'
-	],
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
@@ -45,11 +42,6 @@ OPUmlPackageDiagramController >> allShowableElements [
 			((self model packagedElements
 				select: [ :each | each isKindOf: OPUMLEnumeration ])
 				flatCollect: [ :each | each ownedLiterals ])
-]
-
-{ #category : #'ui hooks' }
-OPUmlPackageDiagramController >> applyBasicLayout [
-	self layouter dominanceTreeLayout
 ]
 
 { #category : #forms }
@@ -386,11 +378,6 @@ OPUmlPackageDiagramController >> isAppliedProfileInUse [
 	^ model packagedElements anySatisfy: [ :each | each appliedStereotypes isNotEmpty ]
 ]
 
-{ #category : #accessing }
-OPUmlPackageDiagramController >> layouter [
-	^ layouter ifNil: [ layouter := OPUmlLayouter new diagramController: self ]
-]
-
 { #category : #adding }
 OPUmlPackageDiagramController >> modelToControllerMapping [
 	^ {OPUMLClass -> OPUmlClassController.
@@ -407,12 +394,6 @@ OPUmlPackageDiagramController >> modelToControllerMapping [
 	OPUMLEnumerationLiteral -> OPUmlEnumerationLiteralController.
 	OPUMLStereotype -> OPUmlStereotypeController.
 	OPUMLPackageImport -> OPUmlPackageImportController} asDictionary
-]
-
-{ #category : #rebuilding }
-OPUmlPackageDiagramController >> rebuild [
-	super rebuild.
-	self applyBasicLayout
 ]
 
 { #category : #palette }

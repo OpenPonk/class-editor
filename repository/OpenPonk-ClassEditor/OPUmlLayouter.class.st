@@ -3,12 +3,11 @@ I manage layouts available for UML Editor and apply them.
 "
 Class {
 	#name : #OPUmlLayouter,
-	#superclass : #Object,
+	#superclass : #OPLayouter,
 	#instVars : [
-		'packagedElements',
-		'diagramController'
+		'packagedElements'
 	],
-	#category : 'OpenPonk-ClassEditor-Layouting'
+	#category : #'OpenPonk-ClassEditor-Plugin'
 }
 
 { #category : #'ui hooks' }
@@ -60,6 +59,11 @@ OPUmlLayouter >> circleLayout [
 				on: boxes ]
 ]
 
+{ #category : #'ui hooks' }
+OPUmlLayouter >> defaultLayout [
+	self dominanceTreeLayout
+]
+
 { #category : #accessing }
 OPUmlLayouter >> diagramController: aDiagramController [
 	diagramController := aDiagramController.
@@ -76,16 +80,6 @@ OPUmlLayouter >> dominanceTreeLayout [
 				horizontalGap: 100;
 				doNotAttachPoint;
 				on: boxes edges: hierarchy , links ]
-]
-
-{ #category : #'ui hooks' }
-OPUmlLayouter >> figuresFor: aCollection [
-	^ (aCollection
-		collect: [ :model | 
-			diagramController controllers
-				detect: [ :each | each model = model ]
-				ifFound: #figure
-				ifNone: [ nil ] ]) reject: #isNil
 ]
 
 { #category : #'ui hooks' }
@@ -123,12 +117,4 @@ OPUmlLayouter >> treeLayout [
 				on: boxes edges: hierarchy , links.
 			centerY := boxes asGroup encompassingRectangle center y.
 			boxes do: [ :each | each translateBy: 0 @ 2 * (centerY - each position y) ] ]
-]
-
-{ #category : #userinterface }
-OPUmlLayouter >> updateView [
-	| view |
-	view := diagramController view.
-	view signalUpdate.
-	view canvas camera focusOnCenter
 ]

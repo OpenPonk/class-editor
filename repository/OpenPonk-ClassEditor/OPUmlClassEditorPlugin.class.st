@@ -13,13 +13,6 @@ OPUmlClassEditorPlugin class >> addModelTo: aProject [
 ]
 
 { #category : #toolbar }
-OPUmlClassEditorPlugin class >> canvasToolbarFor: aBuilder [
-	<opCanvasToolbar: #OPUmlClassEditorPlugin>
-	(aBuilder item: 'Layout') action: [  ].
-	aBuilder model diagramController addLayoutMenu: aBuilder parent: 'Layout'
-]
-
-{ #category : #toolbar }
 OPUmlClassEditorPlugin class >> contextMenu: aBuilder [
 	<opModelNavigatorContextMenu: #OPUmlClassEditorPlugin>
 	| navigator selectedItem |
@@ -83,6 +76,11 @@ OPUmlClassEditorPlugin >> icon [
 { #category : #accessing }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
 	^ aModel class = self modelClass | (aModel class = OPUMLPackage) | (aModel class = OPUMLProfile)
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin >> layouterClass [
+	^ OPUmlLayouter
 ]
 
 { #category : #accessing }
