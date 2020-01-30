@@ -125,3 +125,10 @@ OPUmlPackageImportController >> renderFigureIn: aView [
 	diagramController figureAdded: self figure.
 	self refreshFigure
 ]
+
+{ #category : #construction }
+OPUmlPackageImportController >> showInDiagram: aDiagramController [
+	aDiagramController showInDiagramModel: model importedPackage.
+	aDiagramController showInDiagramModel: model importingNamespace.
+	^ super showInDiagram: aDiagramController
+]

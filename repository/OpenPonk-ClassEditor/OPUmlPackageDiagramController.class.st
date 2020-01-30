@@ -172,7 +172,7 @@ OPUmlPackageDiagramController >> descriptionVisibility [
 
 { #category : #figures }
 OPUmlPackageDiagramController >> diagramElementForModel: aModel [
-	^ (self controllerForModel: aModel) diagramElement
+	^ (self showInDiagramModel: aModel) diagramElement
 ]
 
 { #category : #userinterface }

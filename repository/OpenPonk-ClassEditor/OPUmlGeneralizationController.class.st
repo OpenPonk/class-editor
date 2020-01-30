@@ -126,3 +126,10 @@ OPUmlGeneralizationController >> renderFigureIn: aView [
 	diagramController figureAdded: self figure.
 	self refreshFigure
 ]
+
+{ #category : #construction }
+OPUmlGeneralizationController >> showInDiagram: aDiagramController [
+	aDiagramController showInDiagramModel: model general.
+	aDiagramController showInDiagramModel: model specific.
+	^ super showInDiagram: aDiagramController
+]
