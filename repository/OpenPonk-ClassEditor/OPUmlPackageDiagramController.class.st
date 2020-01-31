@@ -23,11 +23,6 @@ OPUmlPackageDiagramController >> addAsTargetFor: aClassController [
 	aClassController createModelIn: self model andShowInDiagram: self
 ]
 
-{ #category : #'ui hooks' }
-OPUmlPackageDiagramController >> addLayoutMenu: builder parent: aParent [
-	self layouter buildMenuOn: builder parent: aParent
-]
-
 { #category : #figures }
 OPUmlPackageDiagramController >> allShowableElements [
 	"Should return all elements that could be directly hidden on diagram"
