@@ -89,13 +89,13 @@ OPUmlClassEditorPlugin >> modelClass [
 ]
 
 { #category : #accessing }
-OPUmlClassEditorPlugin >> name [
-	^ 'UML Class Editor'
+OPUmlClassEditorPlugin >> modelSerializerClass [
+	^ OPUmlModelSerializer
 ]
 
 { #category : #accessing }
-OPUmlClassEditorPlugin >> serializerClass [
-	^ OPUmlSerializer
+OPUmlClassEditorPlugin >> name [
+	^ 'UML Class Editor'
 ]
 
 { #category : #'as yet unclassified' }

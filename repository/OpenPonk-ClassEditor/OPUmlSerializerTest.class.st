@@ -4,17 +4,17 @@ An OPUmlSerializerTest is a test class for testing the behavior of OPUmlSerializ
 Class {
 	#name : #OPUmlSerializerTest,
 	#superclass : #OPAbstractSerializerTest,
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#category : #'OpenPonk-ClassEditor-Tests'
 }
+
+{ #category : #accessing }
+OPUmlSerializerTest >> modelSerializerClass [
+	^ OPUmlModelSerializer
+]
 
 { #category : #'instance creation' }
 OPUmlSerializerTest >> newModel [
 	^ OPUmlExamples new simpleAssociation
-]
-
-{ #category : #accessing }
-OPUmlSerializerTest >> serializerClass [
-	^ OPUmlSerializer
 ]
 
 { #category : #tests }
