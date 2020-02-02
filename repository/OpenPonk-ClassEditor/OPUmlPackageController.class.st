@@ -93,7 +93,7 @@ OPUmlPackageController >> dependentElements [
 	^ (self model packagedElements
 		select:
 			[ :each | mainElementTypes anySatisfy: [ :any | each oclIsKindOf: any ] ])
-		, self model packageImports
+		asSet , self model packageImports
 		,
 			((diagramController model packagedElements
 				select: [ :each | 
