@@ -3,7 +3,7 @@ An OPUmlSerializerTest is a test class for testing the behavior of OPUmlSerializ
 "
 Class {
 	#name : #OPUmlSerializerTest,
-	#superclass : #OPAbstractSerializerTest,
+	#superclass : #OPMementoFileSerializerTest,
 	#category : #'OpenPonk-ClassEditor-Tests'
 }
 
