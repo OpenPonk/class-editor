@@ -146,3 +146,19 @@ OPUmlNavigatorAdapter >> suffixFor: anObject [
 OPUmlNavigatorAdapter >> suffixMapping [
 	^ {OPUMLMetaElement -> [ :o | self classNameFor: o ]}
 ]
+
+{ #category : #'widget API' }
+OPUmlNavigatorAdapter >> typesByDependency [
+	^ {OPUMLPackage.
+	OPUMLModel.
+	OPUMLProfile.
+	OPUMLClass.
+	OPUMLEnumeration.
+	OPUMLPackageImport.
+	OPUMLAssociation.
+	OPUMLGeneralizationSet.
+	OPUMLGeneralization.
+	OPUMLOperation.
+	OPUMLEnumerationLiteral.
+	OPUMLProperty}
+]
