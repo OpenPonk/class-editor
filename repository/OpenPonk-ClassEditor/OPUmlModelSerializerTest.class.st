@@ -2,23 +2,23 @@
 An OPUmlSerializerTest is a test class for testing the behavior of OPUmlSerializer
 "
 Class {
-	#name : #OPUmlSerializerTest,
-	#superclass : #OPMementoFileSerializerTest,
+	#name : #OPUmlModelSerializerTest,
+	#superclass : #TestCase,
 	#category : #'OpenPonk-ClassEditor-Tests'
 }
 
 { #category : #accessing }
-OPUmlSerializerTest >> modelSerializerClass [
+OPUmlModelSerializerTest >> mementoSerializerClass [
 	^ OPUmlModelSerializer
 ]
 
 { #category : #'instance creation' }
-OPUmlSerializerTest >> newModel [
+OPUmlModelSerializerTest >> newModel [
 	^ OPUmlExamples new simpleAssociation
 ]
 
 { #category : #tests }
-OPUmlSerializerTest >> testRoundtrip [
+OPUmlModelSerializerTest >> testRoundtrip [
 	| originalModel loadedModel serialization |
 	originalModel := self newModel.
 	serialization := serializer serializeModel: originalModel.
