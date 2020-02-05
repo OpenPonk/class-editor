@@ -127,8 +127,8 @@ OPUmlPackageImportController >> renderFigureIn: aView [
 ]
 
 { #category : #construction }
-OPUmlPackageImportController >> showInDiagram: aDiagramController [
-	aDiagramController showInDiagramModel: model importedPackage.
-	aDiagramController showInDiagramModel: model importingNamespace.
-	^ super showInDiagram: aDiagramController
+OPUmlPackageImportController >> showWithoutDependentInDiagram: aDiagramController [
+	aDiagramController showWithoutDependentInDiagramModel: model importedPackage.
+	aDiagramController showWithoutDependentInDiagramModel: model importingNamespace.
+	^ super showWithoutDependentInDiagram: aDiagramController
 ]

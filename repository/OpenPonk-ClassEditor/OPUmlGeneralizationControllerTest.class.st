@@ -48,8 +48,8 @@ OPUmlGeneralizationControllerTest >> testClassBeTarget [
 	diagramController
 		addController: sourceController;
 		addController: targetController.
-	sourceController showInDiagram: diagramController.
-	targetController showInDiagram: diagramController.
+	sourceController showWithoutDependentInDiagram: diagramController.
+	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	targetController addAsTargetFor: controller.
 	self assert: sourceController model generalizations asArray equals: {controller model}.
@@ -64,9 +64,9 @@ OPUmlGeneralizationControllerTest >> testCreateDiagramElement [
 { #category : #'tests - diagram' }
 OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 	diagramController
-		showInDiagramModel: parent;
-		showInDiagramModel: child.
-	diagramController showInDiagramModel: generalization.
+		showWithoutDependentInDiagramModel: parent;
+		showWithoutDependentInDiagramModel: child.
+	diagramController showWithoutDependentInDiagramModel: generalization.
 	controller := diagramController controllerForModel: generalization.
 	controller remove.
 	self assert: diagramController view edges asArray equals: #()
@@ -76,9 +76,9 @@ OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 	| gs |
 	diagramController
-		showInDiagramModel: parent;
-		showInDiagramModel: child;
-		showInDiagramModel: generalization.
+		showWithoutDependentInDiagramModel: parent;
+		showWithoutDependentInDiagramModel: child;
+		showWithoutDependentInDiagramModel: generalization.
 	gs := OPUMLGeneralizationSet new.
 	gs generalizations add: generalization.
 	controller := diagramController controllerForModel: generalization.
@@ -91,9 +91,9 @@ OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 { #category : #'tests - diagram' }
 OPUmlGeneralizationControllerTest >> testShowInDiagram [
 	diagramController
-		showInDiagramModel: parent;
-		showInDiagramModel: child.
-	diagramController showInDiagramModel: generalization.
+		showWithoutDependentInDiagramModel: parent;
+		showWithoutDependentInDiagramModel: child.
+	diagramController showWithoutDependentInDiagramModel: generalization.
 	self
 		assert:
 			(diagramController view edges

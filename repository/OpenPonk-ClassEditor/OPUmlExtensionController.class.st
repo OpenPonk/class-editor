@@ -29,12 +29,12 @@ OPUmlExtensionController >> createModelIn: aParentModel [
 	model memberEnds
 		add: sourceOwnedProp;
 		add: extensionOwnedProp.
-	aParentModel packagedElements add: model.
+	source diagramController model packagedElements add: model.
 	^ model
 ]
 
 { #category : #accessing }
-OPUmlExtensionController >> elementsToShowInside [
+OPUmlExtensionController >> dependentElements [
 	^ {model memberEnds first}
 ]
 

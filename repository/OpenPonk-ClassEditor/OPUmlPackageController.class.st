@@ -33,7 +33,7 @@ OPUmlPackageController >> attachTo: aDiagramController [
 	newModel := self createModel.
 	OPRenameElementCommand executeOn: newModel.
 	aDiagramController model packagedElements add: newModel.
-	aDiagramController showInDiagramModel: newModel
+	aDiagramController showWithoutDependentInDiagramModel: newModel
 ]
 
 { #category : #configuration }

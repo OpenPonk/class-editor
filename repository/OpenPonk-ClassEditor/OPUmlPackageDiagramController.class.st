@@ -167,7 +167,7 @@ OPUmlPackageDiagramController >> descriptionVisibility [
 
 { #category : #figures }
 OPUmlPackageDiagramController >> diagramElementForModel: aModel [
-	^ (self showInDiagramModel: aModel) diagramElement
+	^ (self showWithoutDependentInDiagramModel: aModel) diagramElement
 ]
 
 { #category : #userinterface }
@@ -415,7 +415,7 @@ OPUmlPackageDiagramController >> selectableFigures [
 OPUmlPackageDiagramController >> showAllElements [
 	self disableRefresh.
 	self allShowableElements
-		do: [ :each | self showInDiagramModel: each ].
+		do: [ :each | self showWithoutDependentInDiagramModel: each ].
 	self enableRefresh.
 	self controllers
 		select: [ :each | each isKindOf: OPUmlClassController ]

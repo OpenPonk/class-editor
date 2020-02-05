@@ -51,7 +51,7 @@ OPUmlStereotypeControllerTest >> testRemoveEmpty [
 	class := self newEmptyModel.
 	controller model: class.
 	diagramController addController: controller.
-	controller showInDiagram: diagramController.
+	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().
 	self assert: diagramController controllers asArray equals: #()
@@ -62,12 +62,12 @@ OPUmlStereotypeControllerTest >> testRemoveFromModel [
 	| class |
 	class := self newEmptyModel.
 	diagramController model packagedElements add: class.
-	diagramController showInDiagramModel: class.
+	diagramController showWithoutDependentInDiagramModel: class.
 	controller := diagramController controllerForModel: class.
 	controller removeModel.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController model packagedElements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	self
+		assert: diagramController model packagedElements asArray
+		equals: #()
 ]
 
 { #category : #'tests - removing' }
@@ -77,7 +77,7 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 	class ownedAttributes add: OPUMLProperty new.
 	controller model: class.
 	diagramController addController: controller.
-	controller showInDiagram: diagramController.
+	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().
 	self assert: diagramController controllers asArray equals: #()
@@ -87,7 +87,7 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 OPUmlStereotypeControllerTest >> testShowClassInDiagram [
 	| class |
 	class := self newEmptyModel.
-	diagramController showInDiagramModel: class.
+	diagramController showWithoutDependentInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements
@@ -104,7 +104,8 @@ OPUmlStereotypeControllerTest >> testShowClassWithAttributeInDiagram [
 	self
 		assert:
 			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = prop ] ])
+				anySatisfy:
+					[ :each | each model isNotNil and: [ each model modelElement = prop ] ])
 ]
 
 { #category : #tests }

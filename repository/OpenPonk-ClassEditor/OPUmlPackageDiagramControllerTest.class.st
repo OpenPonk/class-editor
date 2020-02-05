@@ -24,7 +24,7 @@ OPUmlPackageDiagramControllerTest >> setUp [
 OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 	| class |
 	class := OPUMLClass new.
-	diagramController showInDiagramModel: class.
+	diagramController showWithoutDependentInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements

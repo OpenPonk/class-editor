@@ -128,8 +128,8 @@ OPUmlGeneralizationController >> renderFigureIn: aView [
 ]
 
 { #category : #construction }
-OPUmlGeneralizationController >> showInDiagram: aDiagramController [
-	aDiagramController showInDiagramModel: model general.
-	aDiagramController showInDiagramModel: model specific.
-	^ super showInDiagram: aDiagramController
+OPUmlGeneralizationController >> showWithoutDependentInDiagram: aDiagramController [
+	aDiagramController showWithoutDependentInDiagramModel: model general.
+	aDiagramController showWithoutDependentInDiagramModel: model specific.
+	^ super showWithoutDependentInDiagram: aDiagramController
 ]

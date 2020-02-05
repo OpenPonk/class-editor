@@ -64,7 +64,7 @@ OPUmlClassController >> attachTo: aDiagramController [
 	newModel := self createModel.
 	OPRenameElementCommand executeOn: newModel.
 	aDiagramController model packagedElements add: newModel.
-	aDiagramController showInDiagramModel: newModel
+	aDiagramController showWithoutDependentInDiagramModel: newModel
 ]
 
 { #category : #forms }
@@ -179,7 +179,7 @@ OPUmlClassController >> refreshFigure [
 	self diagramElement changed
 ]
 
-{ #category : #removing }
+{ #category : #private }
 OPUmlClassController >> removeModel [
 	diagramController model packagedElements remove: self model
 ]

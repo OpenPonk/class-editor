@@ -88,8 +88,8 @@ OPUmlClassControllerTest >> testRemoveEmpty [
 	class := OPUMLClass new.
 	controller model: class.
 	diagramController addController: controller.
-	controller showInDiagram: diagramController.
-	controller remove.
+	controller showWithoutDependentInDiagram: diagramController.
+	controller removeController.
 	self assert: diagramController view elements asArray equals: #().
 	self assert: diagramController controllers asArray equals: #()
 ]
@@ -99,12 +99,12 @@ OPUmlClassControllerTest >> testRemoveFromModel [
 	| class |
 	class := OPUMLClass new.
 	diagramController model packagedElements add: class.
-	diagramController showInDiagramModel: class.
+	diagramController showWithoutDependentInDiagramModel: class.
 	controller := diagramController controllerForModel: class.
 	controller removeModel.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController model packagedElements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	self
+		assert: diagramController model packagedElements asArray
+		equals: #()
 ]
 
 { #category : #'tests - removing' }
@@ -114,7 +114,7 @@ OPUmlClassControllerTest >> testRemoveWithAttribute [
 	class ownedAttributes add: OPUMLProperty new.
 	controller model: class.
 	diagramController addController: controller.
-	controller showInDiagram: diagramController.
+	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().
 	self assert: diagramController controllers asArray equals: #()
@@ -124,7 +124,7 @@ OPUmlClassControllerTest >> testRemoveWithAttribute [
 OPUmlClassControllerTest >> testShowClassInDiagram [
 	| class |
 	class := OPUMLClass new.
-	diagramController showInDiagramModel: class.
+	diagramController showWithoutDependentInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements

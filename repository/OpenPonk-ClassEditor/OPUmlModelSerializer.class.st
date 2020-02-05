@@ -21,3 +21,8 @@ OPUmlModelSerializer >> materializeModelFrom: aString [
 OPUmlModelSerializer >> serializeModel: aModel [
 	^ OPUMLXMIWriter toString: aModel
 ]
+
+{ #category : #accessing }
+OPUmlModelSerializer >> serializeModel: aModel to: aStream [
+	^ aStream << (self serializeModel: aModel)
+]

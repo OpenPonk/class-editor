@@ -65,8 +65,8 @@ OPUmlPackageImportControllerTest >> testClassBeTarget [
 	diagramController
 		addController: sourceController;
 		addController: targetController.
-	sourceController showInDiagram: diagramController.
-	targetController showInDiagram: diagramController.
+	sourceController showWithoutDependentInDiagram: diagramController.
+	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	targetController addAsTargetFor: controller.
 	self assert: sourceController model packageImports asArray equals: {controller model}.
@@ -80,8 +80,8 @@ OPUmlPackageImportControllerTest >> testConnectionFeedback [
 	targetController := diagramController newControllerFor: (OPUMLPackage new name: 'B').
 	diagramController addController: sourceController.
 	diagramController addController: targetController.
-	sourceController showInDiagram: diagramController.
-	targetController showInDiagram: diagramController.
+	sourceController showWithoutDependentInDiagram: diagramController.
+	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	feedback := controller connectionFeedback.
 	feedback renderIn: diagramController view.
@@ -101,9 +101,9 @@ OPUmlPackageImportControllerTest >> testCreateDiagramElement [
 { #category : #'tests - diagram' }
 OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 	diagramController
-		showInDiagramModel: importingNamespace;
-		showInDiagramModel: importedPackage.
-	diagramController showInDiagramModel: packageImport.
+		showWithoutDependentInDiagramModel: importingNamespace;
+		showWithoutDependentInDiagramModel: importedPackage.
+	diagramController showWithoutDependentInDiagramModel: packageImport.
 	controller := diagramController controllerForModel: packageImport.
 	controller remove.
 	self assert: diagramController view edges asArray equals: #()
@@ -112,9 +112,9 @@ OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 { #category : #'tests - model' }
 OPUmlPackageImportControllerTest >> testRemoveFromModel [
 	diagramController
-		showInDiagramModel: importingNamespace;
-		showInDiagramModel: importedPackage;
-		showInDiagramModel: packageImport.
+		showWithoutDependentInDiagramModel: importingNamespace;
+		showWithoutDependentInDiagramModel: importedPackage;
+		showWithoutDependentInDiagramModel: packageImport.
 	controller := diagramController controllerForModel: packageImport.
 	controller removeModel.
 	self assert: importedPackage packageImports asArray equals: #()
@@ -123,9 +123,9 @@ OPUmlPackageImportControllerTest >> testRemoveFromModel [
 { #category : #'tests - diagram' }
 OPUmlPackageImportControllerTest >> testShowInDiagram [
 	diagramController
-		showInDiagramModel: importingNamespace;
-		showInDiagramModel: importedPackage.
-	diagramController showInDiagramModel: packageImport.
+		showWithoutDependentInDiagramModel: importingNamespace;
+		showWithoutDependentInDiagramModel: importedPackage.
+	diagramController showWithoutDependentInDiagramModel: packageImport.
 	self
 		assert:
 			(diagramController view edges

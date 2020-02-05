@@ -39,7 +39,7 @@ OPUmlEnumerationControllerTest >> testModelClass [
 OPUmlEnumerationControllerTest >> testRemoveEmpty [
 	controller model: model.
 	diagramController addController: controller.
-	controller showInDiagram: diagramController.
+	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().
 	self assert: diagramController controllers asArray equals: #()
@@ -48,12 +48,12 @@ OPUmlEnumerationControllerTest >> testRemoveEmpty [
 { #category : #'tests - removing' }
 OPUmlEnumerationControllerTest >> testRemoveFromModel [
 	diagramController model packagedElements add: model.
-	diagramController showInDiagramModel: model.
+	diagramController showWithoutDependentInDiagramModel: model.
 	controller := diagramController controllerForModel: model.
 	controller removeModel.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController model packagedElements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	self
+		assert: diagramController model packagedElements asArray
+		equals: #()
 ]
 
 { #category : #'tests - removing' }
@@ -61,7 +61,7 @@ OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 	model ownedLiterals add: OPUMLEnumerationLiteral new.
 	controller model: model.
 	diagramController addController: controller.
-	controller showInDiagram: diagramController.
+	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().
 	self assert: diagramController controllers asArray equals: #()
@@ -69,7 +69,7 @@ OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 
 { #category : #'tests - diagram' }
 OPUmlEnumerationControllerTest >> testShowInDiagram [
-	diagramController showInDiagramModel: model.
+	diagramController showWithoutDependentInDiagramModel: model.
 	self
 		assert:
 			(diagramController view elements

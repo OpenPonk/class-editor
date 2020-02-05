@@ -39,8 +39,8 @@ OPUmlRelationshipControllerTest >> testConnectionFeedback [
 	targetController := diagramController newControllerFor: (OPUMLClass new name: 'B').
 	diagramController addController: sourceController.
 	diagramController addController: targetController.
-	sourceController showInDiagram: diagramController.
-	targetController showInDiagram: diagramController.
+	sourceController showWithoutDependentInDiagram: diagramController.
+	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	feedback := controller connectionFeedback.
 	feedback renderIn: diagramController view.

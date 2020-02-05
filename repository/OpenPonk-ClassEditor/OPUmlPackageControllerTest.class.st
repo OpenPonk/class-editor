@@ -46,7 +46,7 @@ OPUmlPackageControllerTest >> testCreateFromPalette [
 OPUmlPackageControllerTest >> testRemoveEmpty [
 	controller model: self newEmptyModel.
 	diagramController addController: controller.
-	controller showInDiagram: diagramController.
+	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().
 	self assert: diagramController controllers asArray equals: #()
@@ -54,22 +54,22 @@ OPUmlPackageControllerTest >> testRemoveEmpty [
 
 { #category : #'tests - removing' }
 OPUmlPackageControllerTest >> testRemoveFromModel [
-	| model |
-	model := self newEmptyModel.
-	diagramController model packagedElements add: model.
-	diagramController showInDiagramModel: model.
-	controller := diagramController controllerForModel: model.
+	| packagedModel |
+	packagedModel := self newEmptyModel.
+	diagramController model packagedElements add: packagedModel.
+	diagramController showWithoutDependentInDiagramModel: packagedModel.
+	controller := diagramController controllerForModel: packagedModel.
 	controller removeModel.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController model packagedElements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	self
+		assert: diagramController model packagedElements asArray
+		equals: #()
 ]
 
 { #category : #'tests - diagram' }
 OPUmlPackageControllerTest >> testShowClassInDiagram [
 	| class |
 	class := OPUMLClass new.
-	diagramController showInDiagramModel: class.
+	diagramController showWithoutDependentInDiagramModel: class.
 	self
 		assert:
 			(diagramController view elements
@@ -86,7 +86,8 @@ OPUmlPackageControllerTest >> testShowClassWithAttributeInDiagram [
 	self
 		assert:
 			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = prop ] ])
+				anySatisfy:
+					[ :each | each model isNotNil and: [ each model modelElement = prop ] ])
 ]
 
 { #category : #tests }

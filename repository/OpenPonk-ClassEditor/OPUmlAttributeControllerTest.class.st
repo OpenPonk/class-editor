@@ -26,7 +26,7 @@ OPUmlAttributeControllerTest >> testClassBeTarget [
 	| classController |
 	classController := diagramController newControllerFor: OPUMLClass new.
 	diagramController addController: classController.
-	classController showInDiagram: diagramController.
+	classController showWithoutDependentInDiagram: diagramController.
 	classController addAsTargetFor: controller.
 	self assert: classController model ownedAttributes asArray equals: {controller model}
 ]
@@ -89,7 +89,7 @@ OPUmlAttributeControllerTest >> testRemoveFromView [
 	diagramController showInDiagramModel: class.
 	controller := diagramController controllerForModel: prop.
 	compartment := controller diagramElement owningElement.
-	controller remove.
+	controller removeController.
 	self assert: compartment ownedElements asArray equals: #()
 ]
 

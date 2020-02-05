@@ -56,8 +56,8 @@ OPUmlExtensionControllerTest >> testClassBeTarget [
 	diagramController
 		addController: sourceController;
 		addController: targetController.
-	sourceController showInDiagram: diagramController.
-	targetController showInDiagram: diagramController.
+	sourceController showWithoutDependentInDiagram: diagramController.
+	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	targetController addAsTargetFor: controller.
 	self assert: (controller model memberEnds collect: #name) asArray equals: #(base_B extension_A).
@@ -76,9 +76,9 @@ OPUmlExtensionControllerTest >> testCreateDiagramElement [
 { #category : #'tests - diagram' }
 OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 	diagramController
-		showInDiagramModel: artifact;
-		showInDiagramModel: library;
-		showInDiagramModel: extension.
+		showWithoutDependentInDiagramModel: artifact;
+		showWithoutDependentInDiagramModel: library;
+		showWithoutDependentInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
 	controller remove.
 	self assert: diagramController view edges asArray equals: #()
@@ -87,9 +87,9 @@ OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 { #category : #'tests - model' }
 OPUmlExtensionControllerTest >> testRemoveFromModel [
 	diagramController
-		showInDiagramModel: artifact;
-		showInDiagramModel: library;
-		showInDiagramModel: extension.
+		showWithoutDependentInDiagramModel: artifact;
+		showWithoutDependentInDiagramModel: library;
+		showWithoutDependentInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
 	diagramController model packagedElements add: extension.
 	controller removeModel.
@@ -101,9 +101,9 @@ OPUmlExtensionControllerTest >> testRemoveFromModel [
 { #category : #tests }
 OPUmlExtensionControllerTest >> testShowInDiagram [
 	diagramController
-		showInDiagramModel: artifact;
-		showInDiagramModel: library;
-		showInDiagramModel: extension.
+		showWithoutDependentInDiagramModel: artifact;
+		showWithoutDependentInDiagramModel: library;
+		showWithoutDependentInDiagramModel: extension.
 	self
 		assert:
 			(diagramController view edges
@@ -112,7 +112,8 @@ OPUmlExtensionControllerTest >> testShowInDiagram [
 
 { #category : #tests }
 OPUmlExtensionControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: controller createModel)
+	self
+		assert: (diagramController hasSupportForModel: self modelClass new)
 ]
 
 { #category : #tests }
