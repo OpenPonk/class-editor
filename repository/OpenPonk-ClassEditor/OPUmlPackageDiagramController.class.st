@@ -398,13 +398,6 @@ OPUmlPackageDiagramController >> rebuildPalette [
 	self selectView
 ]
 
-{ #category : #removing }
-OPUmlPackageDiagramController >> removeFromModel: aModel [
-	| controller |
-	controller := self controllerForModel: aModel.
-	controller removeModel
-]
-
 { #category : #figures }
 OPUmlPackageDiagramController >> selectableFigures [
 	^ (self controllers select: [ :each | each isKindOf: OPUmlClassController ])

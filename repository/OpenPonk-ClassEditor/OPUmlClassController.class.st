@@ -8,11 +8,6 @@ Class {
 }
 
 { #category : #adding }
-OPUmlClassController >> addAsSourceFor: aController [
-	aController source: self
-]
-
-{ #category : #adding }
 OPUmlClassController >> addAsTargetFor: aController [
 	aController
 		createModelIn: self model

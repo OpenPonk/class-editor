@@ -11,11 +11,6 @@ Class {
 }
 
 { #category : #adding }
-OPUmlPackageController >> addAsSourceFor: aController [
-	aController source: self
-]
-
-{ #category : #adding }
 OPUmlPackageController >> addAsTargetFor: aController [
 	aController
 		createModelIn: self model
