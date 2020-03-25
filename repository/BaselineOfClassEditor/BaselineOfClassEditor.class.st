@@ -114,27 +114,15 @@ BaselineOfClassEditor >> baseline: spec [
 				baseline: 'OntoUMLProfile'
 				with: [ spec repository: 'github://openponk/ontouml-profile/repository' ].
 			spec
-				baseline: 'Magritte'
-				with: [ spec
-						repository: 'github://magritte-metamodel/magritte:49781e985875315d06c5991f094c30d6f8c9f02d/source';
-						loads: #(Core);
-						postLoadDoIt: #removeGreaseWarnings ].
-			spec
 				package: 'OpenPonk-ClassEditor'
 				with: [ spec
 						requires:
-							#('UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'OntoUMLProfile' 'UMLProfiles' 'Magritte' 'Moose') ].
+							#(Moose 'UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'OntoUMLProfile' 'UMLProfiles') ].
 			spec
 				baseline: 'OntoUMLVerifications'
 				with: [ spec repository: 'github://belohma2/OpenPonk-Verifications' ].
 			spec
 				group: 'plugin'
 				with: #('OpenPonk-ClassEditor' 'OntoUMLVerifications').
-			spec group: 'default' with: #(Magritte OpenPonk plugin) ]
-]
-
-{ #category : #scripts }
-BaselineOfClassEditor >> removeGreaseWarnings [
-	('Grease-Pharo40-Slime' asPackageIfAbsent: [ ^ self ])
-		removeFromSystem
+			spec group: 'default' with: #(OpenPonk plugin) ]
 ]
