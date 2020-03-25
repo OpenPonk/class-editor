@@ -130,7 +130,7 @@ BaselineOfClassEditor >> baseline: spec [
 			spec
 				group: 'plugin'
 				with: #('OpenPonk-ClassEditor' 'OntoUMLVerifications').
-			spec group: 'default' with: #('plugin' 'OpenPonk') ]
+			spec group: 'default' with: #(Magritte OpenPonk plugin) ]
 ]
 
 { #category : #scripts }
