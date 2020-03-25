@@ -116,7 +116,7 @@ BaselineOfClassEditor >> baseline: spec [
 			spec
 				baseline: 'Magritte'
 				with: [ spec
-						repository: 'github://magritte-metamodel/magritte:v3.6/source';
+						repository: 'github://magritte-metamodel/magritte:magritte:49781e985875315d06c5991f094c30d6f8c9f02d/source';
 						loads: #(Core);
 						postLoadDoIt: #removeGreaseWarnings ].
 			spec
