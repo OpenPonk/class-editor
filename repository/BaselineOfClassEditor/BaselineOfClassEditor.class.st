@@ -95,7 +95,7 @@ BaselineOfClassEditor >> baseline: spec [
 				baseline: 'UMLShapes'
 				with: [ spec
 						repository: 'github://openponk/uml-shapes/repository';
-						load: #(plugin) ].
+						loads: #(plugin) ].
 			spec
 				baseline: 'UMLMetamodel'
 				with: [ spec repository: 'github://openponk/uml-metamodel:v1.x/repository' ].
