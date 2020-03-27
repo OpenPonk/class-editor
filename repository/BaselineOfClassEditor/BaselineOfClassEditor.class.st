@@ -50,6 +50,9 @@ BaselineOfClassEditor >> baseline: spec [
 				baseline: 'OntoUMLVerifications'
 				with: [ spec repository: 'github://openponk/ontouml-verifications' ].
 			spec
+				group: 'no-verifications'
+				with: #(OpenPonk 'OpenPonk-ClassEditor').
+			spec
 				group: 'plugin'
 				with: #('OpenPonk-ClassEditor' 'OntoUMLVerifications').
 			spec group: 'default' with: #(OpenPonk plugin) ]
