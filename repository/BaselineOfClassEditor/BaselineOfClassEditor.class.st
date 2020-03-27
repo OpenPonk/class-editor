@@ -92,11 +92,6 @@ BaselineOfClassEditor >> baseline: spec [
 						repository: 'github://moosetechnology/Moose:24a33d7/src';
 						loads: #(Merlin) ].
 			spec
-				baseline: 'UMLShapes'
-				with: [ spec
-						repository: 'github://openponk/uml-shapes/repository';
-						loads: #(plugin) ].
-			spec
 				baseline: 'UMLMetamodel'
 				with: [ spec repository: 'github://openponk/uml-metamodel:v1.x/repository' ].
 			spec
@@ -109,6 +104,11 @@ BaselineOfClassEditor >> baseline: spec [
 			spec
 				baseline: 'OpenPonk'
 				with: [ spec repository: 'github://openponk/openponk/repository' ].
+			spec
+				baseline: 'UMLShapes'
+				with: [ spec
+						repository: 'github://openponk/uml-shapes/repository';
+						loads: #(plugin) ].
 			spec
 				baseline: 'UMLProfiles'
 				with: [ spec repository: 'github://openponk/uml-profiles:v1.x/repository' ].
