@@ -122,7 +122,7 @@ BaselineOfClassEditor >> baseline: spec [
 							#(Moose 'UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'OntoUMLProfile' 'UMLProfiles') ].
 			spec
 				baseline: 'OntoUMLVerifications'
-				with: [ spec repository: 'github://belohma2/OpenPonk-Verifications' ].
+				with: [ spec repository: 'github://openponk/ontouml-verifications' ].
 			spec
 				group: 'plugin'
 				with: #('OpenPonk-ClassEditor' 'OntoUMLVerifications').
