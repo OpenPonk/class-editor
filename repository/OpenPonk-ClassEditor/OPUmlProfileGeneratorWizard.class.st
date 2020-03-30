@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'profile'
 	],
-	#category : 'OpenPonk-ClassEditor-UI'
+	#category : #'OpenPonk-ClassEditor-UI'
 }
 
 { #category : #example }
@@ -30,7 +30,7 @@ OPUmlProfileGeneratorWizard >> addGeneratePane [
 		defaultValue: profile name.
 	(packagePart := TextFieldPart new)
 		inGroupboxNamed: 'Target Package';
-		defaultValue: profile name , 'Profile'.
+		defaultValue: profile name , '-Profile'.
 	pane row: prefixPart associatedTo: #prefix.
 	pane row: packagePart associatedTo: #package.
 	pane
