@@ -29,12 +29,12 @@ OPUmlRelationshipController >> isHideable [
 
 { #category : #forms }
 OPUmlRelationshipController >> layout [
-	^ nil
+	^ OPElementLayout none
 ]
 
 { #category : #forms }
-OPUmlRelationshipController >> layout: aPoint [
-	
+OPUmlRelationshipController >> layout: anObject [
+	"do nothing"
 ]
 
 { #category : #accessing }
