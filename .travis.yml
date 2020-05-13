@@ -5,6 +5,7 @@ env:
   global:
   - PROJECT_NAME=class-editor
   - FULL_PROJECT_NAME=openponk-$PROJECT_NAME
+  - BUILD_TIMESTAMP=`date -Is`
 matrix:
   include:
     - smalltalk: Pharo64-7.0
