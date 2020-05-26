@@ -54,7 +54,7 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 	diagramController rebuild.
 	elements := diagramController view elements.
 	nameLabelRectangle := (elements
-		detect: [ :any | any model class = OPUmlNameLabel ])
+		detect: [ :any | any model class = OPUmlMultilineNameLabel ])
 		encompassingRectangle.
 	operationLabelRectangle := (elements
 		detect: [ :any | any model class = OPUmlLabel ])

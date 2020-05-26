@@ -32,7 +32,7 @@ OPUmlClassShape >> initialize [
 	stereotypeLabel text: [ :model | self stereotypeText ].
 	stereotypeLabel localStyle: OPUmlStyle new.
 	stereotypeLabel owningElement: self.
-	nameLabel := OPUmlNameLabel new.
+	nameLabel := OPUmlMultilineNameLabel new.
 	nameLabel text: [ :model | model name ].
 	nameLabel emphasis: [ :model :style | style fontItalic: model isAbstract ].
 	nameLabel localStyle: (OPUmlStyle new fontSize: 11).

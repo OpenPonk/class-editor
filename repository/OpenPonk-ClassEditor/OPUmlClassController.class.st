@@ -3,16 +3,9 @@ I am a controller for a Class(ifier)
 "
 Class {
 	#name : #OPUmlClassController,
-	#superclass : #OPUmlElementController,
+	#superclass : #OPUmlClassifierController,
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
-
-{ #category : #adding }
-OPUmlClassController >> addAsTargetFor: aController [
-	aController
-		createModelIn: self model
-		andShowInDiagram: self diagramController
-]
 
 { #category : #figures }
 OPUmlClassController >> adornments [
@@ -51,15 +44,6 @@ OPUmlClassController >> allShowableElements [
 		select: [ :each | diagramController hasSupportForModel: each ]
 ]
 
-{ #category : #'events - registering' }
-OPUmlClassController >> attachTo: aDiagramController [
-	| newModel |
-	newModel := self createModel.
-	OPRenameElementCommand executeOn: newModel.
-	aDiagramController model packagedElements add: newModel.
-	aDiagramController showWithoutDependentInDiagramModel: newModel
-]
-
 { #category : #forms }
 OPUmlClassController >> buildAbstractEditorForm: aForm [
 	(aForm addCheckbox: 'Is Abstract')
@@ -72,7 +56,7 @@ OPUmlClassController >> buildAbstractEditorForm: aForm [
 { #category : #adding }
 OPUmlClassController >> canBeSourceFor: aController [
 	^ (aController isKindOf: OPUmlGeneralizationController)
-		| (aController isKindOf: OPUmlAssociationController)
+		| (super canBeSourceFor: aController)
 		| (aController isKindOf: OPUmlExtensionController)
 ]
 
@@ -90,17 +74,6 @@ OPUmlClassController >> createDiagramElement [
 	^ OPUmlClassShape new
 		stereotype: [ self stereotypeNames ];
 		modelElement: self model
-]
-
-{ #category : #construction }
-OPUmlClassController >> createModelIn: aParentModel [
-	self
-		model:
-			(self modelClass new
-				name: self modelClassName;
-				yourself).
-	aParentModel packagedElements add: model.
-	^ model
 ]
 
 { #category : #accessing }
@@ -152,11 +125,6 @@ OPUmlClassController >> elementsToShowInside [
 	^ model ownedOperations asSet , model ownedAttributes
 ]
 
-{ #category : #testing }
-OPUmlClassController >> isHideable [
-	^ true
-]
-
 { #category : #accessing }
 OPUmlClassController >> modelClass [
 	^ OPUMLClass
@@ -165,26 +133,6 @@ OPUmlClassController >> modelClass [
 { #category : #accessing }
 OPUmlClassController >> modelClassName [
 	^ #Class
-]
-
-{ #category : #figures }
-OPUmlClassController >> refreshFigure [
-	self diagramElement changed
-]
-
-{ #category : #private }
-OPUmlClassController >> removeModel [
-	diagramController model packagedElements remove: self model
-]
-
-{ #category : #figures }
-OPUmlClassController >> renderFigureIn: aView [
-	diagramElement := self createDiagramElement.
-	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self figure @ (OPRTAdornments new adornments: self adornments).
-	self refreshFigure.
-	self figure @ RTDraggableSnapToGrid
 ]
 
 { #category : #accessing }
