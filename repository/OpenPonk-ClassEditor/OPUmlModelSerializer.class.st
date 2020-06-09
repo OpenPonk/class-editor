@@ -13,8 +13,8 @@ OPUmlModelSerializer >> formatName [
 ]
 
 { #category : #accessing }
-OPUmlModelSerializer >> materializeModelFrom: aString [
-	^ OPUMLXMIReader read: aString
+OPUmlModelSerializer >> materializeModelFrom: aStream [
+	^ OPUMLXMIReader read: aStream
 ]
 
 { #category : #accessing }
