@@ -153,5 +153,5 @@ if [[ -n "$TRAVIS_TAG" ]]; then
 	main
 fi
 
-return 0
+exit 0
 
