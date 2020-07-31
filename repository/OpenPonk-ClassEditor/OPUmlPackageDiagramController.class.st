@@ -60,6 +60,11 @@ OPUmlPackageDiagramController >> canBeTargetFor: aController [
 		| (aController isKindOf: OPUmlEnumerationController)
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlPackageDiagramController >> commonModelClassPrefix [
+	^ 'OPUML'
+]
+
 { #category : #forms }
 OPUmlPackageDiagramController >> descriptionAccessor: aSymbol [
 	^ MAPluggableAccessor
