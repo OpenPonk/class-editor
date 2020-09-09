@@ -91,11 +91,17 @@ OPUmlExtensionControllerTest >> testRemoveFromModel [
 		showWithoutDependentInDiagramModel: library;
 		showWithoutDependentInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
+	self
+		deny: (diagramController model packagedElements includes: extension).
 	diagramController model packagedElements add: extension.
+	self
+		assert: (diagramController model packagedElements includes: extension).
 	controller removeModel.
 	self assert: extensionLibrary association equals: nil.
 	self assert: extensionLibrary owningClass equals: nil.
-	self assert: library attributes asArray equals: #()
+	self assert: library attributes asArray equals: #().
+	self
+		deny: (diagramController model packagedElements includes: extension)
 ]
 
 { #category : #tests }

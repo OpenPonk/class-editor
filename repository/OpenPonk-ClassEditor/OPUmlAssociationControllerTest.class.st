@@ -151,13 +151,19 @@ OPUmlAssociationControllerTest >> testRemoveFromModel [
 		showWithoutDependentInDiagramModel: element;
 		showWithoutDependentInDiagramModel: comment;
 		showWithoutDependentInDiagramModel: association.
+	self
+		deny: (diagramController model packagedElements includes: association).
 	controller := diagramController controllerForModel: association.
 	diagramController model packagedElements add: association.
+	self
+		assert: (diagramController model packagedElements includes: association).
 	self assert: ownedComment association equals: association.
 	self assert: ownedComment owningClass equals: element.
 	controller removeModel.
 	self assert: ownedComment association equals: nil.
-	self assert: ownedComment owningClass equals: nil
+	self assert: ownedComment owningClass equals: nil.
+	self
+		deny: (diagramController model packagedElements includes: association)
 ]
 
 { #category : #tests }

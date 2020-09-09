@@ -109,7 +109,13 @@ OPUmlGeneralizationController >> refreshFigure [
 OPUmlGeneralizationController >> removeModel [
 	model general: nil.
 	model specific: nil.
-	model generalizationSets asArray do: [ :each | each generalizations remove: model ]
+	model generalizationSets asArray
+		do: [ :each | 
+			each generalizations remove: model.
+			each generalizations
+				ifEmpty: [ diagramController model packagedElements
+						remove: each
+						ifAbsent: [ "do nothing" ] ] ]
 ]
 
 { #category : #figures }

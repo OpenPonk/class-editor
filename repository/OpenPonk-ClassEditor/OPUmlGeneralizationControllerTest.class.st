@@ -81,11 +81,16 @@ OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 		showWithoutDependentInDiagramModel: generalization.
 	gs := OPUMLGeneralizationSet new.
 	gs generalizations add: generalization.
+	self deny: (diagramController model packagedElements includes: gs).
+	diagramController model
+		packagedElements: diagramController model packagedElements , {gs}.
+	self assert: (diagramController model packagedElements includes: gs).
 	controller := diagramController controllerForModel: generalization.
 	controller removeModel.
 	self assert: child generalizations asArray equals: #().
 	self assert: generalization generalizationSets asArray equals: #().
-	self assert: gs generalizations asArray equals: #()
+	self assert: gs generalizations asArray equals: #().
+	self deny: (diagramController model packagedElements includes: gs)
 ]
 
 { #category : #'tests - diagram' }

@@ -120,6 +120,36 @@ OPUmlClassControllerTest >> testRemoveWithAttribute [
 	self assert: diagramController controllers asArray equals: #()
 ]
 
+{ #category : #'tests - removing' }
+OPUmlClassControllerTest >> testRemovesDependent [
+	| class secondClass association ownedClass owningClass |
+	class := OPUMLClass new.
+	secondClass := OPUMLClass new.
+	diagramController model packagedElements add: class.
+	diagramController model packagedElements add: secondClass.
+	association := OPUMLAssociation new.
+	(ownedClass := OPUMLProperty new)
+		owningClass: class;
+		type: secondClass.
+	(owningClass := OPUMLProperty new)
+		owningAssociation: association;
+		type: secondClass.
+	association
+		name: 'association';
+		memberEnds:
+			{ownedClass.
+			owningClass}.
+	diagramController model packagedElements add: association.
+	diagramController showWithoutDependentInDiagramModel: class.
+	diagramController showWithoutDependentInDiagramModel: secondClass.
+	diagramController showWithoutDependentInDiagramModel: association.
+	controller := diagramController controllerForModel: class.
+	controller removeFull.
+	self
+		assertCollection: diagramController model packagedElements asArray
+		hasSameElements: {secondClass}
+]
+
 { #category : #'tests - diagram' }
 OPUmlClassControllerTest >> testShowClassInDiagram [
 	| class |
