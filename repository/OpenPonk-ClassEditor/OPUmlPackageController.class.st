@@ -112,7 +112,8 @@ OPUmlPackageController >> modelClass [
 
 { #category : #figures }
 OPUmlPackageController >> refreshFigure [
-	self diagramElement changed
+	self diagramElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -122,9 +123,9 @@ OPUmlPackageController >> removeModel [
 
 { #category : #rendering }
 OPUmlPackageController >> renderFigureIn: aView [
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure.
-"	self figure @ RTDraggable""SnapToGrid"
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]

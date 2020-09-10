@@ -68,7 +68,8 @@ OPUmlOperationController >> notationTextFor: anOperation [
 { #category : #figures }
 OPUmlOperationController >> refreshFigure [
 	self diagramElement changed.
-	self diagramElement owningElement owningElement changed
+	self diagramElement owningElement owningElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -81,10 +82,11 @@ OPUmlOperationController >> removeModel [
 
 { #category : #figures }
 OPUmlOperationController >> renderFigureIn: aView [
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	diagramElement
 		owningElement: (diagramController diagramElementForModel: model owningClass) operations.
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]

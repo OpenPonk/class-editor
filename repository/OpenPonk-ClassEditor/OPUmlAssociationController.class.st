@@ -89,7 +89,8 @@ OPUmlAssociationController >> modelClass [
 
 { #category : #rendering }
 OPUmlAssociationController >> refreshFigure [
-	self diagramElement changed
+	self diagramElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -103,14 +104,15 @@ OPUmlAssociationController >> removeModel [
 
 { #category : #rendering }
 OPUmlAssociationController >> renderFigureIn: aView [
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	diagramElement
 		ends:
 			{diagramController diagramElementForModel: self model memberEnds first type.
 			diagramController diagramElementForModel: self model memberEnds second type}.
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]
 
 { #category : #writing }

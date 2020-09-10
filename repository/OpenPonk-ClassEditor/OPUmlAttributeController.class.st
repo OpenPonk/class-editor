@@ -155,7 +155,8 @@ OPUmlAttributeController >> notationTextFor: aProperty [
 { #category : #figures }
 OPUmlAttributeController >> refreshFigure [
 	self diagramElement changed.
-	self diagramElement owningElement owningElement changed
+	self diagramElement owningElement owningElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -169,14 +170,15 @@ OPUmlAttributeController >> removeModel [
 
 { #category : #figures }
 OPUmlAttributeController >> renderFigureIn: aView [
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	diagramElement
 		owningElement:
-			(diagramController controllerForModel: model owningClass)
-				diagramElement attributes.
+			(diagramController diagramElementForModel: model owningClass)
+				attributes.
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]
 
 { #category : #accessing }

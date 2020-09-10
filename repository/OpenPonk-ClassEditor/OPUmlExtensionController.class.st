@@ -45,7 +45,8 @@ OPUmlExtensionController >> modelClass [
 
 { #category : #figures }
 OPUmlExtensionController >> refreshFigure [
-	self diagramElement changed
+	self diagramElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -73,6 +74,7 @@ OPUmlExtensionController >> removeModel [
 
 { #category : #figures }
 OPUmlExtensionController >> renderFigureIn: aView [
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	diagramElement
 		ends:
@@ -80,6 +82,6 @@ OPUmlExtensionController >> renderFigureIn: aView [
 			diagramController
 				diagramElementForModel: (self model memberEnds copyWithout: self model ownedEnd) first type}.
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]

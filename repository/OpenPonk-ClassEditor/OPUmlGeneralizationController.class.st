@@ -102,7 +102,8 @@ OPUmlGeneralizationController >> modelClass [
 
 { #category : #figures }
 OPUmlGeneralizationController >> refreshFigure [
-	self diagramElement changed
+	self diagramElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -121,6 +122,7 @@ OPUmlGeneralizationController >> removeModel [
 { #category : #figures }
 OPUmlGeneralizationController >> renderFigureIn: aView [
 	| sourceElement |
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	sourceElement := ((diagramController controllers
 		select: [ :each | each isKindOf: OPUmlClassController ])
@@ -129,8 +131,8 @@ OPUmlGeneralizationController >> renderFigureIn: aView [
 	diagramElement source: sourceElement.
 	diagramElement target: (diagramController diagramElementForModel: self model general).
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]
 
 { #category : #construction }

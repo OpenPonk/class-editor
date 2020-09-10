@@ -38,7 +38,8 @@ OPUmlEnumerationLiteralController >> modelClass [
 { #category : #figures }
 OPUmlEnumerationLiteralController >> refreshFigure [
 	self diagramElement changed.
-	self diagramElement owningElement owningElement changed
+	self diagramElement owningElement owningElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -50,10 +51,13 @@ OPUmlEnumerationLiteralController >> removeModel [
 
 { #category : #figures }
 OPUmlEnumerationLiteralController >> renderFigureIn: aView [
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	diagramElement
-		owningElement: (diagramController controllerForModel: model enumeration) diagramElement attributes.
+		owningElement:
+			(diagramController diagramElementForModel: model enumeration)
+				diagramElement attributes.
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]

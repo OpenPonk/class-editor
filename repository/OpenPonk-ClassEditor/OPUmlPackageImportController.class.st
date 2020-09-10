@@ -102,7 +102,8 @@ OPUmlPackageImportController >> modelClass [
 
 { #category : #figures }
 OPUmlPackageImportController >> refreshFigure [
-	self diagramElement changed
+	self diagramElement changed.
+	^ self figure
 ]
 
 { #category : #removing }
@@ -114,6 +115,7 @@ OPUmlPackageImportController >> removeModel [
 { #category : #figures }
 OPUmlPackageImportController >> renderFigureIn: aView [
 	| sourceElement |
+	self diagramController addingFigureFor: self.
 	diagramElement := self createDiagramElement.
 	sourceElement := ((diagramController controllers
 		select: [ :each | each isKindOf: OPUmlPackageController ])
@@ -122,8 +124,8 @@ OPUmlPackageImportController >> renderFigureIn: aView [
 	diagramElement source: sourceElement.
 	diagramElement target: (diagramController diagramElementForModel: self model importedPackage).
 	diagramElement renderIn: aView.
-	diagramController figureAdded: self figure.
-	self refreshFigure
+	diagramController addedFigureFor: self.
+	^ self refreshFigure
 ]
 
 { #category : #construction }
