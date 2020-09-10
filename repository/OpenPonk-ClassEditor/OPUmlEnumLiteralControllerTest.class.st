@@ -29,11 +29,13 @@ OPUmlEnumLiteralControllerTest >> testCreateDiagramElement [
 { #category : #'tests - creation' }
 OPUmlEnumLiteralControllerTest >> testEnumerationBeTarget [
 	| classController |
-	classController := diagramController newControllerFor: OPUMLEnumeration new.
-	diagramController addController: classController.
+	classController := diagramController
+		newControllerFor: OPUMLEnumeration new.
 	classController showWithoutDependentInDiagram: diagramController.
 	classController addAsTargetFor: controller.
-	self assert: classController model ownedLiterals asArray equals: {controller model}
+	self
+		assert: classController model ownedLiterals asArray
+		equals: {controller model}
 ]
 
 { #category : #'tests - accessing' }

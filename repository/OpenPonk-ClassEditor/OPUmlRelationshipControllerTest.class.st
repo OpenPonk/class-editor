@@ -35,10 +35,10 @@ OPUmlRelationshipControllerTest >> testClassBeTarget [
 { #category : #'tests - creation' }
 OPUmlRelationshipControllerTest >> testConnectionFeedback [
 	| sourceController targetController feedback feedbackLine |
-	sourceController := diagramController newControllerFor: (OPUMLClass new name: 'A').
-	targetController := diagramController newControllerFor: (OPUMLClass new name: 'B').
-	diagramController addController: sourceController.
-	diagramController addController: targetController.
+	sourceController := diagramController
+		newControllerFor: (OPUMLClass new name: 'A').
+	targetController := diagramController
+		newControllerFor: (OPUMLClass new name: 'B').
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.

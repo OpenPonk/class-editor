@@ -25,10 +25,11 @@ OPUmlAttributeControllerTest >> testCanClassBeTarget [
 OPUmlAttributeControllerTest >> testClassBeTarget [
 	| classController |
 	classController := diagramController newControllerFor: OPUMLClass new.
-	diagramController addController: classController.
 	classController showWithoutDependentInDiagram: diagramController.
 	classController addAsTargetFor: controller.
-	self assert: classController model ownedAttributes asArray equals: {controller model}
+	self
+		assert: classController model ownedAttributes asArray
+		equals: {controller model}
 ]
 
 { #category : #'tests - creation' }

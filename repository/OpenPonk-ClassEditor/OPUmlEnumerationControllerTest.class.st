@@ -38,7 +38,6 @@ OPUmlEnumerationControllerTest >> testModelClass [
 { #category : #'tests - removing' }
 OPUmlEnumerationControllerTest >> testRemoveEmpty [
 	controller model: model.
-	diagramController addController: controller.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().
@@ -60,7 +59,6 @@ OPUmlEnumerationControllerTest >> testRemoveFromModel [
 OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 	model ownedLiterals add: OPUMLEnumerationLiteral new.
 	controller model: model.
-	diagramController addController: controller.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().

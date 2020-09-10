@@ -45,7 +45,6 @@ OPUmlPackageControllerTest >> testCreateFromPalette [
 { #category : #'tests - removing' }
 OPUmlPackageControllerTest >> testRemoveEmpty [
 	controller model: self newEmptyModel.
-	diagramController addController: controller.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller remove.
 	self assert: diagramController view elements asArray equals: #().

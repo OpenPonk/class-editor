@@ -43,16 +43,17 @@ OPUmlGeneralizationControllerTest >> setUpGeneralization [
 { #category : #tests }
 OPUmlGeneralizationControllerTest >> testClassBeTarget [
 	| sourceController targetController |
-	sourceController := diagramController newControllerFor: (OPUMLClass new name: 'A').
-	targetController := diagramController newControllerFor: (OPUMLClass new name: 'B').
-	diagramController
-		addController: sourceController;
-		addController: targetController.
+	sourceController := diagramController
+		newControllerFor: (OPUMLClass new name: 'A').
+	targetController := diagramController
+		newControllerFor: (OPUMLClass new name: 'B').
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	targetController addAsTargetFor: controller.
-	self assert: sourceController model generalizations asArray equals: {controller model}.
+	self
+		assert: sourceController model generalizations asArray
+		equals: {controller model}.
 	self assert: controller model general equals: targetController model
 ]
 

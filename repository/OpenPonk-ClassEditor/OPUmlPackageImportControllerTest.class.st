@@ -60,26 +60,29 @@ OPUmlPackageImportControllerTest >> testClassBeSource [
 { #category : #'tests - construction' }
 OPUmlPackageImportControllerTest >> testClassBeTarget [
 	| sourceController targetController |
-	sourceController := diagramController newControllerFor: (OPUMLPackage new name: 'A').
-	targetController := diagramController newControllerFor: (OPUMLPackage new name: 'B').
-	diagramController
-		addController: sourceController;
-		addController: targetController.
+	sourceController := diagramController
+		newControllerFor: (OPUMLPackage new name: 'A').
+	targetController := diagramController
+		newControllerFor: (OPUMLPackage new name: 'B').
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	targetController addAsTargetFor: controller.
-	self assert: sourceController model packageImports asArray equals: {controller model}.
-	self assert: controller model importedPackage equals: targetController model
+	self
+		assert: sourceController model packageImports asArray
+		equals: {controller model}.
+	self
+		assert: controller model importedPackage
+		equals: targetController model
 ]
 
 { #category : #'tests - construction' }
 OPUmlPackageImportControllerTest >> testConnectionFeedback [
 	| sourceController targetController feedback feedbackLine |
-	sourceController := diagramController newControllerFor: (OPUMLPackage new name: 'A').
-	targetController := diagramController newControllerFor: (OPUMLPackage new name: 'B').
-	diagramController addController: sourceController.
-	diagramController addController: targetController.
+	sourceController := diagramController
+		newControllerFor: (OPUMLPackage new name: 'A').
+	targetController := diagramController
+		newControllerFor: (OPUMLPackage new name: 'B').
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.

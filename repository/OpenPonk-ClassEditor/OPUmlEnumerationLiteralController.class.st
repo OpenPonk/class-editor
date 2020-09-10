@@ -56,7 +56,7 @@ OPUmlEnumerationLiteralController >> renderFigureIn: aView [
 	diagramElement
 		owningElement:
 			(diagramController diagramElementForModel: model enumeration)
-				diagramElement attributes.
+				attributes.
 	diagramElement renderIn: aView.
 	diagramController addedFigureFor: self.
 	^ self refreshFigure

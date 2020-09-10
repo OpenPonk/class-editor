@@ -54,9 +54,6 @@ OPUmlAssociationControllerTest >> testClassBeTarget [
 		newControllerFor: (OPUMLClass new name: 'A').
 	targetController := diagramController
 		newControllerFor: (OPUMLClass new name: 'B').
-	diagramController
-		addController: sourceController;
-		addController: targetController.
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
