@@ -47,13 +47,13 @@ BaselineOfClassEditor >> baseline: spec [
 						requires:
 							#(Moose 'UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'OntoUMLProfile' 'UMLProfiles') ].
 			spec
-				baseline: 'OntoUMLVerifications'
+				baseline: 'OntoUMLVerificationFramework'
 				with: [ spec repository: 'github://openponk/ontouml-verifications' ].
 			spec
 				group: 'no-verifications'
 				with: #(OpenPonk 'OpenPonk-ClassEditor').
 			spec
 				group: 'plugin'
-				with: #('OpenPonk-ClassEditor' 'OntoUMLVerifications').
+				with: #('OpenPonk-ClassEditor' 'OntoUMLVerificationFramework').
 			spec group: 'default' with: #(OpenPonk plugin) ]
 ]
