@@ -161,6 +161,7 @@ OPUmlAssociationShape >> update [
 		tailDecorator: (self decoratorFor: modelElement memberEnds first).
 	self
 		headDecorator: (self decoratorFor: modelElement memberEnds second).
+	self rtEdge shape color: self style strokeColor.
 	self rtEdge view ifNotNil: [ self rtEdge update ].
 	constraints do: #update.
 	self ownedElements do: #update
