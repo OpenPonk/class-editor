@@ -8,7 +8,7 @@ Class {
 		'nameLabel',
 		'constraints'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #configuration }
@@ -111,6 +111,7 @@ OPUmlGeneralizationShape >> textFor: aGeneralization [
 
 { #category : #'Roassal2 - updating' }
 OPUmlGeneralizationShape >> update [
+	self rtEdge shape color: self style strokeColor.
 	self rtEdge update.
 	constraints do: #update.
 	self ownedElements do: #update
