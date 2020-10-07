@@ -38,10 +38,7 @@ OPUmlGeneralizationController >> descriptionGeneral [
 OPUmlGeneralizationController >> descriptionGeneralizationSet [
 	<magritteDescription>
 	^ MAToManyRelationDescription new
-		initializer: [ :desc | 
-			desc
-				controller: self;
-				set: OPUMLGeneralizationSet new ];
+		initializer: [ :desc | desc initializeFor: self ];
 		display: [ :desc | 
 			String
 				streamContents: [ :stream | 

@@ -8,7 +8,7 @@ Class {
 		'set',
 		'controller'
 	],
-	#category : 'OpenPonk-ClassEditor-Forms'
+	#category : #'OpenPonk-ClassEditor-Forms'
 }
 
 { #category : #comparing }
@@ -88,6 +88,52 @@ OPUmlGeneralizationSetDescriptions >> descriptionVisibility [
 { #category : #comparing }
 OPUmlGeneralizationSetDescriptions >> hash [
 	^ super hash bitXor: set hash
+]
+
+{ #category : #forms }
+OPUmlGeneralizationSetDescriptions >> initializeFor: aGeneralizationController [
+	| dialog listPresenter |
+	self controller: aGeneralizationController.
+	dialog := SpVersatileDialogPresenter new.
+	listPresenter := dialog newList.
+	listPresenter
+		items:
+			(aGeneralizationController diagramController model packagedElements
+				select: [ :each | each oclIsKindOf: #GeneralizationSet ])
+				,
+					((aGeneralizationController diagramController model packagedElements
+						select: [ :each | each respondsTo: #generalizations ])
+						flatCollectAsSet: [ :each | 
+							each generalizations
+								flatCollectAsSet: [ :eachGeneralization | eachGeneralization generalizationSets ] ])
+						asArray;
+		display: [ :each | 
+			String
+				streamContents: [ :stream | 
+					stream
+						<< 'GeneralizationSet {''';
+						<< (each name ifNil: [ '' ]);
+						<< ''', '.
+					each isCovering
+						ifTrue: [ stream << 'complete, ' ]
+						ifFalse: [ stream << 'incomplete, ' ].
+					each isDisjoint
+						ifTrue: [ stream << 'disjoint, ' ]
+						ifFalse: [ stream << 'overlapping, ' ].
+					stream << ('(' , each generalizations size asString , ')}') ] ].
+	dialog contentArea: listPresenter.
+	dialog
+		addButton: #select
+		text: 'Select existing from list'
+		value: [ listPresenter selection selectedItem ]
+		condition: [ listPresenter selection selectedItems size = 1 ].
+	dialog
+		addButton: #new
+		text: 'Create new'
+		value: [ OPUMLGeneralizationSet new ].
+	dialog openModalWithSpec.
+	dialog withWindowDo: [ :w | w title: 'Select existing or new set' ].
+	self set: dialog result value
 ]
 
 { #category : #accessing }
