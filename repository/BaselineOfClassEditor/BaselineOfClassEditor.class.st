@@ -37,7 +37,7 @@ BaselineOfClassEditor >> baseline: spec [
 						loads: #(plugin) ].
 			spec
 				baseline: 'UMLProfiles'
-				with: [ spec repository: 'github://openponk/uml-profiles:v1.x/repository' ].
+				with: [ spec repository: 'github://openponk/uml-profiles:v2.0.0/repository' ].
 			spec
 				baseline: 'OntoUMLProfile'
 				with: [ spec repository: 'github://openponk/ontouml-profile:v2.0.0/repository' ].
