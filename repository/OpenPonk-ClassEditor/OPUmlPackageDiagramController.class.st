@@ -7,11 +7,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #'ui hooks' }
-OPUmlPackageDiagramController >> addAllElements [
-	self showAllElements
-]
-
 { #category : #adding }
 OPUmlPackageDiagramController >> addAsSourceFor: aController [
 	self shouldBeImplemented
