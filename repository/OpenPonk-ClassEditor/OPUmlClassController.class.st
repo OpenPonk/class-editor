@@ -73,6 +73,7 @@ OPUmlClassController >> canBeTargetFor: aController [
 OPUmlClassController >> createDiagramElement [
 	^ OPUmlClassShape new
 		stereotype: [ self stereotypeNames ];
+		comments: [ self model ownedComments ];
 		modelElement: self model
 ]
 
