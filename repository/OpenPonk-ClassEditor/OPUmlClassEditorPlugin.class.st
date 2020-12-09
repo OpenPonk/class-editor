@@ -8,22 +8,6 @@ Class {
 }
 
 { #category : #toolbar }
-OPUmlClassEditorPlugin class >> addModelTo: aProject [
-	
-]
-
-{ #category : #toolbar }
-OPUmlClassEditorPlugin class >> contextMenu: aBuilder [
-	<opModelNavigatorContextMenu: #OPUmlClassEditorPlugin>
-	| navigator selectedItem |
-	navigator := aBuilder model.
-	selectedItem := navigator selectedItem.
-	(selectedItem oclIsKindOf: #Package)
-		ifTrue: [ (aBuilder item: 'Export as XMI...') action: [ self exportPackage: selectedItem ].
-			(aBuilder item: 'Import from XMI...') action: [ self importToPackage: selectedItem ] ]
-]
-
-{ #category : #toolbar }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 	FDSaveFileDialog new
 		whenSelected: [ :file | 
@@ -54,18 +38,6 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 			('All files' -> #())};
 		defaultFolder: FileLocator imageDirectory asFileReference;
 		open
-]
-
-{ #category : #toolbar }
-OPUmlClassEditorPlugin class >> toolbarMenu: aBuilder [
-	"<opEditorToolbarMenu: #OPUmlOldClassPlugin>
-	(aBuilder item: 'DSL Editor')
-		action: [ OPDslEditor new
-				parser: OPUmlDslParser new;
-				exporter: OPUmlDslExporter new;
-				modelClass: MooseModel;
-				model: aBuilder model diagramController model;
-				openWithSpec ]"
 ]
 
 { #category : #accessing }
