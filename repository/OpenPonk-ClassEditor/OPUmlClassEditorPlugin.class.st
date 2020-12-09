@@ -41,12 +41,17 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 { #category : #toolbar }
 OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 	FDOpenFileDialog new
-		whenSelected: [ :file | |model|
+		whenSelected: [ :file | 
+			| model |
 			model := OPUMLXMIReader read: file contents.
+			(model packagedElements size = 1
+				and: [ model packagedElements first oclIsKindOf: #Package ])
+				ifTrue: [ model := model packagedElements first ].
+			aPackage packagedElements: model packagedElements.
 			self inform: 'Imported from ' , file fullName ];
 		extensionFilters:
-			{'XMI files' -> #(xmi xml uml).
-			'All files' -> #()};
+			{('XMI files' -> #(xmi xml uml)).
+			('All files' -> #())};
 		defaultFolder: FileLocator imageDirectory asFileReference;
 		open
 ]
