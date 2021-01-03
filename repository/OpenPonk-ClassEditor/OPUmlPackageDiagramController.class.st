@@ -50,9 +50,10 @@ OPUmlPackageDiagramController >> buildNameEditorForm: aForm [
 
 { #category : #adding }
 OPUmlPackageDiagramController >> canBeTargetFor: aController [
-	^ (aController isKindOf: OPUmlClassController)
-		| (aController isKindOf: OPUmlPackageController)
-		| (aController isKindOf: OPUmlEnumerationController)
+	^ (super canBeTargetFor: aController)
+		or: [ (aController isKindOf: OPUmlClassController)
+				or: [ (aController isKindOf: OPUmlPackageController)
+						or: [ aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
 { #category : #'as yet unclassified' }
