@@ -64,9 +64,11 @@ OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
 { #category : #tests }
 OPUmlAttributeControllerTest >> testDescriptions [
 	| container |
+	controller diagramController: diagramController.
 	container := controller magritteDescription.
 	self assert: (container anySatisfy: [ :each | each label = 'Name' ]).
-	self assert: (container anySatisfy: [ :each | each label = 'Is Derived' ]).
+	self
+		assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
 ]
 
 { #category : #tests }

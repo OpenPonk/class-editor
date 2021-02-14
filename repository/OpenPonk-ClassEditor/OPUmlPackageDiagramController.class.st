@@ -24,7 +24,7 @@ OPUmlPackageDiagramController >> addAsTargetFor: aClassController [
 OPUmlPackageDiagramController >> allShowableElements [
 	"Should return all elements that could be directly hidden on diagram"
 
-	^ self elementsToShowInside
+	^ self elementsToShowInside , self diagram commonElements
 		,
 			((self model packagedElements
 				select:
@@ -47,6 +47,27 @@ OPUmlPackageDiagramController >> canBeTargetFor: aController [
 { #category : #'as yet unclassified' }
 OPUmlPackageDiagramController >> commonModelClassPrefix [
 	^ 'OPUML'
+]
+
+{ #category : #adding }
+OPUmlPackageDiagramController >> controllerFactory [
+	^ super controllerFactory
+		register: OPUmlClassController forModel: OPUMLClass;
+		register: OPUmlAttributeController forModel: OPUMLProperty;
+		register: OPUmlOperationController forModel: OPUMLOperation;
+		register: OPUmlGeneralizationController
+			forModel: OPUMLGeneralization;
+		register: OPUmlAssociationController forModel: OPUMLAssociation;
+		register: OPUmlPackageController forModel: OPUMLPackage;
+		register: OPUmlPackageController forModel: OPUMLModel;
+		register: OPUmlPackageController forModel: OPUMLProfile;
+		register: OPUmlExtensionController forModel: OPUMLExtension;
+		register: OPUmlAttributeController forModel: OPUMLExtensionEnd;
+		register: OPUmlEnumerationController forModel: OPUMLEnumeration;
+		register: OPUmlEnumerationLiteralController
+			forModel: OPUMLEnumerationLiteral;
+		register: OPUmlStereotypeController forModel: OPUMLStereotype;
+		register: OPUmlPackageImportController forModel: OPUMLPackageImport
 ]
 
 { #category : #forms }
@@ -168,11 +189,6 @@ OPUmlPackageDiagramController >> enableRefresh [
 		withAllSubAndSuperclassesDo: [ :each | uninstall value: each ]
 ]
 
-{ #category : #testing }
-OPUmlPackageDiagramController >> hasSupportForModel: aModel [
-	^ modelToControllerMapping includesKey: aModel class
-]
-
 { #category : #palette }
 OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 	aPalette newSeparator.
@@ -292,24 +308,6 @@ OPUmlPackageDiagramController >> initializeProfilePalette: aPalette [
 OPUmlPackageDiagramController >> isAppliedProfileInUse [
 	model profileApplications ifEmpty: [ ^ false ].
 	^ model packagedElements anySatisfy: [ :each | each appliedStereotypes isNotEmpty ]
-]
-
-{ #category : #adding }
-OPUmlPackageDiagramController >> modelToControllerMapping [
-	^ {OPUMLClass -> OPUmlClassController.
-	OPUMLProperty -> OPUmlAttributeController.
-	OPUMLOperation -> OPUmlOperationController.
-	OPUMLGeneralization -> OPUmlGeneralizationController.
-	OPUMLAssociation -> OPUmlAssociationController.
-	OPUMLPackage -> OPUmlPackageController.
-	OPUMLModel -> OPUmlPackageController.
-	OPUMLProfile -> OPUmlPackageController.
-	OPUMLExtension -> OPUmlExtensionController.
-	OPUMLExtensionEnd -> OPUmlAttributeController.
-	OPUMLEnumeration -> OPUmlEnumerationController.
-	OPUMLEnumerationLiteral -> OPUmlEnumerationLiteralController.
-	OPUMLStereotype -> OPUmlStereotypeController.
-	OPUMLPackageImport -> OPUmlPackageImportController} asDictionary
 ]
 
 { #category : #hooks }
