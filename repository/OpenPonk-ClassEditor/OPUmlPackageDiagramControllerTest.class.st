@@ -11,7 +11,7 @@ OPUmlPackageDiagramControllerTest >> controllerClass [
 
 { #category : #accessing }
 OPUmlPackageDiagramControllerTest >> modelClass [
-	^ OPUMLModel
+	^ OPUMLPackage
 ]
 
 { #category : #running }

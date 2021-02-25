@@ -52,7 +52,9 @@ OPUmlClassEditorPlugin >> icon [
 
 { #category : #accessing }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
-	^ aModel class = self modelClass | (aModel class = OPUMLPackage) | (aModel class = OPUMLProfile)
+	^ {self modelClass.
+	OPUMLModel.
+	OPUMLProfile} includes: aModel class
 ]
 
 { #category : #'as yet unclassified' }
@@ -62,7 +64,7 @@ OPUmlClassEditorPlugin >> layouterClass [
 
 { #category : #accessing }
 OPUmlClassEditorPlugin >> modelClass [
-	^ OPUMLModel
+	^ OPUMLPackage
 ]
 
 { #category : #accessing }

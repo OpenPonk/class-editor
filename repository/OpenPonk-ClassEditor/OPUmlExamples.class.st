@@ -15,7 +15,7 @@ Class {
 
 { #category : #examples }
 OPUmlExamples class >> exampleEmptyModel [
-	^ OPProject openOnModel: (OPUMLModel new name: 'Model')
+	^ OPProject openOnModel: (OPUMLPackage new name: 'Model')
 ]
 
 { #category : #examples }
@@ -114,7 +114,7 @@ OPUmlExamples >> emptyEnumeration [
 { #category : #accessing }
 OPUmlExamples >> emptyModel [
 	<gtExample>
-	^ OPUMLModel new name: 'Empty Model'
+	^ OPUMLPackage new name: 'Empty Model'
 ]
 
 { #category : #accessing }
