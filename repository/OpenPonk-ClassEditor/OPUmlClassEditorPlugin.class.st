@@ -63,8 +63,9 @@ OPUmlClassEditorPlugin >> icon [
 { #category : #testing }
 OPUmlClassEditorPlugin >> isForController: aDiagramController [
 	| appliedProfiles pluginClassesWithProfileCounts |
-	appliedProfiles := aDiagramController model profileApplications
-		collect: #appliedProfile.
+	appliedProfiles := aDiagramController model
+		ifNil: [ {} ]
+		ifNotNil: [ :model | model profileApplications collect: #appliedProfile ].
 	pluginClassesWithProfileCounts := (self class withAllSubclasses
 		collect: [ :eachPluginClass | 
 			eachPluginClass
