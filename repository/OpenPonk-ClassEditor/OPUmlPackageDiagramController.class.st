@@ -338,3 +338,16 @@ OPUmlPackageDiagramController >> showAllElements [
 		select: [ :each | each isKindOf: OPUmlClassController ]
 		thenDo: #refreshFigure
 ]
+
+{ #category : #'as yet unclassified' }
+OPUmlPackageDiagramController >> typeOfModel: aModel [
+	^ OPModelObjectType
+		named: (aModel umlClassName splitOnCapitals joinUsing: ' ')
+		withSubtype:
+			(aModel appliedStereotypes
+				ifEmpty: [ OPModelObjectType named: '(without stereotype)' ]
+				ifNotEmpty: [ OPModelObjectType
+						named:
+							(aModel appliedStereotypes first umlClassName splitOnCapitals
+								joinUsing: ' ') ])
+]

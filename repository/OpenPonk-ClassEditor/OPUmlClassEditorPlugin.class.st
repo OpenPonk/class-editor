@@ -7,6 +7,11 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Plugin'
 }
 
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin class >> defaultProfiles [
+	^ {}
+]
+
 { #category : #toolbar }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 	FDSaveFileDialog new
@@ -40,6 +45,11 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 		open
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin >> defaultProfiles [
+	^ self class defaultProfiles
+]
+
 { #category : #accessing }
 OPUmlClassEditorPlugin >> diagramControllerClass [
 	^ OPUmlPackageDiagramController
@@ -48,6 +58,22 @@ OPUmlClassEditorPlugin >> diagramControllerClass [
 { #category : #accessing }
 OPUmlClassEditorPlugin >> icon [
 	^ OPUmlIcons packageIcon
+]
+
+{ #category : #testing }
+OPUmlClassEditorPlugin >> isForController: aDiagramController [
+	| appliedProfiles pluginClassesWithProfileCounts |
+	appliedProfiles := aDiagramController model profileApplications
+		collect: #appliedProfile.
+	pluginClassesWithProfileCounts := (self class withAllSubclasses
+		collect: [ :eachPluginClass | 
+			eachPluginClass
+				->
+					(eachPluginClass defaultProfiles
+						count: [ :eachDefaultPlugin | appliedProfiles includes: eachDefaultPlugin ]) ])
+		sorted: [ :a :b | a value > b value ].
+	^ pluginClassesWithProfileCounts first value isZero
+		or: [ pluginClassesWithProfileCounts first key = self class ]
 ]
 
 { #category : #accessing }

@@ -139,6 +139,13 @@ OPUmlNavigatorAdapter >> retrieveSuffixMapping [
 	^ suffixMapping ifNil: [ suffixMapping := self suffixMapping asDictionary ]
 ]
 
+{ #category : #private }
+OPUmlNavigatorAdapter >> sort: modelObjects [
+	^ modelObjects
+		sorted:
+			[ :a :b | a name isNotNil and: [ b name isNil or: [ a name < b name ] ] ]
+]
+
 { #category : #accessing }
 OPUmlNavigatorAdapter >> suffixFor: anObject [
 	^ (self mappingFor: anObject in: self retrieveSuffixMapping)
