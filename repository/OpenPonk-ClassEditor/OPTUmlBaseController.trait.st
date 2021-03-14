@@ -9,7 +9,7 @@ OPTUmlBaseController >> buildNameEditorForm: aForm [
 		text: self model name;
 		whenTextIsAccepted: [ :newValue | 
 			self model name: newValue.
-			self refreshFigure ]
+			self reactToAttributeWrite ]
 ]
 
 { #category : #forms }
@@ -33,9 +33,11 @@ OPTUmlBaseController >> descriptionComment [
 						ifEmpty: [ '' ]
 						ifNotEmpty: [ :oc | oc first body asString ] ]
 				write: [ :me :newValue | 
-					me model ownedComments
-						ifEmpty: [ me model ownedComments add: OPUMLComment new ].
-					me model ownedComments first body: newValue asString.
+					newValue asString
+						ifEmpty: [ me model ownedComments: OrderedCollection new ]
+						ifNotEmpty: [ me model ownedComments
+								ifEmpty: [ me model ownedComments add: OPUMLComment new ].
+							me model ownedComments first body: newValue asString ].
 					self reactToAttributeWrite ]);
 		label: 'Comment';
 		priority: 100;
