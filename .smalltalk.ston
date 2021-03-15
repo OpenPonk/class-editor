@@ -9,16 +9,16 @@ SmalltalkCISpec {
 		}
 	],
 	#postLoading : [
-		'scripts/script.st'
+		'.github/scripts/script.st'
 	],
 	#testing : {
 		#coverage : {
 			#packages : [
-				'OpenPonk-ClassEditor'
+				'OpenPonk-ClassEditor*'
 			]
 		},
 		#packages : [
-			'OpenPonk-ClassEditor'
+			'OpenPonk*'
 		]
 	}
 }
