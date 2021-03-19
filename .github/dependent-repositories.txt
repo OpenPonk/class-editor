@@ -1,5 +1,5 @@
 {
 	"include" : [
-		{ "repository" : "OpenPonk/all-in-one" }
+		{ "repository" : "OpenPonk/all-in-one", "build-dependent" : true }
 	]
 }

@@ -2,6 +2,11 @@ name: Nightly
 
 on:
   workflow_dispatch:
+    inputs:
+      build-dependent:
+        description: 'Should build dependent repositories? (true/false)'
+        required: false
+        default: false
   push:
     branches:
       - 'master'
@@ -174,6 +179,7 @@ jobs:
   create-dependent-matrix:
     runs-on: ubuntu-latest
     name: 'Find dependent repositories'
+    if: ${{ github.event_name == 'push' || contains(github.event.inputs.build-dependent || false, 'true') }}
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -200,3 +206,4 @@ jobs:
           workflow: Nightly
           repo: ${{ matrix.repository }}
           token: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
+          inputs: '{ "build-dependent": "${{ matrix.build-dependent }}" }'
