@@ -5,7 +5,8 @@ SmalltalkCISpec {
 				#pharo
 			],
 			#baseline : 'ClassEditor',
-			#directory : 'repository'
+			#directory : 'repository',
+			#load : [ 'complete' ]
 		}
 	],
 	#postLoading : [

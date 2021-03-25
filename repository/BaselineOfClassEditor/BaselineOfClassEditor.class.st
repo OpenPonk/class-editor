@@ -7,6 +7,11 @@ Class {
 	#category : #BaselineOfClassEditor
 }
 
+{ #category : #plugins }
+BaselineOfClassEditor class >> loadPlugins [
+	self new loadPlugins
+]
+
 { #category : #accessing }
 BaselineOfClassEditor >> baseline: spec [
 	<baseline>
@@ -50,10 +55,27 @@ BaselineOfClassEditor >> baseline: spec [
 				baseline: 'OntoUMLProfile'
 				with: [ spec repository: 'github://openponk/ontouml-profile/repository' ].
 			spec
-				group: 'no-verifications'
-				with: #(OpenPonk 'OpenPonk-ClassEditor' OntoUMLProfile).
-			spec
 				group: 'plugin'
-				with: #('OpenPonk-ClassEditor' OntoUMLProfile 'OntoUMLVerificationFramework').
+				with: #('OpenPonk-ClassEditor' OntoUMLProfile).
+			spec
+				group: 'complete-plugin'
+				with: #(plugin OntoUMLVerificationFramework).
+			spec
+				group: 'complete'
+				with: #(OpenPonk 'complete-plugin').
 			spec group: 'default' with: #(OpenPonk plugin) ]
+]
+
+{ #category : #plugins }
+BaselineOfClassEditor >> loadPlugins [
+	self loadVerificationFramework
+]
+
+{ #category : #'as yet unclassified' }
+BaselineOfClassEditor >> loadVerificationFramework [
+	Metacello new
+		baseline: 'ModelQuery';
+		repository: 'github://openponk/ontouml-modelquery';
+		load: #(plugin)
+
 ]
