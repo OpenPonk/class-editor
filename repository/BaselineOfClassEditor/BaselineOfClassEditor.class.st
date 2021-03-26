@@ -77,8 +77,7 @@ BaselineOfClassEditor >> loadPlugins [
 { #category : #'as yet unclassified' }
 BaselineOfClassEditor >> loadVerificationFramework [
 	Metacello new
-		baseline: 'ModelQuery';
-		repository: 'github://openponk/ontouml-modelquery';
-		load: #(plugin)
-
+		baseline: 'OntoUMLVerificationFramework';
+		repository: 'github://openponk/ontouml-verifications';
+		load: 'plugin'
 ]
