@@ -4,6 +4,8 @@ I am controller for managing the main class diagram presentation and handling it
 Class {
 	#name : #OPUmlPackageDiagramController,
 	#superclass : #OPDiagramController,
+	#traits : 'OPTUmlBaseController',
+	#classTraits : 'OPTUmlBaseController classTrait',
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
@@ -22,7 +24,7 @@ OPUmlPackageDiagramController >> addAsTargetFor: aClassController [
 OPUmlPackageDiagramController >> allShowableElements [
 	"Should return all elements that could be directly hidden on diagram"
 
-	^ self elementsToShowInside
+	^ self elementsToShowInside , self diagram commonElements
 		,
 			((self model packagedElements
 				select:
@@ -34,25 +36,12 @@ OPUmlPackageDiagramController >> allShowableElements [
 				flatCollect: [ :each | each ownedLiterals ])
 ]
 
-{ #category : #forms }
-OPUmlPackageDiagramController >> buildEditorForm: aForm [
-	aForm fromMagritteDescriptions: self magritteDescription
-]
-
-{ #category : #forms }
-OPUmlPackageDiagramController >> buildNameEditorForm: aForm [
-	(aForm addTextInput: 'Name')
-		text: self model name;
-		whenTextIsAccepted: [ :newValue | 
-			self model name: newValue.
-			self refreshFigure ]
-]
-
 { #category : #adding }
 OPUmlPackageDiagramController >> canBeTargetFor: aController [
-	^ (aController isKindOf: OPUmlClassController)
-		| (aController isKindOf: OPUmlPackageController)
-		| (aController isKindOf: OPUmlEnumerationController)
+	^ (super canBeTargetFor: aController)
+		or: [ (aController isKindOf: OPUmlClassController)
+				or: [ (aController isKindOf: OPUmlPackageController)
+						or: [ aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -60,11 +49,25 @@ OPUmlPackageDiagramController >> commonModelClassPrefix [
 	^ 'OPUML'
 ]
 
-{ #category : #forms }
-OPUmlPackageDiagramController >> descriptionAccessor: aSymbol [
-	^ MAPluggableAccessor
-		read: [ :me | me model perform: aSymbol ]
-		write: [ :me :newValue | me model perform: (aSymbol , ':') asSymbol with: newValue ]
+{ #category : #adding }
+OPUmlPackageDiagramController >> controllerFactory [
+	^ super controllerFactory
+		register: OPUmlClassController forModel: OPUMLClass;
+		register: OPUmlAttributeController forModel: OPUMLProperty;
+		register: OPUmlOperationController forModel: OPUMLOperation;
+		register: OPUmlGeneralizationController
+			forModel: OPUMLGeneralization;
+		register: OPUmlAssociationController forModel: OPUMLAssociation;
+		register: OPUmlPackageController forModel: OPUMLPackage;
+		register: OPUmlPackageController forModel: OPUMLModel;
+		register: OPUmlPackageController forModel: OPUMLProfile;
+		register: OPUmlExtensionController forModel: OPUMLExtension;
+		register: OPUmlAttributeController forModel: OPUMLExtensionEnd;
+		register: OPUmlEnumerationController forModel: OPUMLEnumeration;
+		register: OPUmlEnumerationLiteralController
+			forModel: OPUMLEnumerationLiteral;
+		register: OPUmlStereotypeController forModel: OPUMLStereotype;
+		register: OPUmlPackageImportController forModel: OPUMLPackageImport
 ]
 
 { #category : #forms }
@@ -100,67 +103,6 @@ OPUmlPackageDiagramController >> descriptionAppliedProfile [
 					self refreshFigure ]);
 		label: 'Applied Profile';
 		priority: 10;
-		beSorted;
-		yourself
-]
-
-{ #category : #forms }
-OPUmlPackageDiagramController >> descriptionComment [
-	<magritteDescription>
-	^ MAMemoDescription new
-		required: false;
-		accessor:
-			(MAPluggableAccessor
-				read:
-					[ :me | me model ownedComments ifEmpty: [ '' ] ifNotEmpty: [ :oc | oc first body asString ] ]
-				write: [ :me :newValue | 
-					me model ownedComments ifEmpty: [ me model ownedComments add: OPUMLComment new ].
-					me model ownedComments first body: newValue asString ]);
-		label: 'Comment';
-		priority: 100;
-		yourself
-]
-
-{ #category : #forms }
-OPUmlPackageDiagramController >> descriptionModelInfo [
-	<magritteDescription>
-	^ MAStringDescription new
-		beReadonly;
-		accessor: (MAPluggableAccessor read: [ :me | '' ] write: [ :me :newValue |  ]);
-		label: self model className;
-		priority: 0;
-		yourself
-]
-
-{ #category : #forms }
-OPUmlPackageDiagramController >> descriptionName [
-	<magritteDescription>
-	^ MAStringDescription new
-		accessor: (self descriptionAccessor: #name);
-		label: 'Name';
-		priority: 1;
-		yourself
-]
-
-{ #category : #forms }
-OPUmlPackageDiagramController >> descriptionVisibility [
-	<magritteDescription>
-	^ MASingleOptionDescription new
-		optionsAndLabels:
-			{nil -> ''.
-			OPUMLVisibilityKind public -> 'public'.
-			OPUMLVisibilityKind protected -> 'protected'.
-			OPUMLVisibilityKind private -> 'private'.
-			OPUMLVisibilityKind new package -> 'package'};
-		reference: MAStringDescription new;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | me model visibility ]
-				write: [ :me :newValue | 
-					me model visibility: newValue.
-					self refreshFigure ]);
-		label: 'Visibility';
-		priority: 8;
 		beSorted;
 		yourself
 ]
@@ -245,11 +187,6 @@ OPUmlPackageDiagramController >> enableRefresh [
 				ifNotNil: [ :l | l asSet do: #uninstall ] ] ].
 	OPUmlElementController
 		withAllSubAndSuperclassesDo: [ :each | uninstall value: each ]
-]
-
-{ #category : #testing }
-OPUmlPackageDiagramController >> hasSupportForModel: aModel [
-	^ modelToControllerMapping includesKey: aModel class
 ]
 
 { #category : #palette }
@@ -373,22 +310,9 @@ OPUmlPackageDiagramController >> isAppliedProfileInUse [
 	^ model packagedElements anySatisfy: [ :each | each appliedStereotypes isNotEmpty ]
 ]
 
-{ #category : #adding }
-OPUmlPackageDiagramController >> modelToControllerMapping [
-	^ {OPUMLClass -> OPUmlClassController.
-	OPUMLProperty -> OPUmlAttributeController.
-	OPUMLOperation -> OPUmlOperationController.
-	OPUMLGeneralization -> OPUmlGeneralizationController.
-	OPUMLAssociation -> OPUmlAssociationController.
-	OPUMLPackage -> OPUmlPackageController.
-	OPUMLModel -> OPUmlPackageController.
-	OPUMLProfile -> OPUmlPackageController.
-	OPUMLExtension -> OPUmlExtensionController.
-	OPUMLExtensionEnd -> OPUmlAttributeController.
-	OPUMLEnumeration -> OPUmlEnumerationController.
-	OPUMLEnumerationLiteral -> OPUmlEnumerationLiteralController.
-	OPUMLStereotype -> OPUmlStereotypeController.
-	OPUMLPackageImport -> OPUmlPackageImportController} asDictionary
+{ #category : #hooks }
+OPUmlPackageDiagramController >> reactToAttributeWrite [
+	"do nothing"
 ]
 
 { #category : #palette }
@@ -413,4 +337,17 @@ OPUmlPackageDiagramController >> showAllElements [
 	self controllers
 		select: [ :each | each isKindOf: OPUmlClassController ]
 		thenDo: #refreshFigure
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlPackageDiagramController >> typeOfModel: aModel [
+	^ OPModelObjectType
+		named: (aModel umlClassName splitOnCapitals joinUsing: ' ')
+		withSubtype:
+			(aModel appliedStereotypes
+				ifEmpty: [ OPModelObjectType named: '(without stereotype)' ]
+				ifNotEmpty: [ OPModelObjectType
+						named:
+							(aModel appliedStereotypes first umlClassName splitOnCapitals
+								joinUsing: ' ') ])
 ]

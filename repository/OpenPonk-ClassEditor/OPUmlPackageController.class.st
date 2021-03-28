@@ -33,7 +33,7 @@ OPUmlPackageController >> attachTo: aDiagramController [
 
 { #category : #configuration }
 OPUmlPackageController >> beForModel [
-	modelClass := OPUMLModel
+	modelClass := OPUMLPackage
 ]
 
 { #category : #configuration }

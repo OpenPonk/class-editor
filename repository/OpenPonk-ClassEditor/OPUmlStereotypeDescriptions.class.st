@@ -2,16 +2,16 @@
 I take a model element and provide a list of magritte descriptions for all the properties added by stereotypes applied to the model element.
 "
 Class {
-	#name : #OPUmlSteretypeDescriptions,
+	#name : #OPUmlStereotypeDescriptions,
 	#superclass : #Object,
 	#instVars : [
 		'controller'
 	],
-	#category : 'OpenPonk-ClassEditor-Profiles'
+	#category : #'OpenPonk-ClassEditor-Profiles'
 }
 
 { #category : #'as yet unclassified' }
-OPUmlSteretypeDescriptions >> accessorFor: anAttribute of: aStereotype [
+OPUmlStereotypeDescriptions >> accessorFor: anAttribute of: aStereotype [
 	^ MAPluggableAccessor
 		read: [ :me | aStereotype perform: anAttribute name asSymbol ]
 		write: [ :me :newValue | 
@@ -20,7 +20,7 @@ OPUmlSteretypeDescriptions >> accessorFor: anAttribute of: aStereotype [
 ]
 
 { #category : #adding }
-OPUmlSteretypeDescriptions >> addTo: aCollection attribute: anAttribute of: aStereotype [
+OPUmlStereotypeDescriptions >> addTo: aCollection attribute: anAttribute of: aStereotype [
 	anAttribute type name = #Boolean
 		ifTrue: [ aCollection
 				add:
@@ -38,17 +38,17 @@ OPUmlSteretypeDescriptions >> addTo: aCollection attribute: anAttribute of: aSte
 ]
 
 { #category : #accessing }
-OPUmlSteretypeDescriptions >> controller [
+OPUmlStereotypeDescriptions >> controller [
 	^ controller
 ]
 
 { #category : #accessing }
-OPUmlSteretypeDescriptions >> controller: anObject [
+OPUmlStereotypeDescriptions >> controller: anObject [
 	controller := anObject
 ]
 
 { #category : #'as yet unclassified' }
-OPUmlSteretypeDescriptions >> descriptions [
+OPUmlStereotypeDescriptions >> descriptions [
 	| descriptions |
 	self model ifNil: [ ^ #() ].
 	descriptions := OrderedCollection new.
@@ -62,6 +62,6 @@ OPUmlSteretypeDescriptions >> descriptions [
 ]
 
 { #category : #accessing }
-OPUmlSteretypeDescriptions >> model [
+OPUmlStereotypeDescriptions >> model [
 	^ controller model
 ]

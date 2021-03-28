@@ -4,6 +4,8 @@ I am a base class for diagram element controllers.
 Class {
 	#name : #OPUmlElementController,
 	#superclass : #OPElementController,
+	#traits : 'OPTUmlBaseController',
+	#classTraits : 'OPTUmlBaseController classTrait',
 	#instVars : [
 		'diagramElement'
 	],
@@ -28,20 +30,6 @@ OPUmlElementController >> buildAbstractEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #forms }
-OPUmlElementController >> buildEditorForm: aForm [
-	aForm fromMagritteDescriptions: self magritteDescription
-]
-
-{ #category : #forms }
-OPUmlElementController >> buildNameEditorForm: aForm [
-	(aForm addTextInput: 'Name')
-		text: self model name;
-		whenTextIsAccepted: [ :newValue | 
-			self model name: newValue.
-			self refreshFigure ]
-]
-
 { #category : #figures }
 OPUmlElementController >> createDiagramElement [
 	^ self subclassResponsibility
@@ -50,57 +38,6 @@ OPUmlElementController >> createDiagramElement [
 { #category : #figures }
 OPUmlElementController >> createFigure [
 	^ self shouldNotImplement
-]
-
-{ #category : #forms }
-OPUmlElementController >> descriptionAccessor: aSymbol [
-	^ MAPluggableAccessor
-		read: [ :me | me model perform: aSymbol ]
-		write: [ :me :newValue | 
-			me model perform: (aSymbol , ':') asSymbol with: newValue.
-			diagramElement ifNotNil: [ self refreshFigure ] ]
-]
-
-{ #category : #forms }
-OPUmlElementController >> descriptionComment [
-	<magritteDescription>
-	^ MAMemoDescription new
-		required: false;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | 
-					me model ownedComments
-						ifEmpty: [ '' ]
-						ifNotEmpty: [ :oc | oc first body asString ] ]
-				write: [ :me :newValue | 
-					me model ownedComments
-						ifEmpty: [ me model ownedComments add: OPUMLComment new ].
-					me model ownedComments first body: newValue asString.
-					self refreshFigure ]);
-		label: 'Comment';
-		priority: 100;
-		yourself
-]
-
-{ #category : #forms }
-OPUmlElementController >> descriptionModelInfo [
-	<magritteDescription>
-	^ MAStringDescription new
-		beReadonly;
-		accessor: (MAPluggableAccessor read: [ :me | '' ] write: [ :me :newValue |  ]);
-		label: self model className;
-		priority: 0;
-		yourself
-]
-
-{ #category : #forms }
-OPUmlElementController >> descriptionName [
-	<magritteDescription>
-	^ MAStringDescription new
-		accessor: (self descriptionAccessor: #name);
-		label: 'Name';
-		priority: 1;
-		yourself
 ]
 
 { #category : #forms }
@@ -132,29 +69,6 @@ OPUmlElementController >> descriptionStereotype [
 		yourself
 ]
 
-{ #category : #forms }
-OPUmlElementController >> descriptionVisibility [
-	<magritteDescription>
-	^ MASingleOptionDescription new
-		optionsAndLabels:
-			{nil -> ''.
-			OPUMLVisibilityKind public -> 'public'.
-			OPUMLVisibilityKind protected -> 'protected'.
-			OPUMLVisibilityKind private -> 'private'.
-			OPUMLVisibilityKind new package -> 'package'};
-		reference: MAStringDescription new;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | me model visibility ]
-				write: [ :me :newValue | 
-					me model visibility: newValue.
-					self refreshFigure ]);
-		label: 'Visibility';
-		priority: 8;
-		beSorted;
-		yourself
-]
-
 { #category : #figures }
 OPUmlElementController >> diagramElement [
 	^ diagramElement
@@ -171,6 +85,11 @@ OPUmlElementController >> magritteDescription [
 	container := MAPragmaBuilder for: self.
 	container addAll: self stereotypeMagritteDescription.
 	^ container
+]
+
+{ #category : #hooks }
+OPUmlElementController >> reactToAttributeWrite [
+	diagramElement ifNotNil: [ self refreshFigure ]
 ]
 
 { #category : #figures }
@@ -207,7 +126,7 @@ OPUmlElementController >> renderFigureIn: aView [
 { #category : #accessing }
 OPUmlElementController >> stereotypeMagritteDescription [
 	| descriptions |
-	descriptions := OPUmlSteretypeDescriptions new controller: self.
+	descriptions := OPUmlStereotypeDescriptions new controller: self.
 	^ descriptions descriptions
 ]
 

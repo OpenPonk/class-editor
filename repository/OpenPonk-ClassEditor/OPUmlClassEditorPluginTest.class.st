@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'plugin'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#category : #'OpenPonk-ClassEditor-Tests'
 }
 
 { #category : #running }
@@ -25,7 +25,7 @@ OPUmlClassEditorPluginTest >> testIcon [
 
 { #category : #tests }
 OPUmlClassEditorPluginTest >> testModelClass [
-	self assert: plugin modelClass equals: OPUMLModel
+	self assert: plugin modelClass equals: OPUMLPackage
 ]
 
 { #category : #tests }

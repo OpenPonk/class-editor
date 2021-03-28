@@ -5,20 +5,23 @@ SmalltalkCISpec {
 				#pharo
 			],
 			#baseline : 'ClassEditor',
-			#directory : 'repository'
+			#directory : 'repository',
+			#onConflict : #useIncoming,
+			#load : [ 'complete' ]
 		}
 	],
 	#postLoading : [
-		'scripts/script.st'
+		'.github/scripts/script.st'
 	],
 	#testing : {
 		#coverage : {
 			#packages : [
-				'OpenPonk-ClassEditor'
+				'OpenPonk-ClassEditor*'
 			]
 		},
 		#packages : [
-			'OpenPonk-ClassEditor'
+			'OpenPonk*',
+			'OntoUML*'
 		]
 	}
 }

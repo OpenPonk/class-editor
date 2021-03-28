@@ -7,20 +7,9 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Plugin'
 }
 
-{ #category : #toolbar }
-OPUmlClassEditorPlugin class >> addModelTo: aProject [
-	
-]
-
-{ #category : #toolbar }
-OPUmlClassEditorPlugin class >> contextMenu: aBuilder [
-	<opModelNavigatorContextMenu: #OPUmlClassEditorPlugin>
-	| navigator selectedItem |
-	navigator := aBuilder model.
-	selectedItem := navigator selectedItem.
-	(selectedItem oclIsKindOf: #Package)
-		ifTrue: [ (aBuilder item: 'Export as XMI...') action: [ self exportPackage: selectedItem ].
-			(aBuilder item: 'Import from XMI...') action: [ self importToPackage: selectedItem ] ]
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin class >> defaultProfiles [
+	^ {}
 ]
 
 { #category : #toolbar }
@@ -41,26 +30,24 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 { #category : #toolbar }
 OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 	FDOpenFileDialog new
-		whenSelected: [ :file | |model|
+		whenSelected: [ :file | 
+			| model |
 			model := OPUMLXMIReader read: file contents.
+			(model packagedElements size = 1
+				and: [ model packagedElements first oclIsKindOf: #Package ])
+				ifTrue: [ model := model packagedElements first ].
+			aPackage packagedElements: model packagedElements.
 			self inform: 'Imported from ' , file fullName ];
 		extensionFilters:
-			{'XMI files' -> #(xmi xml uml).
-			'All files' -> #()};
+			{('XMI files' -> #(xmi xml uml)).
+			('All files' -> #())};
 		defaultFolder: FileLocator imageDirectory asFileReference;
 		open
 ]
 
-{ #category : #toolbar }
-OPUmlClassEditorPlugin class >> toolbarMenu: aBuilder [
-	"<opEditorToolbarMenu: #OPUmlOldClassPlugin>
-	(aBuilder item: 'DSL Editor')
-		action: [ OPDslEditor new
-				parser: OPUmlDslParser new;
-				exporter: OPUmlDslExporter new;
-				modelClass: MooseModel;
-				model: aBuilder model diagramController model;
-				openWithSpec ]"
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin >> defaultProfiles [
+	^ self class defaultProfiles
 ]
 
 { #category : #accessing }
@@ -73,9 +60,28 @@ OPUmlClassEditorPlugin >> icon [
 	^ OPUmlIcons packageIcon
 ]
 
+{ #category : #testing }
+OPUmlClassEditorPlugin >> isForController: aDiagramController [
+	| appliedProfiles pluginClassesWithProfileCounts |
+	appliedProfiles := aDiagramController model
+		ifNil: [ {} ]
+		ifNotNil: [ :model | model profileApplications collect: #appliedProfile ].
+	pluginClassesWithProfileCounts := (self class withAllSubclasses
+		collect: [ :eachPluginClass | 
+			eachPluginClass
+				->
+					(eachPluginClass defaultProfiles
+						count: [ :eachDefaultPlugin | appliedProfiles includes: eachDefaultPlugin ]) ])
+		sorted: [ :a :b | a value > b value ].
+	^ pluginClassesWithProfileCounts first value isZero
+		or: [ pluginClassesWithProfileCounts first key = self class ]
+]
+
 { #category : #accessing }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
-	^ aModel class = self modelClass | (aModel class = OPUMLPackage) | (aModel class = OPUMLProfile)
+	^ {self modelClass.
+	OPUMLModel.
+	OPUMLProfile} includes: aModel class
 ]
 
 { #category : #'as yet unclassified' }
@@ -85,7 +91,7 @@ OPUmlClassEditorPlugin >> layouterClass [
 
 { #category : #accessing }
 OPUmlClassEditorPlugin >> modelClass [
-	^ OPUMLModel
+	^ OPUMLPackage
 ]
 
 { #category : #accessing }
