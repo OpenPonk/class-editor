@@ -6,6 +6,7 @@ SmalltalkCISpec {
 			],
 			#baseline : 'ClassEditor',
 			#directory : 'repository',
+			#onConflict : #useIncoming,
 			#load : [ 'complete' ]
 		}
 	],
