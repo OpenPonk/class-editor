@@ -21,4 +21,4 @@ cp $vm_dir/Pharo.exe $package_dir/$PROJECT_NAME.exe
 
 & $vm_dir/PharoConsole.exe -headless $package_dir/$PROJECT_NAME.image eval --save "OPVersion currentWithRunId: $RUN_ID projectName: '$REPOSITORY_NAME'"
 
-Compress-Archive -Path $package_dir -DestinationPath $PROJECT_NAME-$PLATFORM-$VERSION
+Compress-Archive -Path $package_dir -DestinationPath "$PROJECT_NAME-$PLATFORM-$VERSION.zip"
