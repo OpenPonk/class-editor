@@ -9,6 +9,6 @@
 Metacello new
 	baseline: 'ClassEditor';
 	repository: 'github://OpenPonk/class-editor/repository';
-	load.
+	load: 'complete'.
 ```
 
