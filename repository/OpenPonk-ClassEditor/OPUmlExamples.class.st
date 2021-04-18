@@ -14,11 +14,6 @@ Class {
 }
 
 { #category : #examples }
-OPUmlExamples class >> exampleEmptyModel [
-	^ OPProject openOnModel: (OPUMLPackage new name: 'Model')
-]
-
-{ #category : #examples }
 OPUmlExamples class >> exampleEmptyPackage [
 	^ OPProject openOnModel: (OPUMLPackage new name: 'Package')
 ]
@@ -62,11 +57,6 @@ OPUmlExamples class >> menuCommandOn: aBuilder [
 				label: 'New Empty Package';
 				icon: OPUmlIcons packageIcon;
 				action: [ self exampleEmptyPackage ].
-			(aBuilder item: #UMLEmptyModel)
-				parent: #UMLClassEditor;
-				label: 'New Empty Model';
-				icon: OPUmlIcons modelIcon;
-				action: [ self exampleEmptyModel ].
 			(aBuilder item: #UMLEmptyProfile)
 				parent: #UMLClassEditor;
 				label: 'New Empty Profile';
