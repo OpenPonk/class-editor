@@ -1,7 +1,7 @@
-Extension { #name : #OPUmlModel }
+Extension { #name : #OPUMLModel }
 
 { #category : #'*LiveClassEditor-Model-Extensions' }
-OPUmlModel >> populateFrom: aPackage [
+OPUMLModel >> populateFrom: aPackage [
 	| clsMapping |
 	self name: aPackage name.
 	clsMapping := Dictionary new.

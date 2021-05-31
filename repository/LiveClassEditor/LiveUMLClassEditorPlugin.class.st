@@ -11,7 +11,7 @@ LiveUMLClassEditorPlugin >> diagramControllerClass [
 
 { #category : #'as yet unclassified' }
 LiveUMLClassEditorPlugin >> modelClass [
-	^ OPUmlModel
+	^ OPUMLModel
 ]
 
 { #category : #'as yet unclassified' }
