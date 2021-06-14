@@ -26,16 +26,17 @@ OPUmlAssociationShape >> addConstraintsTo: aCollection at: aPosition [
 OPUmlAssociationShape >> constraintLabel: aLabel at: aPosition side: aSide [
 	| config anchor |
 	config := Dictionary
-		with: #source -> (Array with: 10 with: aSide * 10)
-		with: #target -> (Array with: -10 with: aSide * 10)
-		with: #middle -> (Array with: 0.5 with: aSide * 10)
+		with: #source -> (Array with: 10 with: aSide * 20)
+		with: #target -> (Array with: -10 with: aSide * 20)
+		with: #middle -> (Array with: 0.5 with: aSide * 20)
 		with: #center -> (Array with: 0.5 with: 0).
-	anchor := OPRTAnchorConstraint new.
+	anchor := OPRTRailConstraint new.
 	anchor
-		element: aLabel rtElement;
-		edge: self rtEdge;
-		balance: (config at: aPosition) first;
-		minDistance: (config at: aPosition) second.
+		noGripLine;
+		initialPosition: (config at: aPosition) first;
+		distance: (config at: aPosition) second;
+		element: aLabel rtElement connection: self rtEdge.
+	aLabel rtElement @ RTDraggable.
 	^ anchor
 ]
 
@@ -147,10 +148,10 @@ OPUmlAssociationShape >> propertiesOfModel: aModel [
 { #category : #rendering }
 OPUmlAssociationShape >> renderIn: aView [
 	super renderIn: aView.
+	self ownedElements do: [ :each | each renderIn: view ].
 	self addConstraintsTo: constraints at: #middle.
 	sourceEndLabels addConstraintsTo: constraints at: #source.
 	targetEndLabels addConstraintsTo: constraints at: #target.
-	self ownedElements do: [ :each | each renderIn: view ].
 	constraints do: #build.
 	self update
 ]
@@ -163,6 +164,5 @@ OPUmlAssociationShape >> update [
 		headDecorator: (self decoratorFor: modelElement memberEnds second).
 	self rtEdge shape color: self style strokeColor.
 	self rtEdge view ifNotNil: [ self rtEdge update ].
-	constraints do: #update.
 	self ownedElements do: #update
 ]
