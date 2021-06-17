@@ -12,7 +12,7 @@
 Class {
 	#name : #OPUmlAssociationBuilder,
 	#superclass : #OPUmlAssociationGrammar,
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#category : #'OpenPonk-UML-DSL-Builders'
 }
 
 { #category : #accessing }
@@ -20,7 +20,7 @@ OPUmlAssociationBuilder >> association [
 	^ super association
 		==> [ :nodes | 
 			| assoc |
-			assoc := OPFAMIXBinaryAssociation new.
+			assoc := DCFAMIXBinaryAssociation new.
 			assoc name: (nodes fourth ifNil: [ '' ]).
 			nodes first second association: assoc.
 			nodes third second association: assoc.
@@ -47,7 +47,7 @@ OPUmlAssociationBuilder >> endSymbol [
 		==>
 			[ :nodes | 
 			nodes = '>'
-				ifTrue: [ {OPUmlAggregationKind none.
+				ifTrue: [ {DCUmlAggregationKind none.
 					true} ]
 				ifFalse: [ nodes ] ]
 ]
@@ -57,7 +57,7 @@ OPUmlAssociationBuilder >> leftEnd [
 	^ super leftEnd
 		==> [ :nodes | 
 			{nodes first.
-			(OPFAMIXProperty new
+			(DCFAMIXProperty new
 				name: nodes third;
 				multiplicity: nodes second).
 			nodes fourth first.
@@ -70,7 +70,7 @@ OPUmlAssociationBuilder >> multiplicity [
 		==>
 			[ :nodes | 
 			| m |
-			m := OPFAMIXMultiplicity new.
+			m := DCFAMIXMultiplicity new.
 			nodes
 				ifNotNil: [ 
 					m
@@ -88,10 +88,10 @@ OPUmlAssociationBuilder >> multiplicityRange [
 			min := nodes first.
 			max := nodes second.
 			max = $*
-				ifTrue: [ max := OPUnlimitedNatural max ].
+				ifTrue: [ max := DCUnlimitedNatural max ].
 			min
 				ifNil: [ 
-					min := max = OPUnlimitedNatural max
+					min := max = DCUnlimitedNatural max
 						ifTrue: [ 0 ]
 						ifFalse: [ max ] ].
 			Array with: min with: max ]
@@ -114,7 +114,7 @@ OPUmlAssociationBuilder >> rightEnd [
 						ifFalse: [ nil ])
 				with: n first.
 			{nodes first.
-			(OPFAMIXProperty new
+			(DCFAMIXProperty new
 				name: nodes third;
 				multiplicity: nodes second).
 			nodes fourth first.
@@ -127,7 +127,7 @@ OPUmlAssociationBuilder >> startSymbol [
 		==>
 			[ :nodes | 
 			nodes = '<'
-				ifTrue: [ {OPUmlAggregationKind none.
+				ifTrue: [ {DCUmlAggregationKind none.
 					true} ]
 				ifFalse: [ nodes ] ]
 ]
@@ -139,8 +139,8 @@ OPUmlAssociationBuilder >> typeSymbol [
 			[ :symbol | 
 			Array
 				with:
-					({($- -> OPUmlAggregationKind none).
-					('<>' -> OPUmlAggregationKind shared).
-					('<*>' -> OPUmlAggregationKind composite)} asDictionary at: symbol)
+					({($- -> DCUmlAggregationKind none).
+					('<>' -> DCUmlAggregationKind shared).
+					('<*>' -> DCUmlAggregationKind composite)} asDictionary at: symbol)
 				with: false ]
 ]

@@ -14,12 +14,12 @@ _attribute : flags = someValue => default value
 Class {
 	#name : #OPUmlAttributeBuilder,
 	#superclass : #OPUmlPropertyGrammar,
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#category : #'OpenPonk-UML-DSL-Builders'
 }
 
 { #category : #building }
 OPUmlAttributeBuilder >> defaultValue [
-	^ super defaultValue ==> [ :expression | OPFAMIXValueSpecification from: expression ]
+	^ super defaultValue ==> [ :expression | DCFAMIXValueSpecification from: expression ]
 ]
 
 { #category : #building }
@@ -28,7 +28,7 @@ OPUmlAttributeBuilder >> multiplicity [
 		==>
 			[ :nodes | 
 			| m |
-			m := OPFAMIXMultiplicity new.
+			m := DCFAMIXMultiplicity new.
 			nodes
 				ifNotNil: [ 
 					m
