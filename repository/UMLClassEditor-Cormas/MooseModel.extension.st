@@ -9,5 +9,6 @@ MooseModel >> isCormasModel [
 
 { #category : #'*UMLClassEditor-Cormas' }
 MooseModel >> isCormasModel: aBoolean [
-	^ self privateState propertyAt: #isCormasModel put: aBoolean
+
+	^ self cacheAt: #isCormasModel put: aBoolean
 ]

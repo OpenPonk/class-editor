@@ -1,15 +1,14 @@
 Class {
 	#name : #CormasUmlClassController,
 	#superclass : #Object,
-	#category : 'UMLClassEditor-Cormas-Controllers'
+	#category : #'UMLClassEditor-Cormas-Controllers'
 }
 
 { #category : #accessing }
 CormasUmlClassController >> addAutomaticCormasAssociation [
 	| sourceClass tool paletteModel |
 	sourceClass := self diagramController model allClasses
-		detect:
-			[ :each | each stereotypes isNotEmpty and: [ each stereotypes first name = 'CormasModel' ] ]
+		detect: [ :each | each stereotypes isNotEmpty and: [ each stereotypes first name = 'CormasModel' ] ]
 		ifFound: #yourself
 		ifNone: [ ^ self ].
 	paletteModel := self diagramController editor paletteModel.
@@ -22,7 +21,7 @@ CormasUmlClassController >> addAutomaticCormasAssociation [
 		whenCompleted: [ :ctrl | 
 			ctrl model targetEnd
 				name: 'the' , self model name , 's';
-				multiplicity: OPFAMIXMultiplicity zeroToMany.
+				multiplicity: DCFAMIXMultiplicity zeroToMany.
 			ctrl refreshFigure ].
 	tool targetSelected: self.
 	paletteModel selectedTool targetSelected: self

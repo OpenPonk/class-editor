@@ -19,7 +19,7 @@ Class {
 		'fqn',
 		'keyword'
 	],
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#category : #'OpenPonk-UML-DSL-Builders'
 }
 
 { #category : #accessing }
@@ -67,7 +67,7 @@ OPUmlClassBuilder >> keyword [
 			nodes
 				ifNil: [ OrderedCollection new ]
 				ifNotNil:
-					[ (nodes second removeAllSuchThat: #isEmpty) collect: [ :each | OPFAMIXStereotype named: each ] as: OrderedCollection ] ]
+					[ (nodes second removeAllSuchThat: #isEmpty) collect: [ :each | DCFAMIXStereotype named: each ] as: OrderedCollection ] ]
 ]
 
 { #category : #accessing }

@@ -24,16 +24,30 @@ OPUmlNavigatorAdapter >> classNameFor: anObject [
 
 { #category : #accessing }
 OPUmlNavigatorAdapter >> contextMenuMapping [
+
 	^ super contextMenuMapping
 		,
-			{([ :obj | obj oclIsKindOf: #Package ]
-				->
-					{('Export as XMI...'
-						-> [ :pkg | OPUmlClassEditorPlugin exportPackage: pkg ]).
-					('Import from XMI...'
-						-> [ :pkg | OPUmlClassEditorPlugin importToPackage: pkg ])}).
-			([ :obj | obj oclIsKindOf: #Profile ]
-				-> {('Generate...' -> [ :pkg | OPUmlProfileGeneratorWizard openOn: pkg ])})}
+			{
+			(
+				[ :obj | obj oclIsKindOf: #Package ] ->
+					{
+					('Export as XMI...' -> [ :pkg | OPUmlClassEditorPlugin exportPackage: pkg ])
+					.
+					('Import from XMI...' -> [ :pkg | OPUmlClassEditorPlugin importToPackage: pkg ])
+					.
+					('Generate VW Code...' -> [ : pkg | self halt. CECMVWGeneratorWizard openOn: pkg model diagramController model ])
+					.
+					('Generate Pharo Code...' -> [ : pkg | OPCORMASUMLGeneratorWizard openOn: pkg "OPUMLClassGeneratorPlugin generatePackage: pkg" ])
+					}
+			)
+			.
+			(
+				[ :obj | obj oclIsKindOf: #Profile ] -> 
+					{
+					('Generate...' -> [ :pkg | OPUmlProfileGeneratorWizard openOn: pkg ])
+					}
+			)
+			}
 ]
 
 { #category : #accessing }

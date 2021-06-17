@@ -56,6 +56,7 @@ OPUmlProfileGeneratorWizard >> generateWith: aDictionary [
 
 { #category : #initialization }
 OPUmlProfileGeneratorWizard >> initialize [
+
 	super initialize.
 	self addGeneratePane.
 	self atEndDo: [ :values | self generateWith: values ]

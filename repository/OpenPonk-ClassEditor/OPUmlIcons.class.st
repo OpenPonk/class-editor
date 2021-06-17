@@ -9,8 +9,27 @@ Class {
 	#classInstVars : [
 		'icons'
 	],
-	#category : 'OpenPonk-ClassEditor-Plugin'
+	#category : #'OpenPonk-ClassEditor-Plugin'
 }
+
+{ #category : #'accessing - icons' }
+OPUmlIcons class >> associationIcon [
+	^ icons
+		at: #associationIcon
+		ifAbsentPut: [ Form
+				fromBinaryStream:
+					(Base64MimeConverter
+						mimeDecodeToBytes: self associationIconContents readStream) ]
+]
+
+{ #category : #'private - contents' }
+OPUmlIcons class >> associationIconContents [
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA
+CXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gwREQch13lF2gAAABl0RVh0Q29tbWVudABD
+cmVhdGVkIHdpdGggR0lNUFeBDhcAAABqSURBVDjLY2AYBcQCRlwSzCQY8p+BgeEdAwPDKUpc
+cICBgeEKAwODArKEBQkG/WBgYLBmYGCYwsDA0MDAwNDIwsDA4E+iN/5D2cEMDAyNpHolF2pA
+LkyAhQTNdxgYGJ7gixFCQGc0NWMHAKweDmH+UsOrAAAAAElFTkSuQmCC'
+]
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> attributeIcon [
@@ -113,6 +132,25 @@ gAKUnyoSWI4sQyR+ObP//Z3RwH9LAAdjTzVn2sXoQJ4K5QCUjz7rmrz0hK7GujbqVIstmdlc
 3I6ingZjn8psf3v2kqIuGgEO7KRCce/e/Szjsqx8c1foHGBQeTKK2q3/oHGEh329SpwYjtpG
 WLmDLPCG2fw14POLY4lJG+DHDjAfZeVrQw/x/B64WrYkZq2AFDVclZQKHTbV13MHDuRdr9GB
 /K/h69EC9xhByVkP+hoAAAAASUVORK5CYII='
+]
+
+{ #category : #'accessing - icons' }
+OPUmlIcons class >> diagramIcon [
+	^ icons
+		at: #diagramIcon
+		ifAbsentPut: [ Form
+				fromBinaryStream:
+					(Base64MimeConverter
+						mimeDecodeToBytes: self diagramIconContents readStream) ]
+]
+
+{ #category : #'private - contents' }
+OPUmlIcons class >> diagramIconContents [
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAA
+CXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gwRESYZc+TopwAAABl0RVh0Q29tbWVudABD
+cmVhdGVkIHdpdGggR0lNUFeBDhcAAABDSURBVDjLY2CgEDBC6f9EqMEL/pMoDgdMlHqBhRTb
+CPnvP6n+JsvPVA+DgTeAUEJiJBA+jPgk/xPDZ6E0VqjmhYEDAKlHDwzayLTLAAAAAElFTkSu
+QmCC'
 ]
 
 { #category : #'accessing - icons' }

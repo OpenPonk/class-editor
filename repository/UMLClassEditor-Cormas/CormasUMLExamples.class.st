@@ -4,7 +4,7 @@ Class {
 	#category : 'UMLClassEditor-Cormas-Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CormasUMLExamples class >> createNewModel [
 	| modelName projectName project model |
 	projectName := UIManager default request: 'New model name'.
@@ -16,26 +16,33 @@ CormasUMLExamples class >> createNewModel [
 	model
 		add:
 			((FAMIXClass named: modelName)
-				addStereotype: (OPFAMIXStereotype named: 'CormasModel');
+				addStereotype: (DCFAMIXStereotype named: 'CormasModel');
 				yourself).
 	project addModel: model.
 	OPWorkbench openProject: project
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 CormasUMLExamples class >> exampleCormas [
 	| model diagramInterchange |
 	model := self sampleCormas.
 	model name: 'MyECEC'.
 	"	diagramInterchange := self sampleDslDIFor: model."
 	OPProject new
-		projectName: 'My ECEC';
+		name: 'My ECEC';
 		addModel: model;
 		"		layout: diagramInterchange for: model;"
 			open
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
+CormasUMLExamples class >> exampleCormas2 [
+
+	"	diagramInterchange := self sampleDslDIFor: model."
+	OPProject openOnModel: (OPUMLPackage new name: 'My ECEC')
+]
+
+{ #category : #menu }
 CormasUMLExamples class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #CormasUMLExamples)
@@ -45,7 +52,7 @@ CormasUMLExamples class >> menuCommandOn: aBuilder [
 		action: [ self createNewModel ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 CormasUMLExamples class >> sampleCormas [
 	^ OPUmlDslParser
 		parse:

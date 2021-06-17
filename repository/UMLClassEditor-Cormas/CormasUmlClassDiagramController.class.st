@@ -1,14 +1,14 @@
 Class {
 	#name : #CormasUmlClassDiagramController,
 	#superclass : #Object,
-	#category : 'UMLClassEditor-Cormas-Controllers'
+	#category : #'UMLClassEditor-Cormas-Controllers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CormasUmlClassDiagramController >> initializePalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlClassController new ])
 		label: 'Class';
-		icon: OPUmlIcons current classIcon;
+		icon: OPUmlIcons classIcon;
 		whenCompleted: [ :ctrl | 
 			OPRenameElementCommand executeOn: ctrl model.
 			ctrl refreshFigure.
@@ -16,16 +16,16 @@ CormasUmlClassDiagramController >> initializePalette: aPalette [
 				ifTrue: [ ctrl addAutomaticCormasAssociation ] ].
 	(aPalette newCreationEntry: [ OPUmlAttributeController new ])
 		label: 'Attribute';
-		icon: Smalltalk ui theme icons abstractIcon;
+		icon: (self iconNamed: #abstractIcon);
 		whenCompletedRename.
-	(aPalette newCreationEntry: [ OPUmlMethodController new ])
+	(aPalette newCreationEntry: [ OPUmlOperationController new ])
 		label: 'Method';
 		icon: Smalltalk ui theme icons blankIcon;
 		whenCompletedRename.
-	(aPalette newConnectionCreationTool: [ OPUmlInheritanceController new ])
+	(aPalette newConnectionCreationTool: [ OPUmlGeneralizationController new ])
 		label: 'Inheritance';
-		icon: OPUmlIcons current generalizationIcon.
+		icon: OPUmlIcons generalizationIcon.
 	(aPalette newConnectionCreationTool: [ OPUmlAssociationController new ])
 		label: 'Association';
-		icon: OPUmlIcons current associationIcon
+		icon: OPUmlIcons associationIcon
 ]
