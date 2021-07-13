@@ -86,6 +86,6 @@ OPUmlClassifierController >> renderFigureIn: aView [
 	diagramController addedFigureFor: self.
 	self figure @ (OPRTAdornments new adornments: self adornments).
 	self refreshFigure.
-	self figure @ RTDraggableSnapToGrid.
+	self figure @ OPRTDraggableSnapToGrid.
 	^ self figure
 ]
