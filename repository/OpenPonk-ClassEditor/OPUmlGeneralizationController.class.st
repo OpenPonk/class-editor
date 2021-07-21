@@ -108,6 +108,11 @@ OPUmlGeneralizationController >> modelClass [
 	^ OPUMLGeneralization
 ]
 
+{ #category : #forms }
+OPUmlGeneralizationController >> pathSourceModel [
+	^ model general
+]
+
 { #category : #figures }
 OPUmlGeneralizationController >> refreshFigure [
 	self diagramElement changed.

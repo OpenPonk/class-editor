@@ -100,6 +100,11 @@ OPUmlPackageImportController >> modelClass [
 	^ OPUMLPackageImport
 ]
 
+{ #category : #forms }
+OPUmlPackageImportController >> pathSourceModel [
+	^ model importedPackage
+]
+
 { #category : #figures }
 OPUmlPackageImportController >> refreshFigure [
 	self diagramElement changed.

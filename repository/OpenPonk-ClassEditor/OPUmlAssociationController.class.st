@@ -87,6 +87,11 @@ OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
 
+{ #category : #accessing }
+OPUmlAssociationController >> pathSourceModel [
+	^ model memberEnds first type
+]
+
 { #category : #rendering }
 OPUmlAssociationController >> refreshFigure [
 	self diagramElement changed.
