@@ -45,14 +45,16 @@ OPUmlExamples class >> exampleSimpleGeneralization [
 
 { #category : #menu }
 OPUmlExamples class >> menuCommandOn: aBuilder [
+
 	<worldMenu>
 	(aBuilder item: #UMLClassEditor)
 		icon: OPIcons current openponkIcon;
 		label: 'UML Class Diagram Editor';
 		action: [ self exampleEmptyPackage ];
 		parent: #MostUsedTools;
-		order: 25.705;
-		with: [ (aBuilder item: #UMLEmptyPackage)
+		order: 205;
+		with: [ 
+			(aBuilder item: #UMLEmptyPackage)
 				parent: #UMLClassEditor;
 				label: 'New Empty Package';
 				icon: OPUmlIcons packageIcon;
