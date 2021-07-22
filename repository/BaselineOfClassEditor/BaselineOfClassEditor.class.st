@@ -20,7 +20,7 @@ BaselineOfClassEditor >> baseline: spec [
 		do: [ spec
 				baseline: 'Moose'
 				with: [ spec
-						repository: 'github://moosetechnology/Moose:3693b26/src';
+						repository: 'github://moosetechnology/Moose:d49bd89/src';
 						loads: #(Merlin) ].
 			spec
 				baseline: 'UMLMetamodel'
