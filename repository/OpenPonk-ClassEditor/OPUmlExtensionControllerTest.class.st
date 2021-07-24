@@ -78,13 +78,14 @@ OPUmlExtensionControllerTest >> testCreateDiagramElement [
 
 { #category : #'tests - diagram' }
 OPUmlExtensionControllerTest >> testRemoveFromDiagram [
+
 	diagramController
 		showWithoutDependentInDiagramModel: artifact;
 		showWithoutDependentInDiagramModel: library;
 		showWithoutDependentInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
 	controller remove.
-	self assert: diagramController view edges asArray equals: #()
+	self assert: diagramController view geomEdges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -109,14 +110,14 @@ OPUmlExtensionControllerTest >> testRemoveFromModel [
 
 { #category : #tests }
 OPUmlExtensionControllerTest >> testShowInDiagram [
+
 	diagramController
 		showWithoutDependentInDiagramModel: artifact;
 		showWithoutDependentInDiagramModel: library;
 		showWithoutDependentInDiagramModel: extension.
-	self
-		assert:
-			(diagramController view edges
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = extension ] ])
+	self assert:
+		(diagramController view geomEdges anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = extension ] ])
 ]
 
 { #category : #tests }

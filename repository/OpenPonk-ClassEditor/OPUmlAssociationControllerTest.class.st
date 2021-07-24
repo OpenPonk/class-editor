@@ -132,14 +132,15 @@ OPUmlAssociationControllerTest >> testRemovalOfClassRemovesAssociation [
 
 { #category : #'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemoveFromDiagram [
+
 	diagramController
 		showWithoutDependentInDiagramModel: element;
 		showWithoutDependentInDiagramModel: comment;
 		showWithoutDependentInDiagramModel: association.
 	controller := diagramController controllerForModel: association.
-	self assert: diagramController view edges asArray isNotEmpty.
+	self assert: diagramController view geomEdges asArray isNotEmpty.
 	controller remove.
-	self assert: diagramController view edges asArray equals: #()
+	self assert: diagramController view geomEdges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -165,14 +166,14 @@ OPUmlAssociationControllerTest >> testRemoveFromModel [
 
 { #category : #tests }
 OPUmlAssociationControllerTest >> testShowInDiagram [
+
 	diagramController
 		showWithoutDependentInDiagramModel: element;
 		showWithoutDependentInDiagramModel: comment;
 		showWithoutDependentInDiagramModel: association.
-	self
-		assert:
-			(diagramController view edges
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = association ] ])
+	self assert:
+		(diagramController view geomEdges anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = association ] ])
 ]
 
 { #category : #tests }

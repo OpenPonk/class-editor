@@ -34,20 +34,21 @@ OPUmlRelationshipControllerTest >> testClassBeTarget [
 
 { #category : #'tests - creation' }
 OPUmlRelationshipControllerTest >> testConnectionFeedback [
+
 	| sourceController targetController feedback feedbackLine |
-	sourceController := diagramController
-		newControllerFor: (OPUMLClass new name: 'A').
-	targetController := diagramController
-		newControllerFor: (OPUMLClass new name: 'B').
+	sourceController := diagramController newControllerFor:
+		                    (OPUMLClass new name: 'A').
+	targetController := diagramController newControllerFor:
+		                    (OPUMLClass new name: 'B').
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
 	feedback := controller connectionFeedback.
 	feedback renderIn: diagramController view.
-	self assert: diagramController view edges isNotEmpty.
-	feedbackLine := diagramController view edges first.
+	self assert: diagramController view geomEdges isNotEmpty.
+	feedbackLine := diagramController view geomEdges first.
 	self assert: feedbackLine from equals: sourceController figure.
 	targetController addAsTargetFor: controller.
 	feedbackLine remove.
-	self deny: (diagramController view edges includes: feedbackLine)
+	self deny: (diagramController view geomEdges includes: feedbackLine)
 ]

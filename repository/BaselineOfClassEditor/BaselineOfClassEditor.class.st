@@ -14,49 +14,47 @@ BaselineOfClassEditor class >> loadPlugins [
 
 { #category : #accessing }
 BaselineOfClassEditor >> baseline: spec [
+
 	<baseline>
-	spec
-		for: #common
-		do: [ spec
-				baseline: 'Moose'
-				with: [ spec
-						repository: 'github://moosetechnology/Moose:d49bd89/src';
-						loads: #(Merlin) ].
+	spec for: #common do: [ 
+		spec baseline: 'Moose' with: [ 
 			spec
-				baseline: 'UMLMetamodel'
-				with: [ spec repository: 'github://openponk/uml-metamodel/repository' ].
+				repository: 'github://moosetechnology/Moose:b5163b2/src';
+				loads: #( Merlin ) ].
+		spec
+			baseline: 'UMLMetamodel'
+			with: [ 
+			spec repository: 'github://openponk/uml-metamodel/repository' ].
+		spec
+			baseline: 'OPUMLXMI'
+			with: [ spec repository: 'github://openponk/uml-xmi/repository' ].
+		spec baseline: 'UMLBootstrapGenerator' with: [ 
+			spec repository:
+				'github://openponk/uml-bootstrap-generator/repository' ].
+		spec
+			baseline: 'OpenPonk'
+			with: [ spec repository: 'github://openponk/openponk/repository' ].
+		spec baseline: 'UMLShapes' with: [ 
 			spec
-				baseline: 'OPUMLXMI'
-				with: [ spec repository: 'github://openponk/uml-xmi/repository' ].
-			spec
-				baseline: 'UMLBootstrapGenerator'
-				with: [ spec
-						repository: 'github://openponk/uml-bootstrap-generator/repository' ].
-			spec
-				baseline: 'OpenPonk'
-				with: [ spec repository: 'github://openponk/openponk/repository' ].
-			spec
-				baseline: 'UMLShapes'
-				with: [ spec
-						repository: 'github://openponk/uml-shapes/repository';
-						loads: #(plugin) ].
-			spec
-				baseline: 'UMLProfiles'
-				with: [ spec repository: 'github://openponk/uml-profiles/repository' ].
-			spec
-				package: 'OpenPonk-ClassEditor'
-				with: [ spec
-						requires:
-							#(Moose 'UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator' 'UMLProfiles') ].
-			spec
-				package: 'OPClassEditor-Plugins'
-				with: [ spec postLoadDoIt: #loadPlugins ].
-			spec group: 'plugin' with: #('OpenPonk-ClassEditor').
-			spec
-				group: 'complete-plugin'
-				with: #(plugin 'OPClassEditor-Plugins').
-			spec group: 'complete' with: #(OpenPonk 'complete-plugin').
-			spec group: 'default' with: #(OpenPonk plugin) ]
+				repository: 'github://openponk/uml-shapes/repository';
+				loads: #( plugin ) ].
+		spec
+			baseline: 'UMLProfiles'
+			with: [ 
+			spec repository: 'github://openponk/uml-profiles/repository' ].
+		spec package: 'OpenPonk-ClassEditor' with: [ 
+			spec requires:
+				#( Moose 'UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
+				   'UMLProfiles' ) ].
+		spec
+			package: 'OPClassEditor-Plugins'
+			with: [ spec postLoadDoIt: #loadPlugins ].
+		spec group: 'plugin' with: #( 'OpenPonk-ClassEditor' ).
+		spec
+			group: 'complete-plugin'
+			with: #( plugin 'OPClassEditor-Plugins' ).
+		spec group: 'complete' with: #( OpenPonk 'complete-plugin' ).
+		spec group: 'default' with: #( OpenPonk plugin ) ]
 ]
 
 { #category : #'as yet unclassified' }
