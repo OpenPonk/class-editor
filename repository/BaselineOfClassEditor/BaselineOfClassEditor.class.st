@@ -12,7 +12,7 @@ BaselineOfClassEditor class >> loadPlugins [
 	self new loadPlugins
 ]
 
-{ #category : #accessing }
+{ #category : #baselines }
 BaselineOfClassEditor >> baseline: spec [
 
 	<baseline>
@@ -31,9 +31,10 @@ BaselineOfClassEditor >> baseline: spec [
 		spec baseline: 'UMLBootstrapGenerator' with: [ 
 			spec repository:
 				'github://openponk/uml-bootstrap-generator/repository' ].
-		spec
-			baseline: 'OpenPonk'
-			with: [ spec repository: 'github://openponk/openponk/repository' ].
+		spec baseline: 'OpenPonk' with: [ 
+			spec
+				repository: 'github://openponk/openponk/repository';
+				postLoadDoIt: #loadPetitParser ].
 		spec baseline: 'UMLShapes' with: [ 
 			spec
 				repository: 'github://openponk/uml-shapes/repository';
@@ -57,12 +58,23 @@ BaselineOfClassEditor >> baseline: spec [
 		spec group: 'default' with: #( OpenPonk plugin ) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #baselines }
 BaselineOfClassEditor >> loadOntoUML [
 	Metacello new
 		baseline: 'OntoUMLProfile';
 		repository: 'github://openponk/ontouml-profile/repository';
 		load: 'plugin'
+]
+
+{ #category : #accessing }
+BaselineOfClassEditor >> loadPetitParser [
+	"this is solved separatedly by direct loading code because PetitParser does not specify Roassal2 version, which causes conflicts and this is probably only way to use onConflict:"
+
+	Metacello new
+		baseline: 'PetitParser';
+		repository: 'github://moosetechnology/PetitParser:v2.x.x/src';
+		onConflict: [ :err | err useLoaded ];
+		load
 ]
 
 { #category : #plugins }
@@ -72,7 +84,7 @@ BaselineOfClassEditor >> loadPlugins [
 	self loadVerificationFramework
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #baselines }
 BaselineOfClassEditor >> loadVerificationFramework [
 	Metacello new
 		baseline: 'OntoUMLVerificationFramework';
