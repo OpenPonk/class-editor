@@ -45,10 +45,10 @@ OPUmlRelationshipControllerTest >> testConnectionFeedback [
 	sourceController addAsSourceFor: controller.
 	feedback := controller connectionFeedback.
 	feedback renderIn: diagramController view.
-	self assert: diagramController view geomEdges isNotEmpty.
-	feedbackLine := diagramController view geomEdges first.
+	self assert: diagramController view edges isNotEmpty.
+	feedbackLine := diagramController view edges first.
 	self assert: feedbackLine from equals: sourceController figure.
 	targetController addAsTargetFor: controller.
 	feedbackLine remove.
-	self deny: (diagramController view geomEdges includes: feedbackLine)
+	self deny: (diagramController view edges includes: feedbackLine)
 ]

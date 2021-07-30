@@ -71,7 +71,7 @@ OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 	diagramController showWithoutDependentInDiagramModel: generalization.
 	controller := diagramController controllerForModel: generalization.
 	controller remove.
-	self assert: diagramController view geomEdges asArray equals: #(  )
+	self assert: diagramController view edges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -103,7 +103,7 @@ OPUmlGeneralizationControllerTest >> testShowInDiagram [
 		showWithoutDependentInDiagramModel: child.
 	diagramController showWithoutDependentInDiagramModel: generalization.
 	self assert:
-		(diagramController view geomEdges anySatisfy: [ :each | 
+		(diagramController view edges anySatisfy: [ :each | 
 			 each model isNotNil and: [ 
 				 each model modelElement = generalization ] ])
 ]

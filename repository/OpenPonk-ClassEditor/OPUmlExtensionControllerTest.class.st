@@ -85,7 +85,7 @@ OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 		showWithoutDependentInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
 	controller remove.
-	self assert: diagramController view geomEdges asArray equals: #(  )
+	self assert: diagramController view edges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -116,7 +116,7 @@ OPUmlExtensionControllerTest >> testShowInDiagram [
 		showWithoutDependentInDiagramModel: library;
 		showWithoutDependentInDiagramModel: extension.
 	self assert:
-		(diagramController view geomEdges anySatisfy: [ :each | 
+		(diagramController view edges anySatisfy: [ :each | 
 			 each model isNotNil and: [ each model modelElement = extension ] ])
 ]
 

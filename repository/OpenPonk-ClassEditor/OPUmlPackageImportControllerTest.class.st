@@ -89,12 +89,12 @@ OPUmlPackageImportControllerTest >> testConnectionFeedback [
 	sourceController addAsSourceFor: controller.
 	feedback := controller connectionFeedback.
 	feedback renderIn: diagramController view.
-	self assert: diagramController view geomEdges isNotEmpty.
-	feedbackLine := diagramController view geomEdges first.
+	self assert: diagramController view edges isNotEmpty.
+	feedbackLine := diagramController view edges first.
 	self assert: feedbackLine from equals: sourceController figure.
 	targetController addAsTargetFor: controller.
 	feedbackLine remove.
-	self deny: (diagramController view geomEdges includes: feedbackLine)
+	self deny: (diagramController view edges includes: feedbackLine)
 ]
 
 { #category : #'tests - diagram' }
@@ -111,7 +111,7 @@ OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 	diagramController showWithoutDependentInDiagramModel: packageImport.
 	controller := diagramController controllerForModel: packageImport.
 	controller remove.
-	self assert: diagramController view geomEdges asArray equals: #(  )
+	self assert: diagramController view edges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -133,7 +133,7 @@ OPUmlPackageImportControllerTest >> testShowInDiagram [
 		showWithoutDependentInDiagramModel: importedPackage.
 	diagramController showWithoutDependentInDiagramModel: packageImport.
 	self assert:
-		(diagramController view geomEdges anySatisfy: [ :each | 
+		(diagramController view edges anySatisfy: [ :each | 
 			 each model isNotNil and: [ 
 				 each model modelElement = packageImport ] ])
 ]
