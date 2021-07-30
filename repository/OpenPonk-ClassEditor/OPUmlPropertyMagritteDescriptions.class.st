@@ -8,7 +8,7 @@ Class {
 		'labelPrefix',
 		'reader'
 	],
-	#category : 'OpenPonk-ClassEditor-Forms'
+	#category : #'OpenPonk-ClassEditor-Forms'
 }
 
 { #category : #'instance creation' }
@@ -166,7 +166,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionName [
 OPUmlPropertyMagritteDescriptions >> descriptionType [
 	<magritteDescription>
 	^ MAStringDescription new
-		beReadonly;
+		beReadOnly;
 		accessor:
 			(MAPluggableAccessor
 				read: [ :me | (reader value: me) type name ]

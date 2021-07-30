@@ -48,7 +48,7 @@ OPTUmlBaseController >> descriptionComment [
 OPTUmlBaseController >> descriptionModelInfo [
 	<magritteDescription>
 	^ MAStringDescription new
-		beReadonly;
+		beReadOnly;
 		accessor: (MAPluggableAccessor read: [ :me | '' ] write: [ :me :newValue |  ]);
 		label: self nameOfType;
 		priority: 0;

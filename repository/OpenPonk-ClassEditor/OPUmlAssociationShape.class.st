@@ -24,15 +24,17 @@ OPUmlAssociationShape >> addConstraintsTo: aCollection at: aPosition [
 
 { #category : #configuration }
 OPUmlAssociationShape >> constraintLabel: aLabel at: aPosition side: aSide [
+
 	| config anchor |
 	config := Dictionary
-		with: #source -> (Array with: 10 with: aSide * 20)
-		with: #target -> (Array with: -10 with: aSide * 20)
-		with: #middle -> (Array with: 0.5 with: aSide * 20)
-		with: #center -> (Array with: 0.5 with: 0).
+		          with: #source -> (Array with: 10 with: aSide * 20)
+		          with: #target -> (Array with: -10 with: aSide * 20)
+		          with: #middle -> (Array with: 0.5 with: aSide * 20)
+		          with: #center -> (Array with: 0.5 with: 0).
 	anchor := OPRTRailConstraint new.
 	anchor
-		noGripLine;
+		lineOnDragOnly;
+		gripLineColor: Color gray;
 		initialPosition: (config at: aPosition) first;
 		distance: (config at: aPosition) second;
 		element: aLabel rtElement connection: self rtEdge.

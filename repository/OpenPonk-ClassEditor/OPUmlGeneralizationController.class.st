@@ -26,7 +26,7 @@ OPUmlGeneralizationController >> createModelIn: aParentModel [
 OPUmlGeneralizationController >> descriptionGeneral [
 	<magritteDescription>
 	^ MAStringDescription new
-		beReadonly;
+		beReadOnly;
 		accessor:
 			(MAPluggableAccessor read: [ :me | me model general name ] write: [ :me :newValue |  ]);
 		label: 'General';
@@ -90,7 +90,7 @@ OPUmlGeneralizationController >> descriptionName [
 OPUmlGeneralizationController >> descriptionSpecific [
 	<magritteDescription>
 	^ MAStringDescription new
-		beReadonly;
+		beReadOnly;
 		accessor:
 			(MAPluggableAccessor read: [ :me | me model specific name ] write: [ :me :newValue |  ]);
 		label: 'Specific';
