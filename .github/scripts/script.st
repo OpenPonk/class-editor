@@ -1,2 +1,3 @@
 PharoLightTheme beCurrent.
+OPUmlClassEditorPlugin allDefaultProfiles.
 PolymorphSystemSettings setDesktopLogoWith: OPIcons current logo asMorph.
