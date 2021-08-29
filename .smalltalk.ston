@@ -21,6 +21,7 @@ SmalltalkCISpec {
 		},
 		#packages : [
 			'OpenPonk*',
+			'OP-*',
 			'OntoUML*'
 		]
 	}
