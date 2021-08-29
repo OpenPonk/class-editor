@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin class >> allDefaultProfiles [
+
+	^ self withAllSubclasses flatCollectAsSet: #defaultProfiles
+]
+
+{ #category : #'as yet unclassified' }
 OPUmlClassEditorPlugin class >> defaultProfiles [
 	^ {}
 ]
@@ -62,19 +68,28 @@ OPUmlClassEditorPlugin >> icon [
 
 { #category : #testing }
 OPUmlClassEditorPlugin >> isForController: aDiagramController [
+
 	| appliedProfiles pluginClassesWithProfileCounts |
 	appliedProfiles := aDiagramController model
-		ifNil: [ {} ]
-		ifNotNil: [ :model | model profileApplications collect: #appliedProfile ].
-	pluginClassesWithProfileCounts := (self class withAllSubclasses
-		collect: [ :eachPluginClass | 
-			eachPluginClass
-				->
-					(eachPluginClass defaultProfiles
-						count: [ :eachDefaultPlugin | appliedProfiles includes: eachDefaultPlugin ]) ])
-		sorted: [ :a :b | a value > b value ].
-	^ pluginClassesWithProfileCounts first value isZero
-		or: [ pluginClassesWithProfileCounts first key = self class ]
+		                   ifNil: [ #(  ) ]
+		                   ifNotNil: [ :model | 
+		                   model profileApplications collect:
+			                   #appliedProfile ].
+	(appliedProfiles isEmpty and: [ self defaultProfiles isEmpty ]) 
+		ifTrue: [ ^ true ].
+	pluginClassesWithProfileCounts := (self class withAllSubclasses 
+		                                   collect: [ :eachPluginClass | 
+			                                   eachPluginClass
+			                                   ->
+				                                   (eachPluginClass
+					                                    defaultProfiles count: [ 
+					                                    :eachDefaultPlugin | 
+					                                    appliedProfiles includes:
+						                                    eachDefaultPlugin ]) ]) 
+		                                  sorted: [ :a :b | 
+		                                  a value > b value ].
+	^ pluginClassesWithProfileCounts first value isZero or: [ 
+		  pluginClassesWithProfileCounts first key = self class ]
 ]
 
 { #category : #accessing }

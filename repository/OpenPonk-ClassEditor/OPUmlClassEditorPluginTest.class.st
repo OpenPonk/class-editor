@@ -14,6 +14,15 @@ OPUmlClassEditorPluginTest >> setUp [
 ]
 
 { #category : #tests }
+OPUmlClassEditorPluginTest >> testAllDefaultProfiles [
+
+	self
+		assert: plugin class allDefaultProfiles size
+		equals: (OPUmlClassEditorPlugin withAllSubclasses flatCollect:
+				 #defaultProfiles) size
+]
+
+{ #category : #tests }
 OPUmlClassEditorPluginTest >> testDiagramControlllerClass [
 	self assert: plugin diagramControllerClass equals: OPUmlPackageDiagramController
 ]

@@ -78,11 +78,12 @@ OPUmlPackageImportControllerTest >> testClassBeTarget [
 
 { #category : #'tests - construction' }
 OPUmlPackageImportControllerTest >> testConnectionFeedback [
+
 	| sourceController targetController feedback feedbackLine |
-	sourceController := diagramController
-		newControllerFor: (OPUMLPackage new name: 'A').
-	targetController := diagramController
-		newControllerFor: (OPUMLPackage new name: 'B').
+	sourceController := diagramController newControllerFor:
+		                    (OPUMLPackage new name: 'A').
+	targetController := diagramController newControllerFor:
+		                    (OPUMLPackage new name: 'B').
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
 	sourceController addAsSourceFor: controller.
@@ -103,13 +104,14 @@ OPUmlPackageImportControllerTest >> testCreateDiagramElement [
 
 { #category : #'tests - diagram' }
 OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
+
 	diagramController
 		showWithoutDependentInDiagramModel: importingNamespace;
 		showWithoutDependentInDiagramModel: importedPackage.
 	diagramController showWithoutDependentInDiagramModel: packageImport.
 	controller := diagramController controllerForModel: packageImport.
 	controller remove.
-	self assert: diagramController view edges asArray equals: #()
+	self assert: diagramController view edges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -125,14 +127,15 @@ OPUmlPackageImportControllerTest >> testRemoveFromModel [
 
 { #category : #'tests - diagram' }
 OPUmlPackageImportControllerTest >> testShowInDiagram [
+
 	diagramController
 		showWithoutDependentInDiagramModel: importingNamespace;
 		showWithoutDependentInDiagramModel: importedPackage.
 	diagramController showWithoutDependentInDiagramModel: packageImport.
-	self
-		assert:
-			(diagramController view edges
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = packageImport ] ])
+	self assert:
+		(diagramController view edges anySatisfy: [ :each | 
+			 each model isNotNil and: [ 
+				 each model modelElement = packageImport ] ])
 ]
 
 { #category : #tests }

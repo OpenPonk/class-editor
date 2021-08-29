@@ -1,5 +1,5 @@
 # UML Class Editor for OpenPonk
-[![Build Status](https://travis-ci.com/OpenPonk/class-editor.svg?branch=master)](https://travis-ci.com/OpenPonk/class-editor) [![Coverage Status](https://coveralls.io/repos/github/OpenPonk/class-editor/badge.svg?branch=master)](https://coveralls.io/github/OpenPonk/class-editor?branch=master)
+[![Nightly](https://github.com/OpenPonk/class-editor/actions/workflows/nightly.yml/badge.svg)](https://github.com/OpenPonk/class-editor/actions/workflows/nightly.yml) [![Coverage Status](https://coveralls.io/repos/github/OpenPonk/class-editor/badge.svg?branch=master)](https://coveralls.io/github/OpenPonk/class-editor?branch=master)
 
 *part of [OpenPonk](https://github.com/OpenPonk/openponk) platform*
 
@@ -9,6 +9,6 @@
 Metacello new
 	baseline: 'ClassEditor';
 	repository: 'github://OpenPonk/class-editor/repository';
-	load.
+	load: 'complete'.
 ```
 

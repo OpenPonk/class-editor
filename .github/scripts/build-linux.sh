@@ -21,6 +21,6 @@ EOF
 
 chmod a+rx $package_dir/$PROJECT_NAME
 
-"$vm_dir/bin/pharo" --encoding utf8 -vm-display-null -vm-sound-null $package_dir/$PROJECT_NAME.image eval --save "OPVersion currentWithRunId: $RUN_ID projectName: '$REPOSITORY_NAME'"
+"$vm_dir/bin/pharo" --headless $package_dir/$PROJECT_NAME.image eval --save "OPVersion currentWithRunId: $RUN_ID projectName: '$REPOSITORY_NAME'"
 
 zip -qr $PROJECT_NAME-$PLATFORM-$VERSION.zip $package_dir
