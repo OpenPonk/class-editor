@@ -141,9 +141,14 @@ OPUmlNavigatorAdapter >> retrieveSuffixMapping [
 
 { #category : #private }
 OPUmlNavigatorAdapter >> sort: modelObjects [
-	^ modelObjects
-		sorted:
-			[ :a :b | a name isNotNil and: [ b name isNil or: [ a name < b name ] ] ]
+
+	^ modelObjects sorted: [ :a :b | 
+		  ((a respondsTo: #name) and: [ 
+			   (b respondsTo: #name) and: [ 
+				   a name isNotNil or: [ b name isNotNil ] ] ])
+			  ifTrue: [ 
+			  a name isNotNil and: [ b name isNil or: [ a name < b name ] ] ]
+			  ifFalse: [ a uuid < b uuid ] ]
 ]
 
 { #category : #accessing }

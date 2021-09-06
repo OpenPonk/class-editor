@@ -104,6 +104,33 @@ OPUmlClassEditorPlugin >> layouterClass [
 	^ OPUmlLayouter
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
+
+	| models targetModel otherModels |
+	models := aModelsCollection asSet asArray.
+	aModelsCollection ifEmpty: [ ^ OPUMLPackage new ].
+	aModelsCollection size = 1 ifTrue: [ ^ aModelsCollection anyOne ].
+	targetModel := models first.
+	otherModels := models copyWithoutFirst.
+	(otherModels flatCollect: [ :eachModel | 
+		 eachModel profileApplications ])
+		reject: [ :eachProfileApplication | 
+			targetModel profileApplications anySatisfy: [ 
+				:anyTargetProfileApplication | 
+				anyTargetProfileApplication appliedProfile name
+				= eachProfileApplication appliedProfile name ] ]
+		thenDo: [ :eachProfileApplication | 
+			targetModel profileApplications add: (OPUMLProfileApplication new
+					 uuid: eachProfileApplication uuid;
+					 appliedProfile: eachProfileApplication appliedProfile) ].
+	otherModels do: [ :eachModel | 
+		eachModel packagedElements do: [ :eachElement | 
+			eachElement owner: targetModel.
+			targetModel packagedElements add: eachElement ] ].
+	^ targetModel
+]
+
 { #category : #accessing }
 OPUmlClassEditorPlugin >> modelClass [
 	^ OPUMLPackage
@@ -121,5 +148,10 @@ OPUmlClassEditorPlugin >> name [
 
 { #category : #'as yet unclassified' }
 OPUmlClassEditorPlugin >> supportsHidingElements [
+	^ true
+]
+
+{ #category : #testing }
+OPUmlClassEditorPlugin >> supportsMergingModels [
 	^ true
 ]
