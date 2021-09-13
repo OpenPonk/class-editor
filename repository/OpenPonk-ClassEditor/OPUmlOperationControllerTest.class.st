@@ -28,6 +28,7 @@ OPUmlOperationControllerTest >> testNotationText [
 
 { #category : #'tests - removing' }
 OPUmlOperationControllerTest >> testRemoveFromView [
+
 	| class compartment op |
 	class := OPUMLClass new.
 	op := OPUMLOperation new.
@@ -35,8 +36,8 @@ OPUmlOperationControllerTest >> testRemoveFromView [
 	diagramController showInDiagramModel: class.
 	controller := diagramController controllerForModel: op.
 	compartment := controller diagramElement owningElement.
-	controller remove.
-	self assert: compartment ownedElements asArray equals: #()
+	controller removeController.
+	self assert: compartment ownedElements asArray equals: #(  )
 ]
 
 { #category : #tests }

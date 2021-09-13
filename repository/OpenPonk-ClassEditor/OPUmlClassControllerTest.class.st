@@ -102,14 +102,15 @@ OPUmlClassControllerTest >> testRemoveFromModel [
 
 { #category : #'tests - removing' }
 OPUmlClassControllerTest >> testRemoveWithAttribute [
+
 	| class |
 	class := OPUMLClass new.
 	class ownedAttributes add: OPUMLProperty new.
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
-	controller remove.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	controller removeController.
+	self assert: diagramController view elements asArray equals: #(  ).
+	self assert: diagramController controllers asArray equals: #(  )
 ]
 
 { #category : #'tests - removing' }

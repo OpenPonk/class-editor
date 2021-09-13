@@ -110,7 +110,7 @@ OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 		showWithoutDependentInDiagramModel: importedPackage.
 	diagramController showWithoutDependentInDiagramModel: packageImport.
 	controller := diagramController controllerForModel: packageImport.
-	controller remove.
+	controller removeController.
 	self assert: diagramController view edges asArray equals: #(  )
 ]
 

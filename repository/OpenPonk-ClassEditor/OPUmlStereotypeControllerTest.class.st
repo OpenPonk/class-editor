@@ -47,13 +47,14 @@ OPUmlStereotypeControllerTest >> testCreateFromPalette [
 
 { #category : #'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveEmpty [
+
 	| class |
 	class := self newEmptyModel.
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
-	controller remove.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	controller removeController.
+	self assert: diagramController view elements asArray equals: #(  ).
+	self assert: diagramController controllers asArray equals: #(  )
 ]
 
 { #category : #'tests - removing' }
@@ -71,14 +72,15 @@ OPUmlStereotypeControllerTest >> testRemoveFromModel [
 
 { #category : #'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
+
 	| class |
 	class := self newEmptyModel.
 	class ownedAttributes add: OPUMLProperty new.
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
-	controller remove.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	controller removeController.
+	self assert: diagramController view elements asArray equals: #(  ).
+	self assert: diagramController controllers asArray equals: #(  )
 ]
 
 { #category : #'tests - diagram' }

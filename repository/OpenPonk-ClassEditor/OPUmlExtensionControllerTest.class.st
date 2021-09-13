@@ -84,7 +84,7 @@ OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 		showWithoutDependentInDiagramModel: library;
 		showWithoutDependentInDiagramModel: extension.
 	controller := diagramController controllerForModel: extension.
-	controller remove.
+	controller removeController.
 	self assert: diagramController view edges asArray equals: #(  )
 ]
 
