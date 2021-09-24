@@ -22,7 +22,7 @@ cp $vm_dir/*.dll $package_dir/Pharo
 cp $vm_dir/Pharo.exe $package_dir/Pharo
 cp $vm_dir/PharoConsole.exe $package_dir/Pharo
 
-echo "start Pharo/Pharo.exe image/$PROJECT_NAME.image" > $package_dir/$PROJECT_NAME.bat
+"start %~dp0Pharo\Pharo.exe %~dp0image\$PROJECT_NAME.image" | set-content "$package_dir/$PROJECT_NAME.bat"
 
 & $vm_dir/PharoConsole.exe -headless $package_dir/image/$PROJECT_NAME.image eval --save "OPVersion currentWithRunId: $RUN_ID projectName: '$REPOSITORY_NAME'"
 
