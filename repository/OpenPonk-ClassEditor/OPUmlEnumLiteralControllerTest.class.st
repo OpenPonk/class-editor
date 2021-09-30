@@ -45,6 +45,7 @@ OPUmlEnumLiteralControllerTest >> testModelClass [
 
 { #category : #'tests - removing' }
 OPUmlEnumLiteralControllerTest >> testRemoveFromView [
+
 	| class compartment prop |
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
@@ -52,8 +53,8 @@ OPUmlEnumLiteralControllerTest >> testRemoveFromView [
 	diagramController showInDiagramModel: class.
 	controller := diagramController controllerForModel: prop.
 	compartment := controller diagramElement owningElement.
-	controller remove.
-	self assert: compartment ownedElements asArray equals: #()
+	controller removeController.
+	self assert: compartment ownedElements asArray equals: #(  )
 ]
 
 { #category : #'tests - testing' }

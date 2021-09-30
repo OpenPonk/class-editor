@@ -20,7 +20,7 @@ env:
   RUN_ID: ${{ github.run_id }}
 
 jobs:
-
+  
   build-linux:
     runs-on: ubuntu-latest
     env:
@@ -40,6 +40,31 @@ jobs:
         timeout-minutes: 10
       - name: Create zip
         run: chmod u+x .github/scripts/build-linux.sh; ./.github/scripts/build-linux.sh
+      - name: Cache zip
+        uses: actions/cache@v2.1.4
+        with:
+          path: ${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+          key: ${{ github.run_id }}-${{ github.run_number }}_${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+
+  build-mac:
+    runs-on: macos-latest
+    env:
+      PLATFORM: mac
+    name: 'Build Mac'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.3.4
+      - name: Load SmalltalkCI environment
+        uses: hpi-swa/setup-smalltalkCI@1.2.1
+        id: smalltalkci
+        with:
+          smalltalk-version: Pharo64-9.0
+      - name: Prepare image and test
+        run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-version }}
+        shell: bash
+        timeout-minutes: 10
+      - name: Create zip
+        run: chmod u+x .github/scripts/build-mac.sh; ./.github/scripts/build-mac.sh
       - name: Cache zip
         uses: actions/cache@v2.1.4
         with:
@@ -88,6 +113,23 @@ jobs:
         if: steps.get-zip.outputs.cache-hit != 'true'
         run: exit 1
 
+  check-mac-cache:
+    needs: build-mac
+    runs-on: macos-latest
+    name: 'Check Mac zip is created'
+    env:     
+      PLATFORM: mac
+    steps:
+      - name: Get zip from cache
+        id: get-zip
+        uses: actions/cache@v2.1.4
+        with:
+          path: ${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+          key: ${{ github.run_id }}-${{ github.run_number }}_${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+      - name: Fail on cache miss
+        if: steps.get-zip.outputs.cache-hit != 'true'
+        run: exit 1
+
   check-win-cache:
     needs: build-win
     runs-on: windows-latest
@@ -106,7 +148,7 @@ jobs:
         run: exit 1
 
   create-release:
-    needs: [check-linux-cache, check-win-cache]
+    needs: [check-linux-cache, check-mac-cache, check-win-cache]
     runs-on: ubuntu-latest
     name: 'Re-create release'
     steps:
@@ -124,6 +166,35 @@ jobs:
     name: 'Upload Linux zip'
     env:
       PLATFORM: linux
+    steps:
+      - name: Get zip from cache
+        id: get-zip
+        uses: actions/cache@v2.1.4
+        with:
+          path: ${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+          key: ${{ github.run_id }}-${{ github.run_number }}_${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+      - name: Get Release by Tag
+        id: get_release_by_tag
+        uses: jonfriesen/get-release-by-tag@v0.0.11
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: nightly
+      - name: Upload zip
+        id: upload-zip
+        uses: actions/upload-release-asset@v1.0.2
+        with:
+          upload_url: ${{ steps.get_release_by_tag.outputs.upload_url }}
+          asset_path: ./${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+          asset_name: ${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
+          asset_content_type: application/zip
+
+  upload-mac-zip:
+    needs: create-release
+    runs-on: macos-latest
+    name: 'Upload Mac zip'
+    env:
+      PLATFORM: mac
     steps:
       - name: Get zip from cache
         id: get-zip
@@ -177,6 +248,7 @@ jobs:
           asset_content_type: application/zip
 
   create-dependent-matrix:
+    needs: [create-release]
     runs-on: ubuntu-latest
     name: 'Find dependent repositories'
     if: ${{ github.event_name == 'push' || contains(github.event.inputs.build-dependent || false, 'true') }}
@@ -193,7 +265,7 @@ jobs:
         run: echo "::set-output name=matrix::`cat ./.github/dependent-repositories.txt | tr -d " \t\n\r"`"
 
   build-dependent:
-    needs: [check-linux-cache, check-win-cache, create-dependent-matrix]
+    needs: [create-dependent-matrix]
     runs-on: ubuntu-latest
     name: 'Build dependent'
     if: ${{ contains(needs.create-dependent-matrix.outputs.matrix, '/') }}

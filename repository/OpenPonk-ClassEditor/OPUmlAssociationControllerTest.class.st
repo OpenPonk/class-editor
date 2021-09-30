@@ -139,7 +139,7 @@ OPUmlAssociationControllerTest >> testRemoveFromDiagram [
 		showWithoutDependentInDiagramModel: association.
 	controller := diagramController controllerForModel: association.
 	self assert: diagramController view edges asArray isNotEmpty.
-	controller remove.
+	controller removeController.
 	self assert: diagramController view edges asArray equals: #(  )
 ]
 

@@ -70,7 +70,7 @@ OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 		showWithoutDependentInDiagramModel: child.
 	diagramController showWithoutDependentInDiagramModel: generalization.
 	controller := diagramController controllerForModel: generalization.
-	controller remove.
+	controller removeController.
 	self assert: diagramController view edges asArray equals: #(  )
 ]
 
