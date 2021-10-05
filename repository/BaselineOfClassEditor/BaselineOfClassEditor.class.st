@@ -21,20 +21,20 @@ BaselineOfClassEditor >> baseline: spec [
 			spec
 				repository: 'github://moosetechnology/Moose:f2b6052/src';
 				loads: #( Merlin ) ].
-		spec
-			baseline: 'UMLMetamodel'
-			with: [ 
-			spec repository: 'github://openponk/uml-metamodel:v3.0.x/repository' ].
+		spec baseline: 'UMLMetamodel' with: [ 
+			spec repository:
+				'github://openponk/uml-metamodel:v3.0.x/repository' ].
 		spec
 			baseline: 'OPUMLXMI'
-			with: [ spec repository: 'github://openponk/uml-xmi:v3.0.x/repository' ].
+			with: [ 
+			spec repository: 'github://openponk/uml-xmi:v3.0.x/repository' ].
 		spec baseline: 'UMLBootstrapGenerator' with: [ 
 			spec repository:
 				'github://openponk/uml-bootstrap-generator:v3.0.x/repository' ].
-		spec baseline: 'OpenPonk' with: [ 
-			spec
-				repository: 'github://openponk/openponk:v3.0.x/repository';
-				postLoadDoIt: #loadPetitParser ].
+		spec
+			baseline: 'OpenPonk'
+			with: [ 
+			spec repository: 'github://openponk/openponk:v3.0.x/repository' ].
 		spec baseline: 'UMLShapes' with: [ 
 			spec
 				repository: 'github://openponk/uml-shapes:v3.0.x/repository';
@@ -64,17 +64,6 @@ BaselineOfClassEditor >> loadOntoUML [
 		baseline: 'OntoUMLProfile';
 		repository: 'github://openponk/ontouml-profile:v3.0.x/repository';
 		load: 'plugin'
-]
-
-{ #category : #baselines }
-BaselineOfClassEditor >> loadPetitParser [
-	"this is solved separatedly by direct loading code because PetitParser does not specify Roassal2 version, which causes conflicts and this is probably only way to use onConflict:"
-
-	Metacello new
-		baseline: 'PetitParser';
-		repository: 'github://moosetechnology/PetitParser:v2.x.x/src';
-		onConflict: [ :err | err useLoaded ];
-		load
 ]
 
 { #category : #plugins }
