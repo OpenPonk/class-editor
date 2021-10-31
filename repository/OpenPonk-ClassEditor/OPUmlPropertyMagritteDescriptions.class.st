@@ -29,18 +29,26 @@ OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
 
 { #category : #descriptions }
 OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
+
 	<magritteDescription>
+	| property association isDependentOnMultiplicity |
+	property := reader value: reader receiver.
+	association := property association.
+	isDependentOnMultiplicity := association appliedStereotypes 
+		                             anySatisfy: [ :any | 
+		                             any oclIsKindOf: #SubQuantityOf ].
 	^ MASingleOptionDescription new
-		optionsAndLabels:
-			{OPUMLAggregationKind none -> 'none'.
-			OPUMLAggregationKind shared -> 'shared'.
-			OPUMLAggregationKind composite -> 'composite'};
-		reference: MAStringDescription new;
-		accessor: (self descriptionAccessor: #aggregation);
-		label: 'Aggregation';
-		priority: 3;
-		beSorted;
-		yourself
+		  visible: true "isDependentOnMultiplicity not";
+		  optionsAndLabels: { 
+				  (OPUMLAggregationKind none -> 'none').
+				  (OPUMLAggregationKind shared -> 'shared').
+				  (OPUMLAggregationKind composite -> 'composite') };
+		  reference: MAStringDescription new;
+		  accessor: (self descriptionAccessor: #aggregation);
+		  label: 'Aggregation';
+		  priority: 3;
+		  beSorted;
+		  yourself
 ]
 
 { #category : #descriptions }

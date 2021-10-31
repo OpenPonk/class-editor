@@ -50,16 +50,6 @@ OPUmlExtensionController >> refreshFigure [
 ]
 
 { #category : #removing }
-OPUmlExtensionController >> removeController [
-	".		
-	ctrls := self model memberEnds asArray
-		collect: [ :each | diagramController controllerForModel: each type ].
-	ctrls do: #refreshFigure"
-
-	super removeController
-]
-
-{ #category : #removing }
 OPUmlExtensionController >> removeModel [
 	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
 
