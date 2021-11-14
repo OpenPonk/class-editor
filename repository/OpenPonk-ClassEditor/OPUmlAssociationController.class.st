@@ -7,6 +7,12 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
+{ #category : #testing }
+OPUmlAssociationController >> canSwitchSourceAndTarget [
+
+	^ self model isNotNil and: [ self model memberEnds size >= 2 ]
+]
+
 { #category : #figures }
 OPUmlAssociationController >> createDiagramElement [
 	^ OPUmlAssociationShape new
@@ -71,6 +77,27 @@ OPUmlAssociationController >> descriptionStereotype [
 	^ super descriptionStereotype
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlAssociationController >> descriptionSwitchSourceTarget [
+
+	<magritteDescription>
+	| description |
+	description := MABooleanDescription new
+		               accessor:
+			               (MAPluggableAccessor
+				                read: [ :me | false ]
+				                write: [ :me :newValue | 
+					                self switchSourceAndTarget.
+					                self diagramController editor workbench 
+						                openFormOn: self.
+					                self reactToAttributeWrite ]);
+		               label: 'Switch source/target';
+		               comment: '';
+		               priority: 9.05.
+	self canSwitchSourceAndTarget ifFalse: [ description beHidden ].
+	^ description
+]
+
 { #category : #forms }
 OPUmlAssociationController >> descriptionTargetEnd [
 	<magritteDescription>
@@ -118,6 +145,21 @@ OPUmlAssociationController >> renderFigureIn: aView [
 	diagramElement renderIn: aView.
 	diagramController addedFigureFor: self.
 	^ self refreshFigure
+]
+
+{ #category : #construction }
+OPUmlAssociationController >> switchSourceAndTarget [
+
+	| originalModels |
+	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
+	originalModels := self model memberEnds asArray.
+	self model memberEnds removeAll.
+	self model memberEnds add: originalModels second.
+	self model memberEnds add: originalModels first.
+	3 to: originalModels size do: [ :index | 
+	self model memberEnds add: originalModels at: index ].
+	source := self diagramController controllerForModel:
+		          originalModels second type
 ]
 
 { #category : #writing }
