@@ -31,8 +31,8 @@ if %ERRORLEVEL% EQU 0 (
   )
 )
 
-echo Opening: %DIRNAME_S%Pharo\Pharo.exe %DIRNAME_S%image\$PROJECT_NAME.image
-start %DIRNAME_S%Pharo\Pharo.exe %DIRNAME_S%image\$PROJECT_NAME.image" | set-content "$package_dir/$PROJECT_NAME.bat"
+cd `"%DIRNAME_S%`"
+start Pharo\Pharo.exe image\$PROJECT_NAME.image" | set-content "$package_dir/$PROJECT_NAME.bat"
 
 "Open using $PROJECT_NAME.bat.
 
