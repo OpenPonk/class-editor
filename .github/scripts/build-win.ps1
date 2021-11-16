@@ -23,20 +23,11 @@ cp $vm_dir/Pharo.exe $package_dir/Pharo
 cp $vm_dir/PharoConsole.exe $package_dir/Pharo
 
 "@echo off
-set DIRNAME_S=%~dp0
-echo %DIRNAME_S% | findstr `"cvut.cz`" > nul
-if %ERRORLEVEL% EQU 0 (
-  for /F `"tokens=3,* delims=\`" %%a in (`"%DIRNAME_S%`") do (
-    set DIRNAME_S=X:\%%b
-  )
-)
-
-cd `"%DIRNAME_S%`"
-start Pharo\Pharo.exe image\$PROJECT_NAME.image" | set-content "$package_dir/$PROJECT_NAME.bat"
+start `"`" `"%~dp0Pharo\Pharo.exe`" `"%~dp0image\$PROJECT_NAME.image`"" | set-content "$package_dir/$PROJECT_NAME.bat"
 
 "Open using $PROJECT_NAME.bat.
-
-OpenPonk does not work when executed from network drives (like \\example.com\home), unless accessed via mapped letter drive (like X:\). There is a hardcoded fix for fit.cvut.cz student home directories." | set-content "$package_dir/README.txt"
+Opening may take several seconds. When the window opens, click on inner desktop to show menu items, including OpenPonk related ones.
+" | set-content "$package_dir/README.txt"
 
 & $vm_dir/PharoConsole.exe -headless $package_dir/image/$PROJECT_NAME.image eval --save "OPVersion currentWithRunId: $RUN_ID projectName: '$REPOSITORY_NAME'"
 
