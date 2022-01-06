@@ -82,6 +82,15 @@ BaselineOfClassEditor >> loadOpenPonkGithub [
 		load
 ]
 
+{ #category : #baselines }
+BaselineOfClassEditor >> loadPatterns [
+
+	Metacello new
+		baseline: 'OntoUMLPatterns';
+		repository: 'github://openponk/ontouml-patterns';
+		load: 'plugin'
+]
+
 { #category : #plugins }
 BaselineOfClassEditor >> loadPlugins [
 
@@ -89,7 +98,8 @@ BaselineOfClassEditor >> loadPlugins [
 
 	self loadVerificationFramework.
 	self loadOntoUMLToUMLTransformation.
-	self loadOpenPonkGithub
+	self loadOpenPonkGithub.
+	self loadPatterns
 ]
 
 { #category : #baselines }
