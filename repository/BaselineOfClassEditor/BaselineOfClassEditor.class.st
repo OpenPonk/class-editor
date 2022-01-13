@@ -87,7 +87,7 @@ BaselineOfClassEditor >> loadPatterns [
 
 	Metacello new
 		baseline: 'OntoUMLPatterns';
-		repository: 'github://openponk/ontouml-patterns';
+		repository: 'github://openponk/ontouml-patterns:main';
 		load: 'plugin'
 ]
 
