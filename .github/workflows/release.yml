@@ -3,6 +3,7 @@ name: Release
 on:
   release:
     types: [published]
+  workflow_call:
 
 env:
   REPOSITORY_NAME: '${{ github.event.repository.name }}'
@@ -12,89 +13,5 @@ env:
   RUN_ID: ${{ github.run_id }}
   
 jobs:
-  linux:
-    runs-on: ubuntu-latest
-    env:
-      PLATFORM: ${{ github.job }}
-    name: 'Build Linux and upload zip'
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: hpi-swa/setup-smalltalkCI@1.2.1
-        id: smalltalkci
-        with:
-          smalltalk-version: Pharo64-9.0
-      - name: Prepare image and test
-        run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-version }}
-        shell: bash
-        timeout-minutes: 10
-      - name: Create zip
-        run: chmod u+x .github/scripts/build-linux.sh; ./.github/scripts/build-linux.sh
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.2.2
-      - name: Upload zip
-        id: upload-zip
-        uses: actions/upload-release-asset@v1.0.2
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
-          asset_name: ${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
-          asset_content_type: application/zip
-
-  mac:
-    runs-on: macos-latest
-    env:
-      PLATFORM: ${{ github.job }}
-    name: 'Build Mac and upload zip'
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: hpi-swa/setup-smalltalkCI@1.2.1
-        id: smalltalkci
-        with:
-          smalltalk-version: Pharo64-9.0
-      - name: Prepare image and test
-        run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-version }}
-        shell: bash
-        timeout-minutes: 10
-      - name: Create zip
-        run: chmod u+x .github/scripts/build-mac.sh; ./.github/scripts/build-mac.sh
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.2.2
-      - name: Upload zip
-        id: upload-zip
-        uses: actions/upload-release-asset@v1.0.2
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
-          asset_name: ${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
-          asset_content_type: application/zip
-
-  win:
-    runs-on: windows-latest
-    env:
-      PLATFORM: ${{ github.job }}
-    name: 'Build Windows and upload zip'
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: hpi-swa/setup-smalltalkCI@1.2.1
-        id: smalltalkci
-        with:
-          smalltalk-version: Pharo64-9.0
-      - name: Prepare image and test
-        run: smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-version }}
-        shell: bash
-        timeout-minutes: 15
-      - name: Create zip
-        run: ./.github/scripts/build-win.ps1
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.2.2
-      - name: Upload zip
-        id: upload-zip
-        uses: actions/upload-release-asset@v1.0.2
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
-          asset_name: ${{ env.PROJECT_NAME }}-${{ env.PLATFORM }}-${{ env.VERSION }}.zip
-          asset_content_type: application/zip
+  OP:
+    uses: OpenPonk/plugins/.github/workflows/release.yml@master
