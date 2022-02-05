@@ -22,3 +22,5 @@ env:
 jobs:
   OP:
     uses: OpenPonk/plugins/.github/workflows/nightly.yml@master
+    secrets:
+      WORKFLOW_ACCESS_TOKEN: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
