@@ -44,6 +44,17 @@ OPUmlAssociationController >> dependentElements [
 	^ model memberEnds
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlAssociationController >> descriptionFuelOut [
+	<magritteActionDescription>
+	^ MAActionDescription new	
+			action: #fuelOut;
+			priority: 1200;
+			comment: 'Fuel Out';
+			icon: #smallSave;
+			yourself
+]
+
 { #category : #forms }
 OPUmlAssociationController >> descriptionIsDerived [
 	<magritteDescription>
@@ -79,22 +90,17 @@ OPUmlAssociationController >> descriptionStereotype [
 
 { #category : #'as yet unclassified' }
 OPUmlAssociationController >> descriptionSwitchSourceTarget [
-
-	<magritteDescription>
+	<magritteActionDescription>
 	| description |
-	description := MABooleanDescription new
-		               accessor:
-			               (MAPluggableAccessor
-				                read: [ :me | false ]
-				                write: [ :me :newValue | 
-					                self switchSourceAndTarget.
-					                self diagramController editor workbench 
-						                openFormOn: self.
-					                self reactToAttributeWrite ]);
-		               label: 'Switch source/target';
-		               comment: '';
-		               priority: 9.05.
-	self canSwitchSourceAndTarget ifFalse: [ description beHidden ].
+	description := MAActionDescription new.
+	description
+		action: [ self switchSourceAndTarget.
+			self diagramController editor workbench openFormOn: self.
+			self reactToAttributeWrite ];
+		comment: 'Switch source/target';
+		priority: 9.05.
+	"self canSwitchSourceAndTarget
+		ifFalse: [ description beHidden ]."
 	^ description
 ]
 
