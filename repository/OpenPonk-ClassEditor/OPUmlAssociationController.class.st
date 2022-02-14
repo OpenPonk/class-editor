@@ -9,8 +9,7 @@ Class {
 
 { #category : #testing }
 OPUmlAssociationController >> canSwitchSourceAndTarget [
-
-	^ self model isNotNil and: [ self model memberEnds size >= 2 ]
+	^ self model isNotNil and: [ self model memberEnds size = 2 ]
 ]
 
 { #category : #figures }
@@ -45,14 +44,19 @@ OPUmlAssociationController >> dependentElements [
 ]
 
 { #category : #'as yet unclassified' }
-OPUmlAssociationController >> descriptionFuelOut [
-	<magritteActionDescription>
-	^ MAActionDescription new	
-			action: #fuelOut;
-			priority: 1200;
-			comment: 'Fuel Out';
-			icon: #smallSave;
-			yourself
+OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
+	<magritteDescription>
+	| description |
+	self canSwitchSourceAndTarget
+		ifFalse: [ ^ self ].
+	description := OPMAActionDescription new.
+	description
+		action: [ self switchSourceAndTarget.
+			self diagramController editor workbench openFormOn: self.
+			self reactToAttributeWrite ];
+		label: 'Switch source/target';
+		priority: 9.05.
+	^ description
 ]
 
 { #category : #forms }
@@ -86,22 +90,6 @@ OPUmlAssociationController >> descriptionSourceEnd [
 OPUmlAssociationController >> descriptionStereotype [
 	<magritteDescription>
 	^ super descriptionStereotype
-]
-
-{ #category : #'as yet unclassified' }
-OPUmlAssociationController >> descriptionSwitchSourceTarget [
-	<magritteActionDescription>
-	| description |
-	description := MAActionDescription new.
-	description
-		action: [ self switchSourceAndTarget.
-			self diagramController editor workbench openFormOn: self.
-			self reactToAttributeWrite ];
-		comment: 'Switch source/target';
-		priority: 9.05.
-	"self canSwitchSourceAndTarget
-		ifFalse: [ description beHidden ]."
-	^ description
 ]
 
 { #category : #forms }
