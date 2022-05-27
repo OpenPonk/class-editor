@@ -21,15 +21,20 @@ OPUmlAssociationController >> createDiagramElement [
 
 { #category : #construction }
 OPUmlAssociationController >> createModelIn: aClass [
+
 	| sourceProp targetProp |
 	self model: self modelClass new.
 	(sourceProp := OPUMLProperty new)
 		owningAssociation: self model;
-		name: source model name uncapitalized;
+		name: (source model name uncapitalized
+				 replaceAll: Character cr
+				 with: Character space);
 		type: source model.
 	(targetProp := OPUMLProperty new)
 		owningAssociation: self model;
-		name: aClass name uncapitalized;
+		name: (aClass name uncapitalized
+				 replaceAll: Character cr
+				 with: Character space);
 		type: aClass.
 	source diagramController model packagedElements add: self model.
 	model memberEnds
