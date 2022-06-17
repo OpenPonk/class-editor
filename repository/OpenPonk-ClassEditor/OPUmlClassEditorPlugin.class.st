@@ -20,35 +20,34 @@ OPUmlClassEditorPlugin class >> defaultProfiles [
 
 { #category : #toolbar }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
-	FDSaveFileDialog new
-		whenSelected: [ :file | 
+
+	StFBSaveFileDialog new
+		title: 'Choose a XMI file to export to';
+		okAction: [ :file | 
 			file
 				ensureDelete;
-				writeStreamDo: [ :stream | stream << (OPUMLXMIWriter toString: aPackage) ].
+				writeStreamDo: [ :stream | 
+					stream << (OPUMLXMIWriter toString: aPackage) ].
 			self inform: 'Exported to ' , file fullName ];
-		extensionFilters:
-			{'XMI files' -> #(xmi xml uml).
-			'All files' -> #()};
-		defaultFolder: FileLocator imageDirectory asFileReference;
-		open
+		extensions: #( xmi xml uml ) named: 'XMI files';
+		openWithSpec
 ]
 
 { #category : #toolbar }
 OPUmlClassEditorPlugin class >> importToPackage: aPackage [
-	FDOpenFileDialog new
-		whenSelected: [ :file | 
+
+	StFBOpenFileDialog new
+		title: 'Choose a XMI export of UML model';
+		okAction: [ :file | 
 			| model |
 			model := OPUMLXMIReader read: file contents.
-			(model packagedElements size = 1
-				and: [ model packagedElements first oclIsKindOf: #Package ])
-				ifTrue: [ model := model packagedElements first ].
+			(model packagedElements size = 1 and: [ 
+					 model packagedElements first oclIsKindOf: #Package ]) ifTrue: [ 
+					model := model packagedElements first ].
 			aPackage packagedElements: model packagedElements.
 			self inform: 'Imported from ' , file fullName ];
-		extensionFilters:
-			{('XMI files' -> #(xmi xml uml)).
-			('All files' -> #())};
-		defaultFolder: FileLocator imageDirectory asFileReference;
-		open
+		extensions: #( xmi xml uml ) named: 'XMI files';
+		openWithSpec
 ]
 
 { #category : #'as yet unclassified' }
