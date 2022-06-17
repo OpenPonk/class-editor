@@ -30,7 +30,7 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 					stream << (OPUMLXMIWriter toString: aPackage) ].
 			self inform: 'Exported to ' , file fullName ];
 		extensions: #( xmi xml uml ) named: 'XMI files';
-		openWithSpec
+		open
 ]
 
 { #category : #toolbar }
@@ -47,7 +47,7 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 			aPackage packagedElements: model packagedElements.
 			self inform: 'Imported from ' , file fullName ];
 		extensions: #( xmi xml uml ) named: 'XMI files';
-		openWithSpec
+		open
 ]
 
 { #category : #'as yet unclassified' }
