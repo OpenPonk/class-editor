@@ -57,7 +57,7 @@ OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
 	description := OPMAActionDescription new.
 	description
 		action: [ self switchSourceAndTarget.
-			self diagramController editor workbench openFormOn: self.
+			self diagramController editor openFormOn: self.
 			self reactToAttributeWrite ];
 		label: 'Switch source/target';
 		priority: 9.05.

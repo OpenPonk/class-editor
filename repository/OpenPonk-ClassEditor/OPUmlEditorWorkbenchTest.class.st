@@ -24,8 +24,8 @@ OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 	window := workbench open.
 	workbench openProject: project.
 	editor := (workbench instVarNamed: #editors) values first first.
-	view := editor canvasModel roassalView.
-	paletteEntries := editor paletteModel widgets select: [ :each | each isKindOf: OPPaletteEntry ]
+	view := editor canvasPresenter roassalView.
+	paletteEntries := editor palette widgets select: [ :each | each isKindOf: OPPaletteEntry ]
 ]
 
 { #category : #running }

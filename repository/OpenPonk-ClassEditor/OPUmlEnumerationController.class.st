@@ -12,9 +12,9 @@ OPUmlEnumerationController >> adornments [
 	^ {OPUmlIcons literalIcon
 		-> [ | tool |
 			tool := OPCreationTool new
-				palette: self diagramController editor paletteModel;
+				palette: self diagramController editor palette;
 				factory: [ OPUMLEnumerationLiteral new ].
-			self diagramController editor paletteModel selectTool: tool.
+			self diagramController editor palette selectTool: tool.
 			tool
 				whenCompleted: [ :ctrl | 
 					OPRenameElementCommand executeOn: ctrl model.

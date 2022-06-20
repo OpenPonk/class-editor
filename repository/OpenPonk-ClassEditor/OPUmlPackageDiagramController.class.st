@@ -317,8 +317,8 @@ OPUmlPackageDiagramController >> reactToAttributeWrite [
 
 { #category : #palette }
 OPUmlPackageDiagramController >> rebuildPalette [
-	self editor paletteModel createPaletteFor: self.
-	self editor paletteModel rebuildWidget.
+	self editor palette createPaletteFor: self.
+	self editor palette rebuildWidget.
 	self selectView
 ]
 
