@@ -48,7 +48,7 @@ OPUmlExamples class >> menuCommandOn: aBuilder [
 
 	<worldMenu>
 	(aBuilder item: #UMLClassEditor)
-		icon: OPIcons current openponkIcon;
+		icon: OPCoreIcons openponkIcon;
 		label: 'UML Class Diagram Editor';
 		action: [ self exampleEmptyPackage ];
 		parent: #MostUsedTools;

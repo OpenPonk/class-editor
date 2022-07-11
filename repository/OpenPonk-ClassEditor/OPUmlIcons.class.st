@@ -5,20 +5,14 @@ OPUmlIcons resetIcons.
 "
 Class {
 	#name : #OPUmlIcons,
-	#superclass : #Object,
-	#classInstVars : [
-		'icons'
-	],
+	#superclass : #OPIcons,
 	#category : #'OpenPonk-ClassEditor-Plugin'
 }
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> attributeIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #attributeIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self attributeIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self attributeIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -35,11 +29,8 @@ jpK+vSNcNSBaH2BMZVwXasGNxGvB/+f4BO9vTXGCt0WuAAAAAElFTkSuQmCC'
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> classIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #classIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self classIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self classIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -54,11 +45,8 @@ SUVORK5CYII='
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> commentIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #commentIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self commentIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self commentIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -75,11 +63,8 @@ PzZTQmpc0lNtzzRr8+ZDj+Ftn2YAAAAASUVORK5CYII='
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> constraintIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #constraintIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self constraintIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self constraintIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -96,11 +81,8 @@ GBNg6HNdHq1soaQfdB8DRIfkc40RAyAH9kAGjOZdeykFAOgvdUNBu4BdrWA5vbOP3+r8jw7O
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> dataTypeIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #dataTypeIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self dataTypeIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self dataTypeIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -117,11 +99,8 @@ WLmDLPCG2fw14POLY4lJG+DHDjAfZeVrQw/x/B64WrYkZq2AFDVclZQKHTbV13MHDuRdr9GB
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> directedAssociationIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #directedAssociationIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self directedAssociationIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self directedAssociationIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -138,11 +117,8 @@ a89/n/8MDMd2ejC+g4ntcWX8+P8/w1HPPf8D8BrgsP8/z38GBpvtLowb0OV2ujJuZWBgsHDY
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> enumIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #enumIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self enumIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self enumIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -158,11 +134,8 @@ BdKv4+3kBmsPLbxzYn3TAAAAAElFTkSuQmCC'
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> extensionIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #extensionIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self extensionIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self extensionIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -179,11 +152,8 @@ hsjryAAAAABJRU5ErkJggg=='
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> generalizationIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #generalizationIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self generalizationIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self generalizationIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -198,67 +168,10 @@ mLlcl2Ut+AZuqS47lt44D/mRuCJhkA1sG0wQe+SNyV6XnkE1uzcmsUd16T8pnaufztUPpmlM
 qdH/A6qvXDcjgEUcyrP6cQJ5Vu0kDPi13gDJkkfqaimOAQAAAABJRU5ErkJggg=='
 ]
 
-{ #category : #'GT-InspectorExtensions' }
-OPUmlIcons class >> gtInspectorIconsIn: composite [
-	<gtInspectorPresentationOrder: 0>
-	<script: 'self inspect'>
-	composite table
-		title: 'Icons';
-		display: [ (self class selectorsInCategory: 'accessing - icons') sorted
-				collect: [ :each | each -> (self perform: each) ] ];
-		column: 'Icon' evaluated: #value width: 50;
-		column: 'Selector' evaluated: #key
-]
-
-{ #category : #'GT-InspectorExtensions' }
-OPUmlIcons class >> iconSelectors [
-
-	^ self class selectorsInCategory: 'accessing - icons'
-]
-
-{ #category : #accessing }
-OPUmlIcons class >> icons [
-	^ icons ifNil: [ icons := Dictionary new ]
-]
-
-{ #category : #'GT-InspectorExtensions' }
-OPUmlIcons class >> inspectionIcons [
-
-	<inspectorPresentationOrder: 40 title: 'Icons'>
-	<script: 'self inspect'>
-	| selectorsByForms |
-	selectorsByForms := (self iconSelectors collect: [ :each | 
-		                     ([ self perform: each ]
-			                      on: Deprecation
-			                      do: #resume) -> each ]) asDictionary.
-	^ SpTablePresenter new
-		  items:
-			  (selectorsByForms keys sortedAs: [ :each | 
-					   selectorsByForms at: each ]);
-		  addColumn: (SpImageTableColumn new
-				   title: 'Icon';
-				   evaluated: [ :each | 
-					   [ 
-					   each scaledToSize:
-							   (50 min: each width) @ (16 min: each height) ]
-						   on: Deprecation
-						   do: #resume ];
-				   width: 50;
-				   yourself);
-		  addColumn: (SpStringTableColumn new
-				   title: 'Name';
-				   evaluated: [ :each | selectorsByForms at: each ];
-				   yourself);
-		  yourself
-]
-
 { #category : #'accessing - icons' }
 OPUmlIcons class >> literalIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #literalIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self literalIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self literalIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -273,11 +186,8 @@ rkJggg=='
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> modelIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #modelIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self modelIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self modelIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -294,11 +204,8 @@ kEcAAAAASUVORK5CYII='
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> objectIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #objectIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self objectIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self objectIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -313,11 +220,8 @@ AyRZ4kqNuMB/JgYHSi2nDgAAgJAkGGm/rBQAAAAASUVORK5CYII='
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> operationIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #operationIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self operationIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self operationIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -334,11 +238,8 @@ ywRugAIwYGQw8Rdy20oAPz8xVlKAdYT3A3nd1v3bfAO26kn9hYnb5AAAAABJRU5ErkJggg=='
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> packageIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #packageIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self packageIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self packageIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -353,11 +254,8 @@ PnSaAAAAAElFTkSuQmCC'
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> primitiveIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #primitiveIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self primitiveIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self primitiveIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -373,11 +271,8 @@ Hf4bHpd5LsedZt3CAAAAAElFTkSuQmCC'
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> profileIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #profileIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self profileIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self profileIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -393,19 +288,10 @@ IAVTLBHKBMOoFiEemG1piTouG9cw9lLESxHXMO64bEpLFA/M9hwCx0v61tuJu98AFfxLv1IF
 /xL/3+kTGRtla/geVQcAAAAASUVORK5CYII='
 ]
 
-{ #category : #'accessing - reset' }
-OPUmlIcons class >> resetIcons [
-	<script>
-	^ icons := nil
-]
-
 { #category : #'accessing - icons' }
 OPUmlIcons class >> ruleIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #ruleIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self ruleIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self ruleIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -422,11 +308,8 @@ FR9RZp3CgjVvsVc39moBQ2f0ywo2yJgZnO4kGAzMIe6AWd788I/bdiO1y3dRwfgKgduyDSYr
 
 { #category : #'accessing - icons' }
 OPUmlIcons class >> stereotypeIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #stereotypeIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self stereotypeIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self stereotypeIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
@@ -440,22 +323,10 @@ JBLTbTHf7GTg1xKAaGUbcWyyGE0J4ooEADQWNsyafPNoVuOzPgZ4j0d7a356ZOidGF18BnFV
 neiq0QE4FIlQYjV2zjFLqjJ+ofzBjKYEWWuYEnwa/h1dATYvRy5RNn8sAAAAAElFTkSuQmCC'
 ]
 
-{ #category : #actions }
-OPUmlIcons class >> synchronizeIcons [
-	<script>
-	| directory |
-	directory := 'D:\OpenPonk\icons\uml' asFileReference.
-	IconFactory syncDirectory: directory intoClass: #OPUmlIcons.
-	OPUmlIcons resetIcons
-]
-
 { #category : #'accessing - icons' }
 OPUmlIcons class >> unknownIcon [
-	"Private - Generated method"
-	^ self icons
-		at: #unknownIcon
-		ifAbsentPut: [ Form
-				fromBinaryStream: (self unknownIconContents base64Decoded readStream) ]
+
+	^ Form fromBinaryStream: self unknownIconContents base64Decoded asByteArray readStream
 ]
 
 { #category : #'private - contents' }
