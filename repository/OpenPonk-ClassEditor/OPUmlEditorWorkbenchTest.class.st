@@ -15,6 +15,7 @@ Class {
 
 { #category : #'instance creation' }
 OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
+
 	model := OPUMLPackage new.
 	model name: 'Click Package'.
 	project := OPProject new.
@@ -23,9 +24,9 @@ OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 	workbench := OPWorkbench new.
 	window := workbench open.
 	workbench openProject: project.
-	editor := (workbench instVarNamed: #editors) values first first.
+	editor := (workbench instVarNamed: #editors) values first at: #editor.
 	view := editor canvasPresenter roassalView.
-	paletteEntries := editor palette widgets select: [ :each | each isKindOf: OPPaletteEntry ]
+	paletteEntries := editor palette entries
 ]
 
 { #category : #running }
