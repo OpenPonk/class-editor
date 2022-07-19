@@ -33,10 +33,10 @@ BaselineOfClassEditor >> baseline: spec [
 				'github://openponk/uml-bootstrap-generator/repository' ].
 		spec
 			baseline: 'OpenPonk'
-			with: [ spec repository: 'github://openponk/openponk:spec2' ].
+			with: [ spec repository: 'github://openponk/openponk' ].
 		spec baseline: 'UMLShapes' with: [ 
 			spec
-				repository: 'github://openponk/uml-shapes:spec2';
+				repository: 'github://openponk/uml-shapes';
 				loads: #( plugin ) ].
 		spec
 			baseline: 'UMLProfiles'
