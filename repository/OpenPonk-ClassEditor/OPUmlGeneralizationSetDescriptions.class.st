@@ -139,7 +139,7 @@ OPUmlGeneralizationSetDescriptions >> initializeFor: aGeneralizationController [
 		addButton: #new
 		text: 'Create new'
 		value: [ OPUMLGeneralizationSet new ].
-	dialog openModalWithSpec.
+	dialog openModal.
 	dialog withWindowDo: [ :w | w title: 'Select existing or new set' ].
 	self set: dialog result value
 ]

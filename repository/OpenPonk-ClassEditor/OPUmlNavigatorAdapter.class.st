@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+OPUmlNavigatorAdapter class >> priority [
+
+	^ 10
+]
+
+{ #category : #accessing }
 OPUmlNavigatorAdapter >> childrenMapping [
 	^ {(OPUMLPackage -> #packagedElements).
 	(OPUMLProfile -> #packagedElements).
@@ -101,11 +107,6 @@ OPUmlNavigatorAdapter >> displayMapping [
 	(OPUMLPackageImport
 		-> [ :o | o importedPackage name , ' --> ' , o importingNamespace name ]).
 	(OPUMLElement -> #name)}
-]
-
-{ #category : #accessing }
-OPUmlNavigatorAdapter >> famixClassNameFor: anObject [
-	^ (anObject className splitOn: 'FAMIX') last
 ]
 
 { #category : #accessing }

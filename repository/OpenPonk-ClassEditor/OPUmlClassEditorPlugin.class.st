@@ -8,12 +8,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OPUmlClassEditorPlugin class >> allDefaultProfiles [
-
-	^ self withAllSubclasses flatCollectAsSet: #defaultProfiles
-]
-
-{ #category : #'as yet unclassified' }
 OPUmlClassEditorPlugin class >> defaultProfiles [
 	^ {}
 ]
@@ -28,7 +22,14 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 				ensureDelete;
 				writeStreamDo: [ :stream | 
 					stream << (OPUMLXMIWriter toString: aPackage) ].
-			self inform: 'Exported to ' , file fullName ];
+			UIManager default
+				inform: (String streamContents: [ :s | 
+						 s << 'Exported to ' << file pathString.
+						 s
+							 cr;
+							 cr.
+						 s << 'Click to open location' ])
+				actionOnClick: [ file openInOSFileBrowser ] ];
 		extensions: #( xmi xml uml ) named: 'XMI files';
 		open
 ]
@@ -93,9 +94,12 @@ OPUmlClassEditorPlugin >> isForController: aDiagramController [
 
 { #category : #accessing }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
-	^ {self modelClass.
-	OPUMLModel.
-	OPUMLProfile} includes: aModel class
+
+	^ ({ 
+		   self modelClass.
+		   OPUMLModel.
+		   OPUMLProfile } includes: aModel class) and: [ 
+		  self supportsProfilesOf: aModel ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -153,4 +157,11 @@ OPUmlClassEditorPlugin >> supportsHidingElements [
 { #category : #testing }
 OPUmlClassEditorPlugin >> supportsMergingModels [
 	^ true
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlClassEditorPlugin >> supportsProfilesOf: aModel [
+
+	^ aModel profileApplications allSatisfy: [ :each | 
+		  self defaultProfiles includes: each appliedProfile ]
 ]
