@@ -9,17 +9,19 @@ Class {
 
 { #category : #figures }
 OPUmlEnumerationController >> adornments [
-	^ {OPUmlIcons literalIcon
-		-> [ | tool |
-			tool := OPCreationTool new
-				palette: self diagramController editor palette;
-				factory: [ OPUMLEnumerationLiteral new ].
-			self diagramController editor palette selectTool: tool.
-			tool
-				whenCreated: [ :ctrl | 
-					OPRenameElementCommand executeOn: ctrl model.
-					ctrl refreshFigure ].
-			tool targetSelected: self ]}
+
+	^ { (OPUmlIcons literalIcon -> [ 
+	   | tool |
+	   tool := OPCreationTool new
+		           palette: self diagramController editor palette;
+		           factory: [ OPUMLEnumerationLiteral new ].
+	   self diagramController editor palette selectTool: tool.
+	   tool whenCreated: [ :ctrl | 
+		   OPRenameElementCommand
+			   executeOn: ctrl model
+			   in: ctrl diagramController model.
+		   ctrl refreshFigure ].
+	   tool targetSelected: self ]) }
 ]
 
 { #category : #rendering }

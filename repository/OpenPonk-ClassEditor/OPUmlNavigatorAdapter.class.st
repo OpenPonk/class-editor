@@ -110,8 +110,22 @@ OPUmlNavigatorAdapter >> displayMapping [
 ]
 
 { #category : #accessing }
-OPUmlNavigatorAdapter >> hasMappingFor: anObject [
-	^ anObject isKindOf: OPUMLMetaElement
+OPUmlNavigatorAdapter >> hasMappingFor: anObject in: aModel [
+
+	| appliedStereotypeNames availableStereotypeNames |
+	(anObject isKindOf: OPUMLMetaElement) ifFalse: [ ^ false ].
+	(aModel respondsTo: #profileApplications) ifFalse: [ ^ true ].
+	appliedStereotypeNames := anObject appliedStereotypes collect:
+		                          #umlClassName.
+	appliedStereotypeNames ifEmpty: [ ^ true ].
+	availableStereotypeNames := aModel profileApplications 
+		                            flatCollectAsSet: [ 
+			                            :eachProfileApplication | 
+			                            eachProfileApplication appliedProfile
+				                            ownedStereotype collect: [ 
+				                            :eachStereotype | eachStereotype name ] ].
+	^ appliedStereotypeNames allSatisfy: [ :each | 
+		  availableStereotypeNames includes: each ]
 ]
 
 { #category : #accessing }

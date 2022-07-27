@@ -9,29 +9,33 @@ Class {
 
 { #category : #figures }
 OPUmlClassController >> adornments [
-	^ {(OPUmlIcons attributeIcon
-		-> [ | tool |
-			tool := OPCreationTool new
-				palette: self diagramController editor palette;
-				factory: [ OPUmlAttributeController new ].
-			self diagramController editor palette selectTool: tool.
-			tool
-				whenCreated: [ :ctrl | OPRenameElementCommand executeOn: ctrl model ].
-			tool targetSelected: self ]).
-	(OPUmlIcons directedAssociationIcon
-		-> [ | tool |
-			tool := OPConnectionCreationTool new
-				palette: self diagramController editor palette;
-				factory: [ OPUmlAssociationController new ].
-			self diagramController editor palette selectTool: tool.
-			tool sourceSelected: self ]).
-	(OPUmlIcons generalizationIcon
-		-> [ | tool |
-			tool := OPConnectionCreationTool new
-				palette: self diagramController editor palette;
-				factory: [ OPUmlGeneralizationController new ].
-			self diagramController editor palette selectTool: tool.
-			tool sourceSelected: self ])}
+
+	^ { 
+		  (OPUmlIcons attributeIcon -> [ 
+		   | tool |
+		   tool := OPCreationTool new
+			           palette: self diagramController editor palette;
+			           factory: [ OPUmlAttributeController new ].
+		   self diagramController editor palette selectTool: tool.
+		   tool whenCreated: [ :ctrl | 
+			   OPRenameElementCommand
+				   executeOn: ctrl model
+				   in: ctrl diagramController model ].
+		   tool targetSelected: self ]).
+		  (OPUmlIcons directedAssociationIcon -> [ 
+		   | tool |
+		   tool := OPConnectionCreationTool new
+			           palette: self diagramController editor palette;
+			           factory: [ OPUmlAssociationController new ].
+		   self diagramController editor palette selectTool: tool.
+		   tool sourceSelected: self ]).
+		  (OPUmlIcons generalizationIcon -> [ 
+		   | tool |
+		   tool := OPConnectionCreationTool new
+			           palette: self diagramController editor palette;
+			           factory: [ OPUmlGeneralizationController new ].
+		   self diagramController editor palette selectTool: tool.
+		   tool sourceSelected: self ]) }
 ]
 
 { #category : #rendering }
