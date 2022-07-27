@@ -198,15 +198,15 @@ OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlPackageController new beForPackage ])
 		label: 'Package';
 		icon: OPUmlIcons packageIcon;
-		whenCompletedRename.
+		whenCreatedSetup.
 	(aPalette newCreationEntry: [ OPUmlPackageController new beForModel ])
 		label: 'Model';
 		icon: OPUmlIcons modelIcon;
-		whenCompletedRename.
+		whenCreatedSetup.
 	(aPalette newCreationEntry: [ OPUmlPackageController new beForProfile ])
 		label: 'Profile';
 		icon: OPUmlIcons profileIcon;
-		whenCompletedRename
+		whenCreatedSetup
 ]
 
 { #category : #palette }
@@ -215,17 +215,17 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 		label: 'Class';
 		icon: OPUmlIcons classIcon;
 		shortcut: $c asShortcut;
-		whenCompletedRename.
+		whenCreatedSetup.
 	(aPalette newCreationEntry: [ OPUmlAttributeController new ])
 		label: 'Attribute';
 		icon: OPUmlIcons attributeIcon;
 		shortcut: $a asShortcut;
-		whenCompletedRename.
+		whenCreatedSetup.
 	(aPalette newCreationEntry: [ OPUmlOperationController new ])
 		label: 'Operation';
 		icon: OPUmlIcons operationIcon;
 		shortcut: $o asShortcut;
-		whenCompletedRename.
+		whenCreatedSetup.
 	aPalette newSeparator.
 	(aPalette newConnectionCreationTool: [ OPUmlAssociationController new ])
 		label: 'Association';
@@ -239,11 +239,11 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlEnumerationController new ])
 		label: 'Enumeration';
 		icon: OPUmlIcons enumIcon;
-		whenCompletedRename.
+		whenCreatedSetup.
 	(aPalette newCreationEntry: [ OPUmlEnumerationLiteralController new ])
 		label: 'Enumeration Literal';
 		icon: OPUmlIcons literalIcon;
-		whenCompletedRename.
+		whenCreatedSetup.
 	self initializeProfileModelingPalette: aPalette.
 	self initializeProfilesPalette: aPalette.
 	self initializePackagePalette: aPalette
@@ -272,11 +272,11 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 		(aPalette newCreationEntry: [ OPUmlClassController new ])
 			label: stereotype name;
 			icon: OPUmlIcons classIcon;
-			whenCompleted: [ :ctrl | 
+			whenCreated: [ :ctrl | 
 				ctrl model applyStereotype: stereotype implementationClass new.
 				ctrl model name: stereotype name.
 				ctrl refreshFigure.
-				OPRenameElementCommand executeOn: ctrl model.
+				OPInitialSetElementCommand executeOn: ctrl model.
 				ctrl refreshFigure ] ].
 	relationships ifNotEmpty: [ aPalette newSeparator ].
 	relationships do: [ :stereotype | 
@@ -284,7 +284,7 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 				 OPUmlAssociationController new ])
 			label: stereotype name;
 			icon: OPUmlIcons directedAssociationIcon;
-			whenCompleted: [ :ctrl | 
+			whenCreated: [ :ctrl | 
 				ctrl model applyStereotype: stereotype implementationClass new.
 				ctrl refreshFigure ] ]
 ]
@@ -297,7 +297,7 @@ OPUmlPackageDiagramController >> initializeProfileModelingPalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlStereotypeController new ])
 		label: 'Stereotype';
 		icon: OPUmlIcons stereotypeIcon;
-		whenCompletedRename.
+		whenCreatedSetup.
 	(aPalette newConnectionCreationTool: [ OPUmlExtensionController new ])
 		label: 'Extension';
 		icon: OPUmlIcons extensionIcon

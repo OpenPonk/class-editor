@@ -58,7 +58,7 @@ OPUmlEditorWorkbenchTest >> testAddClassFromPalette [
 		selector: #value:;
 		arguments: #(object);
 		control: #instead.
-	method := OPRenameElementCommand >> #execute.
+	method := OPInitialSetElementCommand >> #execute.
 	method ast link: link.
 	[ ev shape announce: ev ]
 		ensure: [ link uninstall ].
