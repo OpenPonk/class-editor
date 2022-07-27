@@ -71,40 +71,40 @@ OPUmlPackageDiagramController >> controllerFactory [
 ]
 
 { #category : #forms }
-OPUmlPackageDiagramController >> descriptionAppliedProfile [
+OPUmlPackageDiagramController >> descriptionAppliedProfiles [
+
 	<magritteDescription>
 	| profiles options |
-	(self model oclIsKindOf: #Profile)
-		ifTrue: [ ^ nil ].
+	(self model oclIsKindOf: #Profile) ifTrue: [ ^ nil ].
 	profiles := OPUmlCustomProfile allSubclasses collect: #profile.
-	options := self isAppliedProfileInUse
-		ifTrue: [ | current |
-			current := model profileApplications first appliedProfile.
-			{current -> current name} ]
-		ifFalse: [ {nil -> ''} , (profiles collect: [ :each | each -> each name ]) ].
-	^ MASingleOptionDescription new
-		optionsAndLabels: options;
-		reference: MAStringDescription new;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | 
-					(me model profileApplications collect: #appliedProfile)
-						ifEmpty: [ nil ]
-						ifNotEmpty: #first ]
-				write: [ :me :newValue | 
-					newValue
-						ifNil: [ [ me model profileApplications isNotEmpty ]
-								whileTrue: [ me model profileApplications remove: me model profileApplications first ] ]
-						ifNotNil: [ me model profileApplications
-								ifEmpty: [ me model profileApplications
-										add: (OPUMLProfileApplication new uuid: me model uuid , '-_profileApplication.0') ].
-							me model profileApplications first appliedProfile: newValue ].
-					self rebuildPalette.
-					self refreshFigure ]);
-		label: 'Applied Profile';
-		priority: 10;
-		beSorted;
-		yourself
+
+	options := profiles collect: [ :each | each -> each name ].
+	^ MAMultipleOptionDescription new
+		  optionsAndLabels: options;
+		  distinct: true;
+		  reference: MAStringDescription new;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | 
+					   me model profileApplications collect: #appliedProfile ]
+				   write: [ :me :selectedProfiles | 
+					   me model profileApplications:
+							   (me model profileApplications select: [ :any | 
+									    selectedProfiles includes: any appliedProfile ]).
+					   me model profileApplications:
+							   me model profileApplications , (selectedProfiles
+									    select: [ :eachSelectedProfile | 
+										    me model profileApplications noneSatisfy: [ 
+												    :eachExistingProfileApplication | 
+												    eachExistingProfileApplication = eachSelectedProfile ] ]
+									    thenCollect: [ :each | 
+										    OPUMLProfileApplication new appliedProfile:
+												    each yourself ]).
+					   self rebuildPalette.
+					   self refreshFigure ]);
+		  label: 'Applied Profiles';
+		  priority: 10;
+		  beSorted;
+		  yourself
 ]
 
 { #category : #figures }
@@ -308,12 +308,6 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 
 	model profileApplications do: [ :each | 
 		self initializeProfile: each appliedProfile palette: aPalette ]
-]
-
-{ #category : #testing }
-OPUmlPackageDiagramController >> isAppliedProfileInUse [
-	model profileApplications ifEmpty: [ ^ false ].
-	^ model packagedElements anySatisfy: [ :each | each appliedStereotypes isNotEmpty ]
 ]
 
 { #category : #hooks }

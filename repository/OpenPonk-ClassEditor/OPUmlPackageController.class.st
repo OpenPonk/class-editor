@@ -22,15 +22,6 @@ OPUmlPackageController >> allShowableElements [
 	^ #()
 ]
 
-{ #category : #'events - registering' }
-OPUmlPackageController >> attachTo: aDiagramController [
-	| newModel |
-	newModel := self createModel.
-	OPRenameElementCommand executeOn: newModel.
-	aDiagramController model packagedElements add: newModel.
-	aDiagramController showWithoutDependentInDiagramModel: newModel
-]
-
 { #category : #configuration }
 OPUmlPackageController >> beForModel [
 	modelClass := OPUMLPackage

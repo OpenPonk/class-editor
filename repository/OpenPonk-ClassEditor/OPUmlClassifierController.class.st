@@ -16,15 +16,6 @@ OPUmlClassifierController >> adornments [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'events - registering' }
-OPUmlClassifierController >> attachTo: aDiagramController [
-	| newModel |
-	newModel := self createModel.
-	OPRenameElementCommand executeOn: newModel.
-	aDiagramController model packagedElements add: newModel.
-	aDiagramController showWithoutDependentInDiagramModel: newModel
-]
-
 { #category : #adding }
 OPUmlClassifierController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlAssociationController
