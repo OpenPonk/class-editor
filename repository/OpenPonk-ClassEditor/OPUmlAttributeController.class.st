@@ -123,6 +123,28 @@ OPUmlAttributeController >> descriptionMultiplicity [
 ]
 
 { #category : #forms }
+OPUmlAttributeController >> descriptionName [
+
+	<magritteDescription>
+	| accessor |
+	accessor := MAPluggableAccessor
+		            read: [ :me | me model name ]
+		            write: [ :me :newValue | 
+			            | text |
+			            text := newValue ifEmpty: [ ' ' ] ifNotEmpty: [ 
+				                    newValue first = Character space
+					                    ifTrue: [ newValue allButFirst ]
+					                    ifFalse: [ newValue ] ].
+			            me model name: text.
+			            self reactToAttributeWrite ].
+	^ MAStringDescription new
+		  accessor: accessor;
+		  label: 'Name';
+		  priority: 1;
+		  yourself
+]
+
+{ #category : #forms }
 OPUmlAttributeController >> descriptionType [
 	<magritteDescription>
 	^ MAStringDescription new
