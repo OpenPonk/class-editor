@@ -36,49 +36,45 @@ OPUmlGeneralizationController >> descriptionGeneral [
 
 { #category : #forms }
 OPUmlGeneralizationController >> descriptionGeneralizationSet [
+
 	<magritteDescription>
 	^ MAToManyRelationDescription new
-		initializer: [ :desc | desc initializeFor: self ];
-		display: [ :desc | 
-			String
-				streamContents: [ :stream | 
-					stream
-						<< 'GeneralizationSet {''';
-						<< (desc set name ifNil: [ '' ]);
-						<< ''', '.
-					desc set isCovering
-						ifTrue: [ stream << 'complete, ' ]
-						ifFalse: [ stream << 'incomplete, ' ].
-					desc set isDisjoint
-						ifTrue: [ stream << 'disjoint, ' ]
-						ifFalse: [ stream << 'overlapping, ' ].
-					stream << ('(' , desc set generalizations size asString , ')}') ] ];
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | 
-					me model generalizationSets
-						collect: [ :each | 
-							OPUmlGeneralizationSetDescriptions new
-								controller: self;
-								set: each ] ]
-				write: [ :me :newValue | 
-					| oldSets newSets setsToRemove setsToAdd |
-					oldSets := me model generalizationSets asArray.
-					newSets := newValue collect: #set.
-					oldSets do: [ :each | each generalizations remove: me model ].
-					newSets do: [ :each | each generalizations add: me model ].
-					setsToRemove := oldSets
-						select: [ :each | each generalizations isEmpty ].
-					setsToAdd := newSets
-						select: [ :each | each generalizations size = 1 ].
-					me model generalizationSets: newSets.
-					diagramController model
-						packagedElements: diagramController model packagedElements \ setsToRemove , setsToAdd.
-					diagramElement ifNotNil: [ self refreshFigure ] ]);
-		classes: {OPUmlGeneralizationSetDescriptions};
-		label: 'Generalization Sets';
-		priority: 5;
-		yourself
+		  initializer: [ :desc | desc initializeFor: self ];
+		  display: [ :desc | 
+			  String streamContents: [ :stream | 
+					  stream << (desc set name ifNil: [ 'unnamed' ]) << ': '
+					  << (desc set isCovering
+							   ifTrue: [ 'complete' ]
+							   ifFalse: [ 'incomplete' ]) << ', ' << (desc set isDisjoint
+							   ifTrue: [ 'disjoint' ]
+							   ifFalse: [ 'overlapping' ]) << ' ('
+					  << (desc set generalizations size pluralize: 'generalization')
+					  << ')' ] ];
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | 
+					   me model generalizationSets collect: [ :each | 
+							   OPUmlGeneralizationSetDescriptions new
+								   controller: self;
+								   set: each ] ]
+				   write: [ :me :newValue | 
+					   | oldSets newSets setsToRemove setsToAdd |
+					   oldSets := me model generalizationSets asArray.
+					   newSets := newValue collect: #set.
+					   oldSets do: [ :each | each generalizations remove: me model ].
+					   newSets do: [ :each | each generalizations add: me model ].
+					   setsToRemove := oldSets select: [ :each | 
+						                   each generalizations isEmpty ].
+					   setsToAdd := newSets select: [ :each | 
+						                each generalizations size = 1 ].
+					   me model generalizationSets: newSets.
+					   diagramController model packagedElements:
+						   diagramController model packagedElements \ setsToRemove
+						   , setsToAdd.
+					   diagramElement ifNotNil: [ self refreshFigure ] ]);
+		  classes: { OPUmlGeneralizationSetDescriptions };
+		  label: 'Generalization Sets';
+		  priority: 5;
+		  yourself
 ]
 
 { #category : #forms }
