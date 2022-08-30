@@ -41,6 +41,7 @@ OPTUmlBaseController >> descriptionComment [
 					self reactToAttributeWrite ]);
 		label: 'Comment';
 		priority: 100;
+		lineCount: 10;
 		yourself
 ]
 
