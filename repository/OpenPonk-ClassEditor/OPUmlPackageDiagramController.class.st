@@ -4,8 +4,8 @@ I am controller for managing the main class diagram presentation and handling it
 Class {
 	#name : #OPUmlPackageDiagramController,
 	#superclass : #OPDiagramController,
-	#traits : 'OPTUmlBaseController',
-	#classTraits : 'OPTUmlBaseController classTrait',
+	#traits : 'OPTUmlStereotypedElementController @ {#descriptionStereotypeContent->#descriptionStereotype}',
+	#classTraits : 'OPTUmlStereotypedElementController classTrait',
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
@@ -59,7 +59,6 @@ OPUmlPackageDiagramController >> controllerFactory [
 			forModel: OPUMLGeneralization;
 		register: OPUmlAssociationController forModel: OPUMLAssociation;
 		register: OPUmlPackageController forModel: OPUMLPackage;
-		register: OPUmlPackageController forModel: OPUMLModel;
 		register: OPUmlPackageController forModel: OPUMLProfile;
 		register: OPUmlExtensionController forModel: OPUMLExtension;
 		register: OPUmlAttributeController forModel: OPUMLExtensionEnd;
@@ -107,6 +106,13 @@ OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 		  yourself
 ]
 
+{ #category : #forms }
+OPUmlPackageDiagramController >> descriptionStereotype [
+
+	<magritteDescription>
+	^ self descriptionStereotypeContent
+]
+
 { #category : #figures }
 OPUmlPackageDiagramController >> diagramElementForModel: aModel [
 	^ (self showWithoutDependentInDiagramModel: aModel) diagramElement
@@ -133,7 +139,6 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 	| queue priority |
 	queue := OrderedCollection new.
 	priority := {(OPUMLPackage -> 1).
-	(OPUMLModel -> 1).
 	(OPUMLProfile -> 1).
 	(OPUMLClass -> 2).
 	(OPUMLStereotype -> 3).
@@ -252,17 +257,21 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 { #category : #palette }
 OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 
-	| stereotypes elements relationships isForRelationship |
+	| stereotypes elements relationships isForRelationship isForClass |
 	stereotypes := (aProfile ownedStereotype reject: #isAbstract) 
 		               sorted: [ :a :b | a name < b name ].
 	isForRelationship := [ :attr | 
 	                     (OPUMLXMISpecsStorage metaClassNamed:
 		                      attr type name) allParents anySatisfy: [ 
 		                     :parent | parent name = 'Relationship' ] ].
+	isForClass := [ :attr | 
+	              (OPUMLXMISpecsStorage metaClassNamed: attr type name)
+		              allParents anySatisfy: [ :parent | 
+		              parent name = 'Class' ] ].
 	elements := stereotypes select: [ :each | 
 		            each allAttributes anySatisfy: [ :attr | 
 			            (attr name beginsWith: 'base_') and: [ 
-				            (isForRelationship value: attr) not ] ] ].
+				            isForClass value: attr ] ] ].
 	relationships := stereotypes select: [ :each | 
 		                 each allAttributes anySatisfy: [ :attr | 
 			                 (attr name beginsWith: 'base_') and: [ 

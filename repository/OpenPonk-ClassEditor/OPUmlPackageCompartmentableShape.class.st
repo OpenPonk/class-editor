@@ -5,7 +5,7 @@ Class {
 		'view',
 		'separators'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'Roassal2 - manipulation' }
@@ -23,7 +23,6 @@ OPUmlPackageCompartmentableShape >> createRtElement [
 			(model modelElement isKindOf: OPUMLProfile)
 				ifTrue: [ '«profile»' ]
 				ifFalse: [ '' ] ].
-	shape showTriangle: [ :model | model modelElement isKindOf: OPUMLModel ].
 	^ shape
 ]
 

@@ -63,7 +63,6 @@ OPUmlPackageController >> createModelIn: aParentModel [
 	| newModel names |
 	newModel := self modelClass new.
 	names := {(OPUMLPackage -> 'Package').
-	(OPUMLModel -> 'Model').
 	(OPUMLProfile -> 'Profile')} asDictionary.
 	newModel name: (names at: newModel class).
 	self model: newModel.

@@ -17,7 +17,6 @@ OPUmlNavigatorAdapter class >> priority [
 OPUmlNavigatorAdapter >> childrenMapping [
 	^ {(OPUMLPackage -> #packagedElements).
 	(OPUMLProfile -> #packagedElements).
-	(OPUMLModel -> #packagedElements).
 	(OPUMLClass
 		-> [ :cls | cls ownedAttributes asArray , cls ownedOperations asArray ]).
 	(OPUMLEnumeration -> #ownedLiterals)}
@@ -62,7 +61,6 @@ OPUmlNavigatorAdapter >> dependentMapping [
 						select: [ :eachImport | eachImport importingNamespace = object ] ]) ].
 	^ {(OPUMLPackage -> packageLikeBlock).
 	(OPUMLProfile -> packageLikeBlock).
-	(OPUMLModel -> packageLikeBlock).
 	(OPUMLClass
 		-> [ :class :model | 
 			class ownedAttributes asSet , class ownedOperations asSet
@@ -132,7 +130,6 @@ OPUmlNavigatorAdapter >> hasMappingFor: anObject in: aModel [
 OPUmlNavigatorAdapter >> iconMapping [
 	^ {OPUMLProfile -> OPUmlIcons profileIcon.
 	OPUMLPackage -> OPUmlIcons packageIcon.
-	OPUMLModel -> OPUmlIcons modelIcon.
 	OPUMLClass -> OPUmlIcons classIcon.
 	OPUMLDataType -> OPUmlIcons dataTypeIcon.
 	OPUMLPrimitiveType -> OPUmlIcons primitiveIcon.
@@ -181,7 +178,6 @@ OPUmlNavigatorAdapter >> suffixMapping [
 { #category : #'widget API' }
 OPUmlNavigatorAdapter >> typesByDependency [
 	^ {OPUMLPackage.
-	OPUMLModel.
 	OPUMLProfile.
 	OPUMLClass.
 	OPUMLEnumeration.

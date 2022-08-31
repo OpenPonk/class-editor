@@ -97,7 +97,6 @@ OPUmlClassEditorPlugin >> isPluginFor: aModel [
 
 	^ ({ 
 		   self modelClass.
-		   OPUMLModel.
 		   OPUMLProfile } includes: aModel class) and: [ 
 		  self supportsProfilesOf: aModel ]
 ]

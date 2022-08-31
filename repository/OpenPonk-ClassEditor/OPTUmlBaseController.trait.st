@@ -4,15 +4,6 @@ Trait {
 }
 
 { #category : #forms }
-OPTUmlBaseController >> buildNameEditorForm: aForm [
-	(aForm addTextInput: 'Name')
-		text: self model name;
-		whenTextIsAccepted: [ :newValue | 
-			self model name: newValue.
-			self reactToAttributeWrite ]
-]
-
-{ #category : #forms }
 OPTUmlBaseController >> descriptionAccessor: aSymbol [
 	^ MAPluggableAccessor
 		read: [ :me | me model perform: aSymbol ]
