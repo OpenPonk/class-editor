@@ -18,6 +18,38 @@ OPUmlModelSerializerTest >> serializerClass [
 ]
 
 { #category : #tests }
+OPUmlModelSerializerTest >> testNoNames [
+
+	serializer serializeModel: model to: stream.
+	model name: nil.
+	self
+		should: [ serializer serializeModel: model to: stream ]
+		raise: AssertionFailure
+		description:
+		'Serialization should fail because model must have a name'.
+	model name: ''.
+	self
+		should: [ serializer serializeModel: model to: stream ]
+		raise: AssertionFailure
+		description:
+		'Serialization should fail because model must have a name'.
+	model name: 'Test'.
+	serializer serializeModel: model to: stream.
+	model packagedElements first name: nil.
+	self
+		should: [ serializer serializeModel: model to: stream ]
+		raise: AssertionFailure
+		description:
+		'Serialization should fail because classes must have a name'.
+	model packagedElements first name: ''.
+	self
+		should: [ serializer serializeModel: model to: stream ]
+		raise: AssertionFailure
+		description:
+		'Serialization should fail because model must have a name'
+]
+
+{ #category : #tests }
 OPUmlModelSerializerTest >> testRoundtrip [
 	| newModel |
 	serializer serializeModel: model to: stream.

@@ -21,7 +21,7 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 			file
 				ensureDelete;
 				writeStreamDo: [ :stream | 
-					stream << (OPUMLXMIWriter toString: aPackage) ].
+					stream << (OPUmlModelSerializer new serializeModel: aPackage) ].
 			UIManager default
 				inform: (String streamContents: [ :s | 
 						 s << 'Exported to ' << file pathString.

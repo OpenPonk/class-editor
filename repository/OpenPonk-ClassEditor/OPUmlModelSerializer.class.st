@@ -19,6 +19,18 @@ OPUmlModelSerializer >> materializeModelFrom: aStream [
 
 { #category : #accessing }
 OPUmlModelSerializer >> serializeModel: aModel [
+
+	self
+		assert: (aModel name isNotNil and: [ aModel name isNotEmpty ])
+		description: 'Model name is mandatory'.
+	aModel packagedElements
+		select: [ :each | each oclIsKindOf: 'Class' ]
+		thenDo: [ :each | 
+			self
+				assert: (each name isNotNil and: [ each name isNotEmpty ])
+				description:
+					each umlClassName , ' name is mandatory (' , each umlClassName
+					, ' id ' , each uuid asString , ')' ].
 	^ OPUMLXMIWriter toString: aModel
 ]
 
