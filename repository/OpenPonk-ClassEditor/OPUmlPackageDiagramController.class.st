@@ -265,9 +265,12 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 		                      attr type name) allParents anySatisfy: [ 
 		                     :parent | parent name = 'Relationship' ] ].
 	isForClass := [ :attr | 
-	              (OPUMLXMISpecsStorage metaClassNamed: attr type name)
-		              allParents anySatisfy: [ :parent | 
-		              parent name = 'Class' ] ].
+	              | metaclass |
+	              metaclass := OPUMLXMISpecsStorage metaClassNamed:
+		                           attr type name.
+	              metaclass name = 'Class' or: [ 
+		              metaclass allParents anySatisfy: [ :parent | 
+			              parent name = 'Class' ] ] ].
 	elements := stereotypes select: [ :each | 
 		            each allAttributes anySatisfy: [ :attr | 
 			            (attr name beginsWith: 'base_') and: [ 
