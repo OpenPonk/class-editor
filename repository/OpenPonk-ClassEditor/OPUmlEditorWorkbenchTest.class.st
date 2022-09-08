@@ -58,7 +58,7 @@ OPUmlEditorWorkbenchTest >> testAddClassFromPalette [
 	"Pseudo-mock OPRenameElementCommand>>execute, so there's no asking user questions for a name."
 	link := MetaLink new
 		        metaObject: [ :object | 
-			        (object instVarNamed: #element) name: 'Hello' ];
+			        (object instVarNamed: #controller) model name: 'Hello' ];
 		        selector: #value:;
 		        arguments: #( object );
 		        control: #instead.
