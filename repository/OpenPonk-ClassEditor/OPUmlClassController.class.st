@@ -18,9 +18,7 @@ OPUmlClassController >> adornments [
 			           factory: [ OPUmlAttributeController new ].
 		   self diagramController editor palette selectTool: tool.
 		   tool whenCreated: [ :ctrl | 
-			   OPRenameElementCommand
-				   executeOn: ctrl model
-				   in: ctrl diagramController model ].
+			   OPRenameElementCommand executeOn: ctrl ].
 		   tool targetSelected: self ]).
 		  (OPUmlIcons directedAssociationIcon -> [ 
 		   | tool |

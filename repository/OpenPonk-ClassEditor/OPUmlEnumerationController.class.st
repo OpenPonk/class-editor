@@ -17,9 +17,7 @@ OPUmlEnumerationController >> adornments [
 		           factory: [ OPUMLEnumerationLiteral new ].
 	   self diagramController editor palette selectTool: tool.
 	   tool whenCreated: [ :ctrl | 
-		   OPRenameElementCommand
-			   executeOn: ctrl model
-			   in: ctrl diagramController model.
+		   OPRenameElementCommand executeOn: ctrl.
 		   ctrl refreshFigure ].
 	   tool targetSelected: self ]) }
 ]
