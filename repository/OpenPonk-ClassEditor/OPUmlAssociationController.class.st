@@ -158,7 +158,8 @@ OPUmlAssociationController >> switchSourceAndTarget [
 	3 to: originalModels size do: [ :index | 
 	self model memberEnds add: originalModels at: index ].
 	source := self diagramController controllerForModel:
-		          originalModels second type
+		          originalModels second type.
+	self diagramElement switchSourceAndTarget
 ]
 
 { #category : #writing }
