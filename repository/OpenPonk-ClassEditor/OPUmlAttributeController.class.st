@@ -173,7 +173,11 @@ OPUmlAttributeController >> modelClass [
 
 { #category : #figures }
 OPUmlAttributeController >> notationTextFor: aProperty [
+
 	^ aProperty notationString
+		  replaceAll: Character lf with: Character space;
+		  replaceAll: Character cr with: Character space;
+		  yourself
 ]
 
 { #category : #figures }

@@ -62,7 +62,11 @@ OPUmlOperationController >> modelClass [
 
 { #category : #figures }
 OPUmlOperationController >> notationTextFor: anOperation [
+
 	^ anOperation notationString
+		  replaceAll: Character lf with: Character space;
+		  replaceAll: Character cr with: Character space;
+		  yourself
 ]
 
 { #category : #figures }
