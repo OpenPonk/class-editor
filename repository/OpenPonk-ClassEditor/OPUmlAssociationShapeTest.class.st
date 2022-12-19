@@ -9,7 +9,7 @@ Class {
 		'ownedComment',
 		'owningElement'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#category : #'OpenPonk-ClassEditor-Tests'
 }
 
 { #category : #running }
@@ -44,10 +44,10 @@ OPUmlAssociationShapeTest >> testBothNavigable [
 		owningClass: comment.
 	self
 		assert: (OPUmlAssociationShape new decoratorFor: ownedComment)
-		equals: OPUmlEdgeMarkers none.
+		equals: OPUmlEdgeMarkers simpleArrow.
 	self
 		assert: (OPUmlAssociationShape new decoratorFor: owningElement)
-		equals: OPUmlEdgeMarkers none
+		equals: OPUmlEdgeMarkers simpleArrow
 ]
 
 { #category : #tests }
