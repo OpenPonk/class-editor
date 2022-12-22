@@ -12,15 +12,18 @@ Class {
 
 { #category : #'ui hooks' }
 OPUmlLayouter >> applyLayout: aThreeArgBlock [
+
 	| classifiers classes packages hierarchy associations packageImports boxes links |
-	classifiers := packagedElements
-		select: [ :each | (each oclIsKindOf: #Class) | (each oclIsKindOf: #DataType) ].
+	classifiers := packagedElements select: [ :each | 
+		               (each oclIsKindOf: #Class)
+		               | (each oclIsKindOf: #DataType) ].
 	classes := classifiers select: [ :each | each oclIsKindOf: #Class ].
-	packages := packagedElements select: [ :each | each oclIsKindOf: #Package ].
+	packages := packagedElements select: [ :each | 
+		            each oclIsKindOf: #Package ].
 	hierarchy := (classifiers flatCollect: #generalizations)
-		, (classes flatCollect: #extensions).
-	associations := (packagedElements select: [ :each | each oclIsKindOf: #Association ])
-		\ hierarchy.
+	             , (classes flatCollect: #extensions).
+	associations := (packagedElements select: [ :each | 
+		                 each oclIsKindOf: #Association ]) \ hierarchy.
 	packageImports := packages flatCollect: #packageImports.
 	boxes := classifiers , packages.
 	links := associations , packageImports.
@@ -28,7 +31,7 @@ OPUmlLayouter >> applyLayout: aThreeArgBlock [
 		value: (self figuresFor: boxes)
 		value: (self figuresFor: hierarchy)
 		value: (self figuresFor: links).
-	self updateView
+	self updateCanvas
 ]
 
 { #category : #'ui hooks' }
