@@ -19,21 +19,21 @@ OPUmlClassController >> adornments [
 		   self diagramController editor palette selectTool: tool.
 		   tool whenCreated: [ :ctrl | 
 			   OPRenameElementCommand executeOn: ctrl ].
-		   tool targetSelected: self ]).
+		   tool selectedTargetControllers: { self } ]).
 		  (OPUmlIcons directedAssociationIcon -> [ 
 		   | tool |
 		   tool := OPConnectionCreationTool new
 			           palette: self diagramController editor palette;
 			           factory: [ OPUmlAssociationController new ].
 		   self diagramController editor palette selectTool: tool.
-		   tool sourceSelected: self ]).
+		   tool selectedSourceControllers: { self } ]).
 		  (OPUmlIcons generalizationIcon -> [ 
 		   | tool |
 		   tool := OPConnectionCreationTool new
 			           palette: self diagramController editor palette;
 			           factory: [ OPUmlGeneralizationController new ].
 		   self diagramController editor palette selectTool: tool.
-		   tool sourceSelected: self ]) }
+		   tool selectedSourceControllers: { self } ]) }
 ]
 
 { #category : #rendering }

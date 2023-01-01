@@ -19,7 +19,7 @@ OPUmlEnumerationController >> adornments [
 	   tool whenCreated: [ :ctrl | 
 		   OPRenameElementCommand executeOn: ctrl.
 		   ctrl refreshFigure ].
-	   tool targetSelected: self ]) }
+	   tool selectedTargetControllers: { self } ]) }
 ]
 
 { #category : #rendering }

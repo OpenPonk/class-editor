@@ -56,11 +56,11 @@ OPUmlElementController >> reactToAttributeWrite [
 
 { #category : #figures }
 OPUmlElementController >> removeDiagramElement [
+
 	self diagramController deselectAll.
-	diagramElement view
-		ifNotNil: [ 
-			diagramElement remove.
-			diagramElement := nil ]
+
+	diagramElement remove.
+	diagramElement := nil
 ]
 
 { #category : #figures }

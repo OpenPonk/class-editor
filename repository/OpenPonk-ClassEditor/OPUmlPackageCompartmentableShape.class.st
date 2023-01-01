@@ -37,7 +37,8 @@ OPUmlPackageCompartmentableShape >> initialize [
 
 { #category : #'Roassal2 - updating' }
 OPUmlPackageCompartmentableShape >> remove [
-	self rtElement view ifNotNil: [ self rtElement remove ].
+
+	self rtElement remove.
 	view ifNotNil: [ view signalUpdate ].
 	view := nil
 ]
