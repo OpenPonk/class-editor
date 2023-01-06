@@ -14,9 +14,14 @@ Class {
 
 { #category : #figures }
 OPUmlRelationshipController >> connectionFeedback [
-	^ OPInteractiveLine new
-		lineBuilder: [ :fromFigure :toFigure | RTLine edgeFrom: fromFigure to: toFigure ];
-		from: source figure
+
+	^ OPRSInteractiveLine new
+		  lineBuilder: [ :fromFigure :toFigure | 
+			  RSLine new
+				  from: fromFigure;
+				  to: toFigure;
+				  yourself ];
+		  from: source figure
 ]
 
 { #category : #accessing }
