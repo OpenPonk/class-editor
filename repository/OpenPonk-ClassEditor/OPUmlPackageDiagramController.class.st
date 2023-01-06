@@ -329,9 +329,9 @@ OPUmlPackageDiagramController >> reactToAttributeWrite [
 
 { #category : #palette }
 OPUmlPackageDiagramController >> rebuildPalette [
+
 	self editor palette createPaletteFor: self.
-	self editor palette rebuildWidget.
-	self selectCanvas
+	self editor palette rebuildWidget
 ]
 
 { #category : #figures }
