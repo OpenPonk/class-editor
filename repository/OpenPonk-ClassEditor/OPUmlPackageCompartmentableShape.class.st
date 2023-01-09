@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'Roassal2 - manipulation' }
-OPUmlPackageCompartmentableShape >> createRtElement [
+OPUmlPackageCompartmentableShape >> createRoassalShape [
 	| shape |
 	shape := OPUmlPackageShape on: self.
 	shape style: self style.
