@@ -6,9 +6,6 @@ Class {
 	#superclass : #OPElementController,
 	#traits : 'OPTUmlStereotypedElementController',
 	#classTraits : 'OPTUmlStereotypedElementController classTrait',
-	#instVars : [
-		'diagramElement'
-	],
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
@@ -34,11 +31,6 @@ OPUmlElementController >> createFigure [
 { #category : #figures }
 OPUmlElementController >> diagramElement [
 	^ diagramElement
-]
-
-{ #category : #figures }
-OPUmlElementController >> figure [
-	^ self diagramElement rtElement
 ]
 
 { #category : #accessing }

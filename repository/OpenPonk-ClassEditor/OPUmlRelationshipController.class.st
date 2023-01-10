@@ -12,23 +12,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #figures }
-OPUmlRelationshipController >> connectionFeedback [
-
-	^ OPRSInteractiveLine new
-		  lineBuilder: [ :fromFigure :toFigure | 
-			  RSLine new
-				  from: fromFigure;
-				  to: toFigure;
-				  yourself ];
-		  from: source figure
-]
-
-{ #category : #accessing }
-OPUmlRelationshipController >> figure [
-	^ diagramElement rtEdge
-]
-
 { #category : #testing }
 OPUmlRelationshipController >> isHideable [
 	^ true
