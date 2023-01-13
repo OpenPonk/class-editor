@@ -23,16 +23,6 @@ OPUmlElementController >> createDiagramElement [
 	^ self subclassResponsibility
 ]
 
-{ #category : #figures }
-OPUmlElementController >> createFigure [
-	^ self shouldNotImplement
-]
-
-{ #category : #figures }
-OPUmlElementController >> diagramElement [
-	^ diagramElement
-]
-
 { #category : #accessing }
 OPUmlElementController >> magritteDescription [
 	| container |
@@ -44,29 +34,4 @@ OPUmlElementController >> magritteDescription [
 { #category : #hooks }
 OPUmlElementController >> reactToAttributeWrite [
 	diagramElement ifNotNil: [ self refreshFigure ]
-]
-
-{ #category : #figures }
-OPUmlElementController >> removeDiagramElement [
-
-	self diagramController deselectAll.
-
-	diagramElement remove.
-	diagramElement := nil
-]
-
-{ #category : #figures }
-OPUmlElementController >> removeFigure [
-	self removeDiagramElement
-]
-
-{ #category : #model }
-OPUmlElementController >> removeModel [
-	self subclassResponsibility
-	
-]
-
-{ #category : #figures }
-OPUmlElementController >> renderFigureIn: aView [
-	self subclassResponsibility
 ]
