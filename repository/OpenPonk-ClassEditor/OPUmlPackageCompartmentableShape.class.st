@@ -29,7 +29,7 @@ OPUmlPackageCompartmentableShape >> createRoassalShape [
 { #category : #initialization }
 OPUmlPackageCompartmentableShape >> initialize [
 	super initialize.
-	(sharedStyle := OPUmlStyle new)
+	(sharedStyle := OPDIOpenPonkStyle new)
 		fillColor: Color veryVeryLightGray;
 		strokeColor: Color black;
 		strokeWidth: 1

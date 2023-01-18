@@ -15,7 +15,7 @@ OPUmlOperationController >> createDiagramElement [
 		emphasis: [ :aModel :aStyle | 
 			aStyle fontUnderline: aModel isStatic.
 			aStyle fontItalic: aModel isAbstract ];
-		localStyle: OPUmlStyle new;
+		localStyle: OPDIOpenPonkStyle new;
 		yourself
 ]
 

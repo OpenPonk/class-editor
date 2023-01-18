@@ -13,7 +13,7 @@ OPUmlAttributeController >> createDiagramElement [
 		modelElement: self model;
 		text: [ :aModel | self notationTextFor: aModel ];
 		emphasis: [ :aModel :aStyle | aStyle fontUnderline: aModel isStatic ];
-		localStyle: OPUmlStyle new;
+		localStyle: OPDIOpenPonkStyle new;
 		yourself
 ]
 
