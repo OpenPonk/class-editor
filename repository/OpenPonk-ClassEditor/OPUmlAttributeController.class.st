@@ -161,6 +161,11 @@ OPUmlAttributeController >> descriptionType [
 		yourself
 ]
 
+{ #category : #figures }
+OPUmlAttributeController >> diagramElementClass [
+	^ OPUmlLabel
+]
+
 { #category : #testing }
 OPUmlAttributeController >> isHideable [
 	^ true

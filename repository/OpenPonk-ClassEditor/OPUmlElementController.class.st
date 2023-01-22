@@ -18,11 +18,6 @@ OPUmlElementController >> buildAbstractEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #figures }
-OPUmlElementController >> createDiagramElement [
-	^ self subclassResponsibility
-]
-
 { #category : #accessing }
 OPUmlElementController >> magritteDescription [
 	| container |
