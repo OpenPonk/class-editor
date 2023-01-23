@@ -16,7 +16,7 @@ OPUmlModelSerializer class >> exportVersion [
 { #category : #formatting }
 OPUmlModelSerializer class >> formatName [
 
-	^ #xmi
+	^ #'uml-xmi'
 ]
 
 { #category : #accessing }
