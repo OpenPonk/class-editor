@@ -2,10 +2,13 @@
 
 set -euxo pipefail
 
-ci_build_dir=$SMALLTALK_CI_BUILD
-vm_dir=`cat $SMALLTALK_CI_VM | sed 's|\(.*\)/.*|\1|'`/pharo-vm
+package_dir="$PROJECT_NAME-$PLATFORM"
 
-"$vm_dir/bin/pharo" --headless $ci_build_dir/TravisCI.image eval --exit "| response contents text timestamp |
+mkdir $package_dir
+
+unzip -q $PROJECT_NAME-$PLATFORM-$VERSION.zip
+
+"$package_dir/pharo/bin/pharo" --headless $package_dir/image/$PROJECT_NAME.image eval "| response contents text timestamp |
     response := ZnClient new
                     url:
                         'https://api.github.com/repos/openponk/$REPOSITORY_NAME/releases/tags/nightly';
