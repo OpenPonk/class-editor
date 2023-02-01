@@ -34,17 +34,13 @@ BaselineOfClassEditor >> baseline: spec [
 		spec
 			baseline: 'OpenPonk'
 			with: [ spec repository: 'github://openponk/openponk:dev-roassal3' ].
-		spec baseline: 'UMLShapes' with: [ 
-			spec
-				repository: 'github://openponk/uml-shapes:dev-roassal3';
-				loads: #( plugin ) ].
 		spec
 			baseline: 'UMLProfiles'
 			with: [ 
 			spec repository: 'github://openponk/uml-profiles/repository' ].
 		spec package: 'OpenPonk-ClassEditor' with: [ 
 			spec requires:
-				#( Moose 'UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
+				#( Moose 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
 				   'UMLProfiles' ) ].
 		spec
 			package: 'OPClassEditor-Plugins'
