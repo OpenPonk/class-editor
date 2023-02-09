@@ -42,8 +42,35 @@ OPUmlAssociationShape >> constraintLabel: aLabel at: aPosition side: aSide [
 	^ anchor
 ]
 
+{ #category : #initialization }
+OPUmlAssociationShape >> createOwnedElementsWithoutController [
+
+	super createOwnedElementsWithoutController.
+	{ 
+		OPUmlAssociationLabel.
+		OPUmlAssociationPropertiesLabel.
+		OPUmlAssociationStereotypesLabel } do: [ :each | 
+		each in: self forModelElement: self modelElement ].
+
+	{ 
+		OPUmlAssociationEndLabel.
+		OPUmlMultiplicityLabel } do: [ :each | 
+		(each in: self forModelElement: self modelElement memberEnds first)
+			atSource ].
+	{ 
+		OPUmlAssociationEndLabel.
+		OPUmlMultiplicityLabel } do: [ :each | 
+		each in: self forModelElement: self modelElement memberEnds second ]
+]
+
+{ #category : #hooks }
+OPUmlAssociationShape >> headMarker [
+
+	^ self markerFor: self modelElement memberEnds second
+]
+
 { #category : #accessing }
-OPUmlAssociationShape >> decoratorFor: aProperty [
+OPUmlAssociationShape >> markerFor: aProperty [
 
 	(self ontoUmlDecoratorFor: aProperty) ifNotNil: [ :marker | ^ marker ].
 	aProperty opposite aggregation = OPUMLAggregationKind composite 
@@ -52,57 +79,6 @@ OPUmlAssociationShape >> decoratorFor: aProperty [
 		^ OPUmlEdgeMarkers emptyDiamond ].
 	aProperty isNavigable ifTrue: [ ^ OPUmlEdgeMarkers simpleArrow ].
 	^ OPUmlEdgeMarkers none
-]
-
-{ #category : #accessing }
-OPUmlAssociationShape >> endLabelsClass [
-	^ OPUmlAssociationEndLabels
-]
-
-{ #category : #'Roassal2 - updating' }
-OPUmlAssociationShape >> ends: anArray [
-	| ends |
-	ends := anArray.
-	ends first modelElement = sourceEndLabels modelElement type
-		ifFalse: [ ends := ends reverse ].
-	self source: ends first.
-	self target: ends second
-]
-
-{ #category : #initialization }
-OPUmlAssociationShape >> initialize [
-	super initialize.
-	(nameLabel := OPUmlNameLabel new)
-		text: [ :model | 
-			(model isDerived
-				ifTrue: [ '/' ]
-				ifFalse: [ '' ]) , (model name ifNil: [ '' ]) ];
-		owningElement: self.
-	(propertiesLabel := OPUmlLabel new)
-		text: [ :model | 
-			(self propertiesOfModel: model)
-				ifEmpty: [ '' ]
-				ifNotEmpty: [ :props | '{' , (props joinUsing: ',') , '}' ] ];
-		owningElement: self.
-	(stereotypeLabel := OPUmlNameLabel new)
-		text: [ :model | 
-			model appliedStereotypes
-				ifEmpty: [ '' ]
-				ifNotEmpty: [ :s | '«' , ((s collect: #umlClassName) joinUsing: ',') , '»' ] ];
-		owningElement: self.
-	sourceEndLabels := self endLabelsClass on: self.
-	targetEndLabels := self endLabelsClass on: self.
-	constraints := OrderedCollection new
-]
-
-{ #category : #accessing }
-OPUmlAssociationShape >> modelElement: aModel [
-	super modelElement: aModel.
-	nameLabel modelElement: aModel.
-	propertiesLabel modelElement: aModel.
-	stereotypeLabel modelElement: aModel.
-	sourceEndLabels modelElement: aModel memberEnds first.
-	targetEndLabels modelElement: aModel memberEnds second
 ]
 
 { #category : #accessing }
@@ -159,13 +135,8 @@ OPUmlAssociationShape >> renderIn: aView [
 	self update
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlAssociationShape >> update [
-	self
-		tailDecorator: (self decoratorFor: modelElement memberEnds first).
-	self
-		headDecorator: (self decoratorFor: modelElement memberEnds second).
-	self rtEdge shape color: self style strokeColor.
-	self rtEdge view ifNotNil: [ self rtEdge update ].
-	self ownedElements do: #update
+{ #category : #hooks }
+OPUmlAssociationShape >> tailMarker [
+
+	^ self markerFor: self modelElement memberEnds first
 ]

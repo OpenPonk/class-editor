@@ -32,8 +32,19 @@ OPUmlGeneralizationShape >> constraintLabel: aLabel at: aPosition side: aSide [
 	^ anchor
 ]
 
+{ #category : #initialization }
+OPUmlGeneralizationShape >> initialize [
+
+	super initialize.
+	self headDecorator: OPUmlEdgeMarkers arrow.
+	nameLabel := OPUmlGeneralizationLabel
+		             in: self
+		             forModelElement: self modelElement.
+	constraints := OrderedCollection new
+]
+
 { #category : #accessing }
-OPUmlGeneralizationShape >> decoratorFor: aProperty [
+OPUmlGeneralizationShape >> markerFor: aProperty [
 
 	aProperty opposite aggregation = OPUMLAggregationKind composite 
 		ifTrue: [ ^ OPUmlEdgeMarkers filledDiamond ].
@@ -41,16 +52,6 @@ OPUmlGeneralizationShape >> decoratorFor: aProperty [
 		^ OPUmlEdgeMarkers emptyDiamond ].
 	aProperty isNavigable ifTrue: [ ^ OPUmlEdgeMarkers simpleArrow ].
 	^ OPUmlEdgeMarkers none
-]
-
-{ #category : #initialization }
-OPUmlGeneralizationShape >> initialize [
-	super initialize.
-	self headDecorator: OPUmlEdgeMarkers arrow.
-	(nameLabel := OPUmlNameLabel new)
-		text: [ :model | self textFor: model ];
-		owningElement: self.
-	constraints := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -76,35 +77,6 @@ OPUmlGeneralizationShape >> showIncomplete [
 { #category : #testing }
 OPUmlGeneralizationShape >> showOverlapping [
 	^ false
-]
-
-{ #category : #accessing }
-OPUmlGeneralizationShape >> textFor: aGeneralization [
-	| labels |
-	aGeneralization generalizationSets ifEmpty: [ ^ '' ].
-	labels := aGeneralization generalizationSets
-		collect: [ :each | 
-			String
-				streamContents: [ :stream | 
-					| props |
-					(each name isNotNil and: [ each name isNotEmpty ])
-						ifTrue: [ stream
-								<< each name;
-								<< ' ' ].
-					props := OrderedCollection new.
-					each isCovering
-						ifTrue: [ props add: 'complete' ].
-					each isCovering not & self showIncomplete
-						ifTrue: [ props add: 'incomplete' ].
-					each isDisjoint
-						ifTrue: [ props add: 'disjoint' ].
-					each isDisjoint not & self showOverlapping
-						ifTrue: [ props add: 'overlapping' ].
-					props
-						ifNotEmpty: [ stream << '{'.
-							props do: [ :p | stream << p ] separatedBy: [ stream << ', ' ].
-							stream << '}' ] ] ].
-	^ labels joinUsing: String cr
 ]
 
 { #category : #'Roassal2 - updating' }

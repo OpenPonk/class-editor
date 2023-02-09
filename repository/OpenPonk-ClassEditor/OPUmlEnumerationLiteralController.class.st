@@ -10,15 +10,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #figures }
-OPUmlEnumerationLiteralController >> createDiagramElement [
-	^ OPUmlLabel new
-		modelElement: self model;
-		text: [ :aModel | aModel name ];
-		localStyle: OPDIOpenPonkStyle new;
-		yourself
-]
-
 { #category : #construction }
 OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
 	self
@@ -28,6 +19,18 @@ OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
 				yourself).
 	aParentModel ownedLiterals add: model.
 	^ model
+]
+
+{ #category : #construction }
+OPUmlEnumerationLiteralController >> diagramElementClass [
+
+	^ OPUmlEnumerationLiteralLabel
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlEnumerationLiteralController >> diagramElementOwner [
+
+^ self halt
 ]
 
 { #category : #accessing }

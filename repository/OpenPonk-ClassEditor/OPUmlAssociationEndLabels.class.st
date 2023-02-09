@@ -12,7 +12,7 @@ Class {
 		'associationShape',
 		'modelElement'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'instance creation' }
@@ -47,11 +47,12 @@ OPUmlAssociationEndLabels >> constraintLabel: aLabel at: aPosition side: aSide [
 
 { #category : #initialization }
 OPUmlAssociationEndLabels >> initializeOn: anAssociationShape [
+
 	self initialize.
 	associationShape := anAssociationShape.
-	(nameLabel := OPUmlAssociationEndLabel new)
-		text: [ :model | model notationStringAsRoleName ];
-		owningElement: anAssociationShape.
+	nameLabel := OPUmlAssociationEndLabel
+		             in: anAssociationShape
+		             forModelElement: modelElement.
 	(multiplicityLabel := OPUmlMultiplicityLabel new)
 		text: [ :model | model notationAssociationMultiplicityRange ];
 		owningElement: anAssociationShape

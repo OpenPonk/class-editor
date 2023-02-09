@@ -126,7 +126,7 @@ OPUmlEdgeMarkers >> filledDiamondWith: aString [
 
 { #category : #markers }
 OPUmlEdgeMarkers >> none [
-	^ RTNoDecorationShape
+	^ nil
 ]
 
 { #category : #markers }

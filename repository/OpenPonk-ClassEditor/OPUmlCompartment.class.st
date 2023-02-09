@@ -1,9 +1,6 @@
 Class {
 	#name : #OPUmlCompartment,
 	#superclass : #OPDiagramElement,
-	#instVars : [
-		'rtElement'
-	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
@@ -24,11 +21,6 @@ OPUmlCompartment >> createRoassalShape [
 { #category : #'Roassal2 - updating' }
 OPUmlCompartment >> remove [
 	self rtElement remove
-]
-
-{ #category : #'Roassal2 - drawing' }
-OPUmlCompartment >> rtElement [
-	^ rtElement ifNil: [ rtElement := self createRoassalShape ]
 ]
 
 { #category : #'Roassal2 - updating' }

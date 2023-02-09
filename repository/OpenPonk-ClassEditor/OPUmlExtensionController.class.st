@@ -61,17 +61,3 @@ OPUmlExtensionController >> removeModel [
 			end owningClass: nil.
 			end owningAssociation: nil ]
 ]
-
-{ #category : #figures }
-OPUmlExtensionController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		ends:
-			{diagramController diagramElementForModel: self model ownedEnd type.
-			diagramController
-				diagramElementForModel: (self model memberEnds copyWithout: self model ownedEnd) first type}.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
-]

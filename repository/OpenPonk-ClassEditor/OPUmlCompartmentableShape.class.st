@@ -58,7 +58,7 @@ OPUmlCompartmentableShape >> initialize [
 { #category : #'Roassal2 - accessing' }
 OPUmlCompartmentableShape >> labels [
 
-	^ RTGroup withAll:
+	^ RSGroup withAll:
 		  (self ownedElements select: [ :each | each isKindOf: OPUmlLabel ])
 ]
 

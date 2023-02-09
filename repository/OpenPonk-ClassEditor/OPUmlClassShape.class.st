@@ -26,21 +26,21 @@ OPUmlClassShape >> hasStereotypes [
 
 { #category : #initialization }
 OPUmlClassShape >> initialize [
+
 	super initialize.
 	self sharedStyle fillColor: Color white.
-	stereotypeLabel := OPUmlKeywordLabel new.
-	stereotypeLabel text: [ :model | self stereotypeText ].
-	stereotypeLabel localStyle: OPDIOpenPonkStyle new.
-	stereotypeLabel owningElement: self.
-	nameLabel := OPUmlMultilineNameLabel new.
-	nameLabel text: [ :model | model name ].
-	nameLabel emphasis: [ :model :style | style fontItalic: model isAbstract ].
-	nameLabel localStyle: (OPDIOpenPonkStyle new fontSize: 11).
-	nameLabel owningElement: self.
-	attributes := OPUmlCompartment new.
-	attributes owningElement: self.
-	operations := OPUmlCompartment new.
-	operations owningElement: self
+	stereotypeLabel := OPUmlKeywordLabel
+		                   in: self
+		                   forModelElement: self modelElement.
+	nameLabel := OPUmlClassifierNameLabel
+		             in: self
+		             forModelElement: self modelElement.
+	attributes := OPUmlCompartment
+		              in: self
+		              forModelElement: self modelElement.
+	operations := OPUmlCompartment
+		              in: self
+		              forModelElement: self modelElement
 ]
 
 { #category : #accessing }

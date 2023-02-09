@@ -11,13 +11,6 @@ Class {
 }
 
 { #category : #accessing }
-OPUmlExtensionShape >> decoratorFor: aProperty [
-	(aProperty name beginsWith: 'base_')
-		ifTrue: [ ^ OPUmlEdgeMarkers filledArrow ].
-	^ OPUmlEdgeMarkers none
-]
-
-{ #category : #accessing }
 OPUmlExtensionShape >> endLabelsClass [
 	^ OPUmlExtensionEndLabels
 ]
@@ -31,6 +24,13 @@ OPUmlExtensionShape >> initialize [
 				ifTrue: [ '{required}' ]
 				ifFalse: [ '' ] ];
 		owningElement: self
+]
+
+{ #category : #accessing }
+OPUmlExtensionShape >> markerFor: aProperty [
+	(aProperty name beginsWith: 'base_')
+		ifTrue: [ ^ OPUmlEdgeMarkers filledArrow ].
+	^ OPUmlEdgeMarkers none
 ]
 
 { #category : #accessing }

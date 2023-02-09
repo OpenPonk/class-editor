@@ -7,18 +7,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #figures }
-OPUmlOperationController >> createDiagramElement [
-	^ OPUmlLabel new
-		modelElement: self model;
-		text: [ :aModel | self notationTextFor: aModel ];
-		emphasis: [ :aModel :aStyle | 
-			aStyle fontUnderline: aModel isStatic.
-			aStyle fontItalic: aModel isAbstract ];
-		localStyle: OPDIOpenPonkStyle new;
-		yourself
-]
-
 { #category : #construction }
 OPUmlOperationController >> createModelIn: aParentModel [
 	self
@@ -50,6 +38,12 @@ OPUmlOperationController >> descriptionIsStatic [
 		yourself
 ]
 
+{ #category : #figures }
+OPUmlOperationController >> diagramElementClass [
+
+	^ OPUmlOperationLabel
+]
+
 { #category : #testing }
 OPUmlOperationController >> isHideable [
 	^ true
@@ -58,15 +52,6 @@ OPUmlOperationController >> isHideable [
 { #category : #accessing }
 OPUmlOperationController >> modelClass [
 	^ OPUMLOperation
-]
-
-{ #category : #figures }
-OPUmlOperationController >> notationTextFor: anOperation [
-
-	^ anOperation notationString
-		  replaceAll: Character lf with: Character space;
-		  replaceAll: Character cr with: Character space;
-		  yourself
 ]
 
 { #category : #figures }

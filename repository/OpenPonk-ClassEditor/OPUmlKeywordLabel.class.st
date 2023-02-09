@@ -8,3 +8,9 @@ Class {
 OPUmlKeywordLabel class >> priority [
 	^ 1
 ]
+
+{ #category : #accessing }
+OPUmlKeywordLabel >> defaultText [
+
+	^ self owningElement stereotypeText
+]

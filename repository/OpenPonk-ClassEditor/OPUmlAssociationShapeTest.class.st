@@ -43,10 +43,10 @@ OPUmlAssociationShapeTest >> testBothNavigable [
 		owningAssociation: nil;
 		owningClass: comment.
 	self
-		assert: (OPUmlAssociationShape new decoratorFor: ownedComment)
+		assert: (OPUmlAssociationShape new markerFor: ownedComment)
 		equals: OPUmlEdgeMarkers simpleArrow.
 	self
-		assert: (OPUmlAssociationShape new decoratorFor: owningElement)
+		assert: (OPUmlAssociationShape new markerFor: owningElement)
 		equals: OPUmlEdgeMarkers simpleArrow
 ]
 
@@ -54,17 +54,17 @@ OPUmlAssociationShapeTest >> testBothNavigable [
 OPUmlAssociationShapeTest >> testEndComposite [
 	ownedComment aggregation: OPUMLAggregationKind composite.
 	self
-		assert: (OPUmlAssociationShape new decoratorFor: owningElement)
+		assert: (OPUmlAssociationShape new markerFor: owningElement)
 		equals: OPUmlEdgeMarkers filledDiamond
 ]
 
 { #category : #tests }
 OPUmlAssociationShapeTest >> testEndOneNavigable [
 	self
-		assert: (OPUmlAssociationShape new decoratorFor: ownedComment)
+		assert: (OPUmlAssociationShape new markerFor: ownedComment)
 		equals: OPUmlEdgeMarkers simpleArrow.
 	self
-		assert: (OPUmlAssociationShape new decoratorFor: owningElement)
+		assert: (OPUmlAssociationShape new markerFor: owningElement)
 		equals: OPUmlEdgeMarkers none
 ]
 
@@ -72,6 +72,6 @@ OPUmlAssociationShapeTest >> testEndOneNavigable [
 OPUmlAssociationShapeTest >> testEndShared [
 	ownedComment aggregation: OPUMLAggregationKind shared.
 	self
-		assert: (OPUmlAssociationShape new decoratorFor: owningElement)
+		assert: (OPUmlAssociationShape new markerFor: owningElement)
 		equals: OPUmlEdgeMarkers emptyDiamond
 ]

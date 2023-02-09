@@ -8,3 +8,9 @@ Class {
 OPUmlNameLabel class >> priority [
 	^ 2
 ]
+
+{ #category : #accessing }
+OPUmlNameLabel >> defaultText [
+
+	^ self modelElement name
+]

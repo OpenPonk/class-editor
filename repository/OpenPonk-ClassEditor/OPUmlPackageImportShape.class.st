@@ -8,7 +8,7 @@ Class {
 		'nameLabel',
 		'constraints'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #configuration }
@@ -55,11 +55,12 @@ OPUmlPackageImportShape >> createRtEdge [
 
 { #category : #initialization }
 OPUmlPackageImportShape >> initialize [
+
 	super initialize.
 	self headDecorator: OPUmlEdgeMarkers simpleArrow.
-	(nameLabel := OPUmlNameLabel new)
-		text: [ :model | self textFor: model ];
-		owningElement: self.
+	nameLabel := OPUmlPackageImportLabel
+		             in: self
+		             forModelElement: self modelElement.
 	constraints := OrderedCollection new
 ]
 
@@ -86,11 +87,6 @@ OPUmlPackageImportShape >> showIncomplete [
 { #category : #testing }
 OPUmlPackageImportShape >> showOverlapping [
 	^ false
-]
-
-{ #category : #accessing }
-OPUmlPackageImportShape >> textFor: aPackageImport [
-	^ '<<import>>'
 ]
 
 { #category : #'Roassal2 - updating' }

@@ -1,9 +1,6 @@
 Class {
 	#name : #OPUmlShape,
 	#superclass : #OPShape,
-	#instVars : [
-		'rtElement'
-	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
@@ -57,11 +54,6 @@ OPUmlShape >> position [
 { #category : #rendering }
 OPUmlShape >> renderIn: aView [
 	self subclassResponsibility
-]
-
-{ #category : #'Roassal2 - accessing' }
-OPUmlShape >> rtElement [
-	^ rtElement ifNil: [ rtElement := self createRoassalShape ]
 ]
 
 { #category : #Roassal2 }

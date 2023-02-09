@@ -133,19 +133,6 @@ OPUmlAssociationController >> removeModel [
 	self model memberEnds: #()
 ]
 
-{ #category : #rendering }
-OPUmlAssociationController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		ends:
-			{diagramController diagramElementForModel: self model memberEnds first type.
-			diagramController diagramElementForModel: self model memberEnds second type}.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
-]
-
 { #category : #construction }
 OPUmlAssociationController >> switchSourceAndTarget [
 
