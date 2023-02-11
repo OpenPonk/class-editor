@@ -10,7 +10,7 @@ Class {
 		'showTriangle',
 		'style'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
 { #category : #adding }

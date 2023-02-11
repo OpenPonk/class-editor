@@ -7,13 +7,8 @@ Class {
 	#instVars : [
 		'isRequiredLabel'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
-
-{ #category : #accessing }
-OPUmlExtensionShape >> endLabelsClass [
-	^ OPUmlExtensionEndLabels
-]
 
 { #category : #initialization }
 OPUmlExtensionShape >> initialize [

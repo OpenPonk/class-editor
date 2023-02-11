@@ -8,7 +8,7 @@ Class {
 		'nameLabel',
 		'constraints'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
 { #category : #configuration }

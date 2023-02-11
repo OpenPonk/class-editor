@@ -12,7 +12,7 @@ Class {
 		'stereotypeLabel',
 		'propertiesLabel'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
 { #category : #configuration }

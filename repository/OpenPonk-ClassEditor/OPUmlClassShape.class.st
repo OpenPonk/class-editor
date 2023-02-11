@@ -11,7 +11,7 @@ Class {
 		'stereotypeLabel',
 		'stereotypeBlock'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
 { #category : #accessing }

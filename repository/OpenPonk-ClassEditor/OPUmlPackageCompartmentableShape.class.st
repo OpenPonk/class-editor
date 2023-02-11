@@ -5,7 +5,7 @@ Class {
 		'view',
 		'separators'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
 { #category : #'Roassal2 - manipulation' }
