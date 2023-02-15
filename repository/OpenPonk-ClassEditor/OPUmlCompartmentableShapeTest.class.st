@@ -11,7 +11,7 @@ OPUmlCompartmentableShapeTest >> elementClass [
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testEmptyRtElement [
-	rt := element rtElement.
+	rt := element roassalShape.
 	self assert: rt class equals: RTElement.
 	self assert: rt shape class equals: RTBox
 ]

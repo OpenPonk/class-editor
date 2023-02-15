@@ -11,27 +11,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
-{ #category : #configuration }
-OPUmlPackageImportShape >> addConstraintsTo: aCollection at: aPosition [
-	aCollection add: (self constraintLabel: nameLabel at: aPosition side: -1)
-]
-
-{ #category : #configuration }
-OPUmlPackageImportShape >> constraintLabel: aLabel at: aPosition side: aSide [
-	| config anchor |
-	config := Dictionary
-		with: #source -> (Array with: 10 with: aSide * 10)
-		with: #target -> (Array with: -10 with: aSide * 10)
-		with: #middle -> (Array with: 0.5 with: 0).
-	anchor := OPRTAnchorConstraint new.
-	anchor
-		element: aLabel rtElement;
-		edge: self rtEdge;
-		balance: (config at: aPosition) first;
-		minDistance: (config at: aPosition) second.
-	^ anchor
-]
-
 { #category : #initialization }
 OPUmlPackageImportShape >> createConnection [
 	^ (OPRTStyledConnection new
@@ -41,7 +20,7 @@ OPUmlPackageImportShape >> createConnection [
 		tail: self tailDecorator asTail;
 		width: self style strokeWidth;
 		decorate: [ :deco | deco dashedLine ];
-		edgeFrom: source rtElement to: target rtElement)
+		edgeFrom: source roassalShape to: target roassalShape)
 		model: self;
 		yourself
 ]
@@ -68,15 +47,6 @@ OPUmlPackageImportShape >> initialize [
 OPUmlPackageImportShape >> modelElement: anObject [
 	super modelElement: anObject.
 	nameLabel modelElement: anObject.
-]
-
-{ #category : #rendering }
-OPUmlPackageImportShape >> renderIn: aView [
-	super renderIn: aView.
-	self addConstraintsTo: constraints at: #middle.
-	self ownedElements do: [ :each | each renderIn: view ].
-	constraints do: #build.
-	self update
 ]
 
 { #category : #testing }

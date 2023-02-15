@@ -6,47 +6,81 @@ Class {
 	#superclass : #OPUmlClassifierShape,
 	#instVars : [
 		'nameLabel',
-		'attributes',
-		'operations',
 		'stereotypeLabel',
-		'stereotypeBlock'
+		'attributes',
+		'operations'
 	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
+
+{ #category : #rendering }
+OPUmlClassShape >> addAttribute: anAttributeShape [
+
+	attributes ifNil: [ 
+		attributes := self createCompartment.
+		operations ifNotNil: [ 
+			self ownedElements: (self ownedElements sorted: [ :a :b | 
+					 (a = attributes and: [ b = operations ]) or: [ 
+						 (a ~= operations or: [ b ~= attributes ]) and: [ 
+							 (self ownedElements indexOf: a)
+							 < (self ownedElements indexOf: b) ] ] ]) ] ].
+
+	anAttributeShape owningElement: attributes.
+
+	attributes sortOwnedElements
+]
+
+{ #category : #rendering }
+OPUmlClassShape >> addOperation: anOperationShape [
+
+	operations ifNil: [ operations := self createCompartment ].
+
+	anOperationShape owningElement: operations.
+
+	operations sortOwnedElements
+]
 
 { #category : #accessing }
 OPUmlClassShape >> attributes [
 	^ attributes
 ]
 
-{ #category : #accessing }
-OPUmlClassShape >> hasStereotypes [
-	^ stereotypeBlock value isNotEmpty
+{ #category : #initialization }
+OPUmlClassShape >> createCompartment [
+
+	^ OPUmlCompartment in: self forModelElement: self modelElement
+]
+
+{ #category : #initialization }
+OPUmlClassShape >> createLabel: aLabelShapeClass [
+
+	| labelContainer |
+	labelContainer := OPUmlCompartmentableLabel
+		                  in: self
+		                  forModelElement: self modelElement.
+	aLabelShapeClass
+		in: labelContainer
+		forModelElement: self modelElement.
+	self ownedElements: (self ownedElements sorted: [ :a :b | 
+			 a = labelContainer or: [ 
+				 b ~= labelContainer and: [ 
+					 (self ownedElements indexOf: a)
+					 < (self ownedElements indexOf: b) ] ] ]).
+	^ labelContainer
+]
+
+{ #category : #initialization }
+OPUmlClassShape >> createOwnedElementsWithoutController [
+
+	super createOwnedElementsWithoutController.
+	self createLabel: OPUmlClassifierNameLabel
 ]
 
 { #category : #initialization }
 OPUmlClassShape >> initialize [
 
 	super initialize.
-	self sharedStyle fillColor: Color white.
-	stereotypeLabel := OPUmlKeywordLabel
-		                   in: self
-		                   forModelElement: self modelElement.
-	nameLabel := OPUmlClassifierNameLabel
-		             in: self
-		             forModelElement: self modelElement.
-	attributes := OPUmlCompartment
-		              in: self
-		              forModelElement: self modelElement.
-	operations := OPUmlCompartment
-		              in: self
-		              forModelElement: self modelElement
-]
-
-{ #category : #accessing }
-OPUmlClassShape >> modelElement: aModelElement [
-	super modelElement: aModelElement.
-	nameLabel modelElement: aModelElement
+	separators := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -54,25 +88,44 @@ OPUmlClassShape >> operations [
 	^ operations
 ]
 
-{ #category : #accessing }
-OPUmlClassShape >> stereotype: aStereotypeBlock [
-	stereotypeBlock := aStereotypeBlock
+{ #category : #rendering }
+OPUmlClassShape >> removeAttribute: anAttributeShape [
+
+	anAttributeShape remove.
+
+	attributes remove.
+	attributes := nil
 ]
 
-{ #category : #accessing }
-OPUmlClassShape >> stereotypeText [
-	^ stereotypeBlock value
-		ifEmpty: [ '' ]
-		ifNotEmpty: [ :vals | '«' , (vals joinUsing: ', ') , '»' ]
+{ #category : #rendering }
+OPUmlClassShape >> removeOperation: anOperationShape [
+
+	anOperationShape remove.
+
+	operations remove.
+	operations := nil
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlClassShape >> update [
-	stereotypeLabel localStyle
-		fontSize:
-			(self hasStereotypes
-				ifTrue: [ 10 ]
-				ifFalse: [ 0 ]).
-	stereotypeLabel update.
-	super update
+{ #category : #rendering }
+OPUmlClassShape >> updateRenderFromModel [
+
+	self updateStereotype.
+
+	super updateRenderFromModel
+]
+
+{ #category : #rendering }
+OPUmlClassShape >> updateStereotype [
+
+	self modelElement appliedStereotypes ifEmpty: [ 
+		stereotypeLabel ifNotNil: [ 
+			stereotypeLabel remove.
+			stereotypeLabel := nil ].
+		^ self ].
+
+	stereotypeLabel ifNotNil: [ ^ self ].
+
+	stereotypeLabel := self createLabel: OPUmlStereotypeLabel.
+
+	self isRendered ifTrue: [ stereotypeLabel renderIn: self canvas ]
 ]

@@ -8,13 +8,6 @@ Class {
 }
 
 { #category : #figures }
-OPUmlGeneralizationController >> createDiagramElement [
-	^ OPUmlGeneralizationShape new
-		modelElement: self model;
-		yourself
-]
-
-{ #category : #figures }
 OPUmlGeneralizationController >> createModelIn: aParentModel [
 	self model: self modelClass new.
 	model general: aParentModel.
@@ -99,14 +92,25 @@ OPUmlGeneralizationController >> descriptionVisibility [
 	^ nil
 ]
 
+{ #category : #figures }
+OPUmlGeneralizationController >> diagramElementClass [
+
+	^ OPUmlGeneralizationShape
+]
+
 { #category : #accessing }
 OPUmlGeneralizationController >> modelClass [
 	^ OPUMLGeneralization
 ]
 
 { #category : #forms }
-OPUmlGeneralizationController >> pathSourceModel [
+OPUmlGeneralizationController >> modelSource [
 	^ model general
+]
+
+{ #category : #forms }
+OPUmlGeneralizationController >> modelTarget [
+	^ model specific
 ]
 
 { #category : #figures }
@@ -126,22 +130,6 @@ OPUmlGeneralizationController >> removeModel [
 				ifEmpty: [ diagramController model packagedElements
 						remove: each
 						ifAbsent: [ "do nothing" ] ] ]
-]
-
-{ #category : #figures }
-OPUmlGeneralizationController >> renderFigureIn: aView [
-	| sourceElement |
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	sourceElement := ((diagramController controllers
-		select: [ :each | each isKindOf: OPUmlClassController ])
-		detect: [ :each | each model generalizations includes: self model ]) diagramElement.
-	"	diagramElement source: (diagramController diagramElementForModel: self model specific)."
-	diagramElement source: sourceElement.
-	diagramElement target: (diagramController diagramElementForModel: self model general).
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]
 
 { #category : #construction }

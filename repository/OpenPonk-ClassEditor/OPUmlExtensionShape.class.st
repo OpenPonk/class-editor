@@ -33,10 +33,3 @@ OPUmlExtensionShape >> modelElement: aModel [
 	super modelElement: aModel.
 	isRequiredLabel modelElement: aModel
 ]
-
-{ #category : #rendering }
-OPUmlExtensionShape >> renderIn: aView [
-	super renderIn: aView.
-	constraints
-		add: (self constraintLabel: isRequiredLabel at: #target side: -1)
-]

@@ -12,13 +12,6 @@ OPUmlAssociationController >> canSwitchSourceAndTarget [
 	^ self model isNotNil and: [ self model memberEnds size = 2 ]
 ]
 
-{ #category : #figures }
-OPUmlAssociationController >> createDiagramElement [
-	^ OPUmlAssociationShape new
-		modelElement: self model;
-		yourself
-]
-
 { #category : #construction }
 OPUmlAssociationController >> createModelIn: aClass [
 
@@ -50,15 +43,16 @@ OPUmlAssociationController >> dependentElements [
 
 { #category : #'as yet unclassified' }
 OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
+
 	<magritteDescription>
 	| description |
-	self canSwitchSourceAndTarget
-		ifFalse: [ ^ self ].
+	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
 	description := OPMAActionDescription new.
 	description
-		action: [ self switchSourceAndTarget.
+		action: [ 
+			self switchSourceAndTarget.
 			self diagramController editor openFormOn: self.
-			self reactToAttributeWrite ];
+			self diagramElement updateRenderFromModel ];
 		label: 'Switch source/target';
 		priority: 9.05.
 	^ description
@@ -108,20 +102,25 @@ OPUmlAssociationController >> descriptionTargetEnd [
 				labelPrefix: 'Target ') magritteDescription
 ]
 
+{ #category : #construction }
+OPUmlAssociationController >> diagramElementClass [
+
+	^ OPUmlAssociationShape
+]
+
 { #category : #accessing }
 OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
 
 { #category : #accessing }
-OPUmlAssociationController >> pathSourceModel [
+OPUmlAssociationController >> modelSource [
 	^ model memberEnds first type
 ]
 
-{ #category : #rendering }
-OPUmlAssociationController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : #accessing }
+OPUmlAssociationController >> modelTarget [
+	^ model memberEnds second type
 ]
 
 { #category : #removing }

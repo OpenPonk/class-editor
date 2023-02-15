@@ -9,31 +9,32 @@ OPTUmlBaseController >> descriptionAccessor: aSymbol [
 		read: [ :me | me model perform: aSymbol ]
 		write: [ :me :newValue | 
 			me model perform: (aSymbol , ':') asSymbol with: newValue.
-			self reactToAttributeWrite ]
+			self diagramElement updateRenderFromModel  ]
 ]
 
 { #category : #forms }
 OPTUmlBaseController >> descriptionComment [
+
 	<magritteDescription>
 	^ MAMemoDescription new
-		required: false;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | 
-					me model ownedComments
-						ifEmpty: [ '' ]
-						ifNotEmpty: [ :oc | oc first body asString ] ]
-				write: [ :me :newValue | 
-					newValue asString
-						ifEmpty: [ me model ownedComments: OrderedCollection new ]
-						ifNotEmpty: [ me model ownedComments
-								ifEmpty: [ me model ownedComments add: OPUMLComment new ].
-							me model ownedComments first body: newValue asString ].
-					self reactToAttributeWrite ]);
-		label: 'Comment';
-		priority: 100;
-		lineCount: 10;
-		yourself
+		  required: false;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | 
+					   me model ownedComments
+						   ifEmpty: [ '' ]
+						   ifNotEmpty: [ :oc | oc first body asString ] ]
+				   write: [ :me :newValue | 
+					   newValue asString
+						   ifEmpty: [ me model ownedComments: OrderedCollection new ]
+						   ifNotEmpty: [ 
+							   me model ownedComments ifEmpty: [ 
+									   me model ownedComments add: OPUMLComment new ].
+							   me model ownedComments first body: newValue asString ].
+					   self diagramElement updateRenderFromModel ]);
+		  label: 'Comment';
+		  priority: 100;
+		  lineCount: 10;
+		  yourself
 ]
 
 { #category : #forms }
@@ -78,9 +79,4 @@ OPTUmlBaseController >> descriptionVisibility [
 		priority: 8;
 		beSorted;
 		yourself
-]
-
-{ #category : #hooks }
-OPTUmlBaseController >> reactToAttributeWrite [
-	self subclassResponsibility
 ]

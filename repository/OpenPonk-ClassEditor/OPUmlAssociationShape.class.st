@@ -15,33 +15,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
-{ #category : #configuration }
-OPUmlAssociationShape >> addConstraintsTo: aCollection at: aPosition [
-	aCollection add: (self constraintLabel: nameLabel at: aPosition side: -1).
-	aCollection add: (self constraintLabel: propertiesLabel at: #center side: 0).
-	aCollection add: (self constraintLabel: stereotypeLabel at: aPosition side: 1).
-]
-
-{ #category : #configuration }
-OPUmlAssociationShape >> constraintLabel: aLabel at: aPosition side: aSide [
-
-	| config anchor |
-	config := Dictionary
-		          with: #source -> (Array with: 10 with: aSide * 20)
-		          with: #target -> (Array with: -10 with: aSide * 20)
-		          with: #middle -> (Array with: 0.5 with: aSide * 20)
-		          with: #center -> (Array with: 0.5 with: 0).
-	anchor := OPRTRailConstraint new.
-	anchor
-		lineOnDragOnly;
-		gripLineColor: Color gray;
-		initialPosition: (config at: aPosition) first;
-		distance: (config at: aPosition) second;
-		element: aLabel rtElement connection: self rtEdge.
-	aLabel rtElement @ RTDraggable.
-	^ anchor
-]
-
 { #category : #initialization }
 OPUmlAssociationShape >> createOwnedElementsWithoutController [
 
@@ -122,17 +95,6 @@ OPUmlAssociationShape >> propertiesOfModel: aModel [
 								ifFalse: [ value = false
 										ifFalse: [ props add: attr name , '=' , attr value asString ] ] ] ] ].
 	^ props
-]
-
-{ #category : #rendering }
-OPUmlAssociationShape >> renderIn: aView [
-	super renderIn: aView.
-	self ownedElements do: [ :each | each renderIn: view ].
-	self addConstraintsTo: constraints at: #middle.
-	sourceEndLabels addConstraintsTo: constraints at: #source.
-	targetEndLabels addConstraintsTo: constraints at: #target.
-	constraints do: #build.
-	self update
 ]
 
 { #category : #hooks }

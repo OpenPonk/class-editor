@@ -58,25 +58,7 @@ OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #figures }
-OPUmlClassifierController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
-]
-
 { #category : #removing }
 OPUmlClassifierController >> removeModel [
 	diagramController model packagedElements remove: self model
-]
-
-{ #category : #figures }
-OPUmlClassifierController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	self figure @ (OPRTAdornments new adornments: self adornments).
-	self refreshFigure.
-	self figure @ OPRTDraggableSnapToGrid.
-	^ self figure
 ]

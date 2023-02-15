@@ -1,34 +1,37 @@
 Class {
 	#name : #OPUmlCompartment,
-	#superclass : #OPDiagramElement,
+	#superclass : #OPUmlCompartmentableContent,
+	#traits : 'OPTUmlAutoAccomodatingShape',
+	#classTraits : 'OPTUmlAutoAccomodatingShape classTrait',
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
-{ #category : #accessing }
-OPUmlCompartment >> compartmentedShape [
-	^ self owningElement
+{ #category : #rendering }
+OPUmlCompartment >> renderBasicShape [
+
+	roassalShape := RSBox new
+		                color: Color transparent;
+		                yourself
 ]
 
-{ #category : #'Roassal2 - drawing' }
-OPUmlCompartment >> createRoassalShape [
-	^ RTSVGPath new
-		path: 'L 0 0';
-		borderColor: self style strokeColor;
-		borderWidth: (self style strokeWidth / 2) asFloat;
-		elementOn: self
+{ #category : #sorting }
+OPUmlCompartment >> sortOwnedElements [
+
+	"do nothing by default"
+
+	
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartment >> remove [
-	self rtElement remove
+{ #category : #rendering }
+OPUmlCompartment >> updateRenderFromModel [
+
+	super updateRenderFromModel.
+
+	self accomodateContents
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartment >> update [
-	self owningElement update
-]
+{ #category : #'as yet unclassified' }
+OPUmlCompartment >> xCoordinateForOwner [
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartment >> view [
-	^ rtElement ifNil: [ nil ] ifNotNil: #view
+	^ self owningElement encompassingRectangle left + (self width / 2)
 ]

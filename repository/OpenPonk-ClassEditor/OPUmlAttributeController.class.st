@@ -7,6 +7,15 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
+{ #category : #figures }
+OPUmlAttributeController >> createDiagramElement [
+
+	diagramElement := self diagramElementClass forModelElement:
+		                  self model.
+
+	self diagramElementOwner addAttribute: diagramElement
+]
+
 { #category : #construction }
 OPUmlAttributeController >> createModelIn: aClass [
 	self
@@ -126,7 +135,7 @@ OPUmlAttributeController >> descriptionName [
 					                    ifTrue: [ newValue allButFirst ]
 					                    ifFalse: [ newValue ] ].
 			            me model name: text.
-			            self reactToAttributeWrite ].
+			            self diagramElement updateRenderFromModel ].
 	^ MAStringDescription new
 		  accessor: accessor;
 		  label: 'Name';
@@ -174,25 +183,20 @@ OPUmlAttributeController >> refreshFigure [
 ]
 
 { #category : #removing }
+OPUmlAttributeController >> removeDiagramElement [
+
+	self diagramElement ifNil: [ ^ self ].
+	self diagramElementOwner removeAttribute: self diagramElement.
+	diagramElement := nil
+]
+
+{ #category : #removing }
 OPUmlAttributeController >> removeModel [
 	"could be any of those, so just nil all of them"
 
 	model owningClass: nil.
 	model datatype: nil.
 	model interface: nil
-]
-
-{ #category : #figures }
-OPUmlAttributeController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		owningElement:
-			(diagramController diagramElementForModel: model owningClass)
-				attributes.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]
 
 { #category : #accessing }

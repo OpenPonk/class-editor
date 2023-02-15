@@ -7,13 +7,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #figures }
-OPUmlExtensionController >> createDiagramElement [
-	^ OPUmlExtensionShape new
-		modelElement: self model;
-		yourself
-]
-
 { #category : #construction }
 OPUmlExtensionController >> createModelIn: aParentModel [
 	| sourceOwnedProp extensionOwnedProp |
@@ -36,6 +29,12 @@ OPUmlExtensionController >> createModelIn: aParentModel [
 { #category : #accessing }
 OPUmlExtensionController >> dependentElements [
 	^ {model memberEnds first}
+]
+
+{ #category : #figures }
+OPUmlExtensionController >> diagramElementClass [
+
+	^ OPUmlExtensionShape
 ]
 
 { #category : #accessing }

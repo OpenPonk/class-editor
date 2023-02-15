@@ -7,11 +7,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
-{ #category : #markers }
-OPUmlEdgeMarkers class >> arrow [
-	^ self current arrow
-]
-
 { #category : #meta }
 OPUmlEdgeMarkers class >> compileDelegatorFor: aMethod [
 	(self class selectors includes: aMethod selector)
@@ -29,8 +24,8 @@ OPUmlEdgeMarkers class >> current [
 ]
 
 { #category : #markers }
-OPUmlEdgeMarkers class >> emptyCircle [
-	^ self current emptyCircle
+OPUmlEdgeMarkers class >> emptyArrow [
+	^ self current emptyArrow
 ]
 
 { #category : #markers }
@@ -46,11 +41,6 @@ OPUmlEdgeMarkers class >> emptyDiamondWith: aString [
 { #category : #markers }
 OPUmlEdgeMarkers class >> filledArrow [
 	^ self current filledArrow
-]
-
-{ #category : #markers }
-OPUmlEdgeMarkers class >> filledCircle [
-	^ self current filledCircle
 ]
 
 { #category : #markers }
@@ -80,23 +70,15 @@ OPUmlEdgeMarkers class >> updateShortcutMethods [
 ]
 
 { #category : #markers }
-OPUmlEdgeMarkers class >> wideArrow [
-	^ self current wideArrow
-]
+OPUmlEdgeMarkers >> emptyArrow [
 
-{ #category : #markers }
-OPUmlEdgeMarkers >> arrow [
-	^ RTEmptyNarrowArrow
-]
-
-{ #category : #markers }
-OPUmlEdgeMarkers >> emptyCircle [
-	^ RTEmptyCircle
+	^ self filledArrow asEmptyMarker
 ]
 
 { #category : #markers }
 OPUmlEdgeMarkers >> emptyDiamond [
-	^ OPRTTextDiamondMarker empty
+
+	^ self filledDiamond asEmptyMarker
 ]
 
 { #category : #markers }
@@ -106,22 +88,37 @@ OPUmlEdgeMarkers >> emptyDiamondWith: aString [
 
 { #category : #markers }
 OPUmlEdgeMarkers >> filledArrow [
-	^ RTFilledNarrowArrow
-]
 
-{ #category : #markers }
-OPUmlEdgeMarkers >> filledCircle [
-	^ RTFilledCircle
+	^ RSShapeFactory polygonWithPoints: { 
+			  (0 @ 0).
+			  (-5 @ 8).
+			  (0 @ 8).
+			  (-5 @ 16).
+			  (5 @ 16).
+			  (0 @ 8).
+			  (5 @ 8) }
 ]
 
 { #category : #markers }
 OPUmlEdgeMarkers >> filledDiamond [
-	^ OPRTTextDiamondMarker filled
+
+	^ RSShapeFactory polygonWithPoints: (Array
+			   with: 0 @ 10
+			   with: 7 @ 0
+			   with: 0 @ -10
+			   with: -7 @ 0)
 ]
 
 { #category : #markers }
 OPUmlEdgeMarkers >> filledDiamondWith: aString [
-	^ OPRTTextDiamondMarker with: aString
+
+	| group |
+	group := RSGroup with: self filledDiamond with: (RSLabel new
+			          text: aString;
+			          color: Color white;
+			          fontSize: 9;
+			          yourself).
+	^ group asShape
 ]
 
 { #category : #markers }
@@ -131,10 +128,10 @@ OPUmlEdgeMarkers >> none [
 
 { #category : #markers }
 OPUmlEdgeMarkers >> simpleArrow [
-	^ RTSimpleArrow
-]
 
-{ #category : #markers }
-OPUmlEdgeMarkers >> wideArrow [
-	^ RTEmptyArrow
+	^ (RSShapeFactory polygonWithPoints: (Array
+			    with: 5 @ 10
+			    with: 0 @ 5
+			    with: -5 @ 10
+			    with: 0 @ 0)) yourself
 ]

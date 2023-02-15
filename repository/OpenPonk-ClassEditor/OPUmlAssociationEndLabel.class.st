@@ -26,3 +26,10 @@ OPUmlAssociationEndLabel >> defaultText [
 
 	^ self modelElement notationStringAsRoleName
 ]
+
+{ #category : #initialization }
+OPUmlAssociationEndLabel >> initialize [
+
+	super initialize.
+	atSource := false
+]

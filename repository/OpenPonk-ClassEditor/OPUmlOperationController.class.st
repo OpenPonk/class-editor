@@ -7,6 +7,15 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
+{ #category : #figures }
+OPUmlOperationController >> createDiagramElement [
+
+	diagramElement := self diagramElementClass forModelElement:
+		                  self model.
+
+	self diagramElementOwner addOperation: diagramElement
+]
+
 { #category : #construction }
 OPUmlOperationController >> createModelIn: aParentModel [
 	self
@@ -44,6 +53,13 @@ OPUmlOperationController >> diagramElementClass [
 	^ OPUmlOperationLabel
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlOperationController >> diagramElementOwner [
+
+	^ (diagramController controllerForModel: model owningClass)
+		  diagramElement
+]
+
 { #category : #testing }
 OPUmlOperationController >> isHideable [
 	^ true
@@ -54,11 +70,12 @@ OPUmlOperationController >> modelClass [
 	^ OPUMLOperation
 ]
 
-{ #category : #figures }
-OPUmlOperationController >> refreshFigure [
-	self diagramElement changed.
-	self diagramElement owningElement owningElement changed.
-	^ self figure
+{ #category : #removing }
+OPUmlOperationController >> removeDiagramElement [
+
+	self diagramElement ifNil: [ ^ self ].
+	self diagramElementOwner removeOperation: self diagramElement.
+	diagramElement := nil
 ]
 
 { #category : #removing }
@@ -67,15 +84,4 @@ OPUmlOperationController >> removeModel [
 	model owningClass: nil.
 	model datatype: nil.
 	model interface: nil
-]
-
-{ #category : #figures }
-OPUmlOperationController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		owningElement: (diagramController diagramElementForModel: model owningClass) operations.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]

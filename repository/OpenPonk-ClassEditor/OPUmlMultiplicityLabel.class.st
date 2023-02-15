@@ -32,3 +32,10 @@ OPUmlMultiplicityLabel >> defaultText [
 
 	^ self modelElement notationAssociationMultiplicityRange
 ]
+
+{ #category : #initialization }
+OPUmlMultiplicityLabel >> initialize [
+
+	super initialize.
+	atSource := false
+]

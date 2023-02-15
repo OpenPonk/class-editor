@@ -8,13 +8,6 @@ Class {
 }
 
 { #category : #figures }
-OPUmlPackageImportController >> createDiagramElement [
-	^ OPUmlPackageImportShape new
-		modelElement: self model;
-		yourself
-]
-
-{ #category : #figures }
 OPUmlPackageImportController >> createModelIn: aParentModel [
 	self model: self modelClass new.
 	model importedPackage: aParentModel.
@@ -95,20 +88,25 @@ OPUmlPackageImportController >> descriptionVisibility [
 	^ nil
 ]
 
+{ #category : #figures }
+OPUmlPackageImportController >> diagramElementClass [
+
+	^ OPUmlPackageImportShape
+]
+
 { #category : #accessing }
 OPUmlPackageImportController >> modelClass [
 	^ OPUMLPackageImport
 ]
 
 { #category : #forms }
-OPUmlPackageImportController >> pathSourceModel [
+OPUmlPackageImportController >> modelSource [
 	^ model importedPackage
 ]
 
-{ #category : #figures }
-OPUmlPackageImportController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : #forms }
+OPUmlPackageImportController >> modelTarget [
+	^ model importingNamespace
 ]
 
 { #category : #removing }

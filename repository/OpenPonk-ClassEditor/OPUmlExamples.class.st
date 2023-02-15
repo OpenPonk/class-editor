@@ -15,32 +15,44 @@ Class {
 
 { #category : #examples }
 OPUmlExamples class >> exampleEmptyPackage [
-	^ OPProject openOnModel: (OPUMLPackage new name: 'Package')
+
+	^ (OPProject openOnModel: (OPUMLPackage new name: 'Package'))
+		  showAllElementsInAllDiagrams
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleEmptyProfile [
-	^ OPProject openOnModel: (OPUMLProfile new name: 'Profile')
+
+	^ (OPProject openOnModel: (OPUMLProfile new name: 'Profile'))
+		  showAllElementsInAllDiagrams
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleGeneralizationSets [
-	^ OPProject openOnModel: self new generalizationSets
+
+	^ (OPProject openOnModel: self new generalizationSets)
+		  showAllElementsInAllDiagrams
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleRichClass [
-	^ OPProject openOnModel: self new modelWithRichClass
+
+	^ (OPProject openOnModel: self new modelWithRichClass)
+		  showAllElementsInAllDiagrams
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleSimpleAssociation [
-	^ OPProject openOnModel: self new simpleAssociation
+
+	^ (OPProject openOnModel: self new simpleAssociation)
+		  showAllElementsInAllDiagrams
 ]
 
 { #category : #examples }
 OPUmlExamples class >> exampleSimpleGeneralization [
-	^ OPProject openOnModel: self new simpleGeneralization
+
+	^ (OPProject openOnModel: self new simpleGeneralization)
+		  showAllElementsInAllDiagrams
 ]
 
 { #category : #menu }
@@ -90,11 +102,12 @@ OPUmlExamples class >> menuCommandOn: aBuilder [
 
 { #category : #examples }
 OPUmlExamples class >> notUsedExampleCommonStructure [
+
 	| uml cs |
 	uml := OPUMLXMISpecsStorage umlMetamodel.
-	cs := uml packagedElements
-		detect: [ :each | each name = 'CommonStructure' ].
-	^ OPProject openOnModel: cs
+	cs := uml packagedElements detect: [ :each | 
+		      each name = 'CommonStructure' ].
+	^ (OPProject openOnModel: cs) showAllElementsInAllDiagrams
 ]
 
 { #category : #accessing }

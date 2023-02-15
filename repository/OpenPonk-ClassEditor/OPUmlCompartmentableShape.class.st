@@ -1,161 +1,114 @@
 Class {
 	#name : #OPUmlCompartmentableShape,
-	#superclass : #OPUmlShape,
+	#superclass : #OPShape,
+	#traits : 'OPTUmlAutoAccomodatingShape',
+	#classTraits : 'OPTUmlAutoAccomodatingShape classTrait',
 	#instVars : [
-		'view',
-		'separators',
-		'oldExtent'
+		'separators'
 	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
-{ #category : #'Roassal2 - accessing' }
-OPUmlCompartmentableShape >> compartmentFigures [
+{ #category : #accessing }
+OPUmlCompartmentableShape >> addSeparator [
 
-	^ RTGroup withAll: (self compartments flatCollect: #ownedElements)
+	| newSeparator |
+	newSeparator := RSLine new.
+	self roassalShape canvas add: newSeparator.
+	separators add: newSeparator
 ]
 
 { #category : #accessing }
 OPUmlCompartmentableShape >> compartments [
+
 	^ self ownedElements select: [ :each | each isKindOf: OPUmlCompartment ]
 ]
 
-{ #category : #'Roassal2 - manipulation' }
-OPUmlCompartmentableShape >> createRoassalShape [
-	^ RTBox new
-		size: 0;
-		color: [ :model | model style fillColor ];
-		borderColor: self style strokeColor;
-		borderWidth: self style strokeWidth;
-		elementOn: self
-]
-
-{ #category : #'Roassal2 - accessing' }
-OPUmlCompartmentableShape >> figures [
-	^ RTGroup withAll: self labels , self compartmentFigures , self icons
-]
-
-{ #category : #'Roassal2 - manipulation' }
-OPUmlCompartmentableShape >> figuresDo: aBlock [
-	^ self figures do: aBlock
-]
-
-{ #category : #'Roassal2 - accessing' }
-OPUmlCompartmentableShape >> icons [
-	^ RTGroup
-		withAll: (self ownedElements select: [ :each | each isKindOf: OPUmlIcon ])
-]
-
-{ #category : #initialization }
-OPUmlCompartmentableShape >> initialize [
-	super initialize.
-	(sharedStyle := OPDIOpenPonkStyle new)
-		fillColor: Color veryVeryLightGray;
-		strokeColor: Color black;
-		strokeWidth: 1
-]
-
-{ #category : #'Roassal2 - accessing' }
-OPUmlCompartmentableShape >> labels [
-
-	^ RSGroup withAll:
-		  (self ownedElements select: [ :each | each isKindOf: OPUmlLabel ])
-]
-
-{ #category : #'Roassal2 - updating' }
+{ #category : #rendering }
 OPUmlCompartmentableShape >> layout [
-	| rect off encompassingRect |
-	RTVerticalLineLayout new
-		gapSize: 0.5;
-		on: self figures.
-	encompassingRect := self figures encompassingRectangle.
-	rect := (encompassingRect
-		withWidth: ((encompassingRect width + 8 roundUpTo: 20) max: 140))
-		withHeight: ((encompassingRect height + 4 roundUpTo: 20) max: 60).
-	self rtElement trachelShape extent: rect width @ rect height.
-	off := self rtElement trachelShape encompassingRectangle center
-		- rect center.
-	off := off asIntegerPoint + (5 @ 5).
-	self figures do: [ :e | e translateBy: off ]
+
+	self accomodateContents
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartmentableShape >> remove [
+{ #category : #rendering }
+OPUmlCompartmentableShape >> layoutContents [
 
-	self separators
-		select: [ :each | each view isNotNil ]
-		thenDo: #remove.
-	self figures select: [ :each | each view isNotNil ] thenDo: #remove.
-	self figures do: [ :each | each owningElement: nil ].
-	self compartments
-		select: [ :each | each view isNotNil ]
-		thenDo: #remove.
-	self compartments do: [ :each | each owningElement: nil ].
-	self rtElement remove.
-	view ifNotNil: [ view signalUpdate ].
-	view := nil
+	self layoutOwnedElements.
+	self layoutSeparators
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartmentableShape >> renderIn: aView [
-	view := aView.
-	view add: self rtElement.
-	self rtElement
-		addCallback:
-			(TRTranslationCallback
-				block:
-					[ :shape :step | 
-					self figures translateBy: step.
-					self separators translateBy: step ]).
-	self updateContent
+{ #category : #rendering }
+OPUmlCompartmentableShape >> layoutOwnedElements [
+
+	^ self ownedElements inject: 0 into: [ :prevHeight :each | 
+		  each translateTopTo: prevHeight.
+		  prevHeight + each height + 1 ]
 ]
 
-{ #category : #'Roassal2 - accessing' }
+{ #category : #rendering }
+OPUmlCompartmentableShape >> layoutSeparators [
+
+	| yCoordinates left right |
+	yCoordinates := self compartments collect: [ :each | each top ].
+
+	left := self roassalShape encompassingRectangle left.
+	right := self roassalShape encompassingRectangle right.
+
+	self separators withIndexDo: [ :each :index | 
+		| y |
+		y := yCoordinates at: index.
+		each controlPoints: { 
+				(left @ y).
+				(right @ y) } ]
+]
+
+{ #category : #accessing }
+OPUmlCompartmentableShape >> removeSeparator [
+
+	separators removeLast remove
+]
+
+{ #category : #rendering }
+OPUmlCompartmentableShape >> renderBasicShape [
+
+	roassalShape := RSBox new
+		                size: 30;
+		                model: self;
+		                yourself
+]
+
+{ #category : #rendering }
+OPUmlCompartmentableShape >> renderShapeDetails [
+
+	self roassalShape @ OPRSSelectable.
+	self roassalShape @ OPRSSelectionDraggable.
+	self roassalShape
+		when: RSPositionChangedEvent
+		do: [ :event | self layoutContents ]
+]
+
+{ #category : #accessing }
 OPUmlCompartmentableShape >> separators [
-	^ self compartments collect: #rtElement as: RTGroup
+
+	^ separators
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartmentableShape >> update [
-	view ifNil: [ ^ self ].
-	self updateContent.
-	self updateConnectedEdges.
-]
+{ #category : #rendering }
+OPUmlCompartmentableShape >> updateRenderFromModel [
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartmentableShape >> update: aParameter [
-	self figuresDo: [ :each | each update: aParameter ].
-	self update
-]
+	super updateRenderFromModel.
 
-{ #category : #'Roassal2 - updating' }
-OPUmlCompartmentableShape >> updateContent [
-	view ifNil: [ ^ self ].
-	self rtElement shape borderColor: self style strokeColor.
-	self rtElement update.
-	self figures
-		select: [ :each | each view isNil ]
-		thenDo: [ :each | each renderIn: view ].
-	self layout.
 	self updateSeparators.
-	self rtElement trachelShape triggerCallbacksForStep: 0 @ 0
+
+	self layout
 ]
 
-{ #category : #'Roassal2 - updating' }
+{ #category : #rendering }
 OPUmlCompartmentableShape >> updateSeparators [
-	| x y |
-	self separators select: [ :each | each view isNil ] thenDo: [ :each | view add: each ].
-	x := self encompassingRectangle left.
-	y := self labels
-		ifEmpty: [ self encompassingRectangle top ]
-		ifNotEmpty: [ :lbls | lbls last encompassingRectangle bottom ].
-	self compartments
-		do: [ :each | 
-			each ownedElements
-				ifEmpty: [ each rtElement shape path: 'L 0 0' ]
-				ifNotEmpty: [ each rtElement shape path: 'L ' , self width asString , ' 0' ].
-			each rtElement translateTo: x @ y.
-			each rtElement update.
-			each ownedElements
-				ifNotEmpty: [ y := each ownedElements last encompassingRectangle bottom ] ]
+
+	[ self separators size < self compartments size ] whileTrue: [ 
+		self addSeparator ].
+
+	[ self separators size > self compartments size ] whileTrue: [ 
+		self removeSeparator ]
 ]

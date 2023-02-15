@@ -9,31 +9,19 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #adding }
-OPUmlPackageDiagramController >> addAsSourceFor: aController [
-	self shouldBeImplemented
-]
-
-{ #category : #adding }
-OPUmlPackageDiagramController >> addAsTargetFor: aClassController [
-	self assert: (self canBeTargetFor: aClassController).
-	aClassController createModelIn: self model andShowInDiagram: self
-]
-
 { #category : #figures }
 OPUmlPackageDiagramController >> allShowableElements [
+
 	"Should return all elements that could be directly hidden on diagram"
 
-	^ self elementsToShowInside , self diagram commonElements
-		,
-			((self model packagedElements
-				select:
-					[ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ])
-				flatCollect: [ :each | each ownedAttributes , each ownedOperations ])
-		,
-			((self model packagedElements
-				select: [ :each | each isKindOf: OPUMLEnumeration ])
-				flatCollect: [ :each | each ownedLiterals ])
+	^ self elementsToShowInside
+	  , ((self model packagedElements select: [ :each | 
+			    (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]) 
+			   flatCollect: [ :each | 
+			   each ownedAttributes , each ownedOperations ])
+	  , ((self model packagedElements select: [ :each | 
+			    each isKindOf: OPUMLEnumeration ]) flatCollect: [ :each | 
+			   each ownedLiterals ])
 ]
 
 { #category : #adding }
@@ -113,14 +101,10 @@ OPUmlPackageDiagramController >> descriptionStereotype [
 	^ self descriptionStereotypeContent
 ]
 
-{ #category : #figures }
-OPUmlPackageDiagramController >> diagramElementForModel: aModel [
-	^ (self showWithoutDependentInDiagramModel: aModel) diagramElement
-]
-
 { #category : #userinterface }
 OPUmlPackageDiagramController >> disableRefresh [
 	| install |
+	self flag: #todo.
 	install := [ :cls | 
 	| link |
 	(cls includesSelector: #refreshFigure)
@@ -186,6 +170,7 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 { #category : #userinterface }
 OPUmlPackageDiagramController >> enableRefresh [
 	| uninstall |
+	self flag: #todo.
 	uninstall := [ :cls | 
 	(cls includesSelector: #refreshFigure)
 		ifTrue: [ (cls >> #refreshFigure) ast links
@@ -322,22 +307,11 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
-{ #category : #hooks }
-OPUmlPackageDiagramController >> reactToAttributeWrite [
-	"do nothing"
-]
-
 { #category : #palette }
 OPUmlPackageDiagramController >> rebuildPalette [
 
 	self editor palette createPaletteFor: self.
 	self editor palette rebuildWidget
-]
-
-{ #category : #figures }
-OPUmlPackageDiagramController >> selectableFigures [
-	^ (self controllers select: [ :each | each isKindOf: OPUmlClassController ])
-		collect: #figure
 ]
 
 { #category : #figures }

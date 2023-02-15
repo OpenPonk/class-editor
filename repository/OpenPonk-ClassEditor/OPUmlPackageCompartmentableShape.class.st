@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlPackageCompartmentableShape,
-	#superclass : #OPUmlShape,
+	#superclass : #OPShape,
 	#instVars : [
 		'view',
 		'separators'
@@ -38,7 +38,7 @@ OPUmlPackageCompartmentableShape >> initialize [
 { #category : #'Roassal2 - updating' }
 OPUmlPackageCompartmentableShape >> remove [
 
-	self rtElement remove.
+	self roassalShape remove.
 	view ifNotNil: [ view signalUpdate ].
 	view := nil
 ]
@@ -46,14 +46,14 @@ OPUmlPackageCompartmentableShape >> remove [
 { #category : #'Roassal2 - updating' }
 OPUmlPackageCompartmentableShape >> renderIn: aView [
 	view := aView.
-	view add: self rtElement.
+	view add: self roassalShape.
 	self changed
 ]
 
 { #category : #'Roassal2 - updating' }
 OPUmlPackageCompartmentableShape >> update [
 	view ifNil: [ ^ self ].
-	self rtElement update.
+	self roassalShape update.
 	self updateConnectedEdges
 ]
 

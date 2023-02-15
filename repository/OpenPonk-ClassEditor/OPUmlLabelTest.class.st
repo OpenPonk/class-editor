@@ -13,7 +13,7 @@ OPUmlLabelTest >> elementClass [
 OPUmlLabelTest >> testBlockNameUpdate [
 	element modelElement: 'hello'.
 	element text: #yourself.
-	rt := element rtElement.
+	rt := element roassalShape.
 	self assert: (rt shape textFor: rt) equals: 'hello'.
 	element modelElement: 'world'.
 	self assert: (rt shape textFor: rt) equals: 'world'
@@ -22,7 +22,7 @@ OPUmlLabelTest >> testBlockNameUpdate [
 { #category : #tests }
 OPUmlLabelTest >> testRtElement [
 	element text: 'some text'.
-	rt := element rtElement.
+	rt := element roassalShape.
 	self assert: rt class equals: RTElement.
 	self assert: rt shape class equals: RTStyledLabel.
 	self assert: (rt shape textFor: rt) equals: 'some text'
@@ -32,7 +32,7 @@ OPUmlLabelTest >> testRtElement [
 OPUmlLabelTest >> testRtEmphasis [
 	element text: 'some text'.
 	element localStyle: OPDIOpenPonkStyle new.
-	rt := element rtElement.
+	rt := element roassalShape.
 	self assertCollection: (rt shape emphasisFor: rt) hasSameElements: #().
 
 	element localStyle fontBold: true.
@@ -63,7 +63,7 @@ OPUmlLabelTest >> testRtEmphasisUpdate [
 			localStyle fontItalic: model second ].
 	element localStyle: OPDIOpenPonkStyle new.
 	element modelElement: #(true true).
-	rt := element rtElement.
+	rt := element roassalShape.
 	self
 		assertCollection: (rt shape emphasisFor: rt)
 		hasSameElements:
@@ -76,7 +76,7 @@ OPUmlLabelTest >> testRtEmphasisUpdate [
 { #category : #tests }
 OPUmlLabelTest >> testRtNameUpdate [
 	element text: 'some text'.
-	rt := element rtElement.
+	rt := element roassalShape.
 	self assert: (rt shape textFor: rt) equals: 'some text'.
 	element text: 'new text'.
 	self assert: (rt shape textFor: rt) equals: 'new text'

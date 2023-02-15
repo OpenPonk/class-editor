@@ -71,14 +71,6 @@ OPUmlClassController >> canBeTargetFor: aController [
 		| (aController isKindOf: OPUmlExtensionController)
 ]
 
-{ #category : #figures }
-OPUmlClassController >> createDiagramElement [
-	^ OPUmlClassShape new
-		stereotype: [ self stereotypeNames ];
-		comments: [ self model ownedComments ];
-		modelElement: self model
-]
-
 { #category : #accessing }
 OPUmlClassController >> dependentElements [
 	^ self elementsToShowInside , self model generalizations
@@ -121,6 +113,12 @@ OPUmlClassController >> descriptionIsAbstract [
 OPUmlClassController >> descriptionStereotype [
 	<magritteDescription>
 	^ super descriptionStereotype
+]
+
+{ #category : #figures }
+OPUmlClassController >> diagramElementClass [
+
+	^ OPUmlClassShape
 ]
 
 { #category : #accessing }

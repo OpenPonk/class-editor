@@ -3,12 +3,9 @@ I am an abstract controller for relationship-type elements.
 "
 Class {
 	#name : #OPUmlRelationshipController,
-	#superclass : #OPUmlElementController,
-	#traits : 'OPTRelationshipWithPathPointsController',
-	#classTraits : 'OPTRelationshipWithPathPointsController classTrait',
-	#instVars : [
-		'source'
-	],
+	#superclass : #OPDirectionalRelationshipController,
+	#traits : 'OPTUmlStereotypedElementController',
+	#classTraits : 'OPTUmlStereotypedElementController classTrait',
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
@@ -18,11 +15,9 @@ OPUmlRelationshipController >> isHideable [
 ]
 
 { #category : #accessing }
-OPUmlRelationshipController >> source [
-	^ source
-]
-
-{ #category : #accessing }
-OPUmlRelationshipController >> source: anObject [
-	source := anObject
+OPUmlRelationshipController >> magritteDescription [
+	| container |
+	container := MAPragmaBuilder for: self.
+	container addAll: self stereotypeMagritteDescription.
+	^ container
 ]
