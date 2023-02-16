@@ -28,9 +28,9 @@ OPUmlLayouter >> applyLayout: aThreeArgBlock [
 	boxes := classifiers , packages.
 	links := associations , packageImports.
 	aThreeArgBlock
-		value: (self figuresFor: boxes)
-		value: (self figuresFor: hierarchy)
-		value: (self figuresFor: links).
+		value: (self roassalShapesFor: boxes)
+		value: (self roassalShapesFor: hierarchy)
+		value: (self roassalShapesFor: links).
 	self updateCanvas
 ]
 
@@ -56,14 +56,13 @@ OPUmlLayouter >> diagramController: aDiagramController [
 
 { #category : #'ui hooks' }
 OPUmlLayouter >> dominanceTreeLayout [
-	self
-		applyLayout: [ :boxes :hierarchy :links | 
-			RTDominanceTreeLayout new
-				verticallyReverse;
-				verticalGap: 100;
-				horizontalGap: 100;
-				doNotAttachPoint;
-				on: boxes edges: hierarchy , links ]
+
+	self applyLayout: [ :boxes :hierarchy :links | 
+		RSDominanceTreeLayout new
+			verticallyReverse;
+			verticalGap: 100;
+			horizontalGap: 100;
+			on: boxes edges: hierarchy , links ]
 ]
 
 { #category : #'ui hooks' }

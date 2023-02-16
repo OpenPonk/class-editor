@@ -7,7 +7,7 @@ Class {
 { #category : #'Roassal2 - accessing' }
 OPUmlEdge >> headMarker [
 
-	^ OPUmlEdgeMarkers none
+	^ nil
 ]
 
 { #category : #rendering }
@@ -52,5 +52,5 @@ OPUmlEdge >> switchSourceAndTarget [
 { #category : #'Roassal2 - accessing' }
 OPUmlEdge >> tailMarker [
 
-	^ OPUmlEdgeMarkers none
+	^ nil
 ]

@@ -22,6 +22,12 @@ OPUmlCompartment >> sortOwnedElements [
 	
 ]
 
+{ #category : #accessing }
+OPUmlCompartment >> top [
+
+	^ self roassalShape encompassingRectangle top
+]
+
 { #category : #rendering }
 OPUmlCompartment >> updateRenderFromModel [
 

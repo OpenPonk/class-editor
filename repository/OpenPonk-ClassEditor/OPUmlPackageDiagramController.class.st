@@ -127,7 +127,7 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 	(OPUMLClass -> 2).
 	(OPUMLStereotype -> 3).
 	(OPUMLEnumeration -> 4)} asDictionary.
-	queue addAll: self model packagedElements.
+	queue addAll: (self model packagedElements reject: [:each | each oclIsKindOf: #Association ]).
 	self model packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
 		thenDo: [ :each | 
@@ -155,11 +155,6 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 					attr association isNotNil
 						and: [ attr association isKindOf: OPUMLExtension ] ]
 				thenDo: [ :attr | queue add: attr type ] ].
-	queue
-		removeAllSuchThat: [ :each | 
-			(each isKindOf: OPUMLAssociation)
-				and: [ each memberEnds
-						anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ].
 	^ (queue asSet asArray
 		sorted: [ :a :b | 
 			(priority at: a class ifAbsent: [ 100 ])
@@ -312,17 +307,6 @@ OPUmlPackageDiagramController >> rebuildPalette [
 
 	self editor palette createPaletteFor: self.
 	self editor palette rebuildWidget
-]
-
-{ #category : #figures }
-OPUmlPackageDiagramController >> showAllElements [
-	self disableRefresh.
-	self allShowableElements
-		do: [ :each | self showWithoutDependentInDiagramModel: each ].
-	self enableRefresh.
-	self controllers
-		select: [ :each | each isKindOf: OPUmlClassController ]
-		thenDo: #refreshFigure
 ]
 
 { #category : #'as yet unclassified' }

@@ -11,11 +11,16 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
+{ #category : #hooks }
+OPUmlGeneralizationShape >> headMarker [
+
+	^ OPRSEmptyMarkerBuilder triangle
+]
+
 { #category : #initialization }
 OPUmlGeneralizationShape >> initialize [
 
 	super initialize.
-	self headDecorator: OPUmlEdgeMarkers emptyArrow.
 	nameLabel := OPUmlGeneralizationLabel
 		             in: self
 		             forModelElement: self modelElement.

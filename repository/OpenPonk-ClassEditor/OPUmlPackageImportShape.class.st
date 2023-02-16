@@ -32,11 +32,16 @@ OPUmlPackageImportShape >> createRtEdge [
 		yourself
 ]
 
+{ #category : #hooks }
+OPUmlPackageImportShape >> headMarker [
+
+	^ OPRSMarkerBuilder arrow
+]
+
 { #category : #initialization }
 OPUmlPackageImportShape >> initialize [
 
 	super initialize.
-	self headDecorator: OPUmlEdgeMarkers simpleArrow.
 	nameLabel := OPUmlPackageImportLabel
 		             in: self
 		             forModelElement: self modelElement.

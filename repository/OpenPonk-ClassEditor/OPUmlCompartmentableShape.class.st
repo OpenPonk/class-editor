@@ -13,7 +13,7 @@ Class {
 OPUmlCompartmentableShape >> addSeparator [
 
 	| newSeparator |
-	newSeparator := RSLine new.
+	newSeparator := RSPolyline new.
 	self roassalShape canvas add: newSeparator.
 	separators add: newSeparator
 ]

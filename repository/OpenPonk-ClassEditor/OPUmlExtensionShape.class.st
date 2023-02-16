@@ -24,8 +24,8 @@ OPUmlExtensionShape >> initialize [
 { #category : #accessing }
 OPUmlExtensionShape >> markerFor: aProperty [
 	(aProperty name beginsWith: 'base_')
-		ifTrue: [ ^ OPUmlEdgeMarkers filledArrow ].
-	^ OPUmlEdgeMarkers none
+		ifTrue: [ ^ OPRSMarkerBuilder triangle ].
+	^ nil
 ]
 
 { #category : #accessing }

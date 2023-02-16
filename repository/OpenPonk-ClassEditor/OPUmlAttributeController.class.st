@@ -165,6 +165,15 @@ OPUmlAttributeController >> diagramElementClass [
 	^ OPUmlAttributeLabel
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlAttributeController >> diagramElementOwner [
+
+	^ (diagramController showWithoutDependentInDiagramModel:
+		   (model owningClass ifNil: [ 
+			    (model owningAssociation memberEnds detect: [ :any | 
+				     any ~= model ]) type ])) diagramElement
+]
+
 { #category : #testing }
 OPUmlAttributeController >> isHideable [
 	^ true

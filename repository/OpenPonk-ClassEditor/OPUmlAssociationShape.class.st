@@ -47,34 +47,34 @@ OPUmlAssociationShape >> markerFor: aProperty [
 
 	(self ontoUmlDecoratorFor: aProperty) ifNotNil: [ :marker | ^ marker ].
 	aProperty opposite aggregation = OPUMLAggregationKind composite 
-		ifTrue: [ ^ OPUmlEdgeMarkers filledDiamond ].
+		ifTrue: [ ^ OPRSMarkerBuilder diamond ].
 	aProperty opposite aggregation = OPUMLAggregationKind shared ifTrue: [ 
-		^ OPUmlEdgeMarkers emptyDiamond ].
-	aProperty isNavigable ifTrue: [ ^ OPUmlEdgeMarkers simpleArrow ].
-	^ OPUmlEdgeMarkers none
+		^ OPRSMarkerBuilder diamond asEmptyMarker ].
+	aProperty isNavigable ifTrue: [ ^ OPRSMarkerBuilder arrow ].
+	^ nil
 ]
 
 { #category : #accessing }
 OPUmlAssociationShape >> ontoUmlDecoratorFor: aProperty [
 
-	| stereoNames markerTexts |
+	| stereoNames markerLetters |
 	stereoNames := aProperty association appliedStereotypes collect:
 		               #umlClassName.
-	markerTexts := { 
-		               (#SubQuantityOf -> 'Q').
-		               (#SubCollectionOf -> 'C').
-		               (#MemberOf -> 'M') } asDictionary.
+	markerLetters := { 
+		                 (#SubQuantityOf -> $Q).
+		                 (#SubCollectionOf -> $C).
+		                 (#MemberOf -> $M) } asDictionary.
 	aProperty opposite aggregation = OPUMLAggregationKind composite 
 		ifTrue: [ 
 			stereoNames do: [ :each | 
-				markerTexts
+				markerLetters
 					at: each
-					ifPresent: [ :text | ^ OPUmlEdgeMarkers filledDiamondWith: text ] ] ].
+					ifPresent: [ :letter | 
+					^ OPRSMarkerBuilder diamondWithLetter: letter ] ] ].
 	aProperty opposite aggregation = OPUMLAggregationKind shared ifTrue: [ 
 		stereoNames do: [ :each | 
-			markerTexts
-				at: each
-				ifPresent: [ :text | ^ OPUmlEdgeMarkers emptyDiamondWith: text ] ] ].
+			markerLetters at: each ifPresent: [ :letter | 
+				^ (OPRSMarkerBuilder diamondWithLetter: letter) asEmptyMarker ] ] ].
 	^ nil
 ]
 

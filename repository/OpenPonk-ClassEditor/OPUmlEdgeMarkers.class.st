@@ -102,23 +102,28 @@ OPUmlEdgeMarkers >> filledArrow [
 { #category : #markers }
 OPUmlEdgeMarkers >> filledDiamond [
 
-	^ RSShapeFactory polygonWithPoints: (Array
-			   with: 0 @ 10
-			   with: 7 @ 0
-			   with: 0 @ -10
-			   with: -7 @ 0)
+	^ RSPolygon new
+		  points: { 
+				  (0 @ 20).
+				  (7 @ 10).
+				  (0 @ 0).
+				  (-7 @ 10) };
+		  yourself
 ]
 
 { #category : #markers }
 OPUmlEdgeMarkers >> filledDiamondWith: aString [
 
-	| group |
-	group := RSGroup with: self filledDiamond with: (RSLabel new
-			          text: aString;
-			          color: Color white;
-			          fontSize: 9;
-			          yourself).
-	^ group asShape
+	^ RSBorderColoringComposite new
+		  shapes: { 
+				  self filledDiamond.
+				  (RSLabel new
+					   text: aString;
+					   color: Color white;
+					   fontSize: 9;
+					   translateBy: -0.5 @ 10;
+					   yourself) };
+		  yourself
 ]
 
 { #category : #markers }
@@ -129,9 +134,13 @@ OPUmlEdgeMarkers >> none [
 { #category : #markers }
 OPUmlEdgeMarkers >> simpleArrow [
 
-	^ (RSShapeFactory polygonWithPoints: (Array
-			    with: 5 @ 10
-			    with: 0 @ 5
-			    with: -5 @ 10
-			    with: 0 @ 0)) yourself
+	| shape marker |
+	shape := RSPolygon new points: { 
+			         (5 @ 10).
+			         (0 @ 5).
+			         (-5 @ 10).
+			         (0 @ 0) }.
+	marker := shape asMarker.
+	marker offset: shape height.
+	^ marker
 ]
