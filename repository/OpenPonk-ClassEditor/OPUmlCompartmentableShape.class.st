@@ -14,8 +14,15 @@ OPUmlCompartmentableShape >> addSeparator [
 
 	| newSeparator |
 	newSeparator := RSPolyline new.
+	newSeparator color: Color black.
 	self roassalShape canvas add: newSeparator.
 	separators add: newSeparator
+]
+
+{ #category : #rendering }
+OPUmlCompartmentableShape >> bottomPadding [
+
+	^ 2
 ]
 
 { #category : #accessing }
@@ -40,16 +47,20 @@ OPUmlCompartmentableShape >> layoutContents [
 { #category : #rendering }
 OPUmlCompartmentableShape >> layoutOwnedElements [
 
-	^ self ownedElements inject: 0 into: [ :prevHeight :each | 
-		  each translateTopTo: prevHeight.
-		  prevHeight + each height + 1 ]
+	^ self ownedElements
+		  inject:
+		  self roassalShape encompassingRectangle top + self topPadding
+		  into: [ :prevHeight :each | 
+			  each translateTopTo: prevHeight.
+			  prevHeight + each height + 1 ]
 ]
 
 { #category : #rendering }
 OPUmlCompartmentableShape >> layoutSeparators [
 
 	| yCoordinates left right |
-	yCoordinates := self compartments collect: [ :each | each top ].
+	yCoordinates := (self compartments ifEmpty: [ ^ self ]) collect: [ 
+		                :each | each top ].
 
 	left := self roassalShape encompassingRectangle left.
 	right := self roassalShape encompassingRectangle right.
@@ -60,6 +71,12 @@ OPUmlCompartmentableShape >> layoutSeparators [
 		each controlPoints: { 
 				(left @ y).
 				(right @ y) } ]
+]
+
+{ #category : #rendering }
+OPUmlCompartmentableShape >> leftPadding [
+
+	^ 2
 ]
 
 { #category : #accessing }
@@ -74,6 +91,8 @@ OPUmlCompartmentableShape >> renderBasicShape [
 	roassalShape := RSBox new
 		                size: 30;
 		                model: self;
+		                color: Color white;
+		                borderColor: Color black;
 		                yourself
 ]
 
@@ -87,10 +106,22 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 		do: [ :event | self layoutContents ]
 ]
 
+{ #category : #rendering }
+OPUmlCompartmentableShape >> rightPadding [
+
+	^ 2
+]
+
 { #category : #accessing }
 OPUmlCompartmentableShape >> separators [
 
 	^ separators
+]
+
+{ #category : #rendering }
+OPUmlCompartmentableShape >> topPadding [
+
+	^ 2
 ]
 
 { #category : #rendering }

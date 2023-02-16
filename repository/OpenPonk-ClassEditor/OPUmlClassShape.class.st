@@ -97,6 +97,7 @@ OPUmlClassShape >> removeAttribute: anAttributeShape [
 
 	anAttributeShape remove.
 
+	attributes ownedElements ifNotEmpty: [ ^ self ].
 	attributes remove.
 	attributes := nil
 ]
@@ -106,6 +107,7 @@ OPUmlClassShape >> removeOperation: anOperationShape [
 
 	anOperationShape remove.
 
+	operations ownedElements ifNotEmpty: [ ^ self ].
 	operations remove.
 	operations := nil
 ]

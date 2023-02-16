@@ -14,6 +14,14 @@ OPUmlCompartment >> renderBasicShape [
 		                yourself
 ]
 
+{ #category : #rendering }
+OPUmlCompartment >> renderShapeDetails [
+
+	self roassalShape when: RSPositionChangedEvent do: [ :event | 
+		self ownedElements do: [ :each | 
+			each translateBy: event newPosition - event oldPosition ] ]
+]
+
 { #category : #sorting }
 OPUmlCompartment >> sortOwnedElements [
 

@@ -9,7 +9,7 @@ OPTUmlAutoAccomodatingShape >> accomodateContents [
 	| originalEncompassingRectangle extentOfContents |
 	originalEncompassingRectangle := self roassalShape
 		                                 encompassingRectangle.
-	extentOfContents := self minExtent max: 20 @ 10.
+	extentOfContents := self extentToFitContents max: self minExtent.
 	self roassalShape extent: extentOfContents.
 	(originalEncompassingRectangle height closeTo: extentOfContents y) 
 		ifTrue: [ ^ self ].
@@ -19,24 +19,54 @@ OPTUmlAutoAccomodatingShape >> accomodateContents [
 ]
 
 { #category : #rendering }
-OPTUmlAutoAccomodatingShape >> minExtent [
+OPTUmlAutoAccomodatingShape >> bottomPadding [
+
+	^ 0
+]
+
+{ #category : #rendering }
+OPTUmlAutoAccomodatingShape >> extentToFit: anOwnedElement [
+
+	^ (anOwnedElement respondsTo: #extentToFitContents)
+		  ifTrue: [ anOwnedElement extentToFitContents ]
+		  ifFalse: [ anOwnedElement extent ]
+]
+
+{ #category : #rendering }
+OPTUmlAutoAccomodatingShape >> extentToFitContents [
 
 	| totalHeight maxWidth |
-	totalHeight := 0.
-	maxWidth := 0.
+	totalHeight := self topPadding + self bottomPadding.
+	maxWidth := self leftPadding + self rightPadding.
 	self ownedElements do: [ :each | 
 		| extentOfEachContents |
-		extentOfEachContents := self minExtentFor: each.
+		extentOfEachContents := self extentToFit: each.
 		maxWidth := maxWidth max: extentOfEachContents x.
-		totalHeight := totalHeight + extentOfEachContents y + 1 ].
+		totalHeight := totalHeight + extentOfEachContents y ].
 
 	^ maxWidth @ totalHeight
 ]
 
 { #category : #rendering }
-OPTUmlAutoAccomodatingShape >> minExtentFor: anOwnedElement [
+OPTUmlAutoAccomodatingShape >> leftPadding [
 
-	^ (anOwnedElement respondsTo: #minExtent)
-		  ifTrue: [ anOwnedElement minExtent ]
-		  ifFalse: [ anOwnedElement extent ]
+	^ 0
+]
+
+{ #category : #rendering }
+OPTUmlAutoAccomodatingShape >> minExtent [
+
+	^ 20 @ 10
+]
+
+{ #category : #rendering }
+OPTUmlAutoAccomodatingShape >> rightPadding [
+
+	^ 0
+]
+
+{ #category : #rendering }
+OPTUmlAutoAccomodatingShape >> topPadding [
+
+	^ 0
 ]

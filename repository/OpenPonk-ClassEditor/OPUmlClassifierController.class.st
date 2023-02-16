@@ -34,18 +34,19 @@ OPUmlClassifierController >> createModelIn: aParentModel [
 
 { #category : #forms }
 OPUmlClassifierController >> descriptionName [
+
 	<magritteDescription>
 	| accessor |
 	accessor := MAPluggableAccessor
-		read: [ :me | me model name ]
-		write: [ :me :newValue | 
-			me model name: newValue.
-			self refreshFigure ].
+		            read: [ :me | me model name ]
+		            write: [ :me :newValue | 
+			            me model name: newValue.
+			            self diagramElement updateRenderFromModel ].
 	^ MAMemoDescription new
-		accessor: accessor;
-		label: 'Name';
-		priority: 1;
-		yourself
+		  accessor: accessor;
+		  label: 'Name';
+		  priority: 1;
+		  yourself
 ]
 
 { #category : #testing }

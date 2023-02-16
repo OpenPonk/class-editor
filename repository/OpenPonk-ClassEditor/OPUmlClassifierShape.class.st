@@ -17,6 +17,12 @@ OPUmlClassifierShape >> hasModelComments [
 			  any body isNotNil and: [ any body isNotEmpty ] ] ]
 ]
 
+{ #category : #accessing }
+OPUmlClassifierShape >> minExtent [
+
+	^ 100 @ 60
+]
+
 { #category : #rendering }
 OPUmlClassifierShape >> updateCommentIcon [
 
