@@ -1,11 +1,11 @@
 Class {
-	#name : #OPUmlFeaturesCompartment,
-	#superclass : #OPUmlCompartment,
+	#name : #OPUmlFeaturesListCompartment,
+	#superclass : #OPUmlListCompartment,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
 { #category : #sorting }
-OPUmlFeaturesCompartment >> sortOwnedElements [
+OPUmlFeaturesListCompartment >> sortOwnedElements [
 
 	ownedElements sort: [ :a :b | 
 		(a modelElement isStatic and: [ b modelElement isStatic not ]) or: [ 

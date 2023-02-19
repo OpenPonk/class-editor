@@ -73,30 +73,26 @@ OPUmlClassController >> canBeTargetFor: aController [
 
 { #category : #accessing }
 OPUmlClassController >> dependentElements [
+
 	^ self elementsToShowInside , self model generalizations
-		,
-			((diagramController model packagedElements
-				select:
-					[ :eachPackageElement | eachPackageElement oclIsKindOf: #GeneralizationSet ])
-				flatCollectAsSet: [ :eachSet | 
-					eachSet generalizations
-						select: [ :eachGeneralization | 
-							eachGeneralization general = self model
-								or: [ eachGeneralization specific = self model ] ] ])
-		,
-			((diagramController model packagedElements
-				select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
-				flatCollectAsSet: [ :eachClass | 
-					eachClass generalizations
-						select: [ :eachGeneralization | 
-							eachGeneralization general = self model
-								or: [ eachGeneralization specific = self model ] ] ])
-		,
-			(diagramController model packagedElements
-				select: [ :eachAssoc | 
-					(eachAssoc oclIsKindOf: #Association)
-						and: [ eachAssoc memberEnds
-								anySatisfy: [ :any | any type = self model or: [ any owningClass = self model ] ] ] ])
+	  , ((diagramController model packagedElements select: [ 
+			    :eachPackageElement | 
+			    eachPackageElement oclIsKindOf: #GeneralizationSet ]) 
+			   flatCollectAsSet: [ :eachSet | 
+				   eachSet generalizations select: [ :eachGeneralization | 
+					   eachGeneralization general = self model or: [ 
+						   eachGeneralization specific = self model ] ] ])
+	  , ((diagramController model packagedElements select: [ 
+			    :eachPackageElement | eachPackageElement oclIsKindOf: #Class ]) 
+			   flatCollectAsSet: [ :eachClass | 
+				   eachClass generalizations select: [ :eachGeneralization | 
+					   eachGeneralization general = self model or: [ 
+						   eachGeneralization specific = self model ] ] ])
+	  ,
+		  (diagramController model packagedElements select: [ :eachAssoc | 
+			   (eachAssoc oclIsKindOf: #Association) and: [ 
+				   eachAssoc memberEnds anySatisfy: [ :any | 
+					   any type = self model or: [ any owningClass = self model ] ] ] ])
 ]
 
 { #category : #forms }
@@ -123,6 +119,7 @@ OPUmlClassController >> diagramElementClass [
 
 { #category : #accessing }
 OPUmlClassController >> elementsToShowInside [
+
 	^ model ownedOperations asSet , model ownedAttributes
 ]
 

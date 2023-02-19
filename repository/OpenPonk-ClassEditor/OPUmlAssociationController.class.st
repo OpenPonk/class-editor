@@ -36,11 +36,6 @@ OPUmlAssociationController >> createModelIn: aClass [
 	^ model
 ]
 
-{ #category : #accessing }
-OPUmlAssociationController >> dependentElements [
-	^ model memberEnds
-]
-
 { #category : #'as yet unclassified' }
 OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
 

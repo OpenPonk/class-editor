@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : #rendering }
+OPUmlCompartment >> layoutOwnedElements [
+
+	self subclassResponsibility
+]
+
+{ #category : #rendering }
 OPUmlCompartment >> renderBasicShape [
 
 	roassalShape := RSBox new
@@ -17,9 +23,9 @@ OPUmlCompartment >> renderBasicShape [
 { #category : #rendering }
 OPUmlCompartment >> renderShapeDetails [
 
-	self roassalShape when: RSPositionChangedEvent do: [ :event | 
-		self ownedElements do: [ :each | 
-			each translateBy: event newPosition - event oldPosition ] ]
+	self roassalShape
+		when: RSPositionChangedEvent
+		do: [ :event | self layoutOwnedElements ]
 ]
 
 { #category : #sorting }

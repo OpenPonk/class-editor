@@ -17,7 +17,9 @@ Class {
 OPUmlClassShape >> addAttribute: anAttributeShape [
 
 	attributes ifNil: [ 
-		attributes := self createCompartment.
+		attributes := OPUmlListCompartment
+			              in: self
+			              forModelElement: self modelElement.
 		operations ifNotNil: [ 
 			self ownedElements: (self ownedElements sorted: [ :a :b | 
 					 (a = attributes and: [ b = operations ]) or: [ 
@@ -26,7 +28,7 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 							 < (self ownedElements indexOf: b) ] ] ]) ] ].
 
 	anAttributeShape owningElement: attributes.
-	
+
 	self isRendered ifTrue: [ attributes renderIn: self canvas ].
 
 	attributes sortOwnedElements
@@ -35,10 +37,13 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 { #category : #rendering }
 OPUmlClassShape >> addOperation: anOperationShape [
 
-	operations ifNil: [ operations := self createCompartment ].
+	operations ifNil: [ 
+		operations := OPUmlFeaturesListCompartment
+			              in: self
+			              forModelElement: self modelElement ].
 
 	anOperationShape owningElement: operations.
-	
+
 	self isRendered ifTrue: [ operations renderIn: self canvas ].
 
 	operations sortOwnedElements
@@ -47,12 +52,6 @@ OPUmlClassShape >> addOperation: anOperationShape [
 { #category : #accessing }
 OPUmlClassShape >> attributes [
 	^ attributes
-]
-
-{ #category : #initialization }
-OPUmlClassShape >> createCompartment [
-
-	^ OPUmlCompartment in: self forModelElement: self modelElement
 ]
 
 { #category : #initialization }

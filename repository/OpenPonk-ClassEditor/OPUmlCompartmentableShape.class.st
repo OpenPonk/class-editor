@@ -19,12 +19,6 @@ OPUmlCompartmentableShape >> addSeparator [
 	separators add: newSeparator
 ]
 
-{ #category : #rendering }
-OPUmlCompartmentableShape >> bottomPadding [
-
-	^ 2
-]
-
 { #category : #accessing }
 OPUmlCompartmentableShape >> compartments [
 
@@ -116,12 +110,6 @@ OPUmlCompartmentableShape >> rightPadding [
 OPUmlCompartmentableShape >> separators [
 
 	^ separators
-]
-
-{ #category : #rendering }
-OPUmlCompartmentableShape >> topPadding [
-
-	^ 2
 ]
 
 { #category : #rendering }

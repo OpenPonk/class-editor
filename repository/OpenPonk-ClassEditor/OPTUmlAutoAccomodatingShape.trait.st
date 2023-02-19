@@ -21,7 +21,7 @@ OPTUmlAutoAccomodatingShape >> accomodateContents [
 { #category : #rendering }
 OPTUmlAutoAccomodatingShape >> bottomPadding [
 
-	^ 0
+	^ 2
 ]
 
 { #category : #rendering }
@@ -68,5 +68,5 @@ OPTUmlAutoAccomodatingShape >> rightPadding [
 { #category : #rendering }
 OPTUmlAutoAccomodatingShape >> topPadding [
 
-	^ 0
+	^ 2
 ]

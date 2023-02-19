@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlOperationLabel,
-	#superclass : #OPUmlNameLabel,
+	#superclass : #OPUmlClassItemLabel,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
@@ -8,19 +8,8 @@ Class {
 OPUmlOperationLabel >> defaultEmphasis [
 
 	| emphasis |
-	emphasis := TextEmphasis normal.
-	self modelElement isStatic ifTrue: [ 
-		emphasis add: TextEmphasis underlined ].
+	emphasis := super defaultEmphasis.
 	self modelElement isAbstract ifTrue: [ 
 		emphasis add: TextEmphasis italic ].
 	^ emphasis
-]
-
-{ #category : #accessing }
-OPUmlOperationLabel >> defaultText [
-
-	^ self modelElement notationString
-		  replaceAll: Character lf with: Character space;
-		  replaceAll: Character cr with: Character space;
-		  yourself
 ]
