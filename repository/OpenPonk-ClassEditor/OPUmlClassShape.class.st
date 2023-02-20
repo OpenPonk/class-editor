@@ -28,9 +28,6 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 							 < (self ownedElements indexOf: b) ] ] ]) ] ].
 
 	anAttributeShape owningElement: attributes.
-
-	self isRendered ifTrue: [ attributes renderIn: self canvas ].
-
 	attributes sortOwnedElements
 ]
 
@@ -43,9 +40,6 @@ OPUmlClassShape >> addOperation: anOperationShape [
 			              forModelElement: self modelElement ].
 
 	anOperationShape owningElement: operations.
-
-	self isRendered ifTrue: [ operations renderIn: self canvas ].
-
 	operations sortOwnedElements
 ]
 

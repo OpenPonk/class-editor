@@ -4,13 +4,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #adding }
-OPUmlClassifierController >> addAsTargetFor: aController [
-	aController
-		createModelIn: self model
-		andShowInDiagram: self diagramController
-]
-
 { #category : #figures }
 OPUmlClassifierController >> adornments [
 	^ self subclassResponsibility

@@ -4,6 +4,14 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
+{ #category : #'as yet unclassified' }
+OPUmlClassItemLabel >> addedByMouseClickTo: aPoint [
+
+	"do nothing"
+
+	
+]
+
 { #category : #accessing }
 OPUmlClassItemLabel >> defaultEmphasis [
 

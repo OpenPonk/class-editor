@@ -36,21 +36,22 @@ OPTUmlAutoAccomodatingShape >> extentToFit: anOwnedElement [
 OPTUmlAutoAccomodatingShape >> extentToFitContents [
 
 	| totalHeight maxWidth |
-	totalHeight := self topPadding + self bottomPadding.
-	maxWidth := self leftPadding + self rightPadding.
+	totalHeight := 0.
+	maxWidth := 0.
 	self ownedElements do: [ :each | 
 		| extentOfEachContents |
 		extentOfEachContents := self extentToFit: each.
 		maxWidth := maxWidth max: extentOfEachContents x.
 		totalHeight := totalHeight + extentOfEachContents y ].
 
-	^ maxWidth @ totalHeight
+	^ maxWidth + self leftPadding + self rightPadding
+	  @ (totalHeight + self topPadding + self bottomPadding)
 ]
 
 { #category : #rendering }
 OPTUmlAutoAccomodatingShape >> leftPadding [
 
-	^ 0
+	^ 2
 ]
 
 { #category : #rendering }
@@ -62,7 +63,7 @@ OPTUmlAutoAccomodatingShape >> minExtent [
 { #category : #rendering }
 OPTUmlAutoAccomodatingShape >> rightPadding [
 
-	^ 0
+	^ 2
 ]
 
 { #category : #rendering }

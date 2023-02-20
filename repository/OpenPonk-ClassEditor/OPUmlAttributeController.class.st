@@ -184,13 +184,6 @@ OPUmlAttributeController >> modelClass [
 	^ OPUMLProperty
 ]
 
-{ #category : #figures }
-OPUmlAttributeController >> refreshFigure [
-	self diagramElement changed.
-	self diagramElement owningElement owningElement changed.
-	^ self figure
-]
-
 { #category : #removing }
 OPUmlAttributeController >> removeDiagramElement [
 

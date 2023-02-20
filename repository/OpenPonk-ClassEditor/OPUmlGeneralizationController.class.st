@@ -113,12 +113,6 @@ OPUmlGeneralizationController >> modelTarget [
 	^ model specific
 ]
 
-{ #category : #figures }
-OPUmlGeneralizationController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
-]
-
 { #category : #removing }
 OPUmlGeneralizationController >> removeModel [
 	model general: nil.

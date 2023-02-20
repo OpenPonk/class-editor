@@ -67,10 +67,13 @@ OPUmlCompartmentableShape >> layoutSeparators [
 				(right @ y) } ]
 ]
 
-{ #category : #rendering }
-OPUmlCompartmentableShape >> leftPadding [
+{ #category : #'as yet unclassified' }
+OPUmlCompartmentableShape >> ownedElement: aShape renderedIn: aCanvas [
 
-	^ 2
+	self
+		updateRenderFromModel;
+		layoutContents.
+	super ownedElement: aShape renderedIn: aCanvas
 ]
 
 { #category : #accessing }
@@ -100,12 +103,6 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 		do: [ :event | self layoutContents ]
 ]
 
-{ #category : #rendering }
-OPUmlCompartmentableShape >> rightPadding [
-
-	^ 2
-]
-
 { #category : #accessing }
 OPUmlCompartmentableShape >> separators [
 
@@ -119,7 +116,9 @@ OPUmlCompartmentableShape >> updateRenderFromModel [
 
 	self updateSeparators.
 
-	self layout
+	self layout.
+
+	roassalShape signalUpdate
 ]
 
 { #category : #rendering }

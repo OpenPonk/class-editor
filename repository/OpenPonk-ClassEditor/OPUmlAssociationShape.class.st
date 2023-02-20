@@ -39,7 +39,8 @@ OPUmlAssociationShape >> createOwnedElementsWithoutController [
 { #category : #hooks }
 OPUmlAssociationShape >> headMarker [
 
-	^ self markerFor: self modelElement memberEnds second
+	^ self markerFor:
+		  (self modelElement ifNil: [ ^ nil ]) memberEnds second
 ]
 
 { #category : #accessing }
@@ -100,5 +101,6 @@ OPUmlAssociationShape >> propertiesOfModel: aModel [
 { #category : #hooks }
 OPUmlAssociationShape >> tailMarker [
 
-	^ self markerFor: self modelElement memberEnds first
+	^ self markerFor:
+		  (self modelElement ifNil: [ ^ nil ]) memberEnds first
 ]

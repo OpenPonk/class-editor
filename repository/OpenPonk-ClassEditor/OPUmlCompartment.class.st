@@ -7,25 +7,15 @@ Class {
 }
 
 { #category : #rendering }
-OPUmlCompartment >> layoutOwnedElements [
-
-	self subclassResponsibility
-]
-
-{ #category : #rendering }
 OPUmlCompartment >> renderBasicShape [
 
 	roassalShape := RSBox new
-		                color: Color transparent;
+		                color: ((Color
+				                 r: 0
+				                 g: 0
+				                 b: 1
+				                 alpha: 0.4));
 		                yourself
-]
-
-{ #category : #rendering }
-OPUmlCompartment >> renderShapeDetails [
-
-	self roassalShape
-		when: RSPositionChangedEvent
-		do: [ :event | self layoutOwnedElements ]
 ]
 
 { #category : #sorting }
@@ -54,4 +44,5 @@ OPUmlCompartment >> updateRenderFromModel [
 OPUmlCompartment >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle left + (self width / 2)
+	  + self leftPadding
 ]

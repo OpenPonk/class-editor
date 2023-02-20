@@ -38,13 +38,6 @@ OPUmlEnumerationLiteralController >> modelClass [
 	^ OPUMLEnumerationLiteral
 ]
 
-{ #category : #figures }
-OPUmlEnumerationLiteralController >> refreshFigure [
-	self diagramElement changed.
-	self diagramElement owningElement owningElement changed.
-	^ self figure
-]
-
 { #category : #removing }
 OPUmlEnumerationLiteralController >> removeModel [
 	"could be any of those, so just nil all of them"

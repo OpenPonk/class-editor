@@ -10,13 +10,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #adding }
-OPUmlPackageController >> addAsTargetFor: aController [
-	aController
-		createModelIn: self model
-		andShowInDiagram: self diagramController
-]
-
 { #category : #rendering }
 OPUmlPackageController >> allShowableElements [
 	^ #()
@@ -98,12 +91,6 @@ OPUmlPackageController >> isHideable [
 OPUmlPackageController >> modelClass [
 	modelClass ifNil: [ self beForPackage ].
 	^ modelClass
-]
-
-{ #category : #figures }
-OPUmlPackageController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
 ]
 
 { #category : #removing }

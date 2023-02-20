@@ -42,12 +42,6 @@ OPUmlExtensionController >> modelClass [
 	^ OPUMLExtension
 ]
 
-{ #category : #figures }
-OPUmlExtensionController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
-]
-
 { #category : #removing }
 OPUmlExtensionController >> removeModel [
 	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
