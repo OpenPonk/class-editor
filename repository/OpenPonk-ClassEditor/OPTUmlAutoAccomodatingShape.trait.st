@@ -51,7 +51,7 @@ OPTUmlAutoAccomodatingShape >> extentToFitContents [
 { #category : #rendering }
 OPTUmlAutoAccomodatingShape >> leftPadding [
 
-	^ 2
+	^ 5
 ]
 
 { #category : #rendering }
@@ -63,7 +63,7 @@ OPTUmlAutoAccomodatingShape >> minExtent [
 { #category : #rendering }
 OPTUmlAutoAccomodatingShape >> rightPadding [
 
-	^ 2
+	^ 5
 ]
 
 { #category : #rendering }

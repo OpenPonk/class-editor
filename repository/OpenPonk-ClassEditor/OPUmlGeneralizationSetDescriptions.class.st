@@ -30,11 +30,17 @@ OPUmlGeneralizationSetDescriptions >> controller: anObject [
 
 { #category : #accessing }
 OPUmlGeneralizationSetDescriptions >> descriptionAccessor: aSymbol [
+
 	^ MAPluggableAccessor
-		read: [ :me | set perform: aSymbol ]
-		write: [ :me :newValue | 
-			set perform: (aSymbol , ':') asSymbol with: newValue.
-			controller diagramElement ifNotNil: [ controller refreshFigure ] ]
+		  read: [ :me | set perform: aSymbol ]
+		  write: [ :me :newValue | 
+			  set perform: (aSymbol , ':') asSymbol with: newValue.
+			  { controller model } asSet , set generalizations
+				  collect: [ :each | 
+				  controller diagramController controllerForModel: each ]
+				  thenDo: [ :ctrl | 
+					  ctrl diagramElement ifNotNil: [ 
+						  ctrl diagramElement updateRenderFromModel ] ] ]
 ]
 
 { #category : #forms }

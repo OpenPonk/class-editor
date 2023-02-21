@@ -3,12 +3,15 @@ I am a controller for an EnumerationLiteral.
 "
 Class {
 	#name : #OPUmlEnumerationLiteralController,
-	#superclass : #OPUmlElementController,
-	#instVars : [
-		'classController'
-	],
+	#superclass : #OPUmlClassifierItemController,
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
+
+{ #category : #figures }
+OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
+
+	self diagramElementOwner addLiteral: diagramElement
+]
 
 { #category : #construction }
 OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
@@ -30,7 +33,8 @@ OPUmlEnumerationLiteralController >> diagramElementClass [
 { #category : #'as yet unclassified' }
 OPUmlEnumerationLiteralController >> diagramElementOwner [
 
-^ self halt
+	^ (diagramController showWithoutDependentInDiagramModel:
+		   model enumeration) diagramElement
 ]
 
 { #category : #accessing }
@@ -39,21 +43,16 @@ OPUmlEnumerationLiteralController >> modelClass [
 ]
 
 { #category : #removing }
+OPUmlEnumerationLiteralController >> removeDiagramElement [
+
+	self diagramElement ifNil: [ ^ self ].
+	self diagramElementOwner removeLiteral: self diagramElement.
+	diagramElement := nil
+]
+
+{ #category : #removing }
 OPUmlEnumerationLiteralController >> removeModel [
 	"could be any of those, so just nil all of them"
 
 	model enumeration: nil
-]
-
-{ #category : #figures }
-OPUmlEnumerationLiteralController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		owningElement:
-			(diagramController diagramElementForModel: model enumeration)
-				attributes.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]

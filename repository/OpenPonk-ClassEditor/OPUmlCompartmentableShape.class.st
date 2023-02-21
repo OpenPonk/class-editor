@@ -25,6 +25,13 @@ OPUmlCompartmentableShape >> compartments [
 	^ self ownedElements select: [ :each | each isKindOf: OPUmlCompartment ]
 ]
 
+{ #category : #initialization }
+OPUmlCompartmentableShape >> initialize [
+
+	super initialize.
+	separators := OrderedCollection new
+]
+
 { #category : #rendering }
 OPUmlCompartmentableShape >> layout [
 

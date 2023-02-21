@@ -8,10 +8,7 @@ Class {
 }
 
 { #category : #figures }
-OPUmlOperationController >> createDiagramElement [
-
-	diagramElement := self diagramElementClass forModelElement:
-		                  self model.
+OPUmlOperationController >> addDiagramElementToOwner [
 
 	self diagramElementOwner addOperation: diagramElement
 ]

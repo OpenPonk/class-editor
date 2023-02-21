@@ -5,8 +5,6 @@ Class {
 	#name : #OPUmlClassShape,
 	#superclass : #OPUmlClassifierShape,
 	#instVars : [
-		'nameLabel',
-		'stereotypeLabel',
 		'attributes',
 		'operations'
 	],
@@ -46,38 +44,6 @@ OPUmlClassShape >> attributes [
 	^ attributes
 ]
 
-{ #category : #initialization }
-OPUmlClassShape >> createLabel: aLabelShapeClass [
-
-	| labelContainer |
-	labelContainer := OPUmlCompartmentableLabel
-		                  in: self
-		                  forModelElement: self modelElement.
-	aLabelShapeClass
-		in: labelContainer
-		forModelElement: self modelElement.
-	self ownedElements: (self ownedElements sorted: [ :a :b | 
-			 a = labelContainer or: [ 
-				 b ~= labelContainer and: [ 
-					 (self ownedElements indexOf: a)
-					 < (self ownedElements indexOf: b) ] ] ]).
-	^ labelContainer
-]
-
-{ #category : #initialization }
-OPUmlClassShape >> createOwnedElementsWithoutController [
-
-	super createOwnedElementsWithoutController.
-	self createLabel: OPUmlClassifierNameLabel
-]
-
-{ #category : #initialization }
-OPUmlClassShape >> initialize [
-
-	super initialize.
-	separators := OrderedCollection new
-]
-
 { #category : #accessing }
 OPUmlClassShape >> operations [
 	^ operations
@@ -108,27 +74,7 @@ OPUmlClassShape >> removeOperation: anOperationShape [
 ]
 
 { #category : #rendering }
-OPUmlClassShape >> updateRenderFromModel [
+OPUmlClassShape >> stereotypesLabelClass [
 
-	self updateStereotype.
-
-	self compartments do: #sortOwnedElements.
-
-	super updateRenderFromModel
-]
-
-{ #category : #rendering }
-OPUmlClassShape >> updateStereotype [
-
-	self modelElement appliedStereotypes ifEmpty: [ 
-		stereotypeLabel ifNotNil: [ 
-			stereotypeLabel remove.
-			stereotypeLabel := nil ].
-		^ self ].
-
-	stereotypeLabel ifNotNil: [ ^ self ].
-
-	stereotypeLabel := self createLabel: OPUmlStereotypeLabel.
-
-	self isRendered ifTrue: [ stereotypeLabel renderIn: self canvas ]
+	^ OPUmlAppliedStereotypesLabel
 ]

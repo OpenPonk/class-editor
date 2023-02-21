@@ -1,13 +1,19 @@
 Class {
-	#name : #OPUmlStereotypeLabel,
+	#name : #OPUmlStereotypesLabel,
 	#superclass : #OPUmlKeywordLabel,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
 { #category : #accessing }
-OPUmlStereotypeLabel >> defaultText [
+OPUmlStereotypesLabel >> defaultText [
 
-	^ (self modelElement appliedStereotypes collect: #umlClassName)
+	^ self stereotypeNames
 		  ifEmpty: [ '' ]
 		  ifNotEmpty: [ :vals | '«' , (vals joinUsing: ', ') , '»' ]
+]
+
+{ #category : #accessing }
+OPUmlStereotypesLabel >> stereotypeNames [
+
+	^ self subclassResponsibility
 ]

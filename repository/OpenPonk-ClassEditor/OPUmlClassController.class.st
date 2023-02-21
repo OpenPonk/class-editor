@@ -132,10 +132,3 @@ OPUmlClassController >> modelClass [
 OPUmlClassController >> modelClassName [
 	^ #Class
 ]
-
-{ #category : #accessing }
-OPUmlClassController >> stereotypeNames [
-	(self diagramController model oclIsKindOf: #Profile)
-		ifTrue: [ ^ #(Metaclass) ].
-	^ self model appliedStereotypes collect: #umlClassName
-]

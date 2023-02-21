@@ -8,10 +8,7 @@ Class {
 }
 
 { #category : #figures }
-OPUmlAttributeController >> createDiagramElement [
-
-	diagramElement := self diagramElementClass forModelElement:
-		                  self model.
+OPUmlAttributeController >> addDiagramElementToOwner [
 
 	self diagramElementOwner addAttribute: diagramElement
 ]
@@ -112,23 +109,6 @@ OPUmlAttributeController >> descriptionMultiplicity [
 ]
 
 { #category : #forms }
-OPUmlAttributeController >> descriptionName [
-
-	<magritteDescription>
-	| description |
-	description := super descriptionName.
-	description accessor writeBlock: [ :me :newValue | 
-		| text |
-		text := newValue ifEmpty: [ ' ' ] ifNotEmpty: [ 
-			        newValue first = Character space
-				        ifTrue: [ newValue allButFirst ]
-				        ifFalse: [ newValue ] ].
-		me model name: text.
-		self diagramElementOwner updateRenderFromModel ].
-	^ description
-]
-
-{ #category : #forms }
 OPUmlAttributeController >> descriptionType [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -147,6 +127,7 @@ OPUmlAttributeController >> descriptionType [
 
 { #category : #figures }
 OPUmlAttributeController >> diagramElementClass [
+
 	^ OPUmlAttributeLabel
 ]
 

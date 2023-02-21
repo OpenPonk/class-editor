@@ -2,10 +2,37 @@ Class {
 	#name : #OPUmlClassifierShape,
 	#superclass : #OPUmlCompartmentableShape,
 	#instVars : [
+		'nameLabel',
+		'stereotypeLabel',
 		'commentIcon'
 	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
+
+{ #category : #initialization }
+OPUmlClassifierShape >> createLabel: aLabelShapeClass [
+
+	| labelContainer |
+	labelContainer := OPUmlCompartmentableLabel
+		                  in: self
+		                  forModelElement: self modelElement.
+	aLabelShapeClass
+		in: labelContainer
+		forModelElement: self modelElement.
+	self ownedElements: (self ownedElements sorted: [ :a :b | 
+			 a = labelContainer or: [ 
+				 b ~= labelContainer and: [ 
+					 (self ownedElements indexOf: a)
+					 < (self ownedElements indexOf: b) ] ] ]).
+	^ labelContainer
+]
+
+{ #category : #initialization }
+OPUmlClassifierShape >> createOwnedElementsWithoutController [
+
+	super createOwnedElementsWithoutController.
+	self createLabel: OPUmlClassifierNameLabel
+]
 
 { #category : #rendering }
 OPUmlClassifierShape >> hasModelComments [
@@ -21,6 +48,20 @@ OPUmlClassifierShape >> hasModelComments [
 OPUmlClassifierShape >> minExtent [
 
 	^ 100 @ 60
+]
+
+{ #category : #accessing }
+OPUmlClassifierShape >> stereotypes [
+
+	^ self stereotypesLabelClass new
+		  modelElement: self modelElement;
+		  stereotypeNames
+]
+
+{ #category : #rendering }
+OPUmlClassifierShape >> stereotypesLabelClass [
+
+	^ self subclassResponsibility
 ]
 
 { #category : #rendering }
@@ -43,8 +84,28 @@ OPUmlClassifierShape >> updateCommentIcon [
 
 { #category : #rendering }
 OPUmlClassifierShape >> updateRenderFromModel [
+	
+	self updateStereotype.
+
+	self compartments do: #sortOwnedElements.
 
 	self updateCommentIcon.
 
 	super updateRenderFromModel
+]
+
+{ #category : #rendering }
+OPUmlClassifierShape >> updateStereotype [
+
+	self stereotypes ifEmpty: [ 
+		stereotypeLabel ifNotNil: [ 
+			stereotypeLabel remove.
+			stereotypeLabel := nil ].
+		^ self ].
+
+	stereotypeLabel ifNotNil: [ ^ self ].
+
+	stereotypeLabel := self createLabel: self stereotypesLabelClass.
+
+	self isRendered ifTrue: [ stereotypeLabel renderIn: self canvas ]
 ]

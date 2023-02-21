@@ -24,3 +24,9 @@ OPUmlClassifierNameLabel >> defaultFontSize [
 
 	^ 11
 ]
+
+{ #category : #accessing }
+OPUmlClassifierNameLabel >> defaultText [
+
+	^ self modelElement name ifEmpty: [ ' ' ]
+]

@@ -7,6 +7,12 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
+{ #category : #construction }
+OPUmlStereotypeController >> diagramElementClass [
+
+	^ OPUmlStereotypeShape
+]
+
 { #category : #accessing }
 OPUmlStereotypeController >> modelClass [
 	^ OPUMLStereotype
@@ -15,9 +21,4 @@ OPUmlStereotypeController >> modelClass [
 { #category : #accessing }
 OPUmlStereotypeController >> modelClassName [
 	^ #Stereotype
-]
-
-{ #category : #accessing }
-OPUmlStereotypeController >> stereotypeNames [
-	^ #(stereotype)
 ]

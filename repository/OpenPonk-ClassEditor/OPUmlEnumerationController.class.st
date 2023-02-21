@@ -37,18 +37,17 @@ OPUmlEnumerationController >> canBeTargetFor: aController [
 		| (aController isKindOf: OPUmlAssociationController)
 ]
 
-{ #category : #figures }
-OPUmlEnumerationController >> createDiagramElement [
-	^ OPUmlClassShape new
-		modelElement: self model;
-		stereotype: [ #(enumeration) ]
-]
-
 { #category : #model }
 OPUmlEnumerationController >> createModel [
 	^ self modelClass new
 		name: 'Enumeration';
 		yourself
+]
+
+{ #category : #construction }
+OPUmlEnumerationController >> diagramElementClass [
+
+	^ OPUmlEnumerationShape
 ]
 
 { #category : #figures }

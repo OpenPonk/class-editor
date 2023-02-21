@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlClassItemController,
-	#superclass : #OPUmlElementController,
+	#superclass : #OPUmlClassifierItemController,
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
@@ -12,31 +12,6 @@ OPUmlClassItemController >> descriptionIsStatic [
 		label: 'Is Static';
 		priority: 10;
 		yourself
-]
-
-{ #category : #forms }
-OPUmlClassItemController >> descriptionName [
-
-	<magritteDescription>
-	| description |
-	description := super descriptionName.
-	description accessor writeBlock: [ :me :newValue | 
-		me model name: newValue.
-		self diagramElementOwner updateRenderFromModel ].
-	^ description
-]
-
-{ #category : #announcements }
-OPUmlClassItemController >> internalSubscribeTo: aModel [
-
-	aModel announcer
-		when: OPElementRenamed
-		do: [ self diagramElementOwner updateRenderFromModel ]
-]
-
-{ #category : #testing }
-OPUmlClassItemController >> isHideable [
-	^ true
 ]
 
 { #category : #removing }

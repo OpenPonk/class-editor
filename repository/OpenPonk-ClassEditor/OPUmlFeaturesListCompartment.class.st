@@ -1,5 +1,5 @@
 Class {
 	#name : #OPUmlFeaturesListCompartment,
-	#superclass : #OPUmlListCompartment,
+	#superclass : #OPUmlClassItemListCompartment,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
