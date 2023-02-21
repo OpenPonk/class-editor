@@ -10,11 +10,7 @@ Class {
 OPUmlCompartment >> renderBasicShape [
 
 	roassalShape := RSBox new
-		                color: ((Color
-				                 r: 0
-				                 g: 0
-				                 b: 1
-				                 alpha: 0.4));
+		                color: Color transparent;
 		                yourself
 ]
 

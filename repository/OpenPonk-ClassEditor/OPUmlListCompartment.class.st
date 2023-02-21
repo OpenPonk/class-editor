@@ -15,3 +15,12 @@ OPUmlListCompartment >> layoutOwnedElements [
 			prevHeight + each height ].
 	self roassalShape signalUpdate
 ]
+
+{ #category : #sorting }
+OPUmlListCompartment >> sortOwnedElements [
+
+	ownedElements sort: [ :a :b | 
+		(a modelElement isStatic and: [ b modelElement isStatic not ]) or: [ 
+			(a modelElement isStatic or: [ b modelElement isStatic not ]) and: [ 
+				a modelElement name < b modelElement name ] ] ]
+]

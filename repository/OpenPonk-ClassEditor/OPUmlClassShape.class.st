@@ -27,8 +27,7 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 							 (self ownedElements indexOf: a)
 							 < (self ownedElements indexOf: b) ] ] ]) ] ].
 
-	anAttributeShape owningElement: attributes.
-	attributes sortOwnedElements
+	anAttributeShape owningElement: attributes
 ]
 
 { #category : #rendering }
@@ -39,8 +38,7 @@ OPUmlClassShape >> addOperation: anOperationShape [
 			              in: self
 			              forModelElement: self modelElement ].
 
-	anOperationShape owningElement: operations.
-	operations sortOwnedElements
+	anOperationShape owningElement: operations
 ]
 
 { #category : #accessing }
@@ -90,9 +88,11 @@ OPUmlClassShape >> removeAttribute: anAttributeShape [
 
 	anAttributeShape remove.
 
-	attributes ownedElements ifNotEmpty: [ ^ self ].
-	attributes remove.
-	attributes := nil
+	attributes ownedElements ifEmpty: [ 
+		attributes remove.
+		attributes := nil ].
+
+	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
 { #category : #rendering }
@@ -100,15 +100,19 @@ OPUmlClassShape >> removeOperation: anOperationShape [
 
 	anOperationShape remove.
 
-	operations ownedElements ifNotEmpty: [ ^ self ].
-	operations remove.
-	operations := nil
+	operations ownedElements ifEmpty: [ 
+		operations remove.
+		operations := nil ].
+
+	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
 { #category : #rendering }
 OPUmlClassShape >> updateRenderFromModel [
 
 	self updateStereotype.
+
+	self compartments do: #sortOwnedElements.
 
 	super updateRenderFromModel
 ]

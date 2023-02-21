@@ -29,6 +29,16 @@ OPUmlClassItemLabel >> defaultText [
 		  yourself
 ]
 
+{ #category : #rendering }
+OPUmlClassItemLabel >> renderShapeDetails [
+
+	| selectable |
+	super renderShapeDetails.
+	selectable := OPRSSelectable new.
+	selectable highlightColor: Color blue.
+	roassalShape @ selectable
+]
+
 { #category : #'as yet unclassified' }
 OPUmlClassItemLabel >> translateTopTo: aCoordinateY [
 

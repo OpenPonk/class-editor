@@ -14,11 +14,7 @@ OPUmlCompartmentableLabel >> extent [
 OPUmlCompartmentableLabel >> renderBasicShape [
 
 	roassalShape := RSBox new
-		                color: (Color
-				                 r: 1
-				                 g: 0
-				                 b: 0
-				                 alpha: 0.4);
+		                color: Color transparent;
 		                yourself
 ]
 

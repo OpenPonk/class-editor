@@ -28,7 +28,9 @@ OPUmlCompartmentableShape >> compartments [
 { #category : #rendering }
 OPUmlCompartmentableShape >> layout [
 
-	self accomodateContents
+	self
+		accomodateContents;
+		layoutContents
 ]
 
 { #category : #rendering }
@@ -70,10 +72,10 @@ OPUmlCompartmentableShape >> layoutSeparators [
 { #category : #'as yet unclassified' }
 OPUmlCompartmentableShape >> ownedElement: aShape renderedIn: aCanvas [
 
-	self
-		updateRenderFromModel;
-		layoutContents.
-	super ownedElement: aShape renderedIn: aCanvas
+	| wasRendered |
+	wasRendered := self isRendered.
+	super ownedElement: aShape renderedIn: aCanvas.
+	wasRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
 { #category : #accessing }
@@ -96,7 +98,11 @@ OPUmlCompartmentableShape >> renderBasicShape [
 { #category : #rendering }
 OPUmlCompartmentableShape >> renderShapeDetails [
 
-	self roassalShape @ OPRSSelectable.
+	| selectable |
+	super renderShapeDetails.
+	selectable := OPRSSelectable new.
+	selectable highlightBorderColor: Color blue.
+	roassalShape @ selectable.
 	self roassalShape @ OPRSSelectionDraggable.
 	self roassalShape
 		when: RSPositionChangedEvent

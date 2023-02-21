@@ -3,7 +3,7 @@ I am a controller for an attribute of a classifier.
 "
 Class {
 	#name : #OPUmlAttributeController,
-	#superclass : #OPUmlElementController,
+	#superclass : #OPUmlClassItemController,
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
@@ -83,16 +83,6 @@ OPUmlAttributeController >> descriptionIsReadOnly [
 ]
 
 { #category : #forms }
-OPUmlAttributeController >> descriptionIsStatic [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isStatic);
-		label: 'Is Static';
-		priority: 10;
-		yourself
-]
-
-{ #category : #forms }
 OPUmlAttributeController >> descriptionIsUnique [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -125,22 +115,17 @@ OPUmlAttributeController >> descriptionMultiplicity [
 OPUmlAttributeController >> descriptionName [
 
 	<magritteDescription>
-	| accessor |
-	accessor := MAPluggableAccessor
-		            read: [ :me | me model name ]
-		            write: [ :me :newValue | 
-			            | text |
-			            text := newValue ifEmpty: [ ' ' ] ifNotEmpty: [ 
-				                    newValue first = Character space
-					                    ifTrue: [ newValue allButFirst ]
-					                    ifFalse: [ newValue ] ].
-			            me model name: text.
-			            self diagramElement updateRenderFromModel ].
-	^ MAStringDescription new
-		  accessor: accessor;
-		  label: 'Name';
-		  priority: 1;
-		  yourself
+	| description |
+	description := super descriptionName.
+	description accessor writeBlock: [ :me :newValue | 
+		| text |
+		text := newValue ifEmpty: [ ' ' ] ifNotEmpty: [ 
+			        newValue first = Character space
+				        ifTrue: [ newValue allButFirst ]
+				        ifFalse: [ newValue ] ].
+		me model name: text.
+		self diagramElementOwner updateRenderFromModel ].
+	^ description
 ]
 
 { #category : #forms }
@@ -174,11 +159,6 @@ OPUmlAttributeController >> diagramElementOwner [
 				     any ~= model ]) type ])) diagramElement
 ]
 
-{ #category : #testing }
-OPUmlAttributeController >> isHideable [
-	^ true
-]
-
 { #category : #accessing }
 OPUmlAttributeController >> modelClass [
 	^ OPUMLProperty
@@ -190,15 +170,6 @@ OPUmlAttributeController >> removeDiagramElement [
 	self diagramElement ifNil: [ ^ self ].
 	self diagramElementOwner removeAttribute: self diagramElement.
 	diagramElement := nil
-]
-
-{ #category : #removing }
-OPUmlAttributeController >> removeModel [
-	"could be any of those, so just nil all of them"
-
-	model owningClass: nil.
-	model datatype: nil.
-	model interface: nil
 ]
 
 { #category : #accessing }
