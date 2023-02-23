@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlStereotypeShape,
-	#superclass : #OPUmlClassifierShape,
+	#superclass : #OPUmlClassShape,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 

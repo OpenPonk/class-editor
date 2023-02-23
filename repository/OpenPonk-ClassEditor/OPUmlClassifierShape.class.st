@@ -9,6 +9,18 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
+{ #category : #accessing }
+OPUmlClassifierShape >> color [
+
+	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color transparent ]
+]
+
+{ #category : #accessing }
+OPUmlClassifierShape >> color: aColor [
+
+	^ self stylePropertyNamed: #fillColor put: aColor
+]
+
 { #category : #initialization }
 OPUmlClassifierShape >> createLabel: aLabelShapeClass [
 
@@ -84,7 +96,7 @@ OPUmlClassifierShape >> updateCommentIcon [
 
 { #category : #rendering }
 OPUmlClassifierShape >> updateRenderFromModel [
-	
+
 	self updateStereotype.
 
 	self compartments do: #sortOwnedElements.
@@ -92,6 +104,14 @@ OPUmlClassifierShape >> updateRenderFromModel [
 	self updateCommentIcon.
 
 	super updateRenderFromModel
+]
+
+{ #category : #rendering }
+OPUmlClassifierShape >> updateRenderFromSelf [
+
+	self isRendered ifFalse: [ ^ self ].
+	roassalShape color: self color.
+	super updateRenderFromSelf
 ]
 
 { #category : #rendering }

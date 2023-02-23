@@ -100,9 +100,9 @@ OPUmlPackageController >> removeModel [
 
 { #category : #rendering }
 OPUmlPackageController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
+	self diagramController willRender: self.
 	diagramElement := self createDiagramElement.
 	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
+	diagramController rendered: self.
 	^ self refreshFigure
 ]

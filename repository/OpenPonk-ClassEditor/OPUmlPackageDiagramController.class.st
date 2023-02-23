@@ -14,14 +14,18 @@ OPUmlPackageDiagramController >> allShowableElements [
 
 	"Should return all elements that could be directly hidden on diagram"
 
-	^ self elementsToShowInside
-	  , ((self model packagedElements select: [ :each | 
-			    (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]) 
-			   flatCollect: [ :each | 
-			   each ownedAttributes , each ownedOperations ])
-	  , ((self model packagedElements select: [ :each | 
+	| elementsToShow |
+	elementsToShow := self elementsToShowInside.
+	^ elementsToShow , ((elementsToShow select: [ :each | 
+		    (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]) 
+		   flatCollect: [ :each | 
+		   each ownedAttributes , each ownedOperations ])
+	  ,
+		  ((elementsToShow select: [ :each | 
 			    each isKindOf: OPUMLEnumeration ]) flatCollect: [ :each | 
 			   each ownedLiterals ])
+	  , (model packagedElements select: [ :each | 
+			   each oclIsKindOf: #Association ])
 ]
 
 { #category : #adding }

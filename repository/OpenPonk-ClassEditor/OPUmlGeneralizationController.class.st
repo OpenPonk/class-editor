@@ -106,12 +106,12 @@ OPUmlGeneralizationController >> modelClass [
 
 { #category : #forms }
 OPUmlGeneralizationController >> modelSource [
-	^ model general
+	^ model specific
 ]
 
 { #category : #forms }
 OPUmlGeneralizationController >> modelTarget [
-	^ model specific
+	^ model general
 ]
 
 { #category : #removing }

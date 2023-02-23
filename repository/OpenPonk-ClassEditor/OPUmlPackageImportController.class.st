@@ -118,7 +118,7 @@ OPUmlPackageImportController >> removeModel [
 { #category : #figures }
 OPUmlPackageImportController >> renderFigureIn: aView [
 	| sourceElement |
-	self diagramController addingFigureFor: self.
+	self diagramController willRender: self.
 	diagramElement := self createDiagramElement.
 	sourceElement := ((diagramController controllers
 		select: [ :each | each isKindOf: OPUmlPackageController ])
@@ -127,7 +127,7 @@ OPUmlPackageImportController >> renderFigureIn: aView [
 	diagramElement source: sourceElement.
 	diagramElement target: (diagramController diagramElementForModel: self model importedPackage).
 	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
+	diagramController rendered: self.
 	^ self refreshFigure
 ]
 

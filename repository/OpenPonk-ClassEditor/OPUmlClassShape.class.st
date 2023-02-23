@@ -18,12 +18,8 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 		attributes := OPUmlListCompartment
 			              in: self
 			              forModelElement: self modelElement.
-		operations ifNotNil: [ 
-			self ownedElements: (self ownedElements sorted: [ :a :b | 
-					 (a = attributes and: [ b = operations ]) or: [ 
-						 (a ~= operations or: [ b ~= attributes ]) and: [ 
-							 (self ownedElements indexOf: a)
-							 < (self ownedElements indexOf: b) ] ] ]) ] ].
+
+		self sortOwnedElements ].
 
 	anAttributeShape owningElement: attributes
 ]
@@ -34,7 +30,9 @@ OPUmlClassShape >> addOperation: anOperationShape [
 	operations ifNil: [ 
 		operations := OPUmlFeaturesListCompartment
 			              in: self
-			              forModelElement: self modelElement ].
+			              forModelElement: self modelElement.
+
+		self sortOwnedElements ].
 
 	anOperationShape owningElement: operations
 ]
@@ -71,6 +69,20 @@ OPUmlClassShape >> removeOperation: anOperationShape [
 		operations := nil ].
 
 	self isRendered ifTrue: [ self updateRenderFromModel ]
+]
+
+{ #category : #sorting }
+OPUmlClassShape >> sortOwnedElements [
+
+	| properOrder |
+	properOrder := (self ownedElements select: [ :each | 
+		                each isKindOf: OPUmlCompartmentableLabel ]) , { 
+		               attributes.
+		               operations.
+		               commentIcon } reject: #isNil.
+	self assert:
+		self ownedElements asIdentitySet = properOrder asIdentitySet.
+	self ownedElements: properOrder
 ]
 
 { #category : #rendering }

@@ -16,14 +16,7 @@ Class {
 }
 
 { #category : #initialization }
-OPUmlAssociationShape >> createOwnedElementsWithoutController [
-
-	super createOwnedElementsWithoutController.
-	{ 
-		OPUmlAssociationLabel.
-		OPUmlAssociationPropertiesLabel.
-		OPUmlAssociationStereotypesLabel } do: [ :each | 
-		each in: self forModelElement: self modelElement ].
+OPUmlAssociationShape >> createEndLabels [
 
 	{ 
 		OPUmlAssociationEndLabel.
@@ -34,6 +27,19 @@ OPUmlAssociationShape >> createOwnedElementsWithoutController [
 		OPUmlAssociationEndLabel.
 		OPUmlMultiplicityLabel } do: [ :each | 
 		each in: self forModelElement: self modelElement memberEnds second ]
+]
+
+{ #category : #initialization }
+OPUmlAssociationShape >> createOwnedElementsWithoutController [
+
+	super createOwnedElementsWithoutController.
+	{ 
+		OPUmlAssociationLabel.
+		OPUmlAssociationPropertiesLabel.
+		OPUmlAssociationStereotypesLabel } do: [ :each | 
+		each in: self forModelElement: self modelElement ].
+
+	self createEndLabels
 ]
 
 { #category : #hooks }
