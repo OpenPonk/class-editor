@@ -7,7 +7,7 @@ Class {
 { #category : #'as yet unclassified' }
 OPUmlExtensionRequiredLabel >> defaultAnchorConstraintPosition [
 
-	^ OPRSAnchorConstraintEndPosition distance: 10
+	^ OPRSAnchorConstraintEndDistanceReference distance: 10
 ]
 
 { #category : #accessing }

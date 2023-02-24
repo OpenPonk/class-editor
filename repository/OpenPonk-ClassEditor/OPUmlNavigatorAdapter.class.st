@@ -27,7 +27,9 @@ OPUmlNavigatorAdapter >> childrenMapping [
 		  (OPUMLClass
 		   -> [ :cls | 
 		   cls ownedAttributes asArray , cls ownedOperations asArray ]).
-		  (OPUMLEnumeration -> #ownedLiterals) }
+		  (OPUMLEnumeration -> #ownedLiterals).
+		  (OPUMLAssociation -> [ :assoc | assoc ownedEnds asArray ]).
+		  (OPUMLExtension -> [ :assoc | assoc ownedEnds asArray ]) }
 ]
 
 { #category : #accessing }

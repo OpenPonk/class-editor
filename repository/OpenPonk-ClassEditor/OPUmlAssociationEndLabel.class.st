@@ -7,6 +7,14 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
+{ #category : #'ston-core' }
+OPUmlAssociationEndLabel class >> stonAllInstVarNames [
+
+	"Override to encode my instances using a custom set of instance variables or to define their order."
+
+	^ super stonAllInstVarNames , #( #atSource )
+]
+
 { #category : #accessing }
 OPUmlAssociationEndLabel >> atSource [
 
@@ -17,8 +25,8 @@ OPUmlAssociationEndLabel >> atSource [
 OPUmlAssociationEndLabel >> defaultAnchorConstraintPosition [
 
 	^ (atSource
-		   ifTrue: [ OPRSAnchorConstraintStartPosition ]
-		   ifFalse: [ OPRSAnchorConstraintEndPosition ]) distance: 10
+		   ifTrue: [ OPRSAnchorConstraintStartDistanceReference ]
+		   ifFalse: [ OPRSAnchorConstraintEndDistanceReference ]) distance: 10
 ]
 
 { #category : #accessing }

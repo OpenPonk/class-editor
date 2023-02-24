@@ -9,6 +9,14 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
+{ #category : #'ston-core' }
+OPUmlClassifierShape class >> stonAllInstVarNames [
+
+	"Override to encode my instances using a custom set of instance variables or to define their order."
+
+	^ super stonAllInstVarNames , #( #nameLabel #stereotypeLabel #commentIcon )
+]
+
 { #category : #accessing }
 OPUmlClassifierShape >> color [
 

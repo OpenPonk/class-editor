@@ -7,7 +7,7 @@ Class {
 { #category : #'as yet unclassified' }
 OPUmlAssociationPropertiesLabel >> defaultAnchorConstraintPosition [
 
-	^ OPRSAnchorConstraintBalancePosition balance: 0.5
+	^ OPRSAnchorConstraintBalanceReference balance: 0.5
 ]
 
 { #category : #'as yet unclassified' }

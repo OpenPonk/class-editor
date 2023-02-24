@@ -71,13 +71,16 @@ OPUmlPackageShape >> renderShapeDetails [
 		             color: Color black;
 		             model: self;
 		             yourself.
-	self canvas add: mainLabel.
 	stereotypeLabel := RSLabel new
 		                   height: mainLabel height - 2;
 		                   color: Color black;
 		                   model: self;
 		                   yourself.
+	self canvas add: mainLabel.
 	self canvas add: stereotypeLabel.
+	self roassalShape when: RSShapeRemovedEvent do: [ 
+		mainLabel remove.
+		stereotypeLabel remove ].
 	RSLocation new
 		inner;
 		left;
