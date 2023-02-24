@@ -43,7 +43,7 @@ OPUmlOperationController >> diagramElementClass [
 { #category : #'as yet unclassified' }
 OPUmlOperationController >> diagramElementOwner [
 
-	^ (diagramController showWithoutDependentInDiagramModel: model owningClass)
+	^ (diagramController controllerForModel: model owningClass)
 		  diagramElement
 ]
 

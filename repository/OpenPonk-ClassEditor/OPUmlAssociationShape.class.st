@@ -36,8 +36,7 @@ OPUmlAssociationShape >> createOwnedElementsWithoutController [
 	{ 
 		OPUmlAssociationLabel.
 		OPUmlAssociationPropertiesLabel.
-		OPUmlAssociationStereotypesLabel } do: [ :each | 
-		each in: self forModelElement: self modelElement ].
+		OPUmlAssociationStereotypesLabel } do: [ :each | each in: self ].
 
 	self createEndLabels
 ]

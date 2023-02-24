@@ -134,7 +134,7 @@ OPUmlAttributeController >> diagramElementClass [
 { #category : #'as yet unclassified' }
 OPUmlAttributeController >> diagramElementOwner [
 
-	^ (diagramController showWithoutDependentInDiagramModel:
+	^ (diagramController controllerForModel:
 		   (model owningClass ifNil: [ 
 			    (model owningAssociation memberEnds detect: [ :any | 
 				     any ~= model ]) type ])) diagramElement

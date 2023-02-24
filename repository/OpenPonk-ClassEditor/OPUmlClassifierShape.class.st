@@ -33,9 +33,7 @@ OPUmlClassifierShape >> color: aColor [
 OPUmlClassifierShape >> createLabel: aLabelShapeClass [
 
 	| labelContainer |
-	labelContainer := OPUmlCompartmentableLabel
-		                  in: self
-		                  forModelElement: self modelElement.
+	labelContainer := OPUmlCompartmentableLabel in: self.
 	aLabelShapeClass
 		in: labelContainer
 		forModelElement: self modelElement.

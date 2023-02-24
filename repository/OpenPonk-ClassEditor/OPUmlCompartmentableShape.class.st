@@ -50,7 +50,7 @@ OPUmlCompartmentableShape >> layoutContents [
 { #category : #rendering }
 OPUmlCompartmentableShape >> layoutOwnedElements [
 
-	^ self ownedElements
+	^ (self ownedElements select: #isRendered)
 		  inject:
 		  self roassalShape encompassingRectangle top + self topPadding
 		  into: [ :prevHeight :each | 
@@ -62,8 +62,9 @@ OPUmlCompartmentableShape >> layoutOwnedElements [
 OPUmlCompartmentableShape >> layoutSeparators [
 
 	| yCoordinates left right |
-	yCoordinates := (self compartments ifEmpty: [ ^ self ]) collect: [ 
-		                :each | each top ].
+	yCoordinates := (self compartments ifEmpty: [ ^ self ])
+		                select: #isRendered
+		                thenCollect: [ :each | each top ].
 
 	left := self roassalShape encompassingRectangle left.
 	right := self roassalShape encompassingRectangle right.
@@ -80,7 +81,7 @@ OPUmlCompartmentableShape >> layoutSeparators [
 OPUmlCompartmentableShape >> ownedElement: aShape renderedIn: aCanvas [
 
 	| wasRendered |
-	wasRendered := self isRendered.
+	wasRendered := self isRenderedWithOwnedElements.
 	super ownedElement: aShape renderedIn: aCanvas.
 	wasRendered ifTrue: [ self updateRenderFromModel ]
 ]

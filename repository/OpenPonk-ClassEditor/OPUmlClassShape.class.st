@@ -23,9 +23,7 @@ OPUmlClassShape class >> stonAllInstVarNames [
 OPUmlClassShape >> addAttribute: anAttributeShape [
 
 	attributes ifNil: [ 
-		attributes := OPUmlListCompartment
-			              in: self
-			              forModelElement: self modelElement.
+		attributes := OPUmlListCompartment in: self.
 
 		self sortOwnedElements ].
 
@@ -36,9 +34,7 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 OPUmlClassShape >> addOperation: anOperationShape [
 
 	operations ifNil: [ 
-		operations := OPUmlFeaturesListCompartment
-			              in: self
-			              forModelElement: self modelElement.
+		operations := OPUmlFeaturesListCompartment in: self.
 
 		self sortOwnedElements ].
 
