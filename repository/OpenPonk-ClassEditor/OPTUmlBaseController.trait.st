@@ -9,7 +9,7 @@ OPTUmlBaseController >> descriptionAccessor: aSymbol [
 		read: [ :me | me model perform: aSymbol ]
 		write: [ :me :newValue | 
 			me model perform: (aSymbol , ':') asSymbol with: newValue.
-			self diagramElement updateRenderFromModel  ]
+			self diagramElement modelChanged  ]
 ]
 
 { #category : #forms }
@@ -30,7 +30,7 @@ OPTUmlBaseController >> descriptionComment [
 							   me model ownedComments ifEmpty: [ 
 									   me model ownedComments add: OPUMLComment new ].
 							   me model ownedComments first body: newValue asString ].
-					   self diagramElement updateRenderFromModel ]);
+					   self diagramElement modelChanged ]);
 		  label: 'Comment';
 		  priority: 100;
 		  lineCount: 10;

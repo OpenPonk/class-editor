@@ -3,119 +3,31 @@ I represent a package box.
 "
 Class {
 	#name : #OPUmlPackageShape,
-	#superclass : #RTAbstractMultiElement,
+	#superclass : #OPShape,
 	#instVars : [
-		'labelText',
-		'stereotypeText',
-		'showTriangle',
-		'style'
+		'mainLabel',
+		'stereotypeLabel',
+		'ear'
 	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
-{ #category : #adding }
-OPUmlPackageShape >> addInteractions [
-	self @ RTDraggable.
-	self @ (RTResizable new minSize: self minWidth @ self minHeight)
+{ #category : #accessing }
+OPUmlPackageShape >> color [
+
+	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color veryVeryLightGray ]
 ]
 
 { #category : #accessing }
-OPUmlPackageShape >> baseShape [
-	^ RTBox new
-		width: self minWidth;
-		height: self minHeight;
-		fillColor: Color white;
-		borderColor: Color black
-]
+OPUmlPackageShape >> color: aColor [
 
-{ #category : #'creating - subelements' }
-OPUmlPackageShape >> createOwnedElements [
-	| mainLabel triangle ear mainStereotype earOverlay |
-	ear := RTBox new
-		width: self minWidth * self earScaling;
-		height: 25;
-		fillColor: [ self shape colorFor: self ];
-		borderColor: [ self shape borderColorFor: self ];
-		elementOn: self.
-	self add: ear.
-	triangle := RTSVGPath new
-		path: 'M0,0L10,-10L20,0z';
-		fillColor: [ :aModel | 
-			self showTriangle
-				ifTrue: [ Color veryVeryLightGray ]
-				ifFalse: [ Color transparent ] ];
-		borderColor: [ :aModel | 
-			self showTriangle
-				ifTrue: [ self shape borderColorFor: self ]
-				ifFalse: [ Color transparent ] ];
-		"		vertices: (Array with: 0 @ 0 with: 10 @ -10 with: 20 @ 0);"
-			elementOn: self.
-	self add: triangle.
-	mainLabel := RTLabel new
-		text: #labelText;
-		color: [ self fontColor ];
-		elementOn: self.
-	self add: mainLabel.
-	mainStereotype := RTLabel new
-		text: #stereotypeText;
-		height: (mainLabel shape heightFor: mainLabel) - 2;
-		color: [ self fontColor ];
-		elementOn: self.
-	self add: mainStereotype.
-	(RTConstraint on: ear background: self)
-		top;
-		left;
-		verticalPadding: ear height negated;
-		stick.
-	(RTConstraint on: triangle background: self)
-		top;
-		right;
-		padding: 15;
-		stick.
-	(RTConstraint on: mainLabel background: self) stick.
-	(RTConstraint on: mainStereotype background: mainLabel)
-		top;
-		outer;
-		stick.
-	self
-		addCallback: (TRExtentCallback block: [ :sh :st | ear width: self width * self earScaling ]).
-	mainLabel
-		addCallback:
-			(TRExtentCallback
-				block: [ :sh :st | 
-					| width |
-					width := {self minWidth.
-					mainLabel width + self padding} max.
-					self shape width: width.
-					ear width: width * self earScaling ])
-]
-
-{ #category : #'creating - subelements' }
-OPUmlPackageShape >> earScaling [
-	^ 0.6
-]
-
-{ #category : #'creating - subelements' }
-OPUmlPackageShape >> fontColor [
-	^ style ifNil: [ Color black ] ifNotNil: #fontColor
-]
-
-{ #category : #initialization }
-OPUmlPackageShape >> initialize [
-	self stereotypeText: [ :aModel | '' ].
-	self labelText: [ :aModel | 'nil' ].
-	self showTriangle: [ :aModel | false ].
-	super initialize
+	^ self stylePropertyNamed: #fillColor put: aColor
 ]
 
 { #category : #accessing }
 OPUmlPackageShape >> labelText [
-	^ labelText value: model
-]
 
-{ #category : #accessing }
-OPUmlPackageShape >> labelText: aBlock [
-	labelText := aBlock
+	^ self modelElement name
 ]
 
 { #category : #'creating - subelements' }
@@ -133,32 +45,102 @@ OPUmlPackageShape >> padding [
 	^ 40
 ]
 
-{ #category : #accessing }
-OPUmlPackageShape >> showTriangle [
-	^ showTriangle value: model
+{ #category : #rendering }
+OPUmlPackageShape >> renderBasicShape [
+
+	^ RSBox new
+		  width: self minWidth;
+		  height: self minHeight;
+		  color: Color veryVeryLightGray;
+		  borderColor: Color black;
+		  yourself
+]
+
+{ #category : #rendering }
+OPUmlPackageShape >> renderShapeDetails [
+
+	ear := RSBox new
+		       width: 35;
+		       height: 15;
+		       color: self roassalShape color;
+		       borderColor: self roassalShape borderColor;
+		       model: self;
+		       yourself.
+	self canvas add: ear.
+	mainLabel := RSLabel new
+		             color: Color black;
+		             model: self;
+		             yourself.
+	self canvas add: mainLabel.
+	stereotypeLabel := RSLabel new
+		                   height: mainLabel height - 2;
+		                   color: Color black;
+		                   model: self;
+		                   yourself.
+	self canvas add: stereotypeLabel.
+	RSLocation new
+		inner;
+		left;
+		top;
+		offset: 0 @ ear height negated;
+		stick: ear on: self roassalShape.
+	RSLocation new
+		inner;
+		top;
+		stick: stereotypeLabel on: self roassalShape.
+	RSLocation new
+		outer;
+		below;
+		stick: mainLabel on: stereotypeLabel.
+	mainLabel when: RSExtentChangedEvent do: [ :event | 
+		self roassalShape width: { 
+				self width.
+				self minWidth.
+				(mainLabel width + self padding) } max ].
+
+	self roassalShape
+		@ OPRSSelectable;
+		@
+			(OPRSSelectionDraggable thatDragsInnerShapesOnCondition: [ :shape | 
+					 self shouldDragInnerShape: shape ]);
+		@ OPRSResizable
 ]
 
 { #category : #'creating - subelements' }
-OPUmlPackageShape >> showTriangle: aBlock [
-	showTriangle := aBlock
+OPUmlPackageShape >> shouldDragInnerShape: aShape [
+
+	| innerShapeDiagramElement |
+	innerShapeDiagramElement := aShape model ifNil: [ ^ false ].
+	(innerShapeDiagramElement isKindOf: OPDiagramElement) ifFalse: [ 
+		^ false ].
+	^ self modelElement hasPackagedElement:
+		  (innerShapeDiagramElement modelElement ifNil: [ ^ false ])
 ]
 
 { #category : #accessing }
 OPUmlPackageShape >> stereotypeText [
-	^ stereotypeText value: model
+
+	^ (self modelElement oclIsKindOf: #Profile)
+		  ifTrue: [ '«profile»' ]
+		  ifFalse: [ '' ]
 ]
 
-{ #category : #'creating - subelements' }
-OPUmlPackageShape >> stereotypeText: aBlock [
-	stereotypeText := aBlock
+{ #category : #update }
+OPUmlPackageShape >> updateRenderFromModel [
+
+	mainLabel text: self labelText.
+	stereotypeLabel text: self stereotypeText.
+
+	super updateRenderFromModel.
+
+	roassalShape signalUpdate
 ]
 
-{ #category : #accessing }
-OPUmlPackageShape >> style [
-	^ style
-]
+{ #category : #update }
+OPUmlPackageShape >> updateRenderFromSelf [
 
-{ #category : #accessing }
-OPUmlPackageShape >> style: anObject [
-	style := anObject
+	self isRendered ifFalse: [ ^ self ].
+	roassalShape color: self color.
+	ear color: self color.
+	super updateRenderFromSelf
 ]

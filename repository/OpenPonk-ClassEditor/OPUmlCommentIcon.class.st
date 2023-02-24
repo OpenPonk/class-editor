@@ -20,9 +20,9 @@ OPUmlCommentIcon >> extentToFitContents [
 { #category : #rendering }
 OPUmlCommentIcon >> renderBasicShape [
 
-	roassalShape := RSBitmap new
-		                form: (self iconNamed: #announcement);
-		                yourself
+	^ RSBitmap new
+		  form: (self iconNamed: #announcement);
+		  yourself
 ]
 
 { #category : #rendering }

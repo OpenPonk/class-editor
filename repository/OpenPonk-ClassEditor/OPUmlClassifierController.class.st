@@ -34,7 +34,7 @@ OPUmlClassifierController >> descriptionName [
 		            read: [ :me | me model name ]
 		            write: [ :me :newValue | 
 			            me model name: newValue.
-			            self diagramElement updateRenderFromModel ].
+			            self diagramElement modelChanged ].
 	^ MAMemoDescription new
 		  accessor: accessor;
 		  label: 'Name';

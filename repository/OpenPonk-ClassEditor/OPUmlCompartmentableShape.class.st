@@ -94,12 +94,12 @@ OPUmlCompartmentableShape >> removeSeparator [
 { #category : #rendering }
 OPUmlCompartmentableShape >> renderBasicShape [
 
-	roassalShape := RSBox new
-		                size: 30;
-		                model: self;
-		                color: Color white;
-		                borderColor: Color black;
-		                yourself
+	^ RSBox new
+		  size: 30;
+		  model: self;
+		  color: Color white;
+		  borderColor: Color black;
+		  yourself
 ]
 
 { #category : #rendering }
@@ -110,7 +110,7 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 	selectable := OPRSSelectable new.
 	selectable highlightBorderColor: Color blue.
 	roassalShape @ selectable.
-	self roassalShape @ OPRSSelectionDraggable.
+	self roassalShape @ OPRSSelectionDraggable thatDoesNotDragInnerShapes.
 	self roassalShape
 		when: RSPositionChangedEvent
 		do: [ :event | self layoutContents ]

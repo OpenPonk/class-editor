@@ -12,6 +12,12 @@ OPUmlClassifierItemLabel >> addedByMouseClickTo: aPoint [
 	
 ]
 
+{ #category : #initialization }
+OPUmlClassifierItemLabel >> modelChanged [
+
+	self owningElement modelChanged
+]
+
 { #category : #rendering }
 OPUmlClassifierItemLabel >> renderShapeDetails [
 

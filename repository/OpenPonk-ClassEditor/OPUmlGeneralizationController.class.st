@@ -64,7 +64,7 @@ OPUmlGeneralizationController >> descriptionGeneralizationSet [
 						   diagramController model packagedElements \ setsToRemove
 						   , setsToAdd.
 					   diagramElement ifNotNil: [ 
-						   self diagramElement updateRenderFromModel ] ]);
+						   self diagramElement modelChanged ] ]);
 		  classes: { OPUmlGeneralizationSetDescriptions };
 		  label: 'Generalization Sets';
 		  priority: 5;

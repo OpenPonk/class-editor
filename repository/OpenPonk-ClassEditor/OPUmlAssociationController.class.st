@@ -47,7 +47,7 @@ OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
 		action: [ 
 			self switchSourceAndTarget.
 			self diagramController editor openFormOn: self.
-			self diagramElement updateRenderFromModel ];
+			self diagramElement modelChanged ];
 		label: 'Switch source/target';
 		priority: 9.05.
 	^ description

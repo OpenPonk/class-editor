@@ -32,7 +32,7 @@ OPUmlClassifierItemController >> descriptionName [
 				        ifTrue: [ newValue allButFirst ]
 				        ifFalse: [ newValue ] ].
 		me model name: text.
-		self diagramElementOwner updateRenderFromModel ].
+		self diagramElementOwner modelChanged ].
 	^ description
 ]
 
@@ -41,7 +41,7 @@ OPUmlClassifierItemController >> internalSubscribeTo: aModel [
 
 	aModel announcer
 		when: OPElementRenamed
-		do: [ self diagramElementOwner updateRenderFromModel ]
+		do: [ self diagramElementOwner modelChanged ]
 ]
 
 { #category : #testing }

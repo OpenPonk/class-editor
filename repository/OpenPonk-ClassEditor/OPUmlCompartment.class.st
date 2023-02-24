@@ -9,9 +9,9 @@ Class {
 { #category : #rendering }
 OPUmlCompartment >> renderBasicShape [
 
-	roassalShape := RSBox new
-		                color: Color transparent;
-		                yourself
+	^ RSBox new
+		  color: Color transparent;
+		  yourself
 ]
 
 { #category : #sorting }

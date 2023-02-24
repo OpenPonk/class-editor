@@ -34,7 +34,7 @@ OPUmlPackageControllerTest >> testCanDiagramBeTargetForModel [
 OPUmlPackageControllerTest >> testCreateDiagramElement [
 	self
 		assert: controller createDiagramElement class
-		equals: OPUmlPackageCompartmentableShape
+		equals: OPUmlPackageShape
 ]
 
 { #category : #'tests - creation' }

@@ -40,7 +40,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionAccessor: aSymbol [
 				  controller diagramController controllerForModel: each ]
 				  thenDo: [ :ctrl | 
 					  ctrl diagramElement ifNotNil: [ 
-						  ctrl diagramElement updateRenderFromModel ] ] ]
+						  ctrl diagramElement modelChanged ] ] ]
 ]
 
 { #category : #forms }

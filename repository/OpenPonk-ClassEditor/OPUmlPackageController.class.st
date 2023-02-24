@@ -40,17 +40,6 @@ OPUmlPackageController >> canBeTargetFor: aController [
 	^ aController isKindOf: OPUmlPackageImportController
 ]
 
-{ #category : #figures }
-OPUmlPackageController >> createDiagramElement [
-	^ OPUmlPackageCompartmentableShape new
-		modelElement: self model;
-		in: [ :shape | 
-			shape style
-				fillColor: Color white;
-				fontColor: Color black ];
-		yourself
-]
-
 { #category : #construction }
 OPUmlPackageController >> createModelIn: aParentModel [
 	| newModel names |
@@ -82,6 +71,12 @@ OPUmlPackageController >> dependentElements [
 						select: [ :eachImport | eachImport importingNamespace = self model ] ])
 ]
 
+{ #category : #figures }
+OPUmlPackageController >> diagramElementClass [
+
+	^ OPUmlPackageShape
+]
+
 { #category : #testing }
 OPUmlPackageController >> isHideable [
 	^ true
@@ -96,13 +91,4 @@ OPUmlPackageController >> modelClass [
 { #category : #removing }
 OPUmlPackageController >> removeModel [
 	diagramController model packagedElements remove: self model
-]
-
-{ #category : #rendering }
-OPUmlPackageController >> renderFigureIn: aView [
-	self diagramController willRender: self.
-	diagramElement := self createDiagramElement.
-	diagramElement renderIn: aView.
-	diagramController rendered: self.
-	^ self refreshFigure
 ]

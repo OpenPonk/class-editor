@@ -156,7 +156,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionMultiplicity [
 					   , (reader value: me) upperBound asString ]
 				   write: [ :me :newValue | 
 					   me writeMultiplicityFrom: newValue to: (reader value: me).
-					   me diagramElement updateRenderFromModel ]);
+					   me diagramElement modelChanged ]);
 		  label: 'Multiplicity';
 		  priority: 9;
 		  beSorted;

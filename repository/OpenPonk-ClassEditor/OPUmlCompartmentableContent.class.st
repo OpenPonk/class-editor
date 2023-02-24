@@ -10,6 +10,12 @@ OPUmlCompartmentableContent >> layoutOwnedElements [
 	"do nothing by default"
 ]
 
+{ #category : #initialization }
+OPUmlCompartmentableContent >> modelChanged [
+
+	self owningElement modelChanged
+]
+
 { #category : #'as yet unclassified' }
 OPUmlCompartmentableContent >> translateTopTo: aCoordinateY [
 
