@@ -34,9 +34,7 @@ OPUmlClassifierShape >> createLabel: aLabelShapeClass [
 
 	| labelContainer |
 	labelContainer := OPUmlCompartmentableLabel in: self.
-	aLabelShapeClass
-		in: labelContainer
-		forModelElement: self modelElement.
+	aLabelShapeClass in: labelContainer.
 	self ownedElements: (self ownedElements sorted: [ :a :b | 
 			 a = labelContainer or: [ 
 				 b ~= labelContainer and: [ 
