@@ -282,7 +282,7 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 			icon: OPUmlIcons directedAssociationIcon;
 			whenCreated: [ :ctrl | 
 				ctrl model applyStereotype: stereotype implementationClass new.
-				ctrl refreshFigure ] ]
+				ctrl diagramElement modelChanged ] ]
 ]
 
 { #category : #palette }

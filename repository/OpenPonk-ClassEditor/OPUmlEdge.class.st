@@ -17,21 +17,12 @@ OPUmlEdge >> renderBasicShape [
 		  markerEnd: self headMarker;
 		  markerStart: self tailMarker;
 		  withBorderAttachPoint;
-		  controlPointsController: OPRSPolylineCPController new;
-		  addInteraction: OPRSPolylineHandles;
+		  controlPointsController: OPRSDraggableCPController new;
+		  addInteraction: OPRSDraggableControlPoints;
 		  color: Color black;
 		  from: self source roassalShape;
 		  to: self target roassalShape;
 		  yourself
-]
-
-{ #category : #rendering }
-OPUmlEdge >> renderShapeDetails [
-
-	| selectable |
-	selectable := OPRSSelectable new.
-	selectable highlightColor: Color blue.
-	roassalShape @ selectable
 ]
 
 { #category : #'Roassal2 - manipulation' }
