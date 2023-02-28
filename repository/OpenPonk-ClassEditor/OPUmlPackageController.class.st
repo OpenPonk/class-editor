@@ -37,7 +37,25 @@ OPUmlPackageController >> canBeSourceFor: aController [
 
 { #category : #testing }
 OPUmlPackageController >> canBeTargetFor: aController [
-	^ aController isKindOf: OPUmlPackageImportController
+
+	^ (aController isKindOf: OPUmlPackageImportController) or: [ 
+		  (aController isKindOf: OPUmlClassController) or: [ 
+			  (aController isKindOf: OPUmlPackageController) or: [ 
+				  aController isKindOf: OPUmlEnumerationController ] ] ]
+]
+
+{ #category : #figures }
+OPUmlPackageController >> createDiagramElement [
+
+	super createDiagramElement.
+
+	diagramElement innerRoassalShapesBlock: [ 
+		self model packagedElements
+			collect: [ :eachModel | 
+				self diagramController
+					controllerForModel: eachModel
+					ifFound: [ :ctrl | ctrl roassalShape ] ]
+			thenSelect: #isNotNil ]
 ]
 
 { #category : #construction }

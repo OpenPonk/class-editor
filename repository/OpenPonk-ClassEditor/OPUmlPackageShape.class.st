@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'mainLabel',
 		'stereotypeLabel',
-		'ear'
+		'ear',
+		'innerRoassalShapesBlock'
 	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
@@ -15,13 +16,26 @@ Class {
 { #category : #accessing }
 OPUmlPackageShape >> color [
 
-	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color veryVeryLightGray ]
+	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color paleYellow ]
 ]
 
 { #category : #accessing }
 OPUmlPackageShape >> color: aColor [
 
 	^ self stylePropertyNamed: #fillColor put: aColor
+]
+
+{ #category : #initialization }
+OPUmlPackageShape >> initialize [
+
+	super initialize.
+	innerRoassalShapesBlock := [ :allNodes | allNodes ]
+]
+
+{ #category : #accessing }
+OPUmlPackageShape >> innerRoassalShapesBlock: aBlock [
+
+	innerRoassalShapesBlock := aBlock
 ]
 
 { #category : #accessing }
@@ -51,7 +65,7 @@ OPUmlPackageShape >> renderBasicShape [
 	^ RSBox new
 		  width: self minWidth;
 		  height: self minHeight;
-		  color: Color veryVeryLightGray;
+		  color: self color;
 		  borderColor: Color black;
 		  yourself
 ]
@@ -103,21 +117,9 @@ OPUmlPackageShape >> renderShapeDetails [
 
 	self roassalShape
 		@ OPRSSelectable;
-		@
-			(OPRSSelectionDraggable thatDragsInnerShapesOnCondition: [ :shape | 
-					 self shouldDragInnerShape: shape ]);
+		@ (OPRSSelectionDraggable thatDragsInnerShapesProvidedBy:
+					 innerRoassalShapesBlock);
 		@ OPRSResizable
-]
-
-{ #category : #'creating - subelements' }
-OPUmlPackageShape >> shouldDragInnerShape: aShape [
-
-	| innerShapeDiagramElement |
-	innerShapeDiagramElement := aShape model ifNil: [ ^ false ].
-	(innerShapeDiagramElement isKindOf: OPDiagramElement) ifFalse: [ 
-		^ false ].
-	^ self modelElement hasPackagedElement:
-		  (innerShapeDiagramElement modelElement ifNil: [ ^ false ])
 ]
 
 { #category : #accessing }

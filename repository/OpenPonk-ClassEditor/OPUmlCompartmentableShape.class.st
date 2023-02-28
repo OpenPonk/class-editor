@@ -97,7 +97,6 @@ OPUmlCompartmentableShape >> renderBasicShape [
 
 	^ RSBox new
 		  size: 30;
-		  model: self;
 		  color: Color white;
 		  borderColor: Color black;
 		  yourself

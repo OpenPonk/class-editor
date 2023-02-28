@@ -20,7 +20,7 @@ OPUmlClassifierShape class >> stonAllInstVarNames [
 { #category : #accessing }
 OPUmlClassifierShape >> color [
 
-	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color transparent ]
+	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color white ]
 ]
 
 { #category : #accessing }
