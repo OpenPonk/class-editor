@@ -91,9 +91,7 @@ OPUmlClassifierShape >> updateCommentIcon [
 
 	commentIcon ifNotNil: [ ^ self ].
 
-	commentIcon := OPUmlCommentIcon
-		               in: self
-		               forModelElement: self modelElement.
+	commentIcon := OPUmlCommentIcon in: self.
 
 	self isRendered ifTrue: [ commentIcon renderIn: self canvas ]
 ]

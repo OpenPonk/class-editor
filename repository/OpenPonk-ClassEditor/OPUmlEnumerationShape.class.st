@@ -18,10 +18,7 @@ OPUmlEnumerationShape class >> stonAllInstVarNames [
 { #category : #adding }
 OPUmlEnumerationShape >> addLiteral: aLiteralShape [
 
-	literals ifNil: [ 
-		literals := OPUmlListCompartment
-			            in: self
-			            forModelElement: self modelElement ].
+	literals ifNil: [ literals := OPUmlListCompartment in: self ].
 
 	aLiteralShape owningElement: literals
 ]

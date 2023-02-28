@@ -13,9 +13,7 @@ Class {
 { #category : #initialization }
 OPUmlExtensionShape >> createEndLabels [
 
-	OPUmlExtensionRequiredLabel
-		in: self
-		forModelElement: self modelElement
+	OPUmlExtensionRequiredLabel in: self
 ]
 
 { #category : #accessing }
