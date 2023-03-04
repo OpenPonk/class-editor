@@ -110,7 +110,7 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 	selectable := OPRSSelectable new.
 	selectable highlightBorderColor: Color blue.
 	roassalShape @ selectable.
-	self roassalShape @ OPRSSelectionDraggable thatDoesNotDragInnerShapes.
+	self roassalShape @ OPRSSelectionDraggable.
 	self roassalShape
 		when: RSPositionChangedEvent
 		do: [ :event | self layoutContents ]

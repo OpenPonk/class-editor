@@ -117,7 +117,7 @@ OPUmlPackageShape >> renderShapeDetails [
 
 	self roassalShape
 		@ OPRSSelectable;
-		@ (OPRSSelectionDraggable thatDragsInnerShapesProvidedBy:
+		@ (OPRSSelectionDraggable thatAlsoDragsShapesProvidedByBlock:
 					 innerRoassalShapesBlock);
 		@ OPRSResizable
 ]

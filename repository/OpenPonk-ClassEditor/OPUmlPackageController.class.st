@@ -54,7 +54,7 @@ OPUmlPackageController >> createDiagramElement [
 			collect: [ :eachModel | 
 				self diagramController
 					controllerForModel: eachModel
-					ifFound: [ :ctrl | ctrl roassalShape ] ]
+					ifFound: #roassalShape ]
 			thenSelect: #isNotNil ]
 ]
 
