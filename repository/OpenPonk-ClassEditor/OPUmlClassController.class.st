@@ -39,6 +39,7 @@ OPUmlClassController >> adornments [
 { #category : #rendering }
 OPUmlClassController >> allShowableElements [
 	| queue |
+	self flag: #unused.
 	queue := OrderedCollection new.
 	queue addAll: self model ownedAttributes.
 	queue addAll: self model ownedOperations.

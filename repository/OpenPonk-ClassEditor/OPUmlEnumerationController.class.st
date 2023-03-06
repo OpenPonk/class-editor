@@ -25,6 +25,7 @@ OPUmlEnumerationController >> adornments [
 { #category : #rendering }
 OPUmlEnumerationController >> allShowableElements [
 	| queue |
+	self flag: #unused.
 	queue := OrderedCollection new.
 	queue addAll: self model ownedLiterals.
 	^ queue asArray

@@ -12,6 +12,7 @@ Class {
 
 { #category : #rendering }
 OPUmlPackageController >> allShowableElements [
+	self flag: #unused.
 	^ #()
 ]
 
