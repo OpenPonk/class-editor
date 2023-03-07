@@ -25,7 +25,7 @@ OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 	window := workbench open.
 	workbench openProject: project.
 	editor := (workbench instVarNamed: #editors) values first at: #editor.
-	view := editor canvasPresenter roassalView.
+	view := editor canvasPresenter canvas.
 	paletteEntries := editor palette entries
 ]
 

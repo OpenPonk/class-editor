@@ -72,6 +72,54 @@ OPUmlClassController >> canBeTargetFor: aController [
 		| (aController isKindOf: OPUmlExtensionController)
 ]
 
+{ #category : #figures }
+OPUmlClassController >> createAdornmentsBy: builder [
+
+	self
+		createAttributeAdornmentBy: builder;
+		createAssociationAdornmentBy: builder;
+		createGeneralizationAdornmentBy: builder
+]
+
+{ #category : #figures }
+OPUmlClassController >> createAssociationAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons directedAssociationIcon action: [ 
+		| tool |
+		tool := OPConnectionCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlAssociationController new ].
+		self diagramController editor palette selectTool: tool.
+		tool selectedControllers: { self } ]
+]
+
+{ #category : #figures }
+OPUmlClassController >> createAttributeAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons attributeIcon action: [ 
+		| tool |
+		tool := OPCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlAttributeController new ].
+		self diagramController editor palette selectTool: tool.
+		tool whenCreated: [ :ctrl | 
+			OPRenameElementCommand executeOn: ctrl.
+			ctrl refreshFigure ].
+		tool selectedControllers: { self } ]
+]
+
+{ #category : #figures }
+OPUmlClassController >> createGeneralizationAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons generalizationIcon action: [ 
+		| tool |
+		tool := OPConnectionCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlGeneralizationController new ].
+		self diagramController editor palette selectTool: tool.
+		tool selectedControllers: { self } ]
+]
+
 { #category : #accessing }
 OPUmlClassController >> dependentElements [
 

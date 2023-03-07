@@ -74,11 +74,12 @@ OPUmlCompartmentableShapeTest >> testRemoveFromOwnership [
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
+
 	| canvas |
 	canvas := RSCanvas new.
 	element renderIn: canvas.
 	element remove.
-	self assert: canvas elements asArray equals: #()
+	self assert: canvas nodes asArray equals: #(  )
 ]
 
 { #category : #tests }

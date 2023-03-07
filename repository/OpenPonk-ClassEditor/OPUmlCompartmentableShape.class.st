@@ -108,7 +108,7 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 	| selectable |
 	super renderShapeDetails.
 	selectable := OPRSSelectable new.
-	selectable highlightBorderColor: Color blue.
+	self setupHighlight: selectable.
 	roassalShape @ selectable.
 	self roassalShape @ OPRSSelectionDraggable.
 	self roassalShape
@@ -120,6 +120,12 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 OPUmlCompartmentableShape >> separators [
 
 	^ separators
+]
+
+{ #category : #rendering }
+OPUmlCompartmentableShape >> setupHighlight: selectable [
+
+	selectable highlightBorderColor: Color blue
 ]
 
 { #category : #rendering }

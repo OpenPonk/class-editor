@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'nameLabel',
 		'stereotypeLabel',
-		'commentIcon'
+		'commentIcon',
+		'adornmentCreationBlock'
 	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
@@ -15,6 +16,12 @@ OPUmlClassifierShape class >> stonAllInstVarNames [
 	"Override to encode my instances using a custom set of instance variables or to define their order."
 
 	^ super stonAllInstVarNames , #( #nameLabel #stereotypeLabel #commentIcon )
+]
+
+{ #category : #accessing }
+OPUmlClassifierShape >> adornmentCreationBlock: aBlock [
+
+	adornmentCreationBlock := aBlock
 ]
 
 { #category : #accessing }
@@ -64,6 +71,21 @@ OPUmlClassifierShape >> hasModelComments [
 OPUmlClassifierShape >> minExtent [
 
 	^ 100 @ 60
+]
+
+{ #category : #hooks }
+OPUmlClassifierShape >> setupHighlight: aHighlightable [
+
+	super setupHighlight: aHighlightable.
+	aHighlightable highlightAdornments: [ :builder | 
+		builder horizontalLocation
+			outer;
+			right.
+		builder verticalLocation
+			inner;
+			top.
+		builder directionDown.
+		adornmentCreationBlock value: builder ]
 ]
 
 { #category : #accessing }
