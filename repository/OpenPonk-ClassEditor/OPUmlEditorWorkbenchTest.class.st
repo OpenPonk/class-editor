@@ -49,9 +49,9 @@ OPUmlEditorWorkbenchTest >> testAddClassFromPalette [
 	classEntry performAction.
 	position := 0 @ 0.
 	shape := view canvas
-		         shapeWithAction: TRMouseLeftClick
+		         shapeWithAction: RSMouseLeftClick
 		         forPositionInPixels: position.
-	ev := TRMouseLeftClick new.
+	ev := RSMouseLeftClick new.
 	ev shape: shape.
 	ev position: position.
 	ev canvas: view canvas.
