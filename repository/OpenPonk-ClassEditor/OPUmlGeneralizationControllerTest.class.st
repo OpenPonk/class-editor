@@ -20,7 +20,7 @@ OPUmlGeneralizationControllerTest >> modelClass [
 ]
 
 { #category : #running }
-OPUmlGeneralizationControllerTest >> newInstance [
+OPUmlGeneralizationControllerTest >> newModel [
 	^ self modelClass new
 ]
 

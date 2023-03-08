@@ -20,7 +20,7 @@ OPUmlPackageImportControllerTest >> modelClass [
 ]
 
 { #category : #running }
-OPUmlPackageImportControllerTest >> newInstance [
+OPUmlPackageImportControllerTest >> newModel [
 	^ self modelClass new
 ]
 
@@ -140,5 +140,5 @@ OPUmlPackageImportControllerTest >> testShowInDiagram [
 
 { #category : #tests }
 OPUmlPackageImportControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: self newInstance)
+	self assert: (diagramController hasSupportForModel: self newModel)
 ]

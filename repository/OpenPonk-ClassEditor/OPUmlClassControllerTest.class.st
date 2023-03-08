@@ -51,7 +51,6 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 	operationController := OPUmlOperationController new.
 	operationController model: operation.
 	diagramController model packagedElements add: class.
-	diagramController rebuild.
 	elements := diagramController view elements.
 	nameLabelRectangle := (elements
 		detect: [ :any | any model class = OPUmlNameLabel ])

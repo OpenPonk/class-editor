@@ -14,12 +14,6 @@ OPUmlPackageDiagramControllerTest >> modelClass [
 	^ OPUMLPackage
 ]
 
-{ #category : #running }
-OPUmlPackageDiagramControllerTest >> setUp [
-	super setUp.
-	diagramController view: RTView new
-]
-
 { #category : #tests }
 OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 	| class |
