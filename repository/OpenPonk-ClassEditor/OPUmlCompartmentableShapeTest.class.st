@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlCompartmentableShapeTest,
-	#superclass : #OPDITestCase,
+	#superclass : #OPDiagramElementTestCase,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
@@ -10,16 +10,20 @@ OPUmlCompartmentableShapeTest >> elementClass [
 ]
 
 { #category : #tests }
-OPUmlCompartmentableShapeTest >> testEmptyRtElement [
-	rt := element roassalShape.
-	self assert: rt class equals: RTElement.
-	self assert: rt shape class equals: RTBox
+OPUmlCompartmentableShapeTest >> testEmptyRoassalShape [
+
+	| roassalShape |
+	element renderIn: RSCanvas new.
+	roassalShape := element roassalShape.
+	self assert: roassalShape class equals: RSBox
 ]
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testFigures [
-	self assert: element figures class equals: RTGroup.
-	self assert: element figures size equals: 0
+
+	element renderIn: RSCanvas new.
+
+	self assert: element canvas nodes isNotEmpty
 ]
 
 { #category : #tests }

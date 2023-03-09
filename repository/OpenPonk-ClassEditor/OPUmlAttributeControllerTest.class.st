@@ -9,6 +9,12 @@ OPUmlAttributeControllerTest >> controllerClass [
 	^ OPUmlAttributeController
 ]
 
+{ #category : #construction }
+OPUmlAttributeControllerTest >> diagramElementClass [
+
+	^ OPUmlAttributeLabel
+]
+
 { #category : #accessing }
 OPUmlAttributeControllerTest >> modelClass [
 	^ OPUMLProperty
@@ -23,18 +29,26 @@ OPUmlAttributeControllerTest >> testCanClassBeTarget [
 
 { #category : #'tests - creation' }
 OPUmlAttributeControllerTest >> testClassBeTarget [
+
 	| classController |
-	classController := diagramController newControllerFor: OPUMLClass new.
+	classController := diagramController newControllerFor:
+		                   (OPUMLClass new
+			                    name: 'Class';
+			                    yourself).
 	classController showWithoutDependentInDiagram: diagramController.
 	classController addAsTargetFor: controller.
 	self
 		assert: classController model ownedAttributes asArray
-		equals: {controller model}
+		equals: { controller model }
 ]
 
-{ #category : #'tests - creation' }
+{ #category : #tests }
 OPUmlAttributeControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlLabel
+
+	model owningClass: OPUMLClass new.
+	diagramController showWithoutDependentInDiagramModel: model owningClass.
+
+	super testCreateDiagramElement
 ]
 
 { #category : #tests }
@@ -96,11 +110,6 @@ OPUmlAttributeControllerTest >> testRemoveFromView [
 	compartment := controller diagramElement owningElement.
 	controller removeController.
 	self assert: compartment ownedElements asArray equals: #()
-]
-
-{ #category : #tests }
-OPUmlAttributeControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: OPUMLProperty new)
 ]
 
 { #category : #tests }

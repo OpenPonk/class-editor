@@ -45,20 +45,6 @@ OPUmlPackageController >> canBeTargetFor: aController [
 				  aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
-{ #category : #figures }
-OPUmlPackageController >> createDiagramElement [
-
-	super createDiagramElement.
-
-	diagramElement innerRoassalShapesBlock: [ 
-		self model packagedElements
-			collect: [ :eachModel | 
-				self diagramController
-					controllerForModel: eachModel
-					ifFound: #roassalShape ]
-			thenSelect: #isNotNil ]
-]
-
 { #category : #construction }
 OPUmlPackageController >> createModelIn: aParentModel [
 	| newModel names |
@@ -94,6 +80,20 @@ OPUmlPackageController >> dependentElements [
 OPUmlPackageController >> diagramElementClass [
 
 	^ OPUmlPackageShape
+]
+
+{ #category : #figures }
+OPUmlPackageController >> hookDiagramElement [
+
+	super hookDiagramElement.
+
+	diagramElement innerRoassalShapesBlock: [ 
+		self model packagedElements
+			collect: [ :eachModel | 
+				self diagramController
+					controllerForModel: eachModel
+					ifFound: #roassalShape ]
+			thenSelect: #isNotNil ]
 ]
 
 { #category : #testing }

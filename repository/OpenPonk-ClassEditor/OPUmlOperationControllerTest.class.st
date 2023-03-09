@@ -9,6 +9,12 @@ OPUmlOperationControllerTest >> controllerClass [
 	^ OPUmlOperationController
 ]
 
+{ #category : #construction }
+OPUmlOperationControllerTest >> diagramElementClass [
+
+	^ OPUmlOperationLabel
+]
+
 { #category : #accessing }
 OPUmlOperationControllerTest >> modelClass [
 	^ OPUMLOperation
@@ -16,7 +22,11 @@ OPUmlOperationControllerTest >> modelClass [
 
 { #category : #tests }
 OPUmlOperationControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlLabel
+
+	model owningClass: OPUMLClass new.
+	diagramController showWithoutDependentInDiagramModel: model owningClass.
+
+	super testCreateDiagramElement
 ]
 
 { #category : #tests }
@@ -38,9 +48,4 @@ OPUmlOperationControllerTest >> testRemoveFromView [
 	compartment := controller diagramElement owningElement.
 	controller removeController.
 	self assert: compartment ownedElements asArray equals: #(  )
-]
-
-{ #category : #tests }
-OPUmlOperationControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: OPUMLOperation new)
 ]

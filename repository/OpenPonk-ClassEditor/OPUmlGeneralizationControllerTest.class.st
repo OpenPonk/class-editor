@@ -3,8 +3,7 @@ Class {
 	#superclass : #OPUmlRelationshipControllerTest,
 	#instVars : [
 		'parent',
-		'child',
-		'generalization'
+		'child'
 	],
 	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
@@ -14,14 +13,15 @@ OPUmlGeneralizationControllerTest >> controllerClass [
 	^ OPUmlGeneralizationController
 ]
 
+{ #category : #construction }
+OPUmlGeneralizationControllerTest >> diagramElementClass [
+
+	^ OPUmlGeneralizationShape
+]
+
 { #category : #accessing }
 OPUmlGeneralizationControllerTest >> modelClass [
 	^ OPUMLGeneralization
-]
-
-{ #category : #running }
-OPUmlGeneralizationControllerTest >> newModel [
-	^ self modelClass new
 ]
 
 { #category : #running }
@@ -34,8 +34,8 @@ OPUmlGeneralizationControllerTest >> setUp [
 OPUmlGeneralizationControllerTest >> setUpGeneralization [
 	parent := OPUMLClass new name: 'Parent'.
 	child := OPUMLClass new name: 'Child'.
-	generalization := OPUMLGeneralization new.
-	generalization
+	model := OPUMLGeneralization new.
+	model
 		general: parent;
 		specific: child
 ]
@@ -57,9 +57,10 @@ OPUmlGeneralizationControllerTest >> testClassBeTarget [
 	self assert: controller model general equals: targetController model
 ]
 
-{ #category : #'tests - diagram' }
-OPUmlGeneralizationControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlGeneralizationShape
+{ #category : #tests }
+OPUmlGeneralizationControllerTest >> testDescriptionName [
+
+	self assert: controller descriptionName equals: nil
 ]
 
 { #category : #'tests - diagram' }
@@ -68,10 +69,10 @@ OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 	diagramController
 		showWithoutDependentInDiagramModel: parent;
 		showWithoutDependentInDiagramModel: child.
-	diagramController showWithoutDependentInDiagramModel: generalization.
-	controller := diagramController controllerForModel: generalization.
+	diagramController showWithoutDependentInDiagramModel: model.
+	controller := diagramController controllerForModel: model.
 	controller removeController.
-	self assert: diagramController view edges asArray equals: #(  )
+	self assert: diagramController canvas edges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -80,17 +81,17 @@ OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 	diagramController
 		showWithoutDependentInDiagramModel: parent;
 		showWithoutDependentInDiagramModel: child;
-		showWithoutDependentInDiagramModel: generalization.
+		showWithoutDependentInDiagramModel: model.
 	gs := OPUMLGeneralizationSet new.
-	gs generalizations add: generalization.
+	gs generalizations add: model.
 	self deny: (diagramController model packagedElements includes: gs).
 	diagramController model
 		packagedElements: diagramController model packagedElements , {gs}.
 	self assert: (diagramController model packagedElements includes: gs).
-	controller := diagramController controllerForModel: generalization.
+	controller := diagramController controllerForModel: model.
 	controller removeModel.
 	self assert: child generalizations asArray equals: #().
-	self assert: generalization generalizationSets asArray equals: #().
+	self assert: model generalizationSets asArray equals: #().
 	self assert: gs generalizations asArray equals: #().
 	self deny: (diagramController model packagedElements includes: gs)
 ]
@@ -101,14 +102,8 @@ OPUmlGeneralizationControllerTest >> testShowInDiagram [
 	diagramController
 		showWithoutDependentInDiagramModel: parent;
 		showWithoutDependentInDiagramModel: child.
-	diagramController showWithoutDependentInDiagramModel: generalization.
-	self assert:
-		(diagramController view edges anySatisfy: [ :each | 
+	diagramController showWithoutDependentInDiagramModel: model.
+	self assert: (diagramController canvas edges anySatisfy: [ :each | 
 			 each model isNotNil and: [ 
-				 each model modelElement = generalization ] ])
-]
-
-{ #category : #tests }
-OPUmlGeneralizationControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: OPUMLGeneralization new)
+				 each model modelElement = model ] ])
 ]

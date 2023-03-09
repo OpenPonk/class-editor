@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlLabelTest,
-	#superclass : #OPDITestCase,
+	#superclass : #OPDiagramElementTestCase,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
@@ -20,16 +20,18 @@ OPUmlLabelTest >> testBlockNameUpdate [
 ]
 
 { #category : #tests }
-OPUmlLabelTest >> testRtElement [
+OPUmlLabelTest >> testRoassalShape [
+
+	| roassalShape |
 	element text: 'some text'.
-	rt := element roassalShape.
-	self assert: rt class equals: RTElement.
-	self assert: rt shape class equals: RTStyledLabel.
-	self assert: (rt shape textFor: rt) equals: 'some text'
+	element renderIn: RSCanvas new.
+	roassalShape := element roassalShape.
+	self assert: roassalShape class equals: RSLabel.
+	self assert: roassalShape text equals: 'some text'
 ]
 
 { #category : #tests }
-OPUmlLabelTest >> testRtEmphasis [
+OPUmlLabelTest >> testRoassalShapeEmphasis [
 	element text: 'some text'.
 	element localStyle: OPDIOpenPonkStyle new.
 	rt := element roassalShape.
@@ -55,7 +57,7 @@ OPUmlLabelTest >> testRtEmphasis [
 ]
 
 { #category : #tests }
-OPUmlLabelTest >> testRtEmphasisUpdate [
+OPUmlLabelTest >> testRoassalShapeEmphasisUpdate [
 	element text: 'some text'.
 	element
 		emphasis: [ :model :localStyle | 
@@ -74,7 +76,7 @@ OPUmlLabelTest >> testRtEmphasisUpdate [
 ]
 
 { #category : #tests }
-OPUmlLabelTest >> testRtNameUpdate [
+OPUmlLabelTest >> testRoassalShapeNameUpdate [
 	element text: 'some text'.
 	rt := element roassalShape.
 	self assert: (rt shape textFor: rt) equals: 'some text'.

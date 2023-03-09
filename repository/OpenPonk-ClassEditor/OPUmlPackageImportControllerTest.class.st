@@ -3,8 +3,7 @@ Class {
 	#superclass : #OPUmlRelationshipControllerTest,
 	#instVars : [
 		'importingNamespace',
-		'importedPackage',
-		'packageImport'
+		'importedPackage'
 	],
 	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
@@ -14,14 +13,15 @@ OPUmlPackageImportControllerTest >> controllerClass [
 	^ OPUmlPackageImportController
 ]
 
+{ #category : #construction }
+OPUmlPackageImportControllerTest >> diagramElementClass [
+
+	^ OPUmlPackageImportShape
+]
+
 { #category : #accessing }
 OPUmlPackageImportControllerTest >> modelClass [
 	^ OPUMLPackageImport
-]
-
-{ #category : #running }
-OPUmlPackageImportControllerTest >> newModel [
-	^ self modelClass new
 ]
 
 { #category : #running }
@@ -34,7 +34,7 @@ OPUmlPackageImportControllerTest >> setUp [
 OPUmlPackageImportControllerTest >> setUpModel [
 	importingNamespace := OPUMLPackage new name: 'Importing Namespace'.
 	importedPackage := OPUMLPackage new name: 'Imported Package'.
-	packageImport := OPUMLPackageImport new
+	model := OPUMLPackageImport new
 		importingNamespace: importingNamespace;
 		importedPackage: importedPackage
 ]
@@ -98,20 +98,15 @@ OPUmlPackageImportControllerTest >> testConnectionFeedback [
 ]
 
 { #category : #'tests - diagram' }
-OPUmlPackageImportControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlPackageImportShape
-]
-
-{ #category : #'tests - diagram' }
 OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 
 	diagramController
 		showWithoutDependentInDiagramModel: importingNamespace;
 		showWithoutDependentInDiagramModel: importedPackage.
-	diagramController showWithoutDependentInDiagramModel: packageImport.
-	controller := diagramController controllerForModel: packageImport.
+	diagramController showWithoutDependentInDiagramModel: model.
+	controller := diagramController controllerForModel: model.
 	controller removeController.
-	self assert: diagramController view edges asArray equals: #(  )
+	self assert: diagramController canvas edges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -119,8 +114,8 @@ OPUmlPackageImportControllerTest >> testRemoveFromModel [
 	diagramController
 		showWithoutDependentInDiagramModel: importingNamespace;
 		showWithoutDependentInDiagramModel: importedPackage;
-		showWithoutDependentInDiagramModel: packageImport.
-	controller := diagramController controllerForModel: packageImport.
+		showWithoutDependentInDiagramModel: model.
+	controller := diagramController controllerForModel: model.
 	controller removeModel.
 	self assert: importedPackage packageImports asArray equals: #()
 ]
@@ -131,14 +126,8 @@ OPUmlPackageImportControllerTest >> testShowInDiagram [
 	diagramController
 		showWithoutDependentInDiagramModel: importingNamespace;
 		showWithoutDependentInDiagramModel: importedPackage.
-	diagramController showWithoutDependentInDiagramModel: packageImport.
-	self assert:
-		(diagramController view edges anySatisfy: [ :each | 
+	diagramController showWithoutDependentInDiagramModel: model.
+	self assert: (diagramController canvas edges anySatisfy: [ :each | 
 			 each model isNotNil and: [ 
-				 each model modelElement = packageImport ] ])
-]
-
-{ #category : #tests }
-OPUmlPackageImportControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: self newModel)
+				 each model modelElement = model ] ])
 ]

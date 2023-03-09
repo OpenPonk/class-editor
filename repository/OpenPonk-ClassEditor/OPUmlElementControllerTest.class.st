@@ -1,12 +1,24 @@
 Class {
 	#name : #OPUmlElementControllerTest,
-	#superclass : #OPBaseControllerTest,
+	#superclass : #OPElementControllerTest,
 	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #testing }
 OPUmlElementControllerTest class >> isAbstract [
 	^ self = OPUmlElementControllerTest
+]
+
+{ #category : #accessing }
+OPUmlElementControllerTest >> diagramControllerClass [
+
+	^ OPUmlPackageDiagramController
+]
+
+{ #category : #accessing }
+OPUmlElementControllerTest >> diagramModelClass [
+
+	^ OPUMLPackage
 ]
 
 { #category : #'tests - model' }

@@ -9,6 +9,12 @@ OPUmlEnumLiteralControllerTest >> controllerClass [
 	^ OPUmlEnumerationLiteralController
 ]
 
+{ #category : #construction }
+OPUmlEnumLiteralControllerTest >> diagramElementClass [
+
+	^ OPUmlEnumerationLiteralLabel
+]
+
 { #category : #accessing }
 OPUmlEnumLiteralControllerTest >> modelClass [
 	^ OPUMLEnumerationLiteral
@@ -21,9 +27,13 @@ OPUmlEnumLiteralControllerTest >> testCanEnumerationBeTarget [
 	self assert: (classController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - creation' }
+{ #category : #tests }
 OPUmlEnumLiteralControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlLabel
+
+	model enumeration: OPUMLEnumeration new.
+	diagramController showWithoutDependentInDiagramModel: model enumeration.
+
+	super testCreateDiagramElement
 ]
 
 { #category : #'tests - creation' }
@@ -55,9 +65,4 @@ OPUmlEnumLiteralControllerTest >> testRemoveFromView [
 	compartment := controller diagramElement owningElement.
 	controller removeController.
 	self assert: compartment ownedElements asArray equals: #(  )
-]
-
-{ #category : #'tests - testing' }
-OPUmlEnumLiteralControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: OPUMLEnumerationLiteral new)
 ]

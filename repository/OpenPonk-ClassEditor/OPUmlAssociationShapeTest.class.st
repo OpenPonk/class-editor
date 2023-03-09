@@ -44,27 +44,32 @@ OPUmlAssociationShapeTest >> testBothNavigable [
 		owningAssociation: nil;
 		owningClass: comment.
 	self
-		assert: (OPUmlAssociationShape new markerFor: ownedComment) shape
-		equals: OPRSMarkerBuilder arrowShape.
+		assert:
+		(OPUmlAssociationShape new markerFor: ownedComment) shape class
+		equals: OPRSMarkerBuilder arrowShape class.
 	self
-		assert: (OPUmlAssociationShape new markerFor: owningElement) shape
-		equals: OPRSMarkerBuilder arrowShape
+		assert:
+		(OPUmlAssociationShape new markerFor: owningElement) shape class
+		equals: OPRSMarkerBuilder arrowShape class
 ]
 
 { #category : #tests }
 OPUmlAssociationShapeTest >> testEndComposite [
+
 	ownedComment aggregation: OPUMLAggregationKind composite.
 	self
-		assert: (OPUmlAssociationShape new markerFor: owningElement) shape
-		equals: OPRSMarkerBuilder diamondShape
+		assert:
+		(OPUmlAssociationShape new markerFor: owningElement) shape class
+		equals: OPRSMarkerBuilder diamondShape class
 ]
 
 { #category : #tests }
 OPUmlAssociationShapeTest >> testEndOneNavigable [
 
 	self
-		assert: (OPUmlAssociationShape new markerFor: ownedComment) shape
-		equals: OPRSMarkerBuilder arrowShape.
+		assert:
+		(OPUmlAssociationShape new markerFor: ownedComment) shape class
+		equals: OPRSMarkerBuilder arrowShape class.
 	self
 		assert: (OPUmlAssociationShape new markerFor: owningElement)
 		equals: nil
@@ -75,6 +80,12 @@ OPUmlAssociationShapeTest >> testEndShared [
 
 	ownedComment aggregation: OPUMLAggregationKind shared.
 	self
-		assert: (OPUmlAssociationShape new markerFor: owningElement) shape
-		equals: OPRSMarkerBuilder diamondShape
+		assert:
+		(OPUmlAssociationShape new markerFor: owningElement) shape class
+		equals: OPRSEmptyShapeProxy.
+	self
+		assert:
+		(OPUmlAssociationShape new markerFor: owningElement) shape shape
+			class
+		equals: OPRSMarkerBuilder diamondShape class
 ]

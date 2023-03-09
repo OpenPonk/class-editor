@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'artifact',
 		'library',
-		'extension',
 		'baseArtifact',
 		'extensionLibrary'
 	],
@@ -14,6 +13,12 @@ Class {
 { #category : #accessing }
 OPUmlExtensionControllerTest >> controllerClass [
 	^ OPUmlExtensionController
+]
+
+{ #category : #construction }
+OPUmlExtensionControllerTest >> diagramElementClass [
+
+	^ OPUmlExtensionShape
 ]
 
 { #category : #accessing }
@@ -32,20 +37,20 @@ OPUmlExtensionControllerTest >> setUp [
 OPUmlExtensionControllerTest >> setUpExtension [
 	artifact := OPUMLClass new name: 'Artifact'.
 	library := OPUMLStereotype new name: 'Library'.
-	extension := OPUMLExtension new.
+	model := OPUMLExtension new.
 	(baseArtifact := OPUMLProperty new)
 		name: 'base_Artifact';
 		owningClass: library;
 		type: artifact.
 	(extensionLibrary := OPUMLExtensionEnd new)
 		name: 'extension_Library';
-		owningAssociation: extension;
+		owningAssociation: model;
 		type: library.
-	extension
+	model
 		memberEnds:
 			{baseArtifact.
 			extensionLibrary}.
-	extension ownedEnd: extensionLibrary
+	model ownedEnd: extensionLibrary
 ]
 
 { #category : #tests }
@@ -70,22 +75,16 @@ OPUmlExtensionControllerTest >> testClassBeTarget [
 		equals: nil
 ]
 
-{ #category : #tests }
-OPUmlExtensionControllerTest >> testCreateDiagramElement [
-	controller model: extension.
-	self assert: controller createDiagramElement class equals: OPUmlExtensionShape
-]
-
 { #category : #'tests - diagram' }
 OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 
 	diagramController
 		showWithoutDependentInDiagramModel: artifact;
 		showWithoutDependentInDiagramModel: library;
-		showWithoutDependentInDiagramModel: extension.
-	controller := diagramController controllerForModel: extension.
+		showWithoutDependentInDiagramModel: model.
+	controller := diagramController controllerForModel: model.
 	controller removeController.
-	self assert: diagramController view edges asArray equals: #(  )
+	self assert: diagramController canvas edges asArray equals: #(  )
 ]
 
 { #category : #'tests - model' }
@@ -93,19 +92,19 @@ OPUmlExtensionControllerTest >> testRemoveFromModel [
 	diagramController
 		showWithoutDependentInDiagramModel: artifact;
 		showWithoutDependentInDiagramModel: library;
-		showWithoutDependentInDiagramModel: extension.
-	controller := diagramController controllerForModel: extension.
+		showWithoutDependentInDiagramModel: model.
+	controller := diagramController controllerForModel: model.
 	self
-		deny: (diagramController model packagedElements includes: extension).
-	diagramController model packagedElements add: extension.
+		deny: (diagramController model packagedElements includes: model).
+	diagramController model packagedElements add: model.
 	self
-		assert: (diagramController model packagedElements includes: extension).
+		assert: (diagramController model packagedElements includes: model).
 	controller removeModel.
 	self assert: extensionLibrary association equals: nil.
 	self assert: extensionLibrary owningClass equals: nil.
 	self assert: library attributes asArray equals: #().
 	self
-		deny: (diagramController model packagedElements includes: extension)
+		deny: (diagramController model packagedElements includes: model)
 ]
 
 { #category : #tests }
@@ -114,26 +113,19 @@ OPUmlExtensionControllerTest >> testShowInDiagram [
 	diagramController
 		showWithoutDependentInDiagramModel: artifact;
 		showWithoutDependentInDiagramModel: library;
-		showWithoutDependentInDiagramModel: extension.
-	self assert:
-		(diagramController view edges anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = extension ] ])
-]
-
-{ #category : #tests }
-OPUmlExtensionControllerTest >> testSupport [
-	self
-		assert: (diagramController hasSupportForModel: self modelClass new)
+		showWithoutDependentInDiagramModel: model.
+	self assert: (diagramController canvas edges anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = model ] ])
 ]
 
 { #category : #tests }
 OPUmlExtensionControllerTest >> testWriteNavigabilityPrecondition [
 	| first second |
-	first := extension memberEnds first.
-	second := extension memberEnds second.
+	first := model memberEnds first.
+	second := model memberEnds second.
 	self assert: first isNavigable.
 	self deny: second isNavigable.
 	self assert: first owningClass isNotNil.
 	self assert: second owningClass isNil.
-	self assert: extension navigableOwnedEnds asArray equals: #()
+	self assert: model navigableOwnedEnds asArray equals: #()
 ]

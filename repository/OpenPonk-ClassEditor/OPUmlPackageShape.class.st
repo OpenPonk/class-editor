@@ -81,6 +81,7 @@ OPUmlPackageShape >> renderShapeDetails [
 		       model: self;
 		       yourself.
 	self canvas add: ear.
+	self roassalShape when: RSShapeRemovedEvent do: [ ear remove ].
 	mainLabel := RSLabel new
 		             color: Color black;
 		             model: self;

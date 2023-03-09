@@ -9,6 +9,12 @@ OPUmlClassControllerTest >> controllerClass [
 	^ OPUmlClassController
 ]
 
+{ #category : #construction }
+OPUmlClassControllerTest >> diagramElementClass [
+
+	^ OPUmlClassShape
+]
+
 { #category : #accessing }
 OPUmlClassControllerTest >> modelClass [
 	^ OPUMLClass
@@ -31,17 +37,13 @@ OPUmlClassControllerTest >> testCanDiagramBeTargetForClass [
 ]
 
 { #category : #'tests - creation' }
-OPUmlClassControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlClassShape
-]
-
-{ #category : #'tests - creation' }
 OPUmlClassControllerTest >> testCreateFromPalette [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
 
 { #category : #'tests - diagram' }
 OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
+
 	| class operation operationController nameLabelRectangle operationLabelRectangle classRectangle elements |
 	class := OPUMLClass new.
 	class name: 'AClass'.
@@ -51,16 +53,16 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 	operationController := OPUmlOperationController new.
 	operationController model: operation.
 	diagramController model packagedElements add: class.
-	elements := diagramController view elements.
-	nameLabelRectangle := (elements
-		detect: [ :any | any model class = OPUmlNameLabel ])
-		encompassingRectangle.
-	operationLabelRectangle := (elements
-		detect: [ :any | any model class = OPUmlLabel ])
-		encompassingRectangle.
-	classRectangle := (elements
-		detect: [ :any | any model isKindOf: OPUmlClassShape ])
-		encompassingRectangle.
+	elements := diagramController canvas nodes.
+	nameLabelRectangle := (elements detect: [ :any | 
+		                       any model class = OPUmlNameLabel ])
+		                      encompassingRectangle.
+	operationLabelRectangle := (elements detect: [ :any | 
+		                            any model class = OPUmlLabel ])
+		                           encompassingRectangle.
+	classRectangle := (elements detect: [ :any | 
+		                   any model isKindOf: OPUmlClassShape ])
+		                  encompassingRectangle.
 	self
 		assert: (classRectangle containsRect: nameLabelRectangle)
 		description: 'Name of class is outside of class shape'.
@@ -71,19 +73,20 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 		deny: (operationLabelRectangle intersects: nameLabelRectangle)
 		description: 'Name of operation is overlapping name of class'.
 	^ self
-		assert: nameLabelRectangle bottom <= operationLabelRectangle top
-		description: 'Name of operation is not below name of class'
+		  assert: nameLabelRectangle bottom <= operationLabelRectangle top
+		  description: 'Name of operation is not below name of class'
 ]
 
 { #category : #'tests - removing' }
 OPUmlClassControllerTest >> testRemoveEmpty [
+
 	| class |
 	class := OPUMLClass new.
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeController.
-	self assert: diagramController view elements asArray equals: #().
-	self assert: diagramController controllers asArray equals: #()
+	self assert: diagramController canvas nodes asArray equals: #(  ).
+	self assert: diagramController controllers asArray equals: #(  )
 ]
 
 { #category : #'tests - removing' }
@@ -108,7 +111,7 @@ OPUmlClassControllerTest >> testRemoveWithAttribute [
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeController.
-	self assert: diagramController view elements asArray equals: #(  ).
+	self assert: diagramController canvas nodes asArray equals: #(  ).
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
@@ -144,29 +147,22 @@ OPUmlClassControllerTest >> testRemovesDependent [
 
 { #category : #'tests - diagram' }
 OPUmlClassControllerTest >> testShowClassInDiagram [
+
 	| class |
 	class := OPUMLClass new.
 	diagramController showWithoutDependentInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = class ] ])
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = class ] ])
 ]
 
 { #category : #'tests - diagram' }
 OPUmlClassControllerTest >> testShowClassWithAttributeInDiagram [
+
 	| class prop |
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
 	diagramController showInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = prop ] ])
-]
-
-{ #category : #tests }
-OPUmlClassControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: OPUMLClass new)
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = prop ] ])
 ]

@@ -20,14 +20,6 @@ OPUmlClassifierController >> createAdornmentsBy: builder [
 	"do nothing by default"
 ]
 
-{ #category : #figures }
-OPUmlClassifierController >> createDiagramElement [
-
-	super createDiagramElement.
-	self diagramElement adornmentCreationBlock: [ :builder | 
-		self createAdornmentsBy: builder ]
-]
-
 { #category : #construction }
 OPUmlClassifierController >> createModelIn: aParentModel [
 	self
@@ -54,6 +46,15 @@ OPUmlClassifierController >> descriptionName [
 		  label: 'Name';
 		  priority: 1;
 		  yourself
+]
+
+{ #category : #figures }
+OPUmlClassifierController >> hookDiagramElement [
+
+	super hookDiagramElement.
+	
+	self diagramElement adornmentCreationBlock: [ :builder | 
+		self createAdornmentsBy: builder ]
 ]
 
 { #category : #testing }

@@ -42,6 +42,16 @@ OPUmlExtensionController >> modelClass [
 	^ OPUMLExtension
 ]
 
+{ #category : #accessing }
+OPUmlExtensionController >> modelSource [
+	^ model memberEnds first type
+]
+
+{ #category : #accessing }
+OPUmlExtensionController >> modelTarget [
+	^ model memberEnds second type
+]
+
 { #category : #removing }
 OPUmlExtensionController >> removeModel [
 	"extra work to trigger update of the end classes... maybe this should be automatic for edges"

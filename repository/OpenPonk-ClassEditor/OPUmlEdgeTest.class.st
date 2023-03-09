@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlEdgeTest,
-	#superclass : #OPDITestCase,
+	#superclass : #OPDiagramElementTestCase,
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
