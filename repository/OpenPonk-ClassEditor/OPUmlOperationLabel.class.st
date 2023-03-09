@@ -5,10 +5,10 @@ Class {
 }
 
 { #category : #accessing }
-OPUmlOperationLabel >> defaultEmphasis [
+OPUmlOperationLabel >> emphasis [
 
 	| emphasis |
-	emphasis := super defaultEmphasis.
+	emphasis := super emphasis.
 	self modelElement isAbstract ifTrue: [ 
 		emphasis add: TextEmphasis italic ].
 	^ emphasis

@@ -12,14 +12,6 @@ OPUmlClassifierNameLabel >> createRoassalShape [
 ]
 
 { #category : #'as yet unclassified' }
-OPUmlClassifierNameLabel >> defaultEmphasis [
-
-	^ self modelElement isAbstract
-		  ifTrue: [ TextEmphasis italic ]
-		  ifFalse: [ TextEmphasis normal ]
-]
-
-{ #category : #'as yet unclassified' }
 OPUmlClassifierNameLabel >> defaultFontSize [
 
 	^ 11
@@ -29,4 +21,22 @@ OPUmlClassifierNameLabel >> defaultFontSize [
 OPUmlClassifierNameLabel >> defaultText [
 
 	^ (self modelElement name ifNil: [ ' ' ]) ifEmpty: [ ' ' ]
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlClassifierNameLabel >> emphasis [
+
+	| emphasis |
+	emphasis := super emphasis.
+	self modelElement isAbstract ifTrue: [ 
+		emphasis add: TextEmphasis italic ].
+	^ emphasis
+]
+
+{ #category : #rendering }
+OPUmlClassifierNameLabel >> updateRenderFromModel [
+
+	roassalShape emphasis: self emphasis.
+
+	super updateRenderFromModel
 ]

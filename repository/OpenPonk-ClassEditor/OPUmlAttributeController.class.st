@@ -91,38 +91,40 @@ OPUmlAttributeController >> descriptionIsUnique [
 
 { #category : #forms }
 OPUmlAttributeController >> descriptionMultiplicity [
+
 	<magritteDescription>
 	^ MASingleOptionDescription new
-		beExtensible;
-		options: #('0..1' '1..1' '0..*' '1..*');
-		reference: MAStringDescription new;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | me model lowerBound asString , '..' , me model upperBound asString ]
-				write: [ :me :newValue | 
-					self writeMultiplicityFrom: newValue to: me model.
-					self refreshFigure ]);
-		label: 'Multiplicity';
-		priority: 9;
-		beSorted;
-		yourself
+		  beExtensible;
+		  options: #( '0..1' '1..1' '0..*' '1..*' );
+		  reference: MAStringDescription new;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | 
+					   me model lowerBound asString , '..'
+					   , me model upperBound asString ]
+				   write: [ :me :newValue | 
+					   self writeMultiplicityFrom: newValue to: me model.
+					   self diagramElement modelChanged ]);
+		  label: 'Multiplicity';
+		  priority: 9;
+		  beSorted;
+		  yourself
 ]
 
 { #category : #forms }
 OPUmlAttributeController >> descriptionType [
+
 	<magritteDescription>
 	^ MAStringDescription new
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | me model type ifNil: [ '' ] ifNotNil: #name ]
-				write: [ :me :newValue | 
-					newValue
-						ifEmpty: [ me model type: nil ]
-						ifNotEmpty: [ me model type: (self typeNamed: newValue) ].
-					self refreshFigure ]);
-		label: 'Type';
-		priority: 5;
-		yourself
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | me model type ifNil: [ '' ] ifNotNil: #name ]
+				   write: [ :me :newValue | 
+					   newValue
+						   ifEmpty: [ me model type: nil ]
+						   ifNotEmpty: [ me model type: (self typeNamed: newValue) ].
+					   self diagramElement modelChanged ]);
+		  label: 'Type';
+		  priority: 5;
+		  yourself
 ]
 
 { #category : #figures }

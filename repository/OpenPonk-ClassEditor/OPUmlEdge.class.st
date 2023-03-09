@@ -14,8 +14,6 @@ OPUmlEdge >> headMarker [
 OPUmlEdge >> renderBasicShape [
 
 	^ OPRSPolyline new
-		  markerEnd: self headMarker;
-		  markerStart: self tailMarker;
 		  withBorderAttachPoint;
 		  controlPointsController: OPRSDraggableCPController new;
 		  addInteraction: OPRSDraggableControlPoints;
@@ -43,4 +41,17 @@ OPUmlEdge >> switchSourceAndTarget [
 OPUmlEdge >> tailMarker [
 
 	^ nil
+]
+
+{ #category : #rendering }
+OPUmlEdge >> updateRenderFromModel [
+
+	super updateRenderFromModel.
+
+	self roassalShape
+		resetMarkers;
+		markerEnd: self headMarker;
+		markerStart: self tailMarker.
+
+	self roassalShape signalUpdate
 ]

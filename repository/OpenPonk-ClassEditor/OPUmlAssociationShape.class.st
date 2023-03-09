@@ -51,6 +51,15 @@ OPUmlAssociationShape >> headMarker [
 { #category : #accessing }
 OPUmlAssociationShape >> markerFor: aProperty [
 
+	| marker |
+	marker := self markerShapeFor: aProperty.
+	marker ifNotNil: [ marker shape color: self roassalShape color ].
+	^ marker
+]
+
+{ #category : #accessing }
+OPUmlAssociationShape >> markerShapeFor: aProperty [
+
 	(self ontoUmlDecoratorFor: aProperty) ifNotNil: [ :marker | ^ marker ].
 	aProperty opposite aggregation = OPUMLAggregationKind composite 
 		ifTrue: [ ^ OPRSMarkerBuilder diamond ].

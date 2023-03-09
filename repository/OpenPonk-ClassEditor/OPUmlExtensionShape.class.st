@@ -17,7 +17,7 @@ OPUmlExtensionShape >> createEndLabels [
 ]
 
 { #category : #accessing }
-OPUmlExtensionShape >> markerFor: aProperty [
+OPUmlExtensionShape >> markerShapeFor: aProperty [
 	(aProperty name beginsWith: 'base_')
 		ifTrue: [ ^ OPRSMarkerBuilder triangle ].
 	^ nil
