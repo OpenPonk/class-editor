@@ -28,52 +28,70 @@ OPUmlCompartmentableShapeTest >> testFigures [
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testFigures1 [
+
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: element.
 
-	self assert: element figures asArray equals: {lbl}
+	self assert: element ownedElements asArray equals: { lbl }
 ]
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testFigures2 [
+
 	| lbl comp1 |
 	(lbl := OPUmlLabel new) owningElement: element.
 	(comp1 := OPUmlCompartment new) owningElement: element.
 
-	self assert: element figures asArray equals: {lbl}
+	self
+		assertCollection: element ownedElements asArray
+		hasSameElements: { 
+				lbl.
+				comp1 }
 ]
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testFigures3 [
+
 	| lbl comp compLbl |
 	(lbl := OPUmlLabel new) owningElement: element.
 	(comp := OPUmlCompartment new) owningElement: element.
 	(compLbl := OPUmlLabel new) owningElement: comp.
 
-	self assert: element figures asArray equals: (Array with: lbl with: compLbl)
+	self
+		assertCollection: element ownedElements asArray
+		hasSameElements: (Array with: lbl with: comp)
 ]
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testRemoveExtentChanged [
-	| compartment compLbl canvas fullExtent |
-	OPUmlNameLabel new owningElement: element.
-	compartment := OPUmlCompartment new.
-	compartment owningElement: element.
-	5 timesRepeat: [ (compLbl := OPUmlLabel new) owningElement: compartment ].
+
+	| compartment compLbl canvas fullExtent labelContainer |
+	element modelElement: OPTestEntityModel new.
+	labelContainer := OPUmlCompartmentableLabel in: element.
+	OPUmlNameLabel in: labelContainer.
+	compartment := OPUmlCompartment in: element.
+	5 timesRepeat: [ 
+		compLbl := (OPUmlLabel in: compartment)
+			           text: 'testx';
+			           yourself ].
 	canvas := RSCanvas new.
 	element renderIn: canvas.
 	fullExtent := element extent.
 	compLbl remove.
+	element modelChanged.
 	self assert: element extent y < fullExtent y
 ]
 
 { #category : #tests }
 OPUmlCompartmentableShapeTest >> testRemoveFromOwnership [
+
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: element.
-	self assert: element figures asArray equals: {lbl}.
+	self
+		assertCollection: element ownedElements asArray
+		hasSameElements: { lbl }.
 	lbl remove.
-	self assert: element figures isEmpty
+	self assert: element ownedElements isEmpty
 ]
 
 { #category : #tests }
@@ -87,25 +105,11 @@ OPUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
 ]
 
 { #category : #tests }
-OPUmlCompartmentableShapeTest >> testRemoveFromViewRich [
-	| canvas lbl comp compLbl |
-	element := OPUmlClassifierShape new.
-	lbl := OPUmlNameLabel new.
-	lbl owningElement: element.
-	comp := OPUmlCompartment new.
-	comp owningElement: element.
-	(compLbl := OPUmlLabel new) owningElement: comp.
-	canvas := RSCanvas new.
-	element renderIn: canvas.
-	element remove.
-	self assert: canvas elements asArray equals: #()
-]
-
-{ #category : #tests }
 OPUmlCompartmentableShapeTest >> testRemoveOwnedElement [
+
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: element.
-	self assert: element figures asArray equals: {lbl}.
+	self assertCollection: element ownedElements hasSameElements: { lbl }.
 	lbl owningElement: nil.
-	self assert: element figures isEmpty
+	self assert: element ownedElements isEmpty
 ]

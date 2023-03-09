@@ -77,6 +77,7 @@ OPUmlClassifierShape >> minExtent [
 OPUmlClassifierShape >> setupHighlight: aHighlightable [
 
 	super setupHighlight: aHighlightable.
+	adornmentCreationBlock ifNil: [ ^ self ].
 	aHighlightable highlightAdornments: [ :builder | 
 		builder horizontalLocation
 			outer;

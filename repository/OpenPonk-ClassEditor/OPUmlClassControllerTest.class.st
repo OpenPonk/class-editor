@@ -44,21 +44,27 @@ OPUmlClassControllerTest >> testCreateFromPalette [
 { #category : #'tests - diagram' }
 OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 
-	| class operation operationController nameLabelRectangle operationLabelRectangle classRectangle elements |
-	class := OPUMLClass new.
-	class name: 'AClass'.
+	| operation operationController nameLabelRectangle operationLabelRectangle classRectangle elements |
 	operation := OPUMLOperation new.
 	operation name: 'anOperation'.
-	class ownedOperations add: operation.
+	model ownedOperations add: operation.
 	operationController := OPUmlOperationController new.
 	operationController model: operation.
-	diagramController model packagedElements add: class.
+	diagramController model packagedElements add: model.
+	controller model: model.
+	controller showInDiagram: diagramController.
+	operationController showInDiagram: diagramController.
 	elements := diagramController canvas nodes.
 	nameLabelRectangle := (elements detect: [ :any | 
-		                       any model class = OPUmlNameLabel ])
+		                       any model isKindOf: OPUmlClassifierNameLabel ])
 		                      encompassingRectangle.
 	operationLabelRectangle := (elements detect: [ :any | 
-		                            any model class = OPUmlLabel ])
+		                            (any model isKindOf: OPUmlOperationLabel) 
+			                            or: [ 
+				                            any model ownedElements anySatisfy: [ 
+					                            :anyInner | 
+					                            anyInner isKindOf:
+						                            OPUmlOperationLabel ] ] ])
 		                           encompassingRectangle.
 	classRectangle := (elements detect: [ :any | 
 		                   any model isKindOf: OPUmlClassShape ])

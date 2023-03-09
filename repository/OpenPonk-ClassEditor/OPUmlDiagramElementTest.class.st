@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 OPUmlDiagramElementTest >> elementClass [
-	^ OPUmlDiagramElement
+	^ OPDiagramElement
 ]
 
 { #category : #tests }

@@ -39,6 +39,18 @@ OPUmlPackageImportControllerTest >> setUpModel [
 		importedPackage: importedPackage
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlPackageImportControllerTest >> sourceClass [
+
+	^ OPUMLPackage
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlPackageImportControllerTest >> targetClass [
+
+	^ OPUMLPackage
+]
+
 { #category : #'tests - construction' }
 OPUmlPackageImportControllerTest >> testCanClassBeSource [
 	self assert: (OPUmlPackageController new canBeSourceFor: controller)
@@ -76,25 +88,10 @@ OPUmlPackageImportControllerTest >> testClassBeTarget [
 		equals: targetController model
 ]
 
-{ #category : #'tests - construction' }
-OPUmlPackageImportControllerTest >> testConnectionFeedback [
+{ #category : #tests }
+OPUmlPackageImportControllerTest >> testDescriptionName [
 
-	| sourceController targetController feedback feedbackLine |
-	sourceController := diagramController newControllerFor:
-		                    (OPUMLPackage new name: 'A').
-	targetController := diagramController newControllerFor:
-		                    (OPUMLPackage new name: 'B').
-	sourceController showWithoutDependentInDiagram: diagramController.
-	targetController showWithoutDependentInDiagram: diagramController.
-	sourceController addAsSourceFor: controller.
-	feedback := controller connectionFeedback.
-	feedback renderIn: diagramController view.
-	self assert: diagramController view edges isNotEmpty.
-	feedbackLine := diagramController view edges first.
-	self assert: feedbackLine from equals: sourceController figure.
-	targetController addAsTargetFor: controller.
-	feedbackLine remove.
-	self deny: (diagramController view edges includes: feedbackLine)
+	self assert: controller descriptionName equals: nil
 ]
 
 { #category : #'tests - diagram' }

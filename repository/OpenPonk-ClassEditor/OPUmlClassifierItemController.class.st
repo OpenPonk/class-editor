@@ -32,7 +32,7 @@ OPUmlClassifierItemController >> descriptionName [
 				        ifTrue: [ newValue allButFirst ]
 				        ifFalse: [ newValue ] ].
 		me model name: text.
-		self diagramElementOwner modelChanged ].
+		self diagramElement modelChanged ].
 	^ description
 ]
 

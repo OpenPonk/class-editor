@@ -14,7 +14,9 @@ OPUmlEdgeTest >> setUp [
 	| source target |
 	super setUp.
 	source := OPUmlLabel new.
+	source text: 'src'.
 	target := OPUmlLabel new.
+	target text: 'tgt'.
 	element source: source.
 	element target: target
 ]
@@ -43,14 +45,16 @@ OPUmlEdgeTest >> testRemoveDetachFromEnds [
 { #category : #tests }
 OPUmlEdgeTest >> testRemoveFromView [
 
-	| lbl v |
-	(lbl := OPUmlLabel new) owningElement: element.
-	v := RTView new.
-	element renderIn: v.
-	lbl renderIn: v.
-	self assert: v edges size equals: 1.
-	self assert: v elements size equals: 1.
+	| lbl canvas |
+	(lbl := OPUmlLabel new)
+		text: 'x';
+		owningElement: element.
+	canvas := RSCanvas new.
+	element source renderIn: canvas.
+	element target renderIn: canvas.
+	element renderIn: canvas.
+	lbl renderIn: canvas.
+	self assert: canvas nodes size equals: 3.
 	element remove.
-	self assert: v edges size equals: 0.
-	self assert: v elements size equals: 0
+	self assert: canvas shapes size equals: 2
 ]

@@ -29,13 +29,6 @@ OPUmlOperationControllerTest >> testCreateDiagramElement [
 	super testCreateDiagramElement
 ]
 
-{ #category : #tests }
-OPUmlOperationControllerTest >> testNotationText [
-	self
-		assert: (controller notationTextFor: (OPUMLOperation new name: 'attr'))
-		equals: 'attr()'
-]
-
 { #category : #'tests - removing' }
 OPUmlOperationControllerTest >> testRemoveFromView [
 

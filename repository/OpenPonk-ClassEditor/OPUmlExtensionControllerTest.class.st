@@ -53,6 +53,12 @@ OPUmlExtensionControllerTest >> setUpExtension [
 	model ownedEnd: extensionLibrary
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlExtensionControllerTest >> sourceClass [
+
+	^ OPUMLStereotype
+]
+
 { #category : #tests }
 OPUmlExtensionControllerTest >> testClassBeTarget [
 	| sourceController targetController |

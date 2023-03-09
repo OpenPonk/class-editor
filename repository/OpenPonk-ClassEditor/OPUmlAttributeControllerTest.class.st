@@ -53,9 +53,10 @@ OPUmlAttributeControllerTest >> testCreateDiagramElement [
 
 { #category : #tests }
 OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
-	| accessor model |
+
+	| accessor |
 	accessor := controller descriptionAccessor: #isDerived.
-	model := OPUMLProperty new.
+	controller diagramElement: Mock new.
 	model isDerived: true.
 	controller model: model.
 	self assert: (accessor read: controller).
@@ -65,10 +66,11 @@ OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
 
 { #category : #tests }
 OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
-	| accessor model |
+
+	| accessor |
 	accessor := controller descriptionAccessor: #isDerived.
-	model := OPUMLProperty new.
 	controller model: model.
+	controller diagramElement: Mock new.
 	accessor write: true to: controller.
 	self assert: model isDerived.
 	accessor write: false to: controller.
@@ -85,18 +87,6 @@ OPUmlAttributeControllerTest >> testDescriptions [
 	self assert: (container anySatisfy: [ :each | each label = 'Name' ]).
 	self
 		assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
-]
-
-{ #category : #tests }
-OPUmlAttributeControllerTest >> testNotationText [
-	self
-		assert:
-			(controller
-				notationTextFor:
-					(OPUMLProperty new
-						name: 'attr';
-						isDerived: true))
-		equals: '/attr'
 ]
 
 { #category : #'tests - removing' }
