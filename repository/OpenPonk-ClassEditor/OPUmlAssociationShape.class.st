@@ -32,7 +32,7 @@ OPUmlAssociationShape >> createEndLabels [
 { #category : #initialization }
 OPUmlAssociationShape >> createOwnedElementsWithoutController [
 
-	super createOwnedElementsWithoutController.
+	self ownedElements ifNotEmpty: [ ^ self ].
 	{ 
 		OPUmlAssociationLabel.
 		OPUmlAssociationPropertiesLabel.

@@ -86,6 +86,14 @@ OPUmlCompartmentableShape >> ownedElement: aShape renderedIn: aCanvas [
 	wasRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
+{ #category : #removing }
+OPUmlCompartmentableShape >> removeRender [
+
+	super removeRender.
+	separators do: #remove.
+	separators := OrderedCollection new
+]
+
 { #category : #accessing }
 OPUmlCompartmentableShape >> removeSeparator [
 
@@ -126,6 +134,12 @@ OPUmlCompartmentableShape >> separators [
 OPUmlCompartmentableShape >> setupHighlight: selectable [
 
 	selectable highlightBorderColor: Color blue
+]
+
+{ #category : #roassal }
+OPUmlCompartmentableShape >> updateRenderFromBounds [
+
+	bounds ifNotNil: [ roassalShape translateTo: bounds position ]
 ]
 
 { #category : #rendering }

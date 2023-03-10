@@ -14,7 +14,7 @@ Class {
 { #category : #initialization }
 OPUmlGeneralizationShape >> createOwnedElementsWithoutController [
 
-	super createOwnedElementsWithoutController.
+	self ownedElements ifNotEmpty: [ ^ self ].
 	OPUmlGeneralizationLabel in: self
 ]
 

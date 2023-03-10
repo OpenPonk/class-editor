@@ -53,7 +53,9 @@ OPUmlClassifierShape >> createLabel: aLabelShapeClass [
 { #category : #initialization }
 OPUmlClassifierShape >> createOwnedElementsWithoutController [
 
-	super createOwnedElementsWithoutController.
+	(self ownedElements anySatisfy: [ :any | 
+		 any ownedElements anySatisfy: [ :anyInner | 
+			 anyInner isKindOf: OPUmlClassifierNameLabel ] ]) ifTrue: [ ^ self ].
 	self createLabel: OPUmlClassifierNameLabel
 ]
 
