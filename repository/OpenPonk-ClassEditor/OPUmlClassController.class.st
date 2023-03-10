@@ -179,5 +179,6 @@ OPUmlClassController >> modelClass [
 
 { #category : #accessing }
 OPUmlClassController >> modelClassName [
-	^ #Class
+
+	^ 'Class'
 ]

@@ -84,5 +84,6 @@ OPUmlEnumerationController >> modelClass [
 
 { #category : #accessing }
 OPUmlEnumerationController >> modelClassName [
-	^ #Enumeration
+
+	^ 'Enumeration'
 ]

@@ -20,5 +20,6 @@ OPUmlStereotypeController >> modelClass [
 
 { #category : #accessing }
 OPUmlStereotypeController >> modelClassName [
-	^ #Stereotype
+
+	^ 'Stereotype'
 ]

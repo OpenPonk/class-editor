@@ -56,7 +56,12 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 	operationController showInDiagram: diagramController.
 	elements := diagramController canvas nodes.
 	nameLabelRectangle := (elements detect: [ :any | 
-		                       any model isKindOf: OPUmlClassifierNameLabel ])
+		                       (any model isKindOf: OPUmlClassifierNameLabel) 
+			                       or: [ 
+				                       any model ownedElements anySatisfy: [ 
+					                       :anyInner | 
+					                       anyInner isKindOf:
+						                       OPUmlClassifierNameLabel ] ] ])
 		                      encompassingRectangle.
 	operationLabelRectangle := (elements detect: [ :any | 
 		                            (any model isKindOf: OPUmlOperationLabel) 
