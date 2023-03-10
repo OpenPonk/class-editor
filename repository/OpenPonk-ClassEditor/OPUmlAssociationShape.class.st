@@ -53,7 +53,9 @@ OPUmlAssociationShape >> markerFor: aProperty [
 
 	| marker |
 	marker := self markerShapeFor: aProperty.
-	marker ifNotNil: [ marker shape color: self roassalShape color ].
+	marker ifNotNil: [ 
+		self isRendered ifTrue: [ 
+			marker shape color: self roassalShape color ] ].
 	^ marker
 ]
 
