@@ -4,6 +4,15 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
+{ #category : #accessing }
+OPUmlEdge >> colorMarker: aMarker [
+
+	aMarker ifNil: [ ^ aMarker ].
+	self isRendered ifFalse: [ ^ aMarker ].
+	aMarker shape color: self roassalShape color.
+	^ aMarker
+]
+
 { #category : #'Roassal2 - accessing' }
 OPUmlEdge >> headMarker [
 
@@ -50,8 +59,8 @@ OPUmlEdge >> updateRenderFromModel [
 
 	self roassalShape
 		resetMarkers;
-		markerEnd: self headMarker;
-		markerStart: self tailMarker.
+		markerEnd: (self colorMarker: self headMarker);
+		markerStart: (self colorMarker: self tailMarker).
 
 	self roassalShape signalUpdate
 ]
