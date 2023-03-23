@@ -105,6 +105,18 @@ OPUmlClassifierShape >> stereotypesLabelClass [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+OPUmlClassifierShape >> strokeColor [
+
+	^ self stylePropertyNamed: #strokeColor ifAbsent: [ Color black ]
+]
+
+{ #category : #accessing }
+OPUmlClassifierShape >> strokeColor: aColor [
+
+	^ self stylePropertyNamed: #strokeColor put: aColor
+]
+
 { #category : #rendering }
 OPUmlClassifierShape >> updateCommentIcon [
 
@@ -134,11 +146,13 @@ OPUmlClassifierShape >> updateRenderFromModel [
 ]
 
 { #category : #rendering }
-OPUmlClassifierShape >> updateRenderFromSelf [
+OPUmlClassifierShape >> updateRenderFromStyles [
 
 	self isRendered ifFalse: [ ^ self ].
 	roassalShape color: self color.
-	super updateRenderFromSelf
+	roassalShape borderColor: self strokeColor.
+	super updateRenderFromStyles.
+	self roassalShape signalUpdate
 ]
 
 { #category : #rendering }

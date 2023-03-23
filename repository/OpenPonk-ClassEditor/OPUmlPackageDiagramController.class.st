@@ -271,9 +271,9 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 			whenCreated: [ :ctrl | 
 				ctrl model applyStereotype: stereotype implementationClass new.
 				ctrl model name: stereotype name.
-				ctrl refreshFigure.
+				ctrl diagramElement modelChanged.
 				OPInitialSetElementCommand executeOn: ctrl.
-				ctrl refreshFigure ] ].
+				ctrl diagramElement modelChanged ] ].
 	relationships ifNotEmpty: [ aPalette newSeparator ].
 	relationships do: [ :stereotype | 
 		(aPalette newConnectionCreationEntry: [ 

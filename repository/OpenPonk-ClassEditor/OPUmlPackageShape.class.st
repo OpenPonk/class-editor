@@ -143,10 +143,11 @@ OPUmlPackageShape >> updateRenderFromModel [
 ]
 
 { #category : #update }
-OPUmlPackageShape >> updateRenderFromSelf [
+OPUmlPackageShape >> updateRenderFromStyles [
 
 	self isRendered ifFalse: [ ^ self ].
 	roassalShape color: self color.
 	ear color: self color.
-	super updateRenderFromSelf
+	super updateRenderFromStyles.
+	self roassalShape signalUpdate
 ]

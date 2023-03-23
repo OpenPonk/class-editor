@@ -22,11 +22,3 @@ OPUmlClassItemLabel >> emphasis [
 		emphasis add: TextEmphasis underlined ].
 	^ emphasis
 ]
-
-{ #category : #rendering }
-OPUmlClassItemLabel >> updateRenderFromModel [
-
-	roassalShape emphasis: self emphasis.
-
-	super updateRenderFromModel
-]
