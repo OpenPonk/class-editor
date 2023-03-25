@@ -56,9 +56,10 @@ OPUmlClassShape >> removeAttribute: anAttributeShape [
 
 	anAttributeShape remove.
 
-	attributes ownedElements ifEmpty: [ 
-		attributes remove.
-		attributes := nil ].
+	attributes ownedElements ifNotNil: [ :elements |
+		elements ifEmpty: [
+			attributes remove.
+			attributes := nil ] ].
 
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
@@ -68,9 +69,11 @@ OPUmlClassShape >> removeOperation: anOperationShape [
 
 	anOperationShape remove.
 
-	operations ownedElements ifEmpty: [ 
-		operations remove.
-		operations := nil ].
+
+	operations ownedElements ifNotNil: [ :elements |
+		elements ifEmpty: [
+			operations remove.
+			operations := nil ] ].
 
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]

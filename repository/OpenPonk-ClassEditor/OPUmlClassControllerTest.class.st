@@ -150,7 +150,7 @@ OPUmlClassControllerTest >> testRemovesDependent [
 	diagramController showWithoutDependentInDiagramModel: secondClass.
 	diagramController showWithoutDependentInDiagramModel: association.
 	controller := diagramController controllerForModel: class.
-	controller removeFull.
+	controller removeControllerAndModel.
 	self
 		assertCollection: diagramController model packagedElements asArray
 		hasSameElements: {secondClass}

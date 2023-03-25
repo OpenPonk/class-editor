@@ -91,9 +91,9 @@ OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 		showWithoutDependentInDiagramModel: element;
 		showWithoutDependentInDiagramModel: comment;
 		showWithoutDependentInDiagramModel: model.
-	(diagramController controllerForModel: model) removeFull.
-	(diagramController controllerForModel: comment) removeFull.
-	(diagramController controllerForModel: element) removeFull.
+	(diagramController controllerForModel: model) removeControllerAndModel.
+	(diagramController controllerForModel: comment) removeControllerAndModel.
+	(diagramController controllerForModel: element) removeControllerAndModel.
 	self assert: diagramController controllers asArray equals: #()
 ]
 
@@ -116,7 +116,7 @@ OPUmlAssociationControllerTest >> testRemovalOfClassRemovesAssociation [
 					 { 'owningElement'. 'ownedComment'. 'association'. '1' } 
 						 includes: e text ] ])
 		equals: 0.
-	elementController removeFull.
+	elementController removeControllerAndModel.
 	self
 		assert: (diagramController canvas nodes select: [ :e | 
 				 (e respondsTo: #text) and: [ 
