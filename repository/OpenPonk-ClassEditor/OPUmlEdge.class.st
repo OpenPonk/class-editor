@@ -1,6 +1,8 @@
 Class {
 	#name : #OPUmlEdge,
 	#superclass : #OPEdge,
+	#traits : 'OPTDIColoredAsStroke',
+	#classTraits : 'OPTDIColoredAsStroke classTrait',
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
@@ -30,18 +32,6 @@ OPUmlEdge >> renderBasicShape [
 		  from: self source roassalShape;
 		  to: self target roassalShape;
 		  yourself
-]
-
-{ #category : #accessing }
-OPUmlEdge >> strokeColor [
-
-	^ self stylePropertyNamed: #strokeColor ifAbsent: [ Color black ]
-]
-
-{ #category : #accessing }
-OPUmlEdge >> strokeColor: aColor [
-
-	^ self stylePropertyNamed: #strokeColor put: aColor
 ]
 
 { #category : #'Roassal2 - manipulation' }
@@ -74,14 +64,5 @@ OPUmlEdge >> updateRenderFromModel [
 		markerEnd: (self colorMarker: self headMarker);
 		markerStart: (self colorMarker: self tailMarker).
 
-	self roassalShape signalUpdate
-]
-
-{ #category : #update }
-OPUmlEdge >> updateRenderFromStyles [
-
-	self isRendered ifFalse: [ ^ self ].
-	roassalShape color: self strokeColor.
-	super updateRenderFromStyles.
 	self roassalShape signalUpdate
 ]

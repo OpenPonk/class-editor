@@ -82,8 +82,9 @@ OPUmlAssociationController >> descriptionSourceEnd [
 
 { #category : #forms }
 OPUmlAssociationController >> descriptionStereotype [
+
 	<magritteDescription>
-	^ super descriptionStereotype
+	^ self descriptionStereotypeContent
 ]
 
 { #category : #forms }

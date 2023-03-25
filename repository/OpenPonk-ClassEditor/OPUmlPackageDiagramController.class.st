@@ -98,7 +98,7 @@ OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 		  yourself
 ]
 
-{ #category : #forms }
+{ #category : #'as yet unclassified' }
 OPUmlPackageDiagramController >> descriptionStereotype [
 
 	<magritteDescription>

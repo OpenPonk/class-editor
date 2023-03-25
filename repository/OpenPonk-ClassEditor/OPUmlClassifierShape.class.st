@@ -1,6 +1,8 @@
 Class {
 	#name : #OPUmlClassifierShape,
 	#superclass : #OPUmlCompartmentableShape,
+	#traits : 'OPTDIBorderColoredAsStroke + OPTDIColoredAsFill',
+	#classTraits : 'OPTDIBorderColoredAsStroke classTrait + OPTDIColoredAsFill classTrait',
 	#instVars : [
 		'nameLabel',
 		'stereotypeLabel',
@@ -22,18 +24,6 @@ OPUmlClassifierShape class >> stonAllInstVarNames [
 OPUmlClassifierShape >> adornmentCreationBlock: aBlock [
 
 	adornmentCreationBlock := aBlock
-]
-
-{ #category : #accessing }
-OPUmlClassifierShape >> color [
-
-	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color white ]
-]
-
-{ #category : #accessing }
-OPUmlClassifierShape >> color: aColor [
-
-	^ self stylePropertyNamed: #fillColor put: aColor
 ]
 
 { #category : #initialization }
@@ -105,18 +95,6 @@ OPUmlClassifierShape >> stereotypesLabelClass [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
-OPUmlClassifierShape >> strokeColor [
-
-	^ self stylePropertyNamed: #strokeColor ifAbsent: [ Color black ]
-]
-
-{ #category : #accessing }
-OPUmlClassifierShape >> strokeColor: aColor [
-
-	^ self stylePropertyNamed: #strokeColor put: aColor
-]
-
 { #category : #rendering }
 OPUmlClassifierShape >> updateCommentIcon [
 
@@ -149,7 +127,7 @@ OPUmlClassifierShape >> updateRenderFromModel [
 OPUmlClassifierShape >> updateRenderFromStyles [
 
 	self isRendered ifFalse: [ ^ self ].
-	roassalShape color: self color.
+	roassalShape color: self fillColor.
 	roassalShape borderColor: self strokeColor.
 	super updateRenderFromStyles.
 	self roassalShape signalUpdate

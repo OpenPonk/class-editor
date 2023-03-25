@@ -4,6 +4,8 @@ I represent a package box.
 Class {
 	#name : #OPUmlPackageShape,
 	#superclass : #OPShape,
+	#traits : 'OPTDIColoredAsFill',
+	#classTraits : 'OPTDIColoredAsFill classTrait',
 	#instVars : [
 		'mainLabel',
 		'stereotypeLabel',
@@ -12,18 +14,6 @@ Class {
 	],
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
-
-{ #category : #accessing }
-OPUmlPackageShape >> color [
-
-	^ self stylePropertyNamed: #fillColor ifAbsent: [ Color paleYellow ]
-]
-
-{ #category : #accessing }
-OPUmlPackageShape >> color: aColor [
-
-	^ self stylePropertyNamed: #fillColor put: aColor
-]
 
 { #category : #initialization }
 OPUmlPackageShape >> initialize [

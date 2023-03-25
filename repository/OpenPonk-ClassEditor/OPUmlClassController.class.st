@@ -156,8 +156,9 @@ OPUmlClassController >> descriptionIsAbstract [
 
 { #category : #forms }
 OPUmlClassController >> descriptionStereotype [
+
 	<magritteDescription>
-	^ super descriptionStereotype
+	^ self descriptionStereotypeContent
 ]
 
 { #category : #figures }
