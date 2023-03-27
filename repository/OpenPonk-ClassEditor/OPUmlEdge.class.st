@@ -25,7 +25,7 @@ OPUmlEdge >> headMarker [
 OPUmlEdge >> renderBasicShape [
 
 	^ OPRSPolyline new
-		  withBorderAttachPoint;
+		  attachPoint: OPRSOrthogonalBorderAttachPoint new;
 		  controlPointsController: OPRSDraggableCPController new;
 		  addInteraction: OPRSDraggableControlPoints;
 		  color: Color black;

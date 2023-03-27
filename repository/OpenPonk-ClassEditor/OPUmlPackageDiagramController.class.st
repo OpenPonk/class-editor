@@ -4,7 +4,7 @@ I am controller for managing the main class diagram presentation and handling it
 Class {
 	#name : #OPUmlPackageDiagramController,
 	#superclass : #OPDiagramController,
-	#traits : 'OPTUmlStereotypedElementController @ {#descriptionStereotypeContent->#descriptionStereotype}',
+	#traits : 'OPTUmlStereotypedElementController',
 	#classTraits : 'OPTUmlStereotypedElementController classTrait',
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
