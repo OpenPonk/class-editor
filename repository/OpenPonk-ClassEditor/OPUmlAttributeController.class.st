@@ -151,7 +151,8 @@ OPUmlAttributeController >> modelClass [
 OPUmlAttributeController >> removeDiagramElement [
 
 	self diagramElement ifNil: [ ^ self ].
-	self diagramElementOwner removeAttribute: self diagramElement.
+	self diagramElementOwner ifNotNil: [ :owner |
+		owner removeAttribute: self diagramElement ].
 	diagramElement := nil
 ]
 

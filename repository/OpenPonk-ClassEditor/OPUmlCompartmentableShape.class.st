@@ -32,6 +32,12 @@ OPUmlCompartmentableShape >> initialize [
 	separators := OrderedCollection new
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlCompartmentableShape >> isResizableByUser [
+
+	^ false
+]
+
 { #category : #rendering }
 OPUmlCompartmentableShape >> layout [
 
@@ -132,12 +138,6 @@ OPUmlCompartmentableShape >> separators [
 OPUmlCompartmentableShape >> setupHighlight: selectable [
 
 	selectable highlightBorderColor: Color blue
-]
-
-{ #category : #roassal }
-OPUmlCompartmentableShape >> updateRenderFromBounds [
-
-	bounds ifNotNil: [ roassalShape translateTo: bounds position ]
 ]
 
 { #category : #rendering }

@@ -56,8 +56,8 @@ OPUmlClassShape >> removeAttribute: anAttributeShape [
 
 	anAttributeShape remove.
 
-	attributes ownedElements ifNotNil: [ :elements |
-		elements ifEmpty: [
+	attributes ifNotNil: [ :compartment |
+		compartment ownedElements ifEmpty: [
 			attributes remove.
 			attributes := nil ] ].
 
@@ -69,9 +69,8 @@ OPUmlClassShape >> removeOperation: anOperationShape [
 
 	anOperationShape remove.
 
-
-	operations ownedElements ifNotNil: [ :elements |
-		elements ifEmpty: [
+	operations ifNotNil: [ :compartment |
+		compartment ownedElements ifEmpty: [
 			operations remove.
 			operations := nil ] ].
 

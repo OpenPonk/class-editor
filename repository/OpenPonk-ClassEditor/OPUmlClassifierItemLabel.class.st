@@ -12,6 +12,18 @@ OPUmlClassifierItemLabel >> addedByMouseClickTo: aPoint [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlClassifierItemLabel >> isPositionableByUser [
+
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlClassifierItemLabel >> isResizableByUser [
+
+	^ false
+]
+
 { #category : #initialization }
 OPUmlClassifierItemLabel >> modelChanged [
 

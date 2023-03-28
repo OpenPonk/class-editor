@@ -29,8 +29,14 @@ OPUmlClassifierNameLabel >> emphasis [
 	^ emphasis
 ]
 
-{ #category : #testing }
+{ #category : #'as yet unclassified' }
 OPUmlClassifierNameLabel >> isPositionableByUser [
+
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlClassifierNameLabel >> isResizableByUser [
 
 	^ false
 ]
@@ -50,7 +56,8 @@ OPUmlClassifierNameLabel >> renderBasicShape [
 	labeled := OPRSLabeled new.
 	labeled shapeBuilder wrapStrategy:
 		(RSWrapStrategy new wrapMaxWidth: 400).
-	labeled locationDo: [ :location | 
+	labeled shapeBuilder layout alignCenter.
+	labeled locationDo: [ :location |
 		location
 			inner;
 			middle;

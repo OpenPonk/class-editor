@@ -56,6 +56,7 @@ OPUmlOperationController >> modelClass [
 OPUmlOperationController >> removeDiagramElement [
 
 	self diagramElement ifNil: [ ^ self ].
-	self diagramElementOwner removeOperation: self diagramElement.
+	self diagramElementOwner ifNotNil: [ :owner |
+		owner removeOperation: self diagramElement ].
 	diagramElement := nil
 ]
