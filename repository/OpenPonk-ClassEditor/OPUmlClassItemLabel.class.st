@@ -1,6 +1,8 @@
 Class {
 	#name : #OPUmlClassItemLabel,
 	#superclass : #OPUmlClassifierItemLabel,
+	#traits : 'OPTDIColoredAsStroke',
+	#classTraits : 'OPTDIColoredAsStroke classTrait',
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
