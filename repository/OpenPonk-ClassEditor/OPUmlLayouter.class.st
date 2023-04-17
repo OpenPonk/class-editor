@@ -38,7 +38,7 @@ OPUmlLayouter >> applyLayout: aThreeArgBlock [
 OPUmlLayouter >> circleLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
-			RTWeightedCircleLayout new
+			RSWeightedCircleLayout new
 				scaleBy: 20;
 				on: boxes ]
 ]
@@ -69,7 +69,7 @@ OPUmlLayouter >> dominanceTreeLayout [
 OPUmlLayouter >> gridLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
-			RTGridLayout new
+			RSGridLayout new
 				gapSize: 140;
 				on: boxes ]
 ]
@@ -91,14 +91,13 @@ OPUmlLayouter >> sugiyamaLayout [
 { #category : #'ui hooks' }
 OPUmlLayouter >> treeLayout [
 
-	self applyLayout: [ :boxes :hierarchy :links | 
+	self applyLayout: [ :boxes :hierarchy :links |
 		| centerY |
-		RTTreeLayout new
-			doNotAttachPoint;
+		RSTreeLayout new
 			verticalGap: 100;
 			horizontalGap: 100;
 			on: boxes edges: hierarchy , links.
-		centerY := (RTGroup withAll: boxes) encompassingRectangle center y.
-		boxes do: [ :each | 
+		centerY := (RSGroup withAll: boxes) encompassingRectangle center y.
+		boxes do: [ :each |
 			each translateBy: 0 @ 2 * (centerY - each position y) ] ]
 ]
