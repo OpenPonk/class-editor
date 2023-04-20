@@ -16,31 +16,26 @@ BaselineOfClassEditor class >> loadPlugins [
 BaselineOfClassEditor >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [ 
-		spec baseline: 'Moose' with: [ 
-			spec
-				repository: 'github://moosetechnology/Moose:v9.0.1/src';
-				loads: #( Merlin ) ].
+	spec for: #common do: [
 		spec
 			baseline: 'UMLMetamodel'
-			with: [ 
+			with: [
 			spec repository: 'github://openponk/uml-metamodel/repository' ].
 		spec
 			baseline: 'OPUMLXMI'
 			with: [ spec repository: 'github://openponk/uml-xmi/repository' ].
-		spec baseline: 'UMLBootstrapGenerator' with: [ 
+		spec baseline: 'UMLBootstrapGenerator' with: [
 			spec repository:
 				'github://openponk/uml-bootstrap-generator/repository' ].
 		spec
 			baseline: 'OpenPonk'
 			with: [ spec repository: 'github://openponk/openponk:dev-roassal3' ].
-		spec
-			baseline: 'UMLProfiles'
-			with: [ 
-			spec repository: 'github://openponk/uml-profiles:dev-roassal3/repository' ].
-		spec package: 'OpenPonk-ClassEditor' with: [ 
+		spec baseline: 'UMLProfiles' with: [
+			spec repository:
+				'github://openponk/uml-profiles:dev-roassal3/repository' ].
+		spec package: 'OpenPonk-ClassEditor' with: [
 			spec requires:
-				#( Moose 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
+				#( 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
 				   'UMLProfiles' ) ].
 		spec
 			package: 'OPClassEditor-Plugins'
