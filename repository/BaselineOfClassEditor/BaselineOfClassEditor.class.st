@@ -19,20 +19,20 @@ BaselineOfClassEditor >> baseline: spec [
 	spec for: #common do: [
 		spec
 			baseline: 'UMLMetamodel'
-			with: [
-			spec repository: 'github://openponk/uml-metamodel/repository' ].
+			with: [ spec repository: 'github://openponk/uml-metamodel' ].
 		spec
 			baseline: 'OPUMLXMI'
-			with: [ spec repository: 'github://openponk/uml-xmi/repository' ].
-		spec baseline: 'UMLBootstrapGenerator' with: [
-			spec repository:
-				'github://openponk/uml-bootstrap-generator/repository' ].
+			with: [ spec repository: 'github://openponk/uml-xmi' ].
+		spec
+			baseline: 'UMLBootstrapGenerator'
+			with: [
+			spec repository: 'github://openponk/uml-bootstrap-generator' ].
 		spec
 			baseline: 'OpenPonk'
-			with: [ spec repository: 'github://openponk/openponk:dev-roassal3' ].
-		spec baseline: 'UMLProfiles' with: [
-			spec repository:
-				'github://openponk/uml-profiles:dev-roassal3/repository' ].
+			with: [ spec repository: 'github://openponk/openponk' ].
+		spec
+			baseline: 'UMLProfiles'
+			with: [ spec repository: 'github://openponk/uml-profiles' ].
 		spec package: 'OpenPonk-ClassEditor' with: [
 			spec requires:
 				#( 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
@@ -52,7 +52,7 @@ BaselineOfClassEditor >> baseline: spec [
 BaselineOfClassEditor >> loadOntoUML [
 	Metacello new
 		baseline: 'OntoUMLProfile';
-		repository: 'github://openponk/ontouml-profile:dev-roassal3';
+		repository: 'github://openponk/ontouml-profile';
 		load: 'plugin'
 ]
 
@@ -60,7 +60,7 @@ BaselineOfClassEditor >> loadOntoUML [
 BaselineOfClassEditor >> loadOntoUMLToUMLTransformation [
 	Metacello new
 		baseline: 'OntoUMLTransformationFramework';
-		repository: 'github://openponk/openponk-ontouml-to-uml-transformation:dev-roassal3';
+		repository: 'github://openponk/openponk-ontouml-to-uml-transformation';
 		load: 'plugin'
 ]
 
@@ -78,7 +78,7 @@ BaselineOfClassEditor >> loadPatterns [
 
 	Metacello new
 		baseline: 'OntoUMLPatterns';
-		repository: 'github://openponk/ontouml-patterns:dev-roassal3';
+		repository: 'github://openponk/ontouml-patterns';
 		load: 'plugin'
 ]
 
@@ -97,6 +97,6 @@ BaselineOfClassEditor >> loadPlugins [
 BaselineOfClassEditor >> loadVerificationFramework [
 	Metacello new
 		baseline: 'OntoUMLVerificationFramework';
-		repository: 'github://openponk/ontouml-verifications:dev-roassal3';
+		repository: 'github://openponk/ontouml-verifications';
 		load: 'plugin'
 ]
