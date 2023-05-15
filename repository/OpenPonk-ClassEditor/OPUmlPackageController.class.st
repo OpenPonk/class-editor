@@ -10,15 +10,9 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #adding }
-OPUmlPackageController >> addAsTargetFor: aController [
-	aController
-		createModelIn: self model
-		andShowInDiagram: self diagramController
-]
-
 { #category : #rendering }
 OPUmlPackageController >> allShowableElements [
+	self flag: #unused.
 	^ #()
 ]
 
@@ -44,18 +38,11 @@ OPUmlPackageController >> canBeSourceFor: aController [
 
 { #category : #testing }
 OPUmlPackageController >> canBeTargetFor: aController [
-	^ aController isKindOf: OPUmlPackageImportController
-]
 
-{ #category : #figures }
-OPUmlPackageController >> createDiagramElement [
-	^ OPUmlPackageCompartmentableShape new
-		modelElement: self model;
-		in: [ :shape | 
-			shape style
-				fillColor: Color white;
-				fontColor: Color black ];
-		yourself
+	^ (aController isKindOf: OPUmlPackageImportController) or: [ 
+		  (aController isKindOf: OPUmlClassController) or: [ 
+			  (aController isKindOf: OPUmlPackageController) or: [ 
+				  aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
 { #category : #construction }
@@ -89,6 +76,26 @@ OPUmlPackageController >> dependentElements [
 						select: [ :eachImport | eachImport importingNamespace = self model ] ])
 ]
 
+{ #category : #figures }
+OPUmlPackageController >> diagramElementClass [
+
+	^ OPUmlPackageShape
+]
+
+{ #category : #figures }
+OPUmlPackageController >> hookDiagramElement [
+
+	super hookDiagramElement.
+
+	diagramElement innerRoassalShapesBlock: [ 
+		self model packagedElements
+			collect: [ :eachModel | 
+				self diagramController
+					controllerForModel: eachModel
+					ifFound: #roassalShape ]
+			thenSelect: #isNotNil ]
+]
+
 { #category : #testing }
 OPUmlPackageController >> isHideable [
 	^ true
@@ -100,22 +107,7 @@ OPUmlPackageController >> modelClass [
 	^ modelClass
 ]
 
-{ #category : #figures }
-OPUmlPackageController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
-]
-
 { #category : #removing }
 OPUmlPackageController >> removeModel [
 	diagramController model packagedElements remove: self model
-]
-
-{ #category : #rendering }
-OPUmlPackageController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]

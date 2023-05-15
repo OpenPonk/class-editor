@@ -1,12 +1,7 @@
 Class {
 	#name : #OPUmlElementControllerTest,
-	#superclass : #TestCase,
-	#instVars : [
-		'controller',
-		'diagramController',
-		'model'
-	],
-	#category : 'OpenPonk-ClassEditor-Tests - Controllers'
+	#superclass : #OPElementControllerTest,
+	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
 { #category : #testing }
@@ -15,28 +10,15 @@ OPUmlElementControllerTest class >> isAbstract [
 ]
 
 { #category : #accessing }
-OPUmlElementControllerTest >> controllerClass [
-	^ self subclassResponsibility
+OPUmlElementControllerTest >> diagramControllerClass [
+
+	^ OPUmlPackageDiagramController
 ]
 
 { #category : #accessing }
-OPUmlElementControllerTest >> modelClass [
-	^ self subclassResponsibility
-]
+OPUmlElementControllerTest >> diagramModelClass [
 
-{ #category : #accessing }
-OPUmlElementControllerTest >> newInstance [
-	^ self modelClass new name: self modelClass name uncapitalized
-]
-
-{ #category : #running }
-OPUmlElementControllerTest >> setUp [
-	super setUp.
-	controller := self controllerClass new.
-	diagramController := OPUmlPackageDiagramController new.
-	diagramController model: (OPUMLPackage new name: 'TestPackage').
-	diagramController view: RTView new.
-	model := self newInstance
+	^ OPUMLPackage
 ]
 
 { #category : #'tests - model' }

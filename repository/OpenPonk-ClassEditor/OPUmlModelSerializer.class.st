@@ -7,6 +7,24 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Persistence'
 }
 
+{ #category : #'as yet unclassified' }
+OPUmlModelSerializer class >> exportVersion [
+
+	^ 1
+]
+
+{ #category : #formatting }
+OPUmlModelSerializer class >> formatName [
+
+	^ #'uml-xmi'
+]
+
+{ #category : #accessing }
+OPUmlModelSerializer class >> minImportVersion [
+
+	^ 1
+]
+
 { #category : #accessing }
 OPUmlModelSerializer >> formatName [
 	^ 'xmi'

@@ -25,7 +25,7 @@ OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 	window := workbench open.
 	workbench openProject: project.
 	editor := (workbench instVarNamed: #editors) values first at: #editor.
-	view := editor canvasPresenter roassalView.
+	view := editor canvasPresenter canvas.
 	paletteEntries := editor palette entries
 ]
 
@@ -49,9 +49,9 @@ OPUmlEditorWorkbenchTest >> testAddClassFromPalette [
 	classEntry performAction.
 	position := 0 @ 0.
 	shape := view canvas
-		         shapeWithAction: TRMouseLeftClick
+		         shapeWithAction: RSMouseLeftClick
 		         forPositionInPixels: position.
-	ev := TRMouseLeftClick new.
+	ev := RSMouseLeftClick new.
 	ev shape: shape.
 	ev position: position.
 	ev canvas: view canvas.

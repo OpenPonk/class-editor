@@ -19,26 +19,27 @@ OPUmlClassController >> adornments [
 		   self diagramController editor palette selectTool: tool.
 		   tool whenCreated: [ :ctrl | 
 			   OPRenameElementCommand executeOn: ctrl ].
-		   tool targetSelected: self ]).
+		   tool selectedTargetControllers: { self } ]).
 		  (OPUmlIcons directedAssociationIcon -> [ 
 		   | tool |
 		   tool := OPConnectionCreationTool new
 			           palette: self diagramController editor palette;
 			           factory: [ OPUmlAssociationController new ].
 		   self diagramController editor palette selectTool: tool.
-		   tool sourceSelected: self ]).
+		   tool selectedSourceControllers: { self } ]).
 		  (OPUmlIcons generalizationIcon -> [ 
 		   | tool |
 		   tool := OPConnectionCreationTool new
 			           palette: self diagramController editor palette;
 			           factory: [ OPUmlGeneralizationController new ].
 		   self diagramController editor palette selectTool: tool.
-		   tool sourceSelected: self ]) }
+		   tool selectedSourceControllers: { self } ]) }
 ]
 
 { #category : #rendering }
 OPUmlClassController >> allShowableElements [
 	| queue |
+	self flag: #unused.
 	queue := OrderedCollection new.
 	queue addAll: self model ownedAttributes.
 	queue addAll: self model ownedOperations.
@@ -72,39 +73,75 @@ OPUmlClassController >> canBeTargetFor: aController [
 ]
 
 { #category : #figures }
-OPUmlClassController >> createDiagramElement [
-	^ OPUmlClassShape new
-		stereotype: [ self stereotypeNames ];
-		comments: [ self model ownedComments ];
-		modelElement: self model
+OPUmlClassController >> createAdornmentsBy: builder [
+
+	self
+		createAttributeAdornmentBy: builder;
+		createAssociationAdornmentBy: builder;
+		createGeneralizationAdornmentBy: builder
+]
+
+{ #category : #figures }
+OPUmlClassController >> createAssociationAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons directedAssociationIcon action: [ 
+		| tool |
+		tool := OPConnectionCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlAssociationController new ].
+		self diagramController editor palette selectTool: tool.
+		tool selectedControllers: { self } ]
+]
+
+{ #category : #figures }
+OPUmlClassController >> createAttributeAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons attributeIcon action: [ 
+		| tool |
+		tool := OPCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlAttributeController new ].
+		self diagramController editor palette selectTool: tool.
+		tool whenCreated: [ :ctrl | 
+			OPRenameElementCommand executeOn: ctrl.
+			ctrl refreshFigure ].
+		tool selectedControllers: { self } ]
+]
+
+{ #category : #figures }
+OPUmlClassController >> createGeneralizationAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons generalizationIcon action: [ 
+		| tool |
+		tool := OPConnectionCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlGeneralizationController new ].
+		self diagramController editor palette selectTool: tool.
+		tool selectedControllers: { self } ]
 ]
 
 { #category : #accessing }
 OPUmlClassController >> dependentElements [
+
 	^ self elementsToShowInside , self model generalizations
-		,
-			((diagramController model packagedElements
-				select:
-					[ :eachPackageElement | eachPackageElement oclIsKindOf: #GeneralizationSet ])
-				flatCollectAsSet: [ :eachSet | 
-					eachSet generalizations
-						select: [ :eachGeneralization | 
-							eachGeneralization general = self model
-								or: [ eachGeneralization specific = self model ] ] ])
-		,
-			((diagramController model packagedElements
-				select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
-				flatCollectAsSet: [ :eachClass | 
-					eachClass generalizations
-						select: [ :eachGeneralization | 
-							eachGeneralization general = self model
-								or: [ eachGeneralization specific = self model ] ] ])
-		,
-			(diagramController model packagedElements
-				select: [ :eachAssoc | 
-					(eachAssoc oclIsKindOf: #Association)
-						and: [ eachAssoc memberEnds
-								anySatisfy: [ :any | any type = self model or: [ any owningClass = self model ] ] ] ])
+	  , ((diagramController model packagedElements select: [ 
+			    :eachPackageElement | 
+			    eachPackageElement oclIsKindOf: #GeneralizationSet ]) 
+			   flatCollectAsSet: [ :eachSet | 
+				   eachSet generalizations select: [ :eachGeneralization | 
+					   eachGeneralization general = self model or: [ 
+						   eachGeneralization specific = self model ] ] ])
+	  , ((diagramController model packagedElements select: [ 
+			    :eachPackageElement | eachPackageElement oclIsKindOf: #Class ]) 
+			   flatCollectAsSet: [ :eachClass | 
+				   eachClass generalizations select: [ :eachGeneralization | 
+					   eachGeneralization general = self model or: [ 
+						   eachGeneralization specific = self model ] ] ])
+	  ,
+		  (diagramController model packagedElements select: [ :eachAssoc | 
+			   (eachAssoc oclIsKindOf: #Association) and: [ 
+				   eachAssoc memberEnds anySatisfy: [ :any | 
+					   any type = self model or: [ any owningClass = self model ] ] ] ])
 ]
 
 { #category : #forms }
@@ -119,12 +156,20 @@ OPUmlClassController >> descriptionIsAbstract [
 
 { #category : #forms }
 OPUmlClassController >> descriptionStereotype [
+
 	<magritteDescription>
-	^ super descriptionStereotype
+	^ self descriptionStereotypeContent
+]
+
+{ #category : #figures }
+OPUmlClassController >> diagramElementClass [
+
+	^ OPUmlClassShape
 ]
 
 { #category : #accessing }
 OPUmlClassController >> elementsToShowInside [
+
 	^ model ownedOperations asSet , model ownedAttributes
 ]
 
@@ -135,12 +180,6 @@ OPUmlClassController >> modelClass [
 
 { #category : #accessing }
 OPUmlClassController >> modelClassName [
-	^ #Class
-]
 
-{ #category : #accessing }
-OPUmlClassController >> stereotypeNames [
-	(self diagramController model oclIsKindOf: #Profile)
-		ifTrue: [ ^ #(Metaclass) ].
-	^ self model appliedStereotypes collect: #umlClassName
+	^ 'Class'
 ]

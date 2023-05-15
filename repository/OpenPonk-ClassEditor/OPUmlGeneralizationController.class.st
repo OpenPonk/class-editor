@@ -8,13 +8,6 @@ Class {
 }
 
 { #category : #figures }
-OPUmlGeneralizationController >> createDiagramElement [
-	^ OPUmlGeneralizationShape new
-		modelElement: self model;
-		yourself
-]
-
-{ #category : #figures }
 OPUmlGeneralizationController >> createModelIn: aParentModel [
 	self model: self modelClass new.
 	model general: aParentModel.
@@ -70,7 +63,8 @@ OPUmlGeneralizationController >> descriptionGeneralizationSet [
 					   diagramController model packagedElements:
 						   diagramController model packagedElements \ setsToRemove
 						   , setsToAdd.
-					   diagramElement ifNotNil: [ self refreshFigure ] ]);
+					   diagramElement ifNotNil: [ 
+						   self diagramElement modelChanged ] ]);
 		  classes: { OPUmlGeneralizationSetDescriptions };
 		  label: 'Generalization Sets';
 		  priority: 5;
@@ -99,20 +93,25 @@ OPUmlGeneralizationController >> descriptionVisibility [
 	^ nil
 ]
 
+{ #category : #figures }
+OPUmlGeneralizationController >> diagramElementClass [
+
+	^ OPUmlGeneralizationShape
+]
+
 { #category : #accessing }
 OPUmlGeneralizationController >> modelClass [
 	^ OPUMLGeneralization
 ]
 
 { #category : #forms }
-OPUmlGeneralizationController >> pathSourceModel [
-	^ model general
+OPUmlGeneralizationController >> modelSource [
+	^ model specific
 ]
 
-{ #category : #figures }
-OPUmlGeneralizationController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : #forms }
+OPUmlGeneralizationController >> modelTarget [
+	^ model general
 ]
 
 { #category : #removing }
@@ -126,22 +125,6 @@ OPUmlGeneralizationController >> removeModel [
 				ifEmpty: [ diagramController model packagedElements
 						remove: each
 						ifAbsent: [ "do nothing" ] ] ]
-]
-
-{ #category : #figures }
-OPUmlGeneralizationController >> renderFigureIn: aView [
-	| sourceElement |
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	sourceElement := ((diagramController controllers
-		select: [ :each | each isKindOf: OPUmlClassController ])
-		detect: [ :each | each model generalizations includes: self model ]) diagramElement.
-	"	diagramElement source: (diagramController diagramElementForModel: self model specific)."
-	diagramElement source: sourceElement.
-	diagramElement target: (diagramController diagramElementForModel: self model general).
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]
 
 { #category : #construction }

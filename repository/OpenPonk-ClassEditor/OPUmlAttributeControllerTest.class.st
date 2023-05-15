@@ -9,6 +9,12 @@ OPUmlAttributeControllerTest >> controllerClass [
 	^ OPUmlAttributeController
 ]
 
+{ #category : #construction }
+OPUmlAttributeControllerTest >> diagramElementClass [
+
+	^ OPUmlAttributeLabel
+]
+
 { #category : #accessing }
 OPUmlAttributeControllerTest >> modelClass [
 	^ OPUMLProperty
@@ -23,25 +29,34 @@ OPUmlAttributeControllerTest >> testCanClassBeTarget [
 
 { #category : #'tests - creation' }
 OPUmlAttributeControllerTest >> testClassBeTarget [
+
 	| classController |
-	classController := diagramController newControllerFor: OPUMLClass new.
+	classController := diagramController newControllerFor:
+		                   (OPUMLClass new
+			                    name: 'Class';
+			                    yourself).
 	classController showWithoutDependentInDiagram: diagramController.
 	classController addAsTargetFor: controller.
 	self
 		assert: classController model ownedAttributes asArray
-		equals: {controller model}
+		equals: { controller model }
 ]
 
-{ #category : #'tests - creation' }
+{ #category : #tests }
 OPUmlAttributeControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlLabel
+
+	model owningClass: OPUMLClass new.
+	diagramController showWithoutDependentInDiagramModel: model owningClass.
+
+	super testCreateDiagramElement
 ]
 
 { #category : #tests }
 OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
-	| accessor model |
+
+	| accessor |
 	accessor := controller descriptionAccessor: #isDerived.
-	model := OPUMLProperty new.
+	controller diagramElement: Mock new.
 	model isDerived: true.
 	controller model: model.
 	self assert: (accessor read: controller).
@@ -51,10 +66,11 @@ OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
 
 { #category : #tests }
 OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
-	| accessor model |
+
+	| accessor |
 	accessor := controller descriptionAccessor: #isDerived.
-	model := OPUMLProperty new.
 	controller model: model.
+	controller diagramElement: Mock new.
 	accessor write: true to: controller.
 	self assert: model isDerived.
 	accessor write: false to: controller.
@@ -73,18 +89,6 @@ OPUmlAttributeControllerTest >> testDescriptions [
 		assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
 ]
 
-{ #category : #tests }
-OPUmlAttributeControllerTest >> testNotationText [
-	self
-		assert:
-			(controller
-				notationTextFor:
-					(OPUMLProperty new
-						name: 'attr';
-						isDerived: true))
-		equals: '/attr'
-]
-
 { #category : #'tests - removing' }
 OPUmlAttributeControllerTest >> testRemoveFromView [
 	| class compartment prop |
@@ -96,11 +100,6 @@ OPUmlAttributeControllerTest >> testRemoveFromView [
 	compartment := controller diagramElement owningElement.
 	controller removeController.
 	self assert: compartment ownedElements asArray equals: #()
-]
-
-{ #category : #tests }
-OPUmlAttributeControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: OPUMLProperty new)
 ]
 
 { #category : #tests }

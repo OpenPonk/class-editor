@@ -9,38 +9,36 @@ OPUmlPackageDiagramControllerTest >> controllerClass [
 	^ OPUmlPackageDiagramController
 ]
 
+{ #category : #construction }
+OPUmlPackageDiagramControllerTest >> diagramElementClass [
+
+	^ OPOpenPonkDiagram
+]
+
 { #category : #accessing }
 OPUmlPackageDiagramControllerTest >> modelClass [
 	^ OPUMLPackage
 ]
 
-{ #category : #running }
-OPUmlPackageDiagramControllerTest >> setUp [
-	super setUp.
-	diagramController view: RTView new
-]
-
 { #category : #tests }
 OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
+
 	| class |
 	class := OPUMLClass new.
 	diagramController showWithoutDependentInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = class ] ])
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = class ] ])
 ]
 
 { #category : #tests }
 OPUmlPackageDiagramControllerTest >> testShowClassWithAttributeInDiagram [
+
 	| class prop |
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
 	prop name: 'prop'.
 	class ownedAttributes add: prop.
 	diagramController showInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = prop ] ])
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = prop ] ])
 ]

@@ -20,11 +20,14 @@ OPUmlPropertyMagritteDescriptions class >> reader: aBlock labelPrefix: aLabelPre
 
 { #category : #accessing }
 OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
+
 	^ MAPluggableAccessor
-		read: [ :me | (reader value: me) perform: aSymbol ]
-		write: [ :me :newValue | 
-			(reader value: me) perform: (aSymbol , ':') asSymbol with: newValue.
-			me ifNotNil: [ me refreshFigure ] ]
+		  read: [ :me | (reader value: me) perform: aSymbol ]
+		  write: [ :me :newValue | 
+			  (reader value: me)
+				  perform: (aSymbol , ':') asSymbol
+				  with: newValue.
+			  me ifNotNil: [ me diagramElement modelChanged ] ]
 ]
 
 { #category : #descriptions }
@@ -89,17 +92,17 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsDerived [
 
 { #category : #descriptions }
 OPUmlPropertyMagritteDescriptions >> descriptionIsNavigable [
+
 	<magritteDescription>
 	^ MABooleanDescription new
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | (reader value: me) isNavigable ]
-				write: [ :me :newValue | 
-					me writeNavigability: newValue to: (reader value: me).
-					me refreshFigure ]);
-		label: 'Is Navigable';
-		priority: 10;
-		yourself
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | (reader value: me) isNavigable ]
+				   write: [ :me :newValue | 
+					   me writeNavigability: newValue to: (reader value: me).
+					   me diagramElement modelChanged ]);
+		  label: 'Is Navigable';
+		  priority: 10;
+		  yourself
 ]
 
 { #category : #descriptions }
@@ -144,22 +147,23 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsUnique [
 
 { #category : #descriptions }
 OPUmlPropertyMagritteDescriptions >> descriptionMultiplicity [
+
 	<magritteDescription>
 	^ MASingleOptionDescription new
-		beExtensible;
-		options: #('0..1' '1..1' '0..*' '1..*');
-		reference: MAStringDescription new;
-		accessor:
-			(MAPluggableAccessor
-				read:
-					[ :me | (reader value: me) lowerBound asString , '..' , (reader value: me) upperBound asString ]
-				write: [ :me :newValue | 
-					me writeMultiplicityFrom: newValue to: (reader value: me).
-					me refreshFigure ]);
-		label: 'Multiplicity';
-		priority: 9;
-		beSorted;
-		yourself
+		  beExtensible;
+		  options: #( '0..1' '1..1' '0..*' '1..*' );
+		  reference: MAStringDescription new;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | 
+					   (reader value: me) lowerBound asString , '..'
+					   , (reader value: me) upperBound asString ]
+				   write: [ :me :newValue | 
+					   me writeMultiplicityFrom: newValue to: (reader value: me).
+					   me diagramElement modelChanged ]);
+		  label: 'Multiplicity';
+		  priority: 9;
+		  beSorted;
+		  yourself
 ]
 
 { #category : #descriptions }

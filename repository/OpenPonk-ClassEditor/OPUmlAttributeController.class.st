@@ -3,18 +3,14 @@ I am a controller for an attribute of a classifier.
 "
 Class {
 	#name : #OPUmlAttributeController,
-	#superclass : #OPUmlElementController,
+	#superclass : #OPUmlClassItemController,
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
 { #category : #figures }
-OPUmlAttributeController >> createDiagramElement [
-	^ OPUmlLabel new
-		modelElement: self model;
-		text: [ :aModel | self notationTextFor: aModel ];
-		emphasis: [ :aModel :aStyle | aStyle fontUnderline: aModel isStatic ];
-		localStyle: OPUmlStyle new;
-		yourself
+OPUmlAttributeController >> addDiagramElementToOwner [
+
+	self diagramElementOwner addAttribute: diagramElement
 ]
 
 { #category : #construction }
@@ -84,16 +80,6 @@ OPUmlAttributeController >> descriptionIsReadOnly [
 ]
 
 { #category : #forms }
-OPUmlAttributeController >> descriptionIsStatic [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isStatic);
-		label: 'Is Static';
-		priority: 10;
-		yourself
-]
-
-{ #category : #forms }
 OPUmlAttributeController >> descriptionIsUnique [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -105,65 +91,55 @@ OPUmlAttributeController >> descriptionIsUnique [
 
 { #category : #forms }
 OPUmlAttributeController >> descriptionMultiplicity [
+
 	<magritteDescription>
 	^ MASingleOptionDescription new
-		beExtensible;
-		options: #('0..1' '1..1' '0..*' '1..*');
-		reference: MAStringDescription new;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | me model lowerBound asString , '..' , me model upperBound asString ]
-				write: [ :me :newValue | 
-					self writeMultiplicityFrom: newValue to: me model.
-					self refreshFigure ]);
-		label: 'Multiplicity';
-		priority: 9;
-		beSorted;
-		yourself
-]
-
-{ #category : #forms }
-OPUmlAttributeController >> descriptionName [
-
-	<magritteDescription>
-	| accessor |
-	accessor := MAPluggableAccessor
-		            read: [ :me | me model name ]
-		            write: [ :me :newValue | 
-			            | text |
-			            text := newValue ifEmpty: [ ' ' ] ifNotEmpty: [ 
-				                    newValue first = Character space
-					                    ifTrue: [ newValue allButFirst ]
-					                    ifFalse: [ newValue ] ].
-			            me model name: text.
-			            self reactToAttributeWrite ].
-	^ MAStringDescription new
-		  accessor: accessor;
-		  label: 'Name';
-		  priority: 1;
+		  beExtensible;
+		  options: #( '0..1' '1..1' '0..*' '1..*' );
+		  reference: MAStringDescription new;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | 
+					   me model lowerBound asString , '..'
+					   , me model upperBound asString ]
+				   write: [ :me :newValue | 
+					   self writeMultiplicityFrom: newValue to: me model.
+					   self diagramElement modelChanged ]);
+		  label: 'Multiplicity';
+		  priority: 9;
+		  beSorted;
 		  yourself
 ]
 
 { #category : #forms }
 OPUmlAttributeController >> descriptionType [
+
 	<magritteDescription>
 	^ MAStringDescription new
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | me model type ifNil: [ '' ] ifNotNil: #name ]
-				write: [ :me :newValue | 
-					newValue
-						ifEmpty: [ me model type: nil ]
-						ifNotEmpty: [ me model type: (self typeNamed: newValue) ].
-					self refreshFigure ]);
-		label: 'Type';
-		priority: 5;
-		yourself
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | me model type ifNil: [ '' ] ifNotNil: #name ]
+				   write: [ :me :newValue | 
+					   newValue
+						   ifEmpty: [ me model type: nil ]
+						   ifNotEmpty: [ me model type: (self typeNamed: newValue) ].
+					   self diagramElement modelChanged ]);
+		  label: 'Type';
+		  priority: 5;
+		  yourself
 ]
 
-{ #category : #testing }
-OPUmlAttributeController >> isHideable [
-	^ true
+{ #category : #figures }
+OPUmlAttributeController >> diagramElementClass [
+
+	^ OPUmlAttributeLabel
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlAttributeController >> diagramElementOwner [
+
+	^ (diagramController controllerForModel:
+		   (model owningClass ifNil: [ 
+			    (model owningAssociation memberEnds detect: [ :any | 
+				     any ~= model ]) type ])) diagramElement
 ]
 
 { #category : #accessing }
@@ -171,42 +147,13 @@ OPUmlAttributeController >> modelClass [
 	^ OPUMLProperty
 ]
 
-{ #category : #figures }
-OPUmlAttributeController >> notationTextFor: aProperty [
-
-	^ aProperty notationString
-		  replaceAll: Character lf with: Character space;
-		  replaceAll: Character cr with: Character space;
-		  yourself
-]
-
-{ #category : #figures }
-OPUmlAttributeController >> refreshFigure [
-	self diagramElement changed.
-	self diagramElement owningElement owningElement changed.
-	^ self figure
-]
-
 { #category : #removing }
-OPUmlAttributeController >> removeModel [
-	"could be any of those, so just nil all of them"
+OPUmlAttributeController >> removeDiagramElement [
 
-	model owningClass: nil.
-	model datatype: nil.
-	model interface: nil
-]
-
-{ #category : #figures }
-OPUmlAttributeController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		owningElement:
-			(diagramController diagramElementForModel: model owningClass)
-				attributes.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
+	self diagramElement ifNil: [ ^ self ].
+	self diagramElementOwner ifNotNil: [ :owner |
+		owner removeAttribute: self diagramElement ].
+	diagramElement := nil
 ]
 
 { #category : #accessing }

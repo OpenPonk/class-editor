@@ -7,13 +7,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #figures }
-OPUmlExtensionController >> createDiagramElement [
-	^ OPUmlExtensionShape new
-		modelElement: self model;
-		yourself
-]
-
 { #category : #construction }
 OPUmlExtensionController >> createModelIn: aParentModel [
 	| sourceOwnedProp extensionOwnedProp |
@@ -38,15 +31,25 @@ OPUmlExtensionController >> dependentElements [
 	^ {model memberEnds first}
 ]
 
+{ #category : #figures }
+OPUmlExtensionController >> diagramElementClass [
+
+	^ OPUmlExtensionShape
+]
+
 { #category : #accessing }
 OPUmlExtensionController >> modelClass [
 	^ OPUMLExtension
 ]
 
-{ #category : #figures }
-OPUmlExtensionController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : #accessing }
+OPUmlExtensionController >> modelSource [
+	^ model memberEnds first type
+]
+
+{ #category : #accessing }
+OPUmlExtensionController >> modelTarget [
+	^ model memberEnds second type
 ]
 
 { #category : #removing }
@@ -60,18 +63,4 @@ OPUmlExtensionController >> removeModel [
 			end association: nil.
 			end owningClass: nil.
 			end owningAssociation: nil ]
-]
-
-{ #category : #figures }
-OPUmlExtensionController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		ends:
-			{diagramController diagramElementForModel: self model ownedEnd type.
-			diagramController
-				diagramElementForModel: (self model memberEnds copyWithout: self model ownedEnd) first type}.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]

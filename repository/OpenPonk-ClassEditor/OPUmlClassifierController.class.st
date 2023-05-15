@@ -4,13 +4,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #adding }
-OPUmlClassifierController >> addAsTargetFor: aController [
-	aController
-		createModelIn: self model
-		andShowInDiagram: self diagramController
-]
-
 { #category : #figures }
 OPUmlClassifierController >> adornments [
 	^ self subclassResponsibility
@@ -19,6 +12,12 @@ OPUmlClassifierController >> adornments [
 { #category : #adding }
 OPUmlClassifierController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlAssociationController
+]
+
+{ #category : #figures }
+OPUmlClassifierController >> createAdornmentsBy: builder [
+
+	"do nothing by default"
 ]
 
 { #category : #construction }
@@ -34,18 +33,28 @@ OPUmlClassifierController >> createModelIn: aParentModel [
 
 { #category : #forms }
 OPUmlClassifierController >> descriptionName [
+
 	<magritteDescription>
 	| accessor |
 	accessor := MAPluggableAccessor
-		read: [ :me | me model name ]
-		write: [ :me :newValue | 
-			me model name: newValue.
-			self refreshFigure ].
+		            read: [ :me | me model name ]
+		            write: [ :me :newValue | 
+			            me model name: newValue.
+			            self diagramElement modelChanged ].
 	^ MAMemoDescription new
-		accessor: accessor;
-		label: 'Name';
-		priority: 1;
-		yourself
+		  accessor: accessor;
+		  label: 'Name';
+		  priority: 1;
+		  yourself
+]
+
+{ #category : #figures }
+OPUmlClassifierController >> hookDiagramElement [
+
+	super hookDiagramElement.
+	
+	self diagramElement adornmentCreationBlock: [ :builder | 
+		self createAdornmentsBy: builder ]
 ]
 
 { #category : #testing }
@@ -58,25 +67,7 @@ OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #figures }
-OPUmlClassifierController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
-]
-
 { #category : #removing }
 OPUmlClassifierController >> removeModel [
 	diagramController model packagedElements remove: self model
-]
-
-{ #category : #figures }
-OPUmlClassifierController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	self figure @ (OPRTAdornments new adornments: self adornments).
-	self refreshFigure.
-	self figure @ OPRTDraggableSnapToGrid.
-	^ self figure
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlProfileGeneratorWizard,
-	#superclass : #WizardControl,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'profile'
 	],

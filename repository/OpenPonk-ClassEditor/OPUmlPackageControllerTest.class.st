@@ -9,6 +9,12 @@ OPUmlPackageControllerTest >> controllerClass [
 	^ OPUmlPackageController
 ]
 
+{ #category : #construction }
+OPUmlPackageControllerTest >> diagramElementClass [
+
+	^ OPUmlPackageShape
+]
+
 { #category : #accessing }
 OPUmlPackageControllerTest >> modelClass [
 	^ OPUMLPackage
@@ -31,13 +37,6 @@ OPUmlPackageControllerTest >> testCanDiagramBeTargetForModel [
 ]
 
 { #category : #'tests - creation' }
-OPUmlPackageControllerTest >> testCreateDiagramElement [
-	self
-		assert: controller createDiagramElement class
-		equals: OPUmlPackageCompartmentableShape
-]
-
-{ #category : #'tests - creation' }
 OPUmlPackageControllerTest >> testCreateFromPalette [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
@@ -46,10 +45,12 @@ OPUmlPackageControllerTest >> testCreateFromPalette [
 OPUmlPackageControllerTest >> testRemoveEmpty [
 
 	controller model: self newEmptyModel.
+	self assert: diagramController canvas nodes isEmpty.
 	controller showWithoutDependentInDiagram: diagramController.
+	self assert: diagramController canvas nodes isNotEmpty.
 	controller removeController.
-	self assert: diagramController view elements asArray equals: #(  ).
-	self assert: diagramController controllers asArray equals: #(  )
+	self assert: diagramController canvas nodes isEmpty.
+	self assert: diagramController controllers isEmpty
 ]
 
 { #category : #'tests - removing' }
@@ -67,30 +68,22 @@ OPUmlPackageControllerTest >> testRemoveFromModel [
 
 { #category : #'tests - diagram' }
 OPUmlPackageControllerTest >> testShowClassInDiagram [
+
 	| class |
 	class := OPUMLClass new.
 	diagramController showWithoutDependentInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = class ] ])
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = class ] ])
 ]
 
 { #category : #'tests - diagram' }
 OPUmlPackageControllerTest >> testShowClassWithAttributeInDiagram [
+
 	| class prop |
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
 	diagramController showInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy:
-					[ :each | each model isNotNil and: [ each model modelElement = prop ] ])
-]
-
-{ #category : #tests }
-OPUmlPackageControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: self newEmptyModel)
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = prop ] ])
 ]

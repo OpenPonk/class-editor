@@ -5,14 +5,41 @@ Class {
 	#name : #OPUmlClassShape,
 	#superclass : #OPUmlClassifierShape,
 	#instVars : [
-		'nameLabel',
 		'attributes',
-		'operations',
-		'stereotypeLabel',
-		'stereotypeBlock'
+		'operations'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
+
+{ #category : #'ston-core' }
+OPUmlClassShape class >> stonAllInstVarNames [
+
+	"Override to encode my instances using a custom set of instance variables or to define their order."
+
+	^ super stonAllInstVarNames , #( #attributes #operations )
+]
+
+{ #category : #rendering }
+OPUmlClassShape >> addAttribute: anAttributeShape [
+
+	attributes ifNil: [ 
+		attributes := OPUmlListCompartment in: self.
+
+		self sortOwnedElements ].
+
+	anAttributeShape owningElement: attributes
+]
+
+{ #category : #rendering }
+OPUmlClassShape >> addOperation: anOperationShape [
+
+	operations ifNil: [ 
+		operations := OPUmlFeaturesListCompartment in: self.
+
+		self sortOwnedElements ].
+
+	anOperationShape owningElement: operations
+]
 
 { #category : #accessing }
 OPUmlClassShape >> attributes [
@@ -20,59 +47,52 @@ OPUmlClassShape >> attributes [
 ]
 
 { #category : #accessing }
-OPUmlClassShape >> hasStereotypes [
-	^ stereotypeBlock value isNotEmpty
-]
-
-{ #category : #initialization }
-OPUmlClassShape >> initialize [
-	super initialize.
-	self sharedStyle fillColor: Color white.
-	stereotypeLabel := OPUmlKeywordLabel new.
-	stereotypeLabel text: [ :model | self stereotypeText ].
-	stereotypeLabel localStyle: OPUmlStyle new.
-	stereotypeLabel owningElement: self.
-	nameLabel := OPUmlMultilineNameLabel new.
-	nameLabel text: [ :model | model name ].
-	nameLabel emphasis: [ :model :style | style fontItalic: model isAbstract ].
-	nameLabel localStyle: (OPUmlStyle new fontSize: 11).
-	nameLabel owningElement: self.
-	attributes := OPUmlCompartment new.
-	attributes owningElement: self.
-	operations := OPUmlCompartment new.
-	operations owningElement: self
-]
-
-{ #category : #accessing }
-OPUmlClassShape >> modelElement: aModelElement [
-	super modelElement: aModelElement.
-	nameLabel modelElement: aModelElement
-]
-
-{ #category : #accessing }
 OPUmlClassShape >> operations [
 	^ operations
 ]
 
-{ #category : #accessing }
-OPUmlClassShape >> stereotype: aStereotypeBlock [
-	stereotypeBlock := aStereotypeBlock
+{ #category : #rendering }
+OPUmlClassShape >> removeAttribute: anAttributeShape [
+
+	anAttributeShape remove.
+
+	attributes ifNotNil: [ :compartment |
+		compartment ownedElements ifEmpty: [
+			attributes remove.
+			attributes := nil ] ].
+
+	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
-{ #category : #accessing }
-OPUmlClassShape >> stereotypeText [
-	^ stereotypeBlock value
-		ifEmpty: [ '' ]
-		ifNotEmpty: [ :vals | '«' , (vals joinUsing: ', ') , '»' ]
+{ #category : #rendering }
+OPUmlClassShape >> removeOperation: anOperationShape [
+
+	anOperationShape remove.
+
+	operations ifNotNil: [ :compartment |
+		compartment ownedElements ifEmpty: [
+			operations remove.
+			operations := nil ] ].
+
+	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
-{ #category : #'Roassal2 - updating' }
-OPUmlClassShape >> update [
-	stereotypeLabel localStyle
-		fontSize:
-			(self hasStereotypes
-				ifTrue: [ 10 ]
-				ifFalse: [ 0 ]).
-	stereotypeLabel update.
-	super update
+{ #category : #sorting }
+OPUmlClassShape >> sortOwnedElements [
+
+	| properOrder |
+	properOrder := (self ownedElements select: [ :each | 
+		                each isKindOf: OPUmlCompartmentableLabel ]) , { 
+		               attributes.
+		               operations.
+		               commentIcon } reject: #isNil.
+	self assert:
+		self ownedElements asIdentitySet = properOrder asIdentitySet.
+	self ownedElements: properOrder
+]
+
+{ #category : #rendering }
+OPUmlClassShape >> stereotypesLabelClass [
+
+	^ OPUmlAppliedStereotypesLabel
 ]

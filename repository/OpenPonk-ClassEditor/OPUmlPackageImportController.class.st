@@ -8,13 +8,6 @@ Class {
 }
 
 { #category : #figures }
-OPUmlPackageImportController >> createDiagramElement [
-	^ OPUmlPackageImportShape new
-		modelElement: self model;
-		yourself
-]
-
-{ #category : #figures }
 OPUmlPackageImportController >> createModelIn: aParentModel [
 	self model: self modelClass new.
 	model importedPackage: aParentModel.
@@ -95,20 +88,25 @@ OPUmlPackageImportController >> descriptionVisibility [
 	^ nil
 ]
 
+{ #category : #figures }
+OPUmlPackageImportController >> diagramElementClass [
+
+	^ OPUmlPackageImportShape
+]
+
 { #category : #accessing }
 OPUmlPackageImportController >> modelClass [
 	^ OPUMLPackageImport
 ]
 
 { #category : #forms }
-OPUmlPackageImportController >> pathSourceModel [
+OPUmlPackageImportController >> modelSource [
 	^ model importedPackage
 ]
 
-{ #category : #figures }
-OPUmlPackageImportController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : #forms }
+OPUmlPackageImportController >> modelTarget [
+	^ model importingNamespace
 ]
 
 { #category : #removing }
@@ -120,7 +118,7 @@ OPUmlPackageImportController >> removeModel [
 { #category : #figures }
 OPUmlPackageImportController >> renderFigureIn: aView [
 	| sourceElement |
-	self diagramController addingFigureFor: self.
+	self diagramController willRender: self.
 	diagramElement := self createDiagramElement.
 	sourceElement := ((diagramController controllers
 		select: [ :each | each isKindOf: OPUmlPackageController ])
@@ -129,7 +127,7 @@ OPUmlPackageImportController >> renderFigureIn: aView [
 	diagramElement source: sourceElement.
 	diagramElement target: (diagramController diagramElementForModel: self model importedPackage).
 	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
+	diagramController rendered: self.
 	^ self refreshFigure
 ]
 

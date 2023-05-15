@@ -12,13 +12,6 @@ OPUmlAssociationController >> canSwitchSourceAndTarget [
 	^ self model isNotNil and: [ self model memberEnds size = 2 ]
 ]
 
-{ #category : #figures }
-OPUmlAssociationController >> createDiagramElement [
-	^ OPUmlAssociationShape new
-		modelElement: self model;
-		yourself
-]
-
 { #category : #construction }
 OPUmlAssociationController >> createModelIn: aClass [
 
@@ -43,22 +36,18 @@ OPUmlAssociationController >> createModelIn: aClass [
 	^ model
 ]
 
-{ #category : #accessing }
-OPUmlAssociationController >> dependentElements [
-	^ model memberEnds
-]
-
 { #category : #'as yet unclassified' }
 OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
+
 	<magritteDescription>
 	| description |
-	self canSwitchSourceAndTarget
-		ifFalse: [ ^ self ].
+	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
 	description := OPMAActionDescription new.
 	description
-		action: [ self switchSourceAndTarget.
+		action: [ 
+			self switchSourceAndTarget.
 			self diagramController editor openFormOn: self.
-			self reactToAttributeWrite ];
+			self diagramElement modelChanged ];
 		label: 'Switch source/target';
 		priority: 9.05.
 	^ description
@@ -93,8 +82,9 @@ OPUmlAssociationController >> descriptionSourceEnd [
 
 { #category : #forms }
 OPUmlAssociationController >> descriptionStereotype [
+
 	<magritteDescription>
-	^ super descriptionStereotype
+	^ self descriptionStereotypeContent
 ]
 
 { #category : #forms }
@@ -108,20 +98,25 @@ OPUmlAssociationController >> descriptionTargetEnd [
 				labelPrefix: 'Target ') magritteDescription
 ]
 
+{ #category : #construction }
+OPUmlAssociationController >> diagramElementClass [
+
+	^ OPUmlAssociationShape
+]
+
 { #category : #accessing }
 OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
 
 { #category : #accessing }
-OPUmlAssociationController >> pathSourceModel [
+OPUmlAssociationController >> modelSource [
 	^ model memberEnds first type
 ]
 
-{ #category : #rendering }
-OPUmlAssociationController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : #accessing }
+OPUmlAssociationController >> modelTarget [
+	^ model memberEnds second type
 ]
 
 { #category : #removing }
@@ -131,19 +126,6 @@ OPUmlAssociationController >> removeModel [
 		select: [ :each | each owningClass isNotNil ]
 		thenDo: [ :eachProperty | eachProperty owningClass: nil ].
 	self model memberEnds: #()
-]
-
-{ #category : #rendering }
-OPUmlAssociationController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		ends:
-			{diagramController diagramElementForModel: self model memberEnds first type.
-			diagramController diagramElementForModel: self model memberEnds second type}.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
 ]
 
 { #category : #construction }

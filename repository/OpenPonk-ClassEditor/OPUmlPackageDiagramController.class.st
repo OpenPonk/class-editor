@@ -4,36 +4,28 @@ I am controller for managing the main class diagram presentation and handling it
 Class {
 	#name : #OPUmlPackageDiagramController,
 	#superclass : #OPDiagramController,
-	#traits : 'OPTUmlStereotypedElementController @ {#descriptionStereotypeContent->#descriptionStereotype}',
+	#traits : 'OPTUmlStereotypedElementController',
 	#classTraits : 'OPTUmlStereotypedElementController classTrait',
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #adding }
-OPUmlPackageDiagramController >> addAsSourceFor: aController [
-	self shouldBeImplemented
-]
-
-{ #category : #adding }
-OPUmlPackageDiagramController >> addAsTargetFor: aClassController [
-	self assert: (self canBeTargetFor: aClassController).
-	aClassController createModelIn: self model andShowInDiagram: self
-]
-
 { #category : #figures }
 OPUmlPackageDiagramController >> allShowableElements [
+
 	"Should return all elements that could be directly hidden on diagram"
 
-	^ self elementsToShowInside , self diagram commonElements
-		,
-			((self model packagedElements
-				select:
-					[ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ])
-				flatCollect: [ :each | each ownedAttributes , each ownedOperations ])
-		,
-			((self model packagedElements
-				select: [ :each | each isKindOf: OPUMLEnumeration ])
-				flatCollect: [ :each | each ownedLiterals ])
+	| elementsToShow |
+	elementsToShow := self elementsToShowInside.
+	^ elementsToShow , ((elementsToShow select: [ :each | 
+		    (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]) 
+		   flatCollect: [ :each | 
+		   each ownedAttributes , each ownedOperations ])
+	  ,
+		  ((elementsToShow select: [ :each | 
+			    each isKindOf: OPUMLEnumeration ]) flatCollect: [ :each | 
+			   each ownedLiterals ])
+	  , (model packagedElements select: [ :each | 
+			   each oclIsKindOf: #Association ])
 ]
 
 { #category : #adding }
@@ -106,21 +98,17 @@ OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 		  yourself
 ]
 
-{ #category : #forms }
+{ #category : #'as yet unclassified' }
 OPUmlPackageDiagramController >> descriptionStereotype [
 
 	<magritteDescription>
 	^ self descriptionStereotypeContent
 ]
 
-{ #category : #figures }
-OPUmlPackageDiagramController >> diagramElementForModel: aModel [
-	^ (self showWithoutDependentInDiagramModel: aModel) diagramElement
-]
-
 { #category : #userinterface }
 OPUmlPackageDiagramController >> disableRefresh [
 	| install |
+	self flag: #todo.
 	install := [ :cls | 
 	| link |
 	(cls includesSelector: #refreshFigure)
@@ -143,7 +131,7 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 	(OPUMLClass -> 2).
 	(OPUMLStereotype -> 3).
 	(OPUMLEnumeration -> 4)} asDictionary.
-	queue addAll: self model packagedElements.
+	queue addAll: (self model packagedElements reject: [:each | each oclIsKindOf: #Association ]).
 	self model packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
 		thenDo: [ :each | 
@@ -171,11 +159,6 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 					attr association isNotNil
 						and: [ attr association isKindOf: OPUMLExtension ] ]
 				thenDo: [ :attr | queue add: attr type ] ].
-	queue
-		removeAllSuchThat: [ :each | 
-			(each isKindOf: OPUMLAssociation)
-				and: [ each memberEnds
-						anySatisfy: [ :membEnd | (queue includes: membEnd type) not ] ] ].
 	^ (queue asSet asArray
 		sorted: [ :a :b | 
 			(priority at: a class ifAbsent: [ 100 ])
@@ -186,6 +169,7 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 { #category : #userinterface }
 OPUmlPackageDiagramController >> enableRefresh [
 	| uninstall |
+	self flag: #todo.
 	uninstall := [ :cls | 
 	(cls includesSelector: #refreshFigure)
 		ifTrue: [ (cls >> #refreshFigure) ast links
@@ -287,9 +271,9 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 			whenCreated: [ :ctrl | 
 				ctrl model applyStereotype: stereotype implementationClass new.
 				ctrl model name: stereotype name.
-				ctrl refreshFigure.
+				ctrl diagramElement modelChanged.
 				OPInitialSetElementCommand executeOn: ctrl.
-				ctrl refreshFigure ] ].
+				ctrl diagramElement modelChanged ] ].
 	relationships ifNotEmpty: [ aPalette newSeparator ].
 	relationships do: [ :stereotype | 
 		(aPalette newConnectionCreationEntry: [ 
@@ -298,7 +282,7 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 			icon: OPUmlIcons directedAssociationIcon;
 			whenCreated: [ :ctrl | 
 				ctrl model applyStereotype: stereotype implementationClass new.
-				ctrl refreshFigure ] ]
+				ctrl diagramElement modelChanged ] ]
 ]
 
 { #category : #palette }
@@ -322,33 +306,11 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
-{ #category : #hooks }
-OPUmlPackageDiagramController >> reactToAttributeWrite [
-	"do nothing"
-]
-
 { #category : #palette }
 OPUmlPackageDiagramController >> rebuildPalette [
+
 	self editor palette createPaletteFor: self.
-	self editor palette rebuildWidget.
-	self selectView
-]
-
-{ #category : #figures }
-OPUmlPackageDiagramController >> selectableFigures [
-	^ (self controllers select: [ :each | each isKindOf: OPUmlClassController ])
-		collect: #figure
-]
-
-{ #category : #figures }
-OPUmlPackageDiagramController >> showAllElements [
-	self disableRefresh.
-	self allShowableElements
-		do: [ :each | self showWithoutDependentInDiagramModel: each ].
-	self enableRefresh.
-	self controllers
-		select: [ :each | each isKindOf: OPUmlClassController ]
-		thenDo: #refreshFigure
+	self editor palette rebuildWidget
 ]
 
 { #category : #'as yet unclassified' }

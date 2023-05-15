@@ -15,11 +15,21 @@ OPUmlNavigatorAdapter class >> priority [
 
 { #category : #accessing }
 OPUmlNavigatorAdapter >> childrenMapping [
-	^ {(OPUMLPackage -> #packagedElements).
-	(OPUMLProfile -> #packagedElements).
-	(OPUMLClass
-		-> [ :cls | cls ownedAttributes asArray , cls ownedOperations asArray ]).
-	(OPUMLEnumeration -> #ownedLiterals)}
+
+	^ { 
+		  (OPUMLPackage -> [ :package | 
+		   package packagedElements
+		   , (package packagedElements flatCollect: [ :each | 
+				    (each respondsTo: #generalizations)
+					    ifTrue: [ each generalizations ]
+					    ifFalse: [ #(  ) ] ]) ]).
+		  (OPUMLProfile -> #packagedElements).
+		  (OPUMLClass
+		   -> [ :cls | 
+		   cls ownedAttributes asArray , cls ownedOperations asArray ]).
+		  (OPUMLEnumeration -> #ownedLiterals).
+		  (OPUMLAssociation -> [ :assoc | assoc ownedEnds asArray ]).
+		  (OPUMLExtension -> [ :assoc | assoc ownedEnds asArray ]) }
 ]
 
 { #category : #accessing }

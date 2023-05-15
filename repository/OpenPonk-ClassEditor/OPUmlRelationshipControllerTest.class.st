@@ -9,6 +9,18 @@ OPUmlRelationshipControllerTest class >> isAbstract [
 	^ self = OPUmlRelationshipControllerTest
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlRelationshipControllerTest >> sourceClass [
+
+	^ OPUMLClass
+]
+
+{ #category : #'as yet unclassified' }
+OPUmlRelationshipControllerTest >> targetClass [
+
+	^ OPUMLClass
+]
+
 { #category : #'tests - creation' }
 OPUmlRelationshipControllerTest >> testCanClassBeSource [
 	self assert: (OPUmlClassController new canBeSourceFor: controller)
@@ -35,20 +47,22 @@ OPUmlRelationshipControllerTest >> testClassBeTarget [
 { #category : #'tests - creation' }
 OPUmlRelationshipControllerTest >> testConnectionFeedback [
 
-	| sourceController targetController feedback feedbackLine |
+	| sourceController targetController feedback feedbackLine edgeCreationTargetController |
 	sourceController := diagramController newControllerFor:
-		                    (OPUMLClass new name: 'A').
+		                    (self sourceClass new name: 'A').
 	targetController := diagramController newControllerFor:
-		                    (OPUMLClass new name: 'B').
+		                    (self targetClass new name: 'B').
 	sourceController showWithoutDependentInDiagram: diagramController.
 	targetController showWithoutDependentInDiagram: diagramController.
+
 	sourceController addAsSourceFor: controller.
-	feedback := controller connectionFeedback.
-	feedback renderIn: diagramController view.
-	self assert: diagramController view edges isNotEmpty.
-	feedbackLine := diagramController view edges first.
-	self assert: feedbackLine from equals: sourceController figure.
+	edgeCreationTargetController := OPEdgeCreationTargetController 
+		                                renderForEdgeController: controller.
+	feedback := controller showAcceptFeedbackFor: controller.
+	self assert: diagramController canvas lines isNotEmpty.
+	feedbackLine := diagramController canvas lines first.
+	self assert: feedbackLine from equals: sourceController roassalShape.
 	targetController addAsTargetFor: controller.
 	feedbackLine remove.
-	self deny: (diagramController view edges includes: feedbackLine)
+	self deny: (diagramController canvas lines includes: feedbackLine)
 ]

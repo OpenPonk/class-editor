@@ -12,30 +12,33 @@ Class {
 
 { #category : #'ui hooks' }
 OPUmlLayouter >> applyLayout: aThreeArgBlock [
+
 	| classifiers classes packages hierarchy associations packageImports boxes links |
-	classifiers := packagedElements
-		select: [ :each | (each oclIsKindOf: #Class) | (each oclIsKindOf: #DataType) ].
+	classifiers := packagedElements select: [ :each | 
+		               (each oclIsKindOf: #Class)
+		               | (each oclIsKindOf: #DataType) ].
 	classes := classifiers select: [ :each | each oclIsKindOf: #Class ].
-	packages := packagedElements select: [ :each | each oclIsKindOf: #Package ].
+	packages := packagedElements select: [ :each | 
+		            each oclIsKindOf: #Package ].
 	hierarchy := (classifiers flatCollect: #generalizations)
-		, (classes flatCollect: #extensions).
-	associations := (packagedElements select: [ :each | each oclIsKindOf: #Association ])
-		\ hierarchy.
+	             , (classes flatCollect: #extensions).
+	associations := (packagedElements select: [ :each | 
+		                 each oclIsKindOf: #Association ]) \ hierarchy.
 	packageImports := packages flatCollect: #packageImports.
 	boxes := classifiers , packages.
 	links := associations , packageImports.
 	aThreeArgBlock
-		value: (self figuresFor: boxes)
-		value: (self figuresFor: hierarchy)
-		value: (self figuresFor: links).
-	self updateView
+		value: (self roassalShapesFor: boxes)
+		value: (self roassalShapesFor: hierarchy)
+		value: (self roassalShapesFor: links).
+	self updateCanvas
 ]
 
 { #category : #'ui hooks' }
 OPUmlLayouter >> circleLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
-			RTWeightedCircleLayout new
+			RSWeightedCircleLayout new
 				scaleBy: 20;
 				on: boxes ]
 ]
@@ -53,21 +56,20 @@ OPUmlLayouter >> diagramController: aDiagramController [
 
 { #category : #'ui hooks' }
 OPUmlLayouter >> dominanceTreeLayout [
-	self
-		applyLayout: [ :boxes :hierarchy :links | 
-			RTDominanceTreeLayout new
-				verticallyReverse;
-				verticalGap: 100;
-				horizontalGap: 100;
-				doNotAttachPoint;
-				on: boxes edges: hierarchy , links ]
+
+	self applyLayout: [ :boxes :hierarchy :links | 
+		RSDominanceTreeLayout new
+			verticallyReverse;
+			verticalGap: 100;
+			horizontalGap: 100;
+			on: boxes edges: hierarchy , links ]
 ]
 
 { #category : #'ui hooks' }
 OPUmlLayouter >> gridLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
-			RTGridLayout new
+			RSGridLayout new
 				gapSize: 140;
 				on: boxes ]
 ]
@@ -77,12 +79,11 @@ OPUmlLayouter >> sugiyamaLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links | 
 		| centerY |
-		RTSugiyamaLayout new
-			doNotAttachPoint;
+		RSSugiyamaLayout new
 			verticalGap: 100;
 			horizontalGap: 100;
 			on: boxes edges: hierarchy , links.
-		centerY := (RTGroup withAll: boxes) encompassingRectangle center y.
+		centerY := (RSGroup withAll: boxes) encompassingRectangle center y.
 		boxes do: [ :each | 
 			each translateBy: 0 @ 2 * (centerY - each position y) ] ]
 ]
@@ -90,14 +91,13 @@ OPUmlLayouter >> sugiyamaLayout [
 { #category : #'ui hooks' }
 OPUmlLayouter >> treeLayout [
 
-	self applyLayout: [ :boxes :hierarchy :links | 
+	self applyLayout: [ :boxes :hierarchy :links |
 		| centerY |
-		RTTreeLayout new
-			doNotAttachPoint;
+		RSTreeLayout new
 			verticalGap: 100;
 			horizontalGap: 100;
 			on: boxes edges: hierarchy , links.
-		centerY := (RTGroup withAll: boxes) encompassingRectangle center y.
-		boxes do: [ :each | 
+		centerY := (RSGroup withAll: boxes) encompassingRectangle center y.
+		boxes do: [ :each |
 			each translateBy: 0 @ 2 * (centerY - each position y) ] ]
 ]

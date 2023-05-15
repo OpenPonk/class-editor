@@ -19,12 +19,13 @@ OPUmlEnumerationController >> adornments [
 	   tool whenCreated: [ :ctrl | 
 		   OPRenameElementCommand executeOn: ctrl.
 		   ctrl refreshFigure ].
-	   tool targetSelected: self ]) }
+	   tool selectedTargetControllers: { self } ]) }
 ]
 
 { #category : #rendering }
 OPUmlEnumerationController >> allShowableElements [
 	| queue |
+	self flag: #unused.
 	queue := OrderedCollection new.
 	queue addAll: self model ownedLiterals.
 	^ queue asArray
@@ -38,10 +39,24 @@ OPUmlEnumerationController >> canBeTargetFor: aController [
 ]
 
 { #category : #figures }
-OPUmlEnumerationController >> createDiagramElement [
-	^ OPUmlClassShape new
-		modelElement: self model;
-		stereotype: [ #(enumeration) ]
+OPUmlEnumerationController >> createAdornmentsBy: builder [
+
+	self createLiteralAdornmentBy: builder
+]
+
+{ #category : #figures }
+OPUmlEnumerationController >> createLiteralAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons literalIcon action: [ 
+		| tool |
+		tool := OPCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUMLEnumerationLiteral new ].
+		self diagramController editor palette selectTool: tool.
+		tool whenCreated: [ :ctrl | 
+			OPRenameElementCommand executeOn: ctrl.
+			ctrl refreshFigure ].
+		tool selectedControllers: { self } ]
 ]
 
 { #category : #model }
@@ -49,6 +64,12 @@ OPUmlEnumerationController >> createModel [
 	^ self modelClass new
 		name: 'Enumeration';
 		yourself
+]
+
+{ #category : #construction }
+OPUmlEnumerationController >> diagramElementClass [
+
+	^ OPUmlEnumerationShape
 ]
 
 { #category : #figures }
@@ -63,5 +84,6 @@ OPUmlEnumerationController >> modelClass [
 
 { #category : #accessing }
 OPUmlEnumerationController >> modelClassName [
-	^ #Enumeration
+
+	^ 'Enumeration'
 ]
