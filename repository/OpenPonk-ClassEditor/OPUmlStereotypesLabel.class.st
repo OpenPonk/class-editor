@@ -18,12 +18,6 @@ OPUmlStereotypesLabel >> isPositionableByUser [
 	^ false
 ]
 
-{ #category : #testing }
-OPUmlStereotypesLabel >> isResizableByUser [
-
-	^ false
-]
-
 { #category : #accessing }
 OPUmlStereotypesLabel >> stereotypeNames [
 

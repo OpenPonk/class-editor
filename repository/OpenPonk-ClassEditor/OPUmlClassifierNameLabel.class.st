@@ -35,12 +35,6 @@ OPUmlClassifierNameLabel >> isPositionableByUser [
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
-OPUmlClassifierNameLabel >> isResizableByUser [
-
-	^ false
-]
-
 { #category : #removing }
 OPUmlClassifierNameLabel >> removeRender [
 
