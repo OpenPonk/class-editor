@@ -10,6 +10,12 @@ OPUmlAssociationStereotypesLabel >> defaultAnchorConstraintPosition [
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlAssociationStereotypesLabel >> defaultMinDistance [
+
+	^ 0
+]
+
 { #category : #accessing }
 OPUmlAssociationStereotypesLabel >> defaultText [
 

@@ -10,6 +10,12 @@ OPUmlExtensionRequiredLabel >> defaultAnchorConstraintPosition [
 	^ OPRSAnchorConstraintEndDistanceReference distance: 10
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlExtensionRequiredLabel >> defaultMinDistance [
+
+	^ super defaultMinDistance negated
+]
+
 { #category : #accessing }
 OPUmlExtensionRequiredLabel >> defaultText [
 

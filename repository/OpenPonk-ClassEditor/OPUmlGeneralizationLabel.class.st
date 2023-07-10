@@ -10,12 +10,6 @@ OPUmlGeneralizationLabel >> defaultAnchorConstraintPosition [
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5
 ]
 
-{ #category : #'as yet unclassified' }
-OPUmlGeneralizationLabel >> defaultMinDistance [
-
-	^ super defaultMinDistance negated
-]
-
 { #category : #accessing }
 OPUmlGeneralizationLabel >> defaultText [
 

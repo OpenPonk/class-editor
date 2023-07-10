@@ -29,12 +29,6 @@ OPUmlMultiplicityLabel >> defaultAnchorConstraintPosition [
 		   ifFalse: [ OPRSAnchorConstraintEndDistanceReference ]) distance: 10
 ]
 
-{ #category : #'as yet unclassified' }
-OPUmlMultiplicityLabel >> defaultMinDistance [
-
-	^ super defaultMinDistance negated
-]
-
 { #category : #accessing }
 OPUmlMultiplicityLabel >> defaultText [
 

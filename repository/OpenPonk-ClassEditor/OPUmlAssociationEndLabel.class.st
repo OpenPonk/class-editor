@@ -29,6 +29,12 @@ OPUmlAssociationEndLabel >> defaultAnchorConstraintPosition [
 		   ifFalse: [ OPRSAnchorConstraintEndDistanceReference ]) distance: 10
 ]
 
+{ #category : #'as yet unclassified' }
+OPUmlAssociationEndLabel >> defaultMinDistance [
+
+	^ super defaultMinDistance negated
+]
+
 { #category : #accessing }
 OPUmlAssociationEndLabel >> defaultText [
 
