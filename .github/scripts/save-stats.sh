@@ -19,6 +19,11 @@ unzip -q $PROJECT_NAME-$PLATFORM-$VERSION.zip
 
     contents := STONJSON fromString: response.
 
+    (contents includesKey: #assets) ifFalse: [ self error: 'Previous nightly build not found. 
+    If this is first build of this repository, create pre-release named "nightly" by hand first. 
+    Otherwise, this server response might help you: 
+    ', response asString].
+
     text := String streamContents: [ :s |
         s << 'name,created_at,download_count'.
         s lf.
