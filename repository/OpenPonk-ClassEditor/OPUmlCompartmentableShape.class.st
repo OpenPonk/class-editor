@@ -126,6 +126,7 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 	self roassalShape
 		when: RSPositionChangedEvent
 		do: [ :event | self layoutContents ]
+		for: self
 ]
 
 { #category : #accessing }
