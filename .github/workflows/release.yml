@@ -4,14 +4,8 @@ on:
   release:
     types: [published]
   workflow_call:
-
-env:
-  REPOSITORY_NAME: '${{ github.event.repository.name }}'
-  PROJECT_NAME: 'openponk-${{ github.event.repository.name }}'
-  VERSION: ${{ github.event.release.tag_name }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  RUN_ID: ${{ github.run_id }}
   
 jobs:
-  OP:
-    uses: OpenPonk/plugins/.github/workflows/release.yml@master
+  plugins:
+    uses: OpenPonk/plugins/.github/workflows/release.yml@master    
+    secrets: inherit
