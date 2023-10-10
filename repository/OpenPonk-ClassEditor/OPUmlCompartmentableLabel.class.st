@@ -21,6 +21,7 @@ OPUmlCompartmentableLabel >> renderBasicShape [
 { #category : #rendering }
 OPUmlCompartmentableLabel >> renderShapeDetails [
 
+	super renderShapeDetails.
 	self roassalShape
 		when: RSPositionChangedEvent
 		do: [ :event |

@@ -10,9 +10,10 @@ OPUmlListCompartment >> layoutOwnedElements [
 	self ownedElements
 		inject:
 		self roassalShape encompassingRectangle top + self topPadding
-		into: [ :prevHeight :each | 
+		into: [ :prevHeight :each |
 			each translateTopTo: prevHeight.
 			prevHeight + each height ].
+	super layoutOwnedElements.
 	self roassalShape signalUpdate
 ]
 

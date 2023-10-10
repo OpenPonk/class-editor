@@ -7,7 +7,9 @@ Class {
 { #category : #rendering }
 OPUmlCompartmentableContent >> layoutOwnedElements [
 
-	"do nothing by default"
+	self roassalShape
+		pushBack;
+		signalUpdate
 ]
 
 { #category : #initialization }

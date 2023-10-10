@@ -115,22 +115,6 @@ OPUmlPackageImportController >> removeModel [
 	model importingNamespace: nil
 ]
 
-{ #category : #figures }
-OPUmlPackageImportController >> renderFigureIn: aView [
-	| sourceElement |
-	self diagramController willRender: self.
-	diagramElement := self createDiagramElement.
-	sourceElement := ((diagramController controllers
-		select: [ :each | each isKindOf: OPUmlPackageController ])
-		detect: [ :each | each model packageImports includes: self model ]) diagramElement.
-	"	diagramElement source: (diagramController diagramElementForModel: self model specific)."
-	diagramElement source: sourceElement.
-	diagramElement target: (diagramController diagramElementForModel: self model importedPackage).
-	diagramElement renderIn: aView.
-	diagramController rendered: self.
-	^ self refreshFigure
-]
-
 { #category : #construction }
 OPUmlPackageImportController >> showWithoutDependentInDiagram: aDiagramController [
 	aDiagramController showWithoutDependentInDiagramModel: model importedPackage.
