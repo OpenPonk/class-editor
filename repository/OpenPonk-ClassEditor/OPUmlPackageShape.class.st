@@ -71,7 +71,10 @@ OPUmlPackageShape >> renderShapeDetails [
 		       model: self;
 		       yourself.
 	self canvas add: ear.
-	self roassalShape when: RSShapeRemovedEvent do: [ ear remove ].
+	self roassalShape
+		when: RSShapeRemovedEvent
+		do: [ ear remove ]
+		for: self.
 	mainLabel := RSLabel new
 		             color: Color black;
 		             model: self;
@@ -83,9 +86,12 @@ OPUmlPackageShape >> renderShapeDetails [
 		                   yourself.
 	self canvas add: mainLabel.
 	self canvas add: stereotypeLabel.
-	self roassalShape when: RSShapeRemovedEvent do: [ 
-		mainLabel remove.
-		stereotypeLabel remove ].
+	self roassalShape
+		when: RSShapeRemovedEvent
+		do: [
+			mainLabel remove.
+			stereotypeLabel remove ]
+		for: self.
 	RSLocation new
 		inner;
 		left;
@@ -100,11 +106,14 @@ OPUmlPackageShape >> renderShapeDetails [
 		outer;
 		below;
 		stick: mainLabel on: stereotypeLabel.
-	mainLabel when: RSExtentChangedEvent do: [ :event | 
-		self roassalShape width: { 
-				self width.
-				self minWidth.
-				(mainLabel width + self padding) } max ].
+	mainLabel
+		when: RSExtentChangedEvent
+		do: [ :event |
+			self roassalShape width: {
+					self width.
+					self minWidth.
+					(mainLabel width + self padding) } max ]
+		for: self.
 
 	self roassalShape
 		@ OPRSSelectable;
