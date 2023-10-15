@@ -13,5 +13,5 @@ on:
 
 jobs:
   plugins:
-    uses: OpenPonk/plugins/.github/workflows/nightly.yml@master
+    uses: OpenPonk/ci-scripts/.github/workflows/publish-nightly.yml@master
     secrets: inherit
