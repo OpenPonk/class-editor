@@ -1,8 +1,8 @@
 Class {
 	#name : #OPUmlClassifierShape,
 	#superclass : #OPUmlCompartmentableShape,
-	#traits : 'OPTDIBorderColoredAsStroke + OPTDIColoredAsFill',
-	#classTraits : 'OPTDIBorderColoredAsStroke classTrait + OPTDIColoredAsFill classTrait',
+	#traits : 'OPTDIColoredAsFillAndBorderColoredAsStroke',
+	#classTraits : 'OPTDIColoredAsFillAndBorderColoredAsStroke classTrait',
 	#instVars : [
 		'nameLabel',
 		'stereotypeLabel',
@@ -123,16 +123,6 @@ OPUmlClassifierShape >> updateRenderFromModel [
 	self updateCommentIcon.
 
 	super updateRenderFromModel
-]
-
-{ #category : #rendering }
-OPUmlClassifierShape >> updateRenderFromStyles [
-
-	self isRendered ifFalse: [ ^ self ].
-	roassalShape color: self fillColor.
-	roassalShape borderColor: self strokeColor.
-	super updateRenderFromStyles.
-	self roassalShape signalUpdate
 ]
 
 { #category : #rendering }

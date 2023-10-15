@@ -63,7 +63,7 @@ OPUmlPackageShape >> renderBasicShape [
 	^ RSBox new
 		  width: self minWidth;
 		  height: self minHeight;
-		  color: self color;
+		  color: self fillColor;
 		  borderColor: Color black;
 		  yourself
 ]
@@ -151,6 +151,23 @@ OPUmlPackageShape >> stereotypeText [
 ]
 
 { #category : #update }
+OPUmlPackageShape >> updateColorFromStyles [
+
+	self roassalShape
+		propertyAt: OPRSSelectable
+		ifPresent: [ :selectable |
+			| key |
+			key := selectable copyKey , 'color'.
+			self roassalShape properties at: key ifPresent: [
+				self roassalShape properties
+					at: key
+					put: (OrderedCollection with: self color).
+				^ self ] ].
+	self roassalShape color: self color.
+	ear color: self color
+]
+
+{ #category : #update }
 OPUmlPackageShape >> updateRenderFromModel [
 
 	mainLabel text: self labelText.
@@ -159,14 +176,4 @@ OPUmlPackageShape >> updateRenderFromModel [
 	super updateRenderFromModel.
 
 	roassalShape signalUpdate
-]
-
-{ #category : #update }
-OPUmlPackageShape >> updateRenderFromStyles [
-
-	self isRendered ifFalse: [ ^ self ].
-	roassalShape color: self color.
-	ear color: self color.
-	super updateRenderFromStyles.
-	self roassalShape signalUpdate
 ]
