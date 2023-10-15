@@ -10,8 +10,8 @@ SmalltalkCISpec {
 			#load : [ 'complete' ]
 		}
 	],
-	#preLoading : '.github/scripts/preLoad.st',
-	#postLoading : '.github/scripts/postLoad.st',
+	#preLoading : 'ci-scripts/.github/scripts/preLoad.st',
+	#postLoading : 'ci-scripts/.github/scripts/postLoad.st',
 	#testing : {
 		#coverage : {
 			#packages : [
