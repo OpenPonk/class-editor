@@ -15,6 +15,14 @@ Class {
 	#category : #'OpenPonk-ClassEditor-DiagramElements'
 }
 
+{ #category : #rendering }
+OPUmlPackageShape >> addSelectionDraggableInteraction [
+
+	roassalShape
+	@ (OPRSSelectionDraggable thatAlsoDragsShapesProvidedByBlock:
+			 innerRoassalShapesBlock)
+]
+
 { #category : #initialization }
 OPUmlPackageShape >> initialize [
 
@@ -113,13 +121,25 @@ OPUmlPackageShape >> renderShapeDetails [
 					self width.
 					self minWidth.
 					(mainLabel width + self padding) } max ]
-		for: self.
+		for: self
+]
 
-	self roassalShape
-		@ OPRSSelectable;
-		@ (OPRSSelectionDraggable thatAlsoDragsShapesProvidedByBlock:
-					 innerRoassalShapesBlock);
-		@ OPRSResizable
+{ #category : #rendering }
+OPUmlPackageShape >> selectableInteraction [
+
+	^ OPRSSelectable
+]
+
+{ #category : #rendering }
+OPUmlPackageShape >> shouldBePositionableByUser [
+
+	^ true
+]
+
+{ #category : #interactions }
+OPUmlPackageShape >> shouldBeResizableByUser [
+
+	^ true
 ]
 
 { #category : #accessing }

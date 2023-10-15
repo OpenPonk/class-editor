@@ -117,16 +117,17 @@ OPUmlCompartmentableShape >> renderBasicShape [
 { #category : #rendering }
 OPUmlCompartmentableShape >> renderShapeDetails [
 
-	| selectable |
 	super renderShapeDetails.
-	selectable := OPRSSelectable new.
-	self setupHighlight: selectable.
-	roassalShape @ selectable.
-	self roassalShape @ OPRSSelectionDraggable.
 	self roassalShape
 		when: RSPositionChangedEvent
 		do: [ :event | self layoutContents ]
 		for: self
+]
+
+{ #category : #rendering }
+OPUmlCompartmentableShape >> selectableInteraction [
+
+	^ OPRSSelectable highlightBorderColorBlue
 ]
 
 { #category : #accessing }
@@ -136,9 +137,9 @@ OPUmlCompartmentableShape >> separators [
 ]
 
 { #category : #rendering }
-OPUmlCompartmentableShape >> setupHighlight: selectable [
+OPUmlCompartmentableShape >> shouldBePositionableByUser [
 
-	selectable highlightBorderColor: Color blue
+	^ true
 ]
 
 { #category : #rendering }

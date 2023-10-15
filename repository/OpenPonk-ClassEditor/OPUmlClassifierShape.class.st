@@ -66,11 +66,12 @@ OPUmlClassifierShape >> minExtent [
 ]
 
 { #category : #hooks }
-OPUmlClassifierShape >> setupHighlight: aHighlightable [
+OPUmlClassifierShape >> selectableInteraction [
 
-	super setupHighlight: aHighlightable.
-	adornmentCreationBlock ifNil: [ ^ self ].
-	aHighlightable highlightAdornments: [ :builder | 
+	| selectableInteraction |
+	selectableInteraction := super selectableInteraction.
+	adornmentCreationBlock ifNil: [ ^ selectableInteraction ].
+	selectableInteraction highlightAdornments: [ :builder |
 		builder horizontalLocation
 			outer;
 			right.
@@ -78,7 +79,8 @@ OPUmlClassifierShape >> setupHighlight: aHighlightable [
 			inner;
 			top.
 		builder directionDown.
-		adornmentCreationBlock value: builder ]
+		adornmentCreationBlock value: builder ].
+	^ selectableInteraction
 ]
 
 { #category : #accessing }

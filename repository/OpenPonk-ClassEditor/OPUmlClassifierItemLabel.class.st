@@ -25,13 +25,9 @@ OPUmlClassifierItemLabel >> modelChanged [
 ]
 
 { #category : #rendering }
-OPUmlClassifierItemLabel >> renderShapeDetails [
+OPUmlClassifierItemLabel >> selectableInteraction [
 
-	| selectable |
-	super renderShapeDetails.
-	selectable := OPRSSelectable new.
-	selectable highlightColor: Color blue.
-	roassalShape @ selectable
+	^ OPRSSelectable highlightColorBlue
 ]
 
 { #category : #'as yet unclassified' }
