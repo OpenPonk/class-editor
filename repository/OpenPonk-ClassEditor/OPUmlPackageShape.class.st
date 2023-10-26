@@ -101,10 +101,8 @@ OPUmlPackageShape >> renderShapeDetails [
 			stereotypeLabel remove ]
 		for: self.
 	RSLocation new
-		inner;
-		left;
-		top;
-		offset: 0 @ ear height negated;
+		insideCornerLeft;
+		offset: 0 @ self roassalShape border width;
 		stick: ear on: self roassalShape.
 	RSLocation new
 		inner;
