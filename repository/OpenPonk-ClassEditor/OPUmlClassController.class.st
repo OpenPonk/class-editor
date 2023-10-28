@@ -10,41 +10,30 @@ Class {
 { #category : #figures }
 OPUmlClassController >> adornments [
 
-	^ { 
-		  (OPUmlIcons attributeIcon -> [ 
+	^ {
+		  (OPUmlIcons attributeIcon -> [
 		   | tool |
 		   tool := OPCreationTool new
 			           palette: self diagramController editor palette;
 			           factory: [ OPUmlAttributeController new ].
 		   self diagramController editor palette selectTool: tool.
-		   tool whenCreated: [ :ctrl | 
+		   tool whenCreated: [ :ctrl |
 			   OPRenameElementCommand executeOn: ctrl ].
 		   tool selectedTargetControllers: { self } ]).
-		  (OPUmlIcons directedAssociationIcon -> [ 
+		  (OPUmlIcons directedAssociationIcon -> [
 		   | tool |
 		   tool := OPConnectionCreationTool new
 			           palette: self diagramController editor palette;
 			           factory: [ OPUmlAssociationController new ].
 		   self diagramController editor palette selectTool: tool.
 		   tool selectedSourceControllers: { self } ]).
-		  (OPUmlIcons generalizationIcon -> [ 
+		  (OPUmlIcons generalizationIcon -> [
 		   | tool |
 		   tool := OPConnectionCreationTool new
 			           palette: self diagramController editor palette;
 			           factory: [ OPUmlGeneralizationController new ].
 		   self diagramController editor palette selectTool: tool.
 		   tool selectedSourceControllers: { self } ]) }
-]
-
-{ #category : #rendering }
-OPUmlClassController >> allShowableElements [
-	| queue |
-	self flag: #unused.
-	queue := OrderedCollection new.
-	queue addAll: self model ownedAttributes.
-	queue addAll: self model ownedOperations.
-	^ queue asArray
-		select: [ :each | diagramController hasSupportForModel: each ]
 ]
 
 { #category : #forms }
@@ -84,7 +73,7 @@ OPUmlClassController >> createAdornmentsBy: builder [
 { #category : #figures }
 OPUmlClassController >> createAssociationAdornmentBy: builder [
 
-	builder addIconForm: OPUmlIcons directedAssociationIcon action: [ 
+	builder addIconForm: OPUmlIcons directedAssociationIcon action: [
 		| tool |
 		tool := OPConnectionCreationTool new
 			        palette: self diagramController editor palette;
@@ -96,22 +85,22 @@ OPUmlClassController >> createAssociationAdornmentBy: builder [
 { #category : #figures }
 OPUmlClassController >> createAttributeAdornmentBy: builder [
 
-	builder addIconForm: OPUmlIcons attributeIcon action: [ 
+	builder addIconForm: OPUmlIcons attributeIcon action: [
 		| tool |
 		tool := OPCreationTool new
 			        palette: self diagramController editor palette;
 			        factory: [ OPUmlAttributeController new ].
 		self diagramController editor palette selectTool: tool.
-		tool whenCreated: [ :ctrl | 
+		tool whenCreated: [ :ctrl |
 			OPRenameElementCommand executeOn: ctrl.
-			ctrl refreshFigure ].
+			ctrl diagramElement modelChanged ].
 		tool selectedControllers: { self } ]
 ]
 
 { #category : #figures }
 OPUmlClassController >> createGeneralizationAdornmentBy: builder [
 
-	builder addIconForm: OPUmlIcons generalizationIcon action: [ 
+	builder addIconForm: OPUmlIcons generalizationIcon action: [
 		| tool |
 		tool := OPConnectionCreationTool new
 			        palette: self diagramController editor palette;

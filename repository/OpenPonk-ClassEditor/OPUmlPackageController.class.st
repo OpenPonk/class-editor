@@ -10,12 +10,6 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Controllers'
 }
 
-{ #category : #rendering }
-OPUmlPackageController >> allShowableElements [
-	self flag: #unused.
-	^ #()
-]
-
 { #category : #configuration }
 OPUmlPackageController >> beForModel [
 	modelClass := OPUMLPackage
