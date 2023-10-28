@@ -100,9 +100,10 @@ OPUmlPackageShape >> renderShapeDetails [
 			mainLabel remove.
 			stereotypeLabel remove ]
 		for: self.
+	self flag: 'Uncomment after Roassal update'.
 	RSLocation new
 		insideCornerLeft;
-		offset: 0 @ self roassalShape border width;
+		"offset: 0 @ self roassalShape border width;"
 		stick: ear on: self roassalShape.
 	RSLocation new
 		inner;
