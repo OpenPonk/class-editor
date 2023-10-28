@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlClassifierItemLabel,
 	#superclass : #OPUmlNameLabel,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'as yet unclassified' }

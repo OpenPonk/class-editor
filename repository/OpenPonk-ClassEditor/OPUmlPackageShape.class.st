@@ -3,16 +3,16 @@ I represent a package box.
 "
 Class {
 	#name : #OPUmlPackageShape,
-	#superclass : #OPShape,
-	#traits : 'OPTDIColoredAsFill',
-	#classTraits : 'OPTDIColoredAsFill classTrait',
+	#superclass : #OPBoundNode,
+	#traits : 'OPTColoredAsFill',
+	#classTraits : 'OPTColoredAsFill classTrait',
 	#instVars : [
 		'mainLabel',
 		'stereotypeLabel',
 		'ear',
 		'innerRoassalShapesBlock'
 	],
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #rendering }

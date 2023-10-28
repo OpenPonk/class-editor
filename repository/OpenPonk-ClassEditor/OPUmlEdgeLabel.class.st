@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlEdgeLabel,
 	#superclass : #OPEdgeLabel,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'as yet unclassified' }

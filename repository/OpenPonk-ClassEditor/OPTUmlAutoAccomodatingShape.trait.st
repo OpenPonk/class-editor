@@ -1,6 +1,6 @@
 Trait {
 	#name : #OPTUmlAutoAccomodatingShape,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #rendering }

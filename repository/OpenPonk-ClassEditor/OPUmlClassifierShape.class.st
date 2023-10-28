@@ -1,15 +1,15 @@
 Class {
 	#name : #OPUmlClassifierShape,
 	#superclass : #OPUmlCompartmentableShape,
-	#traits : 'OPTDIColoredAsFillAndBorderColoredAsStroke',
-	#classTraits : 'OPTDIColoredAsFillAndBorderColoredAsStroke classTrait',
+	#traits : 'OPTColoredAsFillAndBorderColoredAsStroke',
+	#classTraits : 'OPTColoredAsFillAndBorderColoredAsStroke classTrait',
 	#instVars : [
 		'nameLabel',
 		'stereotypeLabel',
 		'commentIcon',
 		'adornmentCreationBlock'
 	],
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'ston-core' }

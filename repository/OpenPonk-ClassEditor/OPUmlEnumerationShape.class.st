@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'literals'
 	],
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'ston-core' }

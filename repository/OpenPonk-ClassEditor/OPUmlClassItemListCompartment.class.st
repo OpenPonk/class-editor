@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlClassItemListCompartment,
 	#superclass : #OPUmlListCompartment,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #sorting }

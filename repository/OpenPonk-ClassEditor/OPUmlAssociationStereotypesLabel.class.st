@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlAssociationStereotypesLabel,
 	#superclass : #OPUmlEdgeLabel,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'as yet unclassified' }

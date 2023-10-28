@@ -1,5 +1,5 @@
 Class {
 	#name : #OPUmlEnumerationLiteralLabel,
 	#superclass : #OPUmlClassifierItemLabel,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }

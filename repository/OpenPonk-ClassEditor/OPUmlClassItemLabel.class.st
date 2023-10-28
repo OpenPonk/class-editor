@@ -1,9 +1,9 @@
 Class {
 	#name : #OPUmlClassItemLabel,
 	#superclass : #OPUmlClassifierItemLabel,
-	#traits : 'OPTDIColoredAsFont',
-	#classTraits : 'OPTDIColoredAsFont classTrait',
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#traits : 'OPTColoredAsFont',
+	#classTraits : 'OPTColoredAsFont classTrait',
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }

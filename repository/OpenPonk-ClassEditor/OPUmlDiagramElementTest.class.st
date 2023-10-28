@@ -1,12 +1,12 @@
 Class {
 	#name : #OPUmlDiagramElementTest,
 	#superclass : #OPDiagramElementTestCase,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }
 OPUmlDiagramElementTest >> elementClass [
-	^ OPDiagramElement
+	^ OPShape
 ]
 
 { #category : #tests }

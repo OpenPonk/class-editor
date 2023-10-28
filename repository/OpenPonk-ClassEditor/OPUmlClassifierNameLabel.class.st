@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'labeled'
 	],
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'as yet unclassified' }

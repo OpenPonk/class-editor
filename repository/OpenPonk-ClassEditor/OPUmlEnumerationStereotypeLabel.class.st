@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlEnumerationStereotypeLabel,
 	#superclass : #OPUmlStereotypesLabel,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }

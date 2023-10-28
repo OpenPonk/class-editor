@@ -1,12 +1,12 @@
 Class {
 	#name : #OPUmlCompartmentableShape,
-	#superclass : #OPShape,
+	#superclass : #OPBoundNode,
 	#traits : 'OPTUmlAutoAccomodatingShape',
 	#classTraits : 'OPTUmlAutoAccomodatingShape classTrait',
 	#instVars : [
 		'separators'
 	],
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }

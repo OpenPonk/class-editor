@@ -8,7 +8,7 @@ Class {
 		'attributes',
 		'operations'
 	],
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #'ston-core' }

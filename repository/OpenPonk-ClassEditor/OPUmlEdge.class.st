@@ -1,9 +1,9 @@
 Class {
 	#name : #OPUmlEdge,
 	#superclass : #OPEdge,
-	#traits : 'OPTDIColoredAsStroke',
-	#classTraits : 'OPTDIColoredAsStroke classTrait',
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#traits : 'OPTColoredAsStroke',
+	#classTraits : 'OPTColoredAsStroke classTrait',
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }

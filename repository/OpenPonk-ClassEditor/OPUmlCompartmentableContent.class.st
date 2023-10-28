@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlCompartmentableContent,
 	#superclass : #OPNode,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #rendering }

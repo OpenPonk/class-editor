@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlCompartmentableShapeTest,
 	#superclass : #OPDiagramElementTestCase,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlNameLabel,
 	#superclass : #OPUmlLabel,
-	#category : #'OpenPonk-ClassEditor-DiagramElements'
+	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
 { #category : #accessing }
