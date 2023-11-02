@@ -1,13 +1,8 @@
 Class {
 	#name : #OPUmlEdgeTest,
-	#superclass : #OPDiagramElementTestCase,
+	#superclass : #OPAbstractEdgeTest,
 	#category : #'OpenPonk-ClassEditor-Shapes'
 }
-
-{ #category : #accessing }
-OPUmlEdgeTest >> elementClass [
-	^ OPUmlEdge
-]
 
 { #category : #running }
 OPUmlEdgeTest >> setUp [
@@ -17,44 +12,49 @@ OPUmlEdgeTest >> setUp [
 	source text: 'src'.
 	target := OPUmlLabel new.
 	target text: 'tgt'.
-	element source: source.
-	element target: target
+	shape source: source.
+	shape target: target
+]
+
+{ #category : #hooks }
+OPUmlEdgeTest >> shapeClass [
+	^ OPUmlEdge
 ]
 
 { #category : #tests }
 OPUmlEdgeTest >> testRemove [
 	| lbl |
-	(lbl := OPUmlLabel new) owningElement: element.
-	self assert: element ownedElements asArray equals: {lbl}.
+	(lbl := OPUmlLabel new) owningElement: shape.
+	self assert: shape ownedElements asArray equals: {lbl}.
 	lbl owningElement: nil.
-	self assert: element ownedElements isEmpty
+	self assert: shape ownedElements isEmpty
 ]
 
 { #category : #tests }
 OPUmlEdgeTest >> testRemoveDetachFromEnds [
-	| source target  |
+
+	| source target |
 	source := OPUmlLabel new.
 	target := OPUmlLabel new.
-	element source: source.
-	element target: target.
-	element remove.
-	self assert: source sourceEdges asArray equals: #().
-	self assert: target targetEdges asArray equals: #()
+	shape source: source.
+	shape target: target.
+	shape remove.
+	self assert: source sourceEdges asArray equals: #(  ).
+	self assert: target targetEdges asArray equals: #(  )
 ]
 
 { #category : #tests }
 OPUmlEdgeTest >> testRemoveFromView [
 
-	| lbl canvas |
+	| lbl |
 	(lbl := OPUmlLabel new)
 		text: 'x';
-		owningElement: element.
-	canvas := RSCanvas new.
-	element source renderIn: canvas.
-	element target renderIn: canvas.
-	element renderIn: canvas.
+		owningElement: shape.
+	shape source renderIn: canvas.
+	shape target renderIn: canvas.
+	shape renderIn: canvas.
 	lbl renderIn: canvas.
 	self assert: canvas nodes size equals: 3.
-	element remove.
+	shape remove.
 	self assert: canvas shapes size equals: 2
 ]
