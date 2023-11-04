@@ -1,7 +1,7 @@
 Class {
 	#name : #OPUmlEdgeTest,
 	#superclass : #OPAbstractEdgeTest,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : #'OpenPonk-ClassEditor-Tests - Shapes'
 }
 
 { #category : #running }

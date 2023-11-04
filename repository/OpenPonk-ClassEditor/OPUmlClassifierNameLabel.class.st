@@ -24,7 +24,7 @@ OPUmlClassifierNameLabel >> emphasis [
 
 	| emphasis |
 	emphasis := super emphasis.
-	self modelElement isAbstract ifTrue: [ 
+	self modelElement isAbstract ifTrue: [
 		emphasis add: TextEmphasis italic ].
 	^ emphasis
 ]
@@ -88,5 +88,7 @@ OPUmlClassifierNameLabel >> updateRenderFromModel [
 
 	super updateRenderFromModel.
 
-	roassalShape := labeled labelShape
+	roassalShape := labeled labelShape.
+
+	roassalShape signalUpdate
 ]

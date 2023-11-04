@@ -15,12 +15,12 @@ OPUmlClassItemLabel >> defaultText [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : #emphasis }
 OPUmlClassItemLabel >> emphasis [
 
 	| emphasis |
 	emphasis := super emphasis.
-	self modelElement isStatic ifTrue: [ 
+	self modelElement isStatic ifTrue: [
 		emphasis add: TextEmphasis underlined ].
 	^ emphasis
 ]

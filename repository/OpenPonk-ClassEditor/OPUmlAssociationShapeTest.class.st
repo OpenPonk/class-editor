@@ -1,15 +1,14 @@
 Class {
 	#name : #OPUmlAssociationShapeTest,
-	#superclass : #TestCase,
+	#superclass : #OPUmlEdgeTest,
 	#instVars : [
-		'property',
 		'element',
 		'comment',
 		'association',
 		'ownedComment',
 		'owningElement'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests'
+	#category : #'OpenPonk-ClassEditor-Tests - Shapes'
 }
 
 { #category : #running }
@@ -35,6 +34,11 @@ OPUmlAssociationShapeTest >> setUpAssociation [
 		memberEnds:
 			{ownedComment.
 			owningElement}
+]
+
+{ #category : #hooks }
+OPUmlAssociationShapeTest >> shapeClass [
+	^ OPUmlAssociationShape
 ]
 
 { #category : #tests }

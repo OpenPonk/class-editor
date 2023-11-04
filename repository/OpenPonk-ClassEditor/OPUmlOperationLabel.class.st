@@ -4,12 +4,12 @@ Class {
 	#category : #'OpenPonk-ClassEditor-Shapes'
 }
 
-{ #category : #accessing }
+{ #category : #emphasis }
 OPUmlOperationLabel >> emphasis [
 
 	| emphasis |
 	emphasis := super emphasis.
-	self modelElement isAbstract ifTrue: [ 
+	self modelElement isAbstract ifTrue: [
 		emphasis add: TextEmphasis italic ].
 	^ emphasis
 ]
