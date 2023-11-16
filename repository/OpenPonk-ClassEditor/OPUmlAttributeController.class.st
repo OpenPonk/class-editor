@@ -13,6 +13,14 @@ OPUmlAttributeController >> addDiagramElementToOwner [
 	self diagramElementOwner addAttribute: diagramElement
 ]
 
+{ #category : #figures }
+OPUmlAttributeController >> createDiagramElement [
+
+	(model name isNil or: [ model name isEmpty ]) ifTrue: [
+		model name: ' ' ].
+	super createDiagramElement
+]
+
 { #category : #construction }
 OPUmlAttributeController >> createModelIn: aClass [
 	self

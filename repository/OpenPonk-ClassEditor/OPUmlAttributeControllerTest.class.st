@@ -89,6 +89,27 @@ OPUmlAttributeControllerTest >> testDescriptions [
 		assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
 ]
 
+{ #category : #tests }
+OPUmlAttributeControllerTest >> testDoesNotShowEmptyName [
+
+	model name: ''.
+
+	self testCreateDiagramElement.
+
+	self assert: controller diagramElement text isNotEmpty
+]
+
+{ #category : #tests }
+OPUmlAttributeControllerTest >> testDoesNotShowNilName [
+
+	model name: nil.
+
+	self testCreateDiagramElement.
+
+	self assert: controller diagramElement text isNotNil.
+	self assert: controller diagramElement text isNotEmpty
+]
+
 { #category : #'tests - removing' }
 OPUmlAttributeControllerTest >> testRemoveFromView [
 	| class compartment prop |
