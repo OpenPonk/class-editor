@@ -1,6 +1,10 @@
 Class {
 	#name : #OPUmlAttributeControllerTest,
 	#superclass : #OPUmlElementControllerTest,
+	#instVars : [
+		'owningController',
+		'owningClass'
+	],
 	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
@@ -18,6 +22,15 @@ OPUmlAttributeControllerTest >> diagramElementClass [
 { #category : #accessing }
 OPUmlAttributeControllerTest >> modelClass [
 	^ OPUMLProperty
+]
+
+{ #category : #running }
+OPUmlAttributeControllerTest >> setUp [
+
+	super setUp.
+	owningClass := OPUMLClass new.
+	model owningClass: owningClass.
+	owningController := OPUmlClassController new model: owningClass
 ]
 
 { #category : #'tests - creation' }
@@ -45,8 +58,7 @@ OPUmlAttributeControllerTest >> testClassBeTarget [
 { #category : #tests }
 OPUmlAttributeControllerTest >> testCreateDiagramElement [
 
-	model owningClass: OPUMLClass new.
-	diagramController showWithoutDependentInDiagramModel: model owningClass.
+	diagramController showWithoutDependentInDiagramModel: owningClass.
 
 	super testCreateDiagramElement
 ]
@@ -90,16 +102,6 @@ OPUmlAttributeControllerTest >> testDescriptions [
 ]
 
 { #category : #tests }
-OPUmlAttributeControllerTest >> testDoesNotShowEmptyName [
-
-	model name: ''.
-
-	self testCreateDiagramElement.
-
-	self assert: controller diagramElement text isNotEmpty
-]
-
-{ #category : #tests }
 OPUmlAttributeControllerTest >> testDoesNotShowNilName [
 
 	model name: nil.
@@ -108,6 +110,42 @@ OPUmlAttributeControllerTest >> testDoesNotShowNilName [
 
 	self assert: controller diagramElement text isNotNil.
 	self assert: controller diagramElement text isNotEmpty
+]
+
+{ #category : #tests }
+OPUmlAttributeControllerTest >> testDoesShowsBlankLabel [
+
+	model name: ' '.
+	controller model: model.
+	diagramController addController: controller.
+	owningController showInDiagram: diagramController.
+	controller showInDiagram: diagramController.
+
+	self assert: controller roassalShape width > 5
+]
+
+{ #category : #tests }
+OPUmlAttributeControllerTest >> testDoesShowsLabel [
+
+	model name: 'attribute'.
+	controller model: model.
+	diagramController addController: controller.
+	owningController showInDiagram: diagramController.
+	controller showInDiagram: diagramController.
+
+	self assert: controller roassalShape width > 5
+]
+
+{ #category : #tests }
+OPUmlAttributeControllerTest >> testDoesShowsNilLabel [
+
+	model name: nil.
+	controller model: model.
+	diagramController addController: controller.
+	owningController showInDiagram: diagramController.
+	controller showInDiagram: diagramController.
+
+	self assert: controller roassalShape width > 5
 ]
 
 { #category : #'tests - removing' }

@@ -25,12 +25,9 @@ OPUmlClassifierItemController >> descriptionName [
 	<magritteDescription>
 	| description |
 	description := super descriptionName.
-	description accessor writeBlock: [ :me :newValue | 
+	description accessor writeBlock: [ :me :newValue |
 		| text |
-		text := newValue ifEmpty: [ ' ' ] ifNotEmpty: [ 
-			        newValue first = Character space
-				        ifTrue: [ newValue allButFirst ]
-				        ifFalse: [ newValue ] ].
+		text := newValue trim ifEmpty: [ self placeholderName ].
 		me model name: text.
 		self diagramElement modelChanged ].
 	^ description
@@ -47,4 +44,10 @@ OPUmlClassifierItemController >> internalSubscribeTo: aModel [
 { #category : #testing }
 OPUmlClassifierItemController >> isHideable [
 	^ true
+]
+
+{ #category : #hooks }
+OPUmlClassifierItemController >> placeholderName [
+
+	^ self subclassResponsibility
 ]

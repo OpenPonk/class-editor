@@ -16,18 +16,17 @@ OPUmlAttributeController >> addDiagramElementToOwner [
 { #category : #figures }
 OPUmlAttributeController >> createDiagramElement [
 
-	(model name isNil or: [ model name isEmpty ]) ifTrue: [
-		model name: ' ' ].
+	(model name isNil or: [ model name trim isEmpty ]) ifTrue: [
+		model name: self placeholderName ].
 	super createDiagramElement
 ]
 
 { #category : #construction }
 OPUmlAttributeController >> createModelIn: aClass [
-	self
-		model:
-			(self modelClass new
-				name: 'attribute';
-				yourself).
+
+	self model: (self modelClass new
+			 name: self placeholderName;
+			 yourself).
 	aClass ownedAttributes add: model.
 	^ model
 ]
@@ -141,7 +140,7 @@ OPUmlAttributeController >> diagramElementClass [
 	^ OPUmlAttributeLabel
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'diagram elements' }
 OPUmlAttributeController >> diagramElementOwner [
 
 	^ (diagramController controllerForModel:
@@ -153,6 +152,12 @@ OPUmlAttributeController >> diagramElementOwner [
 { #category : #accessing }
 OPUmlAttributeController >> modelClass [
 	^ OPUMLProperty
+]
+
+{ #category : #hooks }
+OPUmlAttributeController >> placeholderName [
+
+	^ 'attribute'
 ]
 
 { #category : #removing }

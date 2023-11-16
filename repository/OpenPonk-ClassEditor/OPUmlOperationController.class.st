@@ -40,7 +40,7 @@ OPUmlOperationController >> diagramElementClass [
 	^ OPUmlOperationLabel
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'diagram elements' }
 OPUmlOperationController >> diagramElementOwner [
 
 	^ (diagramController controllerForModel: model owningClass)
@@ -50,6 +50,12 @@ OPUmlOperationController >> diagramElementOwner [
 { #category : #accessing }
 OPUmlOperationController >> modelClass [
 	^ OPUMLOperation
+]
+
+{ #category : #hooks }
+OPUmlOperationController >> placeholderName [
+
+	^ 'operation'
 ]
 
 { #category : #removing }

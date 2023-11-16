@@ -15,11 +15,10 @@ OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
 
 { #category : #construction }
 OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
-	self
-		model:
-			(self modelClass new
-				name: 'literal';
-				yourself).
+
+	self model: (self modelClass new
+			 name: self placeholderName;
+			 yourself).
 	aParentModel ownedLiterals add: model.
 	^ model
 ]
@@ -30,7 +29,7 @@ OPUmlEnumerationLiteralController >> diagramElementClass [
 	^ OPUmlEnumerationLiteralLabel
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'diagram elements' }
 OPUmlEnumerationLiteralController >> diagramElementOwner [
 
 	^ (diagramController showWithoutDependentInDiagramModel:
@@ -40,6 +39,12 @@ OPUmlEnumerationLiteralController >> diagramElementOwner [
 { #category : #accessing }
 OPUmlEnumerationLiteralController >> modelClass [
 	^ OPUMLEnumerationLiteral
+]
+
+{ #category : #hooks }
+OPUmlEnumerationLiteralController >> placeholderName [
+
+	^ 'literal'
 ]
 
 { #category : #removing }
