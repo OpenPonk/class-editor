@@ -4,37 +4,46 @@ I manage layouts available for UML Editor and apply them.
 Class {
 	#name : #OPUmlLayouter,
 	#superclass : #OPLayouter,
-	#instVars : [
-		'packagedElements'
-	],
 	#category : #'OpenPonk-ClassEditor-Plugin'
 }
 
-{ #category : #'ui hooks' }
+{ #category : #userinterface }
 OPUmlLayouter >> applyLayout: aThreeArgBlock [
 
-	| classifiers classes packages hierarchy associations packageImports boxes links |
-	classifiers := packagedElements select: [ :each | 
-		               (each oclIsKindOf: #Class)
-		               | (each oclIsKindOf: #DataType) ].
-	classes := classifiers select: [ :each | each oclIsKindOf: #Class ].
-	packages := packagedElements select: [ :each | 
-		            each oclIsKindOf: #Package ].
-	hierarchy := (classifiers flatCollect: #generalizations)
-	             , (classes flatCollect: #extensions).
-	associations := (packagedElements select: [ :each | 
-		                 each oclIsKindOf: #Association ]) \ hierarchy.
-	packageImports := packages flatCollect: #packageImports.
-	boxes := classifiers , packages.
-	links := associations , packageImports.
+	| packageableElements packageableRelationships subtypeRelationships linkRelationships boxes renderedModels generalizations extensions invertedExtensionShapes |
+	renderedModels := diagramController controllers
+		                  select: #isRendered
+		                  thenCollect: #model.
+	packageableElements := renderedModels select: [ :each |
+		                       each oclIsKindOf: #PackageableElement ].
+	packageableRelationships := packageableElements select: [ :each |
+		                            each oclIsKindOf: #Relationship ].
+	generalizations := renderedModels select: [ :each |
+		                   each oclIsKindOf: #Generalization ].
+	extensions := packageableRelationships select: [ :each |
+		              each oclIsKindOf: #Extension ].
+
+	boxes := packageableElements \ packageableRelationships.
+	subtypeRelationships := generalizations , extensions.
+	linkRelationships := packageableRelationships \ extensions.
+	invertedExtensionShapes := (self roassalShapesFor: extensions)
+		                           collect: [ :each |
+			                           | from to |
+			                           from := each from.
+			                           to := each to.
+			                           each copy
+				                           from: to;
+				                           to: from;
+				                           yourself ].
 	aThreeArgBlock
 		value: (self roassalShapesFor: boxes)
-		value: (self roassalShapesFor: hierarchy)
-		value: (self roassalShapesFor: links).
+		value:
+		(self roassalShapesFor: generalizations) , invertedExtensionShapes
+		value: (self roassalShapesFor: linkRelationships).
 	self updateCanvas
 ]
 
-{ #category : #'ui hooks' }
+{ #category : #layouts }
 OPUmlLayouter >> circleLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
@@ -43,21 +52,15 @@ OPUmlLayouter >> circleLayout [
 				on: boxes ]
 ]
 
-{ #category : #'ui hooks' }
+{ #category : #layouts }
 OPUmlLayouter >> defaultLayout [
 	self dominanceTreeLayout
 ]
 
-{ #category : #accessing }
-OPUmlLayouter >> diagramController: aDiagramController [
-	diagramController := aDiagramController.
-	packagedElements := diagramController model packagedElements
-]
-
-{ #category : #'ui hooks' }
+{ #category : #layouts }
 OPUmlLayouter >> dominanceTreeLayout [
 
-	self applyLayout: [ :boxes :hierarchy :links | 
+	self applyLayout: [ :boxes :hierarchy :links |
 		RSDominanceTreeLayout new
 			verticallyReverse;
 			verticalGap: 100;
@@ -65,7 +68,7 @@ OPUmlLayouter >> dominanceTreeLayout [
 			on: boxes edges: hierarchy , links ]
 ]
 
-{ #category : #'ui hooks' }
+{ #category : #layouts }
 OPUmlLayouter >> gridLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
@@ -74,7 +77,7 @@ OPUmlLayouter >> gridLayout [
 				on: boxes ]
 ]
 
-{ #category : #'ui hooks' }
+{ #category : #layouts }
 OPUmlLayouter >> sugiyamaLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links | 
@@ -88,7 +91,7 @@ OPUmlLayouter >> sugiyamaLayout [
 			each translateBy: 0 @ 2 * (centerY - each position y) ] ]
 ]
 
-{ #category : #'ui hooks' }
+{ #category : #layouts }
 OPUmlLayouter >> treeLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links |
