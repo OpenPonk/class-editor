@@ -112,24 +112,35 @@ OPUmlClassController >> createGeneralizationAdornmentBy: builder [
 { #category : #accessing }
 OPUmlClassController >> dependentElements [
 
-	^ self elementsToShowInside , self model generalizations
-	  , ((diagramController model packagedElements select: [
-			    :eachPackageElement |
-			    eachPackageElement oclIsKindOf: #GeneralizationSet ])
-			   flatCollectAsSet: [ :eachSet |
-				   eachSet generalizations select: [ :eachGeneralization |
-					   eachGeneralization general = self model or: [
-						   eachGeneralization specific = self model ] ] ])
-	  , ((diagramController model packagedElements select: [
-			    :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
-			   flatCollectAsSet: [ :eachClass |
-				   eachClass generalizations select: [ :eachGeneralization |
-					   eachGeneralization general = self model or: [
-						   eachGeneralization specific = self model ] ] ])
-	  , (diagramController model packagedElements select: [ :eachAssoc |
-			   (eachAssoc oclIsKindOf: #Association) and: [
-				   eachAssoc memberEnds anySatisfy: [ :any |
-					   any type = self model or: [ any owningClass = self model ] ] ] ])
+	| ownGeneralizations generalizationsFromSets otherClassesGeneralizations |
+	ownGeneralizations := self model generalizations.
+	generalizationsFromSets := (diagramController model packagedElements
+		                            select: [ :eachPackageElement |
+			                            eachPackageElement oclIsKindOf:
+				                            #GeneralizationSet ])
+		                           flatCollectAsSet: [ :eachSet |
+			                           eachSet generalizations select: [
+				                           :eachGeneralization |
+				                           eachGeneralization general = self model
+					                           or: [
+					                           eachGeneralization specific
+					                           = self model ] ] ].
+	otherClassesGeneralizations := (diagramController model
+		                                packagedElements select: [
+		                                :eachPackageElement |
+		                                eachPackageElement oclIsKindOf:
+			                                #Class ]) flatCollectAsSet: [
+		                               :eachClass |
+		                               eachClass generalizations select: [
+			                               :eachGeneralization |
+			                               eachGeneralization general
+			                               = self model or: [
+				                               eachGeneralization specific
+				                               = self model ] ] ].
+
+
+	^ super dependentElements , ownGeneralizations
+	  , generalizationsFromSets , otherClassesGeneralizations
 ]
 
 { #category : #forms }

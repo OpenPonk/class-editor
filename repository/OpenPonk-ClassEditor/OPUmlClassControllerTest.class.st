@@ -1,6 +1,6 @@
 Class {
 	#name : #OPUmlClassControllerTest,
-	#superclass : #OPUmlElementControllerTest,
+	#superclass : #OPUmlClassifierControllerTest,
 	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
 }
 
@@ -18,27 +18,6 @@ OPUmlClassControllerTest >> diagramElementClass [
 { #category : #accessing }
 OPUmlClassControllerTest >> modelClass [
 	^ OPUMLClass
-]
-
-{ #category : #'instance creation' }
-OPUmlClassControllerTest >> newEmptyClass [
-	^ OPUMLClass new name: 'Something'
-]
-
-{ #category : #'tests - creation' }
-OPUmlClassControllerTest >> testAddDiagramAsTargetForClass [
-	diagramController addAsTargetFor: controller.
-	self assert: diagramController model packagedElements asArray equals: {controller model}
-]
-
-{ #category : #'tests - creation' }
-OPUmlClassControllerTest >> testCanDiagramBeTargetForClass [
-	self assert: (diagramController canBeTargetFor: controller)
-]
-
-{ #category : #'tests - creation' }
-OPUmlClassControllerTest >> testCreateFromPalette [
-	self assert: (diagramController canBeTargetFor: controller)
 ]
 
 { #category : #'tests - diagram' }
@@ -89,31 +68,6 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 ]
 
 { #category : #'tests - removing' }
-OPUmlClassControllerTest >> testRemoveEmpty [
-
-	| class |
-	class := OPUMLClass new.
-	controller model: class.
-	controller showWithoutDependentInDiagram: diagramController.
-	controller removeController.
-	self assert: diagramController canvas nodes asArray equals: #(  ).
-	self assert: diagramController controllers asArray equals: #(  )
-]
-
-{ #category : #'tests - removing' }
-OPUmlClassControllerTest >> testRemoveFromModel [
-	| class |
-	class := OPUMLClass new.
-	diagramController model packagedElements add: class.
-	diagramController showWithoutDependentInDiagramModel: class.
-	controller := diagramController controllerForModel: class.
-	controller removeModel.
-	self
-		assert: diagramController model packagedElements asArray
-		equals: #()
-]
-
-{ #category : #'tests - removing' }
 OPUmlClassControllerTest >> testRemoveWithAttribute [
 
 	| class |
@@ -126,54 +80,13 @@ OPUmlClassControllerTest >> testRemoveWithAttribute [
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - removing' }
-OPUmlClassControllerTest >> testRemovesDependent [
-	| class secondClass association ownedClass owningClass |
-	class := OPUMLClass new.
-	secondClass := OPUMLClass new.
-	diagramController model packagedElements add: class.
-	diagramController model packagedElements add: secondClass.
-	association := OPUMLAssociation new.
-	(ownedClass := OPUMLProperty new)
-		owningClass: class;
-		type: secondClass.
-	(owningClass := OPUMLProperty new)
-		owningAssociation: association;
-		type: secondClass.
-	association
-		name: 'association';
-		memberEnds:
-			{ownedClass.
-			owningClass}.
-	diagramController model packagedElements add: association.
-	diagramController showWithoutDependentInDiagramModel: class.
-	diagramController showWithoutDependentInDiagramModel: secondClass.
-	diagramController showWithoutDependentInDiagramModel: association.
-	controller := diagramController controllerForModel: class.
-	controller removeControllerAndModel.
-	self
-		assertCollection: diagramController model packagedElements asArray
-		hasSameElements: {secondClass}
-]
-
-{ #category : #'tests - diagram' }
-OPUmlClassControllerTest >> testShowClassInDiagram [
-
-	| class |
-	class := OPUMLClass new.
-	diagramController showWithoutDependentInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = class ] ])
-]
-
 { #category : #'tests - diagram' }
 OPUmlClassControllerTest >> testShowClassWithAttributeInDiagram [
 
-	| class prop |
-	class := OPUMLClass new.
+	| prop |
 	prop := OPUMLProperty new.
-	class ownedAttributes add: prop.
-	diagramController showInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+	model ownedAttributes add: prop.
+	diagramController showInDiagramModel: model.
+	self assert: (diagramController canvas nodes anySatisfy: [ :each |
 			 each model isNotNil and: [ each model modelElement = prop ] ])
 ]

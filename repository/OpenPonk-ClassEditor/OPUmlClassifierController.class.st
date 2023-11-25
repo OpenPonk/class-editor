@@ -31,6 +31,21 @@ OPUmlClassifierController >> createModelIn: aParentModel [
 	^ model
 ]
 
+{ #category : #accessing }
+OPUmlClassifierController >> dependentElements [
+
+	| innerElements associations |
+	innerElements := self elementsToShowInside.
+	associations := diagramController model packagedElements select: [
+		                :eachAssoc |
+		                (eachAssoc oclIsKindOf: #Association) and: [
+			                eachAssoc memberEnds anySatisfy: [ :any |
+				                any type = self model or: [
+					                any owningClass = self model ] ] ] ].
+
+	^ innerElements , associations
+]
+
 { #category : #forms }
 OPUmlClassifierController >> descriptionName [
 
