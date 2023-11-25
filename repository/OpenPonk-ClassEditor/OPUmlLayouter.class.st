@@ -61,6 +61,9 @@ OPUmlLayouter >> defaultLayout [
 OPUmlLayouter >> dominanceTreeLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links |
+		(OPLayoutLoopDetector
+			 popupHaveLoopsBoxes: boxes
+			 links: hierarchy , links) ifTrue: [ ^ self treeLayout ].
 		RSDominanceTreeLayout new
 			verticallyReverse;
 			verticalGap: 100;
