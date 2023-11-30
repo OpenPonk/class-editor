@@ -10,10 +10,18 @@ Class {
 { #category : #userinterface }
 OPUmlLayouter >> applyLayout: aThreeArgBlock [
 
-	| packageableElements packageableRelationships subtypeRelationships linkRelationships boxes renderedModels generalizations extensions invertedExtensionShapes |
-	renderedModels := diagramController controllers
-		                  select: #isRendered
-		                  thenCollect: #model.
+	| packageableElements packageableRelationships subtypeRelationships linkRelationships boxes renderedModels generalizations extensions invertedExtensionShapes shapes shapeOnlyObjects |
+	shapes := diagramController controllers
+		          collect: #diagramElement
+		          thenSelect: [ :each |
+		          each isNotNil and: [ each isRendered ] ].
+	shapeOnlyObjects := shapes select: [ :each |
+		                    each modelElement isNil or: [
+			                    each modelElement = each ] ].
+	renderedModels := shapes
+		                  reject: [ :each | shapeOnlyObjects includes: each ]
+		                  thenCollect: #modelElement.
+
 	packageableElements := renderedModels select: [ :each |
 		                       each oclIsKindOf: #PackageableElement ].
 	packageableRelationships := packageableElements select: [ :each |
@@ -23,7 +31,8 @@ OPUmlLayouter >> applyLayout: aThreeArgBlock [
 	extensions := packageableRelationships select: [ :each |
 		              each oclIsKindOf: #Extension ].
 
-	boxes := packageableElements \ packageableRelationships.
+	boxes := packageableElements \ packageableRelationships
+	         , shapeOnlyObjects.
 	subtypeRelationships := generalizations , extensions.
 	linkRelationships := packageableRelationships \ extensions.
 	invertedExtensionShapes := (self roassalShapesFor: extensions)
@@ -63,7 +72,7 @@ OPUmlLayouter >> dominanceTreeLayout [
 	self applyLayout: [ :boxes :hierarchy :links |
 		(OPLayoutLoopDetector
 			 popupHaveLoopsBoxes: boxes
-			 links: hierarchy , links) ifTrue: [ ^ self treeLayout ].
+			 links: hierarchy , links) ifTrue: [ ^ self gridLayout ].
 		RSDominanceTreeLayout new
 			verticallyReverse;
 			verticalGap: 100;
@@ -99,6 +108,8 @@ OPUmlLayouter >> treeLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links |
 		| centerY |
+		(OPLayoutLoopDetector popupHaveLoopsBoxes: boxes links: links)
+			ifTrue: [ ^ self gridLayout ].
 		RSTreeLayout new
 			verticalGap: 100;
 			horizontalGap: 100;
