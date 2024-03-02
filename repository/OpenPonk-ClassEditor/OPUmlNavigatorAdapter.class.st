@@ -190,6 +190,7 @@ OPUmlNavigatorAdapter >> typesByDependency [
 	^ {OPUMLPackage.
 	OPUMLProfile.
 	OPUMLClass.
+	OPUMLStereotype.
 	OPUMLEnumeration.
 	OPUMLPackageImport.
 	OPUMLAssociation.
