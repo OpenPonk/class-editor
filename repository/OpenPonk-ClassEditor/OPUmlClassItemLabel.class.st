@@ -1,12 +1,14 @@
 Class {
-	#name : #OPUmlClassItemLabel,
-	#superclass : #OPUmlClassifierItemLabel,
+	#name : 'OPUmlClassItemLabel',
+	#superclass : 'OPUmlClassifierItemLabel',
 	#traits : 'OPTColoredAsFont',
 	#classTraits : 'OPTColoredAsFont classTrait',
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassItemLabel >> defaultText [
 
 	^ self modelElement notationString
@@ -15,7 +17,7 @@ OPUmlClassItemLabel >> defaultText [
 		  yourself
 ]
 
-{ #category : #emphasis }
+{ #category : 'emphasis' }
 OPUmlClassItemLabel >> emphasis [
 
 	| emphasis |

@@ -2,12 +2,14 @@
 I am a controller for UML Extensions
 "
 Class {
-	#name : #OPUmlExtensionController,
-	#superclass : #OPUmlRelationshipController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlExtensionController',
+	#superclass : 'OPUmlRelationshipController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlExtensionController >> createModelIn: aParentModel [
 	| sourceOwnedProp extensionOwnedProp |
 	self model: self modelClass new.
@@ -26,33 +28,33 @@ OPUmlExtensionController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExtensionController >> dependentElements [
 	^ {model memberEnds first}
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlExtensionController >> diagramElementClass [
 
 	^ OPUmlExtensionShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExtensionController >> modelClass [
 	^ OPUMLExtension
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExtensionController >> modelSource [
 	^ model memberEnds first type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExtensionController >> modelTarget [
 	^ model memberEnds second type
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlExtensionController >> removeModel [
 	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
 

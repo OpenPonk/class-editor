@@ -1,26 +1,28 @@
 Class {
-	#name : #OPUmlPackageDiagramControllerTest,
-	#superclass : #OPUmlElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlPackageDiagramControllerTest',
+	#superclass : 'OPUmlElementControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageDiagramControllerTest >> controllerClass [
 	^ OPUmlPackageDiagramController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlPackageDiagramControllerTest >> diagramElementClass [
 
 	^ OPOpenPonkDiagram
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageDiagramControllerTest >> modelClass [
 	^ OPUMLPackage
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 
 	| class |
@@ -30,7 +32,7 @@ OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 			 each model isNotNil and: [ each model modelElement = class ] ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPackageDiagramControllerTest >> testShowClassWithAttributeInDiagram [
 
 	| class prop |

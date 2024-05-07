@@ -1,16 +1,18 @@
 Class {
-	#name : #OPUmlPropertyMagritteDescriptionsTest,
-	#superclass : #TestCase,
+	#name : 'OPUmlPropertyMagritteDescriptionsTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'property',
 		'prefix',
 		'desc',
 		'reader'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#category : 'OpenPonk-ClassEditor-Tests',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyMagritteDescriptionsTest >> testDescriptionAccessor [
 	property := OPUMLProperty new.
 	reader := [ :nope | property ].

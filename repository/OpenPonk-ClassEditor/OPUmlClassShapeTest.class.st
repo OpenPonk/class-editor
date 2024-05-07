@@ -1,15 +1,17 @@
 Class {
-	#name : #OPUmlClassShapeTest,
-	#superclass : #OPUmlCompartmentableShapeTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Shapes'
+	#name : 'OPUmlClassShapeTest',
+	#superclass : 'OPUmlCompartmentableShapeTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Shapes'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlClassShapeTest >> shapeClass [
 	^ OPUmlClassShape
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassShapeTest >> testName [
 
 	| model labels label |

@@ -1,25 +1,27 @@
 Class {
-	#name : #OPUmlOperationNotationTest,
-	#superclass : #TestCase,
+	#name : 'OPUmlOperationNotationTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'operation'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#category : 'OpenPonk-ClassEditor-Tests',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationNotationTest >> testOperation [
 	(operation := OPUMLOperation new) name: 'op'.
 	self assert: operation notationString equals: 'op()'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationNotationTest >> testOperationNilName [
 	operation := OPUMLOperation new.
 	self assert: operation notationString equals: '()'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationNotationTest >> testOperationParameters [
 	(operation := OPUMLOperation new)
 		name: 'op';
@@ -29,7 +31,7 @@ OPUmlOperationNotationTest >> testOperationParameters [
 	self assert: operation notationString equals: 'op(first, second)'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationNotationTest >> testOperationReturnType [
 	(operation := OPUMLOperation new)
 		name: 'op';
@@ -40,7 +42,7 @@ OPUmlOperationNotationTest >> testOperationReturnType [
 	self assert: operation notationString equals: 'op() : Thing'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationNotationTest >> testOperationReturnTypeWithMultiplicity [
 	(operation := OPUMLOperation new)
 		name: 'op';
@@ -53,7 +55,7 @@ OPUmlOperationNotationTest >> testOperationReturnTypeWithMultiplicity [
 	self assert: operation notationString equals: 'op() : Thing[2..6]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationNotationTest >> testOperationVisibility [
 	(operation := OPUMLOperation new)
 		name: 'op';

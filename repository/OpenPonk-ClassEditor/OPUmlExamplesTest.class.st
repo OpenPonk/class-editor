@@ -1,17 +1,19 @@
 Class {
-	#name : #OPUmlExamplesTest,
-	#superclass : #TestCase,
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#name : 'OPUmlExamplesTest',
+	#superclass : 'TestCase',
+	#category : 'OpenPonk-ClassEditor-Tests',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlExamplesTest >> testAll [
 	OPUmlExamples class selectors
 		select: [ :each | each beginsWith: 'example' ]
 		thenDo: [ :each | self testExample: each ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlExamplesTest >> testExample: anExampleSelector [
 	| window |
 	self assert: anExampleSelector isSymbol.

@@ -2,14 +2,16 @@
 I am a base class for diagram element controllers.
 "
 Class {
-	#name : #OPUmlElementController,
-	#superclass : #OPElementController,
+	#name : 'OPUmlElementController',
+	#superclass : 'OPElementController',
 	#traits : 'OPTUmlStereotypedElementController',
 	#classTraits : 'OPTUmlStereotypedElementController classTrait',
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlElementController >> magritteDescription [
 	| container |
 	container := MAPragmaBuilder for: self.

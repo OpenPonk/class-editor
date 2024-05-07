@@ -2,8 +2,8 @@
 I represent a package box.
 "
 Class {
-	#name : #OPUmlPackageShape,
-	#superclass : #OPBoundNode,
+	#name : 'OPUmlPackageShape',
+	#superclass : 'OPBoundNode',
 	#traits : 'OPTColoredAsFill',
 	#classTraits : 'OPTColoredAsFill classTrait',
 	#instVars : [
@@ -12,10 +12,12 @@ Class {
 		'ear',
 		'innerRoassalShapesBlock'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlPackageShape >> addSelectionDraggableInteraction [
 
 	roassalShape
@@ -23,41 +25,41 @@ OPUmlPackageShape >> addSelectionDraggableInteraction [
 			 innerRoassalShapesBlock)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlPackageShape >> initialize [
 
 	super initialize.
 	innerRoassalShapesBlock := [ :allNodes | allNodes ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageShape >> innerRoassalShapesBlock: aBlock [
 
 	innerRoassalShapesBlock := aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageShape >> labelText [
 
 	^ self modelElement name
 ]
 
-{ #category : #'creating - subelements' }
+{ #category : 'creating - subelements' }
 OPUmlPackageShape >> minHeight [
 	^ 60
 ]
 
-{ #category : #'creating - subelements' }
+{ #category : 'creating - subelements' }
 OPUmlPackageShape >> minWidth [
 	^ 120
 ]
 
-{ #category : #'creating - subelements' }
+{ #category : 'creating - subelements' }
 OPUmlPackageShape >> padding [
 	^ 40
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlPackageShape >> renderBasicShape [
 
 	^ RSBox new
@@ -68,7 +70,7 @@ OPUmlPackageShape >> renderBasicShape [
 		  yourself
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlPackageShape >> renderShapeDetails [
 
 	ear := RSBox new
@@ -123,25 +125,25 @@ OPUmlPackageShape >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlPackageShape >> selectableInteraction [
 
 	^ OPRSSelectable
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlPackageShape >> shouldBePositionableByUser [
 
 	^ true
 ]
 
-{ #category : #interactions }
+{ #category : 'interactions' }
 OPUmlPackageShape >> shouldBeResizableByUser [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageShape >> stereotypeText [
 
 	^ (self modelElement oclIsKindOf: #Profile)
@@ -149,7 +151,7 @@ OPUmlPackageShape >> stereotypeText [
 		  ifFalse: [ '' ]
 ]
 
-{ #category : #update }
+{ #category : 'update' }
 OPUmlPackageShape >> updateColorFromStyles [
 
 	self roassalShape
@@ -166,7 +168,7 @@ OPUmlPackageShape >> updateColorFromStyles [
 	ear color: self color
 ]
 
-{ #category : #update }
+{ #category : 'update' }
 OPUmlPackageShape >> updateRenderFromModel [
 
 	mainLabel text: self labelText.

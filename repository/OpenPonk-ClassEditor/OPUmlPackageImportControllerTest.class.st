@@ -1,36 +1,38 @@
 Class {
-	#name : #OPUmlPackageImportControllerTest,
-	#superclass : #OPUmlRelationshipControllerTest,
+	#name : 'OPUmlPackageImportControllerTest',
+	#superclass : 'OPUmlRelationshipControllerTest',
 	#instVars : [
 		'importingNamespace',
 		'importedPackage'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageImportControllerTest >> controllerClass [
 	^ OPUmlPackageImportController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlPackageImportControllerTest >> diagramElementClass [
 
 	^ OPUmlPackageImportShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageImportControllerTest >> modelClass [
 	^ OPUMLPackageImport
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlPackageImportControllerTest >> setUp [
 	super setUp.
 	self setUpModel
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlPackageImportControllerTest >> setUpModel [
 	importingNamespace := OPUMLPackage new name: 'Importing Namespace'.
 	importedPackage := OPUMLPackage new name: 'Imported Package'.
@@ -39,29 +41,29 @@ OPUmlPackageImportControllerTest >> setUpModel [
 		importedPackage: importedPackage
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlPackageImportControllerTest >> sourceClass [
 
 	^ OPUMLPackage
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlPackageImportControllerTest >> targetClass [
 
 	^ OPUMLPackage
 ]
 
-{ #category : #'tests - construction' }
+{ #category : 'tests - construction' }
 OPUmlPackageImportControllerTest >> testCanClassBeSource [
 	self assert: (OPUmlPackageController new canBeSourceFor: controller)
 ]
 
-{ #category : #'tests - construction' }
+{ #category : 'tests - construction' }
 OPUmlPackageImportControllerTest >> testCanClassBeTarget [
 	self assert: (OPUmlPackageController new canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - construction' }
+{ #category : 'tests - construction' }
 OPUmlPackageImportControllerTest >> testClassBeSource [
 	| source |
 	source := OPUmlPackageController new.
@@ -69,7 +71,7 @@ OPUmlPackageImportControllerTest >> testClassBeSource [
 	self assert: controller source equals: source
 ]
 
-{ #category : #'tests - construction' }
+{ #category : 'tests - construction' }
 OPUmlPackageImportControllerTest >> testClassBeTarget [
 	| sourceController targetController |
 	sourceController := diagramController
@@ -88,13 +90,13 @@ OPUmlPackageImportControllerTest >> testClassBeTarget [
 		equals: targetController model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPackageImportControllerTest >> testDescriptionName [
 
 	self assert: controller descriptionName equals: nil
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 
 	diagramController
@@ -106,7 +108,7 @@ OPUmlPackageImportControllerTest >> testRemoveFromDiagram [
 	self assert: diagramController canvas edges asArray equals: #(  )
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 OPUmlPackageImportControllerTest >> testRemoveFromModel [
 	diagramController
 		showWithoutDependentInDiagramModel: importingNamespace;
@@ -117,7 +119,7 @@ OPUmlPackageImportControllerTest >> testRemoveFromModel [
 	self assert: importedPackage packageImports asArray equals: #()
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlPackageImportControllerTest >> testShowInDiagram [
 
 	diagramController

@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlClassItemListCompartment,
-	#superclass : #OPUmlListCompartment,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlClassItemListCompartment',
+	#superclass : 'OPUmlListCompartment',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 OPUmlClassItemListCompartment >> sortOwnedElements [
 
 	ownedElements sort: [ :a :b | 

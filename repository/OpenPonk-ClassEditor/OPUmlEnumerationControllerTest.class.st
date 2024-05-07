@@ -1,26 +1,28 @@
 Class {
-	#name : #OPUmlEnumerationControllerTest,
-	#superclass : #OPUmlClassifierControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlEnumerationControllerTest',
+	#superclass : 'OPUmlClassifierControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationControllerTest >> controllerClass [
 	^ OPUmlEnumerationController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlEnumerationControllerTest >> diagramElementClass [
 
 	^ OPUmlEnumerationShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationControllerTest >> modelClass [
 	^ OPUMLEnumeration
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 
 	model ownedLiterals add: OPUMLEnumerationLiteral new.
@@ -31,7 +33,7 @@ OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlEnumerationControllerTest >> testShowWithLiteralsInDiagram [
 
 	| literal |

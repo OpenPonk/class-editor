@@ -2,23 +2,25 @@
 I am a collection of magritte descriptions for an association end.
 "
 Class {
-	#name : #OPUmlPropertyMagritteDescriptions,
-	#superclass : #Object,
+	#name : 'OPUmlPropertyMagritteDescriptions',
+	#superclass : 'Object',
 	#instVars : [
 		'labelPrefix',
 		'reader'
 	],
-	#category : #'OpenPonk-ClassEditor-Forms'
+	#category : 'OpenPonk-ClassEditor-Forms',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Forms'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlPropertyMagritteDescriptions class >> reader: aBlock labelPrefix: aLabelPrefix [
 	^ self new
 		setReader: aBlock labelPrefix: aLabelPrefix;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
 
 	^ MAPluggableAccessor
@@ -30,7 +32,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
 			  me ifNotNil: [ me diagramElement modelChanged ] ]
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
 
 	<magritteDescription>
@@ -54,7 +56,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
 		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionDefaultValue [
 
 	<magritteDescription>
@@ -80,7 +82,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionDefaultValue [
 		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsDerived [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -90,7 +92,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsDerived [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsNavigable [
 
 	<magritteDescription>
@@ -105,7 +107,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsNavigable [
 		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsOrdered [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -115,7 +117,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsOrdered [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsReadOnly [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -125,7 +127,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsReadOnly [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsStatic [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -135,7 +137,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsStatic [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsUnique [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -145,7 +147,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsUnique [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionMultiplicity [
 
 	<magritteDescription>
@@ -166,7 +168,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionMultiplicity [
 		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionName [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -176,7 +178,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionName [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionType [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -190,7 +192,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionType [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionVisibility [
 	<magritteDescription>
 	^ MASingleOptionDescription new
@@ -208,7 +210,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionVisibility [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlPropertyMagritteDescriptions >> setReader: aModelReader labelPrefix: aLabelPrefix [
 	reader := aModelReader.
 	labelPrefix := aLabelPrefix

@@ -1,33 +1,35 @@
 Class {
-	#name : #OPUmlEnumLiteralControllerTest,
-	#superclass : #OPUmlElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlEnumLiteralControllerTest',
+	#superclass : 'OPUmlElementControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumLiteralControllerTest >> controllerClass [
 	^ OPUmlEnumerationLiteralController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlEnumLiteralControllerTest >> diagramElementClass [
 
 	^ OPUmlEnumerationLiteralLabel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumLiteralControllerTest >> modelClass [
 	^ OPUMLEnumerationLiteral
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlEnumLiteralControllerTest >> testCanEnumerationBeTarget [
 	| classController |
 	classController := OPUmlEnumerationController new.
 	self assert: (classController canBeTargetFor: controller)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlEnumLiteralControllerTest >> testCreateDiagramElement [
 
 	model enumeration: OPUMLEnumeration new.
@@ -36,7 +38,7 @@ OPUmlEnumLiteralControllerTest >> testCreateDiagramElement [
 	super testCreateDiagramElement
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlEnumLiteralControllerTest >> testEnumerationBeTarget [
 	| classController |
 	classController := diagramController
@@ -48,12 +50,12 @@ OPUmlEnumLiteralControllerTest >> testEnumerationBeTarget [
 		equals: {controller model}
 ]
 
-{ #category : #'tests - accessing' }
+{ #category : 'tests - accessing' }
 OPUmlEnumLiteralControllerTest >> testModelClass [
 	self assert: controller modelClass equals: self modelClass
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlEnumLiteralControllerTest >> testRemoveFromView [
 
 	| class compartment prop |

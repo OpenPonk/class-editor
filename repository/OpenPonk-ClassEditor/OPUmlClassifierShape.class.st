@@ -1,6 +1,6 @@
 Class {
-	#name : #OPUmlClassifierShape,
-	#superclass : #OPUmlCompartmentableShape,
+	#name : 'OPUmlClassifierShape',
+	#superclass : 'OPUmlCompartmentableShape',
 	#traits : 'OPTColoredAsFillAndBorderColoredAsStroke',
 	#classTraits : 'OPTColoredAsFillAndBorderColoredAsStroke classTrait',
 	#instVars : [
@@ -9,10 +9,12 @@ Class {
 		'commentIcon',
 		'adornmentCreationBlock'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'ston-core' }
+{ #category : 'ston-core' }
 OPUmlClassifierShape class >> stonAllInstVarNames [
 
 	"Override to encode my instances using a custom set of instance variables or to define their order."
@@ -20,13 +22,13 @@ OPUmlClassifierShape class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #nameLabel #stereotypeLabel #commentIcon )
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierShape >> adornmentCreationBlock: aBlock [
 
 	adornmentCreationBlock := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlClassifierShape >> createLabel: aLabelShapeClass [
 
 	| labelContainer |
@@ -40,7 +42,7 @@ OPUmlClassifierShape >> createLabel: aLabelShapeClass [
 	^ labelContainer
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlClassifierShape >> createOwnedElementsWithoutController [
 
 	(self ownedElements anySatisfy: [ :any | 
@@ -49,7 +51,7 @@ OPUmlClassifierShape >> createOwnedElementsWithoutController [
 	self createLabel: OPUmlClassifierNameLabel
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassifierShape >> hasModelComments [
 
 	| ownedComments |
@@ -59,13 +61,13 @@ OPUmlClassifierShape >> hasModelComments [
 			  any body isNotNil and: [ any body isNotEmpty ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierShape >> minExtent [
 
 	^ 100 @ 60
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlClassifierShape >> selectableInteraction [
 
 	| selectableInteraction |
@@ -83,7 +85,7 @@ OPUmlClassifierShape >> selectableInteraction [
 	^ selectableInteraction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierShape >> stereotypes [
 
 	^ self stereotypesLabelClass new
@@ -91,13 +93,13 @@ OPUmlClassifierShape >> stereotypes [
 		  stereotypeNames
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassifierShape >> stereotypesLabelClass [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassifierShape >> updateCommentIcon [
 
 	self hasModelComments ifFalse: [ 
@@ -113,7 +115,7 @@ OPUmlClassifierShape >> updateCommentIcon [
 	self isRendered ifTrue: [ commentIcon renderIn: self canvas ]
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassifierShape >> updateRenderFromModel [
 
 	self updateStereotype.
@@ -125,7 +127,7 @@ OPUmlClassifierShape >> updateRenderFromModel [
 	super updateRenderFromModel
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassifierShape >> updateStereotype [
 
 	self stereotypes ifEmpty: [ 

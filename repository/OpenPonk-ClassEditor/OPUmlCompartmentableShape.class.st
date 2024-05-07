@@ -1,15 +1,17 @@
 Class {
-	#name : #OPUmlCompartmentableShape,
-	#superclass : #OPBoundNode,
+	#name : 'OPUmlCompartmentableShape',
+	#superclass : 'OPBoundNode',
 	#traits : 'OPTUmlAutoAccomodatingShape',
 	#classTraits : 'OPTUmlAutoAccomodatingShape classTrait',
 	#instVars : [
 		'separators'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCompartmentableShape >> addSeparator [
 
 	| newSeparator |
@@ -19,26 +21,26 @@ OPUmlCompartmentableShape >> addSeparator [
 	separators add: newSeparator
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCompartmentableShape >> compartments [
 
 	^ self ownedElements select: [ :each | each isKindOf: OPUmlCompartment ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlCompartmentableShape >> initialize [
 
 	super initialize.
 	separators := OrderedCollection new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlCompartmentableShape >> isResizableByUser [
 
 	^ false
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> layout [
 
 	self
@@ -46,14 +48,14 @@ OPUmlCompartmentableShape >> layout [
 		layoutContents
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> layoutContents [
 
 	self layoutOwnedElements.
 	self layoutSeparators
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> layoutOwnedElements [
 
 	^ (self ownedElements select: #isRendered)
@@ -64,7 +66,7 @@ OPUmlCompartmentableShape >> layoutOwnedElements [
 			  prevHeight + each height + 1 ]
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> layoutSeparators [
 
 	| yCoordinates left right |
@@ -83,7 +85,7 @@ OPUmlCompartmentableShape >> layoutSeparators [
 				(right @ y) } ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlCompartmentableShape >> ownedElement: aShape renderedIn: aCanvas [
 
 	| wasRendered |
@@ -92,7 +94,7 @@ OPUmlCompartmentableShape >> ownedElement: aShape renderedIn: aCanvas [
 	wasRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlCompartmentableShape >> removeRender [
 
 	super removeRender.
@@ -100,13 +102,13 @@ OPUmlCompartmentableShape >> removeRender [
 	separators := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCompartmentableShape >> removeSeparator [
 
 	separators removeLast remove
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> renderBasicShape [
 
 	^ RSBox new
@@ -114,7 +116,7 @@ OPUmlCompartmentableShape >> renderBasicShape [
 		  yourself
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> renderShapeDetails [
 
 	super renderShapeDetails.
@@ -124,25 +126,25 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> selectableInteraction [
 
 	^ OPRSSelectable highlightBorderColorBlue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCompartmentableShape >> separators [
 
 	^ separators
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> shouldBePositionableByUser [
 
 	^ true
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> updateRenderFromModel [
 
 	super updateRenderFromModel.
@@ -154,7 +156,7 @@ OPUmlCompartmentableShape >> updateRenderFromModel [
 	roassalShape signalUpdate
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableShape >> updateSeparators [
 
 	[ self separators size < self compartments size ] whileTrue: [ 

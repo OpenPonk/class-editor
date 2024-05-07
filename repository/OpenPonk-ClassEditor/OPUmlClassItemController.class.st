@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlClassItemController,
-	#superclass : #OPUmlClassifierItemController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlClassItemController',
+	#superclass : 'OPUmlClassifierItemController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassItemController >> descriptionIsStatic [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -14,7 +16,7 @@ OPUmlClassItemController >> descriptionIsStatic [
 		yourself
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlClassItemController >> removeModel [
 	"could be any of those, so just nil all of them"
 

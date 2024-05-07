@@ -2,12 +2,14 @@
 I manage layouts available for UML Editor and apply them.
 "
 Class {
-	#name : #OPUmlLayouter,
-	#superclass : #OPLayouter,
-	#category : #'OpenPonk-ClassEditor-Plugin'
+	#name : 'OPUmlLayouter',
+	#superclass : 'OPLayouter',
+	#category : 'OpenPonk-ClassEditor-Plugin',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Plugin'
 }
 
-{ #category : #userinterface }
+{ #category : 'userinterface' }
 OPUmlLayouter >> applyLayout: aThreeArgBlock [
 
 	| packageableElements packageableRelationships subtypeRelationships linkRelationships boxes renderedModels generalizations extensions invertedExtensionShapes shapes shapeOnlyObjects |
@@ -52,7 +54,7 @@ OPUmlLayouter >> applyLayout: aThreeArgBlock [
 	self updateCanvas
 ]
 
-{ #category : #layouts }
+{ #category : 'layouts' }
 OPUmlLayouter >> circleLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
@@ -61,12 +63,12 @@ OPUmlLayouter >> circleLayout [
 				on: boxes ]
 ]
 
-{ #category : #layouts }
+{ #category : 'layouts' }
 OPUmlLayouter >> defaultLayout [
 	self dominanceTreeLayout
 ]
 
-{ #category : #layouts }
+{ #category : 'layouts' }
 OPUmlLayouter >> dominanceTreeLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links |
@@ -80,7 +82,7 @@ OPUmlLayouter >> dominanceTreeLayout [
 			on: boxes edges: hierarchy , links ]
 ]
 
-{ #category : #layouts }
+{ #category : 'layouts' }
 OPUmlLayouter >> gridLayout [
 	self
 		applyLayout: [ :boxes :hierarchy :links | 
@@ -89,7 +91,7 @@ OPUmlLayouter >> gridLayout [
 				on: boxes ]
 ]
 
-{ #category : #layouts }
+{ #category : 'layouts' }
 OPUmlLayouter >> sugiyamaLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links | 
@@ -103,7 +105,7 @@ OPUmlLayouter >> sugiyamaLayout [
 			each translateBy: 0 @ 2 * (centerY - each position y) ] ]
 ]
 
-{ #category : #layouts }
+{ #category : 'layouts' }
 OPUmlLayouter >> treeLayout [
 
 	self applyLayout: [ :boxes :hierarchy :links |

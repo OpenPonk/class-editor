@@ -4,18 +4,20 @@ IconFactory syncDirectory: d intoClass: #OPUmlIcons.
 OPUmlIcons resetIcons.
 "
 Class {
-	#name : #OPUmlIcons,
-	#superclass : #OPIcons,
-	#category : #'OpenPonk-ClassEditor-Plugin'
+	#name : 'OPUmlIcons',
+	#superclass : 'OPIcons',
+	#category : 'OpenPonk-ClassEditor-Plugin',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Plugin'
 }
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> attributeIcon [
 
 	^ Form fromBinaryStream: self attributeIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> attributeIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\attribute.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -27,13 +29,13 @@ F4wB8LxRgIwIaHm/eJ5RARrA1Xdv4Qc9pyawF8yoJx2rJR2r8cGOoNW90+7aAOacG4ziU3tb
 jpK+vSNcNSBaH2BMZVwXasGNxGvB/+f4BO9vTXGCt0WuAAAAAElFTkSuQmCC'
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> classIcon [
 
 	^ Form fromBinaryStream: self classIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> classIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\class.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -43,13 +45,13 @@ yom5twBgXDRlm0+PZ413mgM6AImSPUOiXOLbP/hBwDGjE+kZnWgtf4YdGb0c7kGP8hkAAAAA
 SUVORK5CYII='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> commentIcon [
 
 	^ Form fromBinaryStream: self commentIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> commentIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\comment.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -61,13 +63,13 @@ D70CMLZl1/CdFVtA5Qsh0xptILEC3u7kB0i2636ox59wKJWBCJ1BpFajahY8VWYV4MIlLXL7
 PzZTQmpc0lNtzzRr8+ZDj+Ftn2YAAAAASUVORK5CYII='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> constraintIcon [
 
 	^ Form fromBinaryStream: self constraintIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> constraintIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\constraint.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -79,13 +81,13 @@ GBNg6HNdHq1soaQfdB8DRIfkc40RAyAH9kAGjOZdeykFAOgvdUNBu4BdrWA5vbOP3+r8jw7O
 3TzgcNrvaAAAAABJRU5ErkJggg=='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> dataTypeIcon [
 
 	^ Form fromBinaryStream: self dataTypeIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> dataTypeIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\dataType.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -97,13 +99,13 @@ WLmDLPCG2fw14POLY4lJG+DHDjAfZeVrQw/x/B64WrYkZq2AFDVclZQKHTbV13MHDuRdr9GB
 /K/h69EC9xhByVkP+hoAAAAASUVORK5CYII='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> directedAssociationIcon [
 
 	^ Form fromBinaryStream: self directedAssociationIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> directedAssociationIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\directedAssociation.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -115,13 +117,13 @@ a89/n/8MDMd2ejC+g4ntcWX8+P8/w1HPPf8D8BrgsP8/z38GBpvtLowb0OV2ujJuZWBgsHDY
 /4/hAtku+P+P4QIHC3YDKAYABoVHXkJDbNUAAAAASUVORK5CYII='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> enumIcon [
 
 	^ Form fromBinaryStream: self enumIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> enumIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\enum.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -132,13 +134,13 @@ NBzdBhjxDH2AmLEHDj4DIYkuwMWIbgPBqcy1+Kb4EYDoFJXN7za7MtfMBXgew5F2fmCB5H2j
 BdKv4+3kBmsPLbxzYn3TAAAAAElFTkSuQmCC'
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> extensionIcon [
 
 	^ Form fromBinaryStream: self extensionIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> extensionIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\extension.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -150,13 +152,13 @@ QYwA3PgGkHiKjrelv1G+0jxfad7kdZ6xS/8PuH5iW0eAEHh3p3o4gTvVc+Dj/nw9dAZN7EIy
 hsjryAAAAABJRU5ErkJggg=='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> generalizationIcon [
 
 	^ Form fromBinaryStream: self generalizationIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> generalizationIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\generalization.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -168,13 +170,13 @@ mLlcl2Ut+AZuqS47lt44D/mRuCJhkA1sG0wQe+SNyV6XnkE1uzcmsUd16T8pnaufztUPpmlM
 qdH/A6qvXDcjgEUcyrP6cQJ5Vu0kDPi13gDJkkfqaimOAQAAAABJRU5ErkJggg=='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> literalIcon [
 
 	^ Form fromBinaryStream: self literalIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> literalIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\literal.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -184,13 +186,13 @@ TAwM9+AKGRmmb3VmPIaulgWrsf8YFjExMCghC/1lYPhCoWNpBADt2xHuYm6+EwAAAABJRU5E
 rkJggg=='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> modelIcon [
 
 	^ Form fromBinaryStream: self modelIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> modelIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\model.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -202,13 +204,13 @@ yVXbKCqVnav6oIkPmnTlraKvNDToOdEf17o9S8yDBgZ+ndlyNbKFxI3f6ioq3u10ScPDR0L5
 kEcAAAAASUVORK5CYII='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> objectIcon [
 
 	^ Form fromBinaryStream: self objectIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> objectIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\object.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -218,13 +220,13 @@ u/u/HDY5mB4WfLZsdmV8RMglTPgk8bkABlBcgO6VvwhxFE3bXBnh6lhwSRAL8Hph1ADiAAsD
 AyRZ4kqNuMB/JgYHSi2nDgAAgJAkGGm/rBQAAAAASUVORK5CYII='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> operationIcon [
 
 	^ Form fromBinaryStream: self operationIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> operationIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\operation.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -236,13 +238,13 @@ Q29wYPAVEH+a0Gkj+BDYq0Mx9iN43y0Qlgi9AD8FljsF1Yo7jDP3aOmGjeeWAL21ct/0BuIK
 ywRugAIwYGQw8Rdy20oAPz8xVlKAdYT3A3nd1v3bfAO26kn9hYnb5AAAAABJRU5ErkJggg=='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> packageIcon [
 
 	^ Form fromBinaryStream: self packageIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> packageIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\package.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -252,13 +254,13 @@ EC/s+f+A4T/DAwIKDyDzUbxFyAvYAEwPxV4YNYAKBrAwMEDilNSo/M/E4ECp5dQBALRhHivV
 PnSaAAAAAElFTkSuQmCC'
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> primitiveIcon [
 
 	^ Form fromBinaryStream: self primitiveIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> primitiveIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\primitive.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -269,13 +271,13 @@ jPO9Zu3eoCESlWDgD4jR7KitjFsslv6AURWp5Z+IDa0bmLh65JfAPrNFr8A3xPB8S+83KpD0
 Hf4bHpd5LsedZt3CAAAAAElFTkSuQmCC'
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> profileIcon [
 
 	^ Form fromBinaryStream: self profileIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> profileIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\profile.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -288,13 +290,13 @@ IAVTLBHKBMOoFiEemG1piTouG9cw9lLESxHXMO64bEpLFA/M9hwCx0v61tuJu98AFfxLv1IF
 /xL/3+kTGRtla/geVQcAAAAASUVORK5CYII='
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> ruleIcon [
 
 	^ Form fromBinaryStream: self ruleIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> ruleIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\rule.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -306,13 +308,13 @@ FR9RZp3CgjVvsVc39moBQ2f0ywo2yJgZnO4kGAzMIe6AWd788I/bdiO1y3dRwfgKgduyDSYr
 4f/yA4IROmIGi1YJAAAAAElFTkSuQmCC'
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> stereotypeIcon [
 
 	^ Form fromBinaryStream: self stereotypeIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> stereotypeIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\stereotype.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
@@ -323,13 +325,13 @@ JBLTbTHf7GTg1xKAaGUbcWyyGE0J4ooEADQWNsyafPNoVuOzPgZ4j0d7a356ZOidGF18BnFV
 neiq0QE4FIlQYjV2zjFLqjJ+ofzBjKYEWWuYEnwa/h1dATYvRy5RNn8sAAAAAElFTkSuQmCC'
 ]
 
-{ #category : #'accessing - icons' }
+{ #category : 'accessing - icons' }
 OPUmlIcons class >> unknownIcon [
 
 	^ Form fromBinaryStream: self unknownIconContents base64Decoded asByteArray readStream
 ]
 
-{ #category : #'private - contents' }
+{ #category : 'private - contents' }
 OPUmlIcons class >> unknownIconContents [
 	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\unknown.png"
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw

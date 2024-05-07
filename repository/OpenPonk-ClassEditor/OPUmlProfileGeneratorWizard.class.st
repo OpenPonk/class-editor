@@ -1,18 +1,20 @@
 Class {
-	#name : #OPUmlProfileGeneratorWizard,
-	#superclass : #SpPresenter,
+	#name : 'OPUmlProfileGeneratorWizard',
+	#superclass : 'SpPresenter',
 	#instVars : [
 		'profile'
 	],
-	#category : #'OpenPonk-ClassEditor-UI'
+	#category : 'OpenPonk-ClassEditor-UI',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'UI'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 OPUmlProfileGeneratorWizard class >> example [
 	self openOn: (OPUMLProfile new name: 'Pro')
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlProfileGeneratorWizard class >> openOn: aProfile [
 	self basicNew
 		profile: aProfile;
@@ -20,7 +22,7 @@ OPUmlProfileGeneratorWizard class >> openOn: aProfile [
 		open
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlProfileGeneratorWizard >> addGeneratePane [
 	| pane prefixPart packagePart |
 	pane := WizardSinglePane new.
@@ -39,7 +41,7 @@ OPUmlProfileGeneratorWizard >> addGeneratePane [
 	self addPane: pane
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlProfileGeneratorWizard >> generate: aProfile with: aDictionary [
 	| generator |
 	generator := OPUMLProfileGenerator new.
@@ -49,24 +51,24 @@ OPUmlProfileGeneratorWizard >> generate: aProfile with: aDictionary [
 	(CBChangesBrowser changes: generator generateAll) open
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlProfileGeneratorWizard >> generateWith: aDictionary [
 	self generate: self profile with: aDictionary
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlProfileGeneratorWizard >> initialize [
 	super initialize.
 	self addGeneratePane.
 	self atEndDo: [ :values | self generateWith: values ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlProfileGeneratorWizard >> profile [
 	^ profile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlProfileGeneratorWizard >> profile: anObject [
 	profile := anObject
 ]

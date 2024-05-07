@@ -1,1 +1,1 @@
-Package { #name : #'OpenPonk-ClassEditor' }
+Package { #name : 'OpenPonk-ClassEditor' }

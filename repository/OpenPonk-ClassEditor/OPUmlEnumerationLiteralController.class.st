@@ -2,18 +2,20 @@
 I am a controller for an EnumerationLiteral.
 "
 Class {
-	#name : #OPUmlEnumerationLiteralController,
-	#superclass : #OPUmlClassifierItemController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlEnumerationLiteralController',
+	#superclass : 'OPUmlClassifierItemController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
 
 	self diagramElementOwner addLiteral: diagramElement
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
 
 	self model: (self modelClass new
@@ -23,31 +25,31 @@ OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlEnumerationLiteralController >> diagramElementClass [
 
 	^ OPUmlEnumerationLiteralLabel
 ]
 
-{ #category : #'diagram elements' }
+{ #category : 'diagram elements' }
 OPUmlEnumerationLiteralController >> diagramElementOwner [
 
 	^ (diagramController showWithoutDependentInDiagramModel:
 		   model enumeration) diagramElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationLiteralController >> modelClass [
 	^ OPUMLEnumerationLiteral
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlEnumerationLiteralController >> placeholderName [
 
 	^ 'literal'
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlEnumerationLiteralController >> removeDiagramElement [
 
 	self diagramElement ifNil: [ ^ self ].
@@ -55,7 +57,7 @@ OPUmlEnumerationLiteralController >> removeDiagramElement [
 	diagramElement := nil
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlEnumerationLiteralController >> removeModel [
 	"could be any of those, so just nil all of them"
 

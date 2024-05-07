@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlStereotypesLabel,
-	#superclass : #OPUmlKeywordLabel,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlStereotypesLabel',
+	#superclass : 'OPUmlKeywordLabel',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypesLabel >> defaultText [
 
 	^ self stereotypeNames
@@ -12,13 +14,13 @@ OPUmlStereotypesLabel >> defaultText [
 		  ifNotEmpty: [ :vals | '«' , (vals joinUsing: ', ') , '»' ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlStereotypesLabel >> isPositionableByUser [
 
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypesLabel >> stereotypeNames [
 
 	^ self subclassResponsibility

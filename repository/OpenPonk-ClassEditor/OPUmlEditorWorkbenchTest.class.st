@@ -1,6 +1,6 @@
 Class {
-	#name : #OPUmlEditorWorkbenchTest,
-	#superclass : #TestCase,
+	#name : 'OPUmlEditorWorkbenchTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'project',
@@ -10,10 +10,12 @@ Class {
 		'view',
 		'paletteEntries'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests - UI'
+	#category : 'OpenPonk-ClassEditor-Tests - UI',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - UI'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 
 	model := OPUMLPackage new.
@@ -29,19 +31,19 @@ OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 	paletteEntries := editor palette entries
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlEditorWorkbenchTest >> setUp [
 	super setUp.
 	self createAndOpenEmptyEditor
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlEditorWorkbenchTest >> tearDown [
 	super tearDown.
 	window ifNotNil: #delete
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlEditorWorkbenchTest >> testAddClassFromPalette [
 
 	| position shape ev classEntry link method |

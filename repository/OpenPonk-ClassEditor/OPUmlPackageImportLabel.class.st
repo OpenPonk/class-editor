@@ -1,16 +1,18 @@
 Class {
-	#name : #OPUmlPackageImportLabel,
-	#superclass : #OPUmlEdgeLabel,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlPackageImportLabel',
+	#superclass : 'OPUmlEdgeLabel',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlPackageImportLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageImportLabel >> defaultText [
 
 	^ '<<import>>'

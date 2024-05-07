@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlEdgeTest,
-	#superclass : #OPAbstractEdgeTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Shapes'
+	#name : 'OPUmlEdgeTest',
+	#superclass : 'OPAbstractEdgeTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Shapes'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlEdgeTest >> setUp [
 	| source target |
 	super setUp.
@@ -16,12 +18,12 @@ OPUmlEdgeTest >> setUp [
 	shape target: target
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlEdgeTest >> shapeClass [
 	^ OPUmlEdge
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlEdgeTest >> testRemove [
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
@@ -30,7 +32,7 @@ OPUmlEdgeTest >> testRemove [
 	self assert: shape ownedElements isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlEdgeTest >> testRemoveDetachFromEnds [
 
 	| source target |
@@ -43,7 +45,7 @@ OPUmlEdgeTest >> testRemoveDetachFromEnds [
 	self assert: target targetEdges asArray equals: #(  )
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlEdgeTest >> testRemoveFromView [
 
 	| lbl |

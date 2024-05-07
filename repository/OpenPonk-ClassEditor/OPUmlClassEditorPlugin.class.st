@@ -2,17 +2,19 @@
 I am a plugin for UML Class Diagram
 "
 Class {
-	#name : #OPUmlClassEditorPlugin,
-	#superclass : #OPPlugin,
-	#category : #'OpenPonk-ClassEditor-Plugin'
+	#name : 'OPUmlClassEditorPlugin',
+	#superclass : 'OPPlugin',
+	#category : 'OpenPonk-ClassEditor-Plugin',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Plugin'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin class >> defaultProfiles [
 	^ {}
 ]
 
-{ #category : #toolbar }
+{ #category : 'toolbar' }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 
 	StFBSaveFileDialog new
@@ -34,7 +36,7 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 		open
 ]
 
-{ #category : #toolbar }
+{ #category : 'toolbar' }
 OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 
 	StFBOpenFileDialog new
@@ -51,22 +53,22 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 		open
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> defaultProfiles [
 	^ self class defaultProfiles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> diagramControllerClass [
 	^ OPUmlPackageDiagramController
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> icon [
 	^ OPUmlIcons packageIcon
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> isForController: aDiagramController [
 
 	| appliedProfiles pluginClassesWithProfileCounts |
@@ -92,7 +94,7 @@ OPUmlClassEditorPlugin >> isForController: aDiagramController [
 		  pluginClassesWithProfileCounts first key = self class ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
 
 	^ ({ 
@@ -101,12 +103,12 @@ OPUmlClassEditorPlugin >> isPluginFor: aModel [
 		  self supportsProfilesOf: aModel ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> layouterClass [
 	^ OPUmlLayouter
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
 
 	| models targetModel otherModels |
@@ -133,32 +135,32 @@ OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
 	^ targetModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> modelClass [
 	^ OPUMLPackage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> modelSerializerClass [
 	^ OPUmlModelSerializer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> name [
 	^ 'UML Class Editor'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> supportsHidingElements [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsMergingModels [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> supportsProfilesOf: aModel [
 
 	^ aModel profileApplications allSatisfy: [ :each | 

@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlCompartmentableContent,
-	#superclass : #OPNode,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlCompartmentableContent',
+	#superclass : 'OPNode',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableContent >> layoutOwnedElements [
 
 	self roassalShape
@@ -12,13 +14,13 @@ OPUmlCompartmentableContent >> layoutOwnedElements [
 		signalUpdate
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlCompartmentableContent >> modelChanged [
 
 	self owningElement modelChanged
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlCompartmentableContent >> translateTopTo: aCoordinateY [
 
 	self translateTo:
@@ -26,7 +28,7 @@ OPUmlCompartmentableContent >> translateTopTo: aCoordinateY [
 	self layoutOwnedElements
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlCompartmentableContent >> xCoordinateForOwner [
 
 	^ self subclassResponsibility

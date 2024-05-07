@@ -1,26 +1,28 @@
 Class {
-	#name : #OPUmlClassifierController,
-	#superclass : #OPUmlElementController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlClassifierController',
+	#superclass : 'OPUmlElementController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassifierController >> adornments [
 	^ self subclassResponsibility
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlClassifierController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlAssociationController
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassifierController >> createAdornmentsBy: builder [
 
 	"do nothing by default"
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlClassifierController >> createModelIn: aParentModel [
 	self
 		model:
@@ -31,7 +33,7 @@ OPUmlClassifierController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierController >> dependentElements [
 
 	| innerElements associations |
@@ -46,7 +48,7 @@ OPUmlClassifierController >> dependentElements [
 	^ innerElements , associations
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassifierController >> descriptionName [
 
 	<magritteDescription>
@@ -63,7 +65,7 @@ OPUmlClassifierController >> descriptionName [
 		  yourself
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassifierController >> hookDiagramElement [
 
 	super hookDiagramElement.
@@ -72,17 +74,17 @@ OPUmlClassifierController >> hookDiagramElement [
 		self createAdornmentsBy: builder ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlClassifierController >> isHideable [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlClassifierController >> removeModel [
 	diagramController model packagedElements remove: self model
 ]

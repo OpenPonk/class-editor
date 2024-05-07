@@ -1,11 +1,11 @@
-Extension { #name : #OPUMLParameter }
+Extension { #name : 'OPUMLParameter' }
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLParameter >> notationMultiplicityRange [
 	^ (sharedGeneralizations at: #MultiplicityElement) notationMultiplicityRange
 ]
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLParameter >> notationString [
 	^ String
 		streamContents: [ :stream | 

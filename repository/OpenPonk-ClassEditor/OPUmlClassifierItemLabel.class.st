@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlClassifierItemLabel,
-	#superclass : #OPUmlNameLabel,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlClassifierItemLabel',
+	#superclass : 'OPUmlNameLabel',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierItemLabel >> addedByMouseClickTo: aPoint [
 
 	"do nothing"
@@ -12,32 +14,32 @@ OPUmlClassifierItemLabel >> addedByMouseClickTo: aPoint [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierItemLabel >> isPositionableByUser [
 
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlClassifierItemLabel >> modelChanged [
 
 	self owningElement modelChanged
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassifierItemLabel >> selectableInteraction [
 
 	^ OPRSSelectable highlightColorBlue
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierItemLabel >> translateTopTo: aCoordinateY [
 
 	self translateTo:
 		self xCoordinateForOwner @ (aCoordinateY + (self height / 2))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierItemLabel >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle left + (self width / 2)

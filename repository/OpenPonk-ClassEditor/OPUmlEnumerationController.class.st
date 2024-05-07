@@ -2,12 +2,14 @@
 I am a controller for an Enumeration
 "
 Class {
-	#name : #OPUmlEnumerationController,
-	#superclass : #OPUmlClassifierController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlEnumerationController',
+	#superclass : 'OPUmlClassifierController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlEnumerationController >> adornments [
 
 	^ { (OPUmlIcons literalIcon -> [ 
@@ -22,19 +24,19 @@ OPUmlEnumerationController >> adornments [
 	   tool selectedTargetControllers: { self } ]) }
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlEnumerationController >> canBeTargetFor: aController [
 	^ (aController isKindOf: OPUmlEnumerationLiteralController)
 		| (aController isKindOf: OPUmlAssociationController)
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlEnumerationController >> createAdornmentsBy: builder [
 
 	self createLiteralAdornmentBy: builder
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlEnumerationController >> createLiteralAdornmentBy: builder [
 
 	builder addIconForm: OPUmlIcons literalIcon action: [
@@ -49,30 +51,30 @@ OPUmlEnumerationController >> createLiteralAdornmentBy: builder [
 		tool selectedControllers: { self } ]
 ]
 
-{ #category : #model }
+{ #category : 'model' }
 OPUmlEnumerationController >> createModel [
 	^ self modelClass new
 		name: 'Enumeration';
 		yourself
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlEnumerationController >> diagramElementClass [
 
 	^ OPUmlEnumerationShape
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlEnumerationController >> elementsToShowInside [
 	^ self model ownedLiterals asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationController >> modelClass [
 	^ OPUMLEnumeration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationController >> modelClassName [
 
 	^ 'Enumeration'

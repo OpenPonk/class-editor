@@ -1,38 +1,40 @@
 Class {
-	#name : #OPUmlAssociationControllerTest,
-	#superclass : #OPUmlRelationshipControllerTest,
+	#name : 'OPUmlAssociationControllerTest',
+	#superclass : 'OPUmlRelationshipControllerTest',
 	#instVars : [
 		'element',
 		'comment',
 		'ownedComment',
 		'owningElement'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationControllerTest >> controllerClass [
 	^ OPUmlAssociationController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlAssociationControllerTest >> diagramElementClass [
 
 	^ OPUmlAssociationShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationControllerTest >> modelClass [
 	^ OPUMLAssociation
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlAssociationControllerTest >> setUp [
 	super setUp.
 	self setUpAssociation
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlAssociationControllerTest >> setUpAssociation [
 	element := OPUMLClass new name: 'Element'.
 	comment := OPUMLClass new name: 'Comment'.
@@ -52,7 +54,7 @@ OPUmlAssociationControllerTest >> setUpAssociation [
 			owningElement}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testClassBeTarget [
 	| sourceController targetController |
 	sourceController := diagramController
@@ -80,7 +82,7 @@ OPUmlAssociationControllerTest >> testClassBeTarget [
 		equals: targetController model
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 	diagramController model packagedElements
 		addAll:
@@ -97,7 +99,7 @@ OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 	self assert: diagramController controllers asArray equals: #()
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemovalOfClassRemovesAssociation [
 
 	| elementController |
@@ -125,7 +127,7 @@ OPUmlAssociationControllerTest >> testRemovalOfClassRemovesAssociation [
 		equals: #(  )
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemoveFromDiagram [
 
 	diagramController
@@ -138,7 +140,7 @@ OPUmlAssociationControllerTest >> testRemoveFromDiagram [
 	self assert: diagramController canvas edges asArray equals: #(  )
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 OPUmlAssociationControllerTest >> testRemoveFromModel [
 	diagramController
 		showWithoutDependentInDiagramModel: element;
@@ -159,7 +161,7 @@ OPUmlAssociationControllerTest >> testRemoveFromModel [
 		deny: (diagramController model packagedElements includes: model)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testShowInDiagram [
 
 	diagramController
@@ -170,7 +172,7 @@ OPUmlAssociationControllerTest >> testShowInDiagram [
 			 each model isNotNil and: [ each model modelElement = model ] ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testWriteNavigabilityAssocOwnedToClassOwned [
 	| first second |
 	first := model memberEnds first.
@@ -180,7 +182,7 @@ OPUmlAssociationControllerTest >> testWriteNavigabilityAssocOwnedToClassOwned [
 	self assert: second owningClass equals: first type
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testWriteNavigabilityClassOwnedToAssocOwned [
 	| first |
 	first := model memberEnds first.
@@ -190,7 +192,7 @@ OPUmlAssociationControllerTest >> testWriteNavigabilityClassOwnedToAssocOwned [
 	self assert: first owningAssociation equals: model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testWriteNavigabilityPrecondition [
 	| first second |
 	first := model memberEnds first.

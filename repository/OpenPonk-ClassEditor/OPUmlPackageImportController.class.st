@@ -2,12 +2,14 @@
 I am a controller for a PackageImport.
 "
 Class {
-	#name : #OPUmlPackageImportController,
-	#superclass : #OPUmlRelationshipController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlPackageImportController',
+	#superclass : 'OPUmlRelationshipController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlPackageImportController >> createModelIn: aParentModel [
 	self model: self modelClass new.
 	model importedPackage: aParentModel.
@@ -15,7 +17,7 @@ OPUmlPackageImportController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionGeneral [
 	"<magritteDescription>
 	^ MAStringDescription new
@@ -27,7 +29,7 @@ OPUmlPackageImportController >> descriptionGeneral [
 		yourself"
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionGeneralizationSet [
 "	<magritteDescription>
 	^ MAToManyRelationDescription new
@@ -66,12 +68,12 @@ OPUmlPackageImportController >> descriptionGeneralizationSet [
 		yourself"
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionName [
 	^ nil
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionSpecific [
 "	<magritteDescription>
 	^ MAStringDescription new
@@ -83,39 +85,39 @@ OPUmlPackageImportController >> descriptionSpecific [
 		yourself"
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionVisibility [
 	^ nil
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlPackageImportController >> diagramElementClass [
 
 	^ OPUmlPackageImportShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageImportController >> modelClass [
 	^ OPUMLPackageImport
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> modelSource [
 	^ model importedPackage
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> modelTarget [
 	^ model importingNamespace
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlPackageImportController >> removeModel [
 	model importedPackage: nil.
 	model importingNamespace: nil
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlPackageImportController >> showWithoutDependentInDiagram: aDiagramController [
 	aDiagramController showWithoutDependentInDiagramModel: model importedPackage.
 	aDiagramController showWithoutDependentInDiagramModel: model importingNamespace.

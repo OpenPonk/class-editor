@@ -2,18 +2,20 @@
 I am a controller for an attribute of a classifier.
 "
 Class {
-	#name : #OPUmlAttributeController,
-	#superclass : #OPUmlClassItemController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlAttributeController',
+	#superclass : 'OPUmlClassItemController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlAttributeController >> addDiagramElementToOwner [
 
 	self diagramElementOwner addAttribute: diagramElement
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlAttributeController >> createDiagramElement [
 
 	(model name isNil or: [ model name trim isEmpty ]) ifTrue: [
@@ -21,7 +23,7 @@ OPUmlAttributeController >> createDiagramElement [
 	super createDiagramElement
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlAttributeController >> createModelIn: aClass [
 
 	self model: (self modelClass new
@@ -31,7 +33,7 @@ OPUmlAttributeController >> createModelIn: aClass [
 	^ model
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> descriptionDefaultValue [
 
 	<magritteDescription>
@@ -56,7 +58,7 @@ OPUmlAttributeController >> descriptionDefaultValue [
 		  yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> descriptionIsDerived [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -66,7 +68,7 @@ OPUmlAttributeController >> descriptionIsDerived [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> descriptionIsOrdered [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -76,7 +78,7 @@ OPUmlAttributeController >> descriptionIsOrdered [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> descriptionIsReadOnly [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -86,7 +88,7 @@ OPUmlAttributeController >> descriptionIsReadOnly [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> descriptionIsUnique [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -96,7 +98,7 @@ OPUmlAttributeController >> descriptionIsUnique [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> descriptionMultiplicity [
 
 	<magritteDescription>
@@ -117,7 +119,7 @@ OPUmlAttributeController >> descriptionMultiplicity [
 		  yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> descriptionType [
 
 	<magritteDescription>
@@ -134,13 +136,13 @@ OPUmlAttributeController >> descriptionType [
 		  yourself
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlAttributeController >> diagramElementClass [
 
 	^ OPUmlAttributeLabel
 ]
 
-{ #category : #'diagram elements' }
+{ #category : 'diagram elements' }
 OPUmlAttributeController >> diagramElementOwner [
 
 	^ (diagramController controllerForModel:
@@ -149,18 +151,18 @@ OPUmlAttributeController >> diagramElementOwner [
 				     any ~= model ]) type ])) diagramElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAttributeController >> modelClass [
 	^ OPUMLProperty
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlAttributeController >> placeholderName [
 
 	^ 'attribute'
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlAttributeController >> removeDiagramElement [
 
 	self diagramElement ifNil: [ ^ self ].
@@ -169,7 +171,7 @@ OPUmlAttributeController >> removeDiagramElement [
 	diagramElement := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAttributeController >> typeNamed: aName [
 	OPUMLXMISpecsStorage primitivesMap at: aName ifPresent: [ :prim | ^ prim ].
 	(diagramController model packagedElements select: [ :each | each oclIsKindOf: #Type ])
@@ -178,7 +180,7 @@ OPUmlAttributeController >> typeNamed: aName [
 	^ OPUMLClass new name: aName
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAttributeController >> writeMultiplicityFrom: aString to: aProperty [
 	| values |
 	(aString includesSubstring: '..')

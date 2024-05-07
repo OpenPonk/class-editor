@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlListCompartment,
-	#superclass : #OPUmlCompartment,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlListCompartment',
+	#superclass : 'OPUmlCompartment',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlListCompartment >> layoutOwnedElements [
 
 	self ownedElements
@@ -17,7 +19,7 @@ OPUmlListCompartment >> layoutOwnedElements [
 	self roassalShape signalUpdate
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 OPUmlListCompartment >> sortOwnedElements [
 
 	ownedElements sort: [ :a :b | 

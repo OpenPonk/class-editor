@@ -2,8 +2,8 @@
 I am a shape composition to accomodate for the most common UML Association shape.
 "
 Class {
-	#name : #OPUmlAssociationShape,
-	#superclass : #OPUmlEdge,
+	#name : 'OPUmlAssociationShape',
+	#superclass : 'OPUmlEdge',
 	#instVars : [
 		'nameLabel',
 		'sourceEndLabels',
@@ -12,10 +12,12 @@ Class {
 		'stereotypeLabel',
 		'propertiesLabel'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlAssociationShape >> createEndLabels [
 
 	{ 
@@ -29,7 +31,7 @@ OPUmlAssociationShape >> createEndLabels [
 		each in: self forModelElement: self modelElement memberEnds second ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlAssociationShape >> createOwnedElementsWithoutController [
 
 	self ownedElements ifNotEmpty: [ ^ self ].
@@ -41,14 +43,14 @@ OPUmlAssociationShape >> createOwnedElementsWithoutController [
 	self createEndLabels
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlAssociationShape >> headMarker [
 
 	^ self markerShapeFor:
 		  (self modelElement ifNil: [ ^ nil ]) memberEnds second
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationShape >> markerShapeFor: aProperty [
 
 	(self ontoUmlDecoratorFor: aProperty) ifNotNil: [ :marker | ^ marker ].
@@ -60,7 +62,7 @@ OPUmlAssociationShape >> markerShapeFor: aProperty [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationShape >> ontoUmlDecoratorFor: aProperty [
 
 	| stereoNames markerLetters |
@@ -84,7 +86,7 @@ OPUmlAssociationShape >> ontoUmlDecoratorFor: aProperty [
 	^ nil
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlAssociationShape >> propertiesOfModel: aModel [
 	| props |
 	props := OrderedCollection new.
@@ -103,7 +105,7 @@ OPUmlAssociationShape >> propertiesOfModel: aModel [
 	^ props
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlAssociationShape >> tailMarker [
 
 	^ self markerShapeFor:

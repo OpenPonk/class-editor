@@ -1,16 +1,18 @@
 Class {
-	#name : #OPUmlClassifierItemController,
-	#superclass : #OPUmlElementController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlClassifierItemController',
+	#superclass : 'OPUmlElementController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlClassifierItemController >> addDiagramElementToOwner [
 
 	self subclassResponsibility
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassifierItemController >> createDiagramElement [
 
 	diagramElement := self diagramElementClass forModelElement:
@@ -19,7 +21,7 @@ OPUmlClassifierItemController >> createDiagramElement [
 	self addDiagramElementToOwner
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassifierItemController >> descriptionName [
 
 	<magritteDescription>
@@ -33,20 +35,21 @@ OPUmlClassifierItemController >> descriptionName [
 	^ description
 ]
 
-{ #category : #announcements }
+{ #category : 'announcements' }
 OPUmlClassifierItemController >> internalSubscribeTo: aModel [
 
 	aModel announcer
 		when: OPElementRenamed
 		do: [ self diagramElementOwner modelChanged ]
+		for: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlClassifierItemController >> isHideable [
 	^ true
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlClassifierItemController >> placeholderName [
 
 	^ self subclassResponsibility

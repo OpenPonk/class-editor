@@ -1,13 +1,15 @@
 Class {
-	#name : #OPUmlEnumerationShape,
-	#superclass : #OPUmlClassifierShape,
+	#name : 'OPUmlEnumerationShape',
+	#superclass : 'OPUmlClassifierShape',
 	#instVars : [
 		'literals'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'ston-core' }
+{ #category : 'ston-core' }
 OPUmlEnumerationShape class >> stonAllInstVarNames [
 
 	"Override to encode my instances using a custom set of instance variables or to define their order."
@@ -15,7 +17,7 @@ OPUmlEnumerationShape class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #literals )
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlEnumerationShape >> addLiteral: aLiteralShape [
 
 	literals ifNil: [ literals := OPUmlListCompartment in: self ].
@@ -23,12 +25,12 @@ OPUmlEnumerationShape >> addLiteral: aLiteralShape [
 	aLiteralShape owningElement: literals
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationShape >> literals [
 	^ literals
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlEnumerationShape >> removeLiteral: aLiteralShape [
 
 	aLiteralShape remove.
@@ -40,7 +42,7 @@ OPUmlEnumerationShape >> removeLiteral: aLiteralShape [
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlEnumerationShape >> stereotypesLabelClass [
 
 	^ OPUmlEnumerationStereotypeLabel

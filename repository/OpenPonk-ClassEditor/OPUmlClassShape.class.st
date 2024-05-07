@@ -2,16 +2,18 @@
 I am a classifier shape composition to accomodate for the most common UML Class Diagram shape.
 "
 Class {
-	#name : #OPUmlClassShape,
-	#superclass : #OPUmlClassifierShape,
+	#name : 'OPUmlClassShape',
+	#superclass : 'OPUmlClassifierShape',
 	#instVars : [
 		'attributes',
 		'operations'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'ston-core' }
+{ #category : 'ston-core' }
 OPUmlClassShape class >> stonAllInstVarNames [
 
 	"Override to encode my instances using a custom set of instance variables or to define their order."
@@ -19,7 +21,7 @@ OPUmlClassShape class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #attributes #operations )
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassShape >> addAttribute: anAttributeShape [
 
 	attributes ifNil: [ 
@@ -30,7 +32,7 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 	anAttributeShape owningElement: attributes
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassShape >> addOperation: anOperationShape [
 
 	operations ifNil: [ 
@@ -41,17 +43,17 @@ OPUmlClassShape >> addOperation: anOperationShape [
 	anOperationShape owningElement: operations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassShape >> attributes [
 	^ attributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassShape >> operations [
 	^ operations
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassShape >> removeAttribute: anAttributeShape [
 
 	anAttributeShape remove.
@@ -64,7 +66,7 @@ OPUmlClassShape >> removeAttribute: anAttributeShape [
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassShape >> removeOperation: anOperationShape [
 
 	anOperationShape remove.
@@ -77,7 +79,7 @@ OPUmlClassShape >> removeOperation: anOperationShape [
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 OPUmlClassShape >> sortOwnedElements [
 
 	| properOrder |
@@ -91,7 +93,7 @@ OPUmlClassShape >> sortOwnedElements [
 	self ownedElements: properOrder
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassShape >> stereotypesLabelClass [
 
 	^ OPUmlAppliedStereotypesLabel

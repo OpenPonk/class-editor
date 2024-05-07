@@ -2,22 +2,24 @@
 An OPUmlSerializerTest is a test class for testing the behavior of OPUmlSerializer
 "
 Class {
-	#name : #OPUmlModelSerializerTest,
-	#superclass : #OPModelSerializerTest,
-	#category : #'OpenPonk-ClassEditor-Tests'
+	#name : 'OPUmlModelSerializerTest',
+	#superclass : 'OPModelSerializerTest',
+	#category : 'OpenPonk-ClassEditor-Tests',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlModelSerializerTest >> newModel [
 	^ OPUmlExamples new simpleAssociation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlModelSerializerTest >> serializerClass [
 	^ OPUmlModelSerializer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlModelSerializerTest >> testNoNames [
 
 	serializer serializeModel: model to: stream.
@@ -49,7 +51,7 @@ OPUmlModelSerializerTest >> testNoNames [
 		'Serialization should fail because model must have a name'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlModelSerializerTest >> testRoundtrip [
 	| newModel |
 	serializer serializeModel: model to: stream.

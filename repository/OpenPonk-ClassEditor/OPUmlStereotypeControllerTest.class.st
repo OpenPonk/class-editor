@@ -1,52 +1,54 @@
 Class {
-	#name : #OPUmlStereotypeControllerTest,
-	#superclass : #OPUmlElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlStereotypeControllerTest',
+	#superclass : 'OPUmlElementControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypeControllerTest >> controllerClass [
 	^ OPUmlStereotypeController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlStereotypeControllerTest >> diagramElementClass [
 
 	^ OPUmlStereotypeShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypeControllerTest >> modelClass [
 	^ OPUMLStereotype
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlStereotypeControllerTest >> newEmptyClass [
 	^ OPUMLStereotype new name: 'Something'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlStereotypeControllerTest >> newEmptyModel [
 	^ OPUMLStereotype new name: 'Something'
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testAddDiagramAsTargetForClass [
 	diagramController addAsTargetFor: controller.
 	self assert: diagramController model packagedElements asArray equals: {controller model}
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testCanDiagramBeTargetForClass [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testCreateFromPalette [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveEmpty [
 
 	| class |
@@ -58,7 +60,7 @@ OPUmlStereotypeControllerTest >> testRemoveEmpty [
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveFromModel [
 	| class |
 	class := self newEmptyModel.
@@ -71,7 +73,7 @@ OPUmlStereotypeControllerTest >> testRemoveFromModel [
 		equals: #()
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 
 	| class |
@@ -84,7 +86,7 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlStereotypeControllerTest >> testShowClassInDiagram [
 
 	| class |
@@ -94,7 +96,7 @@ OPUmlStereotypeControllerTest >> testShowClassInDiagram [
 			 each model isNotNil and: [ each model modelElement = class ] ])
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlStereotypeControllerTest >> testShowClassWithAttributeInDiagram [
 
 	| class prop |

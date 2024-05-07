@@ -1,13 +1,15 @@
 Class {
-	#name : #OPUmlAssociationEndLabel,
-	#superclass : #OPUmlEdgeLabel,
+	#name : 'OPUmlAssociationEndLabel',
+	#superclass : 'OPUmlEdgeLabel',
 	#instVars : [
 		'atSource'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'ston-core' }
+{ #category : 'ston-core' }
 OPUmlAssociationEndLabel class >> stonAllInstVarNames [
 
 	"Override to encode my instances using a custom set of instance variables or to define their order."
@@ -15,13 +17,13 @@ OPUmlAssociationEndLabel class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #atSource )
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationEndLabel >> atSource [
 
 	atSource := true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlAssociationEndLabel >> defaultAnchorConstraintPosition [
 
 	^ (atSource
@@ -29,19 +31,19 @@ OPUmlAssociationEndLabel >> defaultAnchorConstraintPosition [
 		   ifFalse: [ OPRSAnchorConstraintEndDistanceReference ]) distance: 10
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlAssociationEndLabel >> defaultMinDistance [
 
 	^ super defaultMinDistance negated
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationEndLabel >> defaultText [
 
 	^ self modelElement notationStringAsRoleName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlAssociationEndLabel >> initialize [
 
 	super initialize.

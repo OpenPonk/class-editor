@@ -1,6 +1,6 @@
-Extension { #name : #OPUMLPackage }
+Extension { #name : 'OPUMLPackage' }
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLPackage >> hasPackagedElement: anElement [
 
 	^ self packagedElements anySatisfy: [ :any | 

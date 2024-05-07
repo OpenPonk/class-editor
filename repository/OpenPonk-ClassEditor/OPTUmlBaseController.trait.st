@@ -1,9 +1,11 @@
 Trait {
-	#name : #OPTUmlBaseController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPTUmlBaseController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPTUmlBaseController >> descriptionAccessor: aSymbol [
 	^ MAPluggableAccessor
 		read: [ :me | me model perform: aSymbol ]
@@ -12,7 +14,7 @@ OPTUmlBaseController >> descriptionAccessor: aSymbol [
 			self diagramElement modelChanged  ]
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPTUmlBaseController >> descriptionComment [
 
 	<magritteDescription>
@@ -37,7 +39,7 @@ OPTUmlBaseController >> descriptionComment [
 		  yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPTUmlBaseController >> descriptionModelInfo [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -48,7 +50,7 @@ OPTUmlBaseController >> descriptionModelInfo [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPTUmlBaseController >> descriptionName [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -58,7 +60,7 @@ OPTUmlBaseController >> descriptionName [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPTUmlBaseController >> descriptionVisibility [
 
 	<magritteDescription>

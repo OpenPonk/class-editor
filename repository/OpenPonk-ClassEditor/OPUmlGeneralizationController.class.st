@@ -2,12 +2,14 @@
 I am a controller for UML Generalization.
 "
 Class {
-	#name : #OPUmlGeneralizationController,
-	#superclass : #OPUmlRelationshipController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlGeneralizationController',
+	#superclass : 'OPUmlRelationshipController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlGeneralizationController >> createModelIn: aParentModel [
 	self model: self modelClass new.
 	model general: aParentModel.
@@ -15,7 +17,7 @@ OPUmlGeneralizationController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationController >> descriptionGeneral [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -27,7 +29,7 @@ OPUmlGeneralizationController >> descriptionGeneral [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationController >> descriptionGeneralizationSet [
 
 	<magritteDescription>
@@ -71,12 +73,12 @@ OPUmlGeneralizationController >> descriptionGeneralizationSet [
 		  yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationController >> descriptionName [
 	^ nil
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationController >> descriptionSpecific [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -88,33 +90,33 @@ OPUmlGeneralizationController >> descriptionSpecific [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationController >> descriptionVisibility [
 	^ nil
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlGeneralizationController >> diagramElementClass [
 
 	^ OPUmlGeneralizationShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationController >> modelClass [
 	^ OPUMLGeneralization
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationController >> modelSource [
 	^ model specific
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationController >> modelTarget [
 	^ model general
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlGeneralizationController >> removeModel [
 	model general: nil.
 	model specific: nil.
@@ -127,7 +129,7 @@ OPUmlGeneralizationController >> removeModel [
 						ifAbsent: [ "do nothing" ] ] ]
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlGeneralizationController >> showWithoutDependentInDiagram: aDiagramController [
 	aDiagramController showWithoutDependentInDiagramModel: model general.
 	aDiagramController showWithoutDependentInDiagramModel: model specific.

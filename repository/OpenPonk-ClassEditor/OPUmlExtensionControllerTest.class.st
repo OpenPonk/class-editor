@@ -1,39 +1,41 @@
 Class {
-	#name : #OPUmlExtensionControllerTest,
-	#superclass : #OPUmlRelationshipControllerTest,
+	#name : 'OPUmlExtensionControllerTest',
+	#superclass : 'OPUmlRelationshipControllerTest',
 	#instVars : [
 		'artifact',
 		'library',
 		'baseArtifact',
 		'extensionLibrary'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExtensionControllerTest >> controllerClass [
 	^ OPUmlExtensionController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlExtensionControllerTest >> diagramElementClass [
 
 	^ OPUmlExtensionShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExtensionControllerTest >> modelClass [
 	^ OPUMLExtension
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlExtensionControllerTest >> setUp [
 	super setUp.
 	diagramController model: OPUMLProfile new.
 	self setUpExtension
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlExtensionControllerTest >> setUpExtension [
 	artifact := OPUMLClass new name: 'Artifact'.
 	library := OPUMLStereotype new name: 'Library'.
@@ -53,13 +55,13 @@ OPUmlExtensionControllerTest >> setUpExtension [
 	model ownedEnd: extensionLibrary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlExtensionControllerTest >> sourceClass [
 
 	^ OPUMLStereotype
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlExtensionControllerTest >> testClassBeTarget [
 	| sourceController targetController |
 	sourceController := diagramController
@@ -81,7 +83,7 @@ OPUmlExtensionControllerTest >> testClassBeTarget [
 		equals: nil
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 
 	diagramController
@@ -93,7 +95,7 @@ OPUmlExtensionControllerTest >> testRemoveFromDiagram [
 	self assert: diagramController canvas edges asArray equals: #(  )
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 OPUmlExtensionControllerTest >> testRemoveFromModel [
 	diagramController
 		showWithoutDependentInDiagramModel: artifact;
@@ -113,7 +115,7 @@ OPUmlExtensionControllerTest >> testRemoveFromModel [
 		deny: (diagramController model packagedElements includes: model)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlExtensionControllerTest >> testShowInDiagram [
 
 	diagramController
@@ -124,7 +126,7 @@ OPUmlExtensionControllerTest >> testShowInDiagram [
 			 each model isNotNil and: [ each model modelElement = model ] ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlExtensionControllerTest >> testWriteNavigabilityPrecondition [
 	| first second |
 	first := model memberEnds first.

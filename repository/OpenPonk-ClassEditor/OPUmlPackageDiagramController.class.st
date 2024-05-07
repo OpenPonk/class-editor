@@ -2,14 +2,16 @@
 I am controller for managing the main class diagram presentation and handling items contained in the canvas.
 "
 Class {
-	#name : #OPUmlPackageDiagramController,
-	#superclass : #OPDiagramController,
+	#name : 'OPUmlPackageDiagramController',
+	#superclass : 'OPDiagramController',
 	#traits : 'OPTUmlStereotypedElementController',
 	#classTraits : 'OPTUmlStereotypedElementController classTrait',
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlPackageDiagramController >> allShowableElements [
 
 	"Should return all elements that could be directly hidden on diagram"
@@ -28,7 +30,7 @@ OPUmlPackageDiagramController >> allShowableElements [
 			   each oclIsKindOf: #Association ])
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlPackageDiagramController >> canBeTargetFor: aController [
 	^ (super canBeTargetFor: aController)
 		or: [ (aController isKindOf: OPUmlClassController)
@@ -36,12 +38,12 @@ OPUmlPackageDiagramController >> canBeTargetFor: aController [
 						or: [ aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlPackageDiagramController >> commonModelClassPrefix [
 	^ 'OPUML'
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlPackageDiagramController >> controllerFactory [
 	^ super controllerFactory
 		register: OPUmlClassController forModel: OPUMLClass;
@@ -61,7 +63,7 @@ OPUmlPackageDiagramController >> controllerFactory [
 		register: OPUmlPackageImportController forModel: OPUMLPackageImport
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 
 	<magritteDescription>
@@ -98,14 +100,14 @@ OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlPackageDiagramController >> descriptionStereotype [
 
 	<magritteDescription>
 	^ self descriptionStereotypeContent
 ]
 
-{ #category : #userinterface }
+{ #category : 'userinterface' }
 OPUmlPackageDiagramController >> disableRefresh [
 	| install |
 	self flag: #todo.
@@ -122,7 +124,7 @@ OPUmlPackageDiagramController >> disableRefresh [
 	OPUmlElementController withAllSubAndSuperclassesDo: [ :each | install value: each ]
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlPackageDiagramController >> elementsToShowInside [
 	| queue priority |
 	queue := OrderedCollection new.
@@ -166,7 +168,7 @@ OPUmlPackageDiagramController >> elementsToShowInside [
 		select: [ :each | self hasSupportForModel: each ]
 ]
 
-{ #category : #userinterface }
+{ #category : 'userinterface' }
 OPUmlPackageDiagramController >> enableRefresh [
 	| uninstall |
 	self flag: #todo.
@@ -178,7 +180,7 @@ OPUmlPackageDiagramController >> enableRefresh [
 		withAllSubAndSuperclassesDo: [ :each | uninstall value: each ]
 ]
 
-{ #category : #palette }
+{ #category : 'palette' }
 OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 	aPalette newSeparator.
 	(aPalette newConnectionCreationTool: [ OPUmlPackageImportController new ])
@@ -198,7 +200,7 @@ OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 		whenCreatedSetup
 ]
 
-{ #category : #palette }
+{ #category : 'palette' }
 OPUmlPackageDiagramController >> initializePalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlClassController new ])
 		label: 'Class';
@@ -238,7 +240,7 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 	self initializePackagePalette: aPalette
 ]
 
-{ #category : #palette }
+{ #category : 'palette' }
 OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 
 	| stereotypes elements relationships isForRelationship isForClass |
@@ -285,7 +287,7 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 				ctrl diagramElement modelChanged ] ]
 ]
 
-{ #category : #palette }
+{ #category : 'palette' }
 OPUmlPackageDiagramController >> initializeProfileModelingPalette: aPalette [
 	(self model oclIsKindOf: #Profile)
 		ifFalse: [ ^ self ].
@@ -299,21 +301,21 @@ OPUmlPackageDiagramController >> initializeProfileModelingPalette: aPalette [
 		icon: OPUmlIcons extensionIcon
 ]
 
-{ #category : #palette }
+{ #category : 'palette' }
 OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 
 	model profileApplications do: [ :each | 
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
-{ #category : #palette }
+{ #category : 'palette' }
 OPUmlPackageDiagramController >> rebuildPalette [
 
 	self editor palette createPaletteFor: self.
 	self editor palette rebuildWidget
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlPackageDiagramController >> typeOfModel: aModel [
 	^ OPModelObjectType
 		named: (aModel umlClassName splitOnCapitals joinUsing: ' ')

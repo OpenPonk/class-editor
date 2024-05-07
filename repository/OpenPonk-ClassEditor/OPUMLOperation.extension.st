@@ -1,6 +1,6 @@
-Extension { #name : #OPUMLOperation }
+Extension { #name : 'OPUMLOperation' }
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLOperation >> notationString [
 	^ String
 		streamContents: [ :stream | 

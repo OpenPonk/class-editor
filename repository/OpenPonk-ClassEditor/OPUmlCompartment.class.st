@@ -1,12 +1,14 @@
 Class {
-	#name : #OPUmlCompartment,
-	#superclass : #OPUmlCompartmentableContent,
+	#name : 'OPUmlCompartment',
+	#superclass : 'OPUmlCompartmentableContent',
 	#traits : 'OPTUmlAutoAccomodatingShape',
 	#classTraits : 'OPTUmlAutoAccomodatingShape classTrait',
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartment >> renderBasicShape [
 
 	^ RSBox new
@@ -14,7 +16,7 @@ OPUmlCompartment >> renderBasicShape [
 		  yourself
 ]
 
-{ #category : #sorting }
+{ #category : 'sorting' }
 OPUmlCompartment >> sortOwnedElements [
 
 	"do nothing by default"
@@ -22,13 +24,13 @@ OPUmlCompartment >> sortOwnedElements [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCompartment >> top [
 
 	^ self roassalShape encompassingRectangle top
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartment >> updateRenderFromModel [
 
 	super updateRenderFromModel.
@@ -36,7 +38,7 @@ OPUmlCompartment >> updateRenderFromModel [
 	self accomodateContents
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlCompartment >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle left + (self width / 2)

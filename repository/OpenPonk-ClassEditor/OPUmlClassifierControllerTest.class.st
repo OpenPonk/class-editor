@@ -1,31 +1,33 @@
 Class {
-	#name : #OPUmlClassifierControllerTest,
-	#superclass : #OPUmlElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlClassifierControllerTest',
+	#superclass : 'OPUmlElementControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlClassifierControllerTest class >> isAbstract [
 	^ self = OPUmlClassifierControllerTest
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlClassifierControllerTest >> testAddDiagramAsTargetForClass [
 	diagramController addAsTargetFor: controller.
 	self assert: diagramController model packagedElements asArray equals: {controller model}
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlClassifierControllerTest >> testCanDiagramBeTargetForClass [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlClassifierControllerTest >> testCreateFromPalette [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlClassifierControllerTest >> testRemoveEmpty [
 
 	controller model: model.
@@ -35,7 +37,7 @@ OPUmlClassifierControllerTest >> testRemoveEmpty [
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlClassifierControllerTest >> testRemoveFromModel [
 
 	diagramController model packagedElements add: model.
@@ -47,7 +49,7 @@ OPUmlClassifierControllerTest >> testRemoveFromModel [
 		equals: #(  )
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlClassifierControllerTest >> testRemovesDependent [
 
 	| class secondClass association ownedClass owningClass |
@@ -78,7 +80,7 @@ OPUmlClassifierControllerTest >> testRemovesDependent [
 		hasSameElements: { secondClass }
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlClassifierControllerTest >> testShowInDiagram [
 
 	diagramController showWithoutDependentInDiagramModel: model.

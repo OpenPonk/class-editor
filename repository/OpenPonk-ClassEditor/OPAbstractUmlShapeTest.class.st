@@ -1,10 +1,12 @@
 Class {
-	#name : #OPAbstractUmlShapeTest,
-	#superclass : #OPAbstractShapeTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Shapes'
+	#name : 'OPAbstractUmlShapeTest',
+	#superclass : 'OPAbstractShapeTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Shapes'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPAbstractUmlShapeTest >> testAddEdge [
 	| source target edge |
 	source := self newShapeInstance.
@@ -20,7 +22,7 @@ OPAbstractUmlShapeTest >> testAddEdge [
 	self assert: edge target equals: target
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPAbstractUmlShapeTest >> testAddOwnedElement [
 	| parent child |
 	parent := self newShapeInstance.
@@ -32,7 +34,7 @@ OPAbstractUmlShapeTest >> testAddOwnedElement [
 	self assert: child ownedElements size equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPAbstractUmlShapeTest >> testAddSelfEdge [
 	| edge |
 	edge := OPUmlEdge new.
@@ -44,7 +46,7 @@ OPAbstractUmlShapeTest >> testAddSelfEdge [
 	self assert: edge target equals: shape
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPAbstractUmlShapeTest >> testEmpty [
 	self assert: shape modelElement isNil.
 	self assert: shape owningElement isNil.

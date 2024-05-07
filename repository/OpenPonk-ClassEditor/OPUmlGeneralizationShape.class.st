@@ -2,23 +2,25 @@
 I represent a direct generalization line.
 "
 Class {
-	#name : #OPUmlGeneralizationShape,
-	#superclass : #OPUmlEdge,
+	#name : 'OPUmlGeneralizationShape',
+	#superclass : 'OPUmlEdge',
 	#instVars : [
 		'nameLabel',
 		'constraints'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlGeneralizationShape >> createOwnedElementsWithoutController [
 
 	self ownedElements ifNotEmpty: [ ^ self ].
 	OPUmlGeneralizationLabel in: self
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlGeneralizationShape >> headMarker [
 
 	^ OPRSEmptyMarkerBuilder triangle

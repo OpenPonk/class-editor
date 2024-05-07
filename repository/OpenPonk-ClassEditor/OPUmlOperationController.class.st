@@ -2,18 +2,20 @@
 I am a controller for Operation.
 "
 Class {
-	#name : #OPUmlOperationController,
-	#superclass : #OPUmlClassItemController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlOperationController',
+	#superclass : 'OPUmlClassItemController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlOperationController >> addDiagramElementToOwner [
 
 	self diagramElementOwner addOperation: diagramElement
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlOperationController >> createModelIn: aParentModel [
 	self
 		model:
@@ -24,7 +26,7 @@ OPUmlOperationController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlOperationController >> descriptionIsAbstract [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -34,31 +36,31 @@ OPUmlOperationController >> descriptionIsAbstract [
 		yourself
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlOperationController >> diagramElementClass [
 
 	^ OPUmlOperationLabel
 ]
 
-{ #category : #'diagram elements' }
+{ #category : 'diagram elements' }
 OPUmlOperationController >> diagramElementOwner [
 
 	^ (diagramController controllerForModel: model owningClass)
 		  diagramElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlOperationController >> modelClass [
 	^ OPUMLOperation
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlOperationController >> placeholderName [
 
 	^ 'operation'
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlOperationController >> removeDiagramElement [
 
 	self diagramElement ifNil: [ ^ self ].

@@ -1,19 +1,21 @@
 Class {
-	#name : #OPUmlParameterNotationTest,
-	#superclass : #TestCase,
+	#name : 'OPUmlParameterNotationTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'parameter'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#category : 'OpenPonk-ClassEditor-Tests',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlParameterNotationTest >> testParameter [
 	(parameter := OPUMLParameter new) name: 'param'.
 	self assert: parameter notationString equals: 'param'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlParameterNotationTest >> testParameterDirectionIn [
 	(parameter := OPUMLParameter new)
 		name: 'param';
@@ -21,7 +23,7 @@ OPUmlParameterNotationTest >> testParameterDirectionIn [
 	self assert: parameter notationString equals: 'param'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlParameterNotationTest >> testParameterDirectionInOut [
 	(parameter := OPUMLParameter new)
 		name: 'param';
@@ -29,7 +31,7 @@ OPUmlParameterNotationTest >> testParameterDirectionInOut [
 	self assert: parameter notationString equals: 'inout param'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlParameterNotationTest >> testParameterDirectionOut [
 	(parameter := OPUMLParameter new)
 		name: 'param';
@@ -37,13 +39,13 @@ OPUmlParameterNotationTest >> testParameterDirectionOut [
 	self assert: parameter notationString equals: 'out param'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlParameterNotationTest >> testParameterName [
 	(parameter := OPUMLParameter new) name: 'param'.
 	self assert: parameter notationString equals: 'param'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlParameterNotationTest >> testParameterTypeExpression [
 	(parameter := OPUMLParameter new)
 		name: 'param';
@@ -51,7 +53,7 @@ OPUmlParameterNotationTest >> testParameterTypeExpression [
 	self assert: parameter notationString equals: 'param : String'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlParameterNotationTest >> testParameterTypeExpressionWithMultiplicity [
 	(parameter := OPUMLParameter new)
 		name: 'param';

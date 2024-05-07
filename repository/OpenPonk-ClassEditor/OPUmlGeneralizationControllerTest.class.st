@@ -1,36 +1,38 @@
 Class {
-	#name : #OPUmlGeneralizationControllerTest,
-	#superclass : #OPUmlRelationshipControllerTest,
+	#name : 'OPUmlGeneralizationControllerTest',
+	#superclass : 'OPUmlRelationshipControllerTest',
 	#instVars : [
 		'parent',
 		'child'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationControllerTest >> controllerClass [
 	^ OPUmlGeneralizationController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlGeneralizationControllerTest >> diagramElementClass [
 
 	^ OPUmlGeneralizationShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationControllerTest >> modelClass [
 	^ OPUMLGeneralization
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlGeneralizationControllerTest >> setUp [
 	super setUp.
 	self setUpGeneralization
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlGeneralizationControllerTest >> setUpGeneralization [
 	parent := OPUMLClass new name: 'Parent'.
 	child := OPUMLClass new name: 'Child'.
@@ -40,7 +42,7 @@ OPUmlGeneralizationControllerTest >> setUpGeneralization [
 		specific: child
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlGeneralizationControllerTest >> testClassBeTarget [
 	| sourceController targetController |
 	sourceController := diagramController
@@ -57,13 +59,13 @@ OPUmlGeneralizationControllerTest >> testClassBeTarget [
 	self assert: controller model general equals: targetController model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlGeneralizationControllerTest >> testDescriptionName [
 
 	self assert: controller descriptionName equals: nil
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 
 	diagramController
@@ -75,7 +77,7 @@ OPUmlGeneralizationControllerTest >> testRemoveFromDiagram [
 	self assert: diagramController canvas edges asArray equals: #(  )
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 	| gs |
 	diagramController
@@ -96,7 +98,7 @@ OPUmlGeneralizationControllerTest >> testRemoveFromModel [
 	self deny: (diagramController model packagedElements includes: gs)
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlGeneralizationControllerTest >> testShowInDiagram [
 
 	diagramController

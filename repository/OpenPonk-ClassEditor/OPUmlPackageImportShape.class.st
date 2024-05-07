@@ -2,22 +2,24 @@
 I represent a import line from importing to imported package.
 "
 Class {
-	#name : #OPUmlPackageImportShape,
-	#superclass : #OPUmlEdge,
+	#name : 'OPUmlPackageImportShape',
+	#superclass : 'OPUmlEdge',
 	#instVars : [
 		'nameLabel',
 		'constraints'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlPackageImportShape >> headMarker [
 
 	^ OPRSMarkerBuilder arrow
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlPackageImportShape >> initialize [
 
 	super initialize.

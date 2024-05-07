@@ -2,35 +2,37 @@
 I am a controller for Package/Model/Profile
 "
 Class {
-	#name : #OPUmlPackageController,
-	#superclass : #OPUmlElementController,
+	#name : 'OPUmlPackageController',
+	#superclass : 'OPUmlElementController',
 	#instVars : [
 		'modelClass'
 	],
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 OPUmlPackageController >> beForModel [
 	modelClass := OPUMLPackage
 ]
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 OPUmlPackageController >> beForPackage [
 	modelClass := OPUMLPackage
 ]
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 OPUmlPackageController >> beForProfile [
 	modelClass := OPUMLProfile
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlPackageController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlPackageImportController
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlPackageController >> canBeTargetFor: aController [
 
 	^ (aController isKindOf: OPUmlPackageImportController) or: [ 
@@ -39,7 +41,7 @@ OPUmlPackageController >> canBeTargetFor: aController [
 				  aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlPackageController >> createModelIn: aParentModel [
 	| newModel names |
 	newModel := self modelClass new.
@@ -51,7 +53,7 @@ OPUmlPackageController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageController >> dependentElements [
 	| mainElementTypes |
 	mainElementTypes := {#Class . #Package . #Enumeration . #Profile.
@@ -70,13 +72,13 @@ OPUmlPackageController >> dependentElements [
 						select: [ :eachImport | eachImport importingNamespace = self model ] ])
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlPackageController >> diagramElementClass [
 
 	^ OPUmlPackageShape
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlPackageController >> hookDiagramElement [
 
 	super hookDiagramElement.
@@ -90,18 +92,18 @@ OPUmlPackageController >> hookDiagramElement [
 			thenSelect: #isNotNil ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlPackageController >> isHideable [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageController >> modelClass [
 	modelClass ifNil: [ self beForPackage ].
 	^ modelClass
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlPackageController >> removeModel [
 	diagramController model packagedElements remove: self model
 ]

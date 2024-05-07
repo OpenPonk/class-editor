@@ -1,19 +1,21 @@
 Class {
-	#name : #OPUmlPropertyNotationTest,
-	#superclass : #TestCase,
+	#name : 'OPUmlPropertyNotationTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'property'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests'
+	#category : 'OpenPonk-ClassEditor-Tests',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testProperty [
 	(property := OPUMLProperty new) name: 'op'.
 	self assert: property notationString equals: 'op'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyDefaultValue [
 	(property := OPUMLProperty new)
 		name: 'op';
@@ -21,7 +23,7 @@ OPUmlPropertyNotationTest >> testPropertyDefaultValue [
 	self assert: property notationString equals: 'op = abc'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyDerived [
 	(property := OPUMLProperty new)
 		name: 'op';
@@ -29,7 +31,7 @@ OPUmlPropertyNotationTest >> testPropertyDerived [
 	self assert: property notationString equals: '/op'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyModifiers [
 	(property := OPUMLProperty new)
 		name: 'op';
@@ -38,13 +40,13 @@ OPUmlPropertyNotationTest >> testPropertyModifiers [
 	self assert: property notationString equals: 'op {readOnly, ordered}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyNilName [
 	property := OPUMLProperty new.
 	self assert: property notationString equals: ''
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyType [
 	(property := OPUMLProperty new)
 		name: 'op';
@@ -52,7 +54,7 @@ OPUmlPropertyNotationTest >> testPropertyType [
 	self assert: property notationString equals: 'op : Thing'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyTypeMultiplicity [
 	(property := OPUMLProperty new)
 		name: 'op';
@@ -62,7 +64,7 @@ OPUmlPropertyNotationTest >> testPropertyTypeMultiplicity [
 	self assert: property notationString equals: 'op : Thing[12..*]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyUniqueMultivalued [
 	"isUnique has no semantic effect on non-multivalued element (specs)"
 
@@ -73,7 +75,7 @@ OPUmlPropertyNotationTest >> testPropertyUniqueMultivalued [
 	self assert: property notationString equals: 'op[1..*] {nonunique}'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyUniqueMultivalued2 [
 	"isUnique has no semantic effect on non-multivalued element (specs)"
 
@@ -83,7 +85,7 @@ OPUmlPropertyNotationTest >> testPropertyUniqueMultivalued2 [
 	self assert: property notationString equals: 'op'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyUniqueNonMultivalued [
 	"isUnique has no semantic effect on non-multivalued element (specs)"
 
@@ -93,7 +95,7 @@ OPUmlPropertyNotationTest >> testPropertyUniqueNonMultivalued [
 	self assert: property notationString equals: 'op'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyUniqueNonMultivalued2 [
 	"isUnique has no semantic effect on non-multivalued element (specs)"
 
@@ -103,7 +105,7 @@ OPUmlPropertyNotationTest >> testPropertyUniqueNonMultivalued2 [
 	self assert: property notationString equals: 'op'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyVisibility [
 	(property := OPUMLProperty new)
 		name: 'op';

@@ -8,54 +8,56 @@ I provide a range of examples for Uml Class Diagrams:
 see class-side
 "
 Class {
-	#name : #OPUmlExamples,
-	#superclass : #Object,
-	#category : #'OpenPonk-ClassEditor-Examples'
+	#name : 'OPUmlExamples',
+	#superclass : 'Object',
+	#category : 'OpenPonk-ClassEditor-Examples',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Examples'
 }
 
-{ #category : #examples }
+{ #category : 'examples' }
 OPUmlExamples class >> exampleEmptyPackage [
 
 	^ (OPProject openOnModel: (OPUMLPackage new name: 'Package'))
 		  showAllElementsInAllDiagrams
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 OPUmlExamples class >> exampleEmptyProfile [
 
 	^ (OPProject openOnModel: (OPUMLProfile new name: 'Profile'))
 		  showAllElementsInAllDiagrams
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 OPUmlExamples class >> exampleGeneralizationSets [
 
 	^ (OPProject openOnModel: self new generalizationSets)
 		  showAllElementsInAllDiagrams
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 OPUmlExamples class >> exampleRichClass [
 
 	^ (OPProject openOnModel: self new modelWithRichClass)
 		  showAllElementsInAllDiagrams
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 OPUmlExamples class >> exampleSimpleAssociation [
 
 	^ (OPProject openOnModel: self new simpleAssociation)
 		  showAllElementsInAllDiagrams
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 OPUmlExamples class >> exampleSimpleGeneralization [
 
 	^ (OPProject openOnModel: self new simpleGeneralization)
 		  showAllElementsInAllDiagrams
 ]
 
-{ #category : #menu }
+{ #category : 'menu' }
 OPUmlExamples class >> menuCommandOn: aBuilder [
 
 	<worldMenu>
@@ -100,7 +102,7 @@ OPUmlExamples class >> menuCommandOn: aBuilder [
 				action: [ OPUMLXMISpecsStorage umlMetamodel inspect ] ]
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 OPUmlExamples class >> notUsedExampleCommonStructure [
 
 	| uml cs |
@@ -110,19 +112,19 @@ OPUmlExamples class >> notUsedExampleCommonStructure [
 	^ (OPProject openOnModel: cs) showAllElementsInAllDiagrams
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> emptyEnumeration [
 	<gtExample>
 	^ OPUMLEnumeration new name: 'VisibilityKind'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> emptyModel [
 	<gtExample>
 	^ OPUMLPackage new name: 'Empty Model'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> enumerationWithLiterals [
 	<gtExample>
 	| enumeration |
@@ -135,7 +137,7 @@ OPUmlExamples >> enumerationWithLiterals [
 	^ enumeration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> generalizationSets [
 	<gtExample>
 	| model insuredItem house car insuredHouse nonInsuredHouse houseSet insuredSet |
@@ -183,7 +185,7 @@ OPUmlExamples >> generalizationSets [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> modelWithRichClass [
 	<gtExample>
 	| model |
@@ -193,7 +195,7 @@ OPUmlExamples >> modelWithRichClass [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> richClass [
 	<gtExample>
 	| class stateMachine comment enum |
@@ -265,7 +267,7 @@ OPUmlExamples >> richClass [
 	^ class
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> simpleAssociation [
 	<gtExample>
 	| element ownedComment comment owningElement assoc model |
@@ -298,7 +300,7 @@ OPUmlExamples >> simpleAssociation [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExamples >> simpleGeneralization [
 	<gtExample>
 	| cls cls2 model |

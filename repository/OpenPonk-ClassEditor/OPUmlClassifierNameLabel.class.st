@@ -1,25 +1,27 @@
 Class {
-	#name : #OPUmlClassifierNameLabel,
-	#superclass : #OPUmlNameLabel,
+	#name : 'OPUmlClassifierNameLabel',
+	#superclass : 'OPUmlNameLabel',
 	#instVars : [
 		'labeled'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierNameLabel >> defaultFontSize [
 
 	^ 11
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierNameLabel >> defaultText [
 
 	^ (self modelElement name ifNil: [ ' ' ]) ifEmpty: [ ' ' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierNameLabel >> emphasis [
 
 	| emphasis |
@@ -29,13 +31,13 @@ OPUmlClassifierNameLabel >> emphasis [
 	^ emphasis
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierNameLabel >> isPositionableByUser [
 
 	^ false
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlClassifierNameLabel >> removeRender [
 
 	(self owningElement roassalShape ifNil: [ ^ super removeRender ]) 
@@ -43,7 +45,7 @@ OPUmlClassifierNameLabel >> removeRender [
 	super removeRender
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassifierNameLabel >> renderBasicShape [
 
 	| targetShape |
@@ -61,13 +63,13 @@ OPUmlClassifierNameLabel >> renderBasicShape [
 	^ labeled labelShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierNameLabel >> roassalShape [
 
 	^ labeled
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 OPUmlClassifierNameLabel >> translateBy: aPosition [
 
 	"ignore it - I can position myself automatically"
@@ -75,7 +77,7 @@ OPUmlClassifierNameLabel >> translateBy: aPosition [
 	
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 OPUmlClassifierNameLabel >> translateTo: aPosition [
 
 	"ignore it - I can position myself automatically"
@@ -83,7 +85,7 @@ OPUmlClassifierNameLabel >> translateTo: aPosition [
 	
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlClassifierNameLabel >> updateRenderFromModel [
 
 	super updateRenderFromModel.

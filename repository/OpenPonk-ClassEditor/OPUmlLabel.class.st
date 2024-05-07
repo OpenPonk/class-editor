@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlLabel,
-	#superclass : #OPLabel,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlLabel',
+	#superclass : 'OPLabel',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlLabel class >> priority [
 	^ 3
 ]

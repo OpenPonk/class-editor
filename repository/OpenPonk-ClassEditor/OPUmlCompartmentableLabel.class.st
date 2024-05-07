@@ -1,16 +1,18 @@
 Class {
-	#name : #OPUmlCompartmentableLabel,
-	#superclass : #OPUmlCompartmentableContent,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlCompartmentableLabel',
+	#superclass : 'OPUmlCompartmentableContent',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCompartmentableLabel >> extent [
 
 	^ self ownedElements anyOne extent
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableLabel >> renderBasicShape [
 
 	^ RSBox new
@@ -18,7 +20,7 @@ OPUmlCompartmentableLabel >> renderBasicShape [
 		  yourself
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCompartmentableLabel >> renderShapeDetails [
 
 	super renderShapeDetails.
@@ -30,7 +32,7 @@ OPUmlCompartmentableLabel >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlCompartmentableLabel >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle center x

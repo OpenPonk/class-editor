@@ -1,30 +1,32 @@
 Class {
-	#name : #OPUmlAttributeControllerTest,
-	#superclass : #OPUmlElementControllerTest,
+	#name : 'OPUmlAttributeControllerTest',
+	#superclass : 'OPUmlElementControllerTest',
 	#instVars : [
 		'owningController',
 		'owningClass'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAttributeControllerTest >> controllerClass [
 	^ OPUmlAttributeController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlAttributeControllerTest >> diagramElementClass [
 
 	^ OPUmlAttributeLabel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAttributeControllerTest >> modelClass [
 	^ OPUMLProperty
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlAttributeControllerTest >> setUp [
 
 	super setUp.
@@ -33,14 +35,14 @@ OPUmlAttributeControllerTest >> setUp [
 	owningController := OPUmlClassController new model: owningClass
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlAttributeControllerTest >> testCanClassBeTarget [
 	| classController |
 	classController := OPUmlClassController new.
 	self assert: (classController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlAttributeControllerTest >> testClassBeTarget [
 
 	| classController |
@@ -55,7 +57,7 @@ OPUmlAttributeControllerTest >> testClassBeTarget [
 		equals: { controller model }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testCreateDiagramElement [
 
 	diagramController showWithoutDependentInDiagramModel: owningClass.
@@ -63,7 +65,7 @@ OPUmlAttributeControllerTest >> testCreateDiagramElement [
 	super testCreateDiagramElement
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
 
 	| accessor |
@@ -76,7 +78,7 @@ OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
 	self deny: (accessor read: controller)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
 
 	| accessor |
@@ -89,7 +91,7 @@ OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
 	self deny: model isDerived
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptions [
 	| container |
 	controller
@@ -101,7 +103,7 @@ OPUmlAttributeControllerTest >> testDescriptions [
 		assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testDoesNotShowNilName [
 
 	model name: nil.
@@ -112,7 +114,7 @@ OPUmlAttributeControllerTest >> testDoesNotShowNilName [
 	self assert: controller diagramElement text isNotEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testDoesShowsBlankLabel [
 
 	model name: ' '.
@@ -124,7 +126,7 @@ OPUmlAttributeControllerTest >> testDoesShowsBlankLabel [
 	self assert: controller roassalShape width > 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testDoesShowsLabel [
 
 	model name: 'attribute'.
@@ -136,7 +138,7 @@ OPUmlAttributeControllerTest >> testDoesShowsLabel [
 	self assert: controller roassalShape width > 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testDoesShowsNilLabel [
 
 	model name: nil.
@@ -148,7 +150,7 @@ OPUmlAttributeControllerTest >> testDoesShowsNilLabel [
 	self assert: controller roassalShape width > 5
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlAttributeControllerTest >> testRemoveFromView [
 	| class compartment prop |
 	class := OPUMLClass new.
@@ -161,7 +163,7 @@ OPUmlAttributeControllerTest >> testRemoveFromView [
 	self assert: compartment ownedElements asArray equals: #()
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testWriteMultiplicity [
 	| prop |
 	prop := OPUMLProperty new.
@@ -170,7 +172,7 @@ OPUmlAttributeControllerTest >> testWriteMultiplicity [
 	self assert: prop upperBound value equals: '*'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAttributeControllerTest >> testWriteMultiplicityMany [
 	| prop pairs |
 	prop := OPUMLProperty new.

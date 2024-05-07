@@ -1,15 +1,17 @@
 Class {
-	#name : #OPUmlCompartmentableShapeTest,
-	#superclass : #OPAbstractUmlShapeTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Shapes'
+	#name : 'OPUmlCompartmentableShapeTest',
+	#superclass : 'OPAbstractUmlShapeTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Shapes'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlCompartmentableShapeTest >> shapeClass [
 	^ OPUmlCompartmentableShape
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testEmptyRoassalShape [
 
 	| roassalShape |
@@ -18,7 +20,7 @@ OPUmlCompartmentableShapeTest >> testEmptyRoassalShape [
 	self assert: roassalShape class equals: RSBox
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testFigures [
 
 	shape renderIn: RSCanvas new.
@@ -26,7 +28,7 @@ OPUmlCompartmentableShapeTest >> testFigures [
 	self assert: shape canvas nodes isNotEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testFigures1 [
 
 	| lbl |
@@ -35,7 +37,7 @@ OPUmlCompartmentableShapeTest >> testFigures1 [
 	self assert: shape ownedElements asArray equals: { lbl }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testFigures2 [
 
 	| lbl comp1 |
@@ -49,7 +51,7 @@ OPUmlCompartmentableShapeTest >> testFigures2 [
 				comp1 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testFigures3 [
 
 	| lbl comp compLbl |
@@ -62,7 +64,7 @@ OPUmlCompartmentableShapeTest >> testFigures3 [
 		hasSameElements: (Array with: lbl with: comp)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testRemoveExtentChanged [
 
 	| compartment compLbl canvas fullExtent labelContainer |
@@ -82,7 +84,7 @@ OPUmlCompartmentableShapeTest >> testRemoveExtentChanged [
 	self assert: shape extent y < fullExtent y
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testRemoveFromOwnership [
 
 	| lbl |
@@ -94,7 +96,7 @@ OPUmlCompartmentableShapeTest >> testRemoveFromOwnership [
 	self assert: shape ownedElements isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
 
 	| canvas |
@@ -104,7 +106,7 @@ OPUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
 	self assert: canvas nodes asArray equals: #(  )
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCompartmentableShapeTest >> testRemoveOwnedElement [
 
 	| lbl |

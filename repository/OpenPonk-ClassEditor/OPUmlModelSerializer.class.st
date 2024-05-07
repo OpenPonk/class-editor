@@ -2,40 +2,42 @@
 I serialize UML models into XMI, and the diagrams into STON.
 "
 Class {
-	#name : #OPUmlModelSerializer,
-	#superclass : #OPModelSerializer,
-	#category : #'OpenPonk-ClassEditor-Persistence'
+	#name : 'OPUmlModelSerializer',
+	#superclass : 'OPModelSerializer',
+	#category : 'OpenPonk-ClassEditor-Persistence',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Persistence'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlModelSerializer class >> exportVersion [
 
 	^ 1
 ]
 
-{ #category : #formatting }
+{ #category : 'formatting' }
 OPUmlModelSerializer class >> formatName [
 
 	^ #'uml-xmi'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlModelSerializer class >> minImportVersion [
 
 	^ 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlModelSerializer >> formatName [
 	^ 'xmi'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlModelSerializer >> materializeModelFrom: aStream [
 	^ OPUMLXMIReader read: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlModelSerializer >> serializeModel: aModel [
 
 	self
@@ -52,7 +54,7 @@ OPUmlModelSerializer >> serializeModel: aModel [
 	^ OPUMLXMIWriter toString: aModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlModelSerializer >> serializeModel: aModel to: aStream [
 	^ aStream << (self serializeModel: aModel)
 ]

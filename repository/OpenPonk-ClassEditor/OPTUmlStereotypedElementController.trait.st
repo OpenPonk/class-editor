@@ -1,11 +1,13 @@
 Trait {
-	#name : #OPTUmlStereotypedElementController,
+	#name : 'OPTUmlStereotypedElementController',
 	#traits : 'OPTUmlBaseController',
 	#classTraits : 'OPTUmlBaseController classTrait',
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPTUmlStereotypedElementController >> applyStereotype: aStereotypeModel to: aModel [
 	(aModel appliedStereotypes
 		anySatisfy: [ :each | each umlClassName = aStereotypeModel umlClassName ])
@@ -14,7 +16,7 @@ OPTUmlStereotypedElementController >> applyStereotype: aStereotypeModel to: aMod
 	aModel applyStereotype: aStereotypeModel implementationClass new
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPTUmlStereotypedElementController >> descriptionStereotypeContent [
 
 	| names stereotypes |
@@ -48,20 +50,20 @@ OPTUmlStereotypedElementController >> descriptionStereotypeContent [
 		  yourself
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPTUmlStereotypedElementController >> removeStereotypesIn: aModel [
 	[ aModel appliedStereotypes isNotEmpty ]
 		whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPTUmlStereotypedElementController >> stereotypeMagritteDescription [
 	| descriptions |
 	descriptions := OPUmlStereotypeDescriptions new controller: self.
 	^ descriptions descriptions
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPTUmlStereotypedElementController >> stereotypesIn: aProfile for: aModel [
 
 	^ (aProfile ownedStereotype reject: #isAbstract) select: [ :stereo | 

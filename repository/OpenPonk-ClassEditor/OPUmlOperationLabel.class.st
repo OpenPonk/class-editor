@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlOperationLabel,
-	#superclass : #OPUmlClassItemLabel,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlOperationLabel',
+	#superclass : 'OPUmlClassItemLabel',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #emphasis }
+{ #category : 'emphasis' }
 OPUmlOperationLabel >> emphasis [
 
 	| emphasis |

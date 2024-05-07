@@ -1,26 +1,28 @@
 Class {
-	#name : #OPUmlClassControllerTest,
-	#superclass : #OPUmlClassifierControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlClassControllerTest',
+	#superclass : 'OPUmlClassifierControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassControllerTest >> controllerClass [
 	^ OPUmlClassController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlClassControllerTest >> diagramElementClass [
 
 	^ OPUmlClassShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassControllerTest >> modelClass [
 	^ OPUMLClass
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 
 	| operation operationController nameLabelRectangle operationLabelRectangle classRectangle elements |
@@ -67,7 +69,7 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 		  description: 'Name of operation is not below name of class'
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlClassControllerTest >> testRemoveWithAttribute [
 
 	| class |
@@ -80,7 +82,7 @@ OPUmlClassControllerTest >> testRemoveWithAttribute [
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlClassControllerTest >> testShowClassWithAttributeInDiagram [
 
 	| prop |

@@ -1,12 +1,14 @@
 Class {
-	#name : #OPUmlEdge,
-	#superclass : #OPEdge,
+	#name : 'OPUmlEdge',
+	#superclass : 'OPEdge',
 	#traits : 'OPTColoredAsStroke',
 	#classTraits : 'OPTColoredAsStroke classTrait',
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEdge >> colorMarker: aMarker [
 
 	aMarker ifNil: [ ^ aMarker ].
@@ -15,13 +17,13 @@ OPUmlEdge >> colorMarker: aMarker [
 	^ aMarker
 ]
 
-{ #category : #'Roassal2 - accessing' }
+{ #category : 'Roassal2 - accessing' }
 OPUmlEdge >> headMarker [
 
 	^ nil
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlEdge >> renderBasicShape [
 
 	^ OPRSPolyline new
@@ -34,7 +36,7 @@ OPUmlEdge >> renderBasicShape [
 		  yourself
 ]
 
-{ #category : #'Roassal2 - manipulation' }
+{ #category : 'Roassal2 - manipulation' }
 OPUmlEdge >> switchSourceAndTarget [
 
 	| originalSource originalFrom originalTo memberEnds |
@@ -55,13 +57,13 @@ OPUmlEdge >> switchSourceAndTarget [
 	self roassalShape update.
 ]
 
-{ #category : #'Roassal2 - accessing' }
+{ #category : 'Roassal2 - accessing' }
 OPUmlEdge >> tailMarker [
 
 	^ nil
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlEdge >> updateRenderFromModel [
 
 	super updateRenderFromModel.

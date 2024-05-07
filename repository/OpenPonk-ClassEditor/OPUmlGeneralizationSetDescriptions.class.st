@@ -2,33 +2,35 @@
 I am a description proxy for a generalization set and I collaborate with GeneralizationController.
 "
 Class {
-	#name : #OPUmlGeneralizationSetDescriptions,
-	#superclass : #Object,
+	#name : 'OPUmlGeneralizationSetDescriptions',
+	#superclass : 'Object',
 	#instVars : [
 		'set',
 		'controller'
 	],
-	#category : #'OpenPonk-ClassEditor-Forms'
+	#category : 'OpenPonk-ClassEditor-Forms',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Forms'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlGeneralizationSetDescriptions >> = aDescription [
 	self species = aDescription species
 		ifFalse: [ ^ false ].
 	^ self set = aDescription set
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> controller [
 	^ controller
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> controller: anObject [
 	controller := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> descriptionAccessor: aSymbol [
 
 	^ MAPluggableAccessor
@@ -43,7 +45,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionAccessor: aSymbol [
 						  ctrl diagramElement modelChanged ] ] ]
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionIsCovering [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -53,7 +55,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionIsCovering [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionIsDisjoint [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -63,7 +65,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionIsDisjoint [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionName [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -73,7 +75,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionName [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionVisibility [
 	<magritteDescription>
 	^ MASingleOptionDescription new
@@ -91,12 +93,12 @@ OPUmlGeneralizationSetDescriptions >> descriptionVisibility [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlGeneralizationSetDescriptions >> hash [
 	^ super hash bitXor: set hash
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> initializeFor: aGeneralizationController [
 	| dialog listPresenter allElements setsToDisplay |
 	self controller: aGeneralizationController.
@@ -150,12 +152,12 @@ OPUmlGeneralizationSetDescriptions >> initializeFor: aGeneralizationController [
 	self set: dialog result value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> set [
 	^ set
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> set: aGeneralizationSet [
 	set := aGeneralizationSet
 ]

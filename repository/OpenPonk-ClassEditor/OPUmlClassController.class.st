@@ -2,12 +2,14 @@
 I am a controller for a Class(ifier)
 "
 Class {
-	#name : #OPUmlClassController,
-	#superclass : #OPUmlClassifierController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlClassController',
+	#superclass : 'OPUmlClassifierController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassController >> adornments [
 
 	^ {
@@ -36,7 +38,7 @@ OPUmlClassController >> adornments [
 		   tool selectedSourceControllers: { self } ]) }
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassController >> buildAbstractEditorForm: aForm [
 	(aForm addCheckbox: 'Is Abstract')
 		state: self model isAbstract;
@@ -45,14 +47,14 @@ OPUmlClassController >> buildAbstractEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlClassController >> canBeSourceFor: aController [
 	^ (aController isKindOf: OPUmlGeneralizationController)
 		| (super canBeSourceFor: aController)
 		| (aController isKindOf: OPUmlExtensionController)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlClassController >> canBeTargetFor: aController [
 	^ (aController isKindOf: OPUmlAttributeController)
 		| (aController isKindOf: OPUmlOperationController)
@@ -61,7 +63,7 @@ OPUmlClassController >> canBeTargetFor: aController [
 		| (aController isKindOf: OPUmlExtensionController)
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassController >> createAdornmentsBy: builder [
 
 	self
@@ -70,7 +72,7 @@ OPUmlClassController >> createAdornmentsBy: builder [
 		createGeneralizationAdornmentBy: builder
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassController >> createAssociationAdornmentBy: builder [
 
 	builder addIconForm: OPUmlIcons directedAssociationIcon action: [
@@ -82,7 +84,7 @@ OPUmlClassController >> createAssociationAdornmentBy: builder [
 		tool selectedControllers: { self } ]
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassController >> createAttributeAdornmentBy: builder [
 
 	builder addIconForm: OPUmlIcons attributeIcon action: [
@@ -97,7 +99,7 @@ OPUmlClassController >> createAttributeAdornmentBy: builder [
 		tool selectedControllers: { self } ]
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassController >> createGeneralizationAdornmentBy: builder [
 
 	builder addIconForm: OPUmlIcons generalizationIcon action: [
@@ -109,7 +111,7 @@ OPUmlClassController >> createGeneralizationAdornmentBy: builder [
 		tool selectedControllers: { self } ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassController >> dependentElements [
 
 	| ownGeneralizations generalizationsFromSets otherClassesGeneralizations |
@@ -143,7 +145,7 @@ OPUmlClassController >> dependentElements [
 	  , generalizationsFromSets , otherClassesGeneralizations
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassController >> descriptionIsAbstract [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -153,31 +155,31 @@ OPUmlClassController >> descriptionIsAbstract [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassController >> descriptionStereotype [
 
 	<magritteDescription>
 	^ self descriptionStereotypeContent
 ]
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassController >> diagramElementClass [
 
 	^ OPUmlClassShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassController >> elementsToShowInside [
 
 	^ model ownedOperations asSet , model ownedAttributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassController >> modelClass [
 	^ OPUMLClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassController >> modelClassName [
 
 	^ 'Class'

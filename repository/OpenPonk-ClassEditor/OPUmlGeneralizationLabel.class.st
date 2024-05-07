@@ -1,16 +1,18 @@
 Class {
-	#name : #OPUmlGeneralizationLabel,
-	#superclass : #OPUmlEdgeLabel,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlGeneralizationLabel',
+	#superclass : 'OPUmlEdgeLabel',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlGeneralizationLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationLabel >> defaultText [
 
 	| labels |
@@ -39,13 +41,13 @@ OPUmlGeneralizationLabel >> defaultText [
 	^ labels joinUsing: String cr
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlGeneralizationLabel >> showIncomplete [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlGeneralizationLabel >> showOverlapping [
 
 	^ false

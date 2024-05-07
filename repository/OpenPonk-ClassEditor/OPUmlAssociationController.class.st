@@ -2,17 +2,19 @@
 I am a controller for Association
 "
 Class {
-	#name : #OPUmlAssociationController,
-	#superclass : #OPUmlRelationshipController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlAssociationController',
+	#superclass : 'OPUmlRelationshipController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlAssociationController >> canSwitchSourceAndTarget [
 	^ self model isNotNil and: [ self model memberEnds size = 2 ]
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlAssociationController >> createModelIn: aClass [
 
 	| sourceProp targetProp |
@@ -36,7 +38,7 @@ OPUmlAssociationController >> createModelIn: aClass [
 	^ model
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
 
 	<magritteDescription>
@@ -53,7 +55,7 @@ OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
 	^ description
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAssociationController >> descriptionIsDerived [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -63,13 +65,13 @@ OPUmlAssociationController >> descriptionIsDerived [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAssociationController >> descriptionSeparator [
 	<magritteDescription>
 	^ MAPriorityContainer new priority: 9
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAssociationController >> descriptionSourceEnd [
 	<magritteDescription>
 	^ MAPriorityContainer new
@@ -80,14 +82,14 @@ OPUmlAssociationController >> descriptionSourceEnd [
 				labelPrefix: 'Source ') magritteDescription
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAssociationController >> descriptionStereotype [
 
 	<magritteDescription>
 	^ self descriptionStereotypeContent
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlAssociationController >> descriptionTargetEnd [
 	<magritteDescription>
 	^ MAPriorityContainer new
@@ -98,28 +100,28 @@ OPUmlAssociationController >> descriptionTargetEnd [
 				labelPrefix: 'Target ') magritteDescription
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlAssociationController >> diagramElementClass [
 
 	^ OPUmlAssociationShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationController >> modelSource [
 	^ model memberEnds first type
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationController >> modelTarget [
 	^ model memberEnds second type
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlAssociationController >> removeModel [
 	self diagramController model packagedElements remove: self model.
 	self model memberEnds
@@ -128,7 +130,7 @@ OPUmlAssociationController >> removeModel [
 	self model memberEnds: #()
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlAssociationController >> switchSourceAndTarget [
 
 	| originalModels |
@@ -144,7 +146,7 @@ OPUmlAssociationController >> switchSourceAndTarget [
 	self diagramElement switchSourceAndTarget
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 OPUmlAssociationController >> writeMultiplicityFrom: aString to: aProperty [
 	| values |
 	(aString includesSubstring: '..')
@@ -164,7 +166,7 @@ OPUmlAssociationController >> writeMultiplicityFrom: aString to: aProperty [
 	aProperty upperValue value: values second
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 OPUmlAssociationController >> writeNavigability: isNavigable to: aProperty [
 	isNavigable
 		ifTrue: [ aProperty owningClass: aProperty opposite type.

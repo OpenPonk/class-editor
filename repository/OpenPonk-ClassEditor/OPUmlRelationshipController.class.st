@@ -2,19 +2,21 @@
 I am an abstract controller for relationship-type elements.
 "
 Class {
-	#name : #OPUmlRelationshipController,
-	#superclass : #OPDirectionalRelationshipController,
+	#name : 'OPUmlRelationshipController',
+	#superclass : 'OPDirectionalRelationshipController',
 	#traits : 'OPTUmlStereotypedElementController',
 	#classTraits : 'OPTUmlStereotypedElementController classTrait',
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlRelationshipController >> isHideable [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlRelationshipController >> magritteDescription [
 	| container |
 	container := MAPragmaBuilder for: self.

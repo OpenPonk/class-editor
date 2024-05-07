@@ -1,27 +1,29 @@
 Class {
-	#name : #OPUmlElementControllerTest,
-	#superclass : #OPElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlElementControllerTest',
+	#superclass : 'OPElementControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlElementControllerTest class >> isAbstract [
 	^ self = OPUmlElementControllerTest
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlElementControllerTest >> diagramControllerClass [
 
 	^ OPUmlPackageDiagramController
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlElementControllerTest >> diagramModelClass [
 
 	^ OPUMLPackage
 ]
 
-{ #category : #'tests - model' }
+{ #category : 'tests - model' }
 OPUmlElementControllerTest >> testModelClass [
 	self assert: controller modelClass equals: self modelClass
 ]

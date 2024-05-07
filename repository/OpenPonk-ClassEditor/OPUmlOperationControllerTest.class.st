@@ -1,26 +1,28 @@
 Class {
-	#name : #OPUmlOperationControllerTest,
-	#superclass : #OPUmlElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlOperationControllerTest',
+	#superclass : 'OPUmlElementControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlOperationControllerTest >> controllerClass [
 	^ OPUmlOperationController
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlOperationControllerTest >> diagramElementClass [
 
 	^ OPUmlOperationLabel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlOperationControllerTest >> modelClass [
 	^ OPUMLOperation
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationControllerTest >> testCreateDiagramElement [
 
 	model owningClass: OPUMLClass new.
@@ -29,7 +31,7 @@ OPUmlOperationControllerTest >> testCreateDiagramElement [
 	super testCreateDiagramElement
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlOperationControllerTest >> testRemoveFromView [
 
 	| class compartment op |

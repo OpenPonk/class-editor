@@ -1,6 +1,6 @@
 Class {
-	#name : #OPUmlAssociationShapeTest,
-	#superclass : #OPUmlEdgeTest,
+	#name : 'OPUmlAssociationShapeTest',
+	#superclass : 'OPUmlEdgeTest',
 	#instVars : [
 		'element',
 		'comment',
@@ -8,16 +8,18 @@ Class {
 		'ownedComment',
 		'owningElement'
 	],
-	#category : #'OpenPonk-ClassEditor-Tests - Shapes'
+	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Shapes'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlAssociationShapeTest >> setUp [
 	super setUp.
 	self setUpAssociation
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlAssociationShapeTest >> setUpAssociation [
 	element := OPUMLClass new name: 'Element'.
 	comment := OPUMLClass new name: 'Comment'.
@@ -36,12 +38,12 @@ OPUmlAssociationShapeTest >> setUpAssociation [
 			owningElement}
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 OPUmlAssociationShapeTest >> shapeClass [
 	^ OPUmlAssociationShape
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationShapeTest >> testBothNavigable [
 
 	owningElement
@@ -57,7 +59,7 @@ OPUmlAssociationShapeTest >> testBothNavigable [
 		equals: OPRSMarkerBuilder arrowShape class
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationShapeTest >> testEndComposite [
 
 	ownedComment aggregation: OPUMLAggregationKind composite.
@@ -67,7 +69,7 @@ OPUmlAssociationShapeTest >> testEndComposite [
 		equals: OPRSMarkerBuilder diamondShape class
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationShapeTest >> testEndOneNavigable [
 
 	self
@@ -79,7 +81,7 @@ OPUmlAssociationShapeTest >> testEndOneNavigable [
 		equals: nil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationShapeTest >> testEndShared [
 
 	ownedComment aggregation: OPUMLAggregationKind shared.

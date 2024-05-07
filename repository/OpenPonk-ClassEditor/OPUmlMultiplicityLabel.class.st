@@ -1,13 +1,15 @@
 Class {
-	#name : #OPUmlMultiplicityLabel,
-	#superclass : #OPUmlEdgeLabel,
+	#name : 'OPUmlMultiplicityLabel',
+	#superclass : 'OPUmlEdgeLabel',
 	#instVars : [
 		'atSource'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #'ston-core' }
+{ #category : 'ston-core' }
 OPUmlMultiplicityLabel class >> stonAllInstVarNames [
 
 	"Override to encode my instances using a custom set of instance variables or to define their order."
@@ -15,13 +17,13 @@ OPUmlMultiplicityLabel class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #atSource )
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlMultiplicityLabel >> atSource [
 
 	atSource := true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlMultiplicityLabel >> defaultAnchorConstraintPosition [
 
 	^ (atSource
@@ -29,13 +31,13 @@ OPUmlMultiplicityLabel >> defaultAnchorConstraintPosition [
 		   ifFalse: [ OPRSAnchorConstraintEndDistanceReference ]) distance: 10
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlMultiplicityLabel >> defaultText [
 
 	^ self modelElement notationAssociationMultiplicityRange
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlMultiplicityLabel >> initialize [
 
 	super initialize.

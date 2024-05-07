@@ -1,23 +1,25 @@
 Class {
-	#name : #OPUmlCommentIcon,
-	#superclass : #OPUmlCompartmentableContent,
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#name : 'OPUmlCommentIcon',
+	#superclass : 'OPUmlCompartmentableContent',
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCommentIcon >> bottomPadding [
 
 	^ 2
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCommentIcon >> extentToFitContents [
 
 	^ self extent
 	  + (self rightPadding @ (self topPadding + self bottomPadding))
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCommentIcon >> renderBasicShape [
 
 	^ RSBitmap new
@@ -25,19 +27,19 @@ OPUmlCommentIcon >> renderBasicShape [
 		  yourself
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCommentIcon >> rightPadding [
 
 	^ 5
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 OPUmlCommentIcon >> topPadding [
 
 	^ 2
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlCommentIcon >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle right - (self width / 2)
