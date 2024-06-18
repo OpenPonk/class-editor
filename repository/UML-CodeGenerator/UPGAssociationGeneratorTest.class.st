@@ -1,6 +1,6 @@
 Class {
-	#name : #UPGAssociationGeneratorTest,
-	#superclass : #UPGBaseGeneratorTest,
+	#name : 'UPGAssociationGeneratorTest',
+	#superclass : 'UPGBaseGeneratorTest',
 	#instVars : [
 		'president',
 		'university',
@@ -14,10 +14,12 @@ Class {
 		'noneToMany',
 		'noneToOne'
 	],
-	#category : 'UML-CodeGenerator-Tests'
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UPGAssociationGeneratorTest >> createModel [
 	| associations |
 	model := 'President president --- university University;
@@ -43,7 +45,7 @@ Teacher --> names Name[*];' asClassDiagram.
 		detect: [ :each | (each source name = #Teacher & each target name) = #Name ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGAssociationGeneratorTest >> setUp [
 	super setUp.
 	generator := UPGDirectAssociationGenerator new.
@@ -51,7 +53,7 @@ UPGAssociationGeneratorTest >> setUp [
 	self createModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testAdderManyToMany [
 	self
 		ast: (generator adder: manyToMany targetEnd)
@@ -62,7 +64,7 @@ UPGAssociationGeneratorTest >> testAdderManyToMany [
 	aTeacher addMemberOf: self'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testAdderNoneToMany [
 	self
 		ast: (generator adder: noneToMany targetEnd)
@@ -72,7 +74,7 @@ UPGAssociationGeneratorTest >> testAdderNoneToMany [
 	names add: aName'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testAdderOneToMany [
 	self
 		ast: (generator adder: oneToMany targetEnd)
@@ -83,7 +85,7 @@ UPGAssociationGeneratorTest >> testAdderOneToMany [
 	aDepartment university: self'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testGeneratedManyToOne [
 	generator resolveAssociationEnd: oneToMany targetEnd in: cls.
 	self assert: cls instVarNames equals: #(#departments).
@@ -92,21 +94,21 @@ UPGAssociationGeneratorTest >> testGeneratedManyToOne [
 		equals: #(#departments #departments: #addDepartment: #removeDepartment: #initialize) asSet
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testGeneratedOneToMany [
 	generator resolveAssociationEnd: oneToMany sourceEnd in: cls.
 	self assert: cls instVarNames equals: #(#university).
 	self assert: cls selectors asSet equals: #(#university #university:) asSet
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testGetterOneToOne [
 	self
 		ast: (generator getter: oneToOne targetEnd)
 		equals: 'university "<DCAssociation: ''President president --- university University''>" ^ university'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testRemoverManyToMany [
 	self
 		ast: (generator remover: manyToMany targetEnd)
@@ -117,7 +119,7 @@ UPGAssociationGeneratorTest >> testRemoverManyToMany [
 	aTeacher removeMemberOf: self'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testRemoverNoneToMany [
 	self
 		ast: (generator remover: noneToMany targetEnd)
@@ -127,7 +129,7 @@ UPGAssociationGeneratorTest >> testRemoverNoneToMany [
 	names remove: aName'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testRemoverOneToMany [
 	self
 		ast: (generator remover: oneToMany targetEnd)
@@ -138,7 +140,7 @@ UPGAssociationGeneratorTest >> testRemoverOneToMany [
 	aDepartment university: nil'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testSetterManyToOne [
 	self
 		ast: (generator setter: oneToMany sourceEnd)
@@ -153,17 +155,17 @@ UPGAssociationGeneratorTest >> testSetterManyToOne [
 	university ifNotNil: [ university addDepartment: self ]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testSetterNoneToMany [
 	self ast: (generator setter: noneToMany targetEnd) equals: 'names: aCollection names := aCollection'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testSetterNoneToOne [
 	self ast: (generator setter: noneToOne targetEnd) equals: 'name: aName name := aName'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testSetterOneToMany [
 	self
 		ast: (generator setter: oneToMany targetEnd)
@@ -173,7 +175,7 @@ UPGAssociationGeneratorTest >> testSetterOneToMany [
 	aCollection do: [ :each | self addDepartment: each ]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGAssociationGeneratorTest >> testSetterOneToOne [
 	self
 		ast: (generator setter: oneToOne targetEnd)

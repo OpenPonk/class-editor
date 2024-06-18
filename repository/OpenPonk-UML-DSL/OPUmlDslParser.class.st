@@ -17,37 +17,39 @@ Category[*] categories --- products Product[*];
 ]]]
 "
 Class {
-	#name : #OPUmlDslParser,
-	#superclass : #Object,
-	#category : 'OpenPonk-UML-DSL-Parser'
+	#name : 'OPUmlDslParser',
+	#superclass : 'Object',
+	#category : 'OpenPonk-UML-DSL-Parser',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Parser'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 OPUmlDslParser class >> parse: aString [
 	^ self new parse: aString
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 OPUmlDslParser >> normalize: aString [
 	^ (aString trim lines collect: #trim) joinUsing: String cr
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 OPUmlDslParser >> parse: aString [
 	^ self replaceModel: MooseModel new withStatements: (self parseStatements: aString)
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 OPUmlDslParser >> parseStatements: aString [
 	^ OPUmlDslBuilder new parse: (self normalize: aString)
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 OPUmlDslParser >> parseStatements: aString into: aModel [
 	self replaceModel: aModel withStatements: (self parseStatements: aString)
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 OPUmlDslParser >> replaceModel: aModel withStatements: statements [
 	| classes |
 	classes := (statements select: #isClass thenCollect: [ :each | each name -> each ])

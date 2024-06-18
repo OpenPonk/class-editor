@@ -2,8 +2,8 @@
 I parse a complete DSL text.
 "
 Class {
-	#name : #OPUmlDslBuilder,
-	#superclass : #PPCompositeParser,
+	#name : 'OPUmlDslBuilder',
+	#superclass : 'PPCompositeParser',
 	#instVars : [
 		'classBlock',
 		'statements',
@@ -11,27 +11,29 @@ Class {
 		'umlClassName',
 		'inheritance'
 	],
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#category : 'OpenPonk-UML-DSL-Builders',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Builders'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilder class >> dependencies [
 	^ {OPUmlClassBuilder.
 	OPUmlAssociationBuilder}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilder >> association [
 	^ ((self dependencyAt: OPUmlAssociationBuilder) association , $; asParser)
 		==> [ :nodes | nodes first ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilder >> classBlock [
 	^ (self dependencyAt: OPUmlClassBuilder) classBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilder >> inheritance [
 	^ (umlClassName , ('>>' asParser / 'extends' asParser) trim , umlClassName , $; asParser)
 		==>
@@ -41,12 +43,12 @@ OPUmlDslBuilder >> inheritance [
 				superclass: (FAMIXClass named: nodes third) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilder >> start [
 	^ statements end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilder >> statements [
 	^ (#newline asParser star
 		, (classBlock / association / inheritance separatedBy: #newline asParser plus) withoutSeparators
@@ -54,7 +56,7 @@ OPUmlDslBuilder >> statements [
 		==> [ :nodes | nodes ifNil: [ #() ] ifNotNil: [ nodes second ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilder >> umlClassName [
 	^ (self dependencyAt: OPUmlClassBuilder) dslName ==> [ :nodes | nodes second ]
 ]

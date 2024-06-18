@@ -1,1 +1,1 @@
-Package { #name : #LiveInstanceVisualization }
+Package { #name : 'LiveInstanceVisualization' }

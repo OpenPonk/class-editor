@@ -4,24 +4,26 @@ I am a wizard for configuring code generator from UML to Smalltalk code.
 see class-side
 "
 Class {
-	#name : #OPUmlCodeGeneratorWizard,
-	#superclass : #WizardControl,
+	#name : 'OPUmlCodeGeneratorWizard',
+	#superclass : 'WizardControl',
 	#instVars : [
 		'model'
 	],
 	#classVars : [
 		'LastValues'
 	],
-	#category : 'UML-CodeGenerator-Windows'
+	#category : 'UML-CodeGenerator-Windows',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Windows'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlCodeGeneratorWizard class >> open [
 	<script>
 	^ self new open
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlCodeGeneratorWizard class >> openOn: aModel [
 	<script>
 	^ self new
@@ -29,7 +31,7 @@ OPUmlCodeGeneratorWizard class >> openOn: aModel [
 		open
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlCodeGeneratorWizard >> addAccessorsPartTo: aPane [
 	| defaultValues types |
 	defaultValues := self lastValues.
@@ -54,7 +56,7 @@ OPUmlCodeGeneratorWizard >> addAccessorsPartTo: aPane [
 		associatedTo: #accessorsStyle
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlCodeGeneratorWizard >> addConfigPane [
 	| pane defaultValues types |
 	defaultValues := self lastValues.
@@ -108,7 +110,7 @@ will not be generated, so you can subclass system classes.')
 	self addPane: pane
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 OPUmlCodeGeneratorWizard >> createContextFrom: aDictionary [
 	| context |
 	context := UPGGeneratorContext new.
@@ -135,7 +137,7 @@ OPUmlCodeGeneratorWizard >> createContextFrom: aDictionary [
 	^ context
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 OPUmlCodeGeneratorWizard >> initialize [
 	super initialize.
 	self addConfigPane.
@@ -145,7 +147,7 @@ OPUmlCodeGeneratorWizard >> initialize [
 			self runGeneratorWith: (self createContextFrom: dictionary) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCodeGeneratorWizard >> lastValues [
 	^ LastValues
 		ifNil: [ {#package -> 'Unclassified'.
@@ -157,12 +159,12 @@ OPUmlCodeGeneratorWizard >> lastValues [
 			#initializationType -> #lazy} asDictionary ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCodeGeneratorWizard >> model: aModel [
 	model := aModel
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 OPUmlCodeGeneratorWizard >> runGeneratorWith: aContext [
 	UPGGenerator new
 		context: aContext;

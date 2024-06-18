@@ -2,16 +2,18 @@
 I take code imported to Pharo from VW and try to reengineer class model for it.
 "
 Class {
-	#name : #DCCormasVWImporter,
-	#superclass : #Object,
+	#name : 'DCCormasVWImporter',
+	#superclass : 'Object',
 	#instVars : [
 		'modelName',
 		'shouldMergeInheritances'
 	],
-	#category : 'UML-CodeGenerator-Generators'
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> ensureDefaultValue: aValue fromMethod: aMethod [
 	| attr |
 	attr := aMethod parentType attributes
@@ -28,7 +30,7 @@ DCCormasVWImporter >> ensureDefaultValue: aValue fromMethod: aMethod [
 		defaultValue: (OPFAMIXValueSpecification from: (self stringSpecificationFor: aValue))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> extractDefaultValue: aClass [
 	aClass methods
 		select: [ :each | each name endsWith: '_default' ]
@@ -40,7 +42,7 @@ DCCormasVWImporter >> extractDefaultValue: aClass [
 						ifNotNil: [ :value | self ensureDefaultValue: value fromMethod: each ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> extractDefaultValueFromAccessor: aMethod [
 	| ast |
 	ast := aMethod sourceAnchor pharoEntity ast.
@@ -48,7 +50,7 @@ DCCormasVWImporter >> extractDefaultValueFromAccessor: aMethod [
 		ifNotEmptyDo: [ :nodes | self ensureDefaultValue: nodes first value value fromMethod: aMethod ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> genericTypeFor: aValue [
 	aValue isInteger
 		ifTrue: [ ^ 'Integer' ].
@@ -61,7 +63,7 @@ DCCormasVWImporter >> genericTypeFor: aValue [
 	^ aValue className
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> importFromClasses: aCollection [
 	| model |
 	model := DCCodeToUmlGenerator new importFromClasses: aCollection.
@@ -69,7 +71,7 @@ DCCormasVWImporter >> importFromClasses: aCollection [
 	^ model
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> importFromPackageNamed: aString [
 	| model |
 	model := DCCodeToUmlGenerator new importFromPackageNamed: aString.
@@ -77,7 +79,7 @@ DCCormasVWImporter >> importFromPackageNamed: aString [
 	^ model
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> mergeAttribute: anAttribute in: aClass [
 	aClass methods
 		detect: [ :each | each name = anAttribute name & (each isStatic = anAttribute isStatic) ]
@@ -89,7 +91,7 @@ DCCormasVWImporter >> mergeAttribute: anAttribute in: aClass [
 				ifFound: [ :method | self removeMethod: method from: aClass ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> mergeClass: aClass [
 	self extractDefaultValue: aClass.
 	self removeDefaultValueMethods: aClass.
@@ -100,28 +102,28 @@ DCCormasVWImporter >> mergeClass: aClass [
 		ifTrue: [ self replaceSuperclassWithStereotype: aClass ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> mergeInheritances [
 	shouldMergeInheritances := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DCCormasVWImporter >> modelName [
 	^ modelName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DCCormasVWImporter >> modelName: aString [
 	modelName := aString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> removeDefaultValueMethods: aClass [
 	(aClass methods select: [ :each | each name endsWith: '_default' ])
 		do: [ :each | self removeMethod: each from: aClass ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> removeMetaMethods: aClass [
 	aClass methods
 		detect: [ :each | each name = 'isAbstract' & each isStatic ]
@@ -130,13 +132,13 @@ DCCormasVWImporter >> removeMetaMethods: aClass [
 			self removeMethod: each from: aClass ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> removeMethod: aMethod from: aClass [
 	aMethod removeFromModel.
 	aClass methods remove: aMethod
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> replaceSuperclassWithStereotype: aClass [
 	| parent corePkg |
 	corePkg := #'Cormas-Core'.
@@ -153,7 +155,7 @@ DCCormasVWImporter >> replaceSuperclassWithStereotype: aClass [
 	aClass addStereotype: (OPFAMIXStereotype named: parent name)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> returnNodeFor: aMethod [
 	| ast |
 	ast := aMethod sourceAnchor pharoEntity ast.
@@ -161,7 +163,7 @@ DCCormasVWImporter >> returnNodeFor: aMethod [
 	^ ast body statements last value
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWImporter >> stringSpecificationFor: aValue [
 	(aValue isMemberOf: RBMessageNode)
 		ifTrue: [ ^ aValue receiver name , ' ' , aValue selector ].

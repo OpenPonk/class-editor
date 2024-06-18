@@ -1,10 +1,11 @@
 Class {
-	#name : #LIVSelectableModelElementContextInteraction,
-	#superclass : #RTAbstractContextInteraction,
-	#category : 'LiveInstanceVisualization'
+	#name : 'LIVSelectableModelElementContextInteraction',
+	#superclass : 'RTAbstractContextInteraction',
+	#category : 'LiveInstanceVisualization',
+	#package : 'LiveInstanceVisualization'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 LIVSelectableModelElementContextInteraction >> initializeElement: aView [
 	self assert: [ self presentation notNil ] description: 'The presentation has to be set'.
 	aView elements

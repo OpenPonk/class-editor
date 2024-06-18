@@ -1,14 +1,16 @@
 Class {
-	#name : #LIVInstanceCompositeSpecificationBuilder,
-	#superclass : #Object,
+	#name : 'LIVInstanceCompositeSpecificationBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'specs',
 		'defaultBuilder'
 	],
-	#category : 'LiveInstanceVisualization-Models'
+	#category : 'LiveInstanceVisualization-Models',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Models'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceCompositeSpecificationBuilder class >> exampleSpec [
 | modelDefs history links |
 modelDefs := LIVInstanceCompositeSpecificationBuilder new.
@@ -109,7 +111,7 @@ links uninstall
 "
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVInstanceCompositeSpecificationBuilder >> addSpec: aOneArgBlock [
 	| spec |
 	spec := LIVInstanceSpecificationBuilder new.
@@ -117,19 +119,19 @@ LIVInstanceCompositeSpecificationBuilder >> addSpec: aOneArgBlock [
 	specs add: spec
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceCompositeSpecificationBuilder >> defaultInstanceBuilder [
 	^ LIVInstanceSpecificationBuilder new name: #hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LIVInstanceCompositeSpecificationBuilder >> initialize [
 	super initialize.
 	specs := OrderedCollection new.
 	defaultBuilder := self defaultInstanceBuilder
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceCompositeSpecificationBuilder >> instanceOn: anObject [
 	^ specs
 		detect: [ :each | anObject isKindOf: each classifier ]

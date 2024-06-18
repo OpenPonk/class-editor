@@ -1,10 +1,12 @@
 Class {
-	#name : #UPGGeneratorTest,
-	#superclass : #UPGBaseGeneratorTest,
-	#category : 'UML-CodeGenerator-Tests'
+	#name : 'UPGGeneratorTest',
+	#superclass : 'UPGBaseGeneratorTest',
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UPGGeneratorTest >> oneToManyAssociation [
 	| source target association |
 	source := FAMIXClass named: 'University'.
@@ -20,7 +22,7 @@ UPGGeneratorTest >> oneToManyAssociation [
 	^ association
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGGeneratorTest >> setUp [
 	super setUp.
 	(generator := UPGGenerator new) context
@@ -29,13 +31,13 @@ UPGGeneratorTest >> setUp [
 	cls := self newClassNamed: #SomethingGenerated
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testClassName [
 	self assert: (generator classNameFor: 'MyObject') equals: 'MyObject'.
 	self assert: (generator classNameFor: 'Object') equals: 'Object'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testClassNameAlwaysPrefixed [
 	generator context prefix: 'XX'.
 	generator context alwaysUsePrefix.
@@ -43,14 +45,14 @@ UPGGeneratorTest >> testClassNameAlwaysPrefixed [
 	self assert: (generator classNameFor: 'Object') equals: 'XXObject'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testClassNamePrefixed [
 	generator context prefix: 'XX'.
 	self assert: (generator classNameFor: 'MyObject') equals: 'XXMyObject'.
 	self assert: (generator classNameFor: 'Object') equals: 'Object'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateAccessors [
 	model := FAMIXAttribute named: 'string' type: (FAMIXClass named: 'String').
 	generator createAttributeFor: model in: cls.
@@ -63,7 +65,7 @@ UPGGeneratorTest >> testCreateAccessors [
 		equals: (RBParser parseMethod: 'string <DCType: #String multiplicity: #(1)> ^ string')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateAccessorsNot [
 	generator context withoutAccessors.
 	model := FAMIXAttribute named: 'string' type: (FAMIXClass named: 'String').
@@ -71,7 +73,7 @@ UPGGeneratorTest >> testCreateAccessorsNot [
 	self assert: cls selectors equals: #()
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateAttribute [
 	model := FAMIXAttribute named: 'string' type: (FAMIXClass named: 'String').
 	generator createAttributeFor: model in: cls.
@@ -79,7 +81,7 @@ UPGGeneratorTest >> testCreateAttribute [
 	self assert: cls classVarNames equals: #()
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateCollectionAccessors [
 	generator context useEagerInitialization.
 	(model := FAMIXAttribute
@@ -113,7 +115,7 @@ UPGGeneratorTest >> testCreateCollectionAccessors [
 				parseMethod: 'initialize super initialize. numbers := OrderedCollection new')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateCollectionAttribute [
 	(model := FAMIXAttribute
 		named: 'numbers'
@@ -125,7 +127,7 @@ UPGGeneratorTest >> testCreateCollectionAttribute [
 	self assert: cls classVarNames equals: #()
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateEmptyClass [
 	| name |
 	name := #SomethingGenerated2.
@@ -138,7 +140,7 @@ UPGGeneratorTest >> testCreateEmptyClass [
 	self assert: cls superclass equals: Object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateMethod [
 	model := factory method: 'method(anArg: String, aCollection: Number[2..5]): Integer'.
 	self flag: 'parser needs support for colon in the selector name'.
@@ -154,7 +156,7 @@ UPGGeneratorTest >> testCreateMethod [
 					'method: anArg in: aCollection <DCMethod: ''method:in:(anArg : String, aCollection : Number[2..5]) : Integer''> "not yet implemented"')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateSetOfClasses [
 	| parentModel childModel classes |
 	parentModel := FAMIXClass named: 'GeneratorParent'.
@@ -167,7 +169,7 @@ UPGGeneratorTest >> testCreateSetOfClasses [
 	self assert: classes second superclass equals: classes first
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateStaticAccessors [
 	model := FAMIXAttribute named: 'something' type: (FAMIXClass named: 'String').
 	model isStatic: true.
@@ -182,7 +184,7 @@ UPGGeneratorTest >> testCreateStaticAccessors [
 		equals: (RBParser parseMethod: 'something <DCType: #String multiplicity: #(1)> ^ something')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateStaticAttribute [
 	(model := FAMIXAttribute named: 'something' type: (FAMIXClass named: 'String'))
 		isStatic: true.
@@ -192,7 +194,7 @@ UPGGeneratorTest >> testCreateStaticAttribute [
 	self assert: cls class instVarNames equals: #(#something)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testCreateSubclassClass [
 	| parentModel childModel parentCls childCls |
 	parentModel := FAMIXClass named: 'GeneratorParent'.
@@ -207,7 +209,7 @@ UPGGeneratorTest >> testCreateSubclassClass [
 	childCls removeFromSystem
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testDefaultValueExpression [
 	(model := FAMIXAttribute named: 'numbers')
 		multiplicity:
@@ -215,7 +217,7 @@ UPGGeneratorTest >> testDefaultValueExpression [
 	self assert: (generator defaultValueExpressionFor: model) equals: nil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testDefaultValueExpression2 [
 	(model := FAMIXAttribute named: 'numbers')
 		multiplicity:
@@ -225,7 +227,7 @@ UPGGeneratorTest >> testDefaultValueExpression2 [
 		equals: 'OrderedCollection new'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testDefaultValueExpression3 [
 	| expression |
 	expression := '#(1 2 3)'.
@@ -235,7 +237,7 @@ UPGGeneratorTest >> testDefaultValueExpression3 [
 	self assert: (generator defaultValueExpressionFor: model) equals: expression
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testDontCreateForeignClass [
 	model := FAMIXClass named: #UPGTestForeign.
 	self assert: model smalltalkClass superclass equals: String.
@@ -247,7 +249,7 @@ UPGGeneratorTest >> testDontCreateForeignClass [
 	self assert: model smalltalkClass instVarNames asArray equals: #(someVar)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testEnsureInitialize [
 	self deny: (cls includesSelector: #initialize).
 	generator ensureHasInitialize: cls.
@@ -256,7 +258,7 @@ UPGGeneratorTest >> testEnsureInitialize [
 	self assert: (cls includesSelector: #initialize)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testGetterPragma [
 	model := FAMIXAttribute named: 'string' type: (FAMIXClass named: 'String').
 	self
@@ -264,7 +266,7 @@ UPGGeneratorTest >> testGetterPragma [
 		equals: (Pragma keyword: #DCType:multiplicity: arguments: #(#String #(1)))
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testGetterPragma2 [
 	(model := FAMIXAttribute named: 'string')
 		multiplicity:
@@ -274,7 +276,7 @@ UPGGeneratorTest >> testGetterPragma2 [
 		equals: (Pragma keyword: #DCType:multiplicity: arguments: #(Object #(0 *)))
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testInitialize [
 	generator addToInitialize: '1 + 1' in: cls.
 	self
@@ -282,7 +284,7 @@ UPGGeneratorTest >> testInitialize [
 		equals: (RBParser parseMethod: 'initialize super initialize. 1 + 1')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testInitializeNoDuplicates [
 	generator addToInitialize: '1 + 1' in: cls.
 	generator addToInitialize: '1 + 1' in: cls.
@@ -291,17 +293,17 @@ UPGGeneratorTest >> testInitializeNoDuplicates [
 		equals: (RBParser parseMethod: 'initialize super initialize. 1 + 1')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testIsForeignClass [
 	self assert: (generator isForeignClass: (FAMIXClass named: #UPGTestForeign))
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testIsForeignClassNot [
 	self deny: (generator isForeignClass: (FAMIXClass named: 'Local'))
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testMethodPragma [
 	model := factory method: 'method(anArg: String, aCollection: Number[2..5]): Integer'.
 	self
@@ -312,7 +314,7 @@ UPGGeneratorTest >> testMethodPragma [
 				arguments: #('method(anArg : String, aCollection : Number[2..5]) : Integer'))
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testModel [
 	model := '
 University {  }
@@ -322,7 +324,7 @@ President {  }
 	generator generateFromModel: model
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testMultiplicity [
 	self
 		assert:
@@ -346,7 +348,7 @@ UPGGeneratorTest >> testMultiplicity [
 		equals: #(1 *)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testOverrideMethod [
 	model := FAMIXMethod named: 'something'.
 	cls compile: 'something "some content"'.
@@ -357,7 +359,7 @@ UPGGeneratorTest >> testOverrideMethod [
 		equals: (RBParser parseMethod: 'something <DCMethod: ''something()''> "not yet implemented"')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testOverrideMethodNot [
 	model := FAMIXMethod named: 'something'.
 	cls compile: 'something "unchanged content"'.
@@ -368,7 +370,7 @@ UPGGeneratorTest >> testOverrideMethodNot [
 		equals: (RBParser parseMethod: 'something "unchanged content"')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGGeneratorTest >> testSortHierarchy [
 	| parent child |
 	model := '
@@ -384,7 +386,7 @@ Child >> Parent;
 		equals: #(Parent Third Child)
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UPGGeneratorTest >> unidirectionalAssociation [
 	| source target association |
 	source := FAMIXClass named: 'SourceSomething'.

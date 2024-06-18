@@ -1,10 +1,12 @@
 Class {
-	#name : #CormasUMLExamples,
-	#superclass : #Object,
-	#category : 'UMLClassEditor-Cormas-Examples'
+	#name : 'CormasUMLExamples',
+	#superclass : 'Object',
+	#category : 'UMLClassEditor-Cormas-Examples',
+	#package : 'UMLClassEditor-Cormas',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUMLExamples class >> createNewModel [
 	| modelName projectName project model |
 	projectName := UIManager default request: 'New model name'.
@@ -22,7 +24,7 @@ CormasUMLExamples class >> createNewModel [
 	OPWorkbench openProject: project
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUMLExamples class >> exampleCormas [
 	| model diagramInterchange |
 	model := self sampleCormas.
@@ -35,7 +37,7 @@ CormasUMLExamples class >> exampleCormas [
 			open
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUMLExamples class >> menuCommandOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #CormasUMLExamples)
@@ -45,7 +47,7 @@ CormasUMLExamples class >> menuCommandOn: aBuilder [
 		action: [ self createNewModel ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUMLExamples class >> sampleCormas [
 	^ OPUmlDslParser
 		parse:

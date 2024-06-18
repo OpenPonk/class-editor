@@ -1,14 +1,16 @@
 Class {
-	#name : #LIVLinkBuilder,
-	#superclass : #Object,
+	#name : 'LIVLinkBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'source',
 		'target'
 	],
-	#category : 'LiveInstanceVisualization-Models'
+	#category : 'LiveInstanceVisualization-Models',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Models'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLinkBuilder >> build [
 	| edge |
 	edge := OPUmlEdge new

@@ -9,8 +9,8 @@ I am parsing string representation of UML class diagram objects like names, attr
 NOTE that the parser currently does NOT support all specified options.
 "
 Class {
-	#name : #OPUmlOperationGrammar,
-	#superclass : #OPUmlPropGrammar,
+	#name : 'OPUmlOperationGrammar',
+	#superclass : 'OPUmlPropGrammar',
 	#instVars : [
 		'parameterList',
 		'returnValue',
@@ -19,42 +19,44 @@ Class {
 		'opName',
 		'parameters'
 	],
-	#category : 'OpenPonk-UML-DSL-Grammar'
+	#category : 'OpenPonk-UML-DSL-Grammar',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Grammar'
 }
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlOperationGrammar >> opName [
 	^ ((symbol , $: asParser) plus ==> [ :nodes | nodes flatten joinUsing: '' ]) / symbol
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlOperationGrammar >> operation [
 	^ prefix, visibility optional , opName , parameters , returnValue optional
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlOperationGrammar >> parameter [
 	^ symbol , (($: asParser , type) ==> [ :nodes | nodes second ]) optional , multiplicity
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlOperationGrammar >> parameterList [
 	^ (parameter separatedBy: $, asParser) withoutSeparators optional
 		==> [ :nodes | nodes ifNil: [ #() ] ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlOperationGrammar >> parameters [
 	^ ($( asParser , parameterList , $) asParser) ==> [ :nodes | nodes second ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlOperationGrammar >> returnValue [
 	^ (Character space asParser star , $: asParser , type , multiplicity)
 		==> [ :nodes | nodes allButFirst: 2 ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlOperationGrammar >> start [
 	^ operation end
 ]

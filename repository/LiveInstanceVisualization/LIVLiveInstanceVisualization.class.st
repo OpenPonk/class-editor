@@ -1,10 +1,11 @@
 Class {
-	#name : #LIVLiveInstanceVisualization,
-	#superclass : #Object,
-	#category : 'LiveInstanceVisualization'
+	#name : 'LIVLiveInstanceVisualization',
+	#superclass : 'Object',
+	#category : 'LiveInstanceVisualization',
+	#package : 'LiveInstanceVisualization'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization class >> wipExample [
 	| m dir f doc els edges v |
 	m
@@ -32,7 +33,7 @@ LIVLiveInstanceVisualization class >> wipExample [
 	v @ RTDraggableView @ RTZoomableView
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 LIVLiveInstanceVisualization >> baseShapeFor: anObject named: aString [
 	| el |
 	el := OPUmlClassifierShape new.
@@ -44,7 +45,7 @@ LIVLiveInstanceVisualization >> baseShapeFor: anObject named: aString [
 	^ el
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization >> isReferenceValue: aValue of: anObject [
 	aValue class package = anObject class package
 		ifTrue: [ ^ true ].
@@ -54,7 +55,7 @@ LIVLiveInstanceVisualization >> isReferenceValue: aValue of: anObject [
 	^ false
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 LIVLiveInstanceVisualization >> labelFor: aKey withText: text [
 	^ OPUmlLabel new
 		text: text;
@@ -62,7 +63,7 @@ LIVLiveInstanceVisualization >> labelFor: aKey withText: text [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization >> limitedShapeFor: anObject [
 	| el comp |
 	el := self baseShapeFor: anObject named: anObject name , ' : ' , anObject class name.
@@ -77,7 +78,7 @@ LIVLiveInstanceVisualization >> limitedShapeFor: anObject [
 	^ el
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization >> referenceShapeFrom: aSourceShape to: aTargetShape [
 	^ OPUmlEdge new
 		source: aSourceShape;
@@ -86,7 +87,7 @@ LIVLiveInstanceVisualization >> referenceShapeFrom: aSourceShape to: aTargetShap
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization >> shapeFor: anObject [
 	| el comp values |
 	el := self baseShapeFor: anObject named: anObject name , ' : ' , anObject class name.
@@ -106,7 +107,7 @@ LIVLiveInstanceVisualization >> shapeFor: anObject [
 	^ el
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization >> shapesFor: anObject [
 	| primaryShape referencedObjects values secondaryShapes references ref refObjects refCollections |
 	values := self valuesOf: anObject.
@@ -132,7 +133,7 @@ LIVLiveInstanceVisualization >> shapesFor: anObject [
 	^ (secondaryShapes , {primaryShape}) -> references
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization >> textFor: aValue of: anObject [
 	aValue class package = anObject class package
 		ifTrue: [ ^ ' = ' , aValue class name ].
@@ -142,7 +143,7 @@ LIVLiveInstanceVisualization >> textFor: aValue of: anObject [
 	^ ' = ' , aValue printString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVLiveInstanceVisualization >> valuesOf: anObject [
 	^ (anObject class instanceVariables sorted
 		collect: [ :each | each -> (anObject instVarNamed: each) ]) asOrderedDictionary

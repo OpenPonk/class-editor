@@ -4,21 +4,23 @@ I am a wizard for importing/reengineering Smalltalk code to UML model.
 self open
 "
 Class {
-	#name : #OPUmlCormasCodeImporterWizard,
-	#superclass : #WizardControl,
+	#name : 'OPUmlCormasCodeImporterWizard',
+	#superclass : 'WizardControl',
 	#instVars : [
 		'model'
 	],
-	#category : 'UMLClassEditor-Cormas-Windows'
+	#category : 'UMLClassEditor-Cormas-Windows',
+	#package : 'UMLClassEditor-Cormas',
+	#tag : 'Windows'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlCormasCodeImporterWizard class >> open [
 	<script>
 	^ self new open
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlCormasCodeImporterWizard class >> openOn: aModel [
 	<script>
 	^ self new
@@ -26,7 +28,7 @@ OPUmlCormasCodeImporterWizard class >> openOn: aModel [
 		open
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlCormasCodeImporterWizard >> addPackagePane [
 	"Here we initialize the first wizard panel, which is related to selecting the packages
 	 that will be added to the model"
@@ -42,7 +44,7 @@ OPUmlCormasCodeImporterWizard >> addPackagePane [
 	self addPane: pane
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 OPUmlCormasCodeImporterWizard >> importWith: aDictionary [
 	| pkgs allClasses filtered newModel |
 	pkgs := (aDictionary at: #packagesSelected) collect: #asPackage.
@@ -53,19 +55,19 @@ OPUmlCormasCodeImporterWizard >> importWith: aDictionary [
 	model announcer announce: (OPModelContentReplaced model: model)
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 OPUmlCormasCodeImporterWizard >> initialize [
 	super initialize.
 	self addPackagePane.
 	self atEndDo: [ :dictionary | self importWith: dictionary ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlCormasCodeImporterWizard >> model: aModel [
 	model := aModel
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 OPUmlCormasCodeImporterWizard >> replaceModel: aModel with: aNewModel [
 	aModel entityStorage removeAll.
 	aModel addAll: aNewModel entityStorage.

@@ -2,8 +2,8 @@
 I provide context and configuration options for the code generator.
 "
 Class {
-	#name : #UPGGeneratorContext,
-	#superclass : #Object,
+	#name : 'UPGGeneratorContext',
+	#superclass : 'Object',
 	#instVars : [
 		'showProgressBar',
 		'overrideMethods',
@@ -16,26 +16,28 @@ Class {
 		'alwaysUsePrefix',
 		'accessorsStyle'
 	],
-	#category : 'UML-CodeGenerator-Generators'
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> accessorsStyle [
 	^ accessorsStyle
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> accessorsStyle: aStyle [
 	self assert: [ #(simple direct fame) includes: aStyle ].
 	accessorsStyle := aStyle
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> alwaysUsePrefix [
 	alwaysUsePrefix := true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UPGGeneratorContext >> defaultOptions [
 	self package: #Unclassified.
 	self prefix: ''.
@@ -47,85 +49,85 @@ UPGGeneratorContext >> defaultOptions [
 	self useLazyInitialization
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> doNotOverrideMethods [
 	overrideMethods := false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UPGGeneratorContext >> initialize [
 	super initialize.
 	self defaultOptions
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> overrideMethods [
 	"Should existing methods be overriden?"
 
 	overrideMethods := true
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> package [
 	^ package
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> package: aString [
 	"Name of the package/category where the classes should be placed"
 
 	package := aString
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> prefix [
 	^ prefix
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> prefix: aString [
 	"Prefix all generated classes with aString"
 
 	prefix := aString
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> shouldAddAccessors [
 	^ generateAccessors
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> shouldAlwaysUsePrefix [
 	^ alwaysUsePrefix
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> shouldOverrideMethods [
 	^ overrideMethods
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> shouldShowProgressBar [
 	^ showProgressBar
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> shouldUseEagerInitialization [
 	^ useEagerLoading
 ]
 
-{ #category : #'accessing-readonly' }
+{ #category : 'accessing-readonly' }
 UPGGeneratorContext >> shouldUseLazyInitialization [
 	^ useLazyLoading
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> useEagerInitialization [
 	useLazyLoading := false.
 	useEagerLoading := true
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> useLazyInitialization [
 	"Add default value of attributes to getters.
 	This setting will generate a getter even if the context is #withoutAccessors. (But will not generate a setter)"
@@ -134,28 +136,28 @@ UPGGeneratorContext >> useLazyInitialization [
 	useEagerLoading := false
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> withAccessors [
 	"Generate accessors (setter, getter, add/remove) for instance variables"
 
 	generateAccessors := true
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> withProgressBar [
 	"Show progress bar depicting the progress of the code generation."
 
 	showProgressBar := true
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> withoutAccessors [
 	"Generate accessors (setter, getter, add/remove) for instance variables"
 
 	generateAccessors := false
 ]
 
-{ #category : #options }
+{ #category : 'options' }
 UPGGeneratorContext >> withoutProgressBar [
 	showProgressBar := false
 ]

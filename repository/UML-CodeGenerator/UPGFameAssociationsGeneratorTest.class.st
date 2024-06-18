@@ -1,15 +1,17 @@
 Class {
-	#name : #UPGFameAssociationsGeneratorTest,
-	#superclass : #UPGBaseGeneratorTest,
+	#name : 'UPGFameAssociationsGeneratorTest',
+	#superclass : 'UPGBaseGeneratorTest',
 	#instVars : [
 		'university',
 		'department',
 		'uniToDept'
 	],
-	#category : 'UML-CodeGenerator-Tests'
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 UPGFameAssociationsGeneratorTest >> createModel [
 	| associations |
 	model := 'University[1] university <*>-- departments Department[*];' asClassDiagram.
@@ -20,12 +22,12 @@ UPGFameAssociationsGeneratorTest >> createModel [
 		detect: [ :each | (each source name = #University & each target name) = #Department ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGFameAssociationsGeneratorTest >> generatorClass [
 	^ UPGFameAssociationsGenerator
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGFameAssociationsGeneratorTest >> setUp [
 	super setUp.
 	generator := self generatorClass new.
@@ -34,7 +36,7 @@ UPGFameAssociationsGeneratorTest >> setUp [
 	self createModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testAdder [
 	self
 		ast: (generator adder: uniToDept targetEnd)
@@ -43,7 +45,7 @@ UPGFameAssociationsGeneratorTest >> testAdder [
 			departments add: aDepartment'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testGetter [
 	self
 		ast: (generator getter: uniToDept sourceEnd)
@@ -51,7 +53,7 @@ UPGFameAssociationsGeneratorTest >> testGetter [
 			'university <DCAssociation: ''University university <*>-- departments Department[*]''> ^ university'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testGetter1 [
 	self
 		ast: (generator getter: uniToDept targetEnd)
@@ -59,7 +61,7 @@ UPGFameAssociationsGeneratorTest >> testGetter1 [
 			'departments <DCAssociation: ''University university <*>-- departments Department[*]''> ^ departments'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testGetterEager [
 	generator context useEagerInitialization.
 	self
@@ -68,7 +70,7 @@ UPGFameAssociationsGeneratorTest >> testGetterEager [
 			'university <DCAssociation: ''University university <*>-- departments Department[*]''> ^ university'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testGetterLazy [
 	generator context useLazyInitialization.
 	self
@@ -77,7 +79,7 @@ UPGFameAssociationsGeneratorTest >> testGetterLazy [
 			'university <DCAssociation: ''University university <*>-- departments Department[*]''> ^ university'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testRemover [
 	self
 		ast: (generator remover: uniToDept targetEnd)
@@ -86,7 +88,7 @@ UPGFameAssociationsGeneratorTest >> testRemover [
 			departments remove: aDepartment'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testSetterMany [
 	true
 		ifTrue: [ ^ self skip: 'not yet implemented' ].
@@ -97,7 +99,7 @@ UPGFameAssociationsGeneratorTest >> testSetterMany [
 			departments value: aCollection'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGFameAssociationsGeneratorTest >> testSetterOne [
 	true
 		ifTrue: [ ^ self skip: 'not yet implemented' ].

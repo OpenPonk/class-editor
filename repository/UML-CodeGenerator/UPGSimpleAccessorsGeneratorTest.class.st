@@ -1,15 +1,17 @@
 Class {
-	#name : #UPGSimpleAccessorsGeneratorTest,
-	#superclass : #UPGBaseGeneratorTest,
+	#name : 'UPGSimpleAccessorsGeneratorTest',
+	#superclass : 'UPGBaseGeneratorTest',
 	#instVars : [
 		'university',
 		'department',
 		'uniToDept'
 	],
-	#category : 'UML-CodeGenerator-Tests'
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 UPGSimpleAccessorsGeneratorTest >> createModel [
 	| associations |
 	model := 'University[1] university <*>-- departments Department[*];' asClassDiagram.
@@ -20,7 +22,7 @@ UPGSimpleAccessorsGeneratorTest >> createModel [
 		detect: [ :each | (each source name = #University & each target name) = #Department ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGSimpleAccessorsGeneratorTest >> setUp [
 	super setUp.
 	generator := UPGSimpleAccessorsGenerator new.
@@ -29,7 +31,7 @@ UPGSimpleAccessorsGeneratorTest >> setUp [
 	self createModel
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testAdder [
 	self
 		ast: (generator adder: uniToDept targetEnd)
@@ -38,7 +40,7 @@ UPGSimpleAccessorsGeneratorTest >> testAdder [
 			departments add: aDepartment'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testGetter [
 	self
 		ast: (generator getter: uniToDept sourceEnd)
@@ -46,7 +48,7 @@ UPGSimpleAccessorsGeneratorTest >> testGetter [
 			'university <DCAssociation: ''University university <*>-- departments Department[*]''> ^ university'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testGetter1 [
 	self
 		ast: (generator getter: uniToDept targetEnd)
@@ -54,7 +56,7 @@ UPGSimpleAccessorsGeneratorTest >> testGetter1 [
 			'departments <DCAssociation: ''University university <*>-- departments Department[*]''> ^ departments'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testGetterEager [
 	generator context useEagerInitialization.
 	self
@@ -63,7 +65,7 @@ UPGSimpleAccessorsGeneratorTest >> testGetterEager [
 			'university <DCAssociation: ''University university <*>-- departments Department[*]''> ^ university'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testGetterLazy [
 	generator context useLazyInitialization.
 	self
@@ -72,7 +74,7 @@ UPGSimpleAccessorsGeneratorTest >> testGetterLazy [
 			'university <DCAssociation: ''University university <*>-- departments Department[*]''> ^ university ifNil: [ university := OrderedCollection new ]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testRemover [
 	self
 		ast: (generator remover: uniToDept targetEnd)
@@ -81,7 +83,7 @@ UPGSimpleAccessorsGeneratorTest >> testRemover [
 			departments remove: aDepartment'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testSetter [
 	self
 		ast: (generator setter: uniToDept sourceEnd)
@@ -90,7 +92,7 @@ UPGSimpleAccessorsGeneratorTest >> testSetter [
 			university := anUniversity'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGSimpleAccessorsGeneratorTest >> testSetter1 [
 	self
 		ast: (generator setter: uniToDept targetEnd)

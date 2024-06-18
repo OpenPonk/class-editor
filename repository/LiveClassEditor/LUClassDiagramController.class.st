@@ -1,10 +1,12 @@
 Class {
-	#name : #LUClassDiagramController,
-	#superclass : #OPUmlClassDiagramController,
-	#category : 'LiveClassEditor-Controllers'
+	#name : 'LUClassDiagramController',
+	#superclass : 'OPUmlClassDiagramController',
+	#category : 'LiveClassEditor-Controllers',
+	#package : 'LiveClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LUClassDiagramController >> initializePalette: aPalette [
 	(aPalette newCreationEntry: [ LUCDClassController new ])
 		label: 'Class';
@@ -32,7 +34,7 @@ LUClassDiagramController >> initializePalette: aPalette [
 		icon: OPUmlIcons current associationIcon
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LUClassDiagramController >> modelToControllerMapping [
 	^ {FAMIXClass -> LUCDClassController.
 	FAMIXAttribute -> LUCDAttributeController.

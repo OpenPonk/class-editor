@@ -1,26 +1,28 @@
 Class {
-	#name : #OPUmlDslBuilderTest,
-	#superclass : #PPCompositeParserTest,
-	#category : 'OpenPonk-UML-DSL-Tests'
+	#name : 'OPUmlDslBuilderTest',
+	#superclass : 'PPCompositeParserTest',
+	#category : 'OpenPonk-UML-DSL-Tests',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslBuilderTest >> parserClass [
 	^ OPUmlDslBuilder
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testAssociation [
 	self parse: 'Left --- Right;' rule: #association
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testAssociations [
 	self parse: 'A --- B;
 C --- D;' rule: #statements
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testAssociations1 [
 	self
 		parse:
@@ -29,7 +31,7 @@ DCProject[0..1] --- diagrams DCDiagram[*];'
 		rule: #statements
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testClasses [
 	self
 		parse:
@@ -41,7 +43,7 @@ Two {}'
 	self assert: result second name equals: 'Two'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testInheritance [
 	self parse: 'Sub >> Super;' rule: #inheritance.
 	self assert: result class equals: FAMIXInheritance.
@@ -49,7 +51,7 @@ OPUmlDslBuilderTest >> testInheritance [
 	self assert: result superclass name equals: 'Super'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testInheritances [
 	self
 		parse:
@@ -59,7 +61,7 @@ A extends B;'
 	self assert: result size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testStatements [
 	self
 		parse:
@@ -71,7 +73,7 @@ Two {}'
 	self assert: result second name equals: 'Two'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testStatements1 [
 	self
 		parse:
@@ -87,20 +89,20 @@ Person {
 	self assert: result size equals: 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testStatements2 [
 	self parse: '' rule: #statements.
 	self assert: result size equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testStatements3 [
 	self parse: '
 Class { }' rule: #statements.
 	self assert: result size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslBuilderTest >> testUmlClassName [
 	self parse: 'Name' rule: #umlClassName.
 	self assert: result equals: 'Name'

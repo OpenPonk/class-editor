@@ -1,41 +1,43 @@
 Class {
-	#name : #LIVInstanceHistory,
-	#superclass : #Object,
+	#name : 'LIVInstanceHistory',
+	#superclass : 'Object',
 	#instVars : [
 		'models',
 		'specificationBuilder'
 	],
-	#category : 'LiveInstanceVisualization-Models'
+	#category : 'LiveInstanceVisualization-Models',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Models'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVInstanceHistory >> add: aModel [
 	models add: aModel.
 	aModel history: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceHistory >> inNewState: aOneArgBlock [
 	^ self newState in: aOneArgBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LIVInstanceHistory >> initialize [
 	super initialize.
 	models := OrderedCollection new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceHistory >> latest [
 	^ models last
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceHistory >> models [
 	^ models
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceHistory >> newState [
 	self models
 		ifEmpty: [ self add: LIVInstanceModel new ]
@@ -47,17 +49,17 @@ LIVInstanceHistory >> newState [
 	^ self latest
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceHistory >> oldest [
 	^ models first
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceHistory >> specificationBuilder [
 	^ specificationBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceHistory >> specificationBuilder: anObject [
 	specificationBuilder := anObject
 ]

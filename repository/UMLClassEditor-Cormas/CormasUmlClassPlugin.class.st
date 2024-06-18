@@ -1,10 +1,11 @@
 Class {
-	#name : #CormasUmlClassPlugin,
-	#superclass : #OPUmlClassPlugin,
-	#category : 'UMLClassEditor-Cormas'
+	#name : 'CormasUmlClassPlugin',
+	#superclass : 'OPUmlClassPlugin',
+	#category : 'UMLClassEditor-Cormas',
+	#package : 'UMLClassEditor-Cormas'
 }
 
-{ #category : #toolbar }
+{ #category : 'toolbar' }
 CormasUmlClassPlugin class >> generatorToolbarMenu: aBuilder [
 	<dcEditorToolbarMenu: #CormasUmlClassPlugin>
 	(aBuilder item: 'Generate VW Code...')

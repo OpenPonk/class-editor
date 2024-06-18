@@ -1,15 +1,17 @@
 Class {
-	#name : #OPUmlAssociationBuilderTest,
-	#superclass : #OPUmlAssociationGrammarTest,
-	#category : 'OpenPonk-UML-DSL-Tests'
+	#name : 'OPUmlAssociationBuilderTest',
+	#superclass : 'OPUmlAssociationGrammarTest',
+	#category : 'OpenPonk-UML-DSL-Tests',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilderTest >> parserClass [
 	^ OPUmlAssociationBuilder
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testAssociation1 [
 	super testAssociation1.
 	self assert: result class equals: OPFAMIXBinaryAssociation.
@@ -19,7 +21,7 @@ OPUmlAssociationBuilderTest >> testAssociation1 [
 	self assert: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testAssociation3 [
 	super testAssociation3.
 	self assert: result source name equals: 'Left'.
@@ -29,33 +31,33 @@ OPUmlAssociationBuilderTest >> testAssociation3 [
 	self assert: result name equals: 'name'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testAssociationName [
 	super testAssociationName.
 	self assert: result equals: 'name'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testAssociationNs [
 	super testAssociationNs.
 	self assert: result source name equals: '::Object'.
 	self assert: result target name equals: 'NS::Object'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testAssociationNs1 [
 	super testAssociationNs1.
 	self assert: result source name equals: 'NS::Object'.
 	self assert: result target name equals: '::Object'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testEndName [
 	super testEndName.
 	self assert: result equals: 'name'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testEndSymbol1 [
 	self parse: '>' rule: #endSymbol.
 	self
@@ -65,7 +67,7 @@ OPUmlAssociationBuilderTest >> testEndSymbol1 [
 			true}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testLeftEnd [
 	self parse: 'Left -' rule: #leftEnd.
 	self assert: result first equals: 'Left'.
@@ -75,7 +77,7 @@ OPUmlAssociationBuilderTest >> testLeftEnd [
 	self assert: result fourth equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testLeftEndWithRole [
 	self parse: 'Left role -' rule: #leftEnd.
 	self assert: result first equals: 'Left'.
@@ -85,56 +87,56 @@ OPUmlAssociationBuilderTest >> testLeftEndWithRole [
 	self assert: result fourth equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testNavigable [
 	super testNavigable.
 	self assert: result sourceEnd isNavigable.
 	self assert: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testNavigable1 [
 	super testNavigable1.
 	self deny: result sourceEnd isNavigable.
 	self assert: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testNavigable2 [
 	super testNavigable2.
 	self assert: result sourceEnd isNavigable.
 	self deny: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testNavigable3 [
 	super testNavigable3.
 	self assert: result sourceEnd isNavigable.
 	self assert: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testNavigable4 [
 	super testNavigable4.
 	self deny: result sourceEnd isNavigable.
 	self assert: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testNavigable5 [
 	super testNavigable5.
 	self assert: result sourceEnd isNavigable.
 	self assert: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testNavigable6 [
 	super testNavigable6.
 	self assert: result sourceEnd isNavigable.
 	self deny: result targetEnd isNavigable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testRightEnd [
 	self parse: '- Right' rule: #rightEnd.
 	self assert: result first equals: 'Right'.
@@ -144,7 +146,7 @@ OPUmlAssociationBuilderTest >> testRightEnd [
 	self assert: result fourth equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testRightEndWithRole [
 	self parse: '- role Right' rule: #rightEnd.
 	self assert: result first equals: 'Right'.
@@ -154,7 +156,7 @@ OPUmlAssociationBuilderTest >> testRightEndWithRole [
 	self assert: result fourth equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testStartSymbol [
 	self parse: '<*>' rule: #startSymbol.
 	self
@@ -164,7 +166,7 @@ OPUmlAssociationBuilderTest >> testStartSymbol [
 			false}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testStartSymbol1 [
 	self parse: '<' rule: #startSymbol.
 	self
@@ -174,7 +176,7 @@ OPUmlAssociationBuilderTest >> testStartSymbol1 [
 			true}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testTypeSymbol [
 	self parse: '-' rule: #typeSymbol.
 	self
@@ -184,7 +186,7 @@ OPUmlAssociationBuilderTest >> testTypeSymbol [
 			false}
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlAssociationBuilderTest >> testTypeSymbol2 [
 	self parse: '<>' rule: #typeSymbol.
 	self

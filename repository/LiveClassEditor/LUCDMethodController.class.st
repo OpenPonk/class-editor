@@ -1,10 +1,12 @@
 Class {
-	#name : #LUCDMethodController,
-	#superclass : #OPUmlMethodController,
-	#category : 'LiveClassEditor-Controllers'
+	#name : 'LUCDMethodController',
+	#superclass : 'OPUmlMethodController',
+	#category : 'LiveClassEditor-Controllers',
+	#package : 'LiveClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LUCDMethodController >> figureDoubleClicked [
 	self model compiledMethod browse
 	"(CodeCard class: self model parentType smalltalkClass selector: self model name asSymbol)

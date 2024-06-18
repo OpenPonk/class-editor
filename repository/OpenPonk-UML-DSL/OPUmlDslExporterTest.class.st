@@ -1,67 +1,69 @@
 Class {
-	#name : #OPUmlDslExporterTest,
-	#superclass : #TestCase,
+	#name : 'OPUmlDslExporterTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'exporter',
 		'result',
 		'dslFactory'
 	],
-	#category : 'OpenPonk-UML-DSL-Tests'
+	#category : 'OpenPonk-UML-DSL-Tests',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Tests'
 }
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 OPUmlDslExporterTest >> export: aModel [
 	result := exporter export: aModel
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 OPUmlDslExporterTest >> export: aModel equals: expected [
 	self export: aModel.
 	self assert: result equals: expected
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlDslExporterTest >> parseAssociation: aString [
 	^ dslFactory association: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlDslExporterTest >> parseAttribute: aString [
 	^ dslFactory attribute: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlDslExporterTest >> parseClass: aString [
 	^ dslFactory class: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlDslExporterTest >> parseInheritance: aString [
 	^ dslFactory inheritance: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlDslExporterTest >> parseMethod: aString [
 	^ dslFactory method: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlDslExporterTest >> parseModel: aString [
 	^ OPUmlDslParser new parse: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 OPUmlDslExporterTest >> setUp [
 	exporter := OPUmlDslExporter new.
 	dslFactory := OPUmlDSLFactory new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testAssociation [
 	self export: (self parseAssociation: 'Left --> Right;') equals: 'Left --> Right;'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testAssociation1 [
 	self
 		export:
@@ -70,45 +72,45 @@ OPUmlDslExporterTest >> testAssociation1 [
 		equals: 'University university <*>-- departments Department[*] : composition;'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testAttribute [
 	self
 		export: (self parseAttribute: '_collection : Float[0..*]')
 		equals: '_collection : Float[*]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testAttribute1 [
 	self
 		export: (self parseAttribute: '_collection : Float[1..1]')
 		equals: '_collection : Float'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testAttribute2 [
 	self export: (self parseAttribute: 'id : Object[1..1]') equals: 'id'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testAttributeWithDefaultValue [
 	self
 		export: (self parseAttribute: 'workDays : String[5] = #(Monday Tuesday Wednesday Thursday Friday)')
 		equals: 'workDays : String[5] = #(Monday Tuesday Wednesday Thursday Friday)'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testClass [
 	self export: (self parseClass: '/::Class { }') equals: '/::Class { }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testClassWithStereotype [
 	self
 		export: (self parseClass: '/::Class << meta , class >> { }')
 		equals: '/::Class <<meta,class>> { }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testClassWithStuff [
 	self
 		export:
@@ -137,36 +139,36 @@ reject:(rejectBlock : BlockClosure[1]) : Object[*]
 }'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testInheritance [
 	self export: (self parseInheritance: 'Child >> Parent;') equals: 'Child >> Parent;'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testMethod [
 	self export: (self parseMethod: '/_function()') equals: '_/function()'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testMethod1 [
 	self export: (self parseMethod: 'funct:ion:(a, b)') equals: 'funct:ion:(a, b)'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testMethod2 [
 	self
 		export: (self parseMethod: 'funct:ion:(a : Object, b : String[1..1]) : Result[0..*]')
 		equals: 'funct:ion:(a, b : String) : Result[*]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testMethod3 [
 	self
 		export: (self parseMethod: 'notNil() : Object')
 		equals: 'notNil() : Object'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlDslExporterTest >> testModel [
 	self
 		export:

@@ -1,21 +1,23 @@
 Class {
-	#name : #LIVInstanceModel,
-	#superclass : #Object,
+	#name : 'LIVInstanceModel',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'elements',
 		'history'
 	],
-	#category : 'LiveInstanceVisualization-Models'
+	#category : 'LiveInstanceVisualization-Models',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Models'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVInstanceModel >> addLinkFrom: sourceObject to: targetObject at: aSlot [
 	((self ensureInstanceFor: sourceObject) slots at: aSlot)
 		add: (self ensureInstanceFor: targetObject)
 ]
 
-{ #category : #'roassal - drawing' }
+{ #category : 'roassal - drawing' }
 LIVInstanceModel >> addMenuFor: aFigure [
 	| menu |
 	menu := PluggableMenuSpec new model: aFigure.
@@ -27,12 +29,12 @@ LIVInstanceModel >> addMenuFor: aFigure [
 	aFigure rtElement when: TRMouseRightClick do: [ :event | menu asMenuMorph popUpInWorld ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceModel >> elements [
 	^ elements
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceModel >> elementsLinkingTo: anInstance [
 	^ elements
 		select: [ :each | 
@@ -43,14 +45,14 @@ LIVInstanceModel >> elementsLinkingTo: anInstance [
 						ifFalse: [ assoc value = anInstance ] ] ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVInstanceModel >> ensureInstanceFor: anObject [
 	^ self
 		specificationFor: anObject
 		ifAbsentPut: [ history specificationBuilder instanceOn: anObject ]
 ]
 
-{ #category : #'inspector - extensions' }
+{ #category : 'inspector - extensions' }
 LIVInstanceModel >> gtInspectorModelViewIn: composite [
 	<gtInspectorPresentationOrder: -1>
 	composite roassal2
@@ -63,29 +65,29 @@ LIVInstanceModel >> gtInspectorModelViewIn: composite [
 			v ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceModel >> history [
 	^ history
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceModel >> history: anObject [
 	history := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LIVInstanceModel >> initialize [
 	super initialize.
 	elements := OrderedCollection new
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 LIVInstanceModel >> removeInstance: anInstance [
 	(self elementsLinkingTo: anInstance) ifNotEmpty: [ ^ self ].
 	elements remove: anInstance
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 LIVInstanceModel >> removeLinkFrom: sourceObject to: targetObject at: aSlot [
 	| source target |
 	source := self specificationFor: sourceObject ifNone: [ ^ self ].
@@ -94,7 +96,7 @@ LIVInstanceModel >> removeLinkFrom: sourceObject to: targetObject at: aSlot [
 	self removeInstance: target
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 LIVInstanceModel >> removeLinksFrom: sourceObject at: aSlot [
 	| source removed |
 	source := self specificationFor: sourceObject ifNone: [ ^ self ].
@@ -107,7 +109,7 @@ LIVInstanceModel >> removeLinksFrom: sourceObject at: aSlot [
 			self removeInstance: removed ]
 ]
 
-{ #category : #'roassal - drawing' }
+{ #category : 'roassal - drawing' }
 LIVInstanceModel >> renderIn: aView [
 	| shapes |
 	shapes := (elements collect: #asShape) asGroup.
@@ -123,7 +125,7 @@ LIVInstanceModel >> renderIn: aView [
 		on: shapes
 ]
 
-{ #category : #'roassal - drawing' }
+{ #category : 'roassal - drawing' }
 LIVInstanceModel >> renderShape: aShape fromShapes: aCollection in: aView [
 	| pairs |
 	pairs := OrderedCollection new.
@@ -163,19 +165,19 @@ LIVInstanceModel >> renderShape: aShape fromShapes: aCollection in: aView [
 									stream << ' = ' << value printString ]) ] ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVInstanceModel >> setLinkFrom: sourceObject to: targetObject at: aSlot [
 	(self ensureInstanceFor: sourceObject) slots
 		at: aSlot
 		put: (self ensureInstanceFor: targetObject)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVInstanceModel >> setValueFrom: aSourceObject to: aTargetObject at: aSlot [
 	(self ensureInstanceFor: aSourceObject) slots at: aSlot put: aTargetObject
 ]
 
-{ #category : #'roassal - drawing' }
+{ #category : 'roassal - drawing' }
 LIVInstanceModel >> showDiffIn: aView [
 	history ifNil: [ ^ self ].
 	(history models before: self ifAbsent: [ nil ])
@@ -186,12 +188,12 @@ LIVInstanceModel >> showDiffIn: aView [
 			colorer colorAll: diff in: aView ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceModel >> specificationFor: anObject [
 	^ elements detect: [ :each | each instanceHash = anObject hash ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceModel >> specificationFor: anObject ifAbsentPut: aBlock [
 	^ elements
 		detect: [ :each | each instanceHash = anObject hash ]
@@ -201,12 +203,12 @@ LIVInstanceModel >> specificationFor: anObject ifAbsentPut: aBlock [
 			value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceModel >> specificationFor: anObject ifNone: aBlock [
 	^ elements detect: [ :each | each instanceHash = anObject hash ] ifNone: aBlock
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 LIVInstanceModel >> unsetLinkFrom: sourceObject at: aSlot [
 	| source removed |
 	source := self specificationFor: sourceObject ifNone: [ ^ self ].

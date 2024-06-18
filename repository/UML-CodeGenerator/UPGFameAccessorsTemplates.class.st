@@ -1,24 +1,26 @@
 Class {
-	#name : #UPGFameAccessorsTemplates,
-	#superclass : #UPGSimpleAccessorsTemplates,
+	#name : 'UPGFameAccessorsTemplates',
+	#superclass : 'UPGSimpleAccessorsTemplates',
 	#instVars : [
 		'value',
 		'attribute'
 	],
-	#category : 'UML-CodeGenerator-Generators'
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UPGFameAccessorsTemplates >> setterMany: aValue [
 	setter value: aValue
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UPGFameAccessorsTemplates >> setterManyToNone: aCollection [
 	attribute := aCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UPGFameAccessorsTemplates >> setterOneToMany: aValue [
 	setter := FMMultivalueLink
 		on: self
@@ -27,12 +29,12 @@ UPGFameAccessorsTemplates >> setterOneToMany: aValue [
 		to: aValue
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UPGFameAccessorsTemplates >> setterOneToNone: aValue [
 	attribute := aValue
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UPGFameAccessorsTemplates >> setterOneToOne: aValue [
 	attribute := aValue
 ]

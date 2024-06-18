@@ -9,20 +9,22 @@ See UML 8.2.4 Literals Notation
 <real>
 "
 Class {
-	#name : #OPUmlLiteralGrammar,
-	#superclass : #PPCompositeParser,
+	#name : 'OPUmlLiteralGrammar',
+	#superclass : 'PPCompositeParser',
 	#instVars : [
 		'natural'
 	],
-	#category : 'OpenPonk-UML-DSL-Grammar'
+	#category : 'OpenPonk-UML-DSL-Grammar',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Grammar'
 }
 
-{ #category : #'grammar-literals' }
+{ #category : 'grammar-literals' }
 OPUmlLiteralGrammar >> natural [
 	^ #digit asParser plus flatten trim ==> [ :nodes | nodes asNumber ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlLiteralGrammar >> start [
 	^ natural end
 ]

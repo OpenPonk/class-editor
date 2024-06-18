@@ -1,10 +1,12 @@
 Class {
-	#name : #CormasUmlClassDiagramController,
-	#superclass : #Object,
-	#category : 'UMLClassEditor-Cormas-Controllers'
+	#name : 'CormasUmlClassDiagramController',
+	#superclass : 'Object',
+	#category : 'UMLClassEditor-Cormas-Controllers',
+	#package : 'UMLClassEditor-Cormas',
+	#tag : 'Controllers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUmlClassDiagramController >> initializePalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlClassController new ])
 		label: 'Class';

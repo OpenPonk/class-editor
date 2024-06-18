@@ -1,10 +1,12 @@
 Class {
-	#name : #LUCDClassController,
-	#superclass : #OPUmlClassController,
-	#category : 'LiveClassEditor-Controllers'
+	#name : 'LUCDClassController',
+	#superclass : 'OPUmlClassController',
+	#category : 'LiveClassEditor-Controllers',
+	#package : 'LiveClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #'ui hooks' }
+{ #category : 'ui hooks' }
 LUCDClassController >> buildEditorForm: aForm [
 	(aForm addTextInput: 'Name')
 		autoAccept: false;
@@ -15,7 +17,7 @@ LUCDClassController >> buildEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #'ui hooks' }
+{ #category : 'ui hooks' }
 LUCDClassController >> createClassFor: aModelClass [
 	(RBAddClassRefactoring
 		addClass: aModelClass name
@@ -24,7 +26,7 @@ LUCDClassController >> createClassFor: aModelClass [
 		category: aModelClass mooseModel name asSymbol) execute
 ]
 
-{ #category : #'ui hooks' }
+{ #category : 'ui hooks' }
 LUCDClassController >> renameClass: anOldName to: aNewName [
 	(RBRenameClassRefactoring rename: anOldName asClass to: aNewName) execute
 ]

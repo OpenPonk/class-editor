@@ -2,8 +2,8 @@
 I am a base class for operations and properties having some convenience methods.
 "
 Class {
-	#name : #OPUmlPropGrammar,
-	#superclass : #PPCompositeParser,
+	#name : 'OPUmlPropGrammar',
+	#superclass : 'PPCompositeParser',
 	#instVars : [
 		'visibility',
 		'type',
@@ -12,46 +12,48 @@ Class {
 		'multiplicityRange',
 		'prefix'
 	],
-	#category : 'OpenPonk-UML-DSL-Grammar'
+	#category : 'OpenPonk-UML-DSL-Grammar',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Grammar'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPropGrammar class >> dependencies [
 	^ {OPUmlLiteralGrammar.
 	OPUmlMultiplicityGrammar}
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlPropGrammar class >> isAbstract [
 	^ self = OPUmlPropGrammar
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropGrammar >> multiplicity [
 	^ (($[ asParser , multiplicityRange , $] asParser) ==> [ :nodes | nodes second ]) optional
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropGrammar >> multiplicityRange [
 	^ (self dependencyAt: OPUmlMultiplicityGrammar) multiplicityRange
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropGrammar >> prefix [
 	^ ($/ asParser / $_ asParser) star
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropGrammar >> symbol [
 	^ (#word asParser / $_ asParser) plus flatten trim
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropGrammar >> type [
 	^ symbol
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropGrammar >> visibility [
 	^ $+ asParser / $- asParser / $# asParser / $~ asParser
 ]

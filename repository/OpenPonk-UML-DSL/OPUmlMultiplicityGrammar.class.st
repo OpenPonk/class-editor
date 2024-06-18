@@ -13,8 +13,8 @@ See UML 7.5.4 Types and Multiplicity Notation.
 <uniqueness-designator>
 "
 Class {
-	#name : #OPUmlMultiplicityGrammar,
-	#superclass : #PPCompositeParser,
+	#name : 'OPUmlMultiplicityGrammar',
+	#superclass : 'PPCompositeParser',
 	#instVars : [
 		'lower',
 		'upper',
@@ -22,40 +22,42 @@ Class {
 		'multiplicity',
 		'naturalLiteral'
 	],
-	#category : 'OpenPonk-UML-DSL-Grammar'
+	#category : 'OpenPonk-UML-DSL-Grammar',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Grammar'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlMultiplicityGrammar class >> dependencies [
 	^ {OPUmlLiteralGrammar}
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMultiplicityGrammar >> lower [
 	^ naturalLiteral
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMultiplicityGrammar >> multiplicity [
 	^ multiplicityRange
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMultiplicityGrammar >> multiplicityRange [
 	^ ((lower , '..' asParser) ==> [ :n | n first ]) optional , upper
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMultiplicityGrammar >> naturalLiteral [
 	^ (self dependencyAt: OPUmlLiteralGrammar) natural
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlMultiplicityGrammar >> start [
 	^ multiplicity end
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMultiplicityGrammar >> upper [
 	^ naturalLiteral / $* asParser
 ]

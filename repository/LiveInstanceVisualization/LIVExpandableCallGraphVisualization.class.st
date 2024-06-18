@@ -1,13 +1,15 @@
 Class {
-	#name : #LIVExpandableCallGraphVisualization,
-	#superclass : #Object,
+	#name : 'LIVExpandableCallGraphVisualization',
+	#superclass : 'Object',
 	#instVars : [
 		'mondrian'
 	],
-	#category : 'LiveInstanceVisualization-Inspector-Extensions'
+	#category : 'LiveInstanceVisualization-Inspector-Extensions',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Inspector-Extensions'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVExpandableCallGraphVisualization >> addMenuFor: aFigure [
 	| menu |
 	menu := PluggableMenuSpec new model: aFigure.
@@ -20,7 +22,7 @@ LIVExpandableCallGraphVisualization >> addMenuFor: aFigure [
 	aFigure when: TRMouseRightClick do: [ :event | menu asMenuMorph popUpInWorld ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVExpandableCallGraphVisualization >> addSendersFor: aFigure [
 	| senders b els |
 	senders := aFigure model senders
@@ -42,13 +44,13 @@ LIVExpandableCallGraphVisualization >> addSendersFor: aFigure [
 	b build
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVExpandableCallGraphVisualization >> initialize [
 	super initialize.
 	mondrian := RTMondrian new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVExpandableCallGraphVisualization >> view: aView class: aClassDescription [
 	| b els |
 	b := mondrian.

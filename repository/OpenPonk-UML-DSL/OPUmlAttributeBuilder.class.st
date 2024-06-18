@@ -12,17 +12,19 @@ _attribute : flags_ => attribute is class-side
 _attribute : flags = someValue => default value
 "
 Class {
-	#name : #OPUmlAttributeBuilder,
-	#superclass : #OPUmlPropertyGrammar,
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#name : 'OPUmlAttributeBuilder',
+	#superclass : 'OPUmlPropertyGrammar',
+	#category : 'OpenPonk-UML-DSL-Builders',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Builders'
 }
 
-{ #category : #building }
+{ #category : 'building' }
 OPUmlAttributeBuilder >> defaultValue [
 	^ super defaultValue ==> [ :expression | OPFAMIXValueSpecification from: expression ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OPUmlAttributeBuilder >> multiplicity [
 	^ super multiplicity
 		==>
@@ -37,7 +39,7 @@ OPUmlAttributeBuilder >> multiplicity [
 			m ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OPUmlAttributeBuilder >> multiplicityRange [
 	^ super multiplicityRange
 		==>
@@ -55,7 +57,7 @@ OPUmlAttributeBuilder >> multiplicityRange [
 			Array with: min with: max ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OPUmlAttributeBuilder >> property [
 	^ super property
 		==> [ :nodes | 
@@ -68,7 +70,7 @@ OPUmlAttributeBuilder >> property [
 				multiplicity: nodes fifth ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 OPUmlAttributeBuilder >> visibility [
 	^ super visibility ==> [ :aSymbol | OPUmlVisibilityKind fromSymbol: aSymbol ]
 ]

@@ -1,18 +1,20 @@
 Class {
-	#name : #UCMVWPsmAssociationGenerator,
-	#superclass : #UPGDirectAssociationGenerator,
+	#name : 'UCMVWPsmAssociationGenerator',
+	#superclass : 'UPGDirectAssociationGenerator',
 	#instVars : [
 		'typesLookup'
 	],
-	#category : 'UML-CodeGenerator-VW-Generators'
+	#category : 'UML-CodeGenerator-VW-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'VW-Generators'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWPsmAssociationGenerator >> addEagerValueFor: anEntity in: aClass [
 	self addLazyValueFor: anEntity in: aClass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWPsmAssociationGenerator >> addLazyValueFor: anAttribute in: aClass [
 	| expression source |
 	expression := self defaultValueExpressionFor: anAttribute.
@@ -34,7 +36,7 @@ UCMVWPsmAssociationGenerator >> addLazyValueFor: anAttribute in: aClass [
 						sourceAnchor: source) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWPsmAssociationGenerator >> createAssociationFor: anAssociation [
 	self
 		resolveAssociationEnd: anAssociation sourceEnd
@@ -44,7 +46,7 @@ UCMVWPsmAssociationGenerator >> createAssociationFor: anAssociation [
 		in: (typesLookup at: anAssociation sourceEnd declaredType)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWPsmAssociationGenerator >> createCollectionAccessorsFor: anEnd in: aClass [
 	| adder remover |
 	adder := self adder: anEnd.
@@ -63,7 +65,7 @@ UCMVWPsmAssociationGenerator >> createCollectionAccessorsFor: anEnd in: aClass [
 				sourceAnchor: (OPUmlSingleOpaqueBehavior body: remover))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWPsmAssociationGenerator >> createGetterFor: anAssociationEnd in: aClass [
 	| source |
 	source := self getter: anAssociationEnd.
@@ -75,7 +77,7 @@ UCMVWPsmAssociationGenerator >> createGetterFor: anAssociationEnd in: aClass [
 				sourceAnchor: (OPUmlSingleOpaqueBehavior body: source))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWPsmAssociationGenerator >> createSetterFor: anAssociationEnd in: aClass [
 	| source |
 	source := self setter: anAssociationEnd.
@@ -87,14 +89,14 @@ UCMVWPsmAssociationGenerator >> createSetterFor: anAssociationEnd in: aClass [
 				sourceAnchor: (OPUmlSingleOpaqueBehavior body: source))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWPsmAssociationGenerator >> ensureInstVariable: aName in: aClass [
 	(aClass withSuperclassHierarchy
 		anySatisfy: [ :each | each attributes anySatisfy: [ :attr | attr name = aName ] ])
 		ifFalse: [ aClass addAttribute: (FAMIXAttribute named: aName) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UCMVWPsmAssociationGenerator >> typesLookup: anObject [
 	typesLookup := anObject
 ]

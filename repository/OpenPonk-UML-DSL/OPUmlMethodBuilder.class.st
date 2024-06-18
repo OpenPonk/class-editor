@@ -15,12 +15,14 @@ _method()_ => method is class-side
 /method()/ => method is abstact
 "
 Class {
-	#name : #OPUmlMethodBuilder,
-	#superclass : #OPUmlOperationGrammar,
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#name : 'OPUmlMethodBuilder',
+	#superclass : 'OPUmlOperationGrammar',
+	#category : 'OpenPonk-UML-DSL-Builders',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Builders'
 }
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMethodBuilder >> multiplicity [
 	^ super multiplicity
 		==>
@@ -35,7 +37,7 @@ OPUmlMethodBuilder >> multiplicity [
 			m ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMethodBuilder >> multiplicityRange [
 	^ super multiplicityRange
 		==>
@@ -53,7 +55,7 @@ OPUmlMethodBuilder >> multiplicityRange [
 			Array with: min with: max ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMethodBuilder >> operation [
 	^ super operation
 		==> [ :nodes | 
@@ -67,7 +69,7 @@ OPUmlMethodBuilder >> operation [
 			method ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMethodBuilder >> parameter [
 	^ super parameter
 		==> [ :nodes | 
@@ -78,7 +80,7 @@ OPUmlMethodBuilder >> parameter [
 				yourself ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMethodBuilder >> returnValue [
 	^ super returnValue
 		==> [ :nodes | 
@@ -90,7 +92,7 @@ OPUmlMethodBuilder >> returnValue [
 				yourself ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlMethodBuilder >> visibility [
 	^ super visibility ==> [ :aSymbol | OPUmlVisibilityKind fromSymbol: aSymbol ]
 ]

@@ -1,39 +1,41 @@
 Class {
-	#name : #LIVTestItem,
-	#superclass : #Object,
+	#name : 'LIVTestItem',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'container'
 	],
-	#category : 'LiveInstanceVisualization-Tests'
+	#category : 'LiveInstanceVisualization-Tests',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestItem >> container [
 	^ container
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestItem >> container: aContainer [
 	container := aContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestItem >> containerDirect: aContainer [
 	container := aContainer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestItem >> initialize [
 	super initialize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestItem >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestItem >> name: aString [
 	name := aString
 ]

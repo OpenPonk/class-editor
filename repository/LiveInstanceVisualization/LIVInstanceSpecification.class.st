@@ -1,16 +1,18 @@
 Class {
-	#name : #LIVInstanceSpecification,
-	#superclass : #Object,
+	#name : 'LIVInstanceSpecification',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'classifier',
 		'slots',
 		'instanceHash'
 	],
-	#category : 'LiveInstanceVisualization-Models'
+	#category : 'LiveInstanceVisualization-Models',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Models'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 LIVInstanceSpecification >> asShape [
 	| el lbl comp compLbl |
 	el := OPUmlCompartmentableShape new.
@@ -59,43 +61,43 @@ LIVInstanceSpecification >> asShape [
 	^ el
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecification >> classifier [
 	^ classifier
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecification >> classifier: anObject [
 	classifier := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LIVInstanceSpecification >> initialize [
 	super initialize.
 	slots := OrderedDictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecification >> instanceHash [
 	^ instanceHash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecification >> instanceHash: aHash [
 	instanceHash := aHash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecification >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecification >> name: aString [
 	name := aString
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LIVInstanceSpecification >> printOn: aStream [
 	aStream
 		<< 'InstSpec';
@@ -106,7 +108,7 @@ LIVInstanceSpecification >> printOn: aStream [
 		<< ')'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecification >> slots [
 	^ slots
 ]

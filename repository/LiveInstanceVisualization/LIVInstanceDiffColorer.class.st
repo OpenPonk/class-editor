@@ -1,10 +1,12 @@
 Class {
-	#name : #LIVInstanceDiffColorer,
-	#superclass : #Object,
-	#category : 'LiveInstanceVisualization-Diff'
+	#name : 'LIVInstanceDiffColorer',
+	#superclass : 'Object',
+	#category : 'LiveInstanceVisualization-Diff',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Diff'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceDiffColorer >> colorAdditions: aCollection in: aView [
 	| els |
 	els := (self diagramElementsIn: aView)
@@ -25,14 +27,14 @@ LIVInstanceDiffColorer >> colorAdditions: aCollection in: aView [
 					each update ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceDiffColorer >> colorAll: aDictionary in: aView [
 	self colorAdditions: (aDictionary at: #added) in: aView.
 	self colorModifications: (aDictionary at: #modified) in: aView.
 	self colorRemovals: (aDictionary at: #removed) in: aView
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceDiffColorer >> colorModifications: aDictionary in: aView [
 	aDictionary
 		keysAndValuesDo: [ :hash :dict | 
@@ -71,7 +73,7 @@ LIVInstanceDiffColorer >> colorModifications: aDictionary in: aView [
 							each model update ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceDiffColorer >> colorRemovals: aCollection in: aView [
 	| els |
 	els := (self diagramElementsIn: aView)
@@ -84,7 +86,7 @@ LIVInstanceDiffColorer >> colorRemovals: aCollection in: aView [
 			fig update ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceDiffColorer >> diagramElementsIn: aView [
 	^ aView elements select: [ :each | each model isKindOf: OPUmlDiagramElement ]
 ]

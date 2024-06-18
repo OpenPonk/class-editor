@@ -2,21 +2,23 @@
 I take a smalltalk code and generate a FAMIX UML model. I use my pragma annotations as well as RoelTyper (if none are present) to infer the types.
 "
 Class {
-	#name : #DCCodeToUmlGenerator,
-	#superclass : #Object,
+	#name : 'DCCodeToUmlGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'category',
 		'factory'
 	],
-	#category : 'UML-CodeGenerator-Generators'
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 DCCodeToUmlGenerator >> attributeTypeFor: aSymbol in: aClass [
 	^ FAMIXClass named: (self attributeTypeNameFor: aSymbol in: aClass)
 ]
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 DCCodeToUmlGenerator >> attributeTypeNameFor: aSymbol in: aClass [
 	(aClass includesSelector: aSymbol)
 		ifTrue:
@@ -26,7 +28,7 @@ DCCodeToUmlGenerator >> attributeTypeNameFor: aSymbol in: aClass [
 	^ #Object
 ]
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 DCCodeToUmlGenerator >> createAttributeNamed: aSymbol in: aClass [
 	^ FAMIXAttribute new
 		name: aSymbol;
@@ -35,14 +37,14 @@ DCCodeToUmlGenerator >> createAttributeNamed: aSymbol in: aClass [
 		yourself
 ]
 
-{ #category : #'generator - class' }
+{ #category : 'generator - class' }
 DCCodeToUmlGenerator >> createClassFor: aClass [
 	^ FAMIXClass new
 		name: aClass name;
 		yourself
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 DCCodeToUmlGenerator >> createMethodFor: aSelector in: aClass [
 	(aClass >> aSelector) pragmas
 		detect: [ :each | each keyword = #DCMethod: ]
@@ -52,7 +54,7 @@ DCCodeToUmlGenerator >> createMethodFor: aSelector in: aClass [
 		parameters: (self methodParametersFor: aSelector in: aClass)
 ]
 
-{ #category : #'public - importer' }
+{ #category : 'public - importer' }
 DCCodeToUmlGenerator >> importFromClasses: aCollection [
 	| model importer |
 	model := MooseModel new.
@@ -68,7 +70,7 @@ DCCodeToUmlGenerator >> importFromClasses: aCollection [
 	^ model
 ]
 
-{ #category : #'public - importer' }
+{ #category : 'public - importer' }
 DCCodeToUmlGenerator >> importFromPackageNamed: aPackageName [
 	| model importer |
 	model := MooseModel new.
@@ -85,13 +87,13 @@ DCCodeToUmlGenerator >> importFromPackageNamed: aPackageName [
 	^ model
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DCCodeToUmlGenerator >> initialize [
 	super initialize.
 	factory := OPUmlDSLFactory new
 ]
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 DCCodeToUmlGenerator >> lowerBoundFor: aPragma [
 	aPragma arguments second
 		ifNotEmpty:
@@ -104,19 +106,19 @@ DCCodeToUmlGenerator >> lowerBoundFor: aPragma [
 	^ 1
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 DCCodeToUmlGenerator >> methodParametersFor: aSelector in: aClass [
 	^ (aClass >> aSelector) argumentNames collect: [ :each | FAMIXParameter named: each ]
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 DCCodeToUmlGenerator >> methodTypeFor: aSelector in: aClass [
 	"@todo: RoelTyper can't detect method types"
 
 	^ FAMIXClass named: #Object
 ]
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 DCCodeToUmlGenerator >> multiplicityFor: aSymbol in: aClass [
 	(aClass includesSelector: aSymbol)
 		ifTrue: [ (aClass >> aSymbol) pragmas
@@ -129,7 +131,7 @@ DCCodeToUmlGenerator >> multiplicityFor: aSymbol in: aClass [
 	^ OPFAMIXMultiplicity one
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCodeToUmlGenerator >> processAssociationsIn: aClass [
 	(aClass smalltalkClass methods flatCollect: #pragmas)
 		select: [ :each | each keyword = #DCAssociation: ]
@@ -164,12 +166,12 @@ DCCodeToUmlGenerator >> processAssociationsIn: aClass [
 							aClass methods remove: method ] ] ]
 ]
 
-{ #category : #postprocessing }
+{ #category : 'postprocessing' }
 DCCodeToUmlGenerator >> processClassSide: aModel [
 	aModel allClasses do: [ :each | self processClassSideFor: each ].
 ]
 
-{ #category : #postprocessing }
+{ #category : 'postprocessing' }
 DCCodeToUmlGenerator >> processClassSideFor: aClass [
 	aClass attributes
 		select: [ :each | each name beginsWith: SmalltalkImporter CIVString ]
@@ -179,7 +181,7 @@ DCCodeToUmlGenerator >> processClassSideFor: aClass [
 	aClass methods do: [ :each | each isStatic: each hasClassScope ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCodeToUmlGenerator >> processDirectAttributesIn: aClass [
 	aClass attributes
 		do: [ :attr | 
@@ -211,7 +213,7 @@ DCCodeToUmlGenerator >> processDirectAttributesIn: aClass [
 											aClass methods remove: method ] ] ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCodeToUmlGenerator >> processMethodsIn: aClass [
 	aClass methods
 		select: [ :each | each name = 'initialize' ]
@@ -230,13 +232,13 @@ DCCodeToUmlGenerator >> processMethodsIn: aClass [
 					"each multiplicity: parsed multiplicity" ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCodeToUmlGenerator >> processPragmasFor: aModel [
 	aModel allClasses do: [ :each | self processPragmasForClass: each ].
 	self haltOnce
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCodeToUmlGenerator >> processPragmasForClass: aClass [
 	self processDirectAttributesIn: aClass.
 	self processAssociationsIn: aClass.
@@ -244,7 +246,7 @@ DCCodeToUmlGenerator >> processPragmasForClass: aClass [
 	self haltOnce
 ]
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 DCCodeToUmlGenerator >> upperBoundFor: aPragma [
 	aPragma arguments second
 		ifNotEmpty: [ :range | 

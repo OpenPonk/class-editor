@@ -2,18 +2,20 @@
 I transfer cormas code between Pharo and VW via SIF.
 "
 Class {
-	#name : #DCCormasVWTransfer,
-	#superclass : #ComposableModel,
+	#name : 'DCCormasVWTransfer',
+	#superclass : 'ComposableModel',
 	#instVars : [
 		'packageDropList',
 		'importButton',
 		'exportButton',
 		'packageLabel'
 	],
-	#category : 'UMLClassEditor-Cormas-Windows'
+	#category : 'UMLClassEditor-Cormas-Windows',
+	#package : 'UMLClassEditor-Cormas',
+	#tag : 'Windows'
 }
 
-{ #category : #specs }
+{ #category : 'specs' }
 DCCormasVWTransfer class >> defaultSpec [
 	^ SpecColumnLayout composed
 		newRow: [ :r | 
@@ -30,12 +32,12 @@ DCCormasVWTransfer class >> defaultSpec [
 		yourself
 ]
 
-{ #category : #'accessing - spec' }
+{ #category : 'accessing - spec' }
 DCCormasVWTransfer >> exportButton [
 	^ exportButton
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWTransfer >> exportCode [
 	| file |
 	file := UIManager default
@@ -49,12 +51,12 @@ DCCormasVWTransfer >> exportCode [
 	self inform: 'Exported'
 ]
 
-{ #category : #'accessing - spec' }
+{ #category : 'accessing - spec' }
 DCCormasVWTransfer >> importButton [
 	^ importButton
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DCCormasVWTransfer >> importCode [
 	| stream |
 	stream := UIManager default
@@ -67,13 +69,13 @@ DCCormasVWTransfer >> importCode [
 	self inform: 'Imported'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DCCormasVWTransfer >> initializePresenter [
 	importButton action: [ self importCode ].
 	exportButton action: [ self exportCode ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DCCormasVWTransfer >> initializeWidgets [
 	(packageLabel := self newLabel) label: 'Package'.
 	(packageDropList := self newDropList)
@@ -83,22 +85,22 @@ DCCormasVWTransfer >> initializeWidgets [
 	(exportButton := self newButton) label: 'export code to file'
 ]
 
-{ #category : #'accessing - spec' }
+{ #category : 'accessing - spec' }
 DCCormasVWTransfer >> packageDropList [
 	^ packageDropList
 ]
 
-{ #category : #'accessing - spec' }
+{ #category : 'accessing - spec' }
 DCCormasVWTransfer >> packageLabel [
 	^ packageLabel
 ]
 
-{ #category : #'accessing - spec' }
+{ #category : 'accessing - spec' }
 DCCormasVWTransfer >> selectFileButton [
 	^ selectFileButton
 ]
 
-{ #category : #'accessing - spec' }
+{ #category : 'accessing - spec' }
 DCCormasVWTransfer >> selectedFileLabel [
 	^ selectedFileLabel
 ]

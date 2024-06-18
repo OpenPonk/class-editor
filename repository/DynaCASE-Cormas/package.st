@@ -1,1 +1,1 @@
-Package { #name : #'DynaCASE-Cormas' }
+Package { #name : 'DynaCASE-Cormas' }

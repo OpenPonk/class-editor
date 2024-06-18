@@ -1,10 +1,12 @@
 Class {
-	#name : #LUCDAttributeController,
-	#superclass : #OPUmlAttributeController,
-	#category : 'LiveClassEditor-Controllers'
+	#name : 'LUCDAttributeController',
+	#superclass : 'OPUmlAttributeController',
+	#category : 'LiveClassEditor-Controllers',
+	#package : 'LiveClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #'ui hooks' }
+{ #category : 'ui hooks' }
 LUCDAttributeController >> buildEditorForm: aForm [
 	(aForm addTextInput: 'Name')
 		autoAccept: false;
@@ -15,7 +17,7 @@ LUCDAttributeController >> buildEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LUCDAttributeController >> buildIsClassSideEditorForm: aForm [
 	(aForm addCheckbox: 'Is Class-side')
 		state: self model isStatic;
@@ -24,12 +26,12 @@ LUCDAttributeController >> buildIsClassSideEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LUCDAttributeController >> createAttributeNamed: aName inClass: aModelClassName [
 	(RBAddInstanceVariableRefactoring variable: aName class: aModelClassName asClass) execute
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LUCDAttributeController >> figureDoubleClicked [
 	| result |
 	result := UIManager default request: 'Name' initialAnswer: self model name.
@@ -39,7 +41,7 @@ LUCDAttributeController >> figureDoubleClicked [
 	self refreshFigure
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LUCDAttributeController >> renameAttribute: oldName to: newName inClass: aClassName [
 	(RBRenameInstanceVariableRefactoring
 		rename: oldName

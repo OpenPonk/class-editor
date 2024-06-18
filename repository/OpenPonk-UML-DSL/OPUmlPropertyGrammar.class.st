@@ -8,39 +8,41 @@ I am a parser for string representation of a UML property.
 NOTE that the parser currently does NOT support all specified options.
 "
 Class {
-	#name : #OPUmlPropertyGrammar,
-	#superclass : #OPUmlPropGrammar,
+	#name : 'OPUmlPropertyGrammar',
+	#superclass : 'OPUmlPropGrammar',
 	#instVars : [
 		'propName',
 		'propType',
 		'property',
 		'defaultValue'
 	],
-	#category : 'OpenPonk-UML-DSL-Grammar'
+	#category : 'OpenPonk-UML-DSL-Grammar',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Grammar'
 }
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropertyGrammar >> defaultValue [
 	^ (#blank asParser star , $= asParser , (#any asParser starLazy: #endOfLine asParser and))
 		==> [ :nodes | (nodes third joinUsing: '') trim ]
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropertyGrammar >> propName [
 	^ symbol
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropertyGrammar >> propType [
 	^ symbol
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropertyGrammar >> property [
 	^ prefix, visibility optional , propName , (($: asParser , propType) ==> [ :n | n second ]) optional , multiplicity, defaultValue optional
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlPropertyGrammar >> start [
 	^ property end
 ]

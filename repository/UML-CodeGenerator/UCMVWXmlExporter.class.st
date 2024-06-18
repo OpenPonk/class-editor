@@ -1,6 +1,6 @@
 Class {
-	#name : #UCMVWXmlExporter,
-	#superclass : #Object,
+	#name : 'UCMVWXmlExporter',
+	#superclass : 'Object',
 	#instVars : [
 		'xmlWriter',
 		'writer',
@@ -8,10 +8,12 @@ Class {
 		'environment',
 		'namespaceEnvironment'
 	],
-	#category : 'UML-CodeGenerator-VW-Generators'
+	#category : 'UML-CodeGenerator-VW-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'VW-Generators'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWXmlExporter class >> example [
 | pim psm writer |
 pim := '
@@ -36,7 +38,7 @@ writer := UCMVWXmlExporter new.
 "
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UCMVWXmlExporter >> initialize [
 	super initialize.
 	namespaceEnvironment := 'CormasNS.Models'.
@@ -44,13 +46,13 @@ UCMVWXmlExporter >> initialize [
 	environment := namespaceEnvironment , '.' , packageName
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 UCMVWXmlExporter >> sortedHierarchyFor: classes [
 	^ classes asArray
 		sorted: [ :a :b | (b superclassHierarchy includes: a) | (a superclassHierarchy includes: b) not ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWXmlExporter >> superClassFor: aClass [
 	aClass stereotypes
 		ifEmpty: [ ^ aClass anySuperclass
@@ -59,7 +61,7 @@ UCMVWXmlExporter >> superClassFor: aClass [
 	^ 'CormasNS.Kernel.' , aClass stereotypes first name
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWXmlExporter >> writeClassesIn: aModel [
 	(self sortedHierarchyFor: aModel allClasses)
 		do: [ :each | 
@@ -80,7 +82,7 @@ UCMVWXmlExporter >> writeClassesIn: aModel [
 						tag: 'attributes' with: [ writer tag: 'package' with: packageName ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWXmlExporter >> writeForgetMethod [
 	writer
 		tag: 'methods'
@@ -95,7 +97,7 @@ UCMVWXmlExporter >> writeForgetMethod [
 	self instVarAt: (self class instVarIndexFor: aSymbol) put: nil' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWXmlExporter >> writeMetadata [
 	| time |
 	time := DateAndTime now truncated.
@@ -133,7 +135,7 @@ UCMVWXmlExporter >> writeMetadata [
 					with: [ writer tag: 'package' with: packageName ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWXmlExporter >> writeMethodsIn: aModel [
 	(self sortedHierarchyFor: aModel allClasses)
 		do: [ :cls | 
@@ -167,7 +169,7 @@ UCMVWXmlExporter >> writeMethodsIn: aModel [
 												with: method sourceText ] ] ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UCMVWXmlExporter >> writeModel: aModel [
 	aModel
 		detect:

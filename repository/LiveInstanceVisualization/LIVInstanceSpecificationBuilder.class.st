@@ -1,15 +1,17 @@
 Class {
-	#name : #LIVInstanceSpecificationBuilder,
-	#superclass : #Object,
+	#name : 'LIVInstanceSpecificationBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'slots',
 		'classifier'
 	],
-	#category : 'LiveInstanceVisualization-Models'
+	#category : 'LiveInstanceVisualization-Models',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Models'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceSpecificationBuilder class >> example1 [
 	<playground>
 | inst builder model v el |
@@ -30,7 +32,7 @@ el rtElement @ RTResizable @ RTDraggable.
 v
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceSpecificationBuilder class >> exampleWithHistory [
 	<playground>
 | b1 b2 hist m1 ui m2 m3 m4 m5 uiM bM m6 v from to diff colorer |
@@ -91,7 +93,7 @@ colorer colorAll: diff in: v.
 v
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceSpecificationBuilder class >> exampleWithMetalinks [
 	<playground>
 | history wrapperSpec modelSpec wrapSelectorLink wrapInstanceLink cmInitLink cmSpecLink links |
@@ -166,29 +168,29 @@ links do: #uninstall.
 "
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVInstanceSpecificationBuilder >> addSlot: anAssociation [
 	slots add: anAssociation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecificationBuilder >> classifier [
 	^ classifier
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecificationBuilder >> classifier: anObject [
 	classifier := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LIVInstanceSpecificationBuilder >> initialize [
 	super initialize.
 	name := nil.
 	slots := OrderedDictionary new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceSpecificationBuilder >> instanceOn: anObject [
 	| model |
 	model := self newModel.
@@ -200,14 +202,14 @@ LIVInstanceSpecificationBuilder >> instanceOn: anObject [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVInstanceSpecificationBuilder >> name: aStringOrBlock [
 	aStringOrBlock isString & aStringOrBlock isSymbol not
 		ifTrue: [ name := [ :obj | aStringOrBlock ] ]
 		ifFalse: [ name := aStringOrBlock ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceSpecificationBuilder >> newModel [
 	^ LIVInstanceSpecification new
 ]

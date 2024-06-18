@@ -1,17 +1,19 @@
 Class {
-	#name : #DCCodeToUmlGeneratorTest,
-	#superclass : #UPGBaseGeneratorTest,
-	#category : 'UML-CodeGenerator-Tests'
+	#name : 'DCCodeToUmlGeneratorTest',
+	#superclass : 'UPGBaseGeneratorTest',
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 DCCodeToUmlGeneratorTest >> setUp [
 	super setUp.
 	cls := self newClassNamed: #SomethingEmpty.
 	generator := DCCodeToUmlGenerator new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testAttribute [
 	cls addInstVarNamed: #something.
 	model := generator createAttributeNamed: #something in: cls.
@@ -19,7 +21,7 @@ DCCodeToUmlGeneratorTest >> testAttribute [
 	self assert: model declaredType name equals: #Object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testAttributeMultiplicity [
 	| multiplicity |
 	cls addInstVarNamed: #something.
@@ -29,7 +31,7 @@ DCCodeToUmlGeneratorTest >> testAttributeMultiplicity [
 	self assert: multiplicity upper equals: 10
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testAttributePragma [
 	cls addInstVarNamed: #something.
 	cls compile: 'something <DCType: #MyType multiplicity: #(2 10)> ^ something'.
@@ -39,7 +41,7 @@ DCCodeToUmlGeneratorTest >> testAttributePragma [
 	self assert: model multiplicity upper equals: 10
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testAttributeType [
 	cls addInstVarNamed: #something.
 	model := generator attributeTypeFor: #something in: cls.
@@ -47,20 +49,20 @@ DCCodeToUmlGeneratorTest >> testAttributeType [
 	self assert: model name equals: #Object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testAttributeTypeDefault [
 	cls addInstVarNamed: #something.
 	self assert: (generator attributeTypeNameFor: #something in: cls) equals: #Object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testAttributeTypePragma [
 	cls addInstVarNamed: #something.
 	cls compile: 'something <DCType: #MyType multiplicity: #(2 10)> ^ something'.
 	self assert: (generator attributeTypeNameFor: #something in: cls) equals: #MyType
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testEmptyClass [
 	cls := self newClassNamed: #SomethingEmpty.
 	model := generator createClassFor: cls.
@@ -71,7 +73,7 @@ DCCodeToUmlGeneratorTest >> testEmptyClass [
 	self assert: model associations isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testLowerBound [
 	{(#(1 10) -> 1).
 	(#(2) -> 2).
@@ -86,7 +88,7 @@ DCCodeToUmlGeneratorTest >> testLowerBound [
 				equals: pair value ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testMethod [
 	cls compile: 'method ^ 1'.
 	model := generator createMethodFor: #method in: cls.
@@ -94,7 +96,7 @@ DCCodeToUmlGeneratorTest >> testMethod [
 	self assert: model name equals: #method
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testMethodWithParams [
 	cls compile: 'add: aNumber to: anotherNumber ^ aNumber + anotherNumber'.
 	model := generator createMethodFor: #add:to: in: cls.
@@ -107,7 +109,7 @@ DCCodeToUmlGeneratorTest >> testMethodWithParams [
 	self assert: model parameters second name equals: #anotherNumber
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testMethodWithPragma [
 	cls
 		compile:
@@ -136,7 +138,7 @@ DCCodeToUmlGeneratorTest >> testMethodWithPragma [
 			OPUmlParameterDirectionKind return
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 DCCodeToUmlGeneratorTest >> testUpperBound [
 	{#(1 10) -> 10.
 	#(2) -> 2.

@@ -2,20 +2,22 @@
 I take a DCFAMIX model and create an equivalent DSL from it.
 "
 Class {
-	#name : #OPUmlDslExporter,
-	#superclass : #Object,
+	#name : 'OPUmlDslExporter',
+	#superclass : 'Object',
 	#instVars : [
 		'stream'
 	],
-	#category : 'OpenPonk-UML-DSL-Exporter'
+	#category : 'OpenPonk-UML-DSL-Exporter',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Exporter'
 }
 
-{ #category : #'public-exporting' }
+{ #category : 'public-exporting' }
 OPUmlDslExporter class >> export: aModel [
 	^ self new export: aModel
 ]
 
-{ #category : #'public-exporting' }
+{ #category : 'public-exporting' }
 OPUmlDslExporter >> export: aModel [
 	stream := String new writeStream.
 	(aModel isKindOf: MooseModel)
@@ -24,12 +26,12 @@ OPUmlDslExporter >> export: aModel [
 	^ stream contents
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlDslExporter >> line [
 	stream nextPutAll: String cr
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitAssociation: anAssociation [
 	self visitType: anAssociation source withMultiplicity: anAssociation sourceEnd multiplicity separator: ''.
 	stream nextPut: Character space.
@@ -70,7 +72,7 @@ OPUmlDslExporter >> visitAssociation: anAssociation [
 	stream nextPut: $;
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitAttribute: anAttribute [
 	anAttribute isStatic
 		ifTrue: [ stream nextPut: $_ ].
@@ -85,7 +87,7 @@ OPUmlDslExporter >> visitAttribute: anAttribute [
 				nextPutAll: val valueExpression asString ]
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitClass: aClass [
 	aClass isAbstract
 		ifTrue: [ stream nextPut: $/ ].
@@ -115,7 +117,7 @@ OPUmlDslExporter >> visitClass: aClass [
 	stream nextPut: $}
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitInheritance: anInheritance [
 	stream nextPutAll: anInheritance subclass name.
 	stream nextPutAll: ' >> '.
@@ -123,7 +125,7 @@ OPUmlDslExporter >> visitInheritance: anInheritance [
 	stream nextPut: $;
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitMethod: aMethod [
 	aMethod isStatic
 		ifTrue: [ stream nextPut: $_ ].
@@ -138,7 +140,7 @@ OPUmlDslExporter >> visitMethod: aMethod [
 	self visitTypeWithMultiplicity: aMethod
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitModel: aModel [
 	aModel allClasses
 		do: [ :each | self visitClass: each ]
@@ -158,13 +160,13 @@ OPUmlDslExporter >> visitModel: aModel [
 		separatedBy: [ self line ]
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitParameter: aParameter [
 	stream nextPutAll: aParameter name.
 	self visitTypeWithMultiplicity: aParameter
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitType: aType withMultiplicity: aMultiplicity separator: aSeparator [
 	"
 	foo : Object[1..1] => foo
@@ -184,7 +186,7 @@ OPUmlDslExporter >> visitType: aType withMultiplicity: aMultiplicity separator: 
 				nextPutAll: aMultiplicity printRange ]
 ]
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 OPUmlDslExporter >> visitTypeWithMultiplicity: aType [
 	aType declaredType ifNil: [ ^ self ].
 	(aType isKindOf: FAMIXMethod)

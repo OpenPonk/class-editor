@@ -1,1 +1,1 @@
-Package { #name : #'UMLClassEditor-Cormas' }
+Package { #name : 'UMLClassEditor-Cormas' }

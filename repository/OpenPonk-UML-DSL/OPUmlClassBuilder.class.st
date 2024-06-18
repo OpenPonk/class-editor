@@ -7,8 +7,8 @@ MyClass => Create a FAMIXClass named 'MyClass'
 /MyClass/ => The class is abstract
 "
 Class {
-	#name : #OPUmlClassBuilder,
-	#superclass : #PPCompositeParser,
+	#name : 'OPUmlClassBuilder',
+	#superclass : 'PPCompositeParser',
 	#instVars : [
 		'symbol',
 		'classBlock',
@@ -19,22 +19,24 @@ Class {
 		'fqn',
 		'keyword'
 	],
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#category : 'OpenPonk-UML-DSL-Builders',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Builders'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder class >> dependencies [
 	^ {OPUmlAttributeBuilder.
 	OPUmlMethodBuilder}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> block [
 	^ (${ asParser , #space asParser star , statements , #space asParser star , $} asParser)
 		==> [ :nodes | nodes third ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> classBlock [
 	^ (dslName, keyword , #blank asParser plus , block)
 		==>
@@ -46,20 +48,20 @@ OPUmlClassBuilder >> classBlock [
 				attributes: (nodes fourth select: #isAttribute) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> dslName [
 	^ ($/ asParser optional , fqn)
 		==>
 			[ :nodes | Array with: (nodes first ifNil: [ false ] ifNotNil: [ nodes first = $/ ]) with: nodes second ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> fqn [
 	^ ('::' asParser optional , symbol , ('::' asParser , symbol) star)
 		==> [ :nodes | (nodes flattened asOrderedCollection removeAllSuchThat: #isNil) joinUsing: '' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> keyword [
 	^ ('<<' asParser trim , (symbol trim separatedBy: ',' asParser) withoutSeparators , '>>' asParser trimLeft) optional
 		==>
@@ -70,23 +72,23 @@ OPUmlClassBuilder >> keyword [
 					[ (nodes second removeAllSuchThat: #isEmpty) collect: [ :each | OPFAMIXStereotype named: each ] as: OrderedCollection ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> start [
 	^ classBlock end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> statement [
 	^ (self dependencyAt: OPUmlMethodBuilder) operation
 		/ (self dependencyAt: OPUmlAttributeBuilder) property
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> statements [
 	^ ((statement , #newline asParser star) ==> [ :nodes | nodes first ]) star
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilder >> symbol [
 	^ #word asParser plus ==> [ :nodes | nodes joinUsing: '' ]
 ]

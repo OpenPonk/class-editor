@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*LiveGenerator' }
+{ #category : '*LiveGenerator' }
 Object >> asCodeGen [
 	^ LGGenerator on: self
 ]

@@ -3,12 +3,14 @@ Subgenerator for associations.
 The code I generate will maintain bi-directional associations (when one side is updated, so is the other).
 "
 Class {
-	#name : #UPGDirectAssociationGenerator,
-	#superclass : #UPGBaseAssociationGenerator,
-	#category : 'UML-CodeGenerator-Generators'
+	#name : 'UPGDirectAssociationGenerator',
+	#superclass : 'UPGBaseAssociationGenerator',
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> addManyToMany [
 	^ 'add{nameSg}: {param}
 	({name} includes: {param}) ifTrue: [ ^ self ].
@@ -16,7 +18,7 @@ UPGDirectAssociationGenerator >> addManyToMany [
 	{param} add{otherNameSg}: self'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> addManyToMany: anEnd [
 	^ self addManyToMany
 		format:
@@ -28,14 +30,14 @@ UPGDirectAssociationGenerator >> addManyToMany: anEnd [
 				with: #otherNameSg -> anEnd opposite name asEnglishSingular capitalized)
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> addNoneToMany [
 	^ 'add{nameSg}: {param}
 	({name} includes: {param}) ifTrue: [ ^ self ].
 	{name} add: {param}'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> addNoneToMany: anEnd [
 	^ self addNoneToMany
 		format:
@@ -45,7 +47,7 @@ UPGDirectAssociationGenerator >> addNoneToMany: anEnd [
 				with: #param -> (self typeNameForEnd: anEnd))
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> addOneToMany [
 	^ 'add{nameSg}: {param}
 	({name} includes: {param}) ifTrue: [ ^ self ].
@@ -53,7 +55,7 @@ UPGDirectAssociationGenerator >> addOneToMany [
 	{param} {otherName}: self'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> addOneToMany: anEnd [
 	^ self addOneToMany
 		format:
@@ -64,7 +66,7 @@ UPGDirectAssociationGenerator >> addOneToMany: anEnd [
 				with: #otherName -> anEnd opposite name)
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> adder: anEnd [
 	self assert: anEnd multiplicity upper > 1.
 	anEnd opposite isNavigable
@@ -74,27 +76,27 @@ UPGDirectAssociationGenerator >> adder: anEnd [
 		ifFalse: [ self addManyToMany: anEnd ]
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> getter [
 	^ '{name}
 	"<DCAssociation: ''{dsl}''>"
 	^ {name}'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> getter: anEnd [
 	^ self getter
 		format: (Dictionary with: #name -> anEnd name with: #dsl -> (self dslFor: anEnd association))
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> manySetter [
 	^ '{name}: {param}
 	[ {name} isNotEmpty ] whileTrue: [ self remove{nameSg}: {name} anyOne ].
 	{param} do: [ :each | self add{nameSg}: each ]'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> manySetter: anEnd [
 	^ self manySetter
 		format:
@@ -104,7 +106,7 @@ UPGDirectAssociationGenerator >> manySetter: anEnd [
 				with: #param -> (self paramNameForEnd: anEnd))
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> manyToOne [
 	^ '{name}: {param}
 	|oldRef|
@@ -116,7 +118,7 @@ UPGDirectAssociationGenerator >> manyToOne [
 	{name} ifNotNil: [ {name} add{otherNameSgCapitalized}: self ]'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> manyToOne: anEnd [
 	^ self manyToOne
 		format:
@@ -127,7 +129,7 @@ UPGDirectAssociationGenerator >> manyToOne: anEnd [
 				with: #param -> (self paramNameForEnd: anEnd))
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> oneToOne [
 	^ '{name}: {param}
 	|oldRef|
@@ -139,7 +141,7 @@ UPGDirectAssociationGenerator >> oneToOne [
 	{name} ifNotNil: [ {name} {otherName}: self ]'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> oneToOne: anEnd [
 	^ self oneToOne
 		format:
@@ -149,7 +151,7 @@ UPGDirectAssociationGenerator >> oneToOne: anEnd [
 				with: #otherName -> anEnd opposite name)
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> removeManyToMany [
 	^ 'remove{nameSg}: {param}
 	({name} includes: {param}) ifFalse: [ ^ self ].
@@ -157,7 +159,7 @@ UPGDirectAssociationGenerator >> removeManyToMany [
 	{param} remove{otherNameSg}: self'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> removeManyToMany: anEnd [
 	^ self removeManyToMany
 		format:
@@ -169,14 +171,14 @@ UPGDirectAssociationGenerator >> removeManyToMany: anEnd [
 				with: #otherNameSg -> anEnd opposite name asEnglishSingular capitalized)
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> removeNoneToMany [
 	^ 'remove{nameSg}: {param}
 	({name} includes: {param}) ifFalse: [ ^ self ].
 	{name} remove: {param}'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> removeNoneToMany: anEnd [
 	^ self removeNoneToMany
 		format:
@@ -186,7 +188,7 @@ UPGDirectAssociationGenerator >> removeNoneToMany: anEnd [
 				with: #param -> (self typeNameForEnd: anEnd))
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> removeOneToMany [
 	^ 'remove{nameSg}: {param}
 	({name} includes: {param}) ifFalse: [ ^ self ].
@@ -194,7 +196,7 @@ UPGDirectAssociationGenerator >> removeOneToMany [
 	{param} {otherName}: nil'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> removeOneToMany: anEnd [
 	^ self removeOneToMany
 		format:
@@ -205,7 +207,7 @@ UPGDirectAssociationGenerator >> removeOneToMany: anEnd [
 				with: #otherName -> anEnd opposite name)
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> remover: anEnd [
 	self assert: anEnd multiplicity upper > 1.
 	anEnd opposite isNavigable
@@ -215,7 +217,7 @@ UPGDirectAssociationGenerator >> remover: anEnd [
 		ifFalse: [ self removeManyToMany: anEnd ]
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> setter: anEnd [
 	anEnd isNavigable & anEnd opposite isNavigable not
 		ifTrue: [ ^ self someToNone: anEnd ].
@@ -228,13 +230,13 @@ UPGDirectAssociationGenerator >> setter: anEnd [
 	self error: 'Unreachable'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> someToNone [
 	^ '{name}: {param}
 	{name} := {param}'
 ]
 
-{ #category : #templates }
+{ #category : 'templates' }
 UPGDirectAssociationGenerator >> someToNone: anEnd [
 	^ self someToNone
 		format: (Dictionary with: #name -> anEnd name with: #param -> (self paramNameForEnd: anEnd))

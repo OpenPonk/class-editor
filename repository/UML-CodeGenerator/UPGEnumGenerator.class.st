@@ -19,15 +19,17 @@ BormParticipantType {
 }
 "
 Class {
-	#name : #UPGEnumGenerator,
-	#superclass : #Object,
+	#name : 'UPGEnumGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'enumModel'
 	],
-	#category : 'UML-CodeGenerator-Generators'
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> ensureClass: anEnum [
 	| oldPkg newPkg parentName |
 	newPkg := anEnum parentPackage ifNil: [ 'Unclassified' ] ifNotNil: #name.
@@ -47,7 +49,7 @@ UPGEnumGenerator >> ensureClass: anEnum [
 		category: newPkg
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> ensureInstanceMethodFor: aPair in: aClass [
 	| method |
 	method := '{1}
@@ -62,7 +64,7 @@ UPGEnumGenerator >> ensureInstanceMethodFor: aPair in: aClass [
 		ifFalse: [ aClass compile: method classified: 'accessing - literals' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> ensureMetaMethodsIn: aClass [
 	| method |
 	(aClass hasInstVarNamed: #Default)
@@ -76,12 +78,12 @@ UPGEnumGenerator >> ensureMetaMethodsIn: aClass [
 		ifFalse: [ aClass compile: method classified: 'accessing' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> execute [
 	self executeOn: enumModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> executeOn: anEnum [
 	| literals |
 	self ensureClass: anEnum.
@@ -93,19 +95,19 @@ UPGEnumGenerator >> executeOn: anEnum [
 			self tryClassMethodFor: each in: anEnum smalltalkClass ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> literalsFor: anEnum [
 	"Proper enum literals are not yet supported so I am abusing attributes"
 
 	^ (anEnum attributes collect: [ :each | each name asSymbol -> each name asSymbol printString ]) asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> model: anEnum [
 	enumModel := anEnum
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGEnumGenerator >> tryClassMethodFor: aPair in: aClass [
 	"Class side is a minefield so be extra careful."
 

@@ -1,10 +1,11 @@
 Class {
-	#name : #LIVInteractiveViewContext,
-	#superclass : #RTAbstractViewContext,
-	#category : 'LiveInstanceVisualization'
+	#name : 'LIVInteractiveViewContext',
+	#superclass : 'RTAbstractViewContext',
+	#category : 'LiveInstanceVisualization',
+	#package : 'LiveInstanceVisualization'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInteractiveViewContext >> interactionsToBeRegistered [
 	^ Array
 		with: LIVSelectableModelElementContextInteraction

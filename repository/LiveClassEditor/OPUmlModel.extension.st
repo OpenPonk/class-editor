@@ -1,6 +1,6 @@
-Extension { #name : #OPUmlModel }
+Extension { #name : 'OPUmlModel' }
 
-{ #category : #'*LiveClassEditor-Model-Extensions' }
+{ #category : '*LiveClassEditor-Model-Extensions' }
 OPUmlModel >> populateFrom: aPackage [
 	| clsMapping |
 	self name: aPackage name.

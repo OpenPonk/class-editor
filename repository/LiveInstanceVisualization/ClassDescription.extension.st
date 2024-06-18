@@ -1,6 +1,6 @@
-Extension { #name : #ClassDescription }
+Extension { #name : 'ClassDescription' }
 
-{ #category : #'*LiveInstanceVisualization-Inspector-Extensions' }
+{ #category : '*LiveInstanceVisualization-Inspector-Extensions' }
 ClassDescription >> gtInspectorExpandableCallGraphIn: composite [
 	<gtInspectorPresentationOrder: 80>
 	| el |
@@ -13,7 +13,7 @@ ClassDescription >> gtInspectorExpandableCallGraphIn: composite [
 			v ]
 ]
 
-{ #category : #'*LiveInstanceVisualization-Inspector-Extensions' }
+{ #category : '*LiveInstanceVisualization-Inspector-Extensions' }
 ClassDescription >> gtInspectorInstanceViewIn: composite [
 	<gtInspectorPresentationOrder: 80>
 	| el |

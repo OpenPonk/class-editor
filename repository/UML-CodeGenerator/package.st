@@ -1,1 +1,1 @@
-Package { #name : #'UML-CodeGenerator' }
+Package { #name : 'UML-CodeGenerator' }

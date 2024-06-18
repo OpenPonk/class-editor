@@ -2,8 +2,8 @@
 I am grammar for associations.
 "
 Class {
-	#name : #OPUmlAssociationGrammar,
-	#superclass : #PPCompositeParser,
+	#name : 'OPUmlAssociationGrammar',
+	#superclass : 'PPCompositeParser',
 	#instVars : [
 		'multiplicityRange',
 		'multiplicity',
@@ -18,52 +18,54 @@ Class {
 		'leftEnd',
 		'rightEnd'
 	],
-	#category : 'OpenPonk-UML-DSL-Grammar'
+	#category : 'OpenPonk-UML-DSL-Grammar',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Grammar'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar class >> dependencies [
 	^ {OPUmlClassBuilder.
 	OPUmlMultiplicityGrammar}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> association [
 	^ leftEnd , $- asParser , rightEnd , associationName optional
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> associationName [
 	^ (#blank asParser star , $: asParser , #blank asParser star , endName)
 		==> [ :nodes | nodes fourth ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> endName [
 	^ #word asParser plus flatten
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> endSymbol [
 	^ typeSymbol / '>' asParser
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> leftEnd [
 	^ umlClassName , multiplicity trim , endName optional trim , startSymbol
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlAssociationGrammar >> multiplicity [
 	^ (($[ asParser , multiplicityRange , $] asParser) ==> [ :nodes | nodes second ]) optional
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlAssociationGrammar >> multiplicityRange [
 	^ (self dependencyAt: OPUmlMultiplicityGrammar) multiplicityRange
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 OPUmlAssociationGrammar >> rightEnd [
 	^ endSymbol trim
 		,
@@ -73,27 +75,27 @@ OPUmlAssociationGrammar >> rightEnd [
 					nodes last} ]) / umlClassName) , multiplicity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> start [
 	^ association end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> startSymbol [
 	^ typeSymbol / '<' asParser
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> type [
 	^ (startSymbol , $- asParser , endSymbol) trim
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> typeSymbol [
 	^ $- asParser / '<>' asParser / '<*>' asParser
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationGrammar >> umlClassName [
 	^ (self dependencyAt: OPUmlClassBuilder) dslName ==> [ :nodes | nodes second ]
 ]

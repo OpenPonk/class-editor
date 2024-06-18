@@ -1,10 +1,12 @@
 Class {
-	#name : #UPGSimpleAccessorsGenerator,
-	#superclass : #UPGBaseAssociationGenerator,
-	#category : 'UML-CodeGenerator-Generators'
+	#name : 'UPGSimpleAccessorsGenerator',
+	#superclass : 'UPGBaseAssociationGenerator',
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #'generator - templates' }
+{ #category : 'generator - templates' }
 UPGSimpleAccessorsGenerator >> adder: anEnd [
 	^ self
 		replace: (self templateNamed: #adder:)
@@ -14,7 +16,7 @@ UPGSimpleAccessorsGenerator >> adder: anEnd [
 			#container -> anEnd name}
 ]
 
-{ #category : #'generator - templates' }
+{ #category : 'generator - templates' }
 UPGSimpleAccessorsGenerator >> eagerGetter: anEnd [
 	^ self
 		replace: (self templateNamed: #getter)
@@ -23,7 +25,7 @@ UPGSimpleAccessorsGenerator >> eagerGetter: anEnd [
 			#_dsl_ -> (self dslFor: anEnd association)}
 ]
 
-{ #category : #'generator - templates' }
+{ #category : 'generator - templates' }
 UPGSimpleAccessorsGenerator >> getter: anEnd [
 	self context shouldUseEagerInitialization
 		ifTrue: [ ^ self eagerGetter: anEnd ].
@@ -31,7 +33,7 @@ UPGSimpleAccessorsGenerator >> getter: anEnd [
 		ifTrue: [ ^ self lazyGetter: anEnd ]
 ]
 
-{ #category : #'generator - templates' }
+{ #category : 'generator - templates' }
 UPGSimpleAccessorsGenerator >> lazyGetter: anEnd [
 	^ self
 		replace: (self templateNamed: #lazyGetter)
@@ -41,7 +43,7 @@ UPGSimpleAccessorsGenerator >> lazyGetter: anEnd [
 			#_dsl_ -> (self dslFor: anEnd association)}
 ]
 
-{ #category : #'generator - templates' }
+{ #category : 'generator - templates' }
 UPGSimpleAccessorsGenerator >> remover: anEnd [
 	^ self
 		replace: (self templateNamed: #remover:)
@@ -51,7 +53,7 @@ UPGSimpleAccessorsGenerator >> remover: anEnd [
 			#container -> anEnd name}
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 UPGSimpleAccessorsGenerator >> replace: aString with: anArray [
 	| newString |
 	newString := aString.
@@ -59,7 +61,7 @@ UPGSimpleAccessorsGenerator >> replace: aString with: anArray [
 	^ newString
 ]
 
-{ #category : #'generator - templates' }
+{ #category : 'generator - templates' }
 UPGSimpleAccessorsGenerator >> setter: anEnd [
 	^ self
 		replace: (self templateNamed: #setter:)
@@ -68,7 +70,7 @@ UPGSimpleAccessorsGenerator >> setter: anEnd [
 			#setter -> anEnd name}
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 UPGSimpleAccessorsGenerator >> templateNamed: aSymbol [
 	^ (UPGSimpleAccessorsTemplates >> aSymbol) sourceCode
 ]

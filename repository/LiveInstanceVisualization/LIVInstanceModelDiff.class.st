@@ -1,10 +1,12 @@
 Class {
-	#name : #LIVInstanceModelDiff,
-	#superclass : #Object,
-	#category : 'LiveInstanceVisualization-Diff'
+	#name : 'LIVInstanceModelDiff',
+	#superclass : 'Object',
+	#category : 'LiveInstanceVisualization-Diff',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Diff'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceModelDiff >> diffBetween: anOldModel and: aNewModel [
 	| oldHashes newHashes removed added modified propertyDiff |
 	oldHashes := anOldModel elements collect: #instanceHash.
@@ -27,7 +29,7 @@ LIVInstanceModelDiff >> diffBetween: anOldModel and: aNewModel [
 		with: #removed -> (anOldModel elements select: [ :each | removed includes: each instanceHash ])
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInstanceModelDiff >> propertyDiffBetween: anOldInstance and: aNewInstance [
 	| added removed same modified |
 	added := aNewInstance slots keys \ anOldInstance slots keys.

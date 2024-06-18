@@ -1,21 +1,23 @@
 Class {
-	#name : #OPUmlPropGrammarTest,
-	#superclass : #PPCompositeParserTest,
-	#category : 'OpenPonk-UML-DSL-Tests'
+	#name : 'OPUmlPropGrammarTest',
+	#superclass : 'PPCompositeParserTest',
+	#category : 'OpenPonk-UML-DSL-Tests',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlPropGrammarTest class >> isAbstract [
 	^ self = OPUmlPropGrammarTest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropGrammarTest >> testMultiplicity [
 	self parse: '' rule: #multiplicity.
 	self parse: '[1]' rule: #multiplicity
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropGrammarTest >> testPrefix [
 	self parse: '/' rule: #prefix.
 	self parse: '_' rule: #prefix.
@@ -23,17 +25,17 @@ OPUmlPropGrammarTest >> testPrefix [
 	self parse: '_/' rule: #prefix
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropGrammarTest >> testSymbol [
 	self parse: 'symbol' rule: #symbol
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropGrammarTest >> testType [
 	self parse: 'symbol' rule: #type
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlPropGrammarTest >> testVisibility [
 	self parse: '+' rule: #visibility.
 	self parse: '-' rule: #visibility.

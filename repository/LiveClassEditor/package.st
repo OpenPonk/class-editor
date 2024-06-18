@@ -1,1 +1,1 @@
-Package { #name : #LiveClassEditor }
+Package { #name : 'LiveClassEditor' }

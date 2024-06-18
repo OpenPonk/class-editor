@@ -1,13 +1,15 @@
 Class {
-	#name : #UPGBaseGenerator,
-	#superclass : #Object,
+	#name : 'UPGBaseGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'context'
 	],
-	#category : 'UML-CodeGenerator-Generators'
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 UPGBaseGenerator >> addEagerValueFor: anEntity in: aClass [
 	| expression |
 	expression := self defaultValueExpressionFor: anEntity.
@@ -17,7 +19,7 @@ UPGBaseGenerator >> addEagerValueFor: anEntity in: aClass [
 		in: aClass
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 UPGBaseGenerator >> addLazyValueFor: anAttribute in: aClass [
 	| expression |
 	expression := self defaultValueExpressionFor: anAttribute.
@@ -35,7 +37,7 @@ UPGBaseGenerator >> addLazyValueFor: anAttribute in: aClass [
 		classified: 'accessing'
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 UPGBaseGenerator >> addToInitialize: aCodeString in: aClass [
 	| node |
 	self ensureHasInitialize: aClass.
@@ -46,12 +48,12 @@ UPGBaseGenerator >> addToInitialize: aCodeString in: aClass [
 	(aClass >> #initialize) reformat
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 UPGBaseGenerator >> classFor: aName [
 	^ aName asSymbol asClass
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 UPGBaseGenerator >> classNameFor: aString [
 	self context shouldAlwaysUsePrefix not
 		and: [ ((Smalltalk hasClassNamed: aString)
@@ -60,17 +62,17 @@ UPGBaseGenerator >> classNameFor: aString [
 	^ self context prefix , aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGBaseGenerator >> context [
 	^ context ifNil: [ context := UPGGeneratorContext new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGBaseGenerator >> context: aGeneratorContext [
 	context := aGeneratorContext
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 UPGBaseGenerator >> defaultValueExpressionFor: anEntity [
 	(anEntity isAttribute and: [ anEntity defaultValue isNotNil ])
 		ifTrue: [ ^ anEntity defaultValue valueExpression ].
@@ -79,7 +81,7 @@ UPGBaseGenerator >> defaultValueExpressionFor: anEntity [
 	^ nil
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 UPGBaseGenerator >> ensureHasInitialize: aClass [
 	(aClass includesSelector: #initialize)
 		ifFalse: [ aClass
@@ -89,7 +91,7 @@ UPGBaseGenerator >> ensureHasInitialize: aClass [
 				classified: 'initialization' ]
 ]
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 UPGBaseGenerator >> ensureInstVariable: aName in: aClass [
 	((aClass withAllSuperclasses flatCollect: #instVarNames) includes: aName)
 		ifTrue: [ ^ false ].
@@ -97,7 +99,7 @@ UPGBaseGenerator >> ensureInstVariable: aName in: aClass [
 	^ true
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 UPGBaseGenerator >> paramNameForType: aType [
 	^ (aType name first isVowel
 		ifTrue: [ 'an' ]

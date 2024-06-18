@@ -2,17 +2,19 @@
 I take PIM model and transform it into VisualWorks PSM by appling patterns specific to the CORMAS platform.
 "
 Class {
-	#name : #UCMVWPimToPsmTransformer,
-	#superclass : #Object,
+	#name : 'UCMVWPimToPsmTransformer',
+	#superclass : 'Object',
 	#instVars : [
 		'context',
 		'typesLookup',
 		'associationsGenerator'
 	],
-	#category : 'UML-CodeGenerator-VW-Generators'
+	#category : 'UML-CodeGenerator-VW-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'VW-Generators'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 UCMVWPimToPsmTransformer class >> example [
 	| pim psm |
 	pim := 'VegetationUnit {
@@ -30,7 +32,7 @@ UCMVWPimToPsmTransformer class >> example [
 		open
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 UCMVWPimToPsmTransformer class >> example1 [
 	| pim psm wb e1 v1 v2 |
 pim := 'VegetationUnit location --- occupant Forager[*];' asClassDiagram.
@@ -58,7 +60,7 @@ RTGridLayout new
 v1
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 UCMVWPimToPsmTransformer class >> example2 [
 | pim psm wb e1 v1 v2 |
 pim := '/VegetationUnit {
@@ -86,7 +88,7 @@ RTGridLayout on: { v1 elements first . v2 elements first }.
 v1
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> accessorsFor: anAttribute [
 	| accessors collection |
 	self context shouldAddAccessors
@@ -102,7 +104,7 @@ UCMVWPimToPsmTransformer >> accessorsFor: anAttribute [
 	^ accessors , collection
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> adderFor: aFamixEntity [
 	^ FAMIXMethod new
 		name: 'add' , aFamixEntity name asEnglishSingular capitalized , ':';
@@ -110,7 +112,7 @@ UCMVWPimToPsmTransformer >> adderFor: aFamixEntity [
 		sourceAnchor: (self adderSourceFor: aFamixEntity)
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> adderSourceFor: aFamixEntity [
 	| name typeName prefix |
 	name := aFamixEntity name asEnglishSingular.
@@ -129,7 +131,7 @@ UCMVWPimToPsmTransformer >> adderSourceFor: aFamixEntity [
 						with: aFamixEntity name))
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> attributeFor: anAttribute [
 	^ (self entityFor: anAttribute)
 		isStatic: anAttribute isStatic;
@@ -137,7 +139,7 @@ UCMVWPimToPsmTransformer >> attributeFor: anAttribute [
 		yourself
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> classFor: aClass [
 	| copyClass |
 	copyClass := self entityFor: aClass.
@@ -159,18 +161,18 @@ UCMVWPimToPsmTransformer >> classFor: aClass [
 	^ copyClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UCMVWPimToPsmTransformer >> context [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UCMVWPimToPsmTransformer >> context: aContext [
 	context := aContext.
 	associationsGenerator context: context
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> copyClassesFrom: sourceModel to: targetModel [
 	sourceModel allClasses
 		do: [ :cls | 
@@ -187,13 +189,13 @@ UCMVWPimToPsmTransformer >> copyClassesFrom: sourceModel to: targetModel [
 						superclass: (typesLookup at: each superclass)) ]
 ]
 
-{ #category : #'public - transforming' }
+{ #category : 'public - transforming' }
 UCMVWPimToPsmTransformer >> createAssociationsFor: anAssociation [
 	associationsGenerator typesLookup: typesLookup.
 	associationsGenerator createAssociationFor: anAssociation
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> defaultMethodFor: anAttribute [
 	^ FAMIXMethod new
 		name: anAttribute name , '_default';
@@ -202,7 +204,7 @@ UCMVWPimToPsmTransformer >> defaultMethodFor: anAttribute [
 		sourceAnchor: (self defaultMethodSourceFor: anAttribute)
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> defaultMethodSourceFor: anAttribute [
 	^ OPUmlSingleOpaqueBehavior
 		body:
@@ -213,7 +215,7 @@ UCMVWPimToPsmTransformer >> defaultMethodSourceFor: anAttribute [
 					anAttribute defaultValue valueExpression})
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> eagerGetterSourceFor: anAttribute [
 	^ OPUmlSingleOpaqueBehavior
 		body:
@@ -224,14 +226,14 @@ UCMVWPimToPsmTransformer >> eagerGetterSourceFor: anAttribute [
 					self getterPragmaFor: anAttribute})
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> entityFor: anEntity [
 	^ anEntity class new
 		name: anEntity name;
 		yourself
 ]
 
-{ #category : #'public - transforming' }
+{ #category : 'public - transforming' }
 UCMVWPimToPsmTransformer >> generateFor: aPsmModel with: aContext [
 	| pim |
 	pim := self modelFor: aPsmModel.
@@ -240,7 +242,7 @@ UCMVWPimToPsmTransformer >> generateFor: aPsmModel with: aContext [
 	^ pim
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> getterFor: aFamixEntity [
 	^ FAMIXMethod new
 		name: aFamixEntity name;
@@ -248,7 +250,7 @@ UCMVWPimToPsmTransformer >> getterFor: aFamixEntity [
 		sourceAnchor: (self getterSourceFor: aFamixEntity)
 ]
 
-{ #category : #'transforming - utility' }
+{ #category : 'transforming - utility' }
 UCMVWPimToPsmTransformer >> getterPragmaFor: anAttribute [
 	^ Pragma
 		keyword: #DCType:multiplicity:
@@ -257,14 +259,14 @@ UCMVWPimToPsmTransformer >> getterPragmaFor: anAttribute [
 			(self multiplicityFor: anAttribute multiplicity)}
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> getterSourceFor: anAttribute [
 	^ (self context shouldUseLazyInitialization and: [ anAttribute defaultValue isNotNil ])
 		ifTrue: [ self lazyGetterSourceFor: anAttribute ]
 		ifFalse: [ self eagerGetterSourceFor: anAttribute ]
 ]
 
-{ #category : #'transforming - utility' }
+{ #category : 'transforming - utility' }
 UCMVWPimToPsmTransformer >> indefiniteTypeNameFor: anEntity [
 	| prefix base |
 	base := anEntity isCollection
@@ -276,7 +278,7 @@ UCMVWPimToPsmTransformer >> indefiniteTypeNameFor: anEntity [
 	^ prefix , base
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UCMVWPimToPsmTransformer >> initialize [
 	super initialize.
 	associationsGenerator := UCMVWPsmAssociationGenerator new.
@@ -284,7 +286,7 @@ UCMVWPimToPsmTransformer >> initialize [
 	typesLookup := Dictionary new
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> isAbstractMethodFor: aClass [
 	^ FAMIXMethod new
 		name: 'isAbstract';
@@ -293,7 +295,7 @@ UCMVWPimToPsmTransformer >> isAbstractMethodFor: aClass [
 		sourceAnchor: (self isAbstractMethodSourceFor: aClass)
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> isAbstractMethodSourceFor: aClass [
 	^ OPUmlSingleOpaqueBehavior
 		body:
@@ -301,7 +303,7 @@ UCMVWPimToPsmTransformer >> isAbstractMethodSourceFor: aClass [
 	^ self = {1}' format: {aClass name})
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> lazyGetterSourceFor: anAttribute [
 	^ OPUmlSingleOpaqueBehavior
 		body:
@@ -313,7 +315,7 @@ UCMVWPimToPsmTransformer >> lazyGetterSourceFor: anAttribute [
 					anAttribute defaultValue valueExpression})
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> metaForAttributeFor: anAttribute [
 	^ Array
 		streamContents: [ :stream | 
@@ -323,26 +325,26 @@ UCMVWPimToPsmTransformer >> metaForAttributeFor: anAttribute [
 				ifTrue: [ stream nextPut: (self unitMethodFor: anAttribute) ] ]
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> methodFor: aMethod [
 	^ (self entityFor: aMethod)
 		isStatic: aMethod isStatic;
 		yourself
 ]
 
-{ #category : #'transforming - associations' }
+{ #category : 'transforming - associations' }
 UCMVWPimToPsmTransformer >> methodsForAssociation: anAssociation [
 	^ self notYetImplemented
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> modelFor: aModel [
 	^ (self entityFor: aModel)
 		name: aModel name , ' (PSM)';
 		yourself
 ]
 
-{ #category : #'transforming - utility' }
+{ #category : 'transforming - utility' }
 UCMVWPimToPsmTransformer >> multiplicityFor: aMultiplicity [
 	^ {aMultiplicity printLower asNumber}
 		,
@@ -354,7 +356,7 @@ UCMVWPimToPsmTransformer >> multiplicityFor: aMultiplicity [
 						ifFalse: [ aMultiplicity upper asNumber ])} ])
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> removerFor: aFamixEntity [
 	^ FAMIXMethod new
 		name: 'remove' , aFamixEntity name asEnglishSingular capitalized , ':';
@@ -362,7 +364,7 @@ UCMVWPimToPsmTransformer >> removerFor: aFamixEntity [
 		sourceAnchor: (self removerSourceFor: aFamixEntity)
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> removerSourceFor: aFamixEntity [
 	| name typeName prefix |
 	name := aFamixEntity name asEnglishSingular.
@@ -381,7 +383,7 @@ UCMVWPimToPsmTransformer >> removerSourceFor: aFamixEntity [
 						with: aFamixEntity name))
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> setterFor: aFamixEntity [
 	^ FAMIXMethod new
 		name: aFamixEntity name, ':';
@@ -389,7 +391,7 @@ UCMVWPimToPsmTransformer >> setterFor: aFamixEntity [
 		sourceAnchor: (self setterSourceFor: aFamixEntity)
 ]
 
-{ #category : #'transforming - accessors' }
+{ #category : 'transforming - accessors' }
 UCMVWPimToPsmTransformer >> setterSourceFor: anAttribute [
 	^ OPUmlSingleOpaqueBehavior
 		body:
@@ -402,14 +404,14 @@ UCMVWPimToPsmTransformer >> setterSourceFor: anAttribute [
 					self indefiniteTypeNameFor: anAttribute})
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 UCMVWPimToPsmTransformer >> typeFor: aType [
 	aType ifNil: [ ^ nil ].
 	typesLookup at: aType ifAbsentPut: [ self classFor: aType ].
 	^ typesLookup at: aType
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> typeMethodFor: anAttribute [
 	^ FAMIXMethod new
 		name: anAttribute name , '_type';
@@ -418,7 +420,7 @@ UCMVWPimToPsmTransformer >> typeMethodFor: anAttribute [
 		sourceAnchor: (self typeMethodSourceFor: anAttribute)
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> typeMethodSourceFor: anAttribute [
 	^ OPUmlSingleOpaqueBehavior
 		body:
@@ -429,7 +431,7 @@ UCMVWPimToPsmTransformer >> typeMethodSourceFor: anAttribute [
 					anAttribute declaredType name})
 ]
 
-{ #category : #'transforming - utility' }
+{ #category : 'transforming - utility' }
 UCMVWPimToPsmTransformer >> typeNameFor: aFamixType [
 	(aFamixType isKindOf: FAMIXAttribute)
 		ifTrue: [ ^ self typeNameFor: aFamixType declaredType ].
@@ -438,7 +440,7 @@ UCMVWPimToPsmTransformer >> typeNameFor: aFamixType [
 	^ aFamixType ifNil: [ 'Object' ] ifNotNil: [ aFamixType name ]
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> unitMethodFor: anAttribute [
 	^ FAMIXMethod new
 		name: anAttribute name , '_unit';
@@ -447,7 +449,7 @@ UCMVWPimToPsmTransformer >> unitMethodFor: anAttribute [
 		sourceAnchor: (self unitMethodSourceFor: anAttribute)
 ]
 
-{ #category : #'transforming - meta' }
+{ #category : 'transforming - meta' }
 UCMVWPimToPsmTransformer >> unitMethodSourceFor: anAttribute [
 	^ OPUmlSingleOpaqueBehavior
 		body:

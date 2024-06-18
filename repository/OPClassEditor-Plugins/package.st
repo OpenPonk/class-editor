@@ -1,1 +1,1 @@
-Package { #name : #'OPClassEditor-Plugins' }
+Package { #name : 'OPClassEditor-Plugins' }

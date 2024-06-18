@@ -1,13 +1,15 @@
 Class {
-	#name : #LIVInstanceModelTest,
-	#superclass : #TestCase,
+	#name : 'LIVInstanceModelTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model'
 	],
-	#category : 'LiveInstanceVisualization-Tests'
+	#category : 'LiveInstanceVisualization-Tests',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 LIVInstanceModelTest >> setUp [
 	| specBuilder history |
 	super setUp.
@@ -18,7 +20,7 @@ LIVInstanceModelTest >> setUp [
 	model := history newState
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 LIVInstanceModelTest >> setupBuilder: aBuilder [
 	aBuilder
 		addSpec: [ :spec | 
@@ -32,7 +34,7 @@ LIVInstanceModelTest >> setupBuilder: aBuilder [
 			spec addSlot: #container -> nil ]
 ]
 
-{ #category : #'tests - adding' }
+{ #category : 'tests - adding' }
 LIVInstanceModelTest >> testAddLinkFromToAt [
 	| container item |
 	container := LIVTestContainer new.
@@ -43,7 +45,7 @@ LIVInstanceModelTest >> testAddLinkFromToAt [
 		equals: {model specificationFor: item}
 ]
 
-{ #category : #'tests - adding' }
+{ #category : 'tests - adding' }
 LIVInstanceModelTest >> testEnsureInstance [
 	| inst |
 	inst := LIVTestItem new.
@@ -52,7 +54,7 @@ LIVInstanceModelTest >> testEnsureInstance [
 	self assert: (model specificationFor: inst) instanceHash equals: inst identityHash
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 LIVInstanceModelTest >> testRemoveInstance [
 	| container item |
 	container := LIVTestContainer new.
@@ -62,7 +64,7 @@ LIVInstanceModelTest >> testRemoveInstance [
 	self assert: model elements asArray equals: {model specificationFor: container}
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 LIVInstanceModelTest >> testRemoveInstanceNot [
 	| container item |
 	container := LIVTestContainer new.
@@ -76,7 +78,7 @@ LIVInstanceModelTest >> testRemoveInstanceNot [
 			model specificationFor: item}
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 LIVInstanceModelTest >> testRemoveLinkFromToAt [
 	| container item |
 	container := LIVTestContainer new.
@@ -86,7 +88,7 @@ LIVInstanceModelTest >> testRemoveLinkFromToAt [
 	self assert: ((model specificationFor: container) slots at: #items) asArray equals: #()
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 LIVInstanceModelTest >> testRemoveLinksFromAtCollection [
 	| container item |
 	container := LIVTestContainer new.
@@ -97,7 +99,7 @@ LIVInstanceModelTest >> testRemoveLinksFromAtCollection [
 	self assert: model elements asArray equals: {model specificationFor: container}
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 LIVInstanceModelTest >> testRemoveLinksFromAtDirect [
 	| container item |
 	container := LIVTestContainer new.
@@ -108,7 +110,7 @@ LIVInstanceModelTest >> testRemoveLinksFromAtDirect [
 	self assert: model elements asArray equals: {model specificationFor: item}
 ]
 
-{ #category : #'tests - adding' }
+{ #category : 'tests - adding' }
 LIVInstanceModelTest >> testSetLinkFromToAt [
 	| container item |
 	container := LIVTestContainer new.
@@ -119,7 +121,7 @@ LIVInstanceModelTest >> testSetLinkFromToAt [
 		equals: (model specificationFor: container)
 ]
 
-{ #category : #'tests - adding' }
+{ #category : 'tests - adding' }
 LIVInstanceModelTest >> testSetValueFromToAt [
 	| container item |
 	container := LIVTestContainer new.
@@ -128,7 +130,7 @@ LIVInstanceModelTest >> testSetValueFromToAt [
 	self assert: ((model specificationFor: item) slots at: #container) equals: container
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 LIVInstanceModelTest >> testUnsetLinkFromAt [
 	| container item |
 	container := LIVTestContainer new.

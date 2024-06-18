@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*UML-CodeGenerator' }
+{ #category : '*UML-CodeGenerator' }
 String >> asEnglishSingular [
 	"Answer the singular of the receiver.  Assumes the receiver is an English noun.
 	For a more comprehensive algorithm please refer to ''An Algorithmic Approach

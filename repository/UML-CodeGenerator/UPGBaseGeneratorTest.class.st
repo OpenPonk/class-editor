@@ -1,26 +1,28 @@
 Class {
-	#name : #UPGBaseGeneratorTest,
-	#superclass : #TestCase,
+	#name : 'UPGBaseGeneratorTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'factory',
 		'model',
 		'cls',
 		'generator'
 	],
-	#category : 'UML-CodeGenerator-Tests'
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 UPGBaseGeneratorTest class >> isAbstract [
 	^ self = UPGBaseGeneratorTest
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 UPGBaseGeneratorTest >> ast: expected equals: actual [
 	self assert: (self astFor: expected) equals: (self astFor: actual)
 ]
 
-{ #category : #utilities }
+{ #category : 'utilities' }
 UPGBaseGeneratorTest >> astFor: aMethodExpression [
 	aMethodExpression isString
 		ifTrue: [ ^ RBParser parseMethod: aMethodExpression ].
@@ -29,17 +31,17 @@ UPGBaseGeneratorTest >> astFor: aMethodExpression [
 	^ aMethodExpression
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGBaseGeneratorTest >> categoryName [
 	^ 'OpenPonk-GeneratorTest'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UPGBaseGeneratorTest >> newClassNamed: aName [
 	^ self newClassNamed: aName inCategory: self categoryName
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UPGBaseGeneratorTest >> newClassNamed: aName inCategory: aCategory [
 	| klass |
 	klass := Object
@@ -51,19 +53,19 @@ UPGBaseGeneratorTest >> newClassNamed: aName inCategory: aCategory [
 	^ klass
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGBaseGeneratorTest >> setUp [
 	super setUp.
 	factory := OPUmlDSLFactory new.
 	self suspendedDo: [ RPackage organizer registerPackageNamed: self categoryName ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGBaseGeneratorTest >> suspendedDo: aBlock [
 	SystemAnnouncer uniqueInstance suspendAllWhile: aBlock
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGBaseGeneratorTest >> tearDown [
 	super tearDown.
 	self

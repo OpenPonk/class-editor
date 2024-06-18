@@ -1,35 +1,37 @@
 Class {
-	#name : #LIVTestContainer,
-	#superclass : #Object,
+	#name : 'LIVTestContainer',
+	#superclass : 'Object',
 	#instVars : [
 		'items',
 		'capacity'
 	],
-	#category : 'LiveInstanceVisualization-Tests'
+	#category : 'LiveInstanceVisualization-Tests',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Tests'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 LIVTestContainer >> addItem: anItem [
 	items add: anItem
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestContainer >> capacity [
 	^ capacity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVTestContainer >> capacity: anObject [
 	capacity := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LIVTestContainer >> initialize [
 	super initialize.
 	items := OrderedCollection new
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 LIVTestContainer >> removeItem: anItem [
 	items remove: anItem
 ]

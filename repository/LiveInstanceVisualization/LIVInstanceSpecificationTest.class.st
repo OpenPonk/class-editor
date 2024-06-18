@@ -1,20 +1,22 @@
 Class {
-	#name : #LIVInstanceSpecificationTest,
-	#superclass : #TestCase,
+	#name : 'LIVInstanceSpecificationTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'model',
 		'spec'
 	],
-	#category : 'LiveInstanceVisualization-Tests'
+	#category : 'LiveInstanceVisualization-Tests',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 LIVInstanceSpecificationTest >> setUp [
 	super setUp.
 	spec := LIVInstanceSpecification new
 ]
 
-{ #category : #'tests - printing' }
+{ #category : 'tests - printing' }
 LIVInstanceSpecificationTest >> testPrintOn [
 	spec name: 'item'.
 	spec classifier: LIVTestItem.

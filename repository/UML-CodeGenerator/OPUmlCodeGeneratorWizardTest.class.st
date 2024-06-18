@@ -1,10 +1,12 @@
 Class {
-	#name : #OPUmlCodeGeneratorWizardTest,
-	#superclass : #TestCase,
-	#category : 'UML-CodeGenerator-Windows'
+	#name : 'OPUmlCodeGeneratorWizardTest',
+	#superclass : 'TestCase',
+	#category : 'UML-CodeGenerator-Windows',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Windows'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlCodeGeneratorWizardTest >> testCreateContext [
 	| dict context |
 	dict := {#package -> 'Target'.

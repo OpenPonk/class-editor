@@ -1,20 +1,22 @@
 Class {
-	#name : #LIVClassBoxBuilder,
-	#superclass : #Object,
+	#name : 'LIVClassBoxBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'model',
 		'baseShape',
 		'nameShape'
 	],
-	#category : 'LiveInstanceVisualization-Inspector-Extensions'
+	#category : 'LiveInstanceVisualization-Inspector-Extensions',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Inspector-Extensions'
 }
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 LIVClassBoxBuilder >> baseShape [
 	^ baseShape ifNil: [ baseShape := self newBaseShape ]
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 LIVClassBoxBuilder >> build [
 	| el |
 	el := baseShape.
@@ -22,34 +24,34 @@ LIVClassBoxBuilder >> build [
 	^ el
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LIVClassBoxBuilder >> initialize [
 	super initialize.
 	baseShape := self newBaseShape
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVClassBoxBuilder >> model [
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LIVClassBoxBuilder >> model: anObject [
 	model := anObject.
 	self nameShape text: model name
 ]
 
-{ #category : #shapes }
+{ #category : 'shapes' }
 LIVClassBoxBuilder >> nameShape [
 	^ nameShape ifNil: [ nameShape := self newNameShape ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LIVClassBoxBuilder >> newBaseShape [
 	^ OPUmlClassifierShape new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LIVClassBoxBuilder >> newNameShape [
 	^ OPUmlNameLabel new
 		text: #Undefined;

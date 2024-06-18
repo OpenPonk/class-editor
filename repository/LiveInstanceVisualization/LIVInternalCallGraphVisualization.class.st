@@ -1,10 +1,12 @@
 Class {
-	#name : #LIVInternalCallGraphVisualization,
-	#superclass : #Object,
-	#category : 'LiveInstanceVisualization-Inspector-Extensions'
+	#name : 'LIVInternalCallGraphVisualization',
+	#superclass : 'Object',
+	#category : 'LiveInstanceVisualization-Inspector-Extensions',
+	#package : 'LiveInstanceVisualization',
+	#tag : 'Inspector-Extensions'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInternalCallGraphVisualization class >> nautilusClassesMenu: aBuilder [
 	<contextMenu>
 	<nautilusGlobalClassMenu>
@@ -17,7 +19,7 @@ LIVInternalCallGraphVisualization class >> nautilusClassesMenu: aBuilder [
 		withSeparatorAfter.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInternalCallGraphVisualization >> addMenuFor: aFigure [
 	| menu |
 	menu := PluggableMenuSpec new model: aFigure.
@@ -27,7 +29,7 @@ LIVInternalCallGraphVisualization >> addMenuFor: aFigure [
 	aFigure when: TRMouseRightClick do: [ :event | menu asMenuMorph popUpInWorld ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LIVInternalCallGraphVisualization >> view: aView class: aClassDescription [
 	| b els |
 	b := RTMondrian new.

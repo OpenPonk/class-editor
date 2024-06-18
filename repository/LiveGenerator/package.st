@@ -1,1 +1,1 @@
-Package { #name : #LiveGenerator }
+Package { #name : 'LiveGenerator' }

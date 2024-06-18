@@ -1,15 +1,17 @@
 Class {
-	#name : #OPUmlLiteralGrammarTest,
-	#superclass : #PPCompositeParserTest,
-	#category : 'OpenPonk-UML-DSL-Tests'
+	#name : 'OPUmlLiteralGrammarTest',
+	#superclass : 'PPCompositeParserTest',
+	#category : 'OpenPonk-UML-DSL-Tests',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlLiteralGrammarTest >> parserClass [
 	^ OPUmlLiteralGrammar
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlLiteralGrammarTest >> testNatural [
 	self parse: '123' rule: #natural
 ]

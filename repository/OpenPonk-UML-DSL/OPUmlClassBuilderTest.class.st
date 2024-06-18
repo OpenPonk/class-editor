@@ -1,15 +1,17 @@
 Class {
-	#name : #OPUmlClassBuilderTest,
-	#superclass : #PPCompositeParserTest,
-	#category : 'OpenPonk-UML-DSL-Tests'
+	#name : 'OPUmlClassBuilderTest',
+	#superclass : 'PPCompositeParserTest',
+	#category : 'OpenPonk-UML-DSL-Tests',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Tests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassBuilderTest >> parserClass [
 	^ OPUmlClassBuilder
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testAbstractClass [
 	self parse: '/MyClass {}' rule: #classBlock.
 	self assert: result class equals: FAMIXClass.
@@ -17,7 +19,7 @@ OPUmlClassBuilderTest >> testAbstractClass [
 	self assert: result isAbstract
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testBlockWithDefaultValue [
 	self
 		parse:
@@ -28,7 +30,7 @@ OPUmlClassBuilderTest >> testBlockWithDefaultValue [
 	self assert: result size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testClass [
 	self parse: 'MyClass {}' rule: #classBlock.
 	self assert: result class equals: FAMIXClass.
@@ -36,7 +38,7 @@ OPUmlClassBuilderTest >> testClass [
 	self deny: result isAbstract
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testClassWithDefaultValue [
 	self
 		parse:
@@ -48,7 +50,7 @@ OPUmlClassBuilderTest >> testClassWithDefaultValue [
 	self assert: result attributes first name equals: 'attr'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testClassWithStatements [
 	self
 		parse:
@@ -63,7 +65,7 @@ OPUmlClassBuilderTest >> testClassWithStatements [
 	self assert: result methods first name equals: 'op'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testClassWithStereotype [
 	self parse: 'MyClass <<meta,class>> {}' rule: #classBlock.
 	self assert: result class equals: FAMIXClass.
@@ -73,25 +75,25 @@ OPUmlClassBuilderTest >> testClassWithStereotype [
 	self assert: result stereotypes second name equals: 'class'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testDslName [
 	self parse: 'MyClass' rule: #dslName.
 	self assert: result equals: #(false 'MyClass')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testDslName1 [
 	self parse: '/MyClass' rule: #dslName.
 	self assert: result equals: #(true 'MyClass')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testDslName2 [
 	self parse: '/::MyClass' rule: #dslName.
 	self assert: result equals: #(true '::MyClass')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testEmptyBlock [
 	self parse: '{}' rule: #block.
 	self parse: '{ }' rule: #block.
@@ -102,59 +104,59 @@ OPUmlClassBuilderTest >> testEmptyBlock [
 		rule: #block
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testFqn [
 	self parse: 'MyClass' rule: #fqn.
 	self assert: result equals: 'MyClass'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testFqn1 [
 	self parse: '::MyClass' rule: #fqn.
 	self assert: result equals: '::MyClass'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testFqn2 [
 	self parse: 'NS::MyClass' rule: #fqn.
 	self assert: result equals: 'NS::MyClass'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testKeyword [
 	self parse: '' rule: #keyword.
 	self assert: result equals: OrderedCollection new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testKeyword1 [
 	self parse: '<<aaa,bbb>>' rule: #keyword.
 	self assert: result first name equals: 'aaa'.
 	self assert: result second name equals: 'bbb'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testKeywordSpaced [
 	self parse: '<< aaa , bbb >>' rule: #keyword.
 	self assert: result first name equals: 'aaa'.
 	self assert: result second name equals: 'bbb'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testStatement [
 	self parse: 'attr : Type' rule: #statement.
 	self assert: result class equals: FAMIXAttribute.
 	self assert: result name equals: 'attr'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testStatement2 [
 	self parse: 'op()' rule: #statement.
 	self assert: result class equals: FAMIXMethod.
 	self assert: result name equals: 'op'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testStatementWithDefaultValue [
 	self parse: 'attr : String = ''hello''
 ' rule: #statements.
@@ -162,7 +164,7 @@ OPUmlClassBuilderTest >> testStatementWithDefaultValue [
 	self assert: result first name equals: 'attr'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlClassBuilderTest >> testStatements [
 	self
 		parse:

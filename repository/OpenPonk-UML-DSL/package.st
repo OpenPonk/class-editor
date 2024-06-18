@@ -1,1 +1,1 @@
-Package { #name : #'OpenPonk-UML-DSL' }
+Package { #name : 'OpenPonk-UML-DSL' }

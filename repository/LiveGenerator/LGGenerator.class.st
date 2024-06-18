@@ -1,18 +1,19 @@
 Class {
-	#name : #LGGenerator,
-	#superclass : #Object,
+	#name : 'LGGenerator',
+	#superclass : 'Object',
 	#instVars : [
 		'object'
 	],
-	#category : 'LiveGenerator'
+	#category : 'LiveGenerator',
+	#package : 'LiveGenerator'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LGGenerator class >> on: anObject [
 	^ self new setObject: anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LGGenerator >> dictionaryToStructureNamed: aName [
 	| keys cls |
 	self assert: [ object isDictionary ].
@@ -33,7 +34,7 @@ LGGenerator >> dictionaryToStructureNamed: aName [
 	cls browse
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LGGenerator >> selectorForName: aString [
 	"selector must adhere to /^[a-z][a-zA-Z0-9_]*$/"
 
@@ -44,7 +45,7 @@ LGGenerator >> selectorForName: aString [
 	^ selector uncapitalized asSymbol
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 LGGenerator >> setObject: anObject [
  object := anObject
 ]

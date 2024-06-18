@@ -2,22 +2,24 @@
 I take [FAMIX] model and generate annotated source code for it.
 "
 Class {
-	#name : #UPGGenerator,
-	#superclass : #UPGBaseGenerator,
+	#name : 'UPGGenerator',
+	#superclass : 'UPGBaseGenerator',
 	#instVars : [
 		'associationsGenerator'
 	],
-	#category : 'UML-CodeGenerator-Generators'
+	#category : 'UML-CodeGenerator-Generators',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Generators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGGenerator >> associationsGenerator [
 	^ associationsGenerator
 		ifNil: [ (associationsGenerator := self associationsGeneratorFor: self context accessorsStyle)
 				context: self context ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGGenerator >> associationsGeneratorFor: aStyle [
 	aStyle = #simple
 		ifTrue: [ ^ UPGSimpleAccessorsGenerator new ].
@@ -28,7 +30,7 @@ UPGGenerator >> associationsGeneratorFor: aStyle [
 	self error: 'Unrecognized style ' , aStyle
 ]
 
-{ #category : #'generator - accessors' }
+{ #category : 'generator - accessors' }
 UPGGenerator >> createAccessorsFor: anAttribute in: aClass [
 	| parameterName prefix isCollection |
 	context shouldAddAccessors
@@ -46,12 +48,12 @@ UPGGenerator >> createAccessorsFor: anAttribute in: aClass [
 		ifTrue: [ self createCollectionAccessorsFor: anAttribute in: aClass ]
 ]
 
-{ #category : #'generator - association' }
+{ #category : 'generator - association' }
 UPGGenerator >> createAssociationFor: anAssociation [
 	self associationsGenerator createAssociationFor: anAssociation
 ]
 
-{ #category : #'generator - attribute' }
+{ #category : 'generator - attribute' }
 UPGGenerator >> createAttributeFor: anAttribute in: aClass [
 	| cls |
 	cls := aClass.
@@ -65,7 +67,7 @@ UPGGenerator >> createAttributeFor: anAttribute in: aClass [
 		ifTrue: [ self addLazyValueFor: anAttribute in: cls ]
 ]
 
-{ #category : #'generator - class' }
+{ #category : 'generator - class' }
 UPGGenerator >> createClassFor: aClass [
 	| parentName |
 	(self isForeignClass: aClass)
@@ -81,7 +83,7 @@ UPGGenerator >> createClassFor: aClass [
 		category: self context package
 ]
 
-{ #category : #'generator - class' }
+{ #category : 'generator - class' }
 UPGGenerator >> createClassesFor: aCollection [
 	"Super must be created before subclasses."
 
@@ -89,7 +91,7 @@ UPGGenerator >> createClassesFor: aCollection [
 		collect: [ :each | self createFullClassFor: each ]
 ]
 
-{ #category : #'generator - accessors' }
+{ #category : 'generator - accessors' }
 UPGGenerator >> createCollectionAccessorsFor: aFamixEntity in: aClass [
 	| name typeName prefix |
 	name := aFamixEntity name asEnglishSingular.
@@ -109,7 +111,7 @@ UPGGenerator >> createCollectionAccessorsFor: aFamixEntity in: aClass [
 		classified: 'adding/removing'
 ]
 
-{ #category : #'generator - class' }
+{ #category : 'generator - class' }
 UPGGenerator >> createFullClassFor: aFamixClass [
 	| cls |
 	cls := self createClassFor: aFamixClass.
@@ -118,7 +120,7 @@ UPGGenerator >> createFullClassFor: aFamixClass [
 	^ cls
 ]
 
-{ #category : #'generator - accessors' }
+{ #category : 'generator - accessors' }
 UPGGenerator >> createGetter: aName pragma: aPragma in: aClass [
 	aClass
 		compile:
@@ -128,7 +130,7 @@ UPGGenerator >> createGetter: aName pragma: aPragma in: aClass [
 		classified: 'accessing'
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 UPGGenerator >> createMethodFor: aFamixMethod in: aClass [
 	| name selector parameters|
 	self context shouldOverrideMethods not & (aClass selectors includes: aFamixMethod name)
@@ -155,7 +157,7 @@ UPGGenerator >> createMethodFor: aFamixMethod in: aClass [
 	(aClass >> aFamixMethod name asSymbol) reformat
 ]
 
-{ #category : #'generator - accessors' }
+{ #category : 'generator - accessors' }
 UPGGenerator >> createSetter: aName parameter: aParameterName in: aClass [
 	aClass
 		compile:
@@ -169,7 +171,7 @@ UPGGenerator >> createSetter: aName parameter: aParameterName in: aClass [
 		classified: 'accessing'
 ]
 
-{ #category : #'generator - model' }
+{ #category : 'generator - model' }
 UPGGenerator >> generateFromModel: aModel [
 	self context shouldShowProgressBar
 		ifTrue: [ ^ self generateWithProgressBar: aModel ].
@@ -178,7 +180,7 @@ UPGGenerator >> generateFromModel: aModel [
 	aModel allBinaryAssociations do: [ :each | self createAssociationFor: each ]
 ]
 
-{ #category : #'generator - model' }
+{ #category : 'generator - model' }
 UPGGenerator >> generateWithProgressBar: aModel [
 	'Generating...'
 		displayProgressFrom: 0
@@ -197,7 +199,7 @@ UPGGenerator >> generateWithProgressBar: aModel [
 					bar increment ] ]
 ]
 
-{ #category : #'generator - accessors' }
+{ #category : 'generator - accessors' }
 UPGGenerator >> getterPragmaFor: anAttribute [
 	^ Pragma
 		keyword: #DCType:multiplicity:
@@ -206,18 +208,18 @@ UPGGenerator >> getterPragmaFor: anAttribute [
 			(self multiplicityFor: anAttribute multiplicity)}
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 UPGGenerator >> isForeignClass: aClass [
 	^ (Smalltalk hasClassNamed: aClass name)
 		and: [ (aClass name asClass package name = self context package) not ]
 ]
 
-{ #category : #'generator - method' }
+{ #category : 'generator - method' }
 UPGGenerator >> methodPragmaFor: aFamixMethod [
 	^ Pragma keyword: #DCMethod: arguments: {aFamixMethod umlSignature}
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 UPGGenerator >> multiplicityFor: aMultiplicity [
 	^ {aMultiplicity printLower asNumber}
 		,
@@ -229,13 +231,13 @@ UPGGenerator >> multiplicityFor: aMultiplicity [
 						ifFalse: [ aMultiplicity upper asNumber ])} ])
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 UPGGenerator >> sortedHierarchyFor: classes [
 	^ classes asArray
 		sorted: [ :a :b | (b superclassHierarchy includes: a) | (a superclassHierarchy includes: b) not ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UPGGenerator >> typeNameFor: aFamixType [
 	(aFamixType isKindOf: FAMIXAttribute)
 		ifTrue: [ ^ self typeNameFor: aFamixType declaredType ].

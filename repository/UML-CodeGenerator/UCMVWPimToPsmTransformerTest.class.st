@@ -1,6 +1,6 @@
 Class {
-	#name : #UCMVWPimToPsmTransformerTest,
-	#superclass : #TestCase,
+	#name : 'UCMVWPimToPsmTransformerTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'pim',
 		'transformer',
@@ -8,16 +8,18 @@ Class {
 		'input',
 		'result'
 	],
-	#category : 'UML-CodeGenerator-Tests'
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 UCMVWPimToPsmTransformerTest >> setUp [
 	super setUp.
 	transformer := UCMVWPimToPsmTransformer new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testAccessorsCollectionFor [
 	input := FAMIXAttribute named: 'items'.
 	input multiplicity upper: 2.
@@ -26,7 +28,7 @@ UCMVWPimToPsmTransformerTest >> testAccessorsCollectionFor [
 	self assert: (result collect: #name) equals: #(items items: addItem: removeItem:)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testAccessorsFor [
 	input := FAMIXAttribute named: 'item'.
 	transformer context withAccessors.
@@ -34,7 +36,7 @@ UCMVWPimToPsmTransformerTest >> testAccessorsFor [
 	self assert: (result collect: #name) equals: #(item item:)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testAccessorsNotFor [
 	input := FAMIXAttribute named: 'item'.
 	transformer context withoutAccessors.
@@ -42,7 +44,7 @@ UCMVWPimToPsmTransformerTest >> testAccessorsNotFor [
 	self assert: result equals: #()
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testAdderFor [
 	input := FAMIXAttribute named: 'items'.
 	input multiplicity upper: 2.
@@ -51,7 +53,7 @@ UCMVWPimToPsmTransformerTest >> testAdderFor [
 	self assert: result protocol equals: 'adding/removing'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testAdderSourceFor [
 	input := FAMIXAttribute named: 'items'.
 	input multiplicity upper: 2.
@@ -63,7 +65,7 @@ UCMVWPimToPsmTransformerTest >> testAdderSourceFor [
 	items add: anObject'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testClassAbstractFor [
 	input := FAMIXClass named: 'Item'.
 	input isAbstract: true.
@@ -73,7 +75,7 @@ UCMVWPimToPsmTransformerTest >> testClassAbstractFor [
 	self assert: result methods first name equals: 'isAbstract'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testClassFor [
 	input := FAMIXClass named: 'Item'.
 	input addAttribute: (FAMIXAttribute named: 'item').
@@ -87,7 +89,7 @@ UCMVWPimToPsmTransformerTest >> testClassFor [
 	self deny: result methods last = input methods last
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testCopyClassesFromTo [
 	input := MooseModel new.
 	input add: (FAMIXClass named: 'Child').
@@ -104,7 +106,7 @@ UCMVWPimToPsmTransformerTest >> testCopyClassesFromTo [
 		deny: result allInheritanceDefinitions first = input allInheritanceDefinitions first
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testDefaultMethodFor [
 	(input := FAMIXAttribute named: 'item')
 		defaultValue: (OPFAMIXValueSpecification from: '15').
@@ -114,7 +116,7 @@ UCMVWPimToPsmTransformerTest >> testDefaultMethodFor [
 	self assert: result isStatic
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testDefaultMethodSourceFor [
 	(input := FAMIXAttribute named: 'item')
 		defaultValue: (OPFAMIXValueSpecification from: '15').
@@ -126,7 +128,7 @@ UCMVWPimToPsmTransformerTest >> testDefaultMethodSourceFor [
 	^ 15'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testEntityFor [
 	pim := FAMIXClass named: 'item'.
 	psm := transformer entityFor: pim.
@@ -135,7 +137,7 @@ UCMVWPimToPsmTransformerTest >> testEntityFor [
 	self assert: psm name equals: pim name
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testGetterFor [
 	input := FAMIXAttribute named: 'item'.
 	result := transformer getterFor: input.
@@ -143,7 +145,7 @@ UCMVWPimToPsmTransformerTest >> testGetterFor [
 	self assert: result protocol equals: 'accessing'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testGetterSourceFor [
 	input := FAMIXAttribute named: 'item'.
 	result := transformer getterSourceFor: input.
@@ -154,7 +156,7 @@ UCMVWPimToPsmTransformerTest >> testGetterSourceFor [
 	^ item'
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testIsAbstractMethodFor [
 	input := FAMIXClass named: 'Item'.
 	result := transformer isAbstractMethodFor: input.
@@ -163,7 +165,7 @@ UCMVWPimToPsmTransformerTest >> testIsAbstractMethodFor [
 	self assert: result isStatic
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testIsAbstractMethodSourceFor [
 	input := FAMIXClass named: 'Item'.
 	result := transformer isAbstractMethodSourceFor: input.
@@ -174,7 +176,7 @@ UCMVWPimToPsmTransformerTest >> testIsAbstractMethodSourceFor [
 	^ self = Item'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testLazyGetterSourceFor [
 	(input := FAMIXAttribute named: 'item')
 		defaultValue: (OPFAMIXValueSpecification from: '15').
@@ -186,14 +188,14 @@ UCMVWPimToPsmTransformerTest >> testLazyGetterSourceFor [
 	^ item ifNil: [ item := 15 ]'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testMetaForAttributeFor [
 	input := FAMIXAttribute named: 'item'.
 	result := transformer metaForAttributeFor: input.
 	self assert: (result collect: #name) equals: #(item_type)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testMetaForAttributeFor2 [
 	(input := FAMIXAttribute named: 'item')
 		defaultValue: (OPFAMIXValueSpecification from: '15');
@@ -202,7 +204,7 @@ UCMVWPimToPsmTransformerTest >> testMetaForAttributeFor2 [
 	self assert: (result collect: #name) equals: #(item_default item_type item_unit)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UCMVWPimToPsmTransformerTest >> testModelFor [
 	pim := MooseModel named: 'hello'.
 	psm := transformer modelFor: pim.
@@ -210,7 +212,7 @@ UCMVWPimToPsmTransformerTest >> testModelFor [
 	self assert: psm name equals: 'hello (PSM)'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testRemoverFor [
 	input := FAMIXAttribute named: 'items'.
 	input multiplicity upper: 2.
@@ -219,7 +221,7 @@ UCMVWPimToPsmTransformerTest >> testRemoverFor [
 	self assert: result protocol equals: 'adding/removing'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testRemoverSourceFor [
 	input := FAMIXAttribute named: 'items'.
 	input multiplicity upper: 2.
@@ -231,7 +233,7 @@ UCMVWPimToPsmTransformerTest >> testRemoverSourceFor [
 	items remove: anObject'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testSetterFor [
 	input := FAMIXAttribute named: 'item'.
 	result := transformer setterFor: input.
@@ -239,7 +241,7 @@ UCMVWPimToPsmTransformerTest >> testSetterFor [
 	self assert: result protocol equals: 'accessing'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testSetterMultipleSourceFor [
 	input := FAMIXAttribute named: 'item'.
 	input multiplicity upper: 2.
@@ -253,7 +255,7 @@ UCMVWPimToPsmTransformerTest >> testSetterMultipleSourceFor [
 	self changed'
 ]
 
-{ #category : #'tests - accessors' }
+{ #category : 'tests - accessors' }
 UCMVWPimToPsmTransformerTest >> testSetterSourceFor [
 	input := FAMIXAttribute named: 'item'.
 	result := transformer setterSourceFor: input.
@@ -266,7 +268,7 @@ UCMVWPimToPsmTransformerTest >> testSetterSourceFor [
 	self changed'
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testTypeMethodFor [
 	input := FAMIXAttribute named: 'item'.
 	result := transformer typeMethodFor: input.
@@ -275,7 +277,7 @@ UCMVWPimToPsmTransformerTest >> testTypeMethodFor [
 	self assert: result isStatic
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testTypeMethodSourceFor [
 	(input := FAMIXAttribute named: 'item') declaredType: (FAMIXClass named: 'Number').
 	result := transformer typeMethodSourceFor: input.
@@ -286,7 +288,7 @@ UCMVWPimToPsmTransformerTest >> testTypeMethodSourceFor [
 	^ Number'
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testUnitMethodFor [
 	input := FAMIXAttribute named: 'item'.
 	result := transformer unitMethodFor: input.
@@ -295,7 +297,7 @@ UCMVWPimToPsmTransformerTest >> testUnitMethodFor [
 	self assert: result isStatic
 ]
 
-{ #category : #'tests - meta' }
+{ #category : 'tests - meta' }
 UCMVWPimToPsmTransformerTest >> testUnitMethodSourceFor [
 	(input := FAMIXAttribute named: 'item') unit: 'kg'.
 	result := transformer unitMethodSourceFor: input.

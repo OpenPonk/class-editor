@@ -2,17 +2,18 @@
 Baseline for https://github.com/OpenPonk/class-editor
 "
 Class {
-	#name : #BaselineOfClassEditor,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfClassEditor
+	#name : 'BaselineOfClassEditor',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfClassEditor',
+	#package : 'BaselineOfClassEditor'
 }
 
-{ #category : #plugins }
+{ #category : 'plugins' }
 BaselineOfClassEditor class >> loadPlugins [
 	self new loadPlugins
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfClassEditor >> baseline: spec [
 
 	<baseline>
@@ -55,7 +56,7 @@ BaselineOfClassEditor >> baseline: spec [
 		spec group: 'default' with: #( OpenPonk plugin ) ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfClassEditor >> plugins: spec [
 
 	spec baseline: 'OntoUMLVerificationFramework' with: [

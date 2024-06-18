@@ -10,12 +10,14 @@
 <type-symbol> ::=  '-' | '<>' | '<*>'
 "
 Class {
-	#name : #OPUmlAssociationBuilder,
-	#superclass : #OPUmlAssociationGrammar,
-	#category : 'OpenPonk-UML-DSL-Builders'
+	#name : 'OPUmlAssociationBuilder',
+	#superclass : 'OPUmlAssociationGrammar',
+	#category : 'OpenPonk-UML-DSL-Builders',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Builders'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> association [
 	^ super association
 		==> [ :nodes | 
@@ -41,7 +43,7 @@ OPUmlAssociationBuilder >> association [
 			assoc ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> endSymbol [
 	^ super endSymbol
 		==>
@@ -52,7 +54,7 @@ OPUmlAssociationBuilder >> endSymbol [
 				ifFalse: [ nodes ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> leftEnd [
 	^ super leftEnd
 		==> [ :nodes | 
@@ -64,7 +66,7 @@ OPUmlAssociationBuilder >> leftEnd [
 			nodes fourth second} ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> multiplicity [
 	^ super multiplicity trim
 		==>
@@ -79,7 +81,7 @@ OPUmlAssociationBuilder >> multiplicity [
 			m ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> multiplicityRange [
 	^ super multiplicityRange
 		==>
@@ -97,7 +99,7 @@ OPUmlAssociationBuilder >> multiplicityRange [
 			Array with: min with: max ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> rightEnd [
 	^ super rightEnd
 		==> [ :n | 
@@ -121,7 +123,7 @@ OPUmlAssociationBuilder >> rightEnd [
 			nodes fourth second} ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> startSymbol [
 	^ super startSymbol
 		==>
@@ -132,7 +134,7 @@ OPUmlAssociationBuilder >> startSymbol [
 				ifFalse: [ nodes ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlAssociationBuilder >> typeSymbol [
 	^ super typeSymbol
 		==>

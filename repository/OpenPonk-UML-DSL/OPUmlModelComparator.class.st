@@ -2,12 +2,14 @@
 I compare two models and decide if they are equal.
 "
 Class {
-	#name : #OPUmlModelComparator,
-	#superclass : #Object,
-	#category : 'OpenPonk-UML-DSL-Tests'
+	#name : 'OPUmlModelComparator',
+	#superclass : 'Object',
+	#category : 'OpenPonk-UML-DSL-Tests',
+	#package : 'OpenPonk-UML-DSL',
+	#tag : 'Tests'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlModelComparator >> model: a equals: b [
 	a class = b class
 		ifFalse: [ ^ false ].
@@ -20,17 +22,17 @@ OPUmlModelComparator >> model: a equals: b [
 	^ self notYetImplemented
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlModelComparator >> multiplicity: a equals: b [
 	^ a lower = b lower & (a upper = b upper)
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlModelComparator >> name: a equals: b [
 	^ a = b
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlModelComparator >> operation: a equals: b [
 	(self name: a name equals: b name)
 		ifFalse: [ ^ false ].
@@ -55,7 +57,7 @@ OPUmlModelComparator >> operation: a equals: b [
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlModelComparator >> parameter: a equals: b [
 	(self name: a name equals: b name)
 		ifFalse: [ ^ false ].

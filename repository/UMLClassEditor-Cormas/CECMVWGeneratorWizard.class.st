@@ -2,24 +2,26 @@
 I am a Wizard for generating Cormas VW code from MooseModel.
 "
 Class {
-	#name : #CECMVWGeneratorWizard,
-	#superclass : #WizardControl,
+	#name : 'CECMVWGeneratorWizard',
+	#superclass : 'WizardControl',
 	#instVars : [
 		'model'
 	],
 	#classVars : [
 		'LastValues'
 	],
-	#category : 'UMLClassEditor-Cormas-Windows'
+	#category : 'UMLClassEditor-Cormas-Windows',
+	#package : 'UMLClassEditor-Cormas',
+	#tag : 'Windows'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CECMVWGeneratorWizard class >> open [
 	<script>
 	^ self new open
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CECMVWGeneratorWizard class >> openOn: aModel [
 	<script>
 	^ self new
@@ -27,7 +29,7 @@ CECMVWGeneratorWizard class >> openOn: aModel [
 		open
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 CECMVWGeneratorWizard >> addConfigPane [
 	| pane |
 	pane := WizardSinglePane new.
@@ -41,19 +43,19 @@ CECMVWGeneratorWizard >> addConfigPane [
 	self addPane: pane
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 CECMVWGeneratorWizard >> initialize [
 	super initialize.
 	self addConfigPane.
 	self atEndDo: [ :dictionary | self runGeneratorWith: dictionary ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CECMVWGeneratorWizard >> model: aModel [
 	model := aModel
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 CECMVWGeneratorWizard >> runGeneratorWith: aDictionary [
 	(aDictionary at: #targetFile) asFileReference
 		ensureDelete;

@@ -1,10 +1,12 @@
 Class {
-	#name : #CormasUmlClassController,
-	#superclass : #Object,
-	#category : 'UMLClassEditor-Cormas-Controllers'
+	#name : 'CormasUmlClassController',
+	#superclass : 'Object',
+	#category : 'UMLClassEditor-Cormas-Controllers',
+	#package : 'UMLClassEditor-Cormas',
+	#tag : 'Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CormasUmlClassController >> addAutomaticCormasAssociation [
 	| sourceClass tool paletteModel |
 	sourceClass := self diagramController model allClasses
@@ -28,7 +30,7 @@ CormasUmlClassController >> addAutomaticCormasAssociation [
 	paletteModel selectedTool targetSelected: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUmlClassController >> buildAbstractEditorForm: aForm [
 	(aForm addCheckbox: 'Is Abstract')
 		state: self model isAbstract;
@@ -41,7 +43,7 @@ CormasUmlClassController >> buildAbstractEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUmlClassController >> buildStereotypeEditorForm: aForm [
 	| repeat stereotypes |
 	repeat := [ :str :num | String withAll: ((1 to: num) flatCollect: [ :i | str ]) ].
@@ -59,7 +61,7 @@ CormasUmlClassController >> buildStereotypeEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CormasUmlClassController >> cormasStereotypes [
 	| cls dict depth |
 	"((CormasNS.Kernel.Entity withAllSubclasses
@@ -73,7 +75,7 @@ CormasUmlClassController >> cormasStereotypes [
 		sorted: [ :a :b | a value < b value or: [ a value = b value & (a key < b key) ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 CormasUmlClassController >> removeAutomaticCormasAssociation [
 	| sourceClass |
 	sourceClass := self diagramController model allClasses

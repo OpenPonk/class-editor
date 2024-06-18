@@ -1,13 +1,15 @@
 Class {
-	#name : #UPGEnumGeneratorTest,
-	#superclass : #UPGBaseGeneratorTest,
+	#name : 'UPGEnumGeneratorTest',
+	#superclass : 'UPGBaseGeneratorTest',
 	#instVars : [
 		'enum'
 	],
-	#category : 'UML-CodeGenerator-Tests'
+	#category : 'UML-CodeGenerator-Tests',
+	#package : 'UML-CodeGenerator',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 UPGEnumGeneratorTest >> createEnum [
 	| mooseModel pkg enumModel |
 	mooseModel := 'TestEnumKind <<enumeration>> {
@@ -22,7 +24,7 @@ UPGEnumGeneratorTest >> createEnum [
 	^ enumModel
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 UPGEnumGeneratorTest >> setUp [
 	super setUp.
 	generator := UPGEnumGenerator new.
@@ -31,14 +33,14 @@ UPGEnumGeneratorTest >> setUp [
 	cls := model smalltalkClass
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGEnumGeneratorTest >> testClassCreated [
 	self assert: cls name equals: model name.
 	self assert: cls package name equals: model parentPackage name.
 	self assert: cls superclass name equals: #Object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGEnumGeneratorTest >> testClassMethods [
 	self assert: cls class selectors asSet equals: #(#person #system #enum) asSet.
 	self
@@ -50,7 +52,7 @@ UPGEnumGeneratorTest >> testClassMethods [
 	self assert: (cls class >> #person) protocol equals: 'accessing - literals'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGEnumGeneratorTest >> testInstanceMethods [
 	self assert: cls selectors asSet equals: #(#organization #person #system) asSet.
 	self
@@ -62,7 +64,7 @@ UPGEnumGeneratorTest >> testInstanceMethods [
 	self assert: (cls >> #organization) protocol equals: 'accessing - literals'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGEnumGeneratorTest >> testLiteralsFor [
 	self
 		assert: (generator literalsFor: model)
@@ -73,7 +75,7 @@ UPGEnumGeneratorTest >> testLiteralsFor [
 				with: #system -> '#system')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UPGEnumGeneratorTest >> testMetaMethods [
 	self assert: cls class instVarNames equals: #(#Default).
 	self assert: (cls class selectors includes: #enum).
