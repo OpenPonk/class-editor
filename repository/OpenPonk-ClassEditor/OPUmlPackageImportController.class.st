@@ -116,10 +116,3 @@ OPUmlPackageImportController >> removeModel [
 	model importedPackage: nil.
 	model importingNamespace: nil
 ]
-
-{ #category : 'construction' }
-OPUmlPackageImportController >> showWithoutDependentInDiagram: aDiagramController [
-	aDiagramController showWithoutDependentInDiagramModel: model importedPackage.
-	aDiagramController showWithoutDependentInDiagramModel: model importingNamespace.
-	^ super showWithoutDependentInDiagram: aDiagramController
-]

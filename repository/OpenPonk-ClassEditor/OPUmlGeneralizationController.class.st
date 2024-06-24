@@ -128,10 +128,3 @@ OPUmlGeneralizationController >> removeModel [
 						remove: each
 						ifAbsent: [ "do nothing" ] ] ]
 ]
-
-{ #category : 'construction' }
-OPUmlGeneralizationController >> showWithoutDependentInDiagram: aDiagramController [
-	aDiagramController showWithoutDependentInDiagramModel: model general.
-	aDiagramController showWithoutDependentInDiagramModel: model specific.
-	^ super showWithoutDependentInDiagram: aDiagramController
-]
