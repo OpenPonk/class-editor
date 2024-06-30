@@ -1,6 +1,6 @@
 Class {
 	#name : 'OPUmlElementControllerTest',
-	#superclass : 'OPElementControllerTest',
+	#superclass : 'OPAbstractElementControllerTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Controllers'
@@ -21,9 +21,4 @@ OPUmlElementControllerTest >> diagramControllerClass [
 OPUmlElementControllerTest >> diagramModelClass [
 
 	^ OPUMLPackage
-]
-
-{ #category : 'tests - model' }
-OPUmlElementControllerTest >> testModelClass [
-	self assert: controller modelClass equals: self modelClass
 ]

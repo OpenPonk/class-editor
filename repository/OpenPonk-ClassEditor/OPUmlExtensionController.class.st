@@ -28,11 +28,6 @@ OPUmlExtensionController >> createModelIn: aParentModel [
 	^ model
 ]
 
-{ #category : 'accessing' }
-OPUmlExtensionController >> dependentElements [
-	^ {model memberEnds first}
-]
-
 { #category : 'figures' }
 OPUmlExtensionController >> diagramElementClass [
 

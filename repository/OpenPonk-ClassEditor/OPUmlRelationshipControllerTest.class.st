@@ -1,6 +1,6 @@
 Class {
 	#name : 'OPUmlRelationshipControllerTest',
-	#superclass : 'OPUmlElementControllerTest',
+	#superclass : 'OPAbstractDirectionalRelationshipControllerTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Controllers'
@@ -9,6 +9,18 @@ Class {
 { #category : 'testing' }
 OPUmlRelationshipControllerTest class >> isAbstract [
 	^ self = OPUmlRelationshipControllerTest
+]
+
+{ #category : 'accessing' }
+OPUmlRelationshipControllerTest >> diagramControllerClass [
+
+	^ OPUmlPackageDiagramController
+]
+
+{ #category : 'accessing' }
+OPUmlRelationshipControllerTest >> diagramModelClass [
+
+	^ OPUMLPackage
 ]
 
 { #category : 'as yet unclassified' }

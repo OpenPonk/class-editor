@@ -50,11 +50,6 @@ OPUmlEnumLiteralControllerTest >> testEnumerationBeTarget [
 		equals: {controller model}
 ]
 
-{ #category : 'tests - accessing' }
-OPUmlEnumLiteralControllerTest >> testModelClass [
-	self assert: controller modelClass equals: self modelClass
-]
-
 { #category : 'tests - removing' }
 OPUmlEnumLiteralControllerTest >> testRemoveFromView [
 

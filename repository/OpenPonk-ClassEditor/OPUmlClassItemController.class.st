@@ -6,6 +6,19 @@ Class {
 	#tag : 'Controllers'
 }
 
+{ #category : 'construction' }
+OPUmlClassItemController >> dependingOnElements [
+
+	| asSetOrEmpty |
+	asSetOrEmpty := [ :nullableElement |
+	                nullableElement
+		                ifNil: [ Set empty ]
+		                ifNotNil: [ :element | Set with: element ] ].
+	^ super dependingOnElements , (asSetOrEmpty value: model owningClass)
+	  , (asSetOrEmpty value: model interface)
+	  , (asSetOrEmpty value: model datatype)
+]
+
 { #category : 'forms' }
 OPUmlClassItemController >> descriptionIsStatic [
 	<magritteDescription>
@@ -21,6 +34,6 @@ OPUmlClassItemController >> removeModel [
 	"could be any of those, so just nil all of them"
 
 	model owningClass: nil.
-	model datatype: nil.
-	model interface: nil
+	model interface: nil.
+	model datatype: nil
 ]

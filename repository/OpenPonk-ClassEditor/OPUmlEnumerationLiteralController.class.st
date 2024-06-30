@@ -26,6 +26,12 @@ OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
 ]
 
 { #category : 'construction' }
+OPUmlEnumerationLiteralController >> dependingOnElements [
+
+	^ super dependingOnElements , (Set with: model enumeration)
+]
+
+{ #category : 'construction' }
 OPUmlEnumerationLiteralController >> diagramElementClass [
 
 	^ OPUmlEnumerationLiteralLabel

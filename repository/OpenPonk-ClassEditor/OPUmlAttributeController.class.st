@@ -33,6 +33,18 @@ OPUmlAttributeController >> createModelIn: aClass [
 	^ model
 ]
 
+{ #category : 'construction' }
+OPUmlAttributeController >> dependingOnElements [
+
+	| asSetOrEmpty |
+	asSetOrEmpty := [ :nullableElement |
+	                nullableElement
+		                ifNil: [ Set empty ]
+		                ifNotNil: [ :element | Set with: element ] ].
+	^ super dependingOnElements
+	  , (asSetOrEmpty value: model owningAssociation)
+]
+
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionDefaultValue [
 
@@ -169,6 +181,14 @@ OPUmlAttributeController >> removeDiagramElement [
 	self diagramElementOwner ifNotNil: [ :owner |
 		owner removeAttribute: self diagramElement ].
 	diagramElement := nil
+]
+
+{ #category : 'removing' }
+OPUmlAttributeController >> removeModel [
+	"could be any of those, so just nil all of them"
+
+	super removeModel.
+	model owningAssociation: nil
 ]
 
 { #category : 'accessing' }
