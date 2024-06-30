@@ -55,19 +55,6 @@ OPUmlPackageControllerTest >> testRemoveEmpty [
 	self assert: diagramController controllers isEmpty
 ]
 
-{ #category : 'tests - removing' }
-OPUmlPackageControllerTest >> testRemoveFromModel [
-	| packagedModel |
-	packagedModel := self newEmptyModel.
-	diagramController model packagedElements add: packagedModel.
-	diagramController showWithoutDependentInDiagramModel: packagedModel.
-	controller := diagramController controllerForModel: packagedModel.
-	controller removeModel.
-	self
-		assert: diagramController model packagedElements asArray
-		equals: #()
-]
-
 { #category : 'tests - diagram' }
 OPUmlPackageControllerTest >> testShowClassInDiagram [
 

@@ -9,14 +9,6 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
-OPUmlPackageImportController >> createModelIn: aParentModel [
-	self model: self modelClass new.
-	model importedPackage: aParentModel.
-	model importingNamespace: source model.
-	^ model
-]
-
 { #category : 'forms' }
 OPUmlPackageImportController >> descriptionGeneral [
 	"<magritteDescription>
@@ -103,16 +95,36 @@ OPUmlPackageImportController >> modelClass [
 
 { #category : 'forms' }
 OPUmlPackageImportController >> modelSource [
-	^ model importedPackage
+	^ model importingNamespace
+]
+
+{ #category : 'figures' }
+OPUmlPackageImportController >> modelSource: aModel in: aParentModel [
+	"answers whether model's source has been changed"
+
+	self modelSource = aModel ifTrue: [ ^ false ].
+	model importingNamespace: aModel.
+	^ true
 ]
 
 { #category : 'forms' }
 OPUmlPackageImportController >> modelTarget [
-	^ model importingNamespace
+	^ model importedPackage
+]
+
+{ #category : 'figures' }
+OPUmlPackageImportController >> modelTarget: aModel in: aParentModel [
+	"answers whether model's target has been changed"
+
+	self modelTarget = aModel ifTrue: [ ^ false ].
+	model importedPackage: aModel.
+	^ true
 ]
 
 { #category : 'removing' }
 OPUmlPackageImportController >> removeModel [
+
 	model importedPackage: nil.
-	model importingNamespace: nil
+	model importingNamespace: nil.
+	self diagramController model packagedElements remove: self model
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : 'OPUmlOperationControllerTest',
-	#superclass : 'OPUmlElementControllerTest',
+	#superclass : 'OPUmlClassifierItemControllerTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Controllers'

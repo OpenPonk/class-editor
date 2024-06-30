@@ -17,13 +17,10 @@ OPUmlOperationController >> addDiagramElementToOwner [
 
 { #category : 'construction' }
 OPUmlOperationController >> createModelIn: aParentModel [
-	self
-		model:
-			(self modelClass new
-				name: 'operation';
-				yourself).
-	aParentModel ownedOperations add: model.
-	^ model
+
+	^ (super createModelIn: aParentModel)
+		  name: 'operation';
+		  yourself
 ]
 
 { #category : 'forms' }
@@ -58,6 +55,12 @@ OPUmlOperationController >> modelClass [
 OPUmlOperationController >> placeholderName [
 
 	^ 'operation'
+]
+
+{ #category : 'construction' }
+OPUmlOperationController >> registerModelInContainer: aParentModel [
+
+	aParentModel ownedOperations add: model
 ]
 
 { #category : 'removing' }

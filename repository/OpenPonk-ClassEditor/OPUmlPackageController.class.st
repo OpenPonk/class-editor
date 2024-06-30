@@ -43,13 +43,9 @@ OPUmlPackageController >> canBeTargetFor: aController [
 
 { #category : 'construction' }
 OPUmlPackageController >> createModelIn: aParentModel [
-	| newModel names |
-	newModel := self modelClass new.
-	names := {(OPUMLPackage -> 'Package').
-	(OPUMLProfile -> 'Profile')} asDictionary.
-	newModel name: (names at: newModel class).
-	self model: newModel.
-	aParentModel packagedElements add: model.
+
+	super createModelIn: aParentModel.
+	model name: (model oclClassifierNameFrom: model class).
 	^ model
 ]
 
@@ -101,6 +97,12 @@ OPUmlPackageController >> isHideable [
 OPUmlPackageController >> modelClass [
 	modelClass ifNil: [ self beForPackage ].
 	^ modelClass
+]
+
+{ #category : 'construction' }
+OPUmlPackageController >> registerModelInContainer: aParentModel [
+
+	aParentModel packagedElements add: model
 ]
 
 { #category : 'removing' }

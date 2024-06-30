@@ -24,13 +24,10 @@ OPUmlClassifierController >> createAdornmentsBy: builder [
 
 { #category : 'construction' }
 OPUmlClassifierController >> createModelIn: aParentModel [
-	self
-		model:
-			(self modelClass new
-				name: self modelClassName;
-				yourself).
-	aParentModel packagedElements add: model.
-	^ model
+
+	^ (super createModelIn: aParentModel)
+		  name: self modelClassName;
+		  yourself
 ]
 
 { #category : 'accessing' }
@@ -82,6 +79,12 @@ OPUmlClassifierController >> isHideable [
 { #category : 'accessing' }
 OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
+]
+
+{ #category : 'construction' }
+OPUmlClassifierController >> registerModelInContainer: aParentModel [
+
+	aParentModel packagedElements add: model
 ]
 
 { #category : 'removing' }

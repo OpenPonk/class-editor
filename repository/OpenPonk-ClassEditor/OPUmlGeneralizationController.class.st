@@ -9,14 +9,6 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
-OPUmlGeneralizationController >> createModelIn: aParentModel [
-	self model: self modelClass new.
-	model general: aParentModel.
-	model specific: source model.
-	^ model
-]
-
 { #category : 'forms' }
 OPUmlGeneralizationController >> descriptionGeneral [
 	<magritteDescription>
@@ -111,9 +103,33 @@ OPUmlGeneralizationController >> modelSource [
 	^ model specific
 ]
 
+{ #category : 'figures' }
+OPUmlGeneralizationController >> modelSource: aModel in: aParentModel [
+	"answers whether model's source has been changed"
+
+	self modelSource = aModel ifTrue: [ ^ false ].
+	model specific: aModel.
+	^ true
+]
+
 { #category : 'forms' }
 OPUmlGeneralizationController >> modelTarget [
 	^ model general
+]
+
+{ #category : 'figures' }
+OPUmlGeneralizationController >> modelTarget: aModel in: aParentModel [
+	"answers whether model's target has been changed"
+
+	self modelTarget = aModel ifTrue: [ ^ false ].
+	model general: aModel.
+	^ true
+]
+
+{ #category : 'construction' }
+OPUmlGeneralizationController >> registerModelInContainer: aParentModel [
+
+	"do nothing"
 ]
 
 { #category : 'removing' }

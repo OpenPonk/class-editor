@@ -14,30 +14,6 @@ OPUmlAssociationController >> canSwitchSourceAndTarget [
 	^ self model isNotNil and: [ self model memberEnds size = 2 ]
 ]
 
-{ #category : 'construction' }
-OPUmlAssociationController >> createModelIn: aClass [
-
-	| sourceProp targetProp |
-	self model: self modelClass new.
-	(sourceProp := OPUMLProperty new)
-		owningAssociation: self model;
-		name: (source model name uncapitalized
-				 replaceAll: Character cr
-				 with: Character space);
-		type: source model.
-	(targetProp := OPUMLProperty new)
-		owningAssociation: self model;
-		name: (aClass name uncapitalized
-				 replaceAll: Character cr
-				 with: Character space);
-		type: aClass.
-	source diagramController model packagedElements add: self model.
-	model memberEnds
-		add: sourceProp;
-		add: targetProp.
-	^ model
-]
-
 { #category : 'as yet unclassified' }
 OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
 
@@ -113,12 +89,46 @@ OPUmlAssociationController >> modelClass [
 
 { #category : 'accessing' }
 OPUmlAssociationController >> modelSource [
-	^ model memberEnds first type
+
+	^ model memberEnds ifNotEmpty: [ :memberEnds | memberEnds first type ]
+]
+
+{ #category : 'construction' }
+OPUmlAssociationController >> modelSource: aModel in: aParentModel [
+
+	| property |
+	self modelSource = aModel ifTrue: [ ^ false ].
+	(property := OPUMLProperty new)
+		owningAssociation: self model;
+		name: (source model name uncapitalized
+				 replaceAll: Character cr
+				 with: Character space);
+		type: source model.
+	model memberEnds add: property.
+	^ true
 ]
 
 { #category : 'accessing' }
 OPUmlAssociationController >> modelTarget [
-	^ model memberEnds second type
+
+	^ model memberEnds size > 1
+		  ifTrue: [ model memberEnds second type ]
+		  ifFalse: [ nil ]
+]
+
+{ #category : 'construction' }
+OPUmlAssociationController >> modelTarget: aModel in: aParentModel [
+
+	| property |
+	self modelTarget = aModel ifTrue: [ ^ false ].
+	(property := OPUMLProperty new)
+		owningAssociation: self model;
+		name: (target model name uncapitalized
+				 replaceAll: Character cr
+				 with: Character space);
+		type: target model.
+	model memberEnds add: property.
+	^ true
 ]
 
 { #category : 'removing' }

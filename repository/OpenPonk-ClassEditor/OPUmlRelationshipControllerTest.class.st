@@ -1,6 +1,6 @@
 Class {
 	#name : 'OPUmlRelationshipControllerTest',
-	#superclass : 'OPUmlElementControllerTest',
+	#superclass : 'OPAbstractDirectionalRelationshipControllerTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Controllers'
@@ -12,13 +12,91 @@ OPUmlRelationshipControllerTest class >> isAbstract [
 ]
 
 { #category : 'as yet unclassified' }
-OPUmlRelationshipControllerTest >> sourceClass [
+OPUmlRelationshipControllerTest >> allElements [
 
-	^ OPUMLClass
+	^ self allElementsOf: diagramController model
 ]
 
 { #category : 'as yet unclassified' }
-OPUmlRelationshipControllerTest >> targetClass [
+OPUmlRelationshipControllerTest >> allElementsOf: aPackage [
+
+	| elements |
+	elements := Set withAll: aPackage packagedElements.
+	aPackage packagedElements
+		select: [ :each | each oclIsKindOf: #Package ]
+		thenDo: [ :each |
+			elements addAll: (self allElementsOf: each).
+			each packageImports do: [ :import |
+				elements add: import importedPackage.
+				elements add: import ] ].
+	aPackage packagedElements
+		select: [ :each |
+			(each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]
+		thenDo: [ :each |
+			each generalizations do: [ :gen |
+				elements add: gen general.
+				elements add: gen ].
+			(each ownedAttributes select: [ :attr |
+				 attr isKindOf: OPUMLProperty ]) do: [ :attr |
+				elements add: attr.
+				attr association ifNotNil: [ elements add: attr association ] ].
+			(each ownedOperations select: [ :op | op isKindOf: OPUMLOperation ])
+				do: [ :op | elements add: op ] ].
+	aPackage packagedElements
+		select: [ :each | each isKindOf: OPUMLStereotype ]
+		thenDo: [ :each |
+			each ownedAttributes
+				select: [ :attr |
+					attr association isNotNil and: [
+						attr association isKindOf: OPUMLExtension ] ]
+				thenDo: [ :attr | elements add: attr type ] ].
+	^ elements
+]
+
+{ #category : 'initialization' }
+OPUmlRelationshipControllerTest >> assignModelSource [
+]
+
+{ #category : 'initialization' }
+OPUmlRelationshipControllerTest >> assignModelTarget [
+]
+
+{ #category : 'accessing' }
+OPUmlRelationshipControllerTest >> diagramControllerClass [
+
+	^ OPUmlPackageDiagramController
+]
+
+{ #category : 'accessing' }
+OPUmlRelationshipControllerTest >> diagramModelClass [
+
+	^ OPUMLPackage
+]
+
+{ #category : 'running' }
+OPUmlRelationshipControllerTest >> setUpSourceModel [
+
+	^ super setUpSourceModel
+		  name: 'SourceModel';
+		  yourself
+]
+
+{ #category : 'running' }
+OPUmlRelationshipControllerTest >> setUpTargetModel [
+
+	^ super setUpTargetModel
+		  name: 'TargetModel';
+		  yourself
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlRelationshipControllerTest >> sourceControllerClass [
+
+	^ OPUmlClassController
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlRelationshipControllerTest >> sourceModelClass [
 
 	^ OPUMLClass
 ]
@@ -39,32 +117,4 @@ OPUmlRelationshipControllerTest >> testClassBeSource [
 	source := OPUmlClassController new.
 	source addAsSourceFor: controller.
 	self assert: controller source equals: source
-]
-
-{ #category : 'tests - creation' }
-OPUmlRelationshipControllerTest >> testClassBeTarget [
-	self subclassResponsibility
-]
-
-{ #category : 'tests - creation' }
-OPUmlRelationshipControllerTest >> testConnectionFeedback [
-
-	| sourceController targetController feedback feedbackLine edgeCreationTargetController |
-	sourceController := diagramController newControllerFor:
-		                    (self sourceClass new name: 'A').
-	targetController := diagramController newControllerFor:
-		                    (self targetClass new name: 'B').
-	sourceController showWithoutDependentInDiagram: diagramController.
-	targetController showWithoutDependentInDiagram: diagramController.
-
-	sourceController addAsSourceFor: controller.
-	edgeCreationTargetController := OPEdgeCreationTargetController 
-		                                renderForEdgeController: controller.
-	feedback := controller showAcceptFeedbackFor: controller.
-	self assert: diagramController canvas lines isNotEmpty.
-	feedbackLine := diagramController canvas lines first.
-	self assert: feedbackLine from equals: sourceController roassalShape.
-	targetController addAsTargetFor: controller.
-	feedbackLine remove.
-	self deny: (diagramController canvas lines includes: feedbackLine)
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : 'OPUmlPackageDiagramControllerTest',
-	#superclass : 'OPUmlElementControllerTest',
+	#superclass : 'OPAbstractDiagramControllerTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Controllers'
@@ -27,8 +27,8 @@ OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 
 	| class |
 	class := OPUMLClass new.
-	diagramController showWithoutDependentInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+	controller showWithoutDependentInDiagramModel: class.
+	self assert: (controller canvas nodes anySatisfy: [ :each | 
 			 each model isNotNil and: [ each model modelElement = class ] ])
 ]
 
@@ -40,7 +40,7 @@ OPUmlPackageDiagramControllerTest >> testShowClassWithAttributeInDiagram [
 	prop := OPUMLProperty new.
 	prop name: 'prop'.
 	class ownedAttributes add: prop.
-	diagramController showInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+	controller showInDiagramModel: class.
+	self assert: (controller canvas nodes anySatisfy: [ :each | 
 			 each model isNotNil and: [ each model modelElement = prop ] ])
 ]

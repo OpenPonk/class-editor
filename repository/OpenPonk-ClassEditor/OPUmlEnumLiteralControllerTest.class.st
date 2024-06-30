@@ -1,6 +1,6 @@
 Class {
 	#name : 'OPUmlEnumLiteralControllerTest',
-	#superclass : 'OPUmlElementControllerTest',
+	#superclass : 'OPUmlClassifierItemControllerTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Controllers'
@@ -9,6 +9,18 @@ Class {
 { #category : 'accessing' }
 OPUmlEnumLiteralControllerTest >> controllerClass [
 	^ OPUmlEnumerationLiteralController
+]
+
+{ #category : 'accessing' }
+OPUmlEnumLiteralControllerTest >> creationTargetControllerClass [
+
+	^ OPUmlEnumerationController
+]
+
+{ #category : 'accessing' }
+OPUmlEnumLiteralControllerTest >> creationTargetModelClass [
+
+	^ OPUMLEnumeration
 ]
 
 { #category : 'construction' }
@@ -48,11 +60,6 @@ OPUmlEnumLiteralControllerTest >> testEnumerationBeTarget [
 	self
 		assert: classController model ownedLiterals asArray
 		equals: {controller model}
-]
-
-{ #category : 'tests - accessing' }
-OPUmlEnumLiteralControllerTest >> testModelClass [
-	self assert: controller modelClass equals: self modelClass
 ]
 
 { #category : 'tests - removing' }

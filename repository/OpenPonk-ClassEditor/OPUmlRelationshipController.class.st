@@ -23,3 +23,10 @@ OPUmlRelationshipController >> magritteDescription [
 	container addAll: self stereotypeMagritteDescription.
 	^ container
 ]
+
+{ #category : 'construction' }
+OPUmlRelationshipController >> registerModelInContainer: aParentModel [
+
+	(diagramController ifNil: [ source ifNil: [ target ] ])
+		diagramController model packagedElements add: self model
+]

@@ -61,19 +61,6 @@ OPUmlStereotypeControllerTest >> testRemoveEmpty [
 ]
 
 { #category : 'tests - removing' }
-OPUmlStereotypeControllerTest >> testRemoveFromModel [
-	| class |
-	class := self newEmptyModel.
-	diagramController model packagedElements add: class.
-	diagramController showWithoutDependentInDiagramModel: class.
-	controller := diagramController controllerForModel: class.
-	controller removeModel.
-	self
-		assert: diagramController model packagedElements asArray
-		equals: #()
-]
-
-{ #category : 'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 
 	| class |

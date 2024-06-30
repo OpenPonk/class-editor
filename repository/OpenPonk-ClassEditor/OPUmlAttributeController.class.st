@@ -26,11 +26,21 @@ OPUmlAttributeController >> createDiagramElement [
 { #category : 'construction' }
 OPUmlAttributeController >> createModelIn: aClass [
 
-	self model: (self modelClass new
-			 name: self placeholderName;
-			 yourself).
-	aClass ownedAttributes add: model.
-	^ model
+	^ (super createModelIn: aClass)
+		  name: self placeholderName;
+		  yourself
+]
+
+{ #category : 'construction' }
+OPUmlAttributeController >> dependingOnElements [
+
+	| asSetOrEmpty |
+	asSetOrEmpty := [ :nullableElement |
+	                nullableElement
+		                ifNil: [ Set empty ]
+		                ifNotNil: [ :element | Set with: element ] ].
+	^ super dependingOnElements
+	  , (asSetOrEmpty value: model owningAssociation)
 ]
 
 { #category : 'forms' }
@@ -162,6 +172,12 @@ OPUmlAttributeController >> placeholderName [
 	^ 'attribute'
 ]
 
+{ #category : 'construction' }
+OPUmlAttributeController >> registerModelInContainer: aClass [
+
+	aClass ownedAttributes add: model
+]
+
 { #category : 'removing' }
 OPUmlAttributeController >> removeDiagramElement [
 
@@ -169,6 +185,14 @@ OPUmlAttributeController >> removeDiagramElement [
 	self diagramElementOwner ifNotNil: [ :owner |
 		owner removeAttribute: self diagramElement ].
 	diagramElement := nil
+]
+
+{ #category : 'removing' }
+OPUmlAttributeController >> removeModel [
+	"could be any of those, so just nil all of them"
+
+	super removeModel.
+	model owningAssociation: nil
 ]
 
 { #category : 'accessing' }

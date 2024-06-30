@@ -38,23 +38,11 @@ OPUmlClassifierControllerTest >> testRemoveEmpty [
 ]
 
 { #category : 'tests - removing' }
-OPUmlClassifierControllerTest >> testRemoveFromModel [
-
-	diagramController model packagedElements add: model.
-	diagramController showWithoutDependentInDiagramModel: model.
-	controller := diagramController controllerForModel: model.
-	controller removeModel.
-	self
-		assert: diagramController model packagedElements asArray
-		equals: #(  )
-]
-
-{ #category : 'tests - removing' }
 OPUmlClassifierControllerTest >> testRemovesDependent [
 
 	| class secondClass association ownedClass owningClass |
 	class := model.
-	secondClass := self modelClass new.
+	secondClass := self newModel.
 	diagramController model packagedElements add: class.
 	diagramController model packagedElements add: secondClass.
 	association := OPUMLAssociation new.
@@ -78,12 +66,4 @@ OPUmlClassifierControllerTest >> testRemovesDependent [
 	self
 		assertCollection: diagramController model packagedElements asArray
 		hasSameElements: { secondClass }
-]
-
-{ #category : 'tests - diagram' }
-OPUmlClassifierControllerTest >> testShowInDiagram [
-
-	diagramController showWithoutDependentInDiagramModel: model.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each |
-			 each model isNotNil and: [ each model modelElement = model ] ])
 ]

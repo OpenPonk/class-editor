@@ -18,11 +18,15 @@ OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
 { #category : 'construction' }
 OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
 
-	self model: (self modelClass new
-			 name: self placeholderName;
-			 yourself).
-	aParentModel ownedLiterals add: model.
-	^ model
+	^ (super createModelIn: aParentModel)
+		  name: self placeholderName;
+		  yourself
+]
+
+{ #category : 'construction' }
+OPUmlEnumerationLiteralController >> dependingOnElements [
+
+	^ super dependingOnElements , (Set with: model enumeration)
 ]
 
 { #category : 'construction' }
@@ -47,6 +51,12 @@ OPUmlEnumerationLiteralController >> modelClass [
 OPUmlEnumerationLiteralController >> placeholderName [
 
 	^ 'literal'
+]
+
+{ #category : 'construction' }
+OPUmlEnumerationLiteralController >> registerModelInContainer: aParentModel [
+
+	aParentModel ownedLiterals add: model
 ]
 
 { #category : 'removing' }

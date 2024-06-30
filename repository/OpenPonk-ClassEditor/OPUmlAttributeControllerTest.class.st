@@ -1,10 +1,6 @@
 Class {
 	#name : 'OPUmlAttributeControllerTest',
-	#superclass : 'OPUmlElementControllerTest',
-	#instVars : [
-		'owningController',
-		'owningClass'
-	],
+	#superclass : 'OPUmlClassifierItemControllerTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Controllers'
@@ -26,43 +22,11 @@ OPUmlAttributeControllerTest >> modelClass [
 	^ OPUMLProperty
 ]
 
-{ #category : 'running' }
-OPUmlAttributeControllerTest >> setUp [
-
-	super setUp.
-	owningClass := OPUMLClass new.
-	model owningClass: owningClass.
-	owningController := OPUmlClassController new model: owningClass
-]
-
 { #category : 'tests - creation' }
 OPUmlAttributeControllerTest >> testCanClassBeTarget [
 	| classController |
 	classController := OPUmlClassController new.
 	self assert: (classController canBeTargetFor: controller)
-]
-
-{ #category : 'tests - creation' }
-OPUmlAttributeControllerTest >> testClassBeTarget [
-
-	| classController |
-	classController := diagramController newControllerFor:
-		                   (OPUMLClass new
-			                    name: 'Class';
-			                    yourself).
-	classController showWithoutDependentInDiagram: diagramController.
-	classController addAsTargetFor: controller.
-	self
-		assert: classController model ownedAttributes asArray
-		equals: { controller model }
-]
-
-{ #category : 'tests' }
-OPUmlAttributeControllerTest >> testCreateDiagramElement [
-
-	diagramController showWithoutDependentInDiagramModel: owningClass.
-
-	super testCreateDiagramElement
 ]
 
 { #category : 'tests' }
@@ -118,10 +82,7 @@ OPUmlAttributeControllerTest >> testDoesNotShowNilName [
 OPUmlAttributeControllerTest >> testDoesShowsBlankLabel [
 
 	model name: ' '.
-	controller model: model.
-	diagramController addController: controller.
-	owningController showInDiagram: diagramController.
-	controller showInDiagram: diagramController.
+	self showInDiagram.
 
 	self assert: controller roassalShape width > 5
 ]
@@ -130,10 +91,7 @@ OPUmlAttributeControllerTest >> testDoesShowsBlankLabel [
 OPUmlAttributeControllerTest >> testDoesShowsLabel [
 
 	model name: 'attribute'.
-	controller model: model.
-	diagramController addController: controller.
-	owningController showInDiagram: diagramController.
-	controller showInDiagram: diagramController.
+	self showInDiagram.
 
 	self assert: controller roassalShape width > 5
 ]
@@ -142,10 +100,7 @@ OPUmlAttributeControllerTest >> testDoesShowsLabel [
 OPUmlAttributeControllerTest >> testDoesShowsNilLabel [
 
 	model name: nil.
-	controller model: model.
-	diagramController addController: controller.
-	owningController showInDiagram: diagramController.
-	controller showInDiagram: diagramController.
+	self showInDiagram.
 
 	self assert: controller roassalShape width > 5
 ]

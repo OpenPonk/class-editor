@@ -9,30 +9,6 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'construction' }
-OPUmlExtensionController >> createModelIn: aParentModel [
-	| sourceOwnedProp extensionOwnedProp |
-	self model: self modelClass new.
-	(sourceOwnedProp := OPUMLProperty new)
-		owningClass: source model;
-		name: 'base_' , aParentModel name;
-		type: aParentModel.
-	(extensionOwnedProp := OPUMLExtensionEnd new)
-		name: 'extension_' , source model name;
-		type: source model.
-	model ownedEnd: extensionOwnedProp.
-	model memberEnds
-		add: sourceOwnedProp;
-		add: extensionOwnedProp.
-	source diagramController model packagedElements add: model.
-	^ model
-]
-
-{ #category : 'accessing' }
-OPUmlExtensionController >> dependentElements [
-	^ {model memberEnds first}
-]
-
 { #category : 'figures' }
 OPUmlExtensionController >> diagramElementClass [
 
@@ -46,12 +22,43 @@ OPUmlExtensionController >> modelClass [
 
 { #category : 'accessing' }
 OPUmlExtensionController >> modelSource [
-	^ model memberEnds first type
+
+	^ model memberEnds ifNotEmpty: [ :memberEnds | memberEnds first type ]
+]
+
+{ #category : 'construction' }
+OPUmlExtensionController >> modelSource: aModel in: aParentModel [
+
+	| property |
+	self modelSource = aModel ifTrue: [ ^ false ].
+	(property := OPUMLExtensionEnd new)
+		owningAssociation: model;
+		name: 'extension_' , aModel name;
+		type: aModel.
+	model memberEnds add: property.
+	model ownedEnd: property.
+	^ true
 ]
 
 { #category : 'accessing' }
 OPUmlExtensionController >> modelTarget [
-	^ model memberEnds second type
+
+	^ model memberEnds size > 1
+		  ifTrue: [ model memberEnds second type ]
+		  ifFalse: [ nil ]
+]
+
+{ #category : 'construction' }
+OPUmlExtensionController >> modelTarget: aModel in: aParentModel [
+
+	| property |
+	self modelTarget = aModel ifTrue: [ ^ false ].
+	(property := OPUMLProperty new)
+		owningClass: source model;
+		name: 'base_' , aModel name;
+		type: aModel.
+	model memberEnds add: property.
+	^ true
 ]
 
 { #category : 'removing' }
