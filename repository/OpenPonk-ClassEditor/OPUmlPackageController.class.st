@@ -74,7 +74,7 @@ OPUmlPackageController >> diagramElementClass [
 	^ OPUmlPackageShape
 ]
 
-{ #category : 'figures' }
+{ #category : 'construction' }
 OPUmlPackageController >> hookDiagramElement [
 
 	super hookDiagramElement.
@@ -99,13 +99,55 @@ OPUmlPackageController >> modelClass [
 	^ modelClass
 ]
 
+{ #category : 'destruction' }
+OPUmlPackageController >> propagateRenderChanged [
+
+	self diagramElement ifNotNil: [ :de | de pushBack ].
+	self propagateRenderChangedIn: self model
+]
+
+{ #category : 'destruction' }
+OPUmlPackageController >> propagateRenderChangedIn: aPackage [
+
+	aPackage packagedElements
+		select: [ :each | each oclIsKindOf: #Classifier ]
+		thenDo: [ :each |
+			self diagramController
+				controllerForModel: each
+				ifFound: [ :classifierController |
+				classifierController packageRenderChanged ] ].
+	aPackage = self model ifFalse: [
+		self diagramController
+			controllerForModel: aPackage
+			ifFound: [ :foundController |
+			^ foundController propagateRenderChanged ] ].
+	aPackage packagedElements
+		select: [ :each | each oclIsKindOf: #Package ]
+		thenDo: [ :each | self propagateRenderChangedIn: each ]
+]
+
 { #category : 'construction' }
 OPUmlPackageController >> registerModelInContainer: aParentModel [
 
 	aParentModel packagedElements add: model
 ]
 
+{ #category : 'destruction' }
+OPUmlPackageController >> removeDiagramElement [
+
+	self diagramElement ifNil: [ ^ self ].
+	super removeDiagramElement.
+	self propagateRenderChanged
+]
+
 { #category : 'removing' }
 OPUmlPackageController >> removeModel [
 	diagramController model packagedElements remove: self model
+]
+
+{ #category : 'construction' }
+OPUmlPackageController >> renderDiagramElement [
+
+	super renderDiagramElement.
+	self propagateRenderChanged
 ]

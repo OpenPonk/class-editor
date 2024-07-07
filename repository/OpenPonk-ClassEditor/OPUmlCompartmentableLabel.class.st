@@ -12,6 +12,12 @@ OPUmlCompartmentableLabel >> extent [
 	^ self ownedElements anyOne extent
 ]
 
+{ #category : 'accessing' }
+OPUmlCompartmentableLabel >> hiddenPackages [
+
+	^ self owningElement hiddenPackages
+]
+
 { #category : 'rendering' }
 OPUmlCompartmentableLabel >> renderBasicShape [
 

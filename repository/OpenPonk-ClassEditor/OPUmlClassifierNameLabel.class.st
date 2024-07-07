@@ -18,7 +18,11 @@ OPUmlClassifierNameLabel >> defaultFontSize [
 { #category : 'accessing' }
 OPUmlClassifierNameLabel >> defaultText [
 
-	^ (self modelElement name ifNil: [ ' ' ]) ifEmpty: [ ' ' ]
+	^ String streamContents: [ :stream |
+		  self owningElement hiddenPackages do: [ :each |
+			  stream << each name asString << '::' ].
+		  stream
+		  << ((self modelElement name ifNil: [ ' ' ]) ifEmpty: [ ' ' ]) ]
 ]
 
 { #category : 'as yet unclassified' }

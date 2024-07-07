@@ -1,6 +1,9 @@
 Class {
 	#name : 'OPUmlClassifierController',
 	#superclass : 'OPUmlElementController',
+	#instVars : [
+		'packages'
+	],
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -62,13 +65,42 @@ OPUmlClassifierController >> descriptionName [
 		  yourself
 ]
 
-{ #category : 'figures' }
+{ #category : 'accessing' }
+OPUmlClassifierController >> findPackagesIn: aPackageLinkedList [
+
+	| packagedElements |
+	packagedElements := aPackageLinkedList last packagedElements.
+	(packagedElements identityIncludes: model) ifTrue: [
+		^ aPackageLinkedList ].
+	packagedElements
+		select: [ :each | each oclIsKindOf: #Package ]
+		thenDo: [ :each |
+			(self findPackagesIn: (aPackageLinkedList copyWith: each))
+				ifNotEmpty: [ :foundList | ^ foundList ] ].
+	^ LinkedList empty
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierController >> hiddenPackages [
+
+	| hiddenPackages |
+	hiddenPackages := LinkedList new.
+	self packages reverseDo: [ :each |
+		self diagramController
+			controllerForModel: each
+			ifFound: [ :ctrl | ctrl isRendered ifTrue: [ ^ hiddenPackages ] ].
+		hiddenPackages addFirst: each ].
+	^ hiddenPackages
+]
+
+{ #category : 'construction' }
 OPUmlClassifierController >> hookDiagramElement [
 
 	super hookDiagramElement.
-	
-	self diagramElement adornmentCreationBlock: [ :builder | 
-		self createAdornmentsBy: builder ]
+
+	self diagramElement adornmentCreationBlock: [ :builder |
+		self createAdornmentsBy: builder ].
+	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
 { #category : 'testing' }
@@ -79,6 +111,22 @@ OPUmlClassifierController >> isHideable [
 { #category : 'accessing' }
 OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierController >> packageRenderChanged [
+
+	self diagramElement hiddenPackages: self hiddenPackages.
+	self diagramElement isRendered ifFalse: [ ^ self ].
+	self diagramElement updateRenderFromModel
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierController >> packages [
+
+	^ packages ifNil: [
+		  packages := self findPackagesIn:
+			             (Stack with: diagramController model) ]
 ]
 
 { #category : 'construction' }

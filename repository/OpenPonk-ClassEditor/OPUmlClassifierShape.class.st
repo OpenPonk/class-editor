@@ -7,7 +7,8 @@ Class {
 		'nameLabel',
 		'stereotypeLabel',
 		'commentIcon',
-		'adornmentCreationBlock'
+		'adornmentCreationBlock',
+		'hiddenPackages'
 	],
 	#category : 'OpenPonk-ClassEditor-Shapes',
 	#package : 'OpenPonk-ClassEditor',
@@ -45,8 +46,8 @@ OPUmlClassifierShape >> createLabel: aLabelShapeClass [
 { #category : 'initialization' }
 OPUmlClassifierShape >> createOwnedElementsWithoutController [
 
-	(self ownedElements anySatisfy: [ :any | 
-		 any ownedElements anySatisfy: [ :anyInner | 
+	(self ownedElements anySatisfy: [ :any |
+		 any ownedElements anySatisfy: [ :anyInner |
 			 anyInner isKindOf: OPUmlClassifierNameLabel ] ]) ifTrue: [ ^ self ].
 	self createLabel: OPUmlClassifierNameLabel
 ]
@@ -59,6 +60,18 @@ OPUmlClassifierShape >> hasModelComments [
 	^ ownedComments isNotNil and: [ 
 		  ownedComments anySatisfy: [ :any | 
 			  any body isNotNil and: [ any body isNotEmpty ] ] ]
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierShape >> hiddenPackages [
+
+	^ hiddenPackages ifNil: [ LinkedList empty ]
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierShape >> hiddenPackages: packagesCollection [
+
+	hiddenPackages := packagesCollection
 ]
 
 { #category : 'accessing' }

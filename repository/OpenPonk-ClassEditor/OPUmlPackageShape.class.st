@@ -59,6 +59,15 @@ OPUmlPackageShape >> padding [
 	^ 40
 ]
 
+{ #category : 'update' }
+OPUmlPackageShape >> pushBack [
+
+	stereotypeLabel pushBack.
+	mainLabel pushBack.
+	roassalShape pushBack.
+	ear pushBack
+]
+
 { #category : 'rendering' }
 OPUmlPackageShape >> renderBasicShape [
 
