@@ -35,5 +35,6 @@ OPUmlClassItemController >> removeModel [
 
 	model owningClass: nil.
 	model interface: nil.
-	model datatype: nil
+	model datatype: nil.
+	super removeModel
 ]

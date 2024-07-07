@@ -72,8 +72,8 @@ OPUmlPackageShape >> pushBack [
 OPUmlPackageShape >> renderBasicShape [
 
 	^ RSBox new
-		  width: self minWidth;
-		  height: self minHeight;
+		  width: self minWidth * 2;
+		  height: self minHeight * 2;
 		  color: self fillColor;
 		  borderColor: Color black;
 		  yourself

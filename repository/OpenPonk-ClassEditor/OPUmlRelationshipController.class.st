@@ -4,8 +4,8 @@ I am an abstract controller for relationship-type elements.
 Class {
 	#name : 'OPUmlRelationshipController',
 	#superclass : 'OPDirectionalRelationshipController',
-	#traits : 'OPTUmlStereotypedElementController',
-	#classTraits : 'OPTUmlStereotypedElementController classTrait',
+	#traits : 'OPTUmlStereotypedElementController + OPTUmlPackageableController',
+	#classTraits : 'OPTUmlStereotypedElementController classTrait + OPTUmlPackageableController classTrait',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -27,6 +27,7 @@ OPUmlRelationshipController >> magritteDescription [
 { #category : 'construction' }
 OPUmlRelationshipController >> registerModelInContainer: aParentModel [
 
-	(diagramController ifNil: [ source ifNil: [ target ] ])
-		diagramController model packagedElements add: self model
+	(aParentModel ifNil: [
+		 (diagramController ifNil: [ source ifNil: [ target ] ])
+			 diagramController model ]) packagedElements add: self model
 ]

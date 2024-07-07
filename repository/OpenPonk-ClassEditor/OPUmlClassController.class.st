@@ -116,30 +116,35 @@ OPUmlClassController >> dependentElements [
 
 	| ownGeneralizations generalizationsFromSets otherClassesGeneralizations |
 	ownGeneralizations := self model generalizations.
-	generalizationsFromSets := (diagramController model packagedElements
-		                            select: [ :eachPackageElement |
-			                            eachPackageElement oclIsKindOf:
-				                            #GeneralizationSet ])
-		                           flatCollectAsSet: [ :eachSet |
-			                           eachSet generalizations select: [
-				                           :eachGeneralization |
-				                           eachGeneralization general = self model
-					                           or: [
-					                           eachGeneralization specific
-					                           = self model ] ] ].
-	otherClassesGeneralizations := (diagramController model
-		                                packagedElements select: [
-		                                :eachPackageElement |
-		                                eachPackageElement oclIsKindOf:
-			                                #Class ]) flatCollectAsSet: [
-		                               :eachClass |
-		                               eachClass generalizations select: [
-			                               :eachGeneralization |
-			                               eachGeneralization general
-			                               = self model or: [
-				                               eachGeneralization specific
-				                               = self model ] ] ].
-
+	generalizationsFromSets := nil.
+	generalizationsFromSets := self
+		                           parentPackageDo: [ :parentPackage |
+			                           (parentPackage packagedElements select: [
+				                            :eachPackageElement |
+				                            eachPackageElement oclIsKindOf:
+					                            #GeneralizationSet ])
+				                           flatCollectAsSet: [ :eachSet |
+					                           eachSet generalizations select: [
+						                           :eachGeneralization |
+						                           eachGeneralization general
+						                           = self model or: [
+							                           eachGeneralization specific
+							                           = self model ] ] ] ]
+		                           ifNone: [ #(  ) ].
+	otherClassesGeneralizations := self
+		                               parentPackageDo: [ :parentPackage |
+			                               (parentPackage packagedElements
+				                                select: [ :eachPackageElement |
+				                                eachPackageElement oclIsKindOf:
+					                                #Class ]) flatCollectAsSet: [
+				                               :eachClass |
+				                               eachClass generalizations select: [
+					                               :eachGeneralization |
+					                               eachGeneralization general
+					                               = self model or: [
+						                               eachGeneralization specific
+						                               = self model ] ] ] ]
+		                               ifNone: [ #(  ) ].
 
 	^ super dependentElements , ownGeneralizations
 	  , generalizationsFromSets , otherClassesGeneralizations

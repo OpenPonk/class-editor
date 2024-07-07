@@ -71,5 +71,6 @@ OPUmlEnumerationLiteralController >> removeDiagramElement [
 OPUmlEnumerationLiteralController >> removeModel [
 	"could be any of those, so just nil all of them"
 
-	model enumeration: nil
+	model enumeration: nil.
+	super removeModel
 ]

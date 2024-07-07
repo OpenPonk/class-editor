@@ -65,11 +65,11 @@ OPUmlExtensionController >> modelTarget: aModel in: aParentModel [
 OPUmlExtensionController >> removeModel [
 	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
 
-	self diagramController model packagedElements remove: self model.
-	[ self model memberEnds isNotEmpty ]
-		whileTrue: [ | end |
-			end := self model memberEnds first.
-			end association: nil.
-			end owningClass: nil.
-			end owningAssociation: nil ]
+	[ self model memberEnds isNotEmpty ] whileTrue: [
+		| end |
+		end := self model memberEnds first.
+		end association: nil.
+		end owningClass: nil.
+		end owningAssociation: nil ].
+	super removeModel
 ]

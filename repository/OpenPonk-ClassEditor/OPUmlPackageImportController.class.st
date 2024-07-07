@@ -126,5 +126,5 @@ OPUmlPackageImportController >> removeModel [
 
 	model importedPackage: nil.
 	model importingNamespace: nil.
-	self diagramController model packagedElements remove: self model
+	super removeModel
 ]

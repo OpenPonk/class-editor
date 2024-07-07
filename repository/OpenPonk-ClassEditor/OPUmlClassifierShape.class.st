@@ -71,7 +71,9 @@ OPUmlClassifierShape >> hiddenPackages [
 { #category : 'accessing' }
 OPUmlClassifierShape >> hiddenPackages: packagesCollection [
 
-	hiddenPackages := packagesCollection
+	hiddenPackages = packagesCollection ifTrue: [ ^ false ].
+	hiddenPackages := packagesCollection.
+	^ true
 ]
 
 { #category : 'accessing' }
@@ -138,6 +140,13 @@ OPUmlClassifierShape >> updateRenderFromModel [
 	self updateCommentIcon.
 
 	super updateRenderFromModel
+]
+
+{ #category : 'roassal' }
+OPUmlClassifierShape >> updateRenderFromSelf [
+
+	self isRendered ifFalse: [ ^ self ].
+	super updateRenderFromSelf
 ]
 
 { #category : 'rendering' }

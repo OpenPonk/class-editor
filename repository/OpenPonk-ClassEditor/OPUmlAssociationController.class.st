@@ -133,11 +133,12 @@ OPUmlAssociationController >> modelTarget: aModel in: aParentModel [
 
 { #category : 'removing' }
 OPUmlAssociationController >> removeModel [
-	self diagramController model packagedElements remove: self model.
+
 	self model memberEnds
 		select: [ :each | each owningClass isNotNil ]
 		thenDo: [ :eachProperty | eachProperty owningClass: nil ].
-	self model memberEnds: #()
+	self model memberEnds: #(  ).
+	super removeModel
 ]
 
 { #category : 'construction' }

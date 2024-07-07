@@ -1,9 +1,8 @@
 Class {
 	#name : 'OPUmlClassifierController',
 	#superclass : 'OPUmlElementController',
-	#instVars : [
-		'packages'
-	],
+	#traits : 'OPTUmlPackageableController',
+	#classTraits : 'OPTUmlPackageableController classTrait',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -38,13 +37,14 @@ OPUmlClassifierController >> dependentElements [
 
 	| innerElements associations |
 	innerElements := self elementsToShowInside.
-	associations := diagramController model packagedElements select: [
-		                :eachAssoc |
-		                (eachAssoc oclIsKindOf: #Association) and: [
-			                eachAssoc memberEnds anySatisfy: [ :any |
-				                any type = self model or: [
-					                any owningClass = self model ] ] ] ].
-
+	associations := self
+		                parentPackageDo: [ :parentPackage |
+			                parentPackage packagedElements select: [ :eachAssoc |
+				                (eachAssoc oclIsKindOf: #Association) and: [
+					                eachAssoc memberEnds anySatisfy: [ :any |
+						                any type = self model or: [
+							                any owningClass = self model ] ] ] ] ]
+		                ifNone: [ #(  ) ].
 	^ innerElements , associations
 ]
 
@@ -66,31 +66,18 @@ OPUmlClassifierController >> descriptionName [
 ]
 
 { #category : 'accessing' }
-OPUmlClassifierController >> findPackagesIn: aPackageLinkedList [
+OPUmlClassifierController >> findPackagesIn: packagesList [
 
 	| packagedElements |
-	packagedElements := aPackageLinkedList last packagedElements.
-	(packagedElements identityIncludes: model) ifTrue: [
-		^ aPackageLinkedList ].
+	packagedElements := packagesList last packagedElements.
+	(packagedElements identityIncludes: self model) ifTrue: [
+		^ packagesList ].
 	packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
 		thenDo: [ :each |
-			(self findPackagesIn: (aPackageLinkedList copyWith: each))
-				ifNotEmpty: [ :foundList | ^ foundList ] ].
-	^ LinkedList empty
-]
-
-{ #category : 'accessing' }
-OPUmlClassifierController >> hiddenPackages [
-
-	| hiddenPackages |
-	hiddenPackages := LinkedList new.
-	self packages reverseDo: [ :each |
-		self diagramController
-			controllerForModel: each
-			ifFound: [ :ctrl | ctrl isRendered ifTrue: [ ^ hiddenPackages ] ].
-		hiddenPackages addFirst: each ].
-	^ hiddenPackages
+			(self findPackagesIn: (packagesList copyWith: each)) ifNotEmpty: [
+				:foundList | ^ foundList ] ].
+	^ #(  )
 ]
 
 { #category : 'construction' }
@@ -116,17 +103,10 @@ OPUmlClassifierController >> modelClassName [
 { #category : 'accessing' }
 OPUmlClassifierController >> packageRenderChanged [
 
-	self diagramElement hiddenPackages: self hiddenPackages.
+	(self diagramElement hiddenPackages: self hiddenPackages) ifFalse: [
+		^ self ].
 	self diagramElement isRendered ifFalse: [ ^ self ].
 	self diagramElement updateRenderFromModel
-]
-
-{ #category : 'accessing' }
-OPUmlClassifierController >> packages [
-
-	^ packages ifNil: [
-		  packages := self findPackagesIn:
-			             (Stack with: diagramController model) ]
 ]
 
 { #category : 'construction' }
@@ -135,7 +115,9 @@ OPUmlClassifierController >> registerModelInContainer: aParentModel [
 	aParentModel packagedElements add: model
 ]
 
-{ #category : 'removing' }
-OPUmlClassifierController >> removeModel [
-	diagramController model packagedElements remove: self model
+{ #category : 'event handling' }
+OPUmlClassifierController >> updateAfterDiagramFocused [
+
+	self diagramElement hiddenPackages: self hiddenPackages.
+	super updateAfterDiagramFocused
 ]

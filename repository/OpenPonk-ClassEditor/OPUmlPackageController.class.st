@@ -4,6 +4,8 @@ I am a controller for Package/Model/Profile
 Class {
 	#name : 'OPUmlPackageController',
 	#superclass : 'OPUmlElementController',
+	#traits : 'OPTUmlPackageableController',
+	#classTraits : 'OPTUmlPackageableController classTrait',
 	#instVars : [
 		'modelClass'
 	],
@@ -51,21 +53,23 @@ OPUmlPackageController >> createModelIn: aParentModel [
 
 { #category : 'accessing' }
 OPUmlPackageController >> dependentElements [
-	| mainElementTypes |
-	mainElementTypes := {#Class . #Package . #Enumeration . #Profile.
-	#Model}.
-	^ (self model packagedElements
-		select:
-			[ :each | mainElementTypes anySatisfy: [ :any | each oclIsKindOf: any ] ])
-		asSet , self model packageImports
-		,
-			((diagramController model packagedElements
-				select: [ :each | 
-					{#Package . #Profile . #Model}
-						anySatisfy: [ :any | each oclIsKindOf: any ] ])
-				flatCollectAsSet: [ :eachPackagedElement | 
-					eachPackagedElement packageImports
-						select: [ :eachImport | eachImport importingNamespace = self model ] ])
+
+	| mainTypes imports importsOfMe |
+	mainTypes := (self model packagedElements select: [ :each |
+		              { #Class. #Package. #Enumeration } anySatisfy: [ :any |
+			              each oclIsKindOf: any ] ]) asSet.
+	imports := self model packageImports.
+
+	importsOfMe := self
+		               parentPackageDo: [ :parentPackage |
+			               (parentPackage packagedElements select: [ :each |
+				                each oclIsKindOf: #Package ]) flatCollectAsSet: [
+				               :eachPackagedElement |
+				               eachPackagedElement packageImports select: [
+					               :eachImport |
+					               eachImport importingNamespace = self model ] ] ]
+		               ifNone: [ #(  ) ].
+	^ mainTypes , imports , importsOfMe
 ]
 
 { #category : 'figures' }
@@ -102,7 +106,6 @@ OPUmlPackageController >> modelClass [
 { #category : 'destruction' }
 OPUmlPackageController >> propagateRenderChanged [
 
-	self diagramElement ifNotNil: [ :de | de pushBack ].
 	self propagateRenderChangedIn: self model
 ]
 
@@ -126,6 +129,14 @@ OPUmlPackageController >> propagateRenderChangedIn: aPackage [
 		thenDo: [ :each | self propagateRenderChangedIn: each ]
 ]
 
+{ #category : 'actions' }
+OPUmlPackageController >> pushBack [
+
+	self diagramElement pushBack.
+	self closestRenderedPackageControllerDo: [ :packageController |
+		^ packageController pushBack ]
+]
+
 { #category : 'construction' }
 OPUmlPackageController >> registerModelInContainer: aParentModel [
 
@@ -140,14 +151,10 @@ OPUmlPackageController >> removeDiagramElement [
 	self propagateRenderChanged
 ]
 
-{ #category : 'removing' }
-OPUmlPackageController >> removeModel [
-	diagramController model packagedElements remove: self model
-]
-
 { #category : 'construction' }
 OPUmlPackageController >> renderDiagramElement [
 
 	super renderDiagramElement.
-	self propagateRenderChanged
+	self propagateRenderChanged.
+	self pushBack
 ]

@@ -308,6 +308,32 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
+{ #category : 'destruction' }
+OPUmlPackageDiagramController >> propagateRenderChanged [
+
+	self propagateRenderChangedIn: self model
+]
+
+{ #category : 'destruction' }
+OPUmlPackageDiagramController >> propagateRenderChangedIn: aPackage [
+
+	aPackage = self model ifFalse: [
+		self diagramController
+			controllerForModel: aPackage
+			ifFound: [ :foundController |
+			^ foundController propagateRenderChanged ] ].
+	aPackage packagedElements
+		select: [ :each | each oclIsKindOf: #Package ]
+		thenDo: [ :each | self propagateRenderChangedIn: each ]
+]
+
+{ #category : 'actions' }
+OPUmlPackageDiagramController >> pushBack [
+	"do nothing"
+
+	
+]
+
 { #category : 'palette' }
 OPUmlPackageDiagramController >> rebuildPalette [
 

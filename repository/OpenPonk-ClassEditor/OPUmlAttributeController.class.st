@@ -191,8 +191,8 @@ OPUmlAttributeController >> removeDiagramElement [
 OPUmlAttributeController >> removeModel [
 	"could be any of those, so just nil all of them"
 
-	super removeModel.
-	model owningAssociation: nil
+	model owningAssociation: nil.
+	super removeModel
 ]
 
 { #category : 'accessing' }

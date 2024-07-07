@@ -27,8 +27,8 @@ OPUmlGeneralizationController >> descriptionGeneralizationSet [
 	<magritteDescription>
 	^ MAToManyRelationDescription new
 		  initializer: [ :desc | desc initializeFor: self ];
-		  display: [ :desc | 
-			  String streamContents: [ :stream | 
+		  display: [ :desc |
+			  String streamContents: [ :stream |
 					  stream << (desc set name ifNil: [ 'unnamed' ]) << ': '
 					  << (desc set isCovering
 							   ifTrue: [ 'complete' ]
@@ -38,27 +38,26 @@ OPUmlGeneralizationController >> descriptionGeneralizationSet [
 					  << (desc set generalizations size pluralize: 'generalization')
 					  << ')' ] ];
 		  accessor: (MAPluggableAccessor
-				   read: [ :me | 
-					   me model generalizationSets collect: [ :each | 
+				   read: [ :me |
+					   me model generalizationSets collect: [ :each |
 							   OPUmlGeneralizationSetDescriptions new
 								   controller: self;
 								   set: each ] ]
-				   write: [ :me :newValue | 
+				   write: [ :me :newValue |
 					   | oldSets newSets setsToRemove setsToAdd |
 					   oldSets := me model generalizationSets asArray.
 					   newSets := newValue collect: #set.
 					   oldSets do: [ :each | each generalizations remove: me model ].
 					   newSets do: [ :each | each generalizations add: me model ].
-					   setsToRemove := oldSets select: [ :each | 
+					   setsToRemove := oldSets select: [ :each |
 						                   each generalizations isEmpty ].
-					   setsToAdd := newSets select: [ :each | 
+					   setsToAdd := newSets select: [ :each |
 						                each generalizations size = 1 ].
 					   me model generalizationSets: newSets.
-					   diagramController model packagedElements:
-						   diagramController model packagedElements \ setsToRemove
-						   , setsToAdd.
-					   diagramElement ifNotNil: [ 
-						   self diagramElement modelChanged ] ]);
+					   self parentPackageDo: [ :parentPackage |
+						   parentPackage packagedElements:
+							   parentPackage packagedElements \ setsToRemove , setsToAdd ].
+					   diagramElement ifNotNil: [ self diagramElement modelChanged ] ]);
 		  classes: { OPUmlGeneralizationSetDescriptions };
 		  label: 'Generalization Sets';
 		  priority: 5;
@@ -134,13 +133,15 @@ OPUmlGeneralizationController >> registerModelInContainer: aParentModel [
 
 { #category : 'removing' }
 OPUmlGeneralizationController >> removeModel [
+
 	model general: nil.
 	model specific: nil.
-	model generalizationSets asArray
-		do: [ :each | 
-			each generalizations remove: model.
-			each generalizations
-				ifEmpty: [ diagramController model packagedElements
-						remove: each
-						ifAbsent: [ "do nothing" ] ] ]
+	model generalizationSets asArray do: [ :each |
+		each generalizations remove: model.
+		each generalizations ifEmpty: [
+			self parentPackageDo: [ :parentPackage |
+				parentPackage packagedElements
+					remove: each
+					ifAbsent: [ "do nothing" ] ] ] ].
+	super removeModel
 ]
