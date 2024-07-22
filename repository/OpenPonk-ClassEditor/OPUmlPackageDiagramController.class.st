@@ -11,23 +11,36 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
+{ #category : 'as yet unclassified' }
 OPUmlPackageDiagramController >> allShowableElements [
+	"Should return all elements that could be directly hidden on diagram"
 
+	^ Array streamContents: [ :stream |
+		  self allShowableElementsIn: self model on: stream ]
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlPackageDiagramController >> allShowableElementsIn: aPackage on: aCollectionStream [
 	"Should return all elements that could be directly hidden on diagram"
 
 	| elementsToShow |
-	elementsToShow := self elementsToShowInside.
-	^ elementsToShow , ((elementsToShow select: [ :each | 
-		    (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]) 
-		   flatCollect: [ :each | 
-		   each ownedAttributes , each ownedOperations ])
-	  ,
-		  ((elementsToShow select: [ :each | 
-			    each isKindOf: OPUMLEnumeration ]) flatCollect: [ :each | 
-			   each ownedLiterals ])
-	  , (model packagedElements select: [ :each | 
-			   each oclIsKindOf: #Association ])
+	elementsToShow := self elementsToShowInside: aPackage.
+	aCollectionStream nextPutAll: elementsToShow.
+	elementsToShow
+		select: [ :each | each oclIsKindOf: #Class ]
+		thenDo: [ :each |
+			aCollectionStream nextPutAll: each ownedAttributes.
+			aCollectionStream nextPutAll: each ownedOperations ].
+	elementsToShow
+		select: [ :each | each oclIsKindOf: #Enumeration ]
+		thenDo: [ :each | aCollectionStream nextPutAll: each ownedLiterals ].
+	aCollectionStream nextPutAll:
+		(aPackage packagedElements select: [ :each |
+			 each oclIsKindOf: #Association ]).
+	aPackage packagedElements
+		select: [ :each | each oclIsKindOf: #Package ]
+		thenDo: [ :each |
+		self allShowableElementsIn: each on: aCollectionStream ]
 ]
 
 { #category : 'adding' }
@@ -126,46 +139,51 @@ OPUmlPackageDiagramController >> disableRefresh [
 
 { #category : 'figures' }
 OPUmlPackageDiagramController >> elementsToShowInside [
+
+	^ self elementsToShowInside: self model
+]
+
+{ #category : 'figures' }
+OPUmlPackageDiagramController >> elementsToShowInside: aPackage [
+
 	| queue priority |
 	queue := OrderedCollection new.
-	priority := {(OPUMLPackage -> 1).
-	(OPUMLProfile -> 1).
-	(OPUMLClass -> 2).
-	(OPUMLStereotype -> 3).
-	(OPUMLEnumeration -> 4)} asDictionary.
-	queue addAll: (self model packagedElements reject: [:each | each oclIsKindOf: #Association ]).
-	self model packagedElements
+	priority := {
+		            (OPUMLPackage -> 1).
+		            (OPUMLProfile -> 1).
+		            (OPUMLClass -> 2).
+		            (OPUMLStereotype -> 3).
+		            (OPUMLEnumeration -> 4) } asDictionary.
+	queue addAll: (aPackage packagedElements reject: [ :each |
+			 each oclIsKindOf: #Association ]).
+	aPackage packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each | 
-			each packageImports
-				do: [ :import | 
-					queue addIfNotPresent: import importedPackage.
-					queue add: import ] ].
-	self model packagedElements
-		select:
-			[ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]
-		thenDo: [ :each | 
-			each generalizations
-				do: [ :gen | 
-					queue addIfNotPresent: gen general.
-					queue add: gen ].
-			(each ownedAttributes
-				select:
-					[ :attr | (attr isKindOf: OPUMLProperty) and: [ attr association isNotNil ] ])
+		thenDo: [ :each |
+			each packageImports do: [ :import |
+				queue addIfNotPresent: import importedPackage.
+				queue add: import ] ].
+	aPackage packagedElements
+		select: [ :each |
+			(each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]
+		thenDo: [ :each |
+			each generalizations do: [ :gen |
+				queue addIfNotPresent: gen general.
+				queue add: gen ].
+			(each ownedAttributes select: [ :attr |
+				 (attr isKindOf: OPUMLProperty) and: [ attr association isNotNil ] ])
 				do: [ :attr | queue addIfNotPresent: attr association ] ].
-	self model packagedElements
+	aPackage packagedElements
 		select: [ :each | each isKindOf: OPUMLStereotype ]
-		thenDo: [ :each | 
+		thenDo: [ :each |
 			each ownedAttributes
-				select: [ :attr | 
-					attr association isNotNil
-						and: [ attr association isKindOf: OPUMLExtension ] ]
+				select: [ :attr |
+					attr association isNotNil and: [
+						attr association isKindOf: OPUMLExtension ] ]
 				thenDo: [ :attr | queue add: attr type ] ].
-	^ (queue asSet asArray
-		sorted: [ :a :b | 
-			(priority at: a class ifAbsent: [ 100 ])
-				< (priority at: b class ifAbsent: [ 100 ]) ])
-		select: [ :each | self hasSupportForModel: each ]
+	^ (queue asSet asArray sorted: [ :a :b |
+		   (priority at: a class ifAbsent: [ 100 ])
+		   < (priority at: b class ifAbsent: [ 100 ]) ]) select: [ :each |
+		  self hasSupportForModel: each ]
 ]
 
 { #category : 'userinterface' }

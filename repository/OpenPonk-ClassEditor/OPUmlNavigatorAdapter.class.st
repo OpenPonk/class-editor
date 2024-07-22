@@ -112,11 +112,25 @@ OPUmlNavigatorAdapter >> displayFor: anObject [
 
 { #category : 'accessing' }
 OPUmlNavigatorAdapter >> displayMapping [
-	^ {(OPUMLGeneralization
-		-> [ :o | o specific name , ' => ' , o general name ]).
-	(OPUMLPackageImport
-		-> [ :o | o importedPackage name , ' --> ' , o importingNamespace name ]).
-	(OPUMLElement -> #name)}
+
+	^ {
+		  (OPUMLAssociation -> [ :a |
+		   String streamContents: [ :s |
+			   a name ifNotNil: [ :name | s << name ].
+			   a memberEnds size = 2 ifTrue: [
+				   | names |
+				   names := a memberEnds asArray collect: [ :property |
+					            ((property type ifNotNil: [ :type | type name ])
+						             ifNil: [ '' ]) truncateWithElipsisTo: 20 ].
+				   s << ' [ '.
+				   names printOn: s delimiter: ' -> '.
+				   s << ' ]' ] ] ]).
+		  (OPUMLGeneralization
+		   -> [ :o | o specific name , ' => ' , o general name ]).
+		  (OPUMLPackageImport
+		   -> [ :o |
+		   o importedPackage name , ' --> ' , o importingNamespace name ]).
+		  (OPUMLElement -> #name) }
 ]
 
 { #category : 'accessing' }
