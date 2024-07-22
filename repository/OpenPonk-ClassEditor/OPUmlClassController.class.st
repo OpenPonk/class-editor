@@ -56,11 +56,13 @@ OPUmlClassController >> canBeSourceFor: aController [
 
 { #category : 'adding' }
 OPUmlClassController >> canBeTargetFor: aController [
-	^ (aController isKindOf: OPUmlAttributeController)
-		| (aController isKindOf: OPUmlOperationController)
-		| (aController isKindOf: OPUmlGeneralizationController)
-		| (aController isKindOf: OPUmlAssociationController)
-		| (aController isKindOf: OPUmlExtensionController)
+
+	^ (aController isKindOf: OPUmlAttributeController) or: [
+		  (aController isKindOf: OPUmlOperationController) or: [
+			  (aController isKindOf: OPUmlAssociationController) or: [
+				  (aController isKindOf: OPUmlExtensionController) or: [
+					  (aController isKindOf: OPUmlGeneralizationController) and: [
+						  aController source ~= self ] ] ] ] ]
 ]
 
 { #category : 'figures' }
