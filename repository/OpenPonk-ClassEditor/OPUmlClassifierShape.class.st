@@ -1,14 +1,12 @@
 Class {
 	#name : 'OPUmlClassifierShape',
 	#superclass : 'OPUmlCompartmentableShape',
-	#traits : 'OPTColoredAsFillAndBorderColoredAsStroke',
-	#classTraits : 'OPTColoredAsFillAndBorderColoredAsStroke classTrait',
+	#traits : 'OPTColoredAsFillAndBorderColoredAsStroke + OPTUmlPackageableShape',
+	#classTraits : 'OPTColoredAsFillAndBorderColoredAsStroke classTrait + OPTUmlPackageableShape classTrait',
 	#instVars : [
-		'nameLabel',
 		'stereotypeLabel',
 		'commentIcon',
-		'adornmentCreationBlock',
-		'hiddenPackages'
+		'adornmentCreationBlock'
 	],
 	#category : 'OpenPonk-ClassEditor-Shapes',
 	#package : 'OpenPonk-ClassEditor',
@@ -60,20 +58,6 @@ OPUmlClassifierShape >> hasModelComments [
 	^ ownedComments isNotNil and: [ 
 		  ownedComments anySatisfy: [ :any | 
 			  any body isNotNil and: [ any body isNotEmpty ] ] ]
-]
-
-{ #category : 'accessing' }
-OPUmlClassifierShape >> hiddenPackages [
-
-	^ hiddenPackages ifNil: [ LinkedList empty ]
-]
-
-{ #category : 'accessing' }
-OPUmlClassifierShape >> hiddenPackages: packagesCollection [
-
-	hiddenPackages = packagesCollection ifTrue: [ ^ false ].
-	hiddenPackages := packagesCollection.
-	^ true
 ]
 
 { #category : 'accessing' }

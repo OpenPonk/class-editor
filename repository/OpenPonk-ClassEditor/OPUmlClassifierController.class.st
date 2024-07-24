@@ -65,21 +65,6 @@ OPUmlClassifierController >> descriptionName [
 		  yourself
 ]
 
-{ #category : 'accessing' }
-OPUmlClassifierController >> findPackagesIn: packagesList [
-
-	| packagedElements |
-	packagedElements := packagesList last packagedElements.
-	(packagedElements identityIncludes: self model) ifTrue: [
-		^ packagesList ].
-	packagedElements
-		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each |
-			(self findPackagesIn: (packagesList copyWith: each)) ifNotEmpty: [
-				:foundList | ^ foundList ] ].
-	^ #(  )
-]
-
 { #category : 'construction' }
 OPUmlClassifierController >> hookDiagramElement [
 
@@ -100,13 +85,12 @@ OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : 'updating' }
 OPUmlClassifierController >> packageRenderChanged [
 
-	(self diagramElement hiddenPackages: self hiddenPackages) ifFalse: [
-		^ self ].
-	self diagramElement isRendered ifFalse: [ ^ self ].
-	self diagramElement updateRenderFromModel
+	self diagramElement ifNotNil: [ :foundDE |
+		(foundDE hiddenPackages: self hiddenPackages) ifTrue: [
+			foundDE isRendered ifTrue: [ foundDE updateRenderFromModel ] ] ]
 ]
 
 { #category : 'construction' }

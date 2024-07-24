@@ -4,10 +4,10 @@ I represent a package box.
 Class {
 	#name : 'OPUmlPackageShape',
 	#superclass : 'OPBoundNode',
-	#traits : 'OPTColoredAsFill',
-	#classTraits : 'OPTColoredAsFill classTrait',
+	#traits : 'OPTColoredAsFill + OPTUmlPackageableShape',
+	#classTraits : 'OPTColoredAsFill classTrait + OPTUmlPackageableShape classTrait',
 	#instVars : [
-		'mainLabel',
+		'nameLabel',
 		'stereotypeLabel',
 		'ear',
 		'innerRoassalShapesBlock'
@@ -38,12 +38,6 @@ OPUmlPackageShape >> innerRoassalShapesBlock: aBlock [
 	innerRoassalShapesBlock := aBlock
 ]
 
-{ #category : 'accessing' }
-OPUmlPackageShape >> labelText [
-
-	^ self modelElement name
-]
-
 { #category : 'creating - subelements' }
 OPUmlPackageShape >> minHeight [
 	^ 60
@@ -52,6 +46,16 @@ OPUmlPackageShape >> minHeight [
 { #category : 'creating - subelements' }
 OPUmlPackageShape >> minWidth [
 	^ 120
+]
+
+{ #category : 'accessing' }
+OPUmlPackageShape >> nameText [
+
+	^ String streamContents: [ :stream |
+		  self hiddenPackages do: [ :each |
+			  stream << each name asString << '::' ].
+		  stream
+		  << ((self modelElement name ifNil: [ ' ' ]) ifEmpty: [ ' ' ]) ]
 ]
 
 { #category : 'creating - subelements' }
@@ -63,7 +67,7 @@ OPUmlPackageShape >> padding [
 OPUmlPackageShape >> pushBack [
 
 	stereotypeLabel pushBack.
-	mainLabel pushBack.
+	nameLabel pushBack.
 	roassalShape pushBack.
 	ear pushBack
 ]
@@ -94,21 +98,21 @@ OPUmlPackageShape >> renderShapeDetails [
 		when: RSShapeRemovedEvent
 		do: [ ear remove ]
 		for: self.
-	mainLabel := RSLabel new
+	nameLabel := RSLabel new
 		             color: Color black;
 		             model: self;
 		             yourself.
 	stereotypeLabel := RSLabel new
-		                   height: mainLabel height - 2;
+		                   height: nameLabel height - 2;
 		                   color: Color black;
 		                   model: self;
 		                   yourself.
-	self canvas add: mainLabel.
+	self canvas add: nameLabel.
 	self canvas add: stereotypeLabel.
 	self roassalShape
 		when: RSShapeRemovedEvent
 		do: [
-			mainLabel remove.
+			nameLabel remove.
 			stereotypeLabel remove ]
 		for: self.
 	RSLocation new
@@ -122,14 +126,14 @@ OPUmlPackageShape >> renderShapeDetails [
 	RSLocation new
 		outer;
 		below;
-		stick: mainLabel on: stereotypeLabel.
-	mainLabel
+		stick: nameLabel on: stereotypeLabel.
+	nameLabel
 		when: RSExtentChangedEvent
 		do: [ :event |
 			self roassalShape width: {
 					self width.
 					self minWidth.
-					(mainLabel width + self padding) } max ]
+					(nameLabel width + self padding) } max ]
 		for: self
 ]
 
@@ -159,7 +163,7 @@ OPUmlPackageShape >> stereotypeText [
 		  ifFalse: [ '' ]
 ]
 
-{ #category : 'update' }
+{ #category : 'initialization' }
 OPUmlPackageShape >> updateColorFromStyles [
 
 	self roassalShape
@@ -176,10 +180,10 @@ OPUmlPackageShape >> updateColorFromStyles [
 	ear color: self color
 ]
 
-{ #category : 'update' }
+{ #category : 'rendering' }
 OPUmlPackageShape >> updateRenderFromModel [
 
-	mainLabel text: self labelText.
+	nameLabel text: self nameText.
 	stereotypeLabel text: self stereotypeText.
 
 	super updateRenderFromModel.

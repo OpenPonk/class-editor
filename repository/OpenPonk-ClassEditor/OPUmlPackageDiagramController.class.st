@@ -327,22 +327,35 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 ]
 
 { #category : 'destruction' }
-OPUmlPackageDiagramController >> propagateRenderChanged [
+OPUmlPackageDiagramController >> packageRenderChanged [
 
-	self propagateRenderChangedIn: self model
+	self propagatePackageRenderChangedIn: self model
 ]
 
 { #category : 'destruction' }
-OPUmlPackageDiagramController >> propagateRenderChangedIn: aPackage [
+OPUmlPackageDiagramController >> propagateBlock: aBlock toNodeControllersIn: aPackage [
 
-	aPackage = self model ifFalse: [
-		self diagramController
-			controllerForModel: aPackage
-			ifFound: [ :foundController |
-			^ foundController propagateRenderChanged ] ].
+	aPackage packagedElements
+		select: [ :each | each oclIsKindOf: #Classifier ]
+		thenDo: [ :each |
+			self
+				controllerForModel: each
+				ifFound: [ :aController | aBlock value: aController ] ].
 	aPackage packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each | self propagateRenderChangedIn: each ]
+		thenDo: [ :each |
+			self
+				controllerForModel: each
+				ifFound: [ :aController | aBlock value: aController ].
+			self propagateBlock: aBlock toNodeControllersIn: each ]
+]
+
+{ #category : 'destruction' }
+OPUmlPackageDiagramController >> propagatePackageRenderChangedIn: aPackage [
+
+	self
+		propagateBlock: [ :each | each packageRenderChanged ]
+		toNodeControllersIn: aPackage
 ]
 
 { #category : 'actions' }

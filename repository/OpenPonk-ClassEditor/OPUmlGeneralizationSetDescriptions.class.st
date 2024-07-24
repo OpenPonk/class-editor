@@ -100,32 +100,36 @@ OPUmlGeneralizationSetDescriptions >> hash [
 
 { #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> initializeFor: aGeneralizationController [
+
 	| dialog listPresenter allElements setsToDisplay |
 	self controller: aGeneralizationController.
 	dialog := SpVersatileDialogPresenter new.
-	allElements := aGeneralizationController diagramController model
-		packagedElements.
-	setsToDisplay := ((allElements
-		select: [ :each | each oclIsKindOf: #GeneralizationSet ])
-		,
-			((allElements select: [ :each | each respondsTo: #generalizations ])
-				flatCollectAsSet: [ :each | 
-					each generalizations
-						flatCollectAsSet: [ :eachGeneralization | eachGeneralization generalizationSets ] ])
-				asArray) asSet asArray
-		select: [ :each | 
-			each generalizations
-				anySatisfy: [ :any | any general = aGeneralizationController model general ] ].
-	setsToDisplay
-		ifEmpty: [ ^ self
-				set: OPUMLGeneralizationSet new;
-				yourself ].
+	allElements := aGeneralizationController source
+		               parentPackageDo: [ :parentPackage |
+		               parentPackage packagedElements ]
+		               ifNone: [ #(  ) ].
+	setsToDisplay := ((allElements select: [ :each |
+		                   each oclIsKindOf: #GeneralizationSet ]) asSet
+	                  ,
+		                  ((allElements select: [ :each |
+			                    each respondsTo: #generalizations ])
+			                   flatCollectAsSet: [ :each |
+				                   each generalizations flatCollect: [
+					                   :eachGeneralization |
+					                   eachGeneralization generalizationSets ] ]))
+		                 asArray select: [ :each |
+		                 each generalizations anySatisfy: [ :any |
+			                 any general
+			                 = aGeneralizationController model general ] ].
+	setsToDisplay ifEmpty: [
+		^ self
+			  set: OPUMLGeneralizationSet new;
+			  yourself ].
 	listPresenter := dialog newList.
 	listPresenter
 		items: setsToDisplay;
-		display: [ :each | 
-			String
-				streamContents: [ :stream | 
+		display: [ :each |
+			String streamContents: [ :stream |
 					stream
 						<< 'GeneralizationSet {''';
 						<< (each name ifNil: [ '' ]);

@@ -83,13 +83,14 @@ OPUmlPackageController >> hookDiagramElement [
 
 	super hookDiagramElement.
 
-	diagramElement innerRoassalShapesBlock: [ 
-		self model packagedElements
-			collect: [ :eachModel | 
-				self diagramController
-					controllerForModel: eachModel
-					ifFound: #roassalShape ]
-			thenSelect: #isNotNil ]
+	diagramElement innerRoassalShapesBlock: [
+		Array streamContents: [ :stream |
+			self diagramController
+				propagateBlock: [ :eachController |
+					eachController roassalShape ifNotNil: [ :roassalShape |
+						stream nextPut: roassalShape ] ]
+				toNodeControllersIn: self model ] ].
+	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
 { #category : 'testing' }
@@ -103,30 +104,13 @@ OPUmlPackageController >> modelClass [
 	^ modelClass
 ]
 
-{ #category : 'destruction' }
-OPUmlPackageController >> propagateRenderChanged [
+{ #category : 'updating' }
+OPUmlPackageController >> packageRenderChanged [
 
-	self propagateRenderChangedIn: self model
-]
-
-{ #category : 'destruction' }
-OPUmlPackageController >> propagateRenderChangedIn: aPackage [
-
-	aPackage packagedElements
-		select: [ :each | each oclIsKindOf: #Classifier ]
-		thenDo: [ :each |
-			self diagramController
-				controllerForModel: each
-				ifFound: [ :classifierController |
-				classifierController packageRenderChanged ] ].
-	aPackage = self model ifFalse: [
-		self diagramController
-			controllerForModel: aPackage
-			ifFound: [ :foundController |
-			^ foundController propagateRenderChanged ] ].
-	aPackage packagedElements
-		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each | self propagateRenderChangedIn: each ]
+	self diagramElement ifNotNil: [ :foundDE |
+		(foundDE hiddenPackages: self hiddenPackages) ifTrue: [
+			foundDE isRendered ifTrue: [ foundDE updateRenderFromModel ] ] ].
+	self diagramController propagatePackageRenderChangedIn: self model
 ]
 
 { #category : 'actions' }
@@ -148,13 +132,20 @@ OPUmlPackageController >> removeDiagramElement [
 
 	self diagramElement ifNil: [ ^ self ].
 	super removeDiagramElement.
-	self propagateRenderChanged
+	self packageRenderChanged
 ]
 
 { #category : 'construction' }
 OPUmlPackageController >> renderDiagramElement [
 
 	super renderDiagramElement.
-	self propagateRenderChanged.
+	self packageRenderChanged.
 	self pushBack
+]
+
+{ #category : 'event handling' }
+OPUmlPackageController >> updateAfterDiagramFocused [
+
+	self diagramElement hiddenPackages: self hiddenPackages.
+	super updateAfterDiagramFocused
 ]

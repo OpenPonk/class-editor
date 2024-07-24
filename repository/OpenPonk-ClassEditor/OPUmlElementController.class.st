@@ -18,3 +18,11 @@ OPUmlElementController >> magritteDescription [
 	container addAll: self stereotypeMagritteDescription.
 	^ container
 ]
+
+{ #category : 'connecting' }
+OPUmlElementController >> parentWhenTargetFor: aCreatedController [
+
+	^ aCreatedController isTargetUsedAsContainer
+		  ifTrue: [ self model ]
+		  ifFalse: [ aCreatedController source parentContainerModel ]
+]

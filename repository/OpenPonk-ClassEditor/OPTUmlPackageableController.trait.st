@@ -11,7 +11,7 @@ Trait {
 { #category : 'accessing' }
 OPTUmlPackageableController >> closestRenderedPackageControllerDo: aBlock [
 
-	self packages reverseDo: [ :any |
+	self packageHierarchy reverseDo: [ :any |
 		self diagramController
 			controllerForModel: any
 			ifFound: [ :parentPackageController |
@@ -20,7 +20,7 @@ OPTUmlPackageableController >> closestRenderedPackageControllerDo: aBlock [
 ]
 
 { #category : 'accessing' }
-OPTUmlPackageableController >> findPackagesIn: packagesList [
+OPTUmlPackageableController >> findPackageHierarchyIn: packagesList [
 
 	| packagedElements |
 	packagedElements := packagesList last packagedElements.
@@ -29,9 +29,9 @@ OPTUmlPackageableController >> findPackagesIn: packagesList [
 	packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
 		thenDo: [ :each |
-			(self findPackagesIn: (packagesList copyWith: each)) ifNotEmpty: [
-				:foundList | ^ foundList ] ].
-	^ LinkedList empty
+			(self findPackageHierarchyIn: (packagesList copyWith: each))
+				ifNotEmpty: [ :foundList | ^ foundList ] ].
+	^ #(  )
 ]
 
 { #category : 'accessing' }
@@ -39,7 +39,7 @@ OPTUmlPackageableController >> hiddenPackages [
 
 	| hiddenPackages |
 	hiddenPackages := LinkedList new.
-	self packages reverseDo: [ :each |
+	self packageHierarchy reverseDo: [ :each |
 		self diagramController
 			controllerForModel: each
 			ifFound: [ :ctrl | ctrl isRendered ifTrue: [ ^ hiddenPackages ] ].
@@ -48,10 +48,10 @@ OPTUmlPackageableController >> hiddenPackages [
 ]
 
 { #category : 'accessing' }
-OPTUmlPackageableController >> packages [
+OPTUmlPackageableController >> packageHierarchy [
 
 	^ packages ifNil: [
-		  packages := self findPackagesIn: { self diagramController model } ]
+		  packages := self findPackageHierarchyIn: { self diagramController model } ]
 ]
 
 { #category : 'removing' }
@@ -63,13 +63,13 @@ OPTUmlPackageableController >> parentContainerModel [
 { #category : 'accessing' }
 OPTUmlPackageableController >> parentPackageDo: aBlock [
 
-	^ aBlock value: (self packages ifEmpty: [ ^ nil ]) last
+	^ aBlock value: (self packageHierarchy ifEmpty: [ ^ nil ]) last
 ]
 
 { #category : 'accessing' }
 OPTUmlPackageableController >> parentPackageDo: aBlock ifNone: noneBlock [
 
-	^ aBlock value: (self packages ifEmpty: [ ^ noneBlock value ]) last
+	^ aBlock value: (self packageHierarchy ifEmpty: [ ^ noneBlock value ]) last
 ]
 
 { #category : 'removing' }
