@@ -15,10 +15,16 @@ OPUmlModelSerializer class >> exportVersion [
 	^ 1
 ]
 
+{ #category : 'accessing' }
+OPUmlModelSerializer class >> fileExtension [
+
+	^ #xml
+]
+
 { #category : 'formatting' }
 OPUmlModelSerializer class >> formatName [
 
-	^ #'uml-xmi'
+	^ #xmi
 ]
 
 { #category : 'accessing' }
@@ -27,17 +33,12 @@ OPUmlModelSerializer class >> minImportVersion [
 	^ 1
 ]
 
-{ #category : 'accessing' }
-OPUmlModelSerializer >> formatName [
-	^ 'xmi'
-]
-
-{ #category : 'accessing' }
+{ #category : 'serialize/materialize' }
 OPUmlModelSerializer >> materializeModelFrom: aStream [
 	^ OPUMLXMIReader read: aStream
 ]
 
-{ #category : 'accessing' }
+{ #category : 'serialize/materialize' }
 OPUmlModelSerializer >> serializeModel: aModel [
 
 	self
@@ -54,7 +55,7 @@ OPUmlModelSerializer >> serializeModel: aModel [
 	^ OPUMLXMIWriter toString: aModel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'serialize/materialize' }
 OPUmlModelSerializer >> serializeModel: aModel to: aStream [
 	^ aStream << (self serializeModel: aModel)
 ]
