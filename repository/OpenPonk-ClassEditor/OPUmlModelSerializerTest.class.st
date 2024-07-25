@@ -11,7 +11,7 @@ Class {
 
 { #category : 'instance creation' }
 OPUmlModelSerializerTest >> newModel [
-	^ OPUmlExamples new simpleAssociation
+	^ OPUmlExamples exampleSimpleAssociation
 ]
 
 { #category : 'accessing' }

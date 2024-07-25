@@ -15,131 +15,44 @@ Class {
 	#tag : 'Examples'
 }
 
-{ #category : 'examples' }
-OPUmlExamples class >> exampleEmptyPackage [
-
-	^ (OPProject openOnModel: (OPUMLPackage new name: 'Package'))
-		  showAllElementsInAllDiagrams
-]
-
-{ #category : 'examples' }
-OPUmlExamples class >> exampleEmptyProfile [
-
-	^ (OPProject openOnModel: (OPUMLProfile new name: 'Profile'))
-		  showAllElementsInAllDiagrams
-]
-
-{ #category : 'examples' }
-OPUmlExamples class >> exampleGeneralizationSets [
-
-	^ (OPProject openOnModel: self new generalizationSets)
-		  showAllElementsInAllDiagrams
-]
-
-{ #category : 'examples' }
-OPUmlExamples class >> exampleRichClass [
-
-	^ (OPProject openOnModel: self new modelWithRichClass)
-		  showAllElementsInAllDiagrams
-]
-
-{ #category : 'examples' }
-OPUmlExamples class >> exampleSimpleAssociation [
-
-	^ (OPProject openOnModel: self new simpleAssociation)
-		  showAllElementsInAllDiagrams
-]
-
-{ #category : 'examples' }
-OPUmlExamples class >> exampleSimpleGeneralization [
-
-	^ (OPProject openOnModel: self new simpleGeneralization)
-		  showAllElementsInAllDiagrams
-]
-
-{ #category : 'menu' }
-OPUmlExamples class >> menuCommandOn: aBuilder [
-
-	<worldMenu>
-	(aBuilder item: #UMLClassEditor)
-		icon: OPCoreIcons openponkIcon;
-		label: 'UML Class Diagram Editor';
-		action: [ self exampleEmptyPackage ];
-		parent: #MostUsedTools;
-		order: 205;
-		with: [ 
-			(aBuilder item: #UMLEmptyPackage)
-				parent: #UMLClassEditor;
-				label: 'New Empty Package';
-				icon: OPUmlIcons packageIcon;
-				action: [ self exampleEmptyPackage ].
-			(aBuilder item: #UMLEmptyProfile)
-				parent: #UMLClassEditor;
-				label: 'New Empty Profile';
-				icon: OPUmlIcons profileIcon;
-				action: [ self exampleEmptyProfile ];
-				withSeparatorAfter.
-			(aBuilder item: #UMLCompleteClass)
-				parent: #UMLClassEditor;
-				label: 'Rich Class';
-				icon: OPUmlIcons modelIcon;
-				action: [ self exampleRichClass ].
-			(aBuilder item: #UMLExampleSimpleAssociation)
-				parent: #UMLClassEditor;
-				label: 'Simple Association';
-				icon: OPUmlIcons modelIcon;
-				action: [ self exampleSimpleAssociation ].
-			(aBuilder item: #UMLExampleGeneralizationSets)
-				parent: #UMLClassEditor;
-				label: 'Generalization Sets';
-				icon: OPUmlIcons modelIcon;
-				withSeparatorAfter;
-				action: [ self exampleGeneralizationSets ].
-			(aBuilder item: #UMLMetamodelInspect)
-				parent: #UMLClassEditor;
-				label: 'Inspect UML Metamodel';
-				icon: OPUmlIcons packageIcon;
-				action: [ OPUMLXMISpecsStorage umlMetamodel inspect ] ]
-]
-
-{ #category : 'examples' }
-OPUmlExamples class >> notUsedExampleCommonStructure [
-
-	| uml cs |
-	uml := OPUMLXMISpecsStorage umlMetamodel.
-	cs := uml packagedElements detect: [ :each | 
-		      each name = 'CommonStructure' ].
-	^ (OPProject openOnModel: cs) showAllElementsInAllDiagrams
-]
-
 { #category : 'accessing' }
-OPUmlExamples >> emptyEnumeration [
-	<gtExample>
+OPUmlExamples class >> emptyEnumeration [
+
 	^ OPUMLEnumeration new name: 'VisibilityKind'
 ]
 
 { #category : 'accessing' }
-OPUmlExamples >> emptyModel [
-	<gtExample>
+OPUmlExamples class >> emptyModel [
+
+	<script: 'self emptyModel inspect'>
 	^ OPUMLPackage new name: 'Empty Model'
 ]
 
+{ #category : 'examples' }
+OPUmlExamples class >> emptyProfile [
+
+	<script: 'self emptyProfile inspect'>
+	^ OPUMLProfile new
+		  name: 'Profile';
+		  yourself
+]
+
 { #category : 'accessing' }
-OPUmlExamples >> enumerationWithLiterals [
-	<gtExample>
+OPUmlExamples class >> enumerationWithLiterals [
+
 	| enumeration |
 	enumeration := self emptyEnumeration.
-	#(public private protected package)
-		do: [ :each | 
-			| literal |
-			literal := OPUMLEnumerationLiteral new name: each.
-			enumeration ownedLiterals add: literal ].
+	#( public private protected package ) do: [ :each |
+		| literal |
+		literal := OPUMLEnumerationLiteral new name: each.
+		enumeration ownedLiterals add: literal ].
 	^ enumeration
 ]
 
 { #category : 'accessing' }
-OPUmlExamples >> generalizationSets [
-	<gtExample>
+OPUmlExamples class >> exampleGeneralizationSets [
+
+	<script: 'self exampleGeneralizationSets inspect'>
 	| model insuredItem house car insuredHouse nonInsuredHouse houseSet insuredSet |
 	model := self emptyModel.
 	model name: 'Generalization Sets'.
@@ -149,46 +62,42 @@ OPUmlExamples >> generalizationSets [
 	insuredHouse := OPUMLClass new name: 'InsuredHouse'.
 	nonInsuredHouse := OPUMLClass new name: 'NonInsuredHouse'.
 	houseSet := OPUMLGeneralizationSet new
-		name: 'house gs';
-		isDisjoint: true.
+		            name: 'house gs';
+		            isDisjoint: true.
 	insuredSet := OPUMLGeneralizationSet new
-		name: 'insured gs';
-		isDisjoint: true;
-		isCovering: true.
+		              name: 'insured gs';
+		              isDisjoint: true;
+		              isCovering: true.
 	houseSet generalizations
-		add:
-			(OPUMLGeneralization new
-				general: insuredItem;
-				specific: car);
-		add:
-			(OPUMLGeneralization new
-				general: insuredItem;
-				specific: insuredHouse).
+		add: (OPUMLGeneralization new
+				 general: insuredItem;
+				 specific: car);
+		add: (OPUMLGeneralization new
+				 general: insuredItem;
+				 specific: insuredHouse).
 	insuredSet generalizations
-		add:
-			(OPUMLGeneralization new
-				general: house;
-				specific: insuredHouse);
-		add:
-			(OPUMLGeneralization new
-				general: house;
-				specific: nonInsuredHouse).
-	model
-		packagedElements:
-			{insuredItem.
+		add: (OPUMLGeneralization new
+				 general: house;
+				 specific: insuredHouse);
+		add: (OPUMLGeneralization new
+				 general: house;
+				 specific: nonInsuredHouse).
+	model packagedElements: {
+			insuredItem.
 			house.
 			car.
 			insuredHouse.
 			nonInsuredHouse.
 			houseSet.
-			insuredSet} asOrderedCollection.
+			insuredSet } asOrderedCollection.
 	^ model
 ]
 
 { #category : 'accessing' }
-OPUmlExamples >> modelWithRichClass [
-	<gtExample>
-	| model |
+OPUmlExamples class >> exampleRichClass [
+
+	<script: 'self exampleRichClass inspect'>
+	| model  |
 	model := self emptyModel.
 	model name: 'Rich Class Model'.
 	model packagedElements add: self richClass.
@@ -196,80 +105,9 @@ OPUmlExamples >> modelWithRichClass [
 ]
 
 { #category : 'accessing' }
-OPUmlExamples >> richClass [
-	<gtExample>
-	| class stateMachine comment enum |
-	class := OPUMLClass new name: 'CompleteClass'.
-	class isAbstract: true.
-	#('Boolean' 'Integer' 'Real' 'String' 'UnlimitedNatural')
-		do: [ :each | 
-			| type |
-			type := OPUMLXMISpecsStorage primitiveTypeNamed: each.
-			class ownedAttributes
-				add:
-					(OPUMLProperty new
-						name: 'primitive' , each;
-						type: type) ].
-	comment := OPUMLXMISpecsStorage metaClassNamed: 'Comment'.
-	stateMachine := OPUMLXMISpecsStorage metaClassNamed: 'StateMachine'.
-	class ownedAttributes
-		add:
-			(OPUMLProperty new
-				name: 'derived';
-				isDerived: true).
-	class ownedAttributes
-		add:
-			(OPUMLProperty new
-				name: 'comments';
-				type: comment;
-				lowerValue: (OPUMLLiteralInteger new value: 0);
-				upperValue: (OPUMLLiteralUnlimitedNatural new value: '*')).
-	class ownedAttributes
-		add:
-			(OPUMLProperty new
-				name: 'static';
-				type: stateMachine;
-				isStatic: true).
-	class ownedOperations add: (OPUMLOperation new name: 'basicMethod').
-	enum := (OPUMLXMISpecsStorage umlMetamodel packagedElements
-		flatCollect: #packagedElements) detect: [ :each | each name = 'VisibilityKind' ].
-	"	class ownedOperations
-		add:
-			((OPUMLOperation new name: 'staticMethod')
-				in: [ :op | 
-					op ownedParameters
-						add:
-							(OPUMLParameter new
-								name: 'enum';
-								type: enum) ];
-				isStatic: true)."
-	class ownedOperations
-		add:
-			((OPUMLOperation new name: 'abstractMethod')
-				in: [ :op | 
-					op ownedParameters
-						add:
-							(OPUMLParameter new
-								name: 'return';
-								type: (OPUMLXMISpecsStorage primitiveTypeNamed: 'String');
-								direction: OPUMLParameterDirectionKind return);
-						add:
-							(OPUMLParameter new
-								name: 'arg1';
-								type: (OPUMLXMISpecsStorage primitiveTypeNamed: 'Integer'));
-						add:
-							(OPUMLParameter new
-								name: 'arg2';
-								type: stateMachine;
-								lowerValue: (OPUMLLiteralInteger new value: 0);
-								upperValue: (OPUMLLiteralUnlimitedNatural new value: 1)) ];
-				isAbstract: true).
-	^ class
-]
+OPUmlExamples class >> exampleSimpleAssociation [
 
-{ #category : 'accessing' }
-OPUmlExamples >> simpleAssociation [
-	<gtExample>
+	<script: 'self exampleSimpleAssociation inspect'>
 	| element ownedComment comment owningElement assoc model |
 	model := self emptyModel.
 	model name: 'Simple Association'.
@@ -289,20 +127,20 @@ OPUmlExamples >> simpleAssociation [
 		type: element.
 	assoc
 		name: 'comments';
-		memberEnds:
-			{ownedComment.
-			owningElement} asOrderedCollection.
-	model
-		packagedElements:
-			{element.
+		memberEnds: {
+				ownedComment.
+				owningElement } asOrderedCollection.
+	model packagedElements: {
+			element.
 			comment.
-			assoc} asOrderedCollection.
+			assoc } asOrderedCollection.
 	^ model
 ]
 
 { #category : 'accessing' }
-OPUmlExamples >> simpleGeneralization [
-	<gtExample>
+OPUmlExamples class >> exampleSimpleGeneralization [
+
+	<script: 'self exampleSimpleGeneralization inspect'>
 	| cls cls2 model |
 	model := self emptyModel.
 	model name: 'Simple Generalization'.
@@ -311,9 +149,175 @@ OPUmlExamples >> simpleGeneralization [
 	OPUMLGeneralization new
 		general: cls2;
 		specific: cls.
-	model
-		packagedElements:
-			{cls.
-			cls2} asOrderedCollection.
+	model packagedElements: {
+			cls.
+			cls2 } asOrderedCollection.
 	^ model
+]
+
+{ #category : 'menu' }
+OPUmlExamples class >> menuCommandOn: aBuilder [
+
+	<worldMenu>
+	(aBuilder item: #UMLClassEditor)
+		icon: OPCoreIcons openponkIcon;
+		label: 'UML Class Diagram Editor';
+		action: [ self openExampleEmptyModel ];
+		parent: #MostUsedTools;
+		order: 205;
+		with: [ 
+			(aBuilder item: #UMLEmptyPackage)
+				parent: #UMLClassEditor;
+				label: 'New Empty Package';
+				icon: OPUmlIcons packageIcon;
+				action: [ self openExampleEmptyModel ].
+			(aBuilder item: #UMLEmptyProfile)
+				parent: #UMLClassEditor;
+				label: 'New Empty Profile';
+				icon: OPUmlIcons profileIcon;
+				action: [ self openExampleEmptyProfile ];
+				withSeparatorAfter.
+			(aBuilder item: #UMLCompleteClass)
+				parent: #UMLClassEditor;
+				label: 'Rich Class';
+				icon: OPUmlIcons modelIcon;
+				action: [ self openExampleRichClass ].
+			(aBuilder item: #UMLExampleSimpleAssociation)
+				parent: #UMLClassEditor;
+				label: 'Simple Association';
+				icon: OPUmlIcons modelIcon;
+				action: [ self openExampleSimpleAssociation ].
+			(aBuilder item: #UMLExampleGeneralizationSets)
+				parent: #UMLClassEditor;
+				label: 'Generalization Sets';
+				icon: OPUmlIcons modelIcon;
+				withSeparatorAfter;
+				action: [ self openExampleGeneralizationSets ].
+			(aBuilder item: #UMLMetamodelInspect)
+				parent: #UMLClassEditor;
+				label: 'Inspect UML Metamodel';
+				icon: OPUmlIcons packageIcon;
+				action: [ OPUMLXMISpecsStorage umlMetamodel inspect ] ]
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> notUsedExampleCommonStructure [
+
+	| uml cs |
+	uml := OPUMLXMISpecsStorage umlMetamodel.
+	cs := uml packagedElements detect: [ :each | 
+		      each name = 'CommonStructure' ].
+	^ (OPProject openOnModel: cs) showAllElementsInAllDiagrams
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> openExample: aModel [
+
+	| project |
+	project := OPProject named: 'UML Example'.
+	project addModel: aModel.
+	^ (OPWorkbench openProject: project) showAllElementsInAllDiagrams
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> openExampleEmptyModel [
+
+	<example>
+	^ self openExample: self emptyModel
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> openExampleEmptyProfile [
+
+	<example>
+	^ self openExample: self emptyProfile
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> openExampleGeneralizationSets [
+
+	<example>
+	^ self openExample: self exampleGeneralizationSets
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> openExampleRichClass [
+
+	<example>
+	^ self openExample: self exampleRichClass
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> openExampleSimpleAssociation [
+
+	<example>
+	^ self openExample: self exampleSimpleAssociation
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> openExampleSimpleGeneralization [
+
+	<example>
+	^ self openExample: self exampleSimpleGeneralization
+]
+
+{ #category : 'accessing' }
+OPUmlExamples class >> richClass [
+
+	| class stateMachine comment enum |
+	class := OPUMLClass new name: 'CompleteClass'.
+	class isAbstract: true.
+	#( 'Boolean' 'Integer' 'Real' 'String' 'UnlimitedNatural' ) do: [
+		:each |
+		| type |
+		type := OPUMLXMISpecsStorage primitiveTypeNamed: each.
+		class ownedAttributes add: (OPUMLProperty new
+				 name: 'primitive' , each;
+				 type: type) ].
+	comment := OPUMLXMISpecsStorage metaClassNamed: 'Comment'.
+	stateMachine := OPUMLXMISpecsStorage metaClassNamed: 'StateMachine'.
+	class ownedAttributes add: (OPUMLProperty new
+			 name: 'derived';
+			 isDerived: true).
+	class ownedAttributes add: (OPUMLProperty new
+			 name: 'comments';
+			 type: comment;
+			 lowerValue: (OPUMLLiteralInteger new value: 0);
+			 upperValue: (OPUMLLiteralUnlimitedNatural new value: '*')).
+	class ownedAttributes add: (OPUMLProperty new
+			 name: 'static';
+			 type: stateMachine;
+			 isStatic: true).
+	class ownedOperations add: (OPUMLOperation new name: 'basicMethod').
+	enum := (OPUMLXMISpecsStorage umlMetamodel packagedElements
+		         flatCollect: #packagedElements) detect: [ :each |
+		        each name = 'VisibilityKind' ].
+	"	class ownedOperations
+		add:
+			((OPUMLOperation new name: 'staticMethod')
+				in: [ :op | 
+					op ownedParameters
+						add:
+							(OPUMLParameter new
+								name: 'enum';
+								type: enum) ];
+				isStatic: true)."
+	class ownedOperations add:
+		((OPUMLOperation new name: 'abstractMethod')
+			 in: [ :op |
+				 op ownedParameters
+					 add: (OPUMLParameter new
+							  name: 'return';
+							  type: (OPUMLXMISpecsStorage primitiveTypeNamed: 'String');
+							  direction: OPUMLParameterDirectionKind return);
+					 add: (OPUMLParameter new
+							  name: 'arg1';
+							  type: (OPUMLXMISpecsStorage primitiveTypeNamed: 'Integer'));
+					 add: (OPUMLParameter new
+							  name: 'arg2';
+							  type: stateMachine;
+							  lowerValue: (OPUMLLiteralInteger new value: 0);
+							  upperValue: (OPUMLLiteralUnlimitedNatural new value: 1)) ];
+			 isAbstract: true).
+	^ class
 ]

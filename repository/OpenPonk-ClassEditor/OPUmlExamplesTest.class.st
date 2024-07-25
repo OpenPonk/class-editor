@@ -8,8 +8,10 @@ Class {
 
 { #category : 'tests' }
 OPUmlExamplesTest >> testAll [
+
 	OPUmlExamples class selectors
-		select: [ :each | each beginsWith: 'example' ]
+		select: [ :each |
+		(each beginsWith: 'open') and: [ (each includes: $:) not ] ]
 		thenDo: [ :each | self testExample: each ]
 ]
 
