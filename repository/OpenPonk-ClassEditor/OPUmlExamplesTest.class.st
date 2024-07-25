@@ -6,6 +6,13 @@ Class {
 	#tag : 'Tests'
 }
 
+{ #category : 'running' }
+OPUmlExamplesTest >> tearDown [
+
+	Smalltalk garbageCollect.
+	super tearDown
+]
+
 { #category : 'tests' }
 OPUmlExamplesTest >> testAll [
 
