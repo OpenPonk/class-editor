@@ -17,44 +17,41 @@ BaselineOfClassEditor class >> loadPlugins [
 BaselineOfClassEditor >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [ 
-		spec baseline: 'Moose' with: [ 
-			spec
-				repository: 'github://moosetechnology/Moose:f2b6052/src';
-				loads: #( Merlin ) ].
-		spec baseline: 'UMLMetamodel' with: [ 
-			spec repository:
-				'github://openponk/uml-metamodel:v3.0.x/repository' ].
+	spec for: #common do: [
+		spec
+			baseline: 'UMLMetamodel'
+			with: [ spec repository: 'github://openponk/uml-metamodel:v4.0.x' ].
 		spec
 			baseline: 'OPUMLXMI'
-			with: [ 
-			spec repository: 'github://openponk/uml-xmi:v3.0.x/repository' ].
-		spec baseline: 'UMLBootstrapGenerator' with: [ 
-			spec repository:
-				'github://openponk/uml-bootstrap-generator:v3.0.x/repository' ].
+			with: [ spec repository: 'github://openponk/uml-xmi:v4.0.x' ].
+		spec
+			baseline: 'UMLBootstrapGenerator'
+			with: [
+			spec repository: 'github://openponk/uml-bootstrap-generator:v4.0.x' ].
 		spec
 			baseline: 'OpenPonk'
-			with: [ 
-			spec repository: 'github://openponk/openponk:v3.0.x/repository' ].
-		spec baseline: 'UMLShapes' with: [ 
-			spec
-				repository: 'github://openponk/uml-shapes:v3.0.x/repository';
-				loads: #( plugin ) ].
+			with: [ spec repository: 'github://openponk/openponk:v4.0.x' ].
 		spec
 			baseline: 'UMLProfiles'
-			with: [ 
-			spec repository: 'github://openponk/uml-profiles:v3.0.x/repository' ].
-		spec package: 'OpenPonk-ClassEditor' with: [ 
+			with: [ spec repository: 'github://openponk/uml-profiles:v4.0.x' ].
+		spec package: 'OpenPonk-ClassEditor' with: [
 			spec requires:
-				#( Moose 'UMLShapes' 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
+				#( 'UMLMetamodel' 'OPUMLXMI' 'UMLBootstrapGenerator'
 				   'UMLProfiles' ) ].
-		spec
-			package: 'OPClassEditor-Plugins'
-			with: [ spec postLoadDoIt: #loadPlugins ].
+
 		spec group: 'plugin' with: #( 'OpenPonk-ClassEditor' ).
-		spec
-			group: 'complete-plugin'
-			with: #( plugin 'OPClassEditor-Plugins' ).
+		(Smalltalk globals includesKey:
+			 #BaselineOfOntoUMLVerificationFramework)
+			ifTrue: [ spec group: 'complete-plugin' with: #( plugin ) ]
+			ifFalse: [
+				self plugins: spec.
+				spec package: 'OPClassEditor-Plugins' with: [
+					spec requires:
+						#( 'OntoUMLVerificationFramework' OntoUMLPatterns
+						   OpenPonkGit OntoUMLTransformationFramework ) ].
+				spec
+					group: 'complete-plugin'
+					with: #( plugin 'OPClassEditor-Plugins' ) ].
 		spec group: 'complete' with: #( OpenPonk 'complete-plugin' ).
 		spec group: 'default' with: #( OpenPonk plugin ) ]
 ]
@@ -64,18 +61,18 @@ BaselineOfClassEditor >> plugins: spec [
 
 	spec baseline: 'OntoUMLVerificationFramework' with: [
 		spec
-			repository: 'github://openponk/ontouml-verifications';
+			repository: 'github://openponk/ontouml-verifications:v4.0.x';
 			loads: 'plugin' ].
 	spec baseline: 'OntoUMLTransformationFramework' with: [
 		spec
 			repository:
-				'github://openponk/openponk-ontouml-to-uml-transformation';
+				'github://openponk/openponk-ontouml-to-uml-transformation:v4.0.x';
 			loads: 'plugin' ].
 	spec
 		baseline: 'OpenPonkGit'
-		with: [ spec repository: 'github://openponk/openponk-git' ].
+		with: [ spec repository: 'github://openponk/openponk-git:v4.0.x' ].
 	spec baseline: 'OntoUMLPatterns' with: [
 		spec
-			repository: 'github://openponk/ontouml-patterns';
+			repository: 'github://openponk/ontouml-patterns:v4.0.x';
 			loads: 'plugin' ]
 ]
