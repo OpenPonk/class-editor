@@ -1,6 +1,6 @@
-Extension { #name : #OPUMLMultiplicityElement }
+Extension { #name : 'OPUMLMultiplicityElement' }
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLMultiplicityElement >> notationAssociationMultiplicityRange [
 	^ String
 		streamContents: [ :stream | 
@@ -11,7 +11,7 @@ OPUMLMultiplicityElement >> notationAssociationMultiplicityRange [
 			stream << self upper asString ]
 ]
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLMultiplicityElement >> notationMultiplicityRange [
 	self lower = self upper & (self upper = 1)
 		ifTrue: [ ^ '' ].

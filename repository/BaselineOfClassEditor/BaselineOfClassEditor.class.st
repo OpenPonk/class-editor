@@ -2,17 +2,18 @@
 Baseline for https://github.com/OpenPonk/class-editor
 "
 Class {
-	#name : #BaselineOfClassEditor,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfClassEditor
+	#name : 'BaselineOfClassEditor',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfClassEditor',
+	#package : 'BaselineOfClassEditor'
 }
 
-{ #category : #plugins }
+{ #category : 'plugins' }
 BaselineOfClassEditor class >> loadPlugins [
 	self new loadPlugins
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfClassEditor >> baseline: spec [
 
 	<baseline>
@@ -58,25 +59,23 @@ BaselineOfClassEditor >> baseline: spec [
 		spec group: 'default' with: #( OpenPonk plugin ) ]
 ]
 
-{ #category : #baselines }
-BaselineOfClassEditor >> loadOntoUML [
-	Metacello new
-		baseline: 'OntoUMLProfile';
-		repository: 'github://openponk/ontouml-profile:v3.0.x/repository';
-		load: 'plugin'
-]
+{ #category : 'baselines' }
+BaselineOfClassEditor >> plugins: spec [
 
-{ #category : #plugins }
-BaselineOfClassEditor >> loadPlugins [
-
-	"self loadOntoUML. ""not neccessary as verification framework loads OntoUML"""
-	self loadVerificationFramework
-]
-
-{ #category : #baselines }
-BaselineOfClassEditor >> loadVerificationFramework [
-	Metacello new
-		baseline: 'OntoUMLVerificationFramework';
-		repository: 'github://openponk/ontouml-verifications:v3.0.x';
-		load: 'plugin'
+	spec baseline: 'OntoUMLVerificationFramework' with: [
+		spec
+			repository: 'github://openponk/ontouml-verifications';
+			loads: 'plugin' ].
+	spec baseline: 'OntoUMLTransformationFramework' with: [
+		spec
+			repository:
+				'github://openponk/openponk-ontouml-to-uml-transformation';
+			loads: 'plugin' ].
+	spec
+		baseline: 'OpenPonkGit'
+		with: [ spec repository: 'github://openponk/openponk-git' ].
+	spec baseline: 'OntoUMLPatterns' with: [
+		spec
+			repository: 'github://openponk/ontouml-patterns';
+			loads: 'plugin' ]
 ]

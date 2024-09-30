@@ -2,24 +2,29 @@
 I take a model element and provide a list of magritte descriptions for all the properties added by stereotypes applied to the model element.
 "
 Class {
-	#name : #OPUmlStereotypeDescriptions,
-	#superclass : #Object,
+	#name : 'OPUmlStereotypeDescriptions',
+	#superclass : 'Object',
 	#instVars : [
 		'controller'
 	],
-	#category : #'OpenPonk-ClassEditor-Profiles'
+	#category : 'OpenPonk-ClassEditor-Profiles',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Profiles'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlStereotypeDescriptions >> accessorFor: anAttribute of: aStereotype [
+
 	^ MAPluggableAccessor
-		read: [ :me | aStereotype perform: anAttribute name asSymbol ]
-		write: [ :me :newValue | 
-			aStereotype perform: (anAttribute name , ':') asSymbol with: newValue.
-			controller refreshFigure ]
+		  read: [ :me | aStereotype perform: anAttribute name asSymbol ]
+		  write: [ :me :newValue |
+			  aStereotype
+				  perform: (anAttribute name , ':') asSymbol
+				  with: newValue.
+			  controller diagramElement modelChanged ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlStereotypeDescriptions >> addTo: aCollection attribute: anAttribute of: aStereotype [
 	anAttribute type name = #Boolean
 		ifTrue: [ aCollection
@@ -37,17 +42,17 @@ OPUmlStereotypeDescriptions >> addTo: aCollection attribute: anAttribute of: aSt
 						yourself) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypeDescriptions >> controller [
 	^ controller
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypeDescriptions >> controller: anObject [
 	controller := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlStereotypeDescriptions >> descriptions [
 	| descriptions |
 	self model ifNil: [ ^ #() ].
@@ -61,7 +66,7 @@ OPUmlStereotypeDescriptions >> descriptions [
 	^ descriptions
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypeDescriptions >> model [
 	^ controller model
 ]

@@ -2,27 +2,14 @@
 I am a controller for a PackageImport.
 "
 Class {
-	#name : #OPUmlPackageImportController,
-	#superclass : #OPUmlRelationshipController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlPackageImportController',
+	#superclass : 'OPUmlRelationshipController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
-OPUmlPackageImportController >> createDiagramElement [
-	^ OPUmlPackageImportShape new
-		modelElement: self model;
-		yourself
-]
-
-{ #category : #figures }
-OPUmlPackageImportController >> createModelIn: aParentModel [
-	self model: self modelClass new.
-	model importedPackage: aParentModel.
-	model importingNamespace: source model.
-	^ model
-]
-
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionGeneral [
 	"<magritteDescription>
 	^ MAStringDescription new
@@ -34,7 +21,7 @@ OPUmlPackageImportController >> descriptionGeneral [
 		yourself"
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionGeneralizationSet [
 "	<magritteDescription>
 	^ MAToManyRelationDescription new
@@ -73,12 +60,12 @@ OPUmlPackageImportController >> descriptionGeneralizationSet [
 		yourself"
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionName [
 	^ nil
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionSpecific [
 "	<magritteDescription>
 	^ MAStringDescription new
@@ -90,52 +77,54 @@ OPUmlPackageImportController >> descriptionSpecific [
 		yourself"
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlPackageImportController >> descriptionVisibility [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'figures' }
+OPUmlPackageImportController >> diagramElementClass [
+
+	^ OPUmlPackageImportShape
+]
+
+{ #category : 'accessing' }
 OPUmlPackageImportController >> modelClass [
 	^ OPUMLPackageImport
 ]
 
-{ #category : #forms }
-OPUmlPackageImportController >> pathSourceModel [
+{ #category : 'forms' }
+OPUmlPackageImportController >> modelSource [
+	^ model importingNamespace
+]
+
+{ #category : 'figures' }
+OPUmlPackageImportController >> modelSource: aModel in: aParentModel [
+	"answers whether model's source has been changed"
+
+	self modelSource = aModel ifTrue: [ ^ false ].
+	model importingNamespace: aModel.
+	^ true
+]
+
+{ #category : 'forms' }
+OPUmlPackageImportController >> modelTarget [
 	^ model importedPackage
 ]
 
-{ #category : #figures }
-OPUmlPackageImportController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : 'figures' }
+OPUmlPackageImportController >> modelTarget: aModel in: aParentModel [
+	"answers whether model's target has been changed"
+
+	self modelTarget = aModel ifTrue: [ ^ false ].
+	model importedPackage: aModel.
+	^ true
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 OPUmlPackageImportController >> removeModel [
+
 	model importedPackage: nil.
-	model importingNamespace: nil
-]
-
-{ #category : #figures }
-OPUmlPackageImportController >> renderFigureIn: aView [
-	| sourceElement |
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	sourceElement := ((diagramController controllers
-		select: [ :each | each isKindOf: OPUmlPackageController ])
-		detect: [ :each | each model packageImports includes: self model ]) diagramElement.
-	"	diagramElement source: (diagramController diagramElementForModel: self model specific)."
-	diagramElement source: sourceElement.
-	diagramElement target: (diagramController diagramElementForModel: self model importedPackage).
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
-]
-
-{ #category : #construction }
-OPUmlPackageImportController >> showWithoutDependentInDiagram: aDiagramController [
-	aDiagramController showWithoutDependentInDiagramModel: model importedPackage.
-	aDiagramController showWithoutDependentInDiagramModel: model importingNamespace.
-	^ super showWithoutDependentInDiagram: aDiagramController
+	model importingNamespace: nil.
+	super removeModel
 ]

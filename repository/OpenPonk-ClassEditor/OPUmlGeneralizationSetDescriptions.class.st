@@ -2,42 +2,50 @@
 I am a description proxy for a generalization set and I collaborate with GeneralizationController.
 "
 Class {
-	#name : #OPUmlGeneralizationSetDescriptions,
-	#superclass : #Object,
+	#name : 'OPUmlGeneralizationSetDescriptions',
+	#superclass : 'Object',
 	#instVars : [
 		'set',
 		'controller'
 	],
-	#category : #'OpenPonk-ClassEditor-Forms'
+	#category : 'OpenPonk-ClassEditor-Forms',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Forms'
 }
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlGeneralizationSetDescriptions >> = aDescription [
 	self species = aDescription species
 		ifFalse: [ ^ false ].
 	^ self set = aDescription set
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> controller [
 	^ controller
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> controller: anObject [
 	controller := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> descriptionAccessor: aSymbol [
+
 	^ MAPluggableAccessor
-		read: [ :me | set perform: aSymbol ]
-		write: [ :me :newValue | 
-			set perform: (aSymbol , ':') asSymbol with: newValue.
-			controller diagramElement ifNotNil: [ controller refreshFigure ] ]
+		  read: [ :me | set perform: aSymbol ]
+		  write: [ :me :newValue | 
+			  set perform: (aSymbol , ':') asSymbol with: newValue.
+			  { controller model } asSet , set generalizations
+				  collect: [ :each | 
+				  controller diagramController controllerForModel: each ]
+				  thenDo: [ :ctrl | 
+					  ctrl diagramElement ifNotNil: [ 
+						  ctrl diagramElement modelChanged ] ] ]
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionIsCovering [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -47,7 +55,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionIsCovering [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionIsDisjoint [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -57,7 +65,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionIsDisjoint [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionName [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -67,16 +75,16 @@ OPUmlGeneralizationSetDescriptions >> descriptionName [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> descriptionVisibility [
 	<magritteDescription>
 	^ MASingleOptionDescription new
 		optionsAndLabels:
-			{OPUMLVisibilityKind public -> 'public'.
-			OPUMLVisibilityKind protected -> 'protected'.
-			OPUMLVisibilityKind private -> 'private'.
-			OPUMLVisibilityKind new package -> 'package'};
-		morphClass: MADropListMorph;
+			{(OPUMLVisibilityKind public -> 'public').
+			(OPUMLVisibilityKind protected -> 'protected').
+			(OPUMLVisibilityKind private -> 'private').
+			(OPUMLVisibilityKind new package -> 'package')};
+		morphicClass: MAMorphicDropList;
 		reference: MAStringDescription new;
 		accessor: (self descriptionAccessor: #visibility);
 		label: 'Visibility';
@@ -85,39 +93,43 @@ OPUmlGeneralizationSetDescriptions >> descriptionVisibility [
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OPUmlGeneralizationSetDescriptions >> hash [
 	^ super hash bitXor: set hash
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlGeneralizationSetDescriptions >> initializeFor: aGeneralizationController [
+
 	| dialog listPresenter allElements setsToDisplay |
 	self controller: aGeneralizationController.
 	dialog := SpVersatileDialogPresenter new.
-	allElements := aGeneralizationController diagramController model
-		packagedElements.
-	setsToDisplay := ((allElements
-		select: [ :each | each oclIsKindOf: #GeneralizationSet ])
-		,
-			((allElements select: [ :each | each respondsTo: #generalizations ])
-				flatCollectAsSet: [ :each | 
-					each generalizations
-						flatCollectAsSet: [ :eachGeneralization | eachGeneralization generalizationSets ] ])
-				asArray) asSet asArray
-		select: [ :each | 
-			each generalizations
-				anySatisfy: [ :any | any general = aGeneralizationController model general ] ].
-	setsToDisplay
-		ifEmpty: [ ^ self
-				set: OPUMLGeneralizationSet new;
-				yourself ].
+	allElements := aGeneralizationController source
+		               parentPackageDo: [ :parentPackage |
+		               parentPackage packagedElements ]
+		               ifNone: [ #(  ) ].
+	setsToDisplay := ((allElements select: [ :each |
+		                   each oclIsKindOf: #GeneralizationSet ]) asSet
+	                  ,
+		                  ((allElements select: [ :each |
+			                    each respondsTo: #generalizations ])
+			                   flatCollectAsSet: [ :each |
+				                   each generalizations flatCollect: [
+					                   :eachGeneralization |
+					                   eachGeneralization generalizationSets ] ]))
+		                 asArray select: [ :each |
+		                 each generalizations anySatisfy: [ :any |
+			                 any general
+			                 = aGeneralizationController model general ] ].
+	setsToDisplay ifEmpty: [
+		^ self
+			  set: OPUMLGeneralizationSet new;
+			  yourself ].
 	listPresenter := dialog newList.
 	listPresenter
 		items: setsToDisplay;
-		display: [ :each | 
-			String
-				streamContents: [ :stream | 
+		display: [ :each |
+			String streamContents: [ :stream |
 					stream
 						<< 'GeneralizationSet {''';
 						<< (each name ifNil: [ '' ]);
@@ -139,17 +151,17 @@ OPUmlGeneralizationSetDescriptions >> initializeFor: aGeneralizationController [
 		addButton: #new
 		text: 'Create new'
 		value: [ OPUMLGeneralizationSet new ].
-	dialog openModalWithSpec.
+	dialog openModal.
 	dialog withWindowDo: [ :w | w title: 'Select existing or new set' ].
 	self set: dialog result value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> set [
 	^ set
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlGeneralizationSetDescriptions >> set: aGeneralizationSet [
 	set := aGeneralizationSet
 ]

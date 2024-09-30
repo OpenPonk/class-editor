@@ -1,16 +1,16 @@
-Extension { #name : #OPUMLProperty }
+Extension { #name : 'OPUMLProperty' }
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLProperty >> notationAssociationMultiplicityRange [
 	^ (sharedGeneralizations at: #MultiplicityElement) notationAssociationMultiplicityRange
 ]
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLProperty >> notationMultiplicityRange [
 	^ (sharedGeneralizations at: #MultiplicityElement) notationMultiplicityRange
 ]
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLProperty >> notationString [
 
 	^ String streamContents: [ :stream | 
@@ -47,7 +47,7 @@ OPUMLProperty >> notationString [
 				  stream << '}' ] ] ]
 ]
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLProperty >> notationStringAsRoleName [
 
 	^ String streamContents: [ :stream | 

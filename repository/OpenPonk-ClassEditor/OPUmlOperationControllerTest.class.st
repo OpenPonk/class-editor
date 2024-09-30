@@ -1,32 +1,37 @@
 Class {
-	#name : #OPUmlOperationControllerTest,
-	#superclass : #OPUmlElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlOperationControllerTest',
+	#superclass : 'OPUmlClassifierItemControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlOperationControllerTest >> controllerClass [
 	^ OPUmlOperationController
 ]
 
-{ #category : #accessing }
+{ #category : 'construction' }
+OPUmlOperationControllerTest >> diagramElementClass [
+
+	^ OPUmlOperationLabel
+]
+
+{ #category : 'accessing' }
 OPUmlOperationControllerTest >> modelClass [
 	^ OPUMLOperation
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OPUmlOperationControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlLabel
+
+	model owningClass: OPUMLClass new.
+	diagramController showWithoutDependentInDiagramModel: model owningClass.
+
+	super testCreateDiagramElement
 ]
 
-{ #category : #tests }
-OPUmlOperationControllerTest >> testNotationText [
-	self
-		assert: (controller notationTextFor: (OPUMLOperation new name: 'attr'))
-		equals: 'attr()'
-]
-
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlOperationControllerTest >> testRemoveFromView [
 
 	| class compartment op |
@@ -38,9 +43,4 @@ OPUmlOperationControllerTest >> testRemoveFromView [
 	compartment := controller diagramElement owningElement.
 	controller removeController.
 	self assert: compartment ownedElements asArray equals: #(  )
-]
-
-{ #category : #tests }
-OPUmlOperationControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: OPUMLOperation new)
 ]

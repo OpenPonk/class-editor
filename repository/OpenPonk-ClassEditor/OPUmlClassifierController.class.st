@@ -1,91 +1,107 @@
 Class {
-	#name : #OPUmlClassifierController,
-	#superclass : #OPUmlElementController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlClassifierController',
+	#superclass : 'OPUmlElementController',
+	#traits : 'OPTUmlPackageableController',
+	#classTraits : 'OPTUmlPackageableController classTrait',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #adding }
-OPUmlClassifierController >> addAsTargetFor: aController [
-	aController
-		createModelIn: self model
-		andShowInDiagram: self diagramController
-]
-
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassifierController >> adornments [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'events - registering' }
-OPUmlClassifierController >> attachTo: aDiagramController [
-	| newModel |
-	newModel := self createModel.
-	OPRenameElementCommand executeOn: newModel.
-	aDiagramController model packagedElements add: newModel.
-	aDiagramController showWithoutDependentInDiagramModel: newModel
-]
-
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlClassifierController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlAssociationController
 ]
 
-{ #category : #construction }
-OPUmlClassifierController >> createModelIn: aParentModel [
-	self
-		model:
-			(self modelClass new
-				name: self modelClassName;
-				yourself).
-	aParentModel packagedElements add: model.
-	^ model
+{ #category : 'figures' }
+OPUmlClassifierController >> createAdornmentsBy: builder [
+
+	"do nothing by default"
 ]
 
-{ #category : #forms }
+{ #category : 'construction' }
+OPUmlClassifierController >> createModelIn: aParentModel [
+
+	^ (super createModelIn: aParentModel)
+		  name: self modelClassName;
+		  yourself
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierController >> dependentElements [
+
+	| innerElements associations |
+	innerElements := self elementsToShowInside.
+	associations := self
+		                parentPackageDo: [ :parentPackage |
+			                parentPackage packagedElements select: [ :eachAssoc |
+				                (eachAssoc oclIsKindOf: #Association) and: [
+					                eachAssoc memberEnds anySatisfy: [ :any |
+						                any type = self model or: [
+							                any owningClass = self model ] ] ] ] ]
+		                ifNone: [ #(  ) ].
+	^ innerElements , associations
+]
+
+{ #category : 'forms' }
 OPUmlClassifierController >> descriptionName [
+
 	<magritteDescription>
 	| accessor |
 	accessor := MAPluggableAccessor
-		read: [ :me | me model name ]
-		write: [ :me :newValue | 
-			me model name: newValue.
-			self refreshFigure ].
+		            read: [ :me | me model name ]
+		            write: [ :me :newValue | 
+			            me model name: newValue.
+			            self diagramElement modelChanged ].
 	^ MAMemoDescription new
-		accessor: accessor;
-		label: 'Name';
-		priority: 1;
-		yourself
+		  accessor: accessor;
+		  label: 'Name';
+		  priority: 1;
+		  yourself
 ]
 
-{ #category : #testing }
+{ #category : 'construction' }
+OPUmlClassifierController >> hookDiagramElement [
+
+	super hookDiagramElement.
+
+	self diagramElement adornmentCreationBlock: [ :builder |
+		self createAdornmentsBy: builder ].
+	self diagramElement hiddenPackages: self hiddenPackages
+]
+
+{ #category : 'testing' }
 OPUmlClassifierController >> isHideable [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #figures }
-OPUmlClassifierController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : 'updating' }
+OPUmlClassifierController >> packageRenderChanged [
+
+	self diagramElement ifNotNil: [ :foundDE |
+		(foundDE hiddenPackages: self hiddenPackages) ifTrue: [
+			foundDE isRendered ifTrue: [ foundDE updateRenderFromModel ] ] ]
 ]
 
-{ #category : #removing }
-OPUmlClassifierController >> removeModel [
-	diagramController model packagedElements remove: self model
+{ #category : 'construction' }
+OPUmlClassifierController >> registerModelInContainer: aParentModel [
+
+	aParentModel packagedElements add: model
 ]
 
-{ #category : #figures }
-OPUmlClassifierController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	self figure @ (OPRTAdornments new adornments: self adornments).
-	self refreshFigure.
-	self figure @ OPRTDraggableSnapToGrid.
-	^ self figure
+{ #category : 'event handling' }
+OPUmlClassifierController >> updateAfterDiagramFocused [
+
+	self diagramElement hiddenPackages: self hiddenPackages.
+	super updateAfterDiagramFocused
 ]

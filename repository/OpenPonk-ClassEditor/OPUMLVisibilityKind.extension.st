@@ -1,6 +1,6 @@
-Extension { #name : #OPUMLVisibilityKind }
+Extension { #name : 'OPUMLVisibilityKind' }
 
-{ #category : #'*OpenPonk-ClassEditor' }
+{ #category : '*OpenPonk-ClassEditor' }
 OPUMLVisibilityKind class >> notationFor: aValue [
 	(aValue isNil or: [ aValue isEmpty ])
 		ifTrue: [ ^ '' ].

@@ -2,130 +2,150 @@
 I am a controller for Package/Model/Profile
 "
 Class {
-	#name : #OPUmlPackageController,
-	#superclass : #OPUmlElementController,
+	#name : 'OPUmlPackageController',
+	#superclass : 'OPUmlElementController',
+	#traits : 'OPTUmlPackageableController',
+	#classTraits : 'OPTUmlPackageableController classTrait',
 	#instVars : [
 		'modelClass'
 	],
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #adding }
-OPUmlPackageController >> addAsTargetFor: aController [
-	aController
-		createModelIn: self model
-		andShowInDiagram: self diagramController
-]
-
-{ #category : #rendering }
-OPUmlPackageController >> allShowableElements [
-	^ #()
-]
-
-{ #category : #'events - registering' }
-OPUmlPackageController >> attachTo: aDiagramController [
-	| newModel |
-	newModel := self createModel.
-	OPRenameElementCommand executeOn: newModel.
-	aDiagramController model packagedElements add: newModel.
-	aDiagramController showWithoutDependentInDiagramModel: newModel
-]
-
-{ #category : #configuration }
+{ #category : 'configuration' }
 OPUmlPackageController >> beForModel [
 	modelClass := OPUMLPackage
 ]
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 OPUmlPackageController >> beForPackage [
 	modelClass := OPUMLPackage
 ]
 
-{ #category : #configuration }
+{ #category : 'configuration' }
 OPUmlPackageController >> beForProfile [
 	modelClass := OPUMLProfile
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlPackageController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlPackageImportController
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlPackageController >> canBeTargetFor: aController [
-	^ aController isKindOf: OPUmlPackageImportController
+
+	^ (aController isKindOf: OPUmlPackageImportController) or: [ 
+		  (aController isKindOf: OPUmlClassController) or: [ 
+			  (aController isKindOf: OPUmlPackageController) or: [ 
+				  aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
-{ #category : #figures }
-OPUmlPackageController >> createDiagramElement [
-	^ OPUmlPackageCompartmentableShape new
-		modelElement: self model;
-		in: [ :shape | 
-			shape style
-				fillColor: Color white;
-				fontColor: Color black ];
-		yourself
-]
-
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlPackageController >> createModelIn: aParentModel [
-	| newModel names |
-	newModel := self modelClass new.
-	names := {(OPUMLPackage -> 'Package').
-	(OPUMLModel -> 'Model').
-	(OPUMLProfile -> 'Profile')} asDictionary.
-	newModel name: (names at: newModel class).
-	self model: newModel.
-	aParentModel packagedElements add: model.
+
+	super createModelIn: aParentModel.
+	model name: (model oclClassifierNameFrom: model class).
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageController >> dependentElements [
-	| mainElementTypes |
-	mainElementTypes := {#Class . #Package . #Enumeration . #Profile.
-	#Model}.
-	^ (self model packagedElements
-		select:
-			[ :each | mainElementTypes anySatisfy: [ :any | each oclIsKindOf: any ] ])
-		asSet , self model packageImports
-		,
-			((diagramController model packagedElements
-				select: [ :each | 
-					{#Package . #Profile . #Model}
-						anySatisfy: [ :any | each oclIsKindOf: any ] ])
-				flatCollectAsSet: [ :eachPackagedElement | 
-					eachPackagedElement packageImports
-						select: [ :eachImport | eachImport importingNamespace = self model ] ])
+
+	| mainTypes imports importsOfMe |
+	mainTypes := (self model packagedElements select: [ :each |
+		              { #Class. #Package. #Enumeration } anySatisfy: [ :any |
+			              each oclIsKindOf: any ] ]) asSet.
+	imports := self model packageImports.
+
+	importsOfMe := self
+		               parentPackageDo: [ :parentPackage |
+			               (parentPackage packagedElements select: [ :each |
+				                each oclIsKindOf: #Package ]) flatCollectAsSet: [
+				               :eachPackagedElement |
+				               eachPackagedElement packageImports select: [
+					               :eachImport |
+					               eachImport importingNamespace = self model ] ] ]
+		               ifNone: [ #(  ) ].
+	^ mainTypes , imports , importsOfMe
 ]
 
-{ #category : #testing }
+{ #category : 'figures' }
+OPUmlPackageController >> diagramElementClass [
+
+	^ OPUmlPackageShape
+]
+
+{ #category : 'construction' }
+OPUmlPackageController >> hookDiagramElement [
+
+	super hookDiagramElement.
+
+	diagramElement innerRoassalShapesBlock: [
+		Array streamContents: [ :stream |
+			self diagramController
+				propagateBlock: [ :eachController |
+					eachController roassalShape ifNotNil: [ :roassalShape |
+						stream nextPut: roassalShape ] ]
+				toNodeControllersIn: self model ] ].
+	self diagramElement hiddenPackages: self hiddenPackages
+]
+
+{ #category : 'testing' }
 OPUmlPackageController >> isHideable [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPackageController >> modelClass [
 	modelClass ifNil: [ self beForPackage ].
 	^ modelClass
 ]
 
-{ #category : #figures }
-OPUmlPackageController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : 'updating' }
+OPUmlPackageController >> packageRenderChanged [
+
+	self diagramElement ifNotNil: [ :foundDE |
+		(foundDE hiddenPackages: self hiddenPackages) ifTrue: [
+			foundDE isRendered ifTrue: [ foundDE updateRenderFromModel ] ] ].
+	self diagramController propagatePackageRenderChangedIn: self model
 ]
 
-{ #category : #removing }
-OPUmlPackageController >> removeModel [
-	diagramController model packagedElements remove: self model
+{ #category : 'actions' }
+OPUmlPackageController >> pushBack [
+
+	self diagramElement pushBack.
+	self closestRenderedPackageControllerDo: [ :packageController |
+		^ packageController pushBack ]
 ]
 
-{ #category : #rendering }
-OPUmlPackageController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
+{ #category : 'construction' }
+OPUmlPackageController >> registerModelInContainer: aParentModel [
+
+	aParentModel packagedElements add: model
+]
+
+{ #category : 'destruction' }
+OPUmlPackageController >> removeDiagramElement [
+
+	self diagramElement ifNil: [ ^ self ].
+	super removeDiagramElement.
+	self packageRenderChanged
+]
+
+{ #category : 'construction' }
+OPUmlPackageController >> renderDiagramElement [
+
+	super renderDiagramElement.
+	self packageRenderChanged.
+	self pushBack
+]
+
+{ #category : 'event handling' }
+OPUmlPackageController >> updateAfterDiagramFocused [
+
+	self diagramElement hiddenPackages: self hiddenPackages.
+	super updateAfterDiagramFocused
 ]

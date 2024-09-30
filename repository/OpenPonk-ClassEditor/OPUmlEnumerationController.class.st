@@ -2,66 +2,80 @@
 I am a controller for an Enumeration
 "
 Class {
-	#name : #OPUmlEnumerationController,
-	#superclass : #OPUmlClassifierController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlEnumerationController',
+	#superclass : 'OPUmlClassifierController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlEnumerationController >> adornments [
-	^ {OPUmlIcons literalIcon
-		-> [ | tool |
-			tool := OPCreationTool new
-				palette: self diagramController editor paletteModel;
-				factory: [ OPUMLEnumerationLiteral new ].
-			self diagramController editor paletteModel selectTool: tool.
-			tool
-				whenCompleted: [ :ctrl | 
-					OPRenameElementCommand executeOn: ctrl model.
-					ctrl refreshFigure ].
-			tool targetSelected: self ]}
+
+	^ { (OPUmlIcons literalIcon -> [ 
+	   | tool |
+	   tool := OPCreationTool new
+		           palette: self diagramController editor palette;
+		           factory: [ OPUMLEnumerationLiteral new ].
+	   self diagramController editor palette selectTool: tool.
+	   tool whenCreated: [ :ctrl | 
+		   OPRenameElementCommand executeOn: ctrl.
+		   ctrl refreshFigure ].
+	   tool selectedTargetControllers: { self } ]) }
 ]
 
-{ #category : #rendering }
-OPUmlEnumerationController >> allShowableElements [
-	| queue |
-	queue := OrderedCollection new.
-	queue addAll: self model ownedLiterals.
-	^ queue asArray
-		select: [ :each | diagramController hasSupportForModel: each ]
-]
-
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlEnumerationController >> canBeTargetFor: aController [
 	^ (aController isKindOf: OPUmlEnumerationLiteralController)
 		| (aController isKindOf: OPUmlAssociationController)
 ]
 
-{ #category : #figures }
-OPUmlEnumerationController >> createDiagramElement [
-	^ OPUmlClassShape new
-		modelElement: self model;
-		stereotype: [ #(enumeration) ]
+{ #category : 'figures' }
+OPUmlEnumerationController >> createAdornmentsBy: builder [
+
+	self createLiteralAdornmentBy: builder
 ]
 
-{ #category : #model }
+{ #category : 'figures' }
+OPUmlEnumerationController >> createLiteralAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons literalIcon action: [
+		| tool |
+		tool := OPCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUMLEnumerationLiteral new ].
+		self diagramController editor palette selectTool: tool.
+		tool whenCreated: [ :ctrl |
+			OPRenameElementCommand executeOn: ctrl.
+			ctrl refreshFigure ].
+		tool selectedControllers: { self } ]
+]
+
+{ #category : 'model' }
 OPUmlEnumerationController >> createModel [
 	^ self modelClass new
 		name: 'Enumeration';
 		yourself
 ]
 
-{ #category : #figures }
+{ #category : 'construction' }
+OPUmlEnumerationController >> diagramElementClass [
+
+	^ OPUmlEnumerationShape
+]
+
+{ #category : 'figures' }
 OPUmlEnumerationController >> elementsToShowInside [
 	^ self model ownedLiterals asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationController >> modelClass [
 	^ OPUMLEnumeration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlEnumerationController >> modelClassName [
-	^ #Enumeration
+
+	^ 'Enumeration'
 ]

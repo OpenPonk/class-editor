@@ -2,62 +2,75 @@
 I am a controller for an EnumerationLiteral.
 "
 Class {
-	#name : #OPUmlEnumerationLiteralController,
-	#superclass : #OPUmlElementController,
-	#instVars : [
-		'classController'
-	],
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlEnumerationLiteralController',
+	#superclass : 'OPUmlClassifierItemController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
-OPUmlEnumerationLiteralController >> createDiagramElement [
-	^ OPUmlLabel new
-		modelElement: self model;
-		text: [ :aModel | aModel name ];
-		localStyle: OPUmlStyle new;
-		yourself
+{ #category : 'figures' }
+OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
+
+	self diagramElementOwner addLiteral: diagramElement
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
-	self
-		model:
-			(self modelClass new
-				name: 'literal';
-				yourself).
-	aParentModel ownedLiterals add: model.
-	^ model
+
+	^ (super createModelIn: aParentModel)
+		  name: self placeholderName;
+		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'construction' }
+OPUmlEnumerationLiteralController >> dependingOnElements [
+
+	^ super dependingOnElements , (Set with: model enumeration)
+]
+
+{ #category : 'construction' }
+OPUmlEnumerationLiteralController >> diagramElementClass [
+
+	^ OPUmlEnumerationLiteralLabel
+]
+
+{ #category : 'diagram elements' }
+OPUmlEnumerationLiteralController >> diagramElementOwner [
+
+	^ (diagramController showWithoutDependentInDiagramModel:
+		   model enumeration) diagramElement
+]
+
+{ #category : 'accessing' }
 OPUmlEnumerationLiteralController >> modelClass [
 	^ OPUMLEnumerationLiteral
 ]
 
-{ #category : #figures }
-OPUmlEnumerationLiteralController >> refreshFigure [
-	self diagramElement changed.
-	self diagramElement owningElement owningElement changed.
-	^ self figure
+{ #category : 'hooks' }
+OPUmlEnumerationLiteralController >> placeholderName [
+
+	^ 'literal'
 ]
 
-{ #category : #removing }
+{ #category : 'construction' }
+OPUmlEnumerationLiteralController >> registerModelInContainer: aParentModel [
+
+	aParentModel ownedLiterals add: model
+]
+
+{ #category : 'removing' }
+OPUmlEnumerationLiteralController >> removeDiagramElement [
+
+	self diagramElement ifNil: [ ^ self ].
+	self diagramElementOwner removeLiteral: self diagramElement.
+	diagramElement := nil
+]
+
+{ #category : 'removing' }
 OPUmlEnumerationLiteralController >> removeModel [
 	"could be any of those, so just nil all of them"
 
-	model enumeration: nil
-]
-
-{ #category : #figures }
-OPUmlEnumerationLiteralController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		owningElement:
-			(diagramController diagramElementForModel: model enumeration)
-				attributes.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
+	model enumeration: nil.
+	super removeModel
 ]

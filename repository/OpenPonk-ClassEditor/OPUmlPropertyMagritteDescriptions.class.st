@@ -2,48 +2,61 @@
 I am a collection of magritte descriptions for an association end.
 "
 Class {
-	#name : #OPUmlPropertyMagritteDescriptions,
-	#superclass : #Object,
+	#name : 'OPUmlPropertyMagritteDescriptions',
+	#superclass : 'Object',
 	#instVars : [
 		'labelPrefix',
 		'reader'
 	],
-	#category : #'OpenPonk-ClassEditor-Forms'
+	#category : 'OpenPonk-ClassEditor-Forms',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Forms'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlPropertyMagritteDescriptions class >> reader: aBlock labelPrefix: aLabelPrefix [
 	^ self new
 		setReader: aBlock labelPrefix: aLabelPrefix;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
+
 	^ MAPluggableAccessor
-		read: [ :me | (reader value: me) perform: aSymbol ]
-		write: [ :me :newValue | 
-			(reader value: me) perform: (aSymbol , ':') asSymbol with: newValue.
-			me ifNotNil: [ me refreshFigure ] ]
+		  read: [ :me | (reader value: me) perform: aSymbol ]
+		  write: [ :me :newValue | 
+			  (reader value: me)
+				  perform: (aSymbol , ':') asSymbol
+				  with: newValue.
+			  me ifNotNil: [ me diagramElement modelChanged ] ]
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
+
 	<magritteDescription>
+	| property association isDependentOnMultiplicity |
+	property := reader value: reader receiver.
+	association := property association.
+	isDependentOnMultiplicity := association appliedStereotypes 
+		                             anySatisfy: [ :any | 
+		                             any oclIsKindOf: #SubQuantityOf ].
 	^ MASingleOptionDescription new
-		optionsAndLabels:
-			{OPUMLAggregationKind none -> 'none'.
-			OPUMLAggregationKind shared -> 'shared'.
-			OPUMLAggregationKind composite -> 'composite'};
-		reference: MAStringDescription new;
-		accessor: (self descriptionAccessor: #aggregation);
-		label: 'Aggregation';
-		priority: 3;
-		beSorted;
-		yourself
+		  visible: true "isDependentOnMultiplicity not";
+		  optionsAndLabels: { 
+				  (OPUMLAggregationKind none -> 'none').
+				  (OPUMLAggregationKind shared -> 'shared').
+				  (OPUMLAggregationKind composite -> 'composite') };
+		  reference: MAStringDescription new;
+		  accessor: (self descriptionAccessor: #aggregation);
+		  label: 'Aggregation';
+		  priority: 3;
+		  beSorted;
+		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionDefaultValue [
 
 	<magritteDescription>
@@ -69,7 +82,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionDefaultValue [
 		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsDerived [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -79,22 +92,22 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsDerived [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsNavigable [
+
 	<magritteDescription>
 	^ MABooleanDescription new
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | (reader value: me) isNavigable ]
-				write: [ :me :newValue | 
-					me writeNavigability: newValue to: (reader value: me).
-					me refreshFigure ]);
-		label: 'Is Navigable';
-		priority: 10;
-		yourself
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | (reader value: me) isNavigable ]
+				   write: [ :me :newValue | 
+					   me writeNavigability: newValue to: (reader value: me).
+					   me diagramElement modelChanged ]);
+		  label: 'Is Navigable';
+		  priority: 10;
+		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsOrdered [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -104,7 +117,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsOrdered [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsReadOnly [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -114,7 +127,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsReadOnly [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsStatic [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -124,7 +137,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsStatic [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsUnique [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -134,27 +147,28 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsUnique [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionMultiplicity [
+
 	<magritteDescription>
 	^ MASingleOptionDescription new
-		beExtensible;
-		options: #('0..1' '1..1' '0..*' '1..*');
-		reference: MAStringDescription new;
-		accessor:
-			(MAPluggableAccessor
-				read:
-					[ :me | (reader value: me) lowerBound asString , '..' , (reader value: me) upperBound asString ]
-				write: [ :me :newValue | 
-					me writeMultiplicityFrom: newValue to: (reader value: me).
-					me refreshFigure ]);
-		label: 'Multiplicity';
-		priority: 9;
-		beSorted;
-		yourself
+		  beExtensible;
+		  options: #( '0..1' '1..1' '0..*' '1..*' );
+		  reference: MAStringDescription new;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | 
+					   (reader value: me) lowerBound asString , '..'
+					   , (reader value: me) upperBound asString ]
+				   write: [ :me :newValue | 
+					   me writeMultiplicityFrom: newValue to: (reader value: me).
+					   me diagramElement modelChanged ]);
+		  label: 'Multiplicity';
+		  priority: 9;
+		  beSorted;
+		  yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionName [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -164,7 +178,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionName [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionType [
 	<magritteDescription>
 	^ MAStringDescription new
@@ -178,7 +192,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionType [
 		yourself
 ]
 
-{ #category : #descriptions }
+{ #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionVisibility [
 	<magritteDescription>
 	^ MASingleOptionDescription new
@@ -196,7 +210,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionVisibility [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OPUmlPropertyMagritteDescriptions >> setReader: aModelReader labelPrefix: aLabelPrefix [
 	reader := aModelReader.
 	labelPrefix := aLabelPrefix

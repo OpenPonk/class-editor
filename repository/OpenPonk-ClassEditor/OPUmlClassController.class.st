@@ -2,49 +2,43 @@
 I am a controller for a Class(ifier)
 "
 Class {
-	#name : #OPUmlClassController,
-	#superclass : #OPUmlClassifierController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlClassController',
+	#superclass : 'OPUmlClassifierController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
+{ #category : 'figures' }
 OPUmlClassController >> adornments [
-	^ {(OPUmlIcons attributeIcon
-		-> [ | tool |
-			tool := OPCreationTool new
-				palette: self diagramController editor paletteModel;
-				factory: [ OPUmlAttributeController new ].
-			self diagramController editor paletteModel selectTool: tool.
-			tool
-				whenCompleted: [ :ctrl | OPRenameElementCommand executeOn: ctrl model ].
-			tool targetSelected: self ]).
-	(OPUmlIcons directedAssociationIcon
-		-> [ | tool |
-			tool := OPConnectionCreationTool new
-				palette: self diagramController editor paletteModel;
-				factory: [ OPUmlAssociationController new ].
-			self diagramController editor paletteModel selectTool: tool.
-			tool sourceSelected: self ]).
-	(OPUmlIcons generalizationIcon
-		-> [ | tool |
-			tool := OPConnectionCreationTool new
-				palette: self diagramController editor paletteModel;
-				factory: [ OPUmlGeneralizationController new ].
-			self diagramController editor paletteModel selectTool: tool.
-			tool sourceSelected: self ])}
+
+	^ {
+		  (OPUmlIcons attributeIcon -> [
+		   | tool |
+		   tool := OPCreationTool new
+			           palette: self diagramController editor palette;
+			           factory: [ OPUmlAttributeController new ].
+		   self diagramController editor palette selectTool: tool.
+		   tool whenCreated: [ :ctrl |
+			   OPRenameElementCommand executeOn: ctrl ].
+		   tool selectedTargetControllers: { self } ]).
+		  (OPUmlIcons directedAssociationIcon -> [
+		   | tool |
+		   tool := OPConnectionCreationTool new
+			           palette: self diagramController editor palette;
+			           factory: [ OPUmlAssociationController new ].
+		   self diagramController editor palette selectTool: tool.
+		   tool selectedSourceControllers: { self } ]).
+		  (OPUmlIcons generalizationIcon -> [
+		   | tool |
+		   tool := OPConnectionCreationTool new
+			           palette: self diagramController editor palette;
+			           factory: [ OPUmlGeneralizationController new ].
+		   self diagramController editor palette selectTool: tool.
+		   tool selectedSourceControllers: { self } ]) }
 ]
 
-{ #category : #rendering }
-OPUmlClassController >> allShowableElements [
-	| queue |
-	queue := OrderedCollection new.
-	queue addAll: self model ownedAttributes.
-	queue addAll: self model ownedOperations.
-	^ queue asArray
-		select: [ :each | diagramController hasSupportForModel: each ]
-]
-
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassController >> buildAbstractEditorForm: aForm [
 	(aForm addCheckbox: 'Is Abstract')
 		state: self model isAbstract;
@@ -53,59 +47,112 @@ OPUmlClassController >> buildAbstractEditorForm: aForm [
 			self refreshFigure ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlClassController >> canBeSourceFor: aController [
 	^ (aController isKindOf: OPUmlGeneralizationController)
 		| (super canBeSourceFor: aController)
 		| (aController isKindOf: OPUmlExtensionController)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 OPUmlClassController >> canBeTargetFor: aController [
-	^ (aController isKindOf: OPUmlAttributeController)
-		| (aController isKindOf: OPUmlOperationController)
-		| (aController isKindOf: OPUmlGeneralizationController)
-		| (aController isKindOf: OPUmlAssociationController)
-		| (aController isKindOf: OPUmlExtensionController)
+
+	^ (aController isKindOf: OPUmlAttributeController) or: [
+		  (aController isKindOf: OPUmlOperationController) or: [
+			  (aController isKindOf: OPUmlAssociationController) or: [
+				  (aController isKindOf: OPUmlExtensionController) or: [
+					  (aController isKindOf: OPUmlGeneralizationController) and: [
+						  aController source ~= self ] ] ] ] ]
 ]
 
-{ #category : #figures }
-OPUmlClassController >> createDiagramElement [
-	^ OPUmlClassShape new
-		stereotype: [ self stereotypeNames ];
-		comments: [ self model ownedComments ];
-		modelElement: self model
+{ #category : 'figures' }
+OPUmlClassController >> createAdornmentsBy: builder [
+
+	self
+		createAttributeAdornmentBy: builder;
+		createAssociationAdornmentBy: builder;
+		createGeneralizationAdornmentBy: builder
 ]
 
-{ #category : #accessing }
+{ #category : 'figures' }
+OPUmlClassController >> createAssociationAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons directedAssociationIcon action: [
+		| tool |
+		tool := OPConnectionCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlAssociationController new ].
+		self diagramController editor palette selectTool: tool.
+		tool selectedControllers: { self } ]
+]
+
+{ #category : 'figures' }
+OPUmlClassController >> createAttributeAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons attributeIcon action: [
+		| tool |
+		tool := OPCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlAttributeController new ].
+		self diagramController editor palette selectTool: tool.
+		tool whenCreated: [ :ctrl |
+			OPRenameElementCommand executeOn: ctrl.
+			ctrl diagramElement modelChanged ].
+		tool selectedControllers: { self } ]
+]
+
+{ #category : 'figures' }
+OPUmlClassController >> createGeneralizationAdornmentBy: builder [
+
+	builder addIconForm: OPUmlIcons generalizationIcon action: [
+		| tool |
+		tool := OPConnectionCreationTool new
+			        palette: self diagramController editor palette;
+			        factory: [ OPUmlGeneralizationController new ].
+		self diagramController editor palette selectTool: tool.
+		tool selectedControllers: { self } ]
+]
+
+{ #category : 'accessing' }
 OPUmlClassController >> dependentElements [
-	^ self elementsToShowInside , self model generalizations
-		,
-			((diagramController model packagedElements
-				select:
-					[ :eachPackageElement | eachPackageElement oclIsKindOf: #GeneralizationSet ])
-				flatCollectAsSet: [ :eachSet | 
-					eachSet generalizations
-						select: [ :eachGeneralization | 
-							eachGeneralization general = self model
-								or: [ eachGeneralization specific = self model ] ] ])
-		,
-			((diagramController model packagedElements
-				select: [ :eachPackageElement | eachPackageElement oclIsKindOf: #Class ])
-				flatCollectAsSet: [ :eachClass | 
-					eachClass generalizations
-						select: [ :eachGeneralization | 
-							eachGeneralization general = self model
-								or: [ eachGeneralization specific = self model ] ] ])
-		,
-			(diagramController model packagedElements
-				select: [ :eachAssoc | 
-					(eachAssoc oclIsKindOf: #Association)
-						and: [ eachAssoc memberEnds
-								anySatisfy: [ :any | any type = self model or: [ any owningClass = self model ] ] ] ])
+
+	| ownGeneralizations generalizationsFromSets otherClassesGeneralizations |
+	ownGeneralizations := self model generalizations.
+	generalizationsFromSets := nil.
+	generalizationsFromSets := self
+		                           parentPackageDo: [ :parentPackage |
+			                           (parentPackage packagedElements select: [
+				                            :eachPackageElement |
+				                            eachPackageElement oclIsKindOf:
+					                            #GeneralizationSet ])
+				                           flatCollectAsSet: [ :eachSet |
+					                           eachSet generalizations select: [
+						                           :eachGeneralization |
+						                           eachGeneralization general
+						                           = self model or: [
+							                           eachGeneralization specific
+							                           = self model ] ] ] ]
+		                           ifNone: [ #(  ) ].
+	otherClassesGeneralizations := self
+		                               parentPackageDo: [ :parentPackage |
+			                               (parentPackage packagedElements
+				                                select: [ :eachPackageElement |
+				                                eachPackageElement oclIsKindOf:
+					                                #Class ]) flatCollectAsSet: [
+				                               :eachClass |
+				                               eachClass generalizations select: [
+					                               :eachGeneralization |
+					                               eachGeneralization general
+					                               = self model or: [
+						                               eachGeneralization specific
+						                               = self model ] ] ] ]
+		                               ifNone: [ #(  ) ].
+
+	^ super dependentElements , ownGeneralizations
+	  , generalizationsFromSets , otherClassesGeneralizations
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassController >> descriptionIsAbstract [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -115,30 +162,32 @@ OPUmlClassController >> descriptionIsAbstract [
 		yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlClassController >> descriptionStereotype [
+
 	<magritteDescription>
-	^ super descriptionStereotype
+	^ self descriptionStereotypeContent
 ]
 
-{ #category : #accessing }
+{ #category : 'figures' }
+OPUmlClassController >> diagramElementClass [
+
+	^ OPUmlClassShape
+]
+
+{ #category : 'accessing' }
 OPUmlClassController >> elementsToShowInside [
+
 	^ model ownedOperations asSet , model ownedAttributes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassController >> modelClass [
 	^ OPUMLClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassController >> modelClassName [
-	^ #Class
-]
 
-{ #category : #accessing }
-OPUmlClassController >> stereotypeNames [
-	(self diagramController model oclIsKindOf: #Profile)
-		ifTrue: [ ^ #(Metaclass) ].
-	^ self model appliedStereotypes collect: #umlClassName
+	^ 'Class'
 ]

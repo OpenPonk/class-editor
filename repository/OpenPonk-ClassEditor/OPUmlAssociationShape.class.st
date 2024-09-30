@@ -2,8 +2,8 @@
 I am a shape composition to accomodate for the most common UML Association shape.
 "
 Class {
-	#name : #OPUmlAssociationShape,
-	#superclass : #OPUmlEdge,
+	#name : 'OPUmlAssociationShape',
+	#superclass : 'OPUmlEdge',
 	#instVars : [
 		'nameLabel',
 		'sourceEndLabels',
@@ -12,123 +12,81 @@ Class {
 		'stereotypeLabel',
 		'propertiesLabel'
 	],
-	#category : #'OpenPonk-ClassEditor-Shapes'
+	#category : 'OpenPonk-ClassEditor-Shapes',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Shapes'
 }
 
-{ #category : #configuration }
-OPUmlAssociationShape >> addConstraintsTo: aCollection at: aPosition [
-	aCollection add: (self constraintLabel: nameLabel at: aPosition side: -1).
-	aCollection add: (self constraintLabel: propertiesLabel at: #center side: 0).
-	aCollection add: (self constraintLabel: stereotypeLabel at: aPosition side: 1).
+{ #category : 'initialization' }
+OPUmlAssociationShape >> createEndLabels [
+
+	{ 
+		OPUmlAssociationEndLabel.
+		OPUmlMultiplicityLabel } do: [ :each | 
+		(each in: self forModelElement: self modelElement memberEnds first)
+			atSource ].
+	{ 
+		OPUmlAssociationEndLabel.
+		OPUmlMultiplicityLabel } do: [ :each | 
+		each in: self forModelElement: self modelElement memberEnds second ]
 ]
 
-{ #category : #configuration }
-OPUmlAssociationShape >> constraintLabel: aLabel at: aPosition side: aSide [
+{ #category : 'initialization' }
+OPUmlAssociationShape >> createOwnedElementsWithoutController [
 
-	| config anchor |
-	config := Dictionary
-		          with: #source -> (Array with: 10 with: aSide * 20)
-		          with: #target -> (Array with: -10 with: aSide * 20)
-		          with: #middle -> (Array with: 0.5 with: aSide * 20)
-		          with: #center -> (Array with: 0.5 with: 0).
-	anchor := OPRTRailConstraint new.
-	anchor
-		lineOnDragOnly;
-		gripLineColor: Color gray;
-		initialPosition: (config at: aPosition) first;
-		distance: (config at: aPosition) second;
-		element: aLabel rtElement connection: self rtEdge.
-	aLabel rtElement @ RTDraggable.
-	^ anchor
+	self ownedElements ifNotEmpty: [ ^ self ].
+	{
+		OPUmlAssociationLabel.
+		OPUmlAssociationPropertiesLabel.
+		OPUmlAssociationStereotypesLabel } do: [ :each | each in: self ].
+
+	self createEndLabels
 ]
 
-{ #category : #accessing }
-OPUmlAssociationShape >> decoratorFor: aProperty [
+{ #category : 'hooks' }
+OPUmlAssociationShape >> headMarker [
+
+	^ self markerShapeFor:
+		  (self modelElement ifNil: [ ^ nil ]) memberEnds second
+]
+
+{ #category : 'accessing' }
+OPUmlAssociationShape >> markerShapeFor: aProperty [
+
 	(self ontoUmlDecoratorFor: aProperty) ifNotNil: [ :marker | ^ marker ].
-	aProperty opposite aggregation = OPUMLAggregationKind composite
-		ifTrue: [ ^ OPUmlEdgeMarkers filledDiamond ].
-	aProperty opposite aggregation = OPUMLAggregationKind shared
-		ifTrue: [ ^ OPUmlEdgeMarkers emptyDiamond ].
-	aProperty isNavigable & aProperty opposite isNavigable
-		ifTrue: [ ^ OPUmlEdgeMarkers none ].
-	aProperty isNavigable & aProperty opposite isNavigable not
-		ifTrue: [ ^ OPUmlEdgeMarkers simpleArrow ].
-	^ OPUmlEdgeMarkers none
-]
-
-{ #category : #accessing }
-OPUmlAssociationShape >> endLabelsClass [
-	^ OPUmlAssociationEndLabels
-]
-
-{ #category : #'Roassal2 - updating' }
-OPUmlAssociationShape >> ends: anArray [
-	| ends |
-	ends := anArray.
-	ends first modelElement = sourceEndLabels modelElement type
-		ifFalse: [ ends := ends reverse ].
-	self source: ends first.
-	self target: ends second
-]
-
-{ #category : #initialization }
-OPUmlAssociationShape >> initialize [
-	super initialize.
-	(nameLabel := OPUmlNameLabel new)
-		text: [ :model | 
-			(model isDerived
-				ifTrue: [ '/' ]
-				ifFalse: [ '' ]) , (model name ifNil: [ '' ]) ];
-		owningElement: self.
-	(propertiesLabel := OPUmlLabel new)
-		text: [ :model | 
-			(self propertiesOfModel: model)
-				ifEmpty: [ '' ]
-				ifNotEmpty: [ :props | '{' , (props joinUsing: ',') , '}' ] ];
-		owningElement: self.
-	(stereotypeLabel := OPUmlNameLabel new)
-		text: [ :model | 
-			model appliedStereotypes
-				ifEmpty: [ '' ]
-				ifNotEmpty: [ :s | '«' , ((s collect: #umlClassName) joinUsing: ',') , '»' ] ];
-		owningElement: self.
-	sourceEndLabels := self endLabelsClass on: self.
-	targetEndLabels := self endLabelsClass on: self.
-	constraints := OrderedCollection new
-]
-
-{ #category : #accessing }
-OPUmlAssociationShape >> modelElement: aModel [
-	super modelElement: aModel.
-	nameLabel modelElement: aModel.
-	propertiesLabel modelElement: aModel.
-	stereotypeLabel modelElement: aModel.
-	sourceEndLabels modelElement: aModel memberEnds first.
-	targetEndLabels modelElement: aModel memberEnds second
-]
-
-{ #category : #accessing }
-OPUmlAssociationShape >> ontoUmlDecoratorFor: aProperty [
-	| stereoNames markers |
-	stereoNames := aProperty association appliedStereotypes collect: #umlClassName.
-	markers := {#SubQuantityOf -> (OPUmlEdgeMarkers filledDiamondWith: 'Q').
-	#SubCollectionOf -> (OPUmlEdgeMarkers filledDiamondWith: 'C').
-	#MemberOf -> (OPUmlEdgeMarkers emptyDiamondWith: 'M').
-	#ComponentOf -> (OPUmlEdgeMarkers emptyDiamondWith: 'C')} asDictionary.
-	aProperty opposite aggregation = OPUMLAggregationKind composite
-		ifTrue: [ (stereoNames includes: #SubQuantityOf)
-				ifTrue: [ ^ markers at: #SubQuantityOf ].
-			(stereoNames includes: #SubCollectionOf)
-				ifTrue: [ ^ markers at: #SubCollectionOf ] ].
-	aProperty opposite aggregation = OPUMLAggregationKind shared
-		ifTrue: [ (stereoNames includes: #MemberOf)
-				ifTrue: [ ^ markers at: #MemberOf ].
-			(stereoNames includes: #ComponentOf)
-				ifTrue: [ ^ markers at: #ComponentOf ] ].
+	aProperty opposite aggregation = OPUMLAggregationKind composite 
+		ifTrue: [ ^ OPRSMarkerBuilder diamond ].
+	aProperty opposite aggregation = OPUMLAggregationKind shared ifTrue: [ 
+		^ OPRSMarkerBuilder diamond asEmptyMarker ].
+	aProperty isNavigable ifTrue: [ ^ OPRSMarkerBuilder arrow ].
 	^ nil
 ]
 
-{ #category : #initialization }
+{ #category : 'accessing' }
+OPUmlAssociationShape >> ontoUmlDecoratorFor: aProperty [
+
+	| stereoNames markerLetters |
+	stereoNames := aProperty association appliedStereotypes collect:
+		               #umlClassName.
+	markerLetters := { 
+		                 (#SubQuantityOf -> $Q).
+		                 (#SubCollectionOf -> $C).
+		                 (#MemberOf -> $M) } asDictionary.
+	aProperty opposite aggregation = OPUMLAggregationKind composite 
+		ifTrue: [ 
+			stereoNames do: [ :each | 
+				markerLetters
+					at: each
+					ifPresent: [ :letter | 
+					^ OPRSMarkerBuilder diamondWithLetter: letter ] ] ].
+	aProperty opposite aggregation = OPUMLAggregationKind shared ifTrue: [ 
+		stereoNames do: [ :each | 
+			markerLetters at: each ifPresent: [ :letter | 
+				^ (OPRSMarkerBuilder diamondWithLetter: letter) asEmptyMarker ] ] ].
+	^ nil
+]
+
+{ #category : 'initialization' }
 OPUmlAssociationShape >> propertiesOfModel: aModel [
 	| props |
 	props := OrderedCollection new.
@@ -147,24 +105,9 @@ OPUmlAssociationShape >> propertiesOfModel: aModel [
 	^ props
 ]
 
-{ #category : #rendering }
-OPUmlAssociationShape >> renderIn: aView [
-	super renderIn: aView.
-	self ownedElements do: [ :each | each renderIn: view ].
-	self addConstraintsTo: constraints at: #middle.
-	sourceEndLabels addConstraintsTo: constraints at: #source.
-	targetEndLabels addConstraintsTo: constraints at: #target.
-	constraints do: #build.
-	self update
-]
+{ #category : 'hooks' }
+OPUmlAssociationShape >> tailMarker [
 
-{ #category : #'Roassal2 - updating' }
-OPUmlAssociationShape >> update [
-	self
-		tailDecorator: (self decoratorFor: modelElement memberEnds first).
-	self
-		headDecorator: (self decoratorFor: modelElement memberEnds second).
-	self rtEdge shape color: self style strokeColor.
-	self rtEdge view ifNotNil: [ self rtEdge update ].
-	self ownedElements do: #update
+	^ self markerShapeFor:
+		  (self modelElement ifNil: [ ^ nil ]) memberEnds first
 ]

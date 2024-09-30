@@ -2,71 +2,73 @@
 I am a plugin for UML Class Diagram
 "
 Class {
-	#name : #OPUmlClassEditorPlugin,
-	#superclass : #OPPlugin,
-	#category : #'OpenPonk-ClassEditor-Plugin'
+	#name : 'OPUmlClassEditorPlugin',
+	#superclass : 'OPPlugin',
+	#category : 'OpenPonk-ClassEditor-Plugin',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Plugin'
 }
 
-{ #category : #'as yet unclassified' }
-OPUmlClassEditorPlugin class >> allDefaultProfiles [
-
-	^ self withAllSubclasses flatCollectAsSet: #defaultProfiles
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin class >> defaultProfiles [
 	^ {}
 ]
 
-{ #category : #toolbar }
+{ #category : 'toolbar' }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
-	FDSaveFileDialog new
-		whenSelected: [ :file | 
+
+	StFBSaveFileDialog new
+		title: 'Choose a XMI file to export to';
+		okAction: [ :file | 
 			file
 				ensureDelete;
-				writeStreamDo: [ :stream | stream << (OPUMLXMIWriter toString: aPackage) ].
-			self inform: 'Exported to ' , file fullName ];
-		extensionFilters:
-			{'XMI files' -> #(xmi xml uml).
-			'All files' -> #()};
-		defaultFolder: FileLocator imageDirectory asFileReference;
+				writeStreamDo: [ :stream | 
+					stream << (OPUmlModelSerializer new serializeModel: aPackage) ].
+			UIManager default
+				inform: (String streamContents: [ :s | 
+						 s << 'Exported to ' << file pathString.
+						 s
+							 cr;
+							 cr.
+						 s << 'Click to open location' ])
+				actionOnClick: [ file openInOSFileBrowser ] ];
+		extensions: #( xmi xml uml ) named: 'XMI files';
 		open
 ]
 
-{ #category : #toolbar }
+{ #category : 'toolbar' }
 OPUmlClassEditorPlugin class >> importToPackage: aPackage [
-	FDOpenFileDialog new
-		whenSelected: [ :file | 
+
+	StFBOpenFileDialog new
+		title: 'Choose a XMI export of UML model';
+		okAction: [ :file | 
 			| model |
 			model := OPUMLXMIReader read: file contents.
-			(model packagedElements size = 1
-				and: [ model packagedElements first oclIsKindOf: #Package ])
-				ifTrue: [ model := model packagedElements first ].
+			(model packagedElements size = 1 and: [ 
+					 model packagedElements first oclIsKindOf: #Package ]) ifTrue: [ 
+					model := model packagedElements first ].
 			aPackage packagedElements: model packagedElements.
 			self inform: 'Imported from ' , file fullName ];
-		extensionFilters:
-			{('XMI files' -> #(xmi xml uml)).
-			('All files' -> #())};
-		defaultFolder: FileLocator imageDirectory asFileReference;
+		extensions: #( xmi xml uml ) named: 'XMI files';
 		open
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> defaultProfiles [
 	^ self class defaultProfiles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> diagramControllerClass [
 	^ OPUmlPackageDiagramController
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> icon [
 	^ OPUmlIcons packageIcon
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> isForController: aDiagramController [
 
 	| appliedProfiles pluginClassesWithProfileCounts |
@@ -92,19 +94,21 @@ OPUmlClassEditorPlugin >> isForController: aDiagramController [
 		  pluginClassesWithProfileCounts first key = self class ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
-	^ {self modelClass.
-	OPUMLModel.
-	OPUMLProfile} includes: aModel class
+
+	^ ({ 
+		   self modelClass.
+		   OPUMLProfile } includes: aModel class) and: [ 
+		  self supportsProfilesOf: aModel ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> layouterClass [
 	^ OPUmlLayouter
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
 
 	| models targetModel otherModels |
@@ -131,27 +135,34 @@ OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
 	^ targetModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> modelClass [
 	^ OPUMLPackage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> modelSerializerClass [
 	^ OPUmlModelSerializer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> name [
 	^ 'UML Class Editor'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 OPUmlClassEditorPlugin >> supportsHidingElements [
 	^ true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsMergingModels [
 	^ true
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlClassEditorPlugin >> supportsProfilesOf: aModel [
+
+	^ aModel profileApplications allSatisfy: [ :each | 
+		  self defaultProfiles includes: each appliedProfile ]
 ]

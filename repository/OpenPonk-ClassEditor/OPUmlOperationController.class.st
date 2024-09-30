@@ -2,35 +2,28 @@
 I am a controller for Operation.
 "
 Class {
-	#name : #OPUmlOperationController,
-	#superclass : #OPUmlElementController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlOperationController',
+	#superclass : 'OPUmlClassItemController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
-OPUmlOperationController >> createDiagramElement [
-	^ OPUmlLabel new
-		modelElement: self model;
-		text: [ :aModel | self notationTextFor: aModel ];
-		emphasis: [ :aModel :aStyle | 
-			aStyle fontUnderline: aModel isStatic.
-			aStyle fontItalic: aModel isAbstract ];
-		localStyle: OPUmlStyle new;
-		yourself
+{ #category : 'figures' }
+OPUmlOperationController >> addDiagramElementToOwner [
+
+	self diagramElementOwner addOperation: diagramElement
 ]
 
-{ #category : #construction }
+{ #category : 'construction' }
 OPUmlOperationController >> createModelIn: aParentModel [
-	self
-		model:
-			(self modelClass new
-				name: 'operation';
-				yourself).
-	aParentModel ownedOperations add: model.
-	^ model
+
+	^ (super createModelIn: aParentModel)
+		  name: 'operation';
+		  yourself
 ]
 
-{ #category : #forms }
+{ #category : 'forms' }
 OPUmlOperationController >> descriptionIsAbstract [
 	<magritteDescription>
 	^ MABooleanDescription new
@@ -40,53 +33,41 @@ OPUmlOperationController >> descriptionIsAbstract [
 		yourself
 ]
 
-{ #category : #forms }
-OPUmlOperationController >> descriptionIsStatic [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isStatic);
-		label: 'Is Static';
-		priority: 10;
-		yourself
+{ #category : 'figures' }
+OPUmlOperationController >> diagramElementClass [
+
+	^ OPUmlOperationLabel
 ]
 
-{ #category : #testing }
-OPUmlOperationController >> isHideable [
-	^ true
+{ #category : 'diagram elements' }
+OPUmlOperationController >> diagramElementOwner [
+
+	^ (diagramController controllerForModel: model owningClass)
+		  diagramElement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlOperationController >> modelClass [
 	^ OPUMLOperation
 ]
 
-{ #category : #figures }
-OPUmlOperationController >> notationTextFor: anOperation [
-	^ anOperation notationString
+{ #category : 'hooks' }
+OPUmlOperationController >> placeholderName [
+
+	^ 'operation'
 ]
 
-{ #category : #figures }
-OPUmlOperationController >> refreshFigure [
-	self diagramElement changed.
-	self diagramElement owningElement owningElement changed.
-	^ self figure
+{ #category : 'construction' }
+OPUmlOperationController >> registerModelInContainer: aParentModel [
+
+	aParentModel ownedOperations add: model
 ]
 
-{ #category : #removing }
-OPUmlOperationController >> removeModel [
-	"could be any of those, so just nil all of them"
-	model owningClass: nil.
-	model datatype: nil.
-	model interface: nil
-]
+{ #category : 'removing' }
+OPUmlOperationController >> removeDiagramElement [
 
-{ #category : #figures }
-OPUmlOperationController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		owningElement: (diagramController diagramElementForModel: model owningClass) operations.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
+	self diagramElement ifNil: [ ^ self ].
+	self diagramElementOwner ifNotNil: [ :owner |
+		owner removeOperation: self diagramElement ].
+	diagramElement := nil
 ]

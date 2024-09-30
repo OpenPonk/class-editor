@@ -1,28 +1,45 @@
 Class {
-	#name : #OPUmlNavigatorAdapter,
-	#superclass : #OPNavigatorAdapter,
+	#name : 'OPUmlNavigatorAdapter',
+	#superclass : 'OPNavigatorAdapter',
 	#instVars : [
 		'suffixMapping'
 	],
-	#category : #'OpenPonk-ClassEditor-Plugin'
+	#category : 'OpenPonk-ClassEditor-Plugin',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Plugin'
 }
 
-{ #category : #accessing }
-OPUmlNavigatorAdapter >> childrenMapping [
-	^ {(OPUMLPackage -> #packagedElements).
-	(OPUMLProfile -> #packagedElements).
-	(OPUMLModel -> #packagedElements).
-	(OPUMLClass
-		-> [ :cls | cls ownedAttributes asArray , cls ownedOperations asArray ]).
-	(OPUMLEnumeration -> #ownedLiterals)}
+{ #category : 'accessing' }
+OPUmlNavigatorAdapter class >> priority [
+
+	^ 10
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
+OPUmlNavigatorAdapter >> childrenMapping [
+
+	^ { 
+		  (OPUMLPackage -> [ :package | 
+		   package packagedElements
+		   , (package packagedElements flatCollect: [ :each | 
+				    (each respondsTo: #generalizations)
+					    ifTrue: [ each generalizations ]
+					    ifFalse: [ #(  ) ] ]) ]).
+		  (OPUMLProfile -> #packagedElements).
+		  (OPUMLClass
+		   -> [ :cls | 
+		   cls ownedAttributes asArray , cls ownedOperations asArray ]).
+		  (OPUMLEnumeration -> #ownedLiterals).
+		  (OPUMLAssociation -> [ :assoc | assoc ownedEnds asArray ]).
+		  (OPUMLExtension -> [ :assoc | assoc ownedEnds asArray ]) }
+]
+
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> classNameFor: anObject [
 	^ anObject umlClassName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> contextMenuMapping [
 	^ super contextMenuMapping
 		,
@@ -36,7 +53,7 @@ OPUmlNavigatorAdapter >> contextMenuMapping [
 				-> {('Generate...' -> [ :pkg | OPUmlProfileGeneratorWizard openOn: pkg ])})}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> dependentMapping [
 	| mainElementTypes packageLikeBlock |
 	mainElementTypes := {#Class . #Package . #Enumeration . #Profile.
@@ -56,7 +73,6 @@ OPUmlNavigatorAdapter >> dependentMapping [
 						select: [ :eachImport | eachImport importingNamespace = object ] ]) ].
 	^ {(OPUMLPackage -> packageLikeBlock).
 	(OPUMLProfile -> packageLikeBlock).
-	(OPUMLModel -> packageLikeBlock).
 	(OPUMLClass
 		-> [ :class :model | 
 			class ownedAttributes asSet , class ownedOperations asSet
@@ -87,37 +103,59 @@ OPUmlNavigatorAdapter >> dependentMapping [
 	(OPUMLEnumeration -> #ownedLiterals)}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> displayFor: anObject [
 	^ ((self mappingFor: anObject in: self retrieveDisplayMapping)
 		ifNil: [ '' ]
 		ifNotNil: [ :name | name ]) , (self suffixFor: anObject)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> displayMapping [
-	^ {(OPUMLGeneralization
-		-> [ :o | o specific name , ' => ' , o general name ]).
-	(OPUMLPackageImport
-		-> [ :o | o importedPackage name , ' --> ' , o importingNamespace name ]).
-	(OPUMLElement -> #name)}
+
+	^ {
+		  (OPUMLAssociation -> [ :a |
+		   String streamContents: [ :s |
+			   a name ifNotNil: [ :name | s << name ].
+			   a memberEnds size = 2 ifTrue: [
+				   | names |
+				   names := a memberEnds asArray collect: [ :property |
+					            ((property type ifNotNil: [ :type | type name ])
+						             ifNil: [ '' ]) truncateWithElipsisTo: 20 ].
+				   s << ' [ '.
+				   names printOn: s delimiter: ' -> '.
+				   s << ' ]' ] ] ]).
+		  (OPUMLGeneralization
+		   -> [ :o | o specific name , ' => ' , o general name ]).
+		  (OPUMLPackageImport
+		   -> [ :o |
+		   o importedPackage name , ' --> ' , o importingNamespace name ]).
+		  (OPUMLElement -> #name) }
 ]
 
-{ #category : #accessing }
-OPUmlNavigatorAdapter >> famixClassNameFor: anObject [
-	^ (anObject className splitOn: 'FAMIX') last
+{ #category : 'accessing' }
+OPUmlNavigatorAdapter >> hasMappingFor: anObject in: aModel [
+
+	| appliedStereotypeNames availableStereotypeNames |
+	(anObject isKindOf: OPUMLMetaElement) ifFalse: [ ^ false ].
+	(aModel respondsTo: #profileApplications) ifFalse: [ ^ true ].
+	appliedStereotypeNames := anObject appliedStereotypes collect:
+		                          #umlClassName.
+	appliedStereotypeNames ifEmpty: [ ^ true ].
+	availableStereotypeNames := aModel profileApplications 
+		                            flatCollectAsSet: [ 
+			                            :eachProfileApplication | 
+			                            eachProfileApplication appliedProfile
+				                            ownedStereotype collect: [ 
+				                            :eachStereotype | eachStereotype name ] ].
+	^ appliedStereotypeNames allSatisfy: [ :each | 
+		  availableStereotypeNames includes: each ]
 ]
 
-{ #category : #accessing }
-OPUmlNavigatorAdapter >> hasMappingFor: anObject [
-	^ anObject isKindOf: OPUMLMetaElement
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> iconMapping [
 	^ {OPUMLProfile -> OPUmlIcons profileIcon.
 	OPUMLPackage -> OPUmlIcons packageIcon.
-	OPUMLModel -> OPUmlIcons modelIcon.
 	OPUMLClass -> OPUmlIcons classIcon.
 	OPUMLDataType -> OPUmlIcons dataTypeIcon.
 	OPUMLPrimitiveType -> OPUmlIcons primitiveIcon.
@@ -134,12 +172,12 @@ OPUmlNavigatorAdapter >> iconMapping [
 	Object -> OPUmlIcons unknownIcon}
 ]
 
-{ #category : #cache }
+{ #category : 'cache' }
 OPUmlNavigatorAdapter >> retrieveSuffixMapping [
 	^ suffixMapping ifNil: [ suffixMapping := self suffixMapping asDictionary ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OPUmlNavigatorAdapter >> sort: modelObjects [
 
 	^ modelObjects sorted: [ :a :b | 
@@ -151,24 +189,24 @@ OPUmlNavigatorAdapter >> sort: modelObjects [
 			  ifFalse: [ a uuid < b uuid ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> suffixFor: anObject [
 	^ (self mappingFor: anObject in: self retrieveSuffixMapping)
 		ifNil: [ '' ]
 		ifNotNil: [ :suffix | ' (' , suffix , ')' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlNavigatorAdapter >> suffixMapping [
 	^ {OPUMLMetaElement -> [ :o | self classNameFor: o ]}
 ]
 
-{ #category : #'widget API' }
+{ #category : 'widget API' }
 OPUmlNavigatorAdapter >> typesByDependency [
 	^ {OPUMLPackage.
-	OPUMLModel.
 	OPUMLProfile.
 	OPUMLClass.
+	OPUMLStereotype.
 	OPUMLEnumeration.
 	OPUMLPackageImport.
 	OPUMLAssociation.

@@ -1,51 +1,54 @@
 Class {
-	#name : #OPUmlStereotypeControllerTest,
-	#superclass : #OPUmlElementControllerTest,
-	#category : #'OpenPonk-ClassEditor-Tests - Controllers'
+	#name : 'OPUmlStereotypeControllerTest',
+	#superclass : 'OPUmlElementControllerTest',
+	#category : 'OpenPonk-ClassEditor-Tests - Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Tests - Controllers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlStereotypeControllerTest >> controllerClass [
 	^ OPUmlStereotypeController
 ]
 
-{ #category : #accessing }
+{ #category : 'construction' }
+OPUmlStereotypeControllerTest >> diagramElementClass [
+
+	^ OPUmlStereotypeShape
+]
+
+{ #category : 'accessing' }
 OPUmlStereotypeControllerTest >> modelClass [
 	^ OPUMLStereotype
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlStereotypeControllerTest >> newEmptyClass [
 	^ OPUMLStereotype new name: 'Something'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OPUmlStereotypeControllerTest >> newEmptyModel [
 	^ OPUMLStereotype new name: 'Something'
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testAddDiagramAsTargetForClass [
 	diagramController addAsTargetFor: controller.
 	self assert: diagramController model packagedElements asArray equals: {controller model}
 ]
 
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testCanDiagramBeTargetForClass [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - creation' }
-OPUmlStereotypeControllerTest >> testCreateDiagramElement [
-	self assert: controller createDiagramElement class equals: OPUmlClassShape
-]
-
-{ #category : #'tests - creation' }
+{ #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testCreateFromPalette [
 	self assert: (diagramController canBeTargetFor: controller)
 ]
 
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveEmpty [
 
 	| class |
@@ -53,24 +56,11 @@ OPUmlStereotypeControllerTest >> testRemoveEmpty [
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeController.
-	self assert: diagramController view elements asArray equals: #(  ).
+	self assert: diagramController canvas nodes asArray equals: #(  ).
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - removing' }
-OPUmlStereotypeControllerTest >> testRemoveFromModel [
-	| class |
-	class := self newEmptyModel.
-	diagramController model packagedElements add: class.
-	diagramController showWithoutDependentInDiagramModel: class.
-	controller := diagramController controllerForModel: class.
-	controller removeModel.
-	self
-		assert: diagramController model packagedElements asArray
-		equals: #()
-]
-
-{ #category : #'tests - removing' }
+{ #category : 'tests - removing' }
 OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 
 	| class |
@@ -79,36 +69,28 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeController.
-	self assert: diagramController view elements asArray equals: #(  ).
+	self assert: diagramController canvas nodes asArray equals: #(  ).
 	self assert: diagramController controllers asArray equals: #(  )
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlStereotypeControllerTest >> testShowClassInDiagram [
+
 	| class |
 	class := self newEmptyModel.
 	diagramController showWithoutDependentInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy: [ :each | each model isNotNil and: [ each model modelElement = class ] ])
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = class ] ])
 ]
 
-{ #category : #'tests - diagram' }
+{ #category : 'tests - diagram' }
 OPUmlStereotypeControllerTest >> testShowClassWithAttributeInDiagram [
+
 	| class prop |
 	class := self newEmptyModel.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
 	diagramController showInDiagramModel: class.
-	self
-		assert:
-			(diagramController view elements
-				anySatisfy:
-					[ :each | each model isNotNil and: [ each model modelElement = prop ] ])
-]
-
-{ #category : #tests }
-OPUmlStereotypeControllerTest >> testSupport [
-	self assert: (diagramController hasSupportForModel: self newEmptyModel)
+	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
+			 each model isNotNil and: [ each model modelElement = prop ] ])
 ]

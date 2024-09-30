@@ -2,86 +2,74 @@
 I am a controller for UML Extensions
 "
 Class {
-	#name : #OPUmlExtensionController,
-	#superclass : #OPUmlRelationshipController,
-	#category : #'OpenPonk-ClassEditor-Controllers'
+	#name : 'OPUmlExtensionController',
+	#superclass : 'OPUmlRelationshipController',
+	#category : 'OpenPonk-ClassEditor-Controllers',
+	#package : 'OpenPonk-ClassEditor',
+	#tag : 'Controllers'
 }
 
-{ #category : #figures }
-OPUmlExtensionController >> createDiagramElement [
-	^ OPUmlExtensionShape new
-		modelElement: self model;
-		yourself
+{ #category : 'figures' }
+OPUmlExtensionController >> diagramElementClass [
+
+	^ OPUmlExtensionShape
 ]
 
-{ #category : #construction }
-OPUmlExtensionController >> createModelIn: aParentModel [
-	| sourceOwnedProp extensionOwnedProp |
-	self model: self modelClass new.
-	(sourceOwnedProp := OPUMLProperty new)
-		owningClass: source model;
-		name: 'base_' , aParentModel name;
-		type: aParentModel.
-	(extensionOwnedProp := OPUMLExtensionEnd new)
-		name: 'extension_' , source model name;
-		type: source model.
-	model ownedEnd: extensionOwnedProp.
-	model memberEnds
-		add: sourceOwnedProp;
-		add: extensionOwnedProp.
-	source diagramController model packagedElements add: model.
-	^ model
-]
-
-{ #category : #accessing }
-OPUmlExtensionController >> dependentElements [
-	^ {model memberEnds first}
-]
-
-{ #category : #accessing }
+{ #category : 'accessing' }
 OPUmlExtensionController >> modelClass [
 	^ OPUMLExtension
 ]
 
-{ #category : #figures }
-OPUmlExtensionController >> refreshFigure [
-	self diagramElement changed.
-	^ self figure
+{ #category : 'accessing' }
+OPUmlExtensionController >> modelSource [
+
+	^ model memberEnds ifNotEmpty: [ :memberEnds | memberEnds first type ]
 ]
 
-{ #category : #removing }
-OPUmlExtensionController >> removeController [
-	".		
-	ctrls := self model memberEnds asArray
-		collect: [ :each | diagramController controllerForModel: each type ].
-	ctrls do: #refreshFigure"
+{ #category : 'construction' }
+OPUmlExtensionController >> modelSource: aModel in: aParentModel [
 
-	super removeController
+	| property |
+	self modelSource = aModel ifTrue: [ ^ false ].
+	(property := OPUMLExtensionEnd new)
+		owningAssociation: model;
+		name: 'extension_' , aModel name;
+		type: aModel.
+	model memberEnds add: property.
+	model ownedEnd: property.
+	^ true
 ]
 
-{ #category : #removing }
+{ #category : 'accessing' }
+OPUmlExtensionController >> modelTarget [
+
+	^ model memberEnds size > 1
+		  ifTrue: [ model memberEnds second type ]
+		  ifFalse: [ nil ]
+]
+
+{ #category : 'construction' }
+OPUmlExtensionController >> modelTarget: aModel in: aParentModel [
+
+	| property |
+	self modelTarget = aModel ifTrue: [ ^ false ].
+	(property := OPUMLProperty new)
+		owningClass: source model;
+		name: 'base_' , aModel name;
+		type: aModel.
+	model memberEnds add: property.
+	^ true
+]
+
+{ #category : 'removing' }
 OPUmlExtensionController >> removeModel [
 	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
 
-	self diagramController model packagedElements remove: self model.
-	[ self model memberEnds isNotEmpty ]
-		whileTrue: [ | end |
-			end := self model memberEnds first.
-			end association: nil.
-			end owningClass: nil.
-			end owningAssociation: nil ]
-]
-
-{ #category : #figures }
-OPUmlExtensionController >> renderFigureIn: aView [
-	self diagramController addingFigureFor: self.
-	diagramElement := self createDiagramElement.
-	diagramElement
-		ends:
-			{diagramController diagramElementForModel: self model ownedEnd type.
-			diagramController
-				diagramElementForModel: (self model memberEnds copyWithout: self model ownedEnd) first type}.
-	diagramElement renderIn: aView.
-	diagramController addedFigureFor: self.
-	^ self refreshFigure
+	[ self model memberEnds isNotEmpty ] whileTrue: [
+		| end |
+		end := self model memberEnds first.
+		end association: nil.
+		end owningClass: nil.
+		end owningAssociation: nil ].
+	super removeModel
 ]

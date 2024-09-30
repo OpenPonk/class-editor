@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfClassEditor }
+Package { #name : 'BaselineOfClassEditor' }
