@@ -9,21 +9,6 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
-OPUmlEnumerationController >> adornments [
-
-	^ { (OPUmlIcons literalIcon -> [ 
-	   | tool |
-	   tool := OPCreationTool new
-		           palette: self diagramController editor palette;
-		           factory: [ OPUMLEnumerationLiteral new ].
-	   self diagramController editor palette selectTool: tool.
-	   tool whenCreated: [ :ctrl | 
-		   OPRenameElementCommand executeOn: ctrl.
-		   ctrl refreshFigure ].
-	   tool selectedTargetControllers: { self } ]) }
-]
-
 { #category : 'adding' }
 OPUmlEnumerationController >> canBeTargetFor: aController [
 	^ (aController isKindOf: OPUmlEnumerationLiteralController)
