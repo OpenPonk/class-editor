@@ -90,23 +90,23 @@ OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 		  distinct: true;
 		  reference: MAStringDescription new;
 		  accessor: (MAPluggableAccessor
-				   read: [ :me | 
+				   read: [ :me |
 					   me model profileApplications collect: #appliedProfile ]
-				   write: [ :me :selectedProfiles | 
+				   write: [ :me :selectedProfiles |
 					   me model profileApplications:
-							   (me model profileApplications select: [ :any | 
+							   (me model profileApplications select: [ :any |
 									    selectedProfiles includes: any appliedProfile ]).
 					   me model profileApplications:
 							   me model profileApplications , (selectedProfiles
-									    select: [ :eachSelectedProfile | 
-										    me model profileApplications noneSatisfy: [ 
-												    :eachExistingProfileApplication | 
+									    select: [ :eachSelectedProfile |
+										    me model profileApplications noneSatisfy: [
+												    :eachExistingProfileApplication |
 												    eachExistingProfileApplication = eachSelectedProfile ] ]
-									    thenCollect: [ :each | 
+									    thenCollect: [ :each |
 										    OPUMLProfileApplication new appliedProfile:
 												    each yourself ]).
 					   self rebuildPalette.
-					   self refreshFigure ]);
+					   self diagramElement modelChanged ]);
 		  label: 'Applied Profiles';
 		  priority: 10;
 		  beSorted;

@@ -9,44 +9,6 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
-OPUmlClassController >> adornments [
-
-	^ {
-		  (OPUmlIcons attributeIcon -> [
-		   | tool |
-		   tool := OPCreationTool new
-			           palette: self diagramController editor palette;
-			           factory: [ OPUmlAttributeController new ].
-		   self diagramController editor palette selectTool: tool.
-		   tool whenCreated: [ :ctrl |
-			   OPRenameElementCommand executeOn: ctrl ].
-		   tool selectedTargetControllers: { self } ]).
-		  (OPUmlIcons directedAssociationIcon -> [
-		   | tool |
-		   tool := OPConnectionCreationTool new
-			           palette: self diagramController editor palette;
-			           factory: [ OPUmlAssociationController new ].
-		   self diagramController editor palette selectTool: tool.
-		   tool selectedSourceControllers: { self } ]).
-		  (OPUmlIcons generalizationIcon -> [
-		   | tool |
-		   tool := OPConnectionCreationTool new
-			           palette: self diagramController editor palette;
-			           factory: [ OPUmlGeneralizationController new ].
-		   self diagramController editor palette selectTool: tool.
-		   tool selectedSourceControllers: { self } ]) }
-]
-
-{ #category : 'forms' }
-OPUmlClassController >> buildAbstractEditorForm: aForm [
-	(aForm addCheckbox: 'Is Abstract')
-		state: self model isAbstract;
-		whenChangedDo: [ :val | 
-			self model isAbstract: val.
-			self refreshFigure ]
-]
-
 { #category : 'adding' }
 OPUmlClassController >> canBeSourceFor: aController [
 	^ (aController isKindOf: OPUmlGeneralizationController)
@@ -154,12 +116,13 @@ OPUmlClassController >> dependentElements [
 
 { #category : 'forms' }
 OPUmlClassController >> descriptionIsAbstract [
+
 	<magritteDescription>
 	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isAbstract);
-		label: 'Is Abstract';
-		priority: 5;
-		yourself
+		  accessor: (self descriptionAccessor: #isAbstract);
+		  label: 'Is Abstract';
+		  priority: 5;
+		  yourself
 ]
 
 { #category : 'forms' }

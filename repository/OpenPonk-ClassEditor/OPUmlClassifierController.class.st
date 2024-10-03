@@ -8,11 +8,6 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
-OPUmlClassifierController >> adornments [
-	^ self subclassResponsibility
-]
-
 { #category : 'adding' }
 OPUmlClassifierController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlAssociationController

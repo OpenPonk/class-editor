@@ -7,11 +7,12 @@ Trait {
 
 { #category : 'forms' }
 OPTUmlBaseController >> descriptionAccessor: aSymbol [
+
 	^ MAPluggableAccessor
-		read: [ :me | me model perform: aSymbol ]
-		write: [ :me :newValue | 
-			me model perform: (aSymbol , ':') asSymbol with: newValue.
-			self diagramElement modelChanged  ]
+		  read: [ :me | me model perform: aSymbol ]
+		  write: [ :me :newValue |
+			  me model perform: (aSymbol , ':') asSymbol with: newValue.
+			  self diagramElement modelChanged ]
 ]
 
 { #category : 'forms' }

@@ -17,7 +17,7 @@ OPUmlClassEditorPlugin class >> defaultProfiles [
 { #category : 'toolbar' }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 
-	StFBSaveFileDialog new
+	StSaveFilePresenter new
 		title: 'Choose a XMI file to export to';
 		okAction: [ :file | 
 			file
@@ -39,7 +39,7 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 { #category : 'toolbar' }
 OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 
-	StFBOpenFileDialog new
+	StOpenFilePresenter new
 		title: 'Choose a XMI export of UML model';
 		okAction: [ :file | 
 			| model |
