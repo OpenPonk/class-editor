@@ -96,5 +96,10 @@ OPUmlClassifierNameLabel >> updateRenderFromModel [
 
 	roassalShape := labeled labelShape.
 
+	roassalShape shapes do: [ :each |
+		self flag: 'https://github.com/pharo-graphics/Roassal/issues/64'.
+		each metricsProvider: OPRSCairoMetricsProvider new ].
+	roassalShape adjustToChildren.
+
 	roassalShape signalUpdate
 ]
