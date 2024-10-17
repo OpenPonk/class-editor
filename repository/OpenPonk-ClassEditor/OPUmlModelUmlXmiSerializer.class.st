@@ -1,5 +1,5 @@
 Class {
-	#name : 'OPUmlModelDeprecatedSerializer',
+	#name : 'OPUmlModelUmlXmiSerializer',
 	#superclass : 'OPUmlModelSerializer',
 	#category : 'OpenPonk-ClassEditor-Persistence',
 	#package : 'OpenPonk-ClassEditor',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'formatting' }
-OPUmlModelDeprecatedSerializer class >> formatName [
+OPUmlModelUmlXmiSerializer class >> formatName [
 
 	^ #'uml-xmi'
 ]
