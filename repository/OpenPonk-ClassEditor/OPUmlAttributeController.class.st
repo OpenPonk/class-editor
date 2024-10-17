@@ -39,6 +39,7 @@ OPUmlAttributeController >> dependingOnElements [
 	                nullableElement
 		                ifNil: [ Set empty ]
 		                ifNotNil: [ :element | Set with: element ] ].
+
 	^ super dependingOnElements
 	  , (asSetOrEmpty value: model owningAssociation)
 ]
@@ -169,7 +170,18 @@ OPUmlAttributeController >> modelClass [
 { #category : 'hooks' }
 OPUmlAttributeController >> placeholderName [
 
-	^ 'attribute'
+	(self model isNil or: [
+		 self model type isNil or: [
+			 self model type name isNil or: [ self model type name isEmpty ] ] ])
+		ifTrue: [ ^ 'attribute' ].
+	^ String streamContents: [ :s |
+		  | words |
+		  words := (self model type name select: [ :each |
+			            each isAlphaNumeric or: [ each isSeparator ] ])
+			           splitOn: [ :each | each isSeparator ].
+		  s << words first first asLowercase asString.
+		  s << words first allButFirst asString.
+		  words allButFirstDo: [ :eachWord | s << eachWord capitalized ] ]
 ]
 
 { #category : 'construction' }
@@ -202,6 +214,27 @@ OPUmlAttributeController >> typeNamed: aName [
 		detect: [ :each | each name = aName ]
 		ifFound: [ :type | ^ type ].
 	^ OPUMLClass new name: aName
+]
+
+{ #category : 'validation' }
+OPUmlAttributeController >> validate [
+
+	super validate.
+	model ifNil: [ ^ self ].
+	(model owningClass isNotNil and: [ model owningAssociation isNotNil ])
+		ifTrue: [
+			OPModelInvalid signal: (String streamContents: [ :s |
+					 s << 'Property "' << model name asString << '" owned by class "'
+					 << model owningClass name asString
+					 << '" is also owned by assoc. '.
+					 model owningAssociation name
+						 ifNil: [
+							 model owningAssociation memberEnds
+								 do: [ :each |
+									 each type ifNotNil: [ :type | s << '"' << type name << '"' ] ]
+								 separatedBy: [ s << ' <-> ' ] ]
+						 ifNotNil: [ :assName | s << '"' << assName << '"' ] ]) ].
+	model owningAssociation: nil
 ]
 
 { #category : 'forms' }
