@@ -16,9 +16,9 @@ OPUmlModelSerializer class >> exportVersion [
 ]
 
 { #category : 'accessing' }
-OPUmlModelSerializer class >> fileExtension [
+OPUmlModelSerializer class >> fileExtensions [
 
-	^ #xml
+	^ #( #xml #xmi )
 ]
 
 { #category : 'formatting' }
