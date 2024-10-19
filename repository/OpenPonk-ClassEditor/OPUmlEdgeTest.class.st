@@ -25,10 +25,11 @@ OPUmlEdgeTest >> shapeClass [
 
 { #category : 'tests' }
 OPUmlEdgeTest >> testRemove [
+
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
-	self assert: shape ownedElements asArray equals: {lbl}.
-	lbl owningElement: nil.
+	self assert: shape ownedElements asArray equals: { lbl }.
+	lbl owningElement: OPNoShape new.
 	self assert: shape ownedElements isEmpty
 ]
 

@@ -72,6 +72,15 @@ OPUmlPackageShape >> pushBack [
 	ear pushBack
 ]
 
+{ #category : 'removing' }
+OPUmlPackageShape >> removeRender [
+
+	super removeRender.
+	nameLabel := nil.
+	stereotypeLabel := nil.
+	ear := nil
+]
+
 { #category : 'rendering' }
 OPUmlPackageShape >> renderBasicShape [
 

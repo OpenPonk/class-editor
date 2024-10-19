@@ -50,7 +50,7 @@ OPUmlPackageControllerTest >> testRemoveEmpty [
 	self assert: diagramController canvas nodes isEmpty.
 	controller showWithoutDependentInDiagram: diagramController.
 	self assert: diagramController canvas nodes isNotEmpty.
-	controller removeController.
+	controller removeControllerAndDiagramElement.
 	self assert: diagramController canvas nodes isEmpty.
 	self assert: diagramController controllers isEmpty
 ]

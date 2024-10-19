@@ -4,10 +4,6 @@ I represent a direct generalization line.
 Class {
 	#name : 'OPUmlGeneralizationShape',
 	#superclass : 'OPUmlEdge',
-	#instVars : [
-		'nameLabel',
-		'constraints'
-	],
 	#category : 'OpenPonk-ClassEditor-Shapes',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Shapes'

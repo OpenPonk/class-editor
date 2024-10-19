@@ -94,6 +94,15 @@ OPUmlClassifierController >> registerModelInContainer: aParentModel [
 	aParentModel packagedElements add: model
 ]
 
+{ #category : 'construction' }
+OPUmlClassifierController >> unhookDiagramElement [
+
+	super unhookDiagramElement.
+
+	(self diagramElement ifNotExists: [ ^ self ])
+		adornmentCreationBlock: [ :builder |  ]
+]
+
 { #category : 'event handling' }
 OPUmlClassifierController >> updateAfterDiagramFocused [
 

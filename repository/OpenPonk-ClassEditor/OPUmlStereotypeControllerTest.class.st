@@ -55,7 +55,7 @@ OPUmlStereotypeControllerTest >> testRemoveEmpty [
 	class := self newEmptyModel.
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
-	controller removeController.
+	controller removeControllerAndDiagramElement.
 	self assert: diagramController canvas nodes asArray equals: #(  ).
 	self assert: diagramController controllers asArray equals: #(  )
 ]
@@ -68,7 +68,7 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 	class ownedAttributes add: OPUMLProperty new.
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
-	controller removeController.
+	controller removeControllerAndDiagramElement.
 	self assert: diagramController canvas nodes asArray equals: #(  ).
 	self assert: diagramController controllers asArray equals: #(  )
 ]

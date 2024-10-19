@@ -107,7 +107,7 @@ OPUmlPackageController >> modelClass [
 { #category : 'updating' }
 OPUmlPackageController >> packageRenderChanged [
 
-	self diagramElement ifNotNil: [ :foundDE |
+	self diagramElement ifExists: [ :foundDE |
 		(foundDE hiddenPackages: self hiddenPackages) ifTrue: [
 			foundDE isRendered ifTrue: [ foundDE updateRenderFromModel ] ] ].
 	self diagramController propagatePackageRenderChangedIn: self model
@@ -130,7 +130,7 @@ OPUmlPackageController >> registerModelInContainer: aParentModel [
 { #category : 'destruction' }
 OPUmlPackageController >> removeDiagramElement [
 
-	self diagramElement ifNil: [ ^ self ].
+	self diagramElement ifNotExists: [ ^ self ].
 	super removeDiagramElement.
 	self packageRenderChanged
 ]
@@ -141,6 +141,15 @@ OPUmlPackageController >> renderDiagramElement [
 	super renderDiagramElement.
 	self packageRenderChanged.
 	self pushBack
+]
+
+{ #category : 'diagram elements' }
+OPUmlPackageController >> unhookDiagramElement [
+
+	super unhookDiagramElement.
+
+	(self diagramElement ifNotExists: [ ^ self ])
+		innerRoassalShapesBlock: [ Array empty ]
 ]
 
 { #category : 'event handling' }

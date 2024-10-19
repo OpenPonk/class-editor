@@ -12,7 +12,7 @@ Class {
 { #category : 'figures' }
 OPUmlOperationController >> addDiagramElementToOwner [
 
-	self diagramElementOwner addOperation: diagramElement
+	self ownerDiagramElement addOperation: diagramElement
 ]
 
 { #category : 'construction' }
@@ -39,16 +39,15 @@ OPUmlOperationController >> diagramElementClass [
 	^ OPUmlOperationLabel
 ]
 
-{ #category : 'diagram elements' }
-OPUmlOperationController >> diagramElementOwner [
-
-	^ (diagramController controllerForModel: model owningClass)
-		  diagramElement
-]
-
 { #category : 'accessing' }
 OPUmlOperationController >> modelClass [
 	^ OPUMLOperation
+]
+
+{ #category : 'diagram elements' }
+OPUmlOperationController >> owner [
+
+	^ diagramController controllerForModel: model owningClass
 ]
 
 { #category : 'hooks' }
@@ -66,8 +65,8 @@ OPUmlOperationController >> registerModelInContainer: aParentModel [
 { #category : 'removing' }
 OPUmlOperationController >> removeDiagramElement [
 
-	self diagramElement ifNil: [ ^ self ].
-	self diagramElementOwner ifNotNil: [ :owner |
+	self diagramElement ifNotExists: [ ^ self ].
+	self ownerDiagramElement ifNotNil: [ :owner |
 		owner removeOperation: self diagramElement ].
-	diagramElement := nil
+	self diagramElement: OPNoShape new
 ]

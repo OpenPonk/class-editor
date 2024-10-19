@@ -44,9 +44,10 @@ OPUmlClassifierNameLabel >> isPositionableByUser [
 { #category : 'removing' }
 OPUmlClassifierNameLabel >> removeRender [
 
-	(self owningElement roassalShape ifNil: [ ^ super removeRender ]) 
-		removeInteractionIfPresent: OPRSLabeled.
-	super removeRender
+	self owningElement roassalShape ifNotNil: [ :owningRoassalShape |
+		owningRoassalShape removeInteractionIfPresent: OPRSLabeled ].
+	super removeRender.
+	labeled := nil
 ]
 
 { #category : 'as yet unclassified' }
