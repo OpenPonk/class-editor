@@ -62,7 +62,7 @@ OPUmlClassifierShape >> hasModelComments [
 { #category : 'accessing' }
 OPUmlClassifierShape >> minExtent [
 
-	^ 100 @ 60
+	^ 100 @ 61
 ]
 
 { #category : 'hooks' }
@@ -100,17 +100,19 @@ OPUmlClassifierShape >> stereotypesLabelClass [
 { #category : 'rendering' }
 OPUmlClassifierShape >> updateCommentIcon [
 
-	self hasModelComments ifFalse: [ 
-		commentIcon ifNotNil: [ 
+	self hasModelComments ifFalse: [
+		commentIcon ifNotNil: [
 			commentIcon remove.
 			commentIcon := nil ].
 		^ self ].
 
-	commentIcon ifNotNil: [ ^ self ].
+	commentIcon ifNil: [ commentIcon := OPUmlCommentIcon in: self ].
 
-	commentIcon := OPUmlCommentIcon in: self.
+	commentIcon isRendered ifTrue: [ ^ self ].
 
-	self isRendered ifTrue: [ commentIcon renderIn: self canvas ]
+	self isRendered ifFalse: [ ^ self ].
+
+	commentIcon renderIn: self canvas
 ]
 
 { #category : 'rendering' }
