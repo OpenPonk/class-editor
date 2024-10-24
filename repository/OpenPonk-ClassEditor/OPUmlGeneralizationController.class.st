@@ -125,6 +125,12 @@ OPUmlGeneralizationController >> modelTarget: aModel in: aParentModel [
 	^ true
 ]
 
+{ #category : 'accessing' }
+OPUmlGeneralizationController >> packagedModel [
+
+	^ self model specific
+]
+
 { #category : 'construction' }
 OPUmlGeneralizationController >> registerModelInContainer: aParentModel [
 
