@@ -18,7 +18,9 @@ OPUmlClassifierItemController >> createDiagramElement [
 	self diagramElement:
 		(self diagramElementClass forModelElement: self model).
 
-	self addDiagramElementToOwner
+	self addDiagramElementToOwner.
+
+	^ self diagramElement
 ]
 
 { #category : 'forms' }

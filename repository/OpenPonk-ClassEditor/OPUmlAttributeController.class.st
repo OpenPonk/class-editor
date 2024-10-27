@@ -20,7 +20,7 @@ OPUmlAttributeController >> createDiagramElement [
 
 	(model name isNil or: [ model name trim isEmpty ]) ifTrue: [
 		model name: self placeholderName ].
-	super createDiagramElement
+	^ super createDiagramElement
 ]
 
 { #category : 'construction' }
