@@ -4,9 +4,6 @@ I represent an Extension shape
 Class {
 	#name : 'OPUmlExtensionShape',
 	#superclass : 'OPUmlAssociationShape',
-	#instVars : [
-		'isRequiredLabel'
-	],
 	#category : 'OpenPonk-ClassEditor-Shapes',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Shapes'

@@ -22,8 +22,12 @@ OPUmlCommentIcon >> extentToFitContents [
 { #category : 'rendering' }
 OPUmlCommentIcon >> renderBasicShape [
 
+	| iconGroup |
+	iconGroup := self iconFormSetNamed: #announcement.
+
 	^ RSBitmap new
-		  form: (self iconNamed: #announcement);
+		  form: (iconGroup asFormAtScale: 2);
+		  extent: iconGroup extent;
 		  yourself
 ]
 

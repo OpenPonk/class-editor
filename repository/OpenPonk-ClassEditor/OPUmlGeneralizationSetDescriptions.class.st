@@ -40,9 +40,7 @@ OPUmlGeneralizationSetDescriptions >> descriptionAccessor: aSymbol [
 			  { controller model } asSet , set generalizations
 				  collect: [ :each |
 				  controller diagramController controllerForModel: each ]
-				  thenDo: [ :ctrl |
-					  ctrl diagramElement ifNotNil: [
-						  ctrl diagramElement modelChanged ] ] ]
+				  thenDo: [ :ctrl | ctrl diagramElement modelChanged ] ]
 ]
 
 { #category : 'forms' }

@@ -24,7 +24,7 @@ OPTUmlPackageableController >> findPackageHierarchyIn: packagesList [
 
 	| packagedElements |
 	packagedElements := packagesList last packagedElements.
-	(packagedElements identityIncludes: self model) ifTrue: [
+	(packagedElements identityIncludes: self packagedModel) ifTrue: [
 		^ packagesList ].
 	packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
@@ -54,13 +54,19 @@ OPTUmlPackageableController >> packageHierarchy [
 		  packages := self findPackageHierarchyIn: { self diagramController model } ]
 ]
 
+{ #category : 'accessing' }
+OPTUmlPackageableController >> packagedModel [
+
+	^ self model
+]
+
 { #category : 'removing' }
 OPTUmlPackageableController >> parentContainerModel [
 
 	^ self parentPackageDo: [ :parentPackage | parentPackage ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'enumerating' }
 OPTUmlPackageableController >> parentPackageDo: aBlock [
 
 	^ aBlock value: (self packageHierarchy ifEmpty: [ ^ nil ]) last
@@ -76,6 +82,6 @@ OPTUmlPackageableController >> parentPackageDo: aBlock ifNone: noneBlock [
 OPTUmlPackageableController >> removeModel [
 
 	self parentPackageDo: [ :parentPackage |
-		parentPackage packagedElements remove: self model ].
+		parentPackage packagedElements remove: self model ifAbsent: [  ] ].
 	super removeModel
 ]

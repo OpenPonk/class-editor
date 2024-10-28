@@ -15,10 +15,12 @@ OPUmlClassifierItemController >> addDiagramElementToOwner [
 { #category : 'figures' }
 OPUmlClassifierItemController >> createDiagramElement [
 
-	diagramElement := self diagramElementClass forModelElement:
-		                  self model.
+	self diagramElement:
+		(self diagramElementClass forModelElement: self model).
 
-	self addDiagramElementToOwner
+	self addDiagramElementToOwner.
+
+	^ self diagramElement
 ]
 
 { #category : 'forms' }
@@ -33,15 +35,6 @@ OPUmlClassifierItemController >> descriptionName [
 		me model name: text.
 		self diagramElement modelChanged ].
 	^ description
-]
-
-{ #category : 'announcements' }
-OPUmlClassifierItemController >> internalSubscribeTo: aModel [
-
-	aModel announcer
-		when: OPElementRenamed
-		do: [ self diagramElementOwner modelChanged ]
-		for: self
 ]
 
 { #category : 'testing' }

@@ -4,14 +4,6 @@ I am a shape composition to accomodate for the most common UML Association shape
 Class {
 	#name : 'OPUmlAssociationShape',
 	#superclass : 'OPUmlEdge',
-	#instVars : [
-		'nameLabel',
-		'sourceEndLabels',
-		'targetEndLabels',
-		'constraints',
-		'stereotypeLabel',
-		'propertiesLabel'
-	],
 	#category : 'OpenPonk-ClassEditor-Shapes',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Shapes'

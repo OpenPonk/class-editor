@@ -4,10 +4,6 @@ I represent a import line from importing to imported package.
 Class {
 	#name : 'OPUmlPackageImportShape',
 	#superclass : 'OPUmlEdge',
-	#instVars : [
-		'nameLabel',
-		'constraints'
-	],
 	#category : 'OpenPonk-ClassEditor-Shapes',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Shapes'
@@ -23,8 +19,5 @@ OPUmlPackageImportShape >> headMarker [
 OPUmlPackageImportShape >> initialize [
 
 	super initialize.
-	nameLabel := OPUmlPackageImportLabel
-		             in: self
-		             forModelElement: self modelElement.
-	constraints := OrderedCollection new
+	OPUmlPackageImportLabel in: self forModelElement: self modelElement
 ]

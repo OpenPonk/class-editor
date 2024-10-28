@@ -28,7 +28,7 @@ OPAbstractUmlShapeTest >> testAddOwnedElement [
 	parent := self newShapeInstance.
 	child := self newShapeInstance.
 	child owningElement: parent.
-	self assert: parent owningElement equals: nil.
+	self assert: parent owningElement doesNotExist.
 	self assert: child owningElement equals: parent.
 	self assertCollection: parent ownedElements hasSameElements: {child}.
 	self assert: child ownedElements size equals: 0
@@ -49,7 +49,7 @@ OPAbstractUmlShapeTest >> testAddSelfEdge [
 { #category : 'tests' }
 OPAbstractUmlShapeTest >> testEmpty [
 	self assert: shape modelElement isNil.
-	self assert: shape owningElement isNil.
+	self assert: shape owningElement doesNotExist.
 	self assert: shape ownedElements isEmpty.
 	self assert: shape sourceEdges isEmpty.
 	self assert: shape targetEdges isEmpty

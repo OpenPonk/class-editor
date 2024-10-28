@@ -28,7 +28,7 @@ OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 	model ownedLiterals add: OPUMLEnumerationLiteral new.
 	controller model: model.
 	controller showWithoutDependentInDiagram: diagramController.
-	controller removeController.
+	controller removeControllerAndDiagramElement.
 	self assert: diagramController canvas nodes asArray equals: #(  ).
 	self assert: diagramController controllers asArray equals: #(  )
 ]

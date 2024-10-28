@@ -99,7 +99,7 @@ OPUmlCompartmentableShape >> removeRender [
 
 	super removeRender.
 	separators do: #remove.
-	separators := OrderedCollection new
+	separators removeAll
 ]
 
 { #category : 'accessing' }

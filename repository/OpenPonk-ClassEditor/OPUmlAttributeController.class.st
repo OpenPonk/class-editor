@@ -12,7 +12,7 @@ Class {
 { #category : 'figures' }
 OPUmlAttributeController >> addDiagramElementToOwner [
 
-	self diagramElementOwner addAttribute: diagramElement
+	self ownerDiagramElement addAttribute: diagramElement
 ]
 
 { #category : 'figures' }
@@ -20,7 +20,7 @@ OPUmlAttributeController >> createDiagramElement [
 
 	(model name isNil or: [ model name trim isEmpty ]) ifTrue: [
 		model name: self placeholderName ].
-	super createDiagramElement
+	^ super createDiagramElement
 ]
 
 { #category : 'construction' }
@@ -153,18 +153,17 @@ OPUmlAttributeController >> diagramElementClass [
 	^ OPUmlAttributeLabel
 ]
 
-{ #category : 'diagram elements' }
-OPUmlAttributeController >> diagramElementOwner [
-
-	^ (diagramController controllerForModel:
-		   (model owningClass ifNil: [ 
-			    (model owningAssociation memberEnds detect: [ :any | 
-				     any ~= model ]) type ])) diagramElement
-]
-
 { #category : 'accessing' }
 OPUmlAttributeController >> modelClass [
 	^ OPUMLProperty
+]
+
+{ #category : 'diagram elements' }
+OPUmlAttributeController >> owner [
+
+	^ diagramController controllerForModel: (model owningClass ifNil: [
+			   (model owningAssociation memberEnds detect: [ :any |
+				    any ~= model ]) type ])
 ]
 
 { #category : 'hooks' }
@@ -193,10 +192,10 @@ OPUmlAttributeController >> registerModelInContainer: aClass [
 { #category : 'removing' }
 OPUmlAttributeController >> removeDiagramElement [
 
-	self diagramElement ifNil: [ ^ self ].
-	self diagramElementOwner ifNotNil: [ :owner |
+	self diagramElement ifNotExists: [ ^ self ].
+	self ownerDiagramElement ifExists: [ :owner |
 		owner removeAttribute: self diagramElement ].
-	diagramElement := nil
+	self diagramElement: OPNoShape new
 ]
 
 { #category : 'removing' }

@@ -57,7 +57,7 @@ OPUmlGeneralizationController >> descriptionGeneralizationSet [
 					   self parentPackageDo: [ :parentPackage |
 						   parentPackage packagedElements:
 							   parentPackage packagedElements \ setsToRemove , setsToAdd ].
-					   diagramElement ifNotNil: [ self diagramElement modelChanged ] ]);
+					   self diagramElement modelChanged ]);
 		  classes: { OPUmlGeneralizationSetDescriptions };
 		  label: 'Generalization Sets';
 		  priority: 5;
@@ -123,6 +123,12 @@ OPUmlGeneralizationController >> modelTarget: aModel in: aParentModel [
 	self modelTarget = aModel ifTrue: [ ^ false ].
 	model general: aModel.
 	^ true
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationController >> packagedModel [
+
+	^ self model specific
 ]
 
 { #category : 'construction' }

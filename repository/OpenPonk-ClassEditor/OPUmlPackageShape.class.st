@@ -66,10 +66,31 @@ OPUmlPackageShape >> padding [
 { #category : 'update' }
 OPUmlPackageShape >> pushBack [
 
+	roassalShape ifNil: [ ^ self ].
 	stereotypeLabel pushBack.
 	nameLabel pushBack.
 	roassalShape pushBack.
 	ear pushBack
+]
+
+{ #category : 'update' }
+OPUmlPackageShape >> pushFront [
+
+	roassalShape ifNil: [ ^ self ].
+
+	ear pushFront.
+	roassalShape pushFront.
+	nameLabel pushFront.
+	stereotypeLabel pushFront
+]
+
+{ #category : 'removing' }
+OPUmlPackageShape >> removeRender [
+
+	super removeRender.
+	nameLabel := nil.
+	stereotypeLabel := nil.
+	ear := nil
 ]
 
 { #category : 'rendering' }

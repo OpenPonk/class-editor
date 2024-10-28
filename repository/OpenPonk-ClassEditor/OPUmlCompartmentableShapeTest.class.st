@@ -112,6 +112,6 @@ OPUmlCompartmentableShapeTest >> testRemoveOwnedElement [
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
 	self assertCollection: shape ownedElements hasSameElements: { lbl }.
-	lbl owningElement: nil.
+	lbl owningElement: OPNoShape new.
 	self assert: shape ownedElements isEmpty
 ]

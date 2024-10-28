@@ -12,7 +12,7 @@ Class {
 { #category : 'figures' }
 OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
 
-	self diagramElementOwner addLiteral: diagramElement
+	self ownerDiagramElement addLiteral: diagramElement
 ]
 
 { #category : 'construction' }
@@ -35,16 +35,16 @@ OPUmlEnumerationLiteralController >> diagramElementClass [
 	^ OPUmlEnumerationLiteralLabel
 ]
 
-{ #category : 'diagram elements' }
-OPUmlEnumerationLiteralController >> diagramElementOwner [
-
-	^ (diagramController showWithoutDependentInDiagramModel:
-		   model enumeration) diagramElement
-]
-
 { #category : 'accessing' }
 OPUmlEnumerationLiteralController >> modelClass [
 	^ OPUMLEnumerationLiteral
+]
+
+{ #category : 'diagram elements' }
+OPUmlEnumerationLiteralController >> owner [
+
+	^ diagramController showWithoutDependentInDiagramModel:
+		  model enumeration
 ]
 
 { #category : 'hooks' }
@@ -62,9 +62,9 @@ OPUmlEnumerationLiteralController >> registerModelInContainer: aParentModel [
 { #category : 'removing' }
 OPUmlEnumerationLiteralController >> removeDiagramElement [
 
-	self diagramElement ifNil: [ ^ self ].
-	self diagramElementOwner removeLiteral: self diagramElement.
-	diagramElement := nil
+	self diagramElement ifNotExists: [ ^ self ].
+	self ownerDiagramElement removeLiteral: self diagramElement.
+	self diagramElement: OPNoShape new
 ]
 
 { #category : 'removing' }
