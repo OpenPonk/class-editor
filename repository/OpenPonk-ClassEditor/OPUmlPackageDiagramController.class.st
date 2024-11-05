@@ -322,7 +322,7 @@ OPUmlPackageDiagramController >> initializeProfileModelingPalette: aPalette [
 { #category : 'palette' }
 OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 
-	model profileApplications do: [ :each | 
+	self model profileApplications do: [ :each |
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 

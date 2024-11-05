@@ -25,6 +25,15 @@ OPUmlPackageShape >> addSelectionDraggableInteraction [
 			 innerRoassalShapesBlock)
 ]
 
+{ #category : 'removing' }
+OPUmlPackageShape >> attachedShapes [
+
+	^ super attachedShapes , {
+		  nameLabel.
+		  stereotypeLabel.
+		  ear }
+]
+
 { #category : 'initialization' }
 OPUmlPackageShape >> initialize [
 
@@ -115,10 +124,6 @@ OPUmlPackageShape >> renderShapeDetails [
 		       model: self;
 		       yourself.
 	self canvas add: ear.
-	self roassalShape
-		when: RSShapeRemovedEvent
-		do: [ ear remove ]
-		for: self.
 	nameLabel := RSLabel new
 		             color: Color black;
 		             model: self;
@@ -130,12 +135,6 @@ OPUmlPackageShape >> renderShapeDetails [
 		                   yourself.
 	self canvas add: nameLabel.
 	self canvas add: stereotypeLabel.
-	self roassalShape
-		when: RSShapeRemovedEvent
-		do: [
-			nameLabel remove.
-			stereotypeLabel remove ]
-		for: self.
 	RSLocation new
 		insideCornerLeft;
 		offset: 0 @ self roassalShape border width;

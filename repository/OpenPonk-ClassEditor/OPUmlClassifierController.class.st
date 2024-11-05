@@ -91,7 +91,7 @@ OPUmlClassifierController >> packageRenderChanged [
 { #category : 'construction' }
 OPUmlClassifierController >> registerModelInContainer: aParentModel [
 
-	aParentModel packagedElements add: model
+	aParentModel packagedElements add: self model
 ]
 
 { #category : 'construction' }

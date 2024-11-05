@@ -26,7 +26,7 @@ OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
 { #category : 'construction' }
 OPUmlEnumerationLiteralController >> dependingOnElements [
 
-	^ super dependingOnElements , (Set with: model enumeration)
+	^ super dependingOnElements , (Set with: self model enumeration)
 ]
 
 { #category : 'construction' }
@@ -44,7 +44,7 @@ OPUmlEnumerationLiteralController >> modelClass [
 OPUmlEnumerationLiteralController >> owner [
 
 	^ diagramController showWithoutDependentInDiagramModel:
-		  model enumeration
+		  self model enumeration
 ]
 
 { #category : 'hooks' }
@@ -56,7 +56,7 @@ OPUmlEnumerationLiteralController >> placeholderName [
 { #category : 'construction' }
 OPUmlEnumerationLiteralController >> registerModelInContainer: aParentModel [
 
-	aParentModel ownedLiterals add: model
+	aParentModel ownedLiterals add: self model
 ]
 
 { #category : 'removing' }
@@ -71,6 +71,6 @@ OPUmlEnumerationLiteralController >> removeDiagramElement [
 OPUmlEnumerationLiteralController >> removeModel [
 	"could be any of those, so just nil all of them"
 
-	model enumeration: nil.
+	self model enumeration: nil.
 	super removeModel
 ]

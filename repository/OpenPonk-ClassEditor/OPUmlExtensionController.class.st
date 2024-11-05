@@ -23,7 +23,8 @@ OPUmlExtensionController >> modelClass [
 { #category : 'accessing' }
 OPUmlExtensionController >> modelSource [
 
-	^ model memberEnds ifNotEmpty: [ :memberEnds | memberEnds first type ]
+	^ self model memberEnds ifNotEmpty: [ :memberEnds |
+		  memberEnds first type ]
 ]
 
 { #category : 'construction' }
@@ -32,19 +33,19 @@ OPUmlExtensionController >> modelSource: aModel in: aParentModel [
 	| property |
 	self modelSource = aModel ifTrue: [ ^ false ].
 	(property := OPUMLExtensionEnd new)
-		owningAssociation: model;
+		owningAssociation: self model;
 		name: 'extension_' , aModel name;
 		type: aModel.
-	model memberEnds add: property.
-	model ownedEnd: property.
+	self model memberEnds add: property.
+	self model ownedEnd: property.
 	^ true
 ]
 
 { #category : 'accessing' }
 OPUmlExtensionController >> modelTarget [
 
-	^ model memberEnds size > 1
-		  ifTrue: [ model memberEnds second type ]
+	^ self model memberEnds size > 1
+		  ifTrue: [ self model memberEnds second type ]
 		  ifFalse: [ nil ]
 ]
 
@@ -57,7 +58,7 @@ OPUmlExtensionController >> modelTarget: aModel in: aParentModel [
 		owningClass: source model;
 		name: 'base_' , aModel name;
 		type: aModel.
-	model memberEnds add: property.
+	self model memberEnds add: property.
 	^ true
 ]
 

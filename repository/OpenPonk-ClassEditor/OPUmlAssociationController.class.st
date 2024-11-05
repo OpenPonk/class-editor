@@ -90,7 +90,8 @@ OPUmlAssociationController >> modelClass [
 { #category : 'accessing' }
 OPUmlAssociationController >> modelSource [
 
-	^ model memberEnds ifNotEmpty: [ :memberEnds | memberEnds first type ]
+	^ self model memberEnds ifNotEmpty: [ :memberEnds |
+		  memberEnds first type ]
 ]
 
 { #category : 'construction' }
@@ -104,15 +105,15 @@ OPUmlAssociationController >> modelSource: aModel in: aParentModel [
 				 replaceAll: Character cr
 				 with: Character space);
 		type: source model.
-	model memberEnds add: property.
+	self model memberEnds add: property.
 	^ true
 ]
 
 { #category : 'accessing' }
 OPUmlAssociationController >> modelTarget [
 
-	^ model memberEnds size > 1
-		  ifTrue: [ model memberEnds second type ]
+	^ self model memberEnds size > 1
+		  ifTrue: [ self model memberEnds second type ]
 		  ifFalse: [ nil ]
 ]
 
@@ -127,7 +128,7 @@ OPUmlAssociationController >> modelTarget: aModel in: aParentModel [
 				 replaceAll: Character cr
 				 with: Character space);
 		type: target model.
-	model memberEnds add: property.
+	self model memberEnds add: property.
 	^ true
 ]
 

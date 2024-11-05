@@ -18,8 +18,8 @@ OPUmlAttributeController >> addDiagramElementToOwner [
 { #category : 'figures' }
 OPUmlAttributeController >> createDiagramElement [
 
-	(model name isNil or: [ model name trim isEmpty ]) ifTrue: [
-		model name: self placeholderName ].
+	(self model name isNil or: [ self model name trim isEmpty ]) ifTrue: [
+		self model name: self placeholderName ].
 	^ super createDiagramElement
 ]
 
@@ -41,7 +41,7 @@ OPUmlAttributeController >> dependingOnElements [
 		                ifNotNil: [ :element | Set with: element ] ].
 
 	^ super dependingOnElements
-	  , (asSetOrEmpty value: model owningAssociation)
+	  , (asSetOrEmpty value: self model owningAssociation)
 ]
 
 { #category : 'forms' }
@@ -161,9 +161,10 @@ OPUmlAttributeController >> modelClass [
 { #category : 'diagram elements' }
 OPUmlAttributeController >> owner [
 
-	^ diagramController controllerForModel: (model owningClass ifNil: [
-			   (model owningAssociation memberEnds detect: [ :any |
-				    any ~= model ]) type ])
+	^ diagramController controllerForModel:
+		  (self model owningClass ifNil: [
+			   (self model owningAssociation memberEnds detect: [ :any |
+				    any ~= self model ]) type ])
 ]
 
 { #category : 'hooks' }
@@ -186,7 +187,7 @@ OPUmlAttributeController >> placeholderName [
 { #category : 'construction' }
 OPUmlAttributeController >> registerModelInContainer: aClass [
 
-	aClass ownedAttributes add: model
+	aClass ownedAttributes add: self model
 ]
 
 { #category : 'removing' }
@@ -202,7 +203,7 @@ OPUmlAttributeController >> removeDiagramElement [
 OPUmlAttributeController >> removeModel [
 	"could be any of those, so just nil all of them"
 
-	model owningAssociation: nil.
+	self model owningAssociation: nil.
 	super removeModel
 ]
 
@@ -219,21 +220,21 @@ OPUmlAttributeController >> typeNamed: aName [
 OPUmlAttributeController >> validate [
 
 	super validate.
-	model ifNil: [ ^ self ].
-	(model owningClass isNotNil and: [ model owningAssociation isNotNil ])
-		ifTrue: [
-			OPModelInvalid signal: (String streamContents: [ :s |
-					 s << 'Property "' << model name asString << '" owned by class "'
-					 << model owningClass name asString
-					 << '" is also owned by assoc. '.
-					 model owningAssociation name
-						 ifNil: [
-							 model owningAssociation memberEnds
-								 do: [ :each |
-									 each type ifNotNil: [ :type | s << '"' << type name << '"' ] ]
-								 separatedBy: [ s << ' <-> ' ] ]
-						 ifNotNil: [ :assName | s << '"' << assName << '"' ] ]) ].
-	model owningAssociation: nil
+	self model ifNil: [ ^ self ].
+	(self model owningClass isNotNil and: [
+		 self model owningAssociation isNotNil ]) ifTrue: [
+		OPModelInvalid signal: (String streamContents: [ :s |
+				 s << 'Property "' << self model name asString
+				 << '" owned by class "' << self model owningClass name asString
+				 << '" is also owned by assoc. '.
+				 self model owningAssociation name
+					 ifNil: [
+						 self model owningAssociation memberEnds
+							 do: [ :each |
+								 each type ifNotNil: [ :type | s << '"' << type name << '"' ] ]
+							 separatedBy: [ s << ' <-> ' ] ]
+					 ifNotNil: [ :assName | s << '"' << assName << '"' ] ]) ].
+	self model owningAssociation: nil
 ]
 
 { #category : 'forms' }

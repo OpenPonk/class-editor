@@ -47,8 +47,8 @@ OPUmlPackageController >> canBeTargetFor: aController [
 OPUmlPackageController >> createModelIn: aParentModel [
 
 	super createModelIn: aParentModel.
-	model name: (model oclClassifierNameFrom: model class).
-	^ model
+	self model name: (self model oclClassifierNameFrom: self model class).
+	^ self model
 ]
 
 { #category : 'accessing' }
@@ -124,7 +124,7 @@ OPUmlPackageController >> pushBack [
 { #category : 'construction' }
 OPUmlPackageController >> registerModelInContainer: aParentModel [
 
-	aParentModel packagedElements add: model
+	aParentModel packagedElements add: self model
 ]
 
 { #category : 'destruction' }

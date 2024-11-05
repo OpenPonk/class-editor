@@ -14,9 +14,10 @@ OPUmlClassItemController >> dependingOnElements [
 	                nullableElement
 		                ifNil: [ Set empty ]
 		                ifNotNil: [ :element | Set with: element ] ].
-	^ super dependingOnElements , (asSetOrEmpty value: model owningClass)
-	  , (asSetOrEmpty value: model interface)
-	  , (asSetOrEmpty value: model datatype)
+	^ super dependingOnElements
+	  , (asSetOrEmpty value: self model owningClass)
+	  , (asSetOrEmpty value: self model interface)
+	  , (asSetOrEmpty value: self model datatype)
 ]
 
 { #category : 'forms' }
@@ -33,8 +34,8 @@ OPUmlClassItemController >> descriptionIsStatic [
 OPUmlClassItemController >> removeModel [
 	"could be any of those, so just nil all of them"
 
-	model owningClass: nil.
-	model interface: nil.
-	model datatype: nil.
+	self model owningClass: nil.
+	self model interface: nil.
+	self model datatype: nil.
 	super removeModel
 ]

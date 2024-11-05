@@ -99,7 +99,8 @@ OPUmlGeneralizationController >> modelClass [
 
 { #category : 'forms' }
 OPUmlGeneralizationController >> modelSource [
-	^ model specific
+
+	^ self model specific
 ]
 
 { #category : 'figures' }
@@ -107,13 +108,14 @@ OPUmlGeneralizationController >> modelSource: aModel in: aParentModel [
 	"answers whether model's source has been changed"
 
 	self modelSource = aModel ifTrue: [ ^ false ].
-	model specific: aModel.
+	self model specific: aModel.
 	^ true
 ]
 
 { #category : 'forms' }
 OPUmlGeneralizationController >> modelTarget [
-	^ model general
+
+	^ self model general
 ]
 
 { #category : 'figures' }
@@ -121,7 +123,7 @@ OPUmlGeneralizationController >> modelTarget: aModel in: aParentModel [
 	"answers whether model's target has been changed"
 
 	self modelTarget = aModel ifTrue: [ ^ false ].
-	model general: aModel.
+	self model general: aModel.
 	^ true
 ]
 
@@ -140,10 +142,10 @@ OPUmlGeneralizationController >> registerModelInContainer: aParentModel [
 { #category : 'removing' }
 OPUmlGeneralizationController >> removeModel [
 
-	model general: nil.
-	model specific: nil.
-	model generalizationSets asArray do: [ :each |
-		each generalizations remove: model.
+	self model general: nil.
+	self model specific: nil.
+	self model generalizationSets asArray do: [ :each |
+		each generalizations remove: self model.
 		each generalizations ifEmpty: [
 			self parentPackageDo: [ :parentPackage |
 				parentPackage packagedElements

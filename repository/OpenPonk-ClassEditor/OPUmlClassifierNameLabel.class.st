@@ -9,6 +9,14 @@ Class {
 	#tag : 'Shapes'
 }
 
+{ #category : 'removing' }
+OPUmlClassifierNameLabel >> attachedShapes [
+
+	labeled ifNil: [ ^ super attachedShapes ].
+
+	^ super attachedShapes , { labeled labelShape }
+]
+
 { #category : 'as yet unclassified' }
 OPUmlClassifierNameLabel >> defaultFontSize [
 

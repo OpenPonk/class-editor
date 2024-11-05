@@ -47,7 +47,7 @@ OPUmlOperationController >> modelClass [
 { #category : 'diagram elements' }
 OPUmlOperationController >> owner [
 
-	^ diagramController controllerForModel: model owningClass
+	^ diagramController controllerForModel: self model owningClass
 ]
 
 { #category : 'hooks' }
@@ -59,7 +59,7 @@ OPUmlOperationController >> placeholderName [
 { #category : 'construction' }
 OPUmlOperationController >> registerModelInContainer: aParentModel [
 
-	aParentModel ownedOperations add: model
+	aParentModel ownedOperations add: self model
 ]
 
 { #category : 'removing' }
