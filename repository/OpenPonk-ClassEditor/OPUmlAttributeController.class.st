@@ -221,19 +221,14 @@ OPUmlAttributeController >> validate [
 
 	super validate.
 	self model ifNil: [ ^ self ].
+	
 	(self model owningClass isNotNil and: [
 		 self model owningAssociation isNotNil ]) ifTrue: [
 		OPModelInvalid signal: (String streamContents: [ :s |
-				 s << 'Property "' << self model name asString
-				 << '" owned by class "' << self model owningClass name asString
-				 << '" is also owned by assoc. '.
-				 self model owningAssociation name
-					 ifNil: [
-						 self model owningAssociation memberEnds
-							 do: [ :each |
-								 each type ifNotNil: [ :type | s << '"' << type name << '"' ] ]
-							 separatedBy: [ s << ' <-> ' ] ]
-					 ifNotNil: [ :assName | s << '"' << assName << '"' ] ]) ].
+				 s << 'Property "' << self model name asString << '" owned by '
+				 << self model owningClass asString << ' is also owned by '
+				 << self model owningAssociation asString ]) ].		
+	"Remove the ownership by the association in order to load the model"
 	self model owningAssociation: nil
 ]
 
