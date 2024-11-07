@@ -37,11 +37,6 @@ OPUmlClassifierItemController >> descriptionName [
 	^ description
 ]
 
-{ #category : 'testing' }
-OPUmlClassifierItemController >> isHideable [
-	^ true
-]
-
 { #category : 'hooks' }
 OPUmlClassifierItemController >> placeholderName [
 

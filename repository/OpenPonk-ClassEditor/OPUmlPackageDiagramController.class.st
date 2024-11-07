@@ -375,12 +375,12 @@ OPUmlPackageDiagramController >> rebuildPalette [
 { #category : 'as yet unclassified' }
 OPUmlPackageDiagramController >> typeOfModel: aModel [
 	^ OPModelObjectType
-		named: (aModel umlClassName splitOnCapitals joinUsing: ' ')
+		named: (aModel umlClassName splitCamelCase joinUsing: ' ')
 		withSubtype:
 			(aModel appliedStereotypes
 				ifEmpty: [ OPModelObjectType named: '(without stereotype)' ]
 				ifNotEmpty: [ OPModelObjectType
 						named:
-							(aModel appliedStereotypes first umlClassName splitOnCapitals
+							(aModel appliedStereotypes first umlClassName splitCamelCase
 								joinUsing: ' ') ])
 ]

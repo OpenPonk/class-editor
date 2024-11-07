@@ -93,11 +93,6 @@ OPUmlPackageController >> hookDiagramElement [
 	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
-{ #category : 'testing' }
-OPUmlPackageController >> isHideable [
-	^ true
-]
-
 { #category : 'accessing' }
 OPUmlPackageController >> modelClass [
 	modelClass ifNil: [ self beForPackage ].

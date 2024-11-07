@@ -70,11 +70,6 @@ OPUmlClassifierController >> hookDiagramElement [
 	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
-{ #category : 'testing' }
-OPUmlClassifierController >> isHideable [
-	^ true
-]
-
 { #category : 'accessing' }
 OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
