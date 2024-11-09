@@ -3,7 +3,7 @@ I am a controller for UML Extensions
 "
 Class {
 	#name : 'OPUmlExtensionController',
-	#superclass : 'OPUmlRelationshipController',
+	#superclass : 'OPUmlAbstractAssociationController',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -20,13 +20,6 @@ OPUmlExtensionController >> modelClass [
 	^ OPUMLExtension
 ]
 
-{ #category : 'accessing' }
-OPUmlExtensionController >> modelSource [
-
-	^ self model memberEnds ifNotEmpty: [ :memberEnds |
-		  memberEnds first type ]
-]
-
 { #category : 'construction' }
 OPUmlExtensionController >> modelSource: aModel in: aParentModel [
 
@@ -41,14 +34,6 @@ OPUmlExtensionController >> modelSource: aModel in: aParentModel [
 	^ true
 ]
 
-{ #category : 'accessing' }
-OPUmlExtensionController >> modelTarget [
-
-	^ self model memberEnds size > 1
-		  ifTrue: [ self model memberEnds second type ]
-		  ifFalse: [ nil ]
-]
-
 { #category : 'construction' }
 OPUmlExtensionController >> modelTarget: aModel in: aParentModel [
 
@@ -60,17 +45,4 @@ OPUmlExtensionController >> modelTarget: aModel in: aParentModel [
 		type: aModel.
 	self model memberEnds add: property.
 	^ true
-]
-
-{ #category : 'removing' }
-OPUmlExtensionController >> removeModel [
-	"extra work to trigger update of the end classes... maybe this should be automatic for edges"
-
-	[ self model memberEnds isNotEmpty ] whileTrue: [
-		| end |
-		end := self model memberEnds first.
-		end association: nil.
-		end owningClass: nil.
-		end owningAssociation: nil ].
-	super removeModel
 ]

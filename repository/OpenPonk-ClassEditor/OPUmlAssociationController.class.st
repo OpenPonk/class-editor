@@ -3,7 +3,7 @@ I am a controller for Association
 "
 Class {
 	#name : 'OPUmlAssociationController',
-	#superclass : 'OPUmlRelationshipController',
+	#superclass : 'OPUmlAbstractAssociationController',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -87,13 +87,6 @@ OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
 
-{ #category : 'accessing' }
-OPUmlAssociationController >> modelSource [
-
-	^ self model memberEnds ifNotEmpty: [ :memberEnds |
-		  memberEnds first type ]
-]
-
 { #category : 'construction' }
 OPUmlAssociationController >> modelSource: aModel in: aParentModel [
 
@@ -109,14 +102,6 @@ OPUmlAssociationController >> modelSource: aModel in: aParentModel [
 	^ true
 ]
 
-{ #category : 'accessing' }
-OPUmlAssociationController >> modelTarget [
-
-	^ self model memberEnds size > 1
-		  ifTrue: [ self model memberEnds second type ]
-		  ifFalse: [ nil ]
-]
-
 { #category : 'construction' }
 OPUmlAssociationController >> modelTarget: aModel in: aParentModel [
 
@@ -130,16 +115,6 @@ OPUmlAssociationController >> modelTarget: aModel in: aParentModel [
 		type: target model.
 	self model memberEnds add: property.
 	^ true
-]
-
-{ #category : 'removing' }
-OPUmlAssociationController >> removeModel [
-
-	self model memberEnds
-		select: [ :each | each owningClass isNotNil ]
-		thenDo: [ :eachProperty | eachProperty owningClass: nil ].
-	self model memberEnds: #(  ).
-	super removeModel
 ]
 
 { #category : 'construction' }

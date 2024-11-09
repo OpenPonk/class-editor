@@ -104,3 +104,10 @@ OPUmlClassifierController >> updateAfterDiagramFocused [
 	self diagramElement hiddenPackages: self hiddenPackages.
 	super updateAfterDiagramFocused
 ]
+
+{ #category : 'validation' }
+OPUmlClassifierController >> validate [
+
+	super validate.
+	self model attributes do: [ :each | self validateProperty: each ]
+]
