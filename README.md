@@ -7,7 +7,7 @@
  
 ```smalltalk
 Metacello new
-	baseline: 'ClassEditor';
+	baseline: 'OpenPonkClassEditor';
 	repository: 'github://OpenPonk/class-editor/repository';
 	load: 'complete'.
 ```
