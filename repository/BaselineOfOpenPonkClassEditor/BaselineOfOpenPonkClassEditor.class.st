@@ -19,9 +19,6 @@ BaselineOfOpenPonkClassEditor >> baseline: spec [
 	<baseline>
 	spec for: #common do: [
 		spec
-			baseline: 'OpenPonkUMLMetamodel'
-			with: [ spec repository: 'github://openponk/uml-metamodel' ].
-		spec
 			baseline: 'OpenPonkUMLXMI'
 			with: [ spec repository: 'github://openponk/uml-xmi' ].
 		spec
@@ -35,8 +32,7 @@ BaselineOfOpenPonkClassEditor >> baseline: spec [
 			baseline: 'OpenPonkUMLProfiles'
 			with: [ spec repository: 'github://openponk/uml-profiles' ].
 		spec package: 'OpenPonk-ClassEditor' with: [
-			spec requires:
-				#( 'OpenPonkUMLMetamodel' 'OpenPonkUMLXMI' 'OpenPonkUMLBootstrapGenerator'
+			spec requires: #( 'OpenPonkUMLXMI' 'OpenPonkUMLBootstrapGenerator'
 				   'OpenPonkUMLProfiles' ) ].
 
 		spec group: 'plugin' with: #( 'OpenPonk-ClassEditor' ).
@@ -46,7 +42,8 @@ BaselineOfOpenPonkClassEditor >> baseline: spec [
 			ifFalse: [
 				self plugins: spec.
 				spec package: 'OpenPonk-ClassEditor-Plugins' with: [
-					spec requires: #( 'OpenPonkOntoUMLVerifications' OpenPonkOntoUMLPatterns
+					spec requires:
+						#( 'OpenPonkOntoUMLVerifications' OpenPonkOntoUMLPatterns
 						   OpenPonkGit OpenPonkOntoUMLTransformations ) ].
 				spec
 					group: 'complete-plugin'
