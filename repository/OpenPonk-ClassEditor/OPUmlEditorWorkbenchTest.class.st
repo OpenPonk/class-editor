@@ -39,8 +39,9 @@ OPUmlEditorWorkbenchTest >> setUp [
 
 { #category : 'running' }
 OPUmlEditorWorkbenchTest >> tearDown [
-	super tearDown.
-	window ifNotNil: #delete
+
+	window ifNotNil: [ window close ].
+	super tearDown
 ]
 
 { #category : 'tests' }

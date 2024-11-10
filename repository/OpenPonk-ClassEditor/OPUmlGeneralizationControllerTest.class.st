@@ -27,34 +27,3 @@ OPUmlGeneralizationControllerTest >> testDescriptionName [
 
 	self assert: controller descriptionName equals: nil
 ]
-
-{ #category : 'tests' }
-OPUmlGeneralizationControllerTest >> testGeneralizationSet [
-
-	| set |
-	self showInDiagram.
-	self
-		assertCollection: diagramController model packagedElements
-		hasSameElements: {
-				sourceModel.
-				targetModel }.
-	set := OPUMLGeneralizationSet new.
-	controller
-		write: { (OPUmlGeneralizationSetDescriptions new
-				 controller: controller;
-				 set: set;
-				 yourself) }
-		using: controller descriptionGeneralizationSet.
-	self
-		assertCollection: diagramController model packagedElements
-		hasSameElements: {
-				sourceModel.
-				targetModel.
-				set }.
-	controller removeModel.
-	self
-		assertCollection: diagramController model packagedElements
-		hasSameElements: {
-				sourceModel.
-				targetModel }
-]

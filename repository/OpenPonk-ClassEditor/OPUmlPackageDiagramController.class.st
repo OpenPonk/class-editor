@@ -11,6 +11,36 @@ Class {
 	#tag : 'Controllers'
 }
 
+{ #category : 'enumerating' }
+OPUmlPackageDiagramController >> allGeneralizationSets [
+
+	^ self allPackages flatCollectAsSet: [ :eachPackage |
+		  (eachPackage packagedElements select: [ :each |
+			   each oclIsKindOf: #GeneralizationSet ])
+		  , (((eachPackage packagedElements select: [ :any |
+				     any oclIsKindOf: #Classifier ]) flatCollect: [
+				    :eachClassifier | eachClassifier generalizations ])
+				   flatCollect: [ :each | each generalizationSets ]) ]
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlPackageDiagramController >> allPackages [
+
+	^ (Set with: self model) , (self allPackagesIn: self model)
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlPackageDiagramController >> allPackagesIn: aPackage [
+
+	| innerPackages |
+	innerPackages := aPackage packagedElements select: [ :each |
+		                 each oclIsKindOf: #Package ].
+	^ innerPackages asSet
+	  ,
+	  (innerPackages flatCollectAsSet: [ :each |
+		   self allPackagesIn: each ])
+]
+
 { #category : 'as yet unclassified' }
 OPUmlPackageDiagramController >> allShowableElements [
 	"Should return all elements that could be directly hidden on diagram"
@@ -110,6 +140,22 @@ OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 		  label: 'Applied Profiles';
 		  priority: 10;
 		  beSorted;
+		  yourself
+]
+
+{ #category : 'forms' }
+OPUmlPackageDiagramController >> descriptionGeneralizationSets [
+
+	<magritteDescription>
+	^ MAToManyRelationDescription new
+		  readOnly: true;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | self allGeneralizationSets ]
+				   write: [ :me :newValue |
+					   self error: 'Direct manipulation only via '
+							   , OPUmlAllGeneralizationSetsEditor name ]);
+		  label: 'Generalization Sets';
+		  priority: 20;
 		  yourself
 ]
 
@@ -326,6 +372,15 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
+{ #category : 'as yet unclassified' }
+OPUmlPackageDiagramController >> maEdit [
+
+	OPUmlAllGeneralizationSetsEditor new
+		application: self diagramController editor application;
+		controller: self;
+		openModal
+]
+
 { #category : 'destruction' }
 OPUmlPackageDiagramController >> packageRenderChanged [
 
@@ -368,8 +423,9 @@ OPUmlPackageDiagramController >> pushBack [
 { #category : 'palette' }
 OPUmlPackageDiagramController >> rebuildPalette [
 
-	self editor palette createPaletteFor: self.
-	self editor palette rebuildWidget
+	self editor palette
+		createPaletteFor: self;
+		rebuildWidget
 ]
 
 { #category : 'as yet unclassified' }
