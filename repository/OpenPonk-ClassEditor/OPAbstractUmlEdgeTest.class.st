@@ -1,5 +1,5 @@
 Class {
-	#name : 'OPUmlEdgeTest',
+	#name : 'OPAbstractUmlEdgeTest',
 	#superclass : 'OPAbstractEdgeTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
 	#package : 'OpenPonk-ClassEditor',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'running' }
-OPUmlEdgeTest >> setUp [
+OPAbstractUmlEdgeTest >> setUp [
 	| source target |
 	super setUp.
 	source := OPUmlLabel new.
@@ -19,12 +19,12 @@ OPUmlEdgeTest >> setUp [
 ]
 
 { #category : 'hooks' }
-OPUmlEdgeTest >> shapeClass [
+OPAbstractUmlEdgeTest >> shapeClass [
 	^ OPUmlEdge
 ]
 
 { #category : 'tests' }
-OPUmlEdgeTest >> testRemove [
+OPAbstractUmlEdgeTest >> testRemove [
 
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
@@ -34,7 +34,7 @@ OPUmlEdgeTest >> testRemove [
 ]
 
 { #category : 'tests' }
-OPUmlEdgeTest >> testRemoveDetachFromEnds [
+OPAbstractUmlEdgeTest >> testRemoveDetachFromEnds [
 
 	| source target |
 	source := OPUmlLabel new.
@@ -47,9 +47,10 @@ OPUmlEdgeTest >> testRemoveDetachFromEnds [
 ]
 
 { #category : 'tests' }
-OPUmlEdgeTest >> testRemoveFromView [
+OPAbstractUmlEdgeTest >> testRemoveFromView [
 
 	| lbl |
+	shape modelElement: model.
 	(lbl := OPUmlLabel new)
 		text: 'x';
 		owningElement: shape.
