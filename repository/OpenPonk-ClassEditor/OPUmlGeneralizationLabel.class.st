@@ -25,7 +25,8 @@ OPUmlGeneralizationLabel >> defaultText [
 OPUmlGeneralizationLabel >> defaultTextForSet: aGeneralizationSet on: aStream [
 
 	| props |
-	aStream << (aGeneralizationSet name trim ifEmpty: [ 'set' ]).
+	aStream
+	<< ((aGeneralizationSet name ifNil: [ '' ]) trim ifEmpty: [ 'set' ]).
 
 	aStream << ' {'.
 	props := OrderedCollection new.
