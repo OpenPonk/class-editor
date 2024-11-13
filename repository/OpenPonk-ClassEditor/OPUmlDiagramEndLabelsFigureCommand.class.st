@@ -28,9 +28,9 @@ OPUmlDiagramEndLabelsFigureCommand class >> resultingShowState [
 ]
 
 { #category : 'accessing' }
-OPUmlDiagramEndLabelsFigureCommand >> defaultMenuIcon [
+OPUmlDiagramEndLabelsFigureCommand >> defaultMenuIconName [
 
-	^ self iconNamed: #smallLeftFlush
+	^ #smallLeftFlush
 ]
 
 { #category : 'execution' }
