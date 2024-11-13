@@ -42,11 +42,11 @@ OPUmlAssociationEndLabel >> defaultText [
 
 	| type typeName defaultText |
 	self showAssociationEndLabels
-	= OPUmlDiagramHideEndLabelsFigureCommand resultingShowState ifTrue: [
+	= OPUmlDiagramHideEndLabelsFigureCommand styleState ifTrue: [
 		^ '' ].
 	defaultText := self modelElement notationStringAsRoleName.
 	self showAssociationEndLabels
-	= OPUmlDiagramShowEndLabelsFigureCommand resultingShowState ifTrue: [
+	= OPUmlDiagramShowEndLabelsFigureCommand styleState ifTrue: [
 		^ defaultText ].
 	type := self modelElement type.
 	type ifNil: [ ^ defaultText ].

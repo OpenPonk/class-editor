@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'hooks' }
-OPUmlDiagramHideSameAsClassEndLabelsFigureCommand class >> resultingShowState [
+OPUmlDiagramHideSameAsClassEndLabelsFigureCommand class >> styleState [
 
 	^ #hideSame
 ]
@@ -21,11 +21,11 @@ OPUmlDiagramHideSameAsClassEndLabelsFigureCommand >> basicMenuItemName [
 { #category : 'accessing' }
 OPUmlDiagramHideSameAsClassEndLabelsFigureCommand >> defaultMenuIconFormSet [
 
-	^ FormSet form: OPCoreIcons opHideSameLabelsIcon
+	^ FormSet form: OPCoreIcons opHideSomeLabelsIcon
 ]
 
 { #category : 'accessing' }
 OPUmlDiagramHideSameAsClassEndLabelsFigureCommand >> description [
 
-	^ 'Hide association end labels where the text is the same as name of the class'
+	^ 'Hide association end labels with same text as name of its connected class'
 ]

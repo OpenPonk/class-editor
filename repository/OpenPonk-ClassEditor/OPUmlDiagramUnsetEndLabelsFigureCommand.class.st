@@ -20,16 +20,22 @@ OPUmlDiagramUnsetEndLabelsFigureCommand >> basicMenuItemName [
 	^ 'Use diagram-level setting'
 ]
 
+{ #category : 'accessing' }
+OPUmlDiagramUnsetEndLabelsFigureCommand >> description [
+
+	^ 'Adopt option picked for the entire diagram, instead of overriding it'
+]
+
 { #category : 'execution' }
 OPUmlDiagramUnsetEndLabelsFigureCommand >> execute [
 
-	diagramElements
+	self applicableDiagramElements
 		select: [ :each | each owningElement exists ]
 		thenDo: [ :each | each unsetAssociationEndLabels ]
 ]
 
 { #category : 'testing' }
-OPUmlDiagramUnsetEndLabelsFigureCommand >> isCurrentStyle: aStyle [
+OPUmlDiagramUnsetEndLabelsFigureCommand >> isCurrentlySelectedByStyle: aStyle [
 
 	aStyle ifNil: [ ^ true ].
 	^ (aStyle includesKey:

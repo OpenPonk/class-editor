@@ -13,7 +13,7 @@ OPUmlDiagramSetEndLabelsFigureCommand class >> isAbstract [
 ]
 
 { #category : 'hooks' }
-OPUmlDiagramSetEndLabelsFigureCommand class >> resultingShowState [
+OPUmlDiagramSetEndLabelsFigureCommand class >> styleState [
 
 	^ #''
 ]
@@ -21,24 +21,38 @@ OPUmlDiagramSetEndLabelsFigureCommand class >> resultingShowState [
 { #category : 'execution' }
 OPUmlDiagramSetEndLabelsFigureCommand >> execute [
 
-	diagramElements
-		select: [ :each | each supportsHidingLabelEnds ]
-		thenDo: [ :each |
-		each showAssociationEndLabels: self resultingShowState ]
+	self applicableDiagramElements do: [ :each |
+		each showAssociationEndLabels: self styleState ]
 ]
 
 { #category : 'testing' }
-OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentStyle: aStyle [
+OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlyActive [
+
+	^ self applicableDiagramElements anySatisfy: [ :any |
+		  any showAssociationEndLabels = self styleState ]
+]
+
+{ #category : 'testing' }
+OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlySelected [
+
+	^ super isCurrentlySelected or: [
+		  self applicableDiagramElements allSatisfy: [ :each |
+			  each owningElement exists not and: [
+				  each showAssociationEndLabels = self styleState ] ] ]
+]
+
+{ #category : 'testing' }
+OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlySelectedByStyle: aStyle [
 
 	aStyle ifNil: [ ^ false ].
 	^ aStyle
 		  at: OPUmlAssociationEndLabel showAssociationEndLabelsKey
-		  ifPresent: [ :styleValue | styleValue = self resultingShowState ]
+		  ifPresent: [ :styleValue | styleValue = self styleState ]
 		  ifAbsent: [ false ]
 ]
 
 { #category : 'hooks' }
-OPUmlDiagramSetEndLabelsFigureCommand >> resultingShowState [
+OPUmlDiagramSetEndLabelsFigureCommand >> styleState [
 
-	^ self class resultingShowState
+	^ self class styleState
 ]

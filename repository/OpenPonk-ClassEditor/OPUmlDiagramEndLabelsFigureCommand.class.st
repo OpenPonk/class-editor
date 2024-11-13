@@ -1,6 +1,9 @@
 Class {
 	#name : 'OPUmlDiagramEndLabelsFigureCommand',
 	#superclass : 'OPDiagramFigureCommand',
+	#instVars : [
+		'relevantDiagramElements'
+	],
 	#category : 'OpenPonk-ClassEditor-Commands',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Commands'
@@ -23,10 +26,25 @@ OPUmlDiagramEndLabelsFigureCommand class >> contextMenuActivation [
 		  for: OPCanvasPresenter
 ]
 
+{ #category : 'as yet unclassified' }
+OPUmlDiagramEndLabelsFigureCommand class >> defaultResultingShowState [
+
+	^ OPUmlDiagramHideSameAsClassEndLabelsFigureCommand
+		  styleState
+]
+
 { #category : 'testing' }
 OPUmlDiagramEndLabelsFigureCommand class >> isAbstract [
 
 	^ self = OPUmlDiagramEndLabelsFigureCommand
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlDiagramEndLabelsFigureCommand >> applicableDiagramElements [
+
+	^ relevantDiagramElements ifNil: [
+		  relevantDiagramElements := diagramElements select: [ :each |
+			                             each supportsHidingLabelEnds ] ]
 ]
 
 { #category : 'accessing' }
@@ -41,20 +59,33 @@ OPUmlDiagramEndLabelsFigureCommand >> defaultMenuItemName [
 	| basicName |
 	basicName := self basicMenuItemName.
 
-	self isCurrent ifFalse: [ ^ basicName ].
+	self isCurrentlySelected ifTrue: [ ^ basicName , ' [selected]' ].
 
-	^ basicName , ' [current]'
+	self isCurrentlyActive ifTrue: [ ^ basicName , ' (active)' ].
+
+	^ basicName
+]
+
+{ #category : 'as yet unclassified' }
+OPUmlDiagramEndLabelsFigureCommand >> defaultResultingShowState [
+	^ self class defaultResultingShowState
 ]
 
 { #category : 'testing' }
-OPUmlDiagramEndLabelsFigureCommand >> isCurrent [
+OPUmlDiagramEndLabelsFigureCommand >> isCurrentlyActive [
 
-	^ diagramElements anySatisfy: [ :any |
-		  self isCurrentStyle: any localStyle ]
+	^ false
 ]
 
 { #category : 'testing' }
-OPUmlDiagramEndLabelsFigureCommand >> isCurrentStyle: aStyle [
+OPUmlDiagramEndLabelsFigureCommand >> isCurrentlySelected [
+
+	^ self applicableDiagramElements anySatisfy: [ :any |
+		  self isCurrentlySelectedByStyle: any localStyle ]
+]
+
+{ #category : 'testing' }
+OPUmlDiagramEndLabelsFigureCommand >> isCurrentlySelectedByStyle: aStyle [
 
 	^ self subclassResponsibility
 ]

@@ -3,9 +3,10 @@ Extension { #name : 'OPDiagramElement' }
 { #category : '*OpenPonk-ClassEditor' }
 OPDiagramElement >> showAssociationEndLabels [
 
-	^ self stylePropertyNamed: self showAssociationEndLabelsKey ifAbsent: [
-		  OPUmlDiagramHideSameAsClassEndLabelsFigureCommand
-			  resultingShowState ]
+	^ self
+		  stylePropertyNamed: self showAssociationEndLabelsKey
+		  ifAbsent: [
+		  OPUmlDiagramEndLabelsFigureCommand defaultResultingShowState ]
 ]
 
 { #category : '*OpenPonk-ClassEditor' }

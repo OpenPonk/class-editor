@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'hooks' }
-OPUmlDiagramShowEndLabelsFigureCommand class >> resultingShowState [
+OPUmlDiagramShowEndLabelsFigureCommand class >> styleState [
 
 	^ #hide
 ]
