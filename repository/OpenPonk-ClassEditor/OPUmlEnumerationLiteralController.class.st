@@ -12,7 +12,7 @@ Class {
 { #category : 'figures' }
 OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
 
-	self ownerDiagramElement addLiteral: diagramElement
+	self ownerDiagramElement addLiteral: self diagramElement
 ]
 
 { #category : 'construction' }
@@ -64,7 +64,7 @@ OPUmlEnumerationLiteralController >> removeDiagramElement [
 
 	self diagramElement ifNotExists: [ ^ self ].
 	self ownerDiagramElement removeLiteral: self diagramElement.
-	self diagramElement: OPNoShape new
+	self diagramElement: nil
 ]
 
 { #category : 'removing' }

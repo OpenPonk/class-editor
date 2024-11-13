@@ -12,7 +12,7 @@ Class {
 { #category : 'figures' }
 OPUmlAttributeController >> addDiagramElementToOwner [
 
-	self ownerDiagramElement addAttribute: diagramElement
+	self ownerDiagramElement addAttribute: self diagramElement
 ]
 
 { #category : 'figures' }
@@ -196,7 +196,7 @@ OPUmlAttributeController >> removeDiagramElement [
 	self diagramElement ifNotExists: [ ^ self ].
 	self ownerDiagramElement ifExists: [ :owner |
 		owner removeAttribute: self diagramElement ].
-	self diagramElement: OPNoShape new
+	self diagramElement: nil
 ]
 
 { #category : 'removing' }

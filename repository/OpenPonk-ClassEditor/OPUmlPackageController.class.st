@@ -83,7 +83,7 @@ OPUmlPackageController >> hookDiagramElement [
 
 	super hookDiagramElement.
 
-	diagramElement innerRoassalShapesBlock: [
+	self diagramElement innerRoassalShapesBlock: [
 		Array streamContents: [ :stream |
 			self diagramController
 				propagateBlock: [ :eachController |

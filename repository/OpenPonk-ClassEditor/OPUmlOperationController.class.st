@@ -12,7 +12,7 @@ Class {
 { #category : 'figures' }
 OPUmlOperationController >> addDiagramElementToOwner [
 
-	self ownerDiagramElement addOperation: diagramElement
+	self ownerDiagramElement addOperation: self diagramElement
 ]
 
 { #category : 'construction' }
@@ -68,5 +68,5 @@ OPUmlOperationController >> removeDiagramElement [
 	self diagramElement ifNotExists: [ ^ self ].
 	self ownerDiagramElement ifNotNil: [ :owner |
 		owner removeOperation: self diagramElement ].
-	self diagramElement: OPNoShape new
+	self diagramElement: nil
 ]
