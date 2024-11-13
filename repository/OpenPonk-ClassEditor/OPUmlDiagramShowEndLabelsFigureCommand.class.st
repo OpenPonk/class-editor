@@ -1,33 +1,31 @@
 Class {
 	#name : 'OPUmlDiagramShowEndLabelsFigureCommand',
-	#superclass : 'OPUmlDiagramEndLabelsFigureCommand',
+	#superclass : 'OPUmlDiagramSetEndLabelsFigureCommand',
 	#category : 'OpenPonk-ClassEditor-Commands',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Commands'
 }
 
-{ #category : 'testing' }
-OPUmlDiagramShowEndLabelsFigureCommand class >> canBeExecutedInContext: aToolContext [
-
-	^ (super canBeExecutedInContext: aToolContext) and: [
-		  aToolContext diagramElements anySatisfy: [ :any |
-			  any showAssociationEndLabels not ] ]
-]
-
 { #category : 'hooks' }
 OPUmlDiagramShowEndLabelsFigureCommand class >> resultingShowState [
 
-	^ true
+	^ #hide
 ]
 
 { #category : 'accessing' }
-OPUmlDiagramShowEndLabelsFigureCommand >> defaultMenuItemName [
+OPUmlDiagramShowEndLabelsFigureCommand >> basicMenuItemName [
 
-	^ 'Show association end labels'
+	^ 'Show all'
+]
+
+{ #category : 'accessing' }
+OPUmlDiagramShowEndLabelsFigureCommand >> defaultMenuIconFormSet [
+
+	^ FormSet form: OPCoreIcons opShowLabelsIcon
 ]
 
 { #category : 'accessing' }
 OPUmlDiagramShowEndLabelsFigureCommand >> description [
 
-	^ 'Show association end labels even where the text is just name of the class'
+	^ 'Show all association end labels'
 ]

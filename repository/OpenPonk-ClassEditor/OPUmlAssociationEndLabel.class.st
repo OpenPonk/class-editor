@@ -41,8 +41,13 @@ OPUmlAssociationEndLabel >> defaultMinDistance [
 OPUmlAssociationEndLabel >> defaultText [
 
 	| type typeName defaultText |
+	self showAssociationEndLabels
+	= OPUmlDiagramHideEndLabelsFigureCommand resultingShowState ifTrue: [
+		^ '' ].
 	defaultText := self modelElement notationStringAsRoleName.
-	self showAssociationEndLabels ifTrue: [ ^ defaultText ].
+	self showAssociationEndLabels
+	= OPUmlDiagramShowEndLabelsFigureCommand resultingShowState ifTrue: [
+		^ defaultText ].
 	type := self modelElement type.
 	type ifNil: [ ^ defaultText ].
 	typeName := type name.
@@ -50,8 +55,8 @@ OPUmlAssociationEndLabel >> defaultText [
 	typeName ifEmpty: [ ^ defaultText ].
 	(typeName reject: [ :each | each isSeparator ]) asLowercase
 	= (defaultText reject: [ :each | each isSeparator ]) asLowercase
-		ifTrue: [ ^ '' ].
-	^ defaultText
+		ifFalse: [ ^ defaultText ].
+	^ ''
 ]
 
 { #category : 'initialization' }

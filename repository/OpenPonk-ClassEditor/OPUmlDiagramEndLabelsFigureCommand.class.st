@@ -11,8 +11,16 @@ OPUmlDiagramEndLabelsFigureCommand class >> canBeExecutedInContext: aToolContext
 
 	^ (super canBeExecutedInContext: aToolContext) and: [
 		  aToolContext diagramElements anySatisfy: [ :any |
-			  any supportsHidingLabelEnds and: [
-				  any showAssociationEndLabels ~= self resultingShowState ] ] ]
+			  any supportsHidingLabelEnds ] ]
+]
+
+{ #category : 'activation' }
+OPUmlDiagramEndLabelsFigureCommand class >> contextMenuActivation [
+
+	<classAnnotation>
+	^ CmdContextMenuActivation
+		  byItemOf: OPUmlDiagramEndLabelsFigureMenuGroup
+		  for: OPCanvasPresenter
 ]
 
 { #category : 'testing' }
@@ -21,29 +29,32 @@ OPUmlDiagramEndLabelsFigureCommand class >> isAbstract [
 	^ self = OPUmlDiagramEndLabelsFigureCommand
 ]
 
-{ #category : 'hooks' }
-OPUmlDiagramEndLabelsFigureCommand class >> resultingShowState [
+{ #category : 'accessing' }
+OPUmlDiagramEndLabelsFigureCommand >> basicMenuItemName [
 
-	^ self subclassResponsibility
+	^ ''
 ]
 
 { #category : 'accessing' }
-OPUmlDiagramEndLabelsFigureCommand >> defaultMenuIconName [
+OPUmlDiagramEndLabelsFigureCommand >> defaultMenuItemName [
 
-	^ #smallLeftFlush
+	| basicName |
+	basicName := self basicMenuItemName.
+
+	self isCurrent ifFalse: [ ^ basicName ].
+
+	^ basicName , ' [current]'
 ]
 
-{ #category : 'execution' }
-OPUmlDiagramEndLabelsFigureCommand >> execute [
+{ #category : 'testing' }
+OPUmlDiagramEndLabelsFigureCommand >> isCurrent [
 
-	diagramElements
-		select: [ :each | each supportsHidingLabelEnds ]
-		thenDo: [ :each |
-		each showAssociationEndLabels: self resultingShowState ]
+	^ diagramElements anySatisfy: [ :any |
+		  self isCurrentStyle: any localStyle ]
 ]
 
-{ #category : 'hooks' }
-OPUmlDiagramEndLabelsFigureCommand >> resultingShowState [
+{ #category : 'testing' }
+OPUmlDiagramEndLabelsFigureCommand >> isCurrentStyle: aStyle [
 
-	^ self class resultingShowState
+	^ self subclassResponsibility
 ]
