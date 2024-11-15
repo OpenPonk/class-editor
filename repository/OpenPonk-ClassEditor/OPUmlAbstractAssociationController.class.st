@@ -37,6 +37,18 @@ OPUmlAbstractAssociationController >> removeModel [
 OPUmlAbstractAssociationController >> validate [
 
 	super validate.
+	self validateMemberEndCount.
 	self model memberEnds do: [ :each | self validateProperty: each ].
 	self model attributes do: [ :each | self validateProperty: each ]
+]
+
+{ #category : 'validation' }
+OPUmlAbstractAssociationController >> validateMemberEndCount [
+
+	self model memberEnds size = 2 ifTrue: [ ^ self ].
+
+	OPModelInvalid signal: (String streamContents: [ :s |
+			 s << self model asString << '" has '
+			 << self model memberEnds size asString
+			 << ' memberEnds instead of 2' ])
 ]
