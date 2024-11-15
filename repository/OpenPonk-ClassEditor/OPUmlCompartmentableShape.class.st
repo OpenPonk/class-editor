@@ -21,6 +21,12 @@ OPUmlCompartmentableShape >> addSeparator [
 	separators add: newSeparator
 ]
 
+{ #category : 'removing' }
+OPUmlCompartmentableShape >> attachedShapes [
+
+	^ super attachedShapes , separators
+]
+
 { #category : 'accessing' }
 OPUmlCompartmentableShape >> compartments [
 

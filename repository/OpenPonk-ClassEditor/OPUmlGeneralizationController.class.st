@@ -22,43 +22,24 @@ OPUmlGeneralizationController >> descriptionGeneral [
 ]
 
 { #category : 'forms' }
-OPUmlGeneralizationController >> descriptionGeneralizationSet [
+OPUmlGeneralizationController >> descriptionGeneralizationSets [
 
 	<magritteDescription>
 	^ MAToManyRelationDescription new
-		  initializer: [ :desc | desc initializeFor: self ];
-		  display: [ :desc |
+		  display: [ :set |
 			  String streamContents: [ :stream |
-					  stream << (desc set name ifNil: [ 'unnamed' ]) << ': '
-					  << (desc set isCovering
-							   ifTrue: [ 'complete' ]
-							   ifFalse: [ 'incomplete' ]) << ', ' << (desc set isDisjoint
-							   ifTrue: [ 'disjoint' ]
-							   ifFalse: [ 'overlapping' ]) << ' ('
-					  << (desc set generalizations size pluralize: 'generalization')
+					  stream << ' - '
+					  << ((set name isNil or: [ set name trim isEmpty ])
+							   ifTrue: [ 'generalization set' ]
+							   ifFalse: [ set name ]) << ' ('
+					  << (set generalizations size pluralize: 'generalization')
 					  << ')' ] ];
 		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   me model generalizationSets collect: [ :each |
-							   OPUmlGeneralizationSetDescriptions new
-								   controller: self;
-								   set: each ] ]
+				   read: [ :me | me model generalizationSets ]
 				   write: [ :me :newValue |
-					   | oldSets newSets setsToRemove setsToAdd |
-					   oldSets := me model generalizationSets asArray.
-					   newSets := newValue collect: #set.
-					   oldSets do: [ :each | each generalizations remove: me model ].
-					   newSets do: [ :each | each generalizations add: me model ].
-					   setsToRemove := oldSets select: [ :each |
-						                   each generalizations isEmpty ].
-					   setsToAdd := newSets select: [ :each |
-						                each generalizations size = 1 ].
-					   me model generalizationSets: newSets.
-					   self parentPackageDo: [ :parentPackage |
-						   parentPackage packagedElements:
-							   parentPackage packagedElements \ setsToRemove , setsToAdd ].
-					   self diagramElement modelChanged ]);
-		  classes: { OPUmlGeneralizationSetDescriptions };
+					   self error:
+							   'Direct manipulation only via '
+							   , OPUmlGeneralizationEditor name ]);
 		  label: 'Generalization Sets';
 		  priority: 5;
 		  yourself
@@ -92,6 +73,18 @@ OPUmlGeneralizationController >> diagramElementClass [
 	^ OPUmlGeneralizationShape
 ]
 
+{ #category : 'as yet unclassified' }
+OPUmlGeneralizationController >> maEdit [
+
+	| editor |
+	editor := OPUmlGeneralizationEditor new.
+	editor
+		application: self diagramController editor application;
+		controller: self;
+		openModal.
+	self diagramController openInForm: self
+]
+
 { #category : 'accessing' }
 OPUmlGeneralizationController >> modelClass [
 	^ OPUMLGeneralization
@@ -99,7 +92,8 @@ OPUmlGeneralizationController >> modelClass [
 
 { #category : 'forms' }
 OPUmlGeneralizationController >> modelSource [
-	^ model specific
+
+	^ self model specific
 ]
 
 { #category : 'figures' }
@@ -107,13 +101,14 @@ OPUmlGeneralizationController >> modelSource: aModel in: aParentModel [
 	"answers whether model's source has been changed"
 
 	self modelSource = aModel ifTrue: [ ^ false ].
-	model specific: aModel.
+	self model specific: aModel.
 	^ true
 ]
 
 { #category : 'forms' }
 OPUmlGeneralizationController >> modelTarget [
-	^ model general
+
+	^ self model general
 ]
 
 { #category : 'figures' }
@@ -121,7 +116,7 @@ OPUmlGeneralizationController >> modelTarget: aModel in: aParentModel [
 	"answers whether model's target has been changed"
 
 	self modelTarget = aModel ifTrue: [ ^ false ].
-	model general: aModel.
+	self model general: aModel.
 	^ true
 ]
 
@@ -140,10 +135,10 @@ OPUmlGeneralizationController >> registerModelInContainer: aParentModel [
 { #category : 'removing' }
 OPUmlGeneralizationController >> removeModel [
 
-	model general: nil.
-	model specific: nil.
-	model generalizationSets asArray do: [ :each |
-		each generalizations remove: model.
+	self model general: nil.
+	self model specific: nil.
+	self model generalizationSets asArray do: [ :each |
+		each generalizations remove: self model.
 		each generalizations ifEmpty: [
 			self parentPackageDo: [ :parentPackage |
 				parentPackage packagedElements

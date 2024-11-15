@@ -1,5 +1,5 @@
 Class {
-	#name : 'OPUmlCompartmentableShapeTest',
+	#name : 'OPAbstractUmlCompartmentableShapeTest',
 	#superclass : 'OPAbstractUmlShapeTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
 	#package : 'OpenPonk-ClassEditor',
@@ -7,12 +7,12 @@ Class {
 }
 
 { #category : 'hooks' }
-OPUmlCompartmentableShapeTest >> shapeClass [
+OPAbstractUmlCompartmentableShapeTest >> shapeClass [
 	^ OPUmlCompartmentableShape
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testEmptyRoassalShape [
+OPAbstractUmlCompartmentableShapeTest >> testEmptyRoassalShape [
 
 	| roassalShape |
 	shape renderIn: RSCanvas new.
@@ -21,7 +21,7 @@ OPUmlCompartmentableShapeTest >> testEmptyRoassalShape [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testFigures [
+OPAbstractUmlCompartmentableShapeTest >> testFigures [
 
 	shape renderIn: RSCanvas new.
 
@@ -29,7 +29,7 @@ OPUmlCompartmentableShapeTest >> testFigures [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testFigures1 [
+OPAbstractUmlCompartmentableShapeTest >> testFigures1 [
 
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
@@ -38,7 +38,7 @@ OPUmlCompartmentableShapeTest >> testFigures1 [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testFigures2 [
+OPAbstractUmlCompartmentableShapeTest >> testFigures2 [
 
 	| lbl comp1 |
 	(lbl := OPUmlLabel new) owningElement: shape.
@@ -52,7 +52,7 @@ OPUmlCompartmentableShapeTest >> testFigures2 [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testFigures3 [
+OPAbstractUmlCompartmentableShapeTest >> testFigures3 [
 
 	| lbl comp compLbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
@@ -65,10 +65,9 @@ OPUmlCompartmentableShapeTest >> testFigures3 [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testRemoveExtentChanged [
+OPAbstractUmlCompartmentableShapeTest >> testRemoveExtentChanged [
 
-	| compartment compLbl canvas fullExtent labelContainer |
-	shape modelElement: OPTestEntityModel new.
+	| compartment compLbl fullExtent labelContainer |
 	labelContainer := OPUmlCompartmentableLabel in: shape.
 	OPUmlNameLabel in: labelContainer.
 	compartment := OPUmlCompartment in: shape.
@@ -76,7 +75,6 @@ OPUmlCompartmentableShapeTest >> testRemoveExtentChanged [
 		compLbl := (OPUmlLabel in: compartment)
 			           text: 'testx';
 			           yourself ].
-	canvas := RSCanvas new.
 	shape renderIn: canvas.
 	fullExtent := shape extent.
 	compLbl remove.
@@ -85,7 +83,7 @@ OPUmlCompartmentableShapeTest >> testRemoveExtentChanged [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testRemoveFromOwnership [
+OPAbstractUmlCompartmentableShapeTest >> testRemoveFromOwnership [
 
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
@@ -97,7 +95,7 @@ OPUmlCompartmentableShapeTest >> testRemoveFromOwnership [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
+OPAbstractUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
 
 	| canvas |
 	canvas := RSCanvas new.
@@ -107,7 +105,7 @@ OPUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
 ]
 
 { #category : 'tests' }
-OPUmlCompartmentableShapeTest >> testRemoveOwnedElement [
+OPAbstractUmlCompartmentableShapeTest >> testRemoveOwnedElement [
 
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.

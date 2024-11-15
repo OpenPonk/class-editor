@@ -97,6 +97,12 @@ OPUmlAssociationShape >> propertiesOfModel: aModel [
 	^ props
 ]
 
+{ #category : 'testing' }
+OPUmlAssociationShape >> supportsHidingLabelEnds [
+
+	^ true
+]
+
 { #category : 'hooks' }
 OPUmlAssociationShape >> tailMarker [
 

@@ -1,6 +1,6 @@
 Class {
 	#name : 'OPAbstractUmlShapeTest',
-	#superclass : 'OPAbstractShapeTest',
+	#superclass : 'OPAbstractNodeTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Shapes'
@@ -48,7 +48,7 @@ OPAbstractUmlShapeTest >> testAddSelfEdge [
 
 { #category : 'tests' }
 OPAbstractUmlShapeTest >> testEmpty [
-	self assert: shape modelElement isNil.
+	super testEmpty.
 	self assert: shape owningElement doesNotExist.
 	self assert: shape ownedElements isEmpty.
 	self assert: shape sourceEdges isEmpty.

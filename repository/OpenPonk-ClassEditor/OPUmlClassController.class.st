@@ -141,7 +141,7 @@ OPUmlClassController >> diagramElementClass [
 { #category : 'accessing' }
 OPUmlClassController >> elementsToShowInside [
 
-	^ model ownedOperations asSet , model ownedAttributes
+	^ self model ownedOperations asSet , self model ownedAttributes
 ]
 
 { #category : 'accessing' }

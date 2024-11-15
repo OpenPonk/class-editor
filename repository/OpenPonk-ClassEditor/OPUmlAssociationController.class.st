@@ -3,7 +3,7 @@ I am a controller for Association
 "
 Class {
 	#name : 'OPUmlAssociationController',
-	#superclass : 'OPUmlRelationshipController',
+	#superclass : 'OPUmlAbstractAssociationController',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -87,12 +87,6 @@ OPUmlAssociationController >> modelClass [
 	^ OPUMLAssociation
 ]
 
-{ #category : 'accessing' }
-OPUmlAssociationController >> modelSource [
-
-	^ model memberEnds ifNotEmpty: [ :memberEnds | memberEnds first type ]
-]
-
 { #category : 'construction' }
 OPUmlAssociationController >> modelSource: aModel in: aParentModel [
 
@@ -104,16 +98,8 @@ OPUmlAssociationController >> modelSource: aModel in: aParentModel [
 				 replaceAll: Character cr
 				 with: Character space);
 		type: source model.
-	model memberEnds add: property.
+	self model memberEnds add: property.
 	^ true
-]
-
-{ #category : 'accessing' }
-OPUmlAssociationController >> modelTarget [
-
-	^ model memberEnds size > 1
-		  ifTrue: [ model memberEnds second type ]
-		  ifFalse: [ nil ]
 ]
 
 { #category : 'construction' }
@@ -127,18 +113,8 @@ OPUmlAssociationController >> modelTarget: aModel in: aParentModel [
 				 replaceAll: Character cr
 				 with: Character space);
 		type: target model.
-	model memberEnds add: property.
+	self model memberEnds add: property.
 	^ true
-]
-
-{ #category : 'removing' }
-OPUmlAssociationController >> removeModel [
-
-	self model memberEnds
-		select: [ :each | each owningClass isNotNil ]
-		thenDo: [ :eachProperty | eachProperty owningClass: nil ].
-	self model memberEnds: #(  ).
-	super removeModel
 ]
 
 { #category : 'construction' }

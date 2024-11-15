@@ -1,13 +1,20 @@
 Class {
 	#name : 'OPUmlClassShapeTest',
-	#superclass : 'OPUmlCompartmentableShapeTest',
+	#superclass : 'OPAbstractUmlCompartmentableShapeTest',
 	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Tests - Shapes'
 }
 
+{ #category : 'instance creation' }
+OPUmlClassShapeTest >> modelClass [
+
+	^ OPUMLClass
+]
+
 { #category : 'hooks' }
 OPUmlClassShapeTest >> shapeClass [
+
 	^ OPUmlClassShape
 ]
 

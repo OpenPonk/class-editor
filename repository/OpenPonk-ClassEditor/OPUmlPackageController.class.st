@@ -47,8 +47,8 @@ OPUmlPackageController >> canBeTargetFor: aController [
 OPUmlPackageController >> createModelIn: aParentModel [
 
 	super createModelIn: aParentModel.
-	model name: (model oclClassifierNameFrom: model class).
-	^ model
+	self model name: (self model oclClassifierNameFrom: self model class).
+	^ self model
 ]
 
 { #category : 'accessing' }
@@ -83,7 +83,7 @@ OPUmlPackageController >> hookDiagramElement [
 
 	super hookDiagramElement.
 
-	diagramElement innerRoassalShapesBlock: [
+	self diagramElement innerRoassalShapesBlock: [
 		Array streamContents: [ :stream |
 			self diagramController
 				propagateBlock: [ :eachController |
@@ -91,11 +91,6 @@ OPUmlPackageController >> hookDiagramElement [
 						stream nextPut: roassalShape ] ]
 				toNodeControllersIn: self model ] ].
 	self diagramElement hiddenPackages: self hiddenPackages
-]
-
-{ #category : 'testing' }
-OPUmlPackageController >> isHideable [
-	^ true
 ]
 
 { #category : 'accessing' }
@@ -124,7 +119,7 @@ OPUmlPackageController >> pushBack [
 { #category : 'construction' }
 OPUmlPackageController >> registerModelInContainer: aParentModel [
 
-	aParentModel packagedElements add: model
+	aParentModel packagedElements add: self model
 ]
 
 { #category : 'destruction' }

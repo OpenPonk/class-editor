@@ -1,10 +1,9 @@
 Class {
 	#name : 'OPUmlAssociationShapeTest',
-	#superclass : 'OPUmlEdgeTest',
+	#superclass : 'OPAbstractUmlEdgeTest',
 	#instVars : [
 		'element',
 		'comment',
-		'association',
 		'ownedComment',
 		'owningElement'
 	],
@@ -13,17 +12,19 @@ Class {
 	#tag : 'Tests - Shapes'
 }
 
-{ #category : 'running' }
-OPUmlAssociationShapeTest >> setUp [
-	super setUp.
-	self setUpAssociation
+{ #category : 'instance creation' }
+OPUmlAssociationShapeTest >> modelClass [
+
+	^ OPUMLAssociation
 ]
 
 { #category : 'running' }
-OPUmlAssociationShapeTest >> setUpAssociation [
+OPUmlAssociationShapeTest >> newModelInstance [
+
+	| association |
 	element := OPUMLClass new name: 'Element'.
 	comment := OPUMLClass new name: 'Comment'.
-	association := OPUMLAssociation new.
+	association := self modelClass new.
 	(ownedComment := OPUMLProperty new)
 		name: 'ownedComment';
 		owningClass: element;
@@ -32,10 +33,10 @@ OPUmlAssociationShapeTest >> setUpAssociation [
 		name: 'owningElement';
 		owningAssociation: association;
 		type: element.
-	association
-		memberEnds:
-			{ownedComment.
-			owningElement}
+	association memberEnds: {
+			ownedComment.
+			owningElement }.
+	^ association
 ]
 
 { #category : 'hooks' }

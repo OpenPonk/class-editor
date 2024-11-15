@@ -70,11 +70,6 @@ OPUmlClassifierController >> hookDiagramElement [
 	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
-{ #category : 'testing' }
-OPUmlClassifierController >> isHideable [
-	^ true
-]
-
 { #category : 'accessing' }
 OPUmlClassifierController >> modelClassName [
 	^ self subclassResponsibility
@@ -91,7 +86,7 @@ OPUmlClassifierController >> packageRenderChanged [
 { #category : 'construction' }
 OPUmlClassifierController >> registerModelInContainer: aParentModel [
 
-	aParentModel packagedElements add: model
+	aParentModel packagedElements add: self model
 ]
 
 { #category : 'construction' }
@@ -108,4 +103,11 @@ OPUmlClassifierController >> updateAfterDiagramFocused [
 
 	self diagramElement hiddenPackages: self hiddenPackages.
 	super updateAfterDiagramFocused
+]
+
+{ #category : 'validation' }
+OPUmlClassifierController >> validate [
+
+	super validate.
+	self model attributes do: [ :each | self validateProperty: each ]
 ]

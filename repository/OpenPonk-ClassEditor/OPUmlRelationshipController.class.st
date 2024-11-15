@@ -11,11 +11,6 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'testing' }
-OPUmlRelationshipController >> isHideable [
-	^ true
-]
-
 { #category : 'accessing' }
 OPUmlRelationshipController >> magritteDescription [
 	| container |

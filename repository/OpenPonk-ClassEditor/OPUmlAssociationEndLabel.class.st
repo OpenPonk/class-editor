@@ -23,7 +23,7 @@ OPUmlAssociationEndLabel >> atSource [
 	atSource := true
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationEndLabel >> defaultAnchorConstraintPosition [
 
 	^ (atSource
@@ -31,7 +31,7 @@ OPUmlAssociationEndLabel >> defaultAnchorConstraintPosition [
 		   ifFalse: [ OPRSAnchorConstraintEndDistanceReference ]) distance: 10
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationEndLabel >> defaultMinDistance [
 
 	^ super defaultMinDistance negated
@@ -40,7 +40,23 @@ OPUmlAssociationEndLabel >> defaultMinDistance [
 { #category : 'accessing' }
 OPUmlAssociationEndLabel >> defaultText [
 
-	^ self modelElement notationStringAsRoleName
+	| type typeName defaultText |
+	self showAssociationEndLabels
+	= OPUmlDiagramHideEndLabelsFigureCommand styleState ifTrue: [
+		^ '' ].
+	defaultText := self modelElement notationStringAsRoleName.
+	self showAssociationEndLabels
+	= OPUmlDiagramShowEndLabelsFigureCommand styleState ifTrue: [
+		^ defaultText ].
+	type := self modelElement type.
+	type ifNil: [ ^ defaultText ].
+	typeName := type name.
+	typeName ifNil: [ ^ defaultText ].
+	typeName ifEmpty: [ ^ defaultText ].
+	(typeName reject: [ :each | each isSeparator ]) asLowercase
+	= (defaultText reject: [ :each | each isSeparator ]) asLowercase
+		ifFalse: [ ^ defaultText ].
+	^ ''
 ]
 
 { #category : 'initialization' }
@@ -48,4 +64,17 @@ OPUmlAssociationEndLabel >> initialize [
 
 	super initialize.
 	atSource := false
+]
+
+{ #category : 'testing' }
+OPUmlAssociationEndLabel >> supportsHidingLabelEnds [
+
+	^ true
+]
+
+{ #category : 'initialization' }
+OPUmlAssociationEndLabel >> updateRenderFromStyles [
+
+	super updateRenderFromStyles.
+	roassalShape text: self text
 ]

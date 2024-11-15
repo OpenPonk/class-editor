@@ -6,7 +6,7 @@ Class {
 	#tag : 'Shapes'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlEdgeLabel >> defaultMinDistance [
 
 	^ 5

@@ -83,3 +83,19 @@ OPTUmlBaseController >> descriptionVisibility [
 		  beSorted;
 		  yourself
 ]
+
+{ #category : 'as yet unclassified' }
+OPTUmlBaseController >> validateProperty: aProperty [
+
+	aProperty ifNil: [ ^ self ].
+	aProperty owningClass ifNil: [ ^ self ].
+	aProperty owningAssociation ifNil: [ ^ self ].
+
+	OPModelInvalid signal: (String streamContents: [ :s |
+			 s << 'Property "' << aProperty name asString << '" owned by '
+			 << aProperty owningClass asString << ' is also owned by '
+			 << aProperty owningAssociation asString ]).
+		
+	"Remove the ownership by the association in order to load the model"
+	aProperty owningAssociation: nil
+]
