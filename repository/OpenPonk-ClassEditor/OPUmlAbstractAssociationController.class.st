@@ -6,6 +6,30 @@ Class {
 	#tag : 'Controllers'
 }
 
+{ #category : 'announcements' }
+OPUmlAbstractAssociationController >> classAttributeChanged [
+
+	super modelChanged
+]
+
+{ #category : 'accessing' }
+OPUmlAbstractAssociationController >> elementsToShowInside [
+
+	^ super elementsToShowInside , self model memberEnds
+]
+
+{ #category : 'announcements' }
+OPUmlAbstractAssociationController >> modelChanged [
+
+	super modelChanged.
+	self model memberEnds
+		select: [ :each | each owningClass isNotNil ]
+		thenDo: [ :each |
+			self diagramController
+				controllerForModel: each
+				ifFound: [ :controller | controller associationChanged ] ]
+]
+
 { #category : 'accessing' }
 OPUmlAbstractAssociationController >> modelSource [
 

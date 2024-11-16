@@ -12,7 +12,7 @@ OPTUmlBaseController >> descriptionAccessor: aSymbol [
 		  read: [ :me | me model perform: aSymbol ]
 		  write: [ :me :newValue |
 			  me model perform: (aSymbol , ':') asSymbol with: newValue.
-			  self diagramElement modelChanged ]
+			  self modelChanged ]
 ]
 
 { #category : 'forms' }
@@ -22,18 +22,18 @@ OPTUmlBaseController >> descriptionComment [
 	^ MAMemoDescription new
 		  required: false;
 		  accessor: (MAPluggableAccessor
-				   read: [ :me | 
+				   read: [ :me |
 					   me model ownedComments
 						   ifEmpty: [ '' ]
 						   ifNotEmpty: [ :oc | oc first body asString ] ]
-				   write: [ :me :newValue | 
+				   write: [ :me :newValue |
 					   newValue asString
 						   ifEmpty: [ me model ownedComments: OrderedCollection new ]
-						   ifNotEmpty: [ 
-							   me model ownedComments ifEmpty: [ 
+						   ifNotEmpty: [
+							   me model ownedComments ifEmpty: [
 									   me model ownedComments add: OPUMLComment new ].
 							   me model ownedComments first body: newValue asString ].
-					   self diagramElement modelChanged ]);
+					   self modelChanged ]);
 		  label: 'Comment';
 		  priority: 100;
 		  lineCount: 10;
@@ -66,7 +66,7 @@ OPTUmlBaseController >> descriptionVisibility [
 
 	<magritteDescription>
 	^ MASingleOptionDescription new
-		  optionsAndLabels: { 
+		  optionsAndLabels: {
 				  (nil -> '').
 				  (OPUMLVisibilityKind public -> 'public').
 				  (OPUMLVisibilityKind protected -> 'protected').
@@ -75,27 +75,47 @@ OPTUmlBaseController >> descriptionVisibility [
 		  reference: MAStringDescription new;
 		  accessor: (MAPluggableAccessor
 				   read: [ :me | me model visibility ]
-				   write: [ :me :newValue | 
+				   write: [ :me :newValue |
 					   me model visibility: newValue.
-					   self diagramElement modelChanged ]);
+					   self modelChanged ]);
 		  label: 'Visibility';
 		  priority: 8;
 		  beSorted;
 		  yourself
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'validation' }
 OPTUmlBaseController >> validateProperty: aProperty [
 
 	aProperty ifNil: [ ^ self ].
-	aProperty owningClass ifNil: [ ^ self ].
-	aProperty owningAssociation ifNil: [ ^ self ].
+	aProperty owningClass
+		ifNil: [
+			aProperty owningAssociation ifNil: [
+				self validationFailedPropertyWithoutOwner: aProperty ] ]
+		ifNotNil: [
+			aProperty owningAssociation ifNotNil: [
+				self validationFailedPropertyWithTwoOwners: aProperty ] ]
+]
+
+{ #category : 'validation' }
+OPTUmlBaseController >> validationFailedPropertyWithTwoOwners: aProperty [
 
 	OPModelInvalid signal: (String streamContents: [ :s |
 			 s << 'Property "' << aProperty name asString << '" owned by '
 			 << aProperty owningClass asString << ' is also owned by '
 			 << aProperty owningAssociation asString ]).
-		
+
 	"Remove the ownership by the association in order to load the model"
 	aProperty owningAssociation: nil
+]
+
+{ #category : 'validation' }
+OPTUmlBaseController >> validationFailedPropertyWithoutOwner: aProperty [
+
+	OPModelInvalid signal: (String streamContents: [ :s |
+			 s << 'Property "' << aProperty name asString << '" with type '
+			 << aProperty type asString << ' has no owner' ]).
+
+	"Attempt to create an ownership"
+	aProperty type ifNotNil: [ aProperty owningClass: aProperty type ]
 ]

@@ -35,7 +35,7 @@ OPUmlClassShape >> addAttribute: anAttributeShape [
 { #category : 'rendering' }
 OPUmlClassShape >> addOperation: anOperationShape [
 
-	operations ifNil: [ 
+	operations ifNil: [
 		operations := OPUmlFeaturesListCompartment in: self.
 
 		self sortOwnedElements ].

@@ -50,9 +50,9 @@ OPUmlClassifierController >> descriptionName [
 	| accessor |
 	accessor := MAPluggableAccessor
 		            read: [ :me | me model name ]
-		            write: [ :me :newValue | 
+		            write: [ :me :newValue |
 			            me model name: newValue.
-			            self diagramElement modelChanged ].
+			            self modelChanged ].
 	^ MAMemoDescription new
 		  accessor: accessor;
 		  label: 'Name';
