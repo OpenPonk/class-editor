@@ -203,8 +203,16 @@ OPUmlAttributeController >> removeDiagramElement [
 OPUmlAttributeController >> removeModel [
 	"could be any of those, so just nil all of them"
 
+	self model association ifNotNil: [ ^ self switchOwnerToAssociation ].
 	self model owningAssociation: nil.
 	super removeModel
+]
+
+{ #category : 'removing' }
+OPUmlAttributeController >> switchOwnerToAssociation [
+
+	self model owningClass: nil.
+	self model owningAssociation: self model association
 ]
 
 { #category : 'accessing' }

@@ -84,18 +84,38 @@ OPTUmlBaseController >> descriptionVisibility [
 		  yourself
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'validation' }
 OPTUmlBaseController >> validateProperty: aProperty [
 
 	aProperty ifNil: [ ^ self ].
-	aProperty owningClass ifNil: [ ^ self ].
-	aProperty owningAssociation ifNil: [ ^ self ].
+	aProperty owningClass
+		ifNil: [
+			aProperty owningAssociation ifNil: [
+				self validationFailedPropertyWithoutOwner: aProperty ] ]
+		ifNotNil: [
+			aProperty owningAssociation ifNotNil: [
+				self validationFailedPropertyWithTwoOwners: aProperty ] ]
+]
+
+{ #category : 'validation' }
+OPTUmlBaseController >> validationFailedPropertyWithTwoOwners: aProperty [
 
 	OPModelInvalid signal: (String streamContents: [ :s |
 			 s << 'Property "' << aProperty name asString << '" owned by '
 			 << aProperty owningClass asString << ' is also owned by '
 			 << aProperty owningAssociation asString ]).
-		
+
 	"Remove the ownership by the association in order to load the model"
 	aProperty owningAssociation: nil
+]
+
+{ #category : 'validation' }
+OPTUmlBaseController >> validationFailedPropertyWithoutOwner: aProperty [
+
+	OPModelInvalid signal: (String streamContents: [ :s |
+			 s << 'Property "' << aProperty name asString << '" with type '
+			 << aProperty type asString << ' has no owner' ]).
+
+	"Attempt to create an ownership"
+	aProperty type ifNotNil: [ aProperty owningClass: aProperty type ]
 ]

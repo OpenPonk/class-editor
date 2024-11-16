@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'accessing' }
+OPUmlAbstractAssociationController >> elementsToShowInside [
+
+	^ super elementsToShowInside , self model memberEnds
+]
+
+{ #category : 'accessing' }
 OPUmlAbstractAssociationController >> modelSource [
 
 	^ self model memberEnds ifNotEmpty: [ :memberEnds |
