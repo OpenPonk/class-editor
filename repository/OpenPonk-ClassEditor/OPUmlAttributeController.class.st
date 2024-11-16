@@ -15,6 +15,12 @@ OPUmlAttributeController >> addDiagramElementToOwner [
 	self ownerDiagramElement addAttribute: self diagramElement
 ]
 
+{ #category : 'announcements' }
+OPUmlAttributeController >> associationChanged [
+
+	super modelChanged
+]
+
 { #category : 'figures' }
 OPUmlAttributeController >> createDiagramElement [
 
@@ -63,7 +69,7 @@ OPUmlAttributeController >> descriptionDefaultValue [
 						   ifTrue: [
 							   me model defaultValue bodies:
 									   (newValue ifEmpty: [ {  } ] ifNotEmpty: [ { newValue } ]) ].
-					   self diagramElement modelChanged ]);
+					   self modelChanged ]);
 		  label: 'Default Value';
 		  priority: 42;
 		  yourself
@@ -118,12 +124,12 @@ OPUmlAttributeController >> descriptionMultiplicity [
 		  options: #( '0..1' '1..1' '0..*' '1..*' );
 		  reference: MAStringDescription new;
 		  accessor: (MAPluggableAccessor
-				   read: [ :me | 
+				   read: [ :me |
 					   me model lowerBound asString , '..'
 					   , me model upperBound asString ]
-				   write: [ :me :newValue | 
+				   write: [ :me :newValue |
 					   self writeMultiplicityFrom: newValue to: me model.
-					   self diagramElement modelChanged ]);
+					   self modelChanged ]);
 		  label: 'Multiplicity';
 		  priority: 9;
 		  beSorted;
@@ -137,11 +143,11 @@ OPUmlAttributeController >> descriptionType [
 	^ MAStringDescription new
 		  accessor: (MAPluggableAccessor
 				   read: [ :me | me model type ifNil: [ '' ] ifNotNil: #name ]
-				   write: [ :me :newValue | 
+				   write: [ :me :newValue |
 					   newValue
 						   ifEmpty: [ me model type: nil ]
 						   ifNotEmpty: [ me model type: (self typeNamed: newValue) ].
-					   self diagramElement modelChanged ]);
+					   self modelChanged ]);
 		  label: 'Type';
 		  priority: 5;
 		  yourself
@@ -151,6 +157,16 @@ OPUmlAttributeController >> descriptionType [
 OPUmlAttributeController >> diagramElementClass [
 
 	^ OPUmlAttributeLabel
+]
+
+{ #category : 'announcements' }
+OPUmlAttributeController >> modelChanged [
+
+	super modelChanged.
+	self model association ifNotNil: [ :association |
+		self diagramController
+			controllerForModel: association
+			ifFound: [ :controller | controller classAttributeChanged ] ]
 ]
 
 { #category : 'accessing' }

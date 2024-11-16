@@ -22,10 +22,10 @@ OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
 	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
 	description := OPMAActionDescription new.
 	description
-		action: [ 
+		action: [
 			self switchSourceAndTarget.
 			self diagramController editor openFormOn: self.
-			self diagramElement modelChanged ];
+			self modelChanged ];
 		label: 'Switch source/target';
 		priority: 9.05.
 	^ description

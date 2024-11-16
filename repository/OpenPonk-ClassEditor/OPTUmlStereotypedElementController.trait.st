@@ -44,7 +44,7 @@ OPTUmlStereotypedElementController >> descriptionStereotypeContent [
 								   applyStereotype:
 									   (stereotypes detect: [ :each | each name = newValue ])
 								   to: me model ].
-					   me diagramElement modelChanged ]);
+					   me modelChanged ]);
 		  label: 'Stereotype';
 		  priority: 4;
 		  yourself

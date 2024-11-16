@@ -59,7 +59,7 @@ OPUmlClassController >> createAttributeAdornmentBy: builder [
 		self diagramController editor palette selectTool: tool.
 		tool whenCreated: [ :ctrl |
 			OPRenameElementCommand executeOn: ctrl.
-			ctrl diagramElement modelChanged ].
+			ctrl modelChanged ].
 		tool selectedControllers: { self } ]
 ]
 

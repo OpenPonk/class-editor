@@ -92,12 +92,11 @@ OPUmlCompartmentableShape >> layoutSeparators [
 ]
 
 { #category : 'as yet unclassified' }
-OPUmlCompartmentableShape >> ownedElement: aShape renderedIn: aCanvas [
+OPUmlCompartmentableShape >> recursivelyOwnedElement: aShape renderedIn: aCanvas [
 
-	| wasRendered |
-	wasRendered := self isRenderedWithOwnedElements.
-	super ownedElement: aShape renderedIn: aCanvas.
-	wasRendered ifTrue: [ self updateRenderFromModel ]
+	super recursivelyOwnedElement: aShape renderedIn: aCanvas.
+	self isRenderedWithOwnedElements ifTrue: [
+		self updateRenderFromModel ]
 ]
 
 { #category : 'removing' }

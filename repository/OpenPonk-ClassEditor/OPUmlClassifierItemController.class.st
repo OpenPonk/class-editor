@@ -33,7 +33,7 @@ OPUmlClassifierItemController >> descriptionName [
 		| text |
 		text := newValue trim ifEmpty: [ self placeholderName ].
 		me model name: text.
-		self diagramElement modelChanged ].
+		self modelChanged ].
 	^ description
 ]
 

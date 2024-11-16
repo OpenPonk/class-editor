@@ -21,7 +21,7 @@ OPUmlStereotypeDescriptions >> accessorFor: anAttribute of: aStereotype [
 			  aStereotype
 				  perform: (anAttribute name , ':') asSymbol
 				  with: newValue.
-			  controller diagramElement modelChanged ]
+			  controller modelChanged ]
 ]
 
 { #category : 'adding' }

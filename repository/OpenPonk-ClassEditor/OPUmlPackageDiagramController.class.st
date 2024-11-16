@@ -136,7 +136,7 @@ OPUmlPackageDiagramController >> descriptionAppliedProfiles [
 										    OPUMLProfileApplication new appliedProfile:
 												    each yourself ]).
 					   self rebuildPalette.
-					   self diagramElement modelChanged ]);
+					   self modelChanged ]);
 		  label: 'Applied Profiles';
 		  priority: 10;
 		  beSorted;
@@ -308,47 +308,47 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 
 	| stereotypes elements relationships isForRelationship isForClass |
-	stereotypes := (aProfile ownedStereotype reject: #isAbstract) 
+	stereotypes := (aProfile ownedStereotype reject: #isAbstract)
 		               sorted: [ :a :b | a name < b name ].
-	isForRelationship := [ :attr | 
+	isForRelationship := [ :attr |
 	                     (OPUMLXMISpecsStorage metaClassNamed:
-		                      attr type name) allParents anySatisfy: [ 
+		                      attr type name) allParents anySatisfy: [
 		                     :parent | parent name = 'Relationship' ] ].
-	isForClass := [ :attr | 
+	isForClass := [ :attr |
 	              | metaclass |
 	              metaclass := OPUMLXMISpecsStorage metaClassNamed:
 		                           attr type name.
-	              metaclass name = 'Class' or: [ 
-		              metaclass allParents anySatisfy: [ :parent | 
+	              metaclass name = 'Class' or: [
+		              metaclass allParents anySatisfy: [ :parent |
 			              parent name = 'Class' ] ] ].
-	elements := stereotypes select: [ :each | 
-		            each allAttributes anySatisfy: [ :attr | 
-			            (attr name beginsWith: 'base_') and: [ 
+	elements := stereotypes select: [ :each |
+		            each allAttributes anySatisfy: [ :attr |
+			            (attr name beginsWith: 'base_') and: [
 				            isForClass value: attr ] ] ].
-	relationships := stereotypes select: [ :each | 
-		                 each allAttributes anySatisfy: [ :attr | 
-			                 (attr name beginsWith: 'base_') and: [ 
+	relationships := stereotypes select: [ :each |
+		                 each allAttributes anySatisfy: [ :attr |
+			                 (attr name beginsWith: 'base_') and: [
 				                 isForRelationship value: attr ] ] ].
 	elements ifNotEmpty: [ aPalette newSeparator ].
-	elements do: [ :stereotype | 
+	elements do: [ :stereotype |
 		(aPalette newCreationEntry: [ OPUmlClassController new ])
 			label: stereotype name;
 			icon: OPUmlIcons classIcon;
-			whenCreated: [ :ctrl | 
+			whenCreated: [ :ctrl |
 				ctrl model applyStereotype: stereotype implementationClass new.
 				ctrl model name: stereotype name.
-				ctrl diagramElement modelChanged.
+				ctrl modelChanged.
 				OPInitialSetElementCommand executeOn: ctrl.
-				ctrl diagramElement modelChanged ] ].
+				ctrl modelChanged ] ].
 	relationships ifNotEmpty: [ aPalette newSeparator ].
-	relationships do: [ :stereotype | 
-		(aPalette newConnectionCreationEntry: [ 
+	relationships do: [ :stereotype |
+		(aPalette newConnectionCreationEntry: [
 				 OPUmlAssociationController new ])
 			label: stereotype name;
 			icon: OPUmlIcons directedAssociationIcon;
-			whenCreated: [ :ctrl | 
+			whenCreated: [ :ctrl |
 				ctrl model applyStereotype: stereotype implementationClass new.
-				ctrl diagramElement modelChanged ] ]
+				ctrl modelChanged ] ]
 ]
 
 { #category : 'palette' }

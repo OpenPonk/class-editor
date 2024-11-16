@@ -13,7 +13,7 @@ OPTUmlAutoAccomodatingShape >> accomodateContents [
 		                                 encompassingRectangle.
 	extentOfContents := self extentToFitContents max: self minExtent.
 	self roassalShape extent: extentOfContents.
-	(originalEncompassingRectangle height closeTo: extentOfContents y) 
+	(originalEncompassingRectangle height closeTo: extentOfContents y)
 		ifTrue: [ ^ self ].
 	self roassalShape translateTo: self roassalShape position x
 		@

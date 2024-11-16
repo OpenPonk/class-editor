@@ -29,7 +29,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
 			  (reader value: me)
 				  perform: (aSymbol , ':') asSymbol
 				  with: newValue.
-			  me ifNotNil: [ me diagramElement modelChanged ] ]
+			  me ifNotNil: [ me modelChanged ] ]
 ]
 
 { #category : 'descriptions' }
@@ -99,9 +99,9 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsNavigable [
 	^ MABooleanDescription new
 		  accessor: (MAPluggableAccessor
 				   read: [ :me | (reader value: me) isNavigable ]
-				   write: [ :me :newValue | 
+				   write: [ :me :newValue |
 					   me writeNavigability: newValue to: (reader value: me).
-					   me diagramElement modelChanged ]);
+					   me modelChanged ]);
 		  label: 'Is Navigable';
 		  priority: 10;
 		  yourself
@@ -156,12 +156,12 @@ OPUmlPropertyMagritteDescriptions >> descriptionMultiplicity [
 		  options: #( '0..1' '1..1' '0..*' '1..*' );
 		  reference: MAStringDescription new;
 		  accessor: (MAPluggableAccessor
-				   read: [ :me | 
+				   read: [ :me |
 					   (reader value: me) lowerBound asString , '..'
 					   , (reader value: me) upperBound asString ]
-				   write: [ :me :newValue | 
+				   write: [ :me :newValue |
 					   me writeMultiplicityFrom: newValue to: (reader value: me).
-					   me diagramElement modelChanged ]);
+					   me modelChanged ]);
 		  label: 'Multiplicity';
 		  priority: 9;
 		  beSorted;
