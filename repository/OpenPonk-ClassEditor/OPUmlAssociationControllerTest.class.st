@@ -23,6 +23,37 @@ OPUmlAssociationControllerTest >> modelClass [
 ]
 
 { #category : 'tests - diagram' }
+OPUmlAssociationControllerTest >> testNavigableRemovalOfAssociationRemovesMemberEnds [
+
+	| first second attributeController attributeDiagramElement |
+	self showInDiagram.
+	first := model memberEnds first.
+	second := model memberEnds second.
+	self deny: (diagramController isVisibleInDiagram: second).
+	controller writeNavigability: true to: second.
+	diagramController showInDiagramModel: second.
+	self assert: (diagramController isVisibleInDiagram: second).
+	attributeController := diagramController controllerForModel: second.
+	self
+		assert: attributeController class
+		equals: OPUmlAttributeController.
+	attributeDiagramElement := attributeController diagramElement.
+	self
+		assert: attributeDiagramElement class
+		equals: OPUmlAttributeLabel.
+	self assert: attributeDiagramElement isRendered.
+	self
+		assertCollection: diagramController diagram allOwnedElements
+		includesAny: { attributeDiagramElement }.
+	controller removeControllerAndModel.
+	self deny: (diagramController isVisibleInDiagram: controller).
+	self deny: (diagramController isVisibleInDiagram: second).
+	self
+		denyCollection: diagramController diagram allOwnedElements
+		includesAny: { attributeDiagramElement }
+]
+
+{ #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 
 	self showInDiagram.
@@ -32,7 +63,9 @@ OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 		removeControllerAndModel.
 	(diagramController controllerForModel: targetModel)
 		removeControllerAndModel.
-	self assert: diagramController controllers asArray equals: #(  )
+	self
+		assertCollection: diagramController controllers
+		hasSameElements: #(  )
 ]
 
 { #category : 'tests' }
