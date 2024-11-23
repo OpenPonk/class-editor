@@ -90,7 +90,7 @@ OPTUmlBaseController >> validateProperty: aProperty [
 	aProperty ifNil: [ ^ self ].
 	(aProperty association isNotNil and: [
 		 (aProperty respondsTo: #oclIsKindOf:) not or: [
-			 aProperty oclIsKindOf: #Classifier ] ]) ifTrue: [
+			 (aProperty oclIsKindOf: #Classifier) not ] ]) ifTrue: [
 		self validationFailedAssociationPropertyWithoutClassifierType:
 			aProperty ].
 	aProperty owningAssociation
