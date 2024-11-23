@@ -88,13 +88,33 @@ OPTUmlBaseController >> descriptionVisibility [
 OPTUmlBaseController >> validateProperty: aProperty [
 
 	aProperty ifNil: [ ^ self ].
-	aProperty owningClass
+	(aProperty association isNotNil and: [
+		 (aProperty type respondsTo: #oclIsKindOf:) not or: [
+			 (aProperty type oclIsKindOf: #Classifier) not ] ]) ifTrue: [
+		self validationFailedAssociationPropertyWithoutClassifierType:
+			aProperty ].
+	aProperty owningAssociation
 		ifNil: [
-			aProperty owningAssociation ifNil: [
+			aProperty owningClass ifNil: [
 				self validationFailedPropertyWithoutOwner: aProperty ] ]
 		ifNotNil: [
-			aProperty owningAssociation ifNotNil: [
+			aProperty owningClass ifNotNil: [
 				self validationFailedPropertyWithTwoOwners: aProperty ] ]
+]
+
+{ #category : 'validation' }
+OPTUmlBaseController >> validationFailedAssociationPropertyWithoutClassifierType: aProperty [
+
+	OPModelInvalid signal: (String streamContents: [ :s |
+			 s << 'Property "' << aProperty name asString << '" has type '
+			 << aProperty type asString << ' although it is part of '
+			 << aProperty association asString ]).
+
+	"Try to use opposite owningClass as type"
+	aProperty opposite owningClass ifNotNil: [ :oppositeOwner |
+		aProperty type: oppositeOwner ]
+
+	"No way to fix this - the association end information is lost"
 ]
 
 { #category : 'validation' }

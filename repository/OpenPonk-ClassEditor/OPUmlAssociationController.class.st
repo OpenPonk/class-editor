@@ -155,9 +155,16 @@ OPUmlAssociationController >> writeMultiplicityFrom: aString to: aProperty [
 
 { #category : 'writing' }
 OPUmlAssociationController >> writeNavigability: isNavigable to: aProperty [
+
 	isNavigable
-		ifTrue: [ aProperty owningClass: aProperty opposite type.
-			aProperty owningAssociation: nil ]
-		ifFalse: [ aProperty owningClass: nil.
-			aProperty owningAssociation: aProperty association ]
+		ifTrue: [
+			aProperty owningClass: aProperty opposite type.
+			aProperty owningAssociation: nil.
+			self diagramController showInDiagramModel: aProperty ]
+		ifFalse: [
+			aProperty owningClass: nil.
+			aProperty owningAssociation: aProperty association.
+			self diagramController
+				controllerForModel: aProperty
+				ifFound: [ :found | found removeControllerAndDiagramElement ] ]
 ]

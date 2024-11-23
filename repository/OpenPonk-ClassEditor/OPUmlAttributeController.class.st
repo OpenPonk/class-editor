@@ -140,17 +140,27 @@ OPUmlAttributeController >> descriptionMultiplicity [
 OPUmlAttributeController >> descriptionType [
 
 	<magritteDescription>
-	^ MAStringDescription new
-		  accessor: (MAPluggableAccessor
-				   read: [ :me | me model type ifNil: [ '' ] ifNotNil: #name ]
-				   write: [ :me :newValue |
-					   newValue
-						   ifEmpty: [ me model type: nil ]
-						   ifNotEmpty: [ me model type: (self typeNamed: newValue) ].
-					   self modelChanged ]);
-		  label: 'Type';
-		  priority: 5;
-		  yourself
+	| description writeBlock |
+	description := MAStringDescription new.
+	writeBlock := self model association
+		              ifNotNil: [
+			              description beReadOnly.
+			              [ :me :newValue |  ] ]
+		              ifNil: [
+			              [ :me :newValue |
+			              newValue
+				              ifEmpty: [ me model type: nil ]
+				              ifNotEmpty: [
+				              me model type: (self typeNamed: newValue) ].
+			              self modelChanged ] ].
+	description
+		accessor: (MAPluggableAccessor
+				 read: [ :me |
+					 me model type ifNil: [ '' ] ifNotNil: [ :type | type name ] ]
+				 write: writeBlock);
+		label: 'Type';
+		priority: 5.
+	^ description
 ]
 
 { #category : 'figures' }
