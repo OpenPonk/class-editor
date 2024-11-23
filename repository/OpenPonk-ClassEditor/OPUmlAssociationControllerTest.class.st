@@ -70,8 +70,10 @@ OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 
 { #category : 'tests' }
 OPUmlAssociationControllerTest >> testWriteNavigabilityAssocOwnedToClassOwned [
+
 	| first second |
 	self prepareToShow.
+	controller diagramController: diagramController.
 	first := model memberEnds first.
 	second := model memberEnds second.
 	controller writeNavigability: true to: second.
@@ -83,6 +85,7 @@ OPUmlAssociationControllerTest >> testWriteNavigabilityAssocOwnedToClassOwned [
 OPUmlAssociationControllerTest >> testWriteNavigabilityClassOwnedToAssocOwned [
 	| first |
 	self prepareToShow.
+	controller diagramController: diagramController.
 	first := model memberEnds first.
 	controller writeNavigability: false to: first.
 	self deny: first isNavigable.
