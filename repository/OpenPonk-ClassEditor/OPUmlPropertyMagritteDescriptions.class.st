@@ -180,16 +180,19 @@ OPUmlPropertyMagritteDescriptions >> descriptionName [
 
 { #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionType [
+
 	<magritteDescription>
 	^ MAStringDescription new
-		beReadOnly;
-		accessor:
-			(MAPluggableAccessor
-				read: [ :me | (reader value: me) type name ]
-				write: [ :me :newValue |  ]);
-		label: labelPrefix;
-		priority: 1;
-		yourself
+		  beReadOnly;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me |
+					   (reader value: me) type
+						   ifNil: [ '' ]
+						   ifNotNil: [ :type | type name ] ]
+				   write: [ :me :newValue |  ]);
+		  label: labelPrefix;
+		  priority: 1;
+		  yourself
 ]
 
 { #category : 'descriptions' }
