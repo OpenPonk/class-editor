@@ -76,7 +76,7 @@ OPUmlPropertyMagritteDescriptions >> descriptionDefaultValue [
 							    OPUMLOpaqueExpression) ifTrue: [ 
 							   (reader value: me) defaultValue bodies:
 									   (newValue ifEmpty: [ {  } ] ifNotEmpty: [ { newValue } ]) ].
-					   me refreshFigure ]);
+					   me modelChanged ]);
 		  label: labelPrefix , 'Default Value';
 		  priority: 42;
 		  yourself

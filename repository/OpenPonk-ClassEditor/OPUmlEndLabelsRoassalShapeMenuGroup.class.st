@@ -1,5 +1,5 @@
 Class {
-	#name : 'OPUmlDiagramEndLabelsFigureMenuGroup',
+	#name : 'OPUmlEndLabelsRoassalShapeMenuGroup',
 	#superclass : 'CmdMenuGroup',
 	#category : 'OpenPonk-ClassEditor-Commands',
 	#package : 'OpenPonk-ClassEditor',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'accessing' }
-OPUmlDiagramEndLabelsFigureMenuGroup >> name [
+OPUmlEndLabelsRoassalShapeMenuGroup >> name [
 
 	^ 'Association end labels'
 ]

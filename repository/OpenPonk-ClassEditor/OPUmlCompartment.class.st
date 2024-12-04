@@ -3,9 +3,9 @@ Class {
 	#superclass : 'OPUmlCompartmentableContent',
 	#traits : 'OPTUmlAutoAccomodatingShape',
 	#classTraits : 'OPTUmlAutoAccomodatingShape classTrait',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'rendering' }

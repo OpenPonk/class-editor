@@ -216,11 +216,11 @@ OPUmlAttributeController >> registerModelInContainer: aClass [
 	aClass ownedAttributes add: self model
 ]
 
-{ #category : 'removing' }
+{ #category : 'destruction' }
 OPUmlAttributeController >> removeDiagramElement [
 
 	self diagramElement ifNotExists: [ ^ self ].
-	self ownerDiagramElement ifExists: [ :owner |
+	self diagramElementOwnerWithPossibleController ifExists: [ :owner |
 		owner removeAttribute: self diagramElement ].
 	self diagramElement: nil
 ]

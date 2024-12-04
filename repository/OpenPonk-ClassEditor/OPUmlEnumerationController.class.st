@@ -32,7 +32,7 @@ OPUmlEnumerationController >> createLiteralAdornmentBy: builder [
 		self diagramController editor palette selectTool: tool.
 		tool whenCreated: [ :ctrl |
 			OPRenameElementCommand executeOn: ctrl.
-			ctrl refreshFigure ].
+			ctrl modelChanged ].
 		tool selectedControllers: { self } ]
 ]
 

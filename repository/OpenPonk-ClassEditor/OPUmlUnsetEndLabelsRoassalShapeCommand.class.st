@@ -1,13 +1,13 @@
 Class {
-	#name : 'OPUmlDiagramUnsetEndLabelsFigureCommand',
-	#superclass : 'OPUmlDiagramEndLabelsFigureCommand',
+	#name : 'OPUmlUnsetEndLabelsRoassalShapeCommand',
+	#superclass : 'OPUmlEndLabelsRoassalShapeCommand',
 	#category : 'OpenPonk-ClassEditor-Commands',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Commands'
 }
 
 { #category : 'testing' }
-OPUmlDiagramUnsetEndLabelsFigureCommand class >> canBeExecutedInContext: aToolContext [
+OPUmlUnsetEndLabelsRoassalShapeCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ (super canBeExecutedInContext: aToolContext) and: [
 		  aToolContext diagramElements anySatisfy: [ :any |
@@ -15,19 +15,19 @@ OPUmlDiagramUnsetEndLabelsFigureCommand class >> canBeExecutedInContext: aToolCo
 ]
 
 { #category : 'accessing' }
-OPUmlDiagramUnsetEndLabelsFigureCommand >> basicMenuItemName [
+OPUmlUnsetEndLabelsRoassalShapeCommand >> basicMenuItemName [
 
 	^ 'Use diagram-level setting'
 ]
 
 { #category : 'accessing' }
-OPUmlDiagramUnsetEndLabelsFigureCommand >> description [
+OPUmlUnsetEndLabelsRoassalShapeCommand >> description [
 
 	^ 'Adopt option picked for the entire diagram, instead of overriding it'
 ]
 
 { #category : 'execution' }
-OPUmlDiagramUnsetEndLabelsFigureCommand >> execute [
+OPUmlUnsetEndLabelsRoassalShapeCommand >> execute [
 
 	self applicableDiagramElements
 		select: [ :each | each owningElement exists ]
@@ -35,7 +35,7 @@ OPUmlDiagramUnsetEndLabelsFigureCommand >> execute [
 ]
 
 { #category : 'testing' }
-OPUmlDiagramUnsetEndLabelsFigureCommand >> isCurrentlySelectedByStyle: aStyle [
+OPUmlUnsetEndLabelsRoassalShapeCommand >> isCurrentlySelectedByStyle: aStyle [
 
 	aStyle ifNil: [ ^ true ].
 	^ (aStyle includesKey:

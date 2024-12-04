@@ -1,9 +1,9 @@
 Class {
 	#name : 'OPAbstractUmlCompartmentableShapeTest',
 	#superclass : 'OPAbstractUmlShapeTest',
-	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
+	#category : 'OpenPonk-ClassEditor-Tests - DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Tests - Shapes'
+	#tag : 'Tests - DiagramElements'
 }
 
 { #category : 'hooks' }

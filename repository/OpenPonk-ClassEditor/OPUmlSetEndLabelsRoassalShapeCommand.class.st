@@ -1,39 +1,39 @@
 Class {
-	#name : 'OPUmlDiagramSetEndLabelsFigureCommand',
-	#superclass : 'OPUmlDiagramEndLabelsFigureCommand',
+	#name : 'OPUmlSetEndLabelsRoassalShapeCommand',
+	#superclass : 'OPUmlEndLabelsRoassalShapeCommand',
 	#category : 'OpenPonk-ClassEditor-Commands',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Commands'
 }
 
 { #category : 'testing' }
-OPUmlDiagramSetEndLabelsFigureCommand class >> isAbstract [
+OPUmlSetEndLabelsRoassalShapeCommand class >> isAbstract [
 
-	^ self = OPUmlDiagramSetEndLabelsFigureCommand
+	^ self = OPUmlSetEndLabelsRoassalShapeCommand
 ]
 
 { #category : 'hooks' }
-OPUmlDiagramSetEndLabelsFigureCommand class >> styleState [
+OPUmlSetEndLabelsRoassalShapeCommand class >> styleState [
 
 	^ #''
 ]
 
 { #category : 'execution' }
-OPUmlDiagramSetEndLabelsFigureCommand >> execute [
+OPUmlSetEndLabelsRoassalShapeCommand >> execute [
 
 	self applicableDiagramElements do: [ :each |
 		each showAssociationEndLabels: self styleState ]
 ]
 
 { #category : 'testing' }
-OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlyActive [
+OPUmlSetEndLabelsRoassalShapeCommand >> isCurrentlyActive [
 
 	^ self applicableDiagramElements anySatisfy: [ :any |
 		  any showAssociationEndLabels = self styleState ]
 ]
 
 { #category : 'testing' }
-OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlySelected [
+OPUmlSetEndLabelsRoassalShapeCommand >> isCurrentlySelected [
 
 	^ super isCurrentlySelected or: [
 		  self applicableDiagramElements allSatisfy: [ :each |
@@ -42,7 +42,7 @@ OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlySelected [
 ]
 
 { #category : 'testing' }
-OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlySelectedByStyle: aStyle [
+OPUmlSetEndLabelsRoassalShapeCommand >> isCurrentlySelectedByStyle: aStyle [
 
 	aStyle ifNil: [ ^ false ].
 	^ aStyle
@@ -52,7 +52,7 @@ OPUmlDiagramSetEndLabelsFigureCommand >> isCurrentlySelectedByStyle: aStyle [
 ]
 
 { #category : 'hooks' }
-OPUmlDiagramSetEndLabelsFigureCommand >> styleState [
+OPUmlSetEndLabelsRoassalShapeCommand >> styleState [
 
 	^ self class styleState
 ]

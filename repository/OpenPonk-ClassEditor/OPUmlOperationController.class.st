@@ -62,11 +62,22 @@ OPUmlOperationController >> registerModelInContainer: aParentModel [
 	aParentModel ownedOperations add: self model
 ]
 
-{ #category : 'removing' }
+{ #category : 'destruction' }
 OPUmlOperationController >> removeDiagramElement [
 
 	self diagramElement ifNotExists: [ ^ self ].
-	self ownerDiagramElement ifNotNil: [ :owner |
+	self diagramElementOwnerWithPossibleController ifNotNil: [ :owner |
 		owner removeOperation: self diagramElement ].
 	self diagramElement: nil
+]
+
+{ #category : 'validation' }
+OPUmlOperationController >> validate [
+
+	super validate.
+	self model ifNil: [ ^ self ].
+	self model owningClass ifNotNil: [ ^ self ].
+	OPModelInvalid signal: (String streamContents: [ :s |
+			 self model printOn: s.
+			 s << ' has no owning class' ])
 ]

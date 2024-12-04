@@ -3,9 +3,9 @@ Class {
 	#superclass : 'OPEdge',
 	#traits : 'OPTColoredAsStroke',
 	#classTraits : 'OPTColoredAsStroke classTrait',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'accessing' }

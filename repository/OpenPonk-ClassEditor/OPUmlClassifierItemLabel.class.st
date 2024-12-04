@@ -1,9 +1,9 @@
 Class {
 	#name : 'OPUmlClassifierItemLabel',
 	#superclass : 'OPUmlNameLabel',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'as yet unclassified' }
@@ -12,6 +12,12 @@ OPUmlClassifierItemLabel >> addedByMouseClickTo: aPoint [
 	"do nothing"
 
 	
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierItemLabel >> canHaveController [
+
+	^ true
 ]
 
 { #category : 'as yet unclassified' }

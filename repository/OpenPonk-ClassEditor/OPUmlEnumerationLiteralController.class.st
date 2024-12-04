@@ -59,11 +59,11 @@ OPUmlEnumerationLiteralController >> registerModelInContainer: aParentModel [
 	aParentModel ownedLiterals add: self model
 ]
 
-{ #category : 'removing' }
+{ #category : 'destruction' }
 OPUmlEnumerationLiteralController >> removeDiagramElement [
 
 	self diagramElement ifNotExists: [ ^ self ].
-	self ownerDiagramElement removeLiteral: self diagramElement.
+	self diagramElementOwnerWithPossibleController removeLiteral: self diagramElement.
 	self diagramElement: nil
 ]
 
@@ -73,4 +73,15 @@ OPUmlEnumerationLiteralController >> removeModel [
 
 	self model enumeration: nil.
 	super removeModel
+]
+
+{ #category : 'validation' }
+OPUmlEnumerationLiteralController >> validate [
+
+	super validate.
+	self model ifNil: [ ^ self ].
+	self model enumeration ifNotNil: [ ^ self ].
+	OPModelInvalid signal: (String streamContents: [ :s |
+			 self model printOn: s.
+			 s << ' has no owning enumeration' ])
 ]
