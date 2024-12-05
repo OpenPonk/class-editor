@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'atSource'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'ston-core' }
@@ -42,11 +42,11 @@ OPUmlAssociationEndLabel >> defaultText [
 
 	| type typeName defaultText |
 	self showAssociationEndLabels
-	= OPUmlDiagramHideEndLabelsFigureCommand styleState ifTrue: [
+	= OPUmlHideEndLabelsRoassalShapeCommand styleState ifTrue: [
 		^ '' ].
 	defaultText := self modelElement notationStringAsRoleName.
 	self showAssociationEndLabels
-	= OPUmlDiagramShowEndLabelsFigureCommand styleState ifTrue: [
+	= OPUmlShowEndLabelsRoassalShapeCommand styleState ifTrue: [
 		^ defaultText ].
 	type := self modelElement type.
 	type ifNil: [ ^ defaultText ].

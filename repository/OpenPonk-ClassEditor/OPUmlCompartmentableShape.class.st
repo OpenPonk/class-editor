@@ -6,9 +6,9 @@ Class {
 	#instVars : [
 		'separators'
 	],
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'accessing' }

@@ -6,7 +6,7 @@ OPDiagramElement >> showAssociationEndLabels [
 	^ self
 		  stylePropertyNamed: self showAssociationEndLabelsKey
 		  ifAbsent: [
-		  OPUmlDiagramEndLabelsFigureCommand defaultResultingShowState ]
+		  OPUmlEndLabelsRoassalShapeCommand defaultResultingShowState ]
 ]
 
 { #category : '*OpenPonk-ClassEditor' }

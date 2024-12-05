@@ -136,6 +136,9 @@ OPTUmlBaseController >> validationFailedPropertyWithoutOwner: aProperty [
 			 s << 'Property "' << aProperty name asString << '" with type '
 			 << aProperty type asString << ' has no owner' ]).
 
-	"Attempt to create an ownership"
-	aProperty type ifNotNil: [ aProperty owningClass: aProperty type ]
+	"Attempt to create an ownership if possible"
+	aProperty type ifNil: [ ^ self ].
+	(self diagramController allModelElementsWithPossibleController includes: aProperty type)
+		ifFalse: [ ^ self ].
+	aProperty owningClass: aProperty type
 ]

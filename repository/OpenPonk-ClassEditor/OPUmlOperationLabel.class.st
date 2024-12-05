@@ -1,9 +1,9 @@
 Class {
 	#name : 'OPUmlOperationLabel',
 	#superclass : 'OPUmlClassItemLabel',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'emphasis' }

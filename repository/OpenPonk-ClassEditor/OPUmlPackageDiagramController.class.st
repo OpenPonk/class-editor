@@ -23,34 +23,18 @@ OPUmlPackageDiagramController >> allGeneralizationSets [
 				   flatCollect: [ :each | each generalizationSets ]) ]
 ]
 
-{ #category : 'as yet unclassified' }
-OPUmlPackageDiagramController >> allPackages [
+{ #category : 'enumerating' }
+OPUmlPackageDiagramController >> allModelElementsWithPossibleController [
+	"all elements that could be directly hidden on diagram"
 
-	^ (Set with: self model) , (self allPackagesIn: self model)
+	^ (Array streamContents: [ :stream |
+		   self
+			   allModelElementsWithPossibleControllerIn: self model
+			   on: stream ]) asSet
 ]
 
-{ #category : 'as yet unclassified' }
-OPUmlPackageDiagramController >> allPackagesIn: aPackage [
-
-	| innerPackages |
-	innerPackages := aPackage packagedElements select: [ :each |
-		                 each oclIsKindOf: #Package ].
-	^ innerPackages asSet
-	  ,
-	  (innerPackages flatCollectAsSet: [ :each |
-		   self allPackagesIn: each ])
-]
-
-{ #category : 'as yet unclassified' }
-OPUmlPackageDiagramController >> allShowableElements [
-	"Should return all elements that could be directly hidden on diagram"
-
-	^ Array streamContents: [ :stream |
-		  self allShowableElementsIn: self model on: stream ]
-]
-
-{ #category : 'as yet unclassified' }
-OPUmlPackageDiagramController >> allShowableElementsIn: aPackage on: aCollectionStream [
+{ #category : 'enumerating' }
+OPUmlPackageDiagramController >> allModelElementsWithPossibleControllerIn: aPackage on: aCollectionStream [
 	"Should return all elements that could be directly hidden on diagram"
 
 	| elementsToShow |
@@ -70,7 +54,38 @@ OPUmlPackageDiagramController >> allShowableElementsIn: aPackage on: aCollection
 	aPackage packagedElements
 		select: [ :each | each oclIsKindOf: #Package ]
 		thenDo: [ :each |
-		self allShowableElementsIn: each on: aCollectionStream ]
+		self allModelElementsWithPossibleControllerIn: each on: aCollectionStream ]
+]
+
+{ #category : 'enumerating' }
+OPUmlPackageDiagramController >> allModelElementsWithPossibleDiagramElement [
+	"all model elements that can have diagram elements (even if cannot have controller)"
+
+	| onesWithPossibleController |
+	onesWithPossibleController := self
+		                              allModelElementsWithPossibleController.
+	^ onesWithPossibleController
+	  , ((onesWithPossibleController select: [ :each |
+			    each oclIsKindOf: #Association ]) flatCollect: [ :each |
+			   each ownedEnds ])
+]
+
+{ #category : 'enumerating' }
+OPUmlPackageDiagramController >> allPackages [
+
+	^ (Set with: self model) , (self allPackagesIn: self model)
+]
+
+{ #category : 'enumerating' }
+OPUmlPackageDiagramController >> allPackagesIn: aPackage [
+
+	| innerPackages |
+	innerPackages := aPackage packagedElements select: [ :each |
+		                 each oclIsKindOf: #Package ].
+	^ innerPackages asSet
+	  ,
+	  (innerPackages flatCollectAsSet: [ :each |
+		   self allPackagesIn: each ])
 ]
 
 { #category : 'adding' }
@@ -81,7 +96,7 @@ OPUmlPackageDiagramController >> canBeTargetFor: aController [
 						or: [ aController isKindOf: OPUmlEnumerationController ] ] ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlPackageDiagramController >> commonModelClassPrefix [
 	^ 'OPUML'
 ]
@@ -159,7 +174,7 @@ OPUmlPackageDiagramController >> descriptionGeneralizationSets [
 		  yourself
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'forms' }
 OPUmlPackageDiagramController >> descriptionStereotype [
 
 	<magritteDescription>
@@ -172,14 +187,14 @@ OPUmlPackageDiagramController >> disableRefresh [
 	self flag: #todo.
 	install := [ :cls | 
 	| link |
-	(cls includesSelector: #refreshFigure)
+	(cls includesSelector: #modelChanged)
 		ifTrue:
 			[ link := MetaLink new
 				metaObject: self;
 				selector: #yourself;
 				arguments: #();
 				control: #instead.
-			(cls >> #refreshFigure) ast link: link ] ].
+			(cls >> #modelChanged) ast link: link ] ].
 	OPUmlElementController withAllSubAndSuperclassesDo: [ :each | install value: each ]
 ]
 
@@ -237,8 +252,8 @@ OPUmlPackageDiagramController >> enableRefresh [
 	| uninstall |
 	self flag: #todo.
 	uninstall := [ :cls | 
-	(cls includesSelector: #refreshFigure)
-		ifTrue: [ (cls >> #refreshFigure) ast links
+	(cls includesSelector: #modelChanged)
+		ifTrue: [ (cls >> #modelChanged) ast links
 				ifNotNil: [ :l | l asSet do: #uninstall ] ] ].
 	OPUmlElementController
 		withAllSubAndSuperclassesDo: [ :each | uninstall value: each ]
@@ -372,7 +387,7 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'forms' }
 OPUmlPackageDiagramController >> maEdit [
 
 	OPUmlAllGeneralizationSetsEditor new
@@ -428,7 +443,7 @@ OPUmlPackageDiagramController >> rebuildPalette [
 		rebuildWidget
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlPackageDiagramController >> typeOfModel: aModel [
 	^ OPModelObjectType
 		named: (aModel umlClassName splitCamelCase joinUsing: ' ')

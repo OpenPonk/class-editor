@@ -113,7 +113,7 @@ OPUmlGeneralizationSetsEditor >> processRemovalIn: originalSets basedOn: newSetC
 OPUmlGeneralizationSetsEditor >> relevantGeneralizationSets [
 
 	| allElements packagedSets usedSets allSets |
-	allElements := controller diagramController allShowableElements.
+	allElements := controller diagramController allModelElementsWithPossibleController.
 	packagedSets := (allElements select: [ :each |
 		                 each oclIsKindOf: #GeneralizationSet ]) asSet.
 	usedSets := (allElements select: [ :each |

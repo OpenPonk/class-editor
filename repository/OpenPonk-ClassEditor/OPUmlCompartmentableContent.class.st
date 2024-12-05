@@ -1,10 +1,16 @@
 Class {
 	#name : 'OPUmlCompartmentableContent',
 	#superclass : 'OPNode',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
+
+{ #category : 'accessing' }
+OPUmlCompartmentableContent >> canHaveController [
+
+	^ false
+]
 
 { #category : 'rendering' }
 OPUmlCompartmentableContent >> layoutOwnedElements [

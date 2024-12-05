@@ -4,9 +4,9 @@ I represent a direct generalization line.
 Class {
 	#name : 'OPUmlGeneralizationShape',
 	#superclass : 'OPUmlEdge',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'initialization' }

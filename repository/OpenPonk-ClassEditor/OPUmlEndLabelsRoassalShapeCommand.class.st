@@ -1,6 +1,6 @@
 Class {
-	#name : 'OPUmlDiagramEndLabelsFigureCommand',
-	#superclass : 'OPDiagramFigureCommand',
+	#name : 'OPUmlEndLabelsRoassalShapeCommand',
+	#superclass : 'OPRoassalShapeCommand',
 	#instVars : [
 		'relevantDiagramElements'
 	],
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'testing' }
-OPUmlDiagramEndLabelsFigureCommand class >> canBeExecutedInContext: aToolContext [
+OPUmlEndLabelsRoassalShapeCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ (super canBeExecutedInContext: aToolContext) and: [
 		  aToolContext diagramElements anySatisfy: [ :any |
@@ -18,29 +18,29 @@ OPUmlDiagramEndLabelsFigureCommand class >> canBeExecutedInContext: aToolContext
 ]
 
 { #category : 'activation' }
-OPUmlDiagramEndLabelsFigureCommand class >> contextMenuActivation [
+OPUmlEndLabelsRoassalShapeCommand class >> contextMenuActivation [
 
 	<classAnnotation>
 	^ CmdContextMenuActivation
-		  byItemOf: OPUmlDiagramEndLabelsFigureMenuGroup
+		  byItemOf: OPUmlEndLabelsRoassalShapeMenuGroup
 		  for: OPCanvasPresenter
 ]
 
 { #category : 'as yet unclassified' }
-OPUmlDiagramEndLabelsFigureCommand class >> defaultResultingShowState [
+OPUmlEndLabelsRoassalShapeCommand class >> defaultResultingShowState [
 
-	^ OPUmlDiagramHideSameAsClassEndLabelsFigureCommand
+	^ OPUmlHideSameAsClassEndLabelsRoassalShapeCommand
 		  styleState
 ]
 
 { #category : 'testing' }
-OPUmlDiagramEndLabelsFigureCommand class >> isAbstract [
+OPUmlEndLabelsRoassalShapeCommand class >> isAbstract [
 
-	^ self = OPUmlDiagramEndLabelsFigureCommand
+	^ self = OPUmlEndLabelsRoassalShapeCommand
 ]
 
 { #category : 'as yet unclassified' }
-OPUmlDiagramEndLabelsFigureCommand >> applicableDiagramElements [
+OPUmlEndLabelsRoassalShapeCommand >> applicableDiagramElements [
 
 	^ relevantDiagramElements ifNil: [
 		  relevantDiagramElements := diagramElements select: [ :each |
@@ -48,13 +48,13 @@ OPUmlDiagramEndLabelsFigureCommand >> applicableDiagramElements [
 ]
 
 { #category : 'accessing' }
-OPUmlDiagramEndLabelsFigureCommand >> basicMenuItemName [
+OPUmlEndLabelsRoassalShapeCommand >> basicMenuItemName [
 
 	^ ''
 ]
 
 { #category : 'accessing' }
-OPUmlDiagramEndLabelsFigureCommand >> defaultMenuItemName [
+OPUmlEndLabelsRoassalShapeCommand >> defaultMenuItemName [
 
 	| basicName |
 	basicName := self basicMenuItemName.
@@ -67,25 +67,25 @@ OPUmlDiagramEndLabelsFigureCommand >> defaultMenuItemName [
 ]
 
 { #category : 'as yet unclassified' }
-OPUmlDiagramEndLabelsFigureCommand >> defaultResultingShowState [
+OPUmlEndLabelsRoassalShapeCommand >> defaultResultingShowState [
 	^ self class defaultResultingShowState
 ]
 
 { #category : 'testing' }
-OPUmlDiagramEndLabelsFigureCommand >> isCurrentlyActive [
+OPUmlEndLabelsRoassalShapeCommand >> isCurrentlyActive [
 
 	^ false
 ]
 
 { #category : 'testing' }
-OPUmlDiagramEndLabelsFigureCommand >> isCurrentlySelected [
+OPUmlEndLabelsRoassalShapeCommand >> isCurrentlySelected [
 
 	^ self applicableDiagramElements anySatisfy: [ :any |
 		  self isCurrentlySelectedByStyle: any localStyle ]
 ]
 
 { #category : 'testing' }
-OPUmlDiagramEndLabelsFigureCommand >> isCurrentlySelectedByStyle: aStyle [
+OPUmlEndLabelsRoassalShapeCommand >> isCurrentlySelectedByStyle: aStyle [
 
 	^ self subclassResponsibility
 ]

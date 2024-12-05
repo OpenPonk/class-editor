@@ -1,9 +1,9 @@
 Class {
 	#name : 'OPAbstractUmlEdgeTest',
 	#superclass : 'OPAbstractEdgeTest',
-	#category : 'OpenPonk-ClassEditor-Tests - Shapes',
+	#category : 'OpenPonk-ClassEditor-Tests - DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Tests - Shapes'
+	#tag : 'Tests - DiagramElements'
 }
 
 { #category : 'running' }

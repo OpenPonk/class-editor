@@ -56,14 +56,14 @@ OPTUmlStereotypedElementController >> removeStereotypesIn: aModel [
 		whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'forms' }
 OPTUmlStereotypedElementController >> stereotypeMagritteDescription [
 	| descriptions |
 	descriptions := OPUmlStereotypeDescriptions new controller: self.
 	^ descriptions descriptions
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'enumerating' }
 OPTUmlStereotypedElementController >> stereotypesIn: aProfile for: aModel [
 
 	^ (aProfile ownedStereotype reject: #isAbstract) select: [ :stereo | 

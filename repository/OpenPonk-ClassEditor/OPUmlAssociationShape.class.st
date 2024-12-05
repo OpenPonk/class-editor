@@ -4,9 +4,9 @@ I am a shape composition to accomodate for the most common UML Association shape
 Class {
 	#name : 'OPUmlAssociationShape',
 	#superclass : 'OPUmlEdge',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'initialization' }

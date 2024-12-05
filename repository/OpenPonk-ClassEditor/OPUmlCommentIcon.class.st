@@ -1,9 +1,9 @@
 Class {
 	#name : 'OPUmlCommentIcon',
 	#superclass : 'OPUmlCompartmentableContent',
-	#category : 'OpenPonk-ClassEditor-Shapes',
+	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Shapes'
+	#tag : 'DiagramElements'
 }
 
 { #category : 'rendering' }
