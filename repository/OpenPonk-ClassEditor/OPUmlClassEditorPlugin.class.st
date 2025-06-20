@@ -53,7 +53,7 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 		open
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> defaultProfiles [
 	^ self class defaultProfiles
 ]
@@ -72,29 +72,30 @@ OPUmlClassEditorPlugin >> icon [
 OPUmlClassEditorPlugin >> isForController: aDiagramController [
 
 	| appliedProfiles pluginClassesWithProfileCounts |
+	(super isForController: aDiagramController) ifFalse: [ ^ false ].
 	appliedProfiles := aDiagramController model
 		                   ifNil: [ #(  ) ]
-		                   ifNotNil: [ :model | 
+		                   ifNotNil: [ :model |
 		                   model profileApplications collect:
 			                   #appliedProfile ].
-	(appliedProfiles isEmpty and: [ self defaultProfiles isEmpty ]) 
+	(appliedProfiles isEmpty and: [ self defaultProfiles isEmpty ])
 		ifTrue: [ ^ true ].
-	pluginClassesWithProfileCounts := (self class withAllSubclasses 
-		                                   collect: [ :eachPluginClass | 
-			                                   eachPluginClass
-			                                   ->
-				                                   (eachPluginClass
-					                                    defaultProfiles count: [ 
-					                                    :eachDefaultPlugin | 
-					                                    appliedProfiles includes:
-						                                    eachDefaultPlugin ]) ]) 
-		                                  sorted: [ :a :b | 
+	pluginClassesWithProfileCounts := (self class withAllSubclasses
+		                                   collect: [ :eachPluginClass |
+				                                   eachPluginClass
+				                                   ->
+					                                   (eachPluginClass
+						                                    defaultProfiles count: [
+						                                    :eachDefaultPlugin |
+						                                    appliedProfiles includes:
+							                                    eachDefaultPlugin ]) ])
+		                                  sorted: [ :a :b |
 		                                  a value > b value ].
-	^ pluginClassesWithProfileCounts first value isZero or: [ 
+	^ pluginClassesWithProfileCounts first value isZero or: [
 		  pluginClassesWithProfileCounts first key = self class ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
 
 	^ ({ 
@@ -103,12 +104,12 @@ OPUmlClassEditorPlugin >> isPluginFor: aModel [
 		  self supportsProfilesOf: aModel ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> layouterClass [
 	^ OPUmlLayouter
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'model updates' }
 OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
 
 	| models targetModel otherModels |
@@ -150,7 +151,7 @@ OPUmlClassEditorPlugin >> name [
 	^ 'UML Class Editor'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsHidingElements [
 	^ true
 ]
@@ -160,7 +161,7 @@ OPUmlClassEditorPlugin >> supportsMergingModels [
 	^ true
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsProfilesOf: aModel [
 
 	^ aModel profileApplications allSatisfy: [ :each | 
