@@ -4,7 +4,7 @@ I represent a package box.
 Class {
 	#name : 'OPUmlPackageShape',
 	#superclass : 'OPBoundNode',
-	#traits : 'OPTColoredAsFill + OPTUmlPackageableShape',
+	#traits : 'OPTColoredAsFill @ {#updateBasicRoassalShapeColorFromStyles->#updateRoassalShapeColorFromStyles} + OPTUmlPackageableShape',
 	#classTraits : 'OPTColoredAsFill classTrait + OPTUmlPackageableShape classTrait',
 	#instVars : [
 		'nameLabel',
@@ -183,23 +183,6 @@ OPUmlPackageShape >> stereotypeText [
 		  ifFalse: [ '' ]
 ]
 
-{ #category : 'initialization' }
-OPUmlPackageShape >> updateColorFromStyles [
-
-	self roassalShape
-		propertyAt: OPRSSelectable
-		ifPresent: [ :selectable |
-			| key |
-			key := selectable copyKey , 'color'.
-			self roassalShape properties at: key ifPresent: [
-				self roassalShape properties
-					at: key
-					put: (OrderedCollection with: self color).
-				^ self ] ].
-	self roassalShape color: self color.
-	ear color: self color
-]
-
 { #category : 'rendering' }
 OPUmlPackageShape >> updateRenderFromModel [
 
@@ -209,4 +192,11 @@ OPUmlPackageShape >> updateRenderFromModel [
 	super updateRenderFromModel.
 
 	roassalShape signalUpdate
+]
+
+{ #category : 'initialization' }
+OPUmlPackageShape >> updateRoassalShapeColorFromStyles [
+
+	self updateBasicRoassalShapeColorFromStyles.
+	ear color: self color
 ]

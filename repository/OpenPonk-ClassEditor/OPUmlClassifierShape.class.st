@@ -127,13 +127,6 @@ OPUmlClassifierShape >> updateRenderFromModel [
 	super updateRenderFromModel
 ]
 
-{ #category : 'roassal' }
-OPUmlClassifierShape >> updateRenderFromSelf [
-
-	self isRendered ifFalse: [ ^ self ].
-	super updateRenderFromSelf
-]
-
 { #category : 'rendering' }
 OPUmlClassifierShape >> updateStereotype [
 
