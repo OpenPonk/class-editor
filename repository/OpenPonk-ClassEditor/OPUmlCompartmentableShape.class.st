@@ -40,12 +40,6 @@ OPUmlCompartmentableShape >> initialize [
 	separators := OrderedCollection new
 ]
 
-{ #category : 'as yet unclassified' }
-OPUmlCompartmentableShape >> isResizableByUser [
-
-	^ false
-]
-
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> layout [
 
@@ -141,12 +135,6 @@ OPUmlCompartmentableShape >> selectableInteraction [
 OPUmlCompartmentableShape >> separators [
 
 	^ separators
-]
-
-{ #category : 'rendering' }
-OPUmlCompartmentableShape >> shouldBePositionableByUser [
-
-	^ true
 ]
 
 { #category : 'rendering' }

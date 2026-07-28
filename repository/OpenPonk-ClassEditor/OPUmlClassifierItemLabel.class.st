@@ -20,12 +20,6 @@ OPUmlClassifierItemLabel >> canHaveController [
 	^ true
 ]
 
-{ #category : 'as yet unclassified' }
-OPUmlClassifierItemLabel >> isPositionableByUser [
-
-	^ false
-]
-
 { #category : 'initialization' }
 OPUmlClassifierItemLabel >> modelChanged [
 
@@ -36,6 +30,12 @@ OPUmlClassifierItemLabel >> modelChanged [
 OPUmlClassifierItemLabel >> selectableInteraction [
 
 	^ OPRSSelectable highlightColorBlue
+]
+
+{ #category : 'interactions' }
+OPUmlClassifierItemLabel >> shouldBePositionableByUser [
+
+	^ false
 ]
 
 { #category : 'as yet unclassified' }

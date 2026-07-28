@@ -14,8 +14,8 @@ OPUmlStereotypesLabel >> defaultText [
 		  ifNotEmpty: [ :vals | '«' , (vals joinUsing: ', ') , '»' ]
 ]
 
-{ #category : 'testing' }
-OPUmlStereotypesLabel >> isPositionableByUser [
+{ #category : 'interactions' }
+OPUmlStereotypesLabel >> shouldBePositionableByUser [
 
 	^ false
 ]

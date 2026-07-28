@@ -163,12 +163,6 @@ OPUmlPackageShape >> selectableInteraction [
 	^ OPRSSelectable
 ]
 
-{ #category : 'rendering' }
-OPUmlPackageShape >> shouldBePositionableByUser [
-
-	^ true
-]
-
 { #category : 'interactions' }
 OPUmlPackageShape >> shouldBeResizableByUser [
 

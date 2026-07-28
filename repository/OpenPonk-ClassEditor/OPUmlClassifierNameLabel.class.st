@@ -17,7 +17,7 @@ OPUmlClassifierNameLabel >> attachedShapes [
 	^ super attachedShapes , { labeled labelShape }
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlClassifierNameLabel >> defaultFontSize [
 
 	^ 11
@@ -33,7 +33,7 @@ OPUmlClassifierNameLabel >> defaultText [
 		  << ((self modelElement name ifNil: [ ' ' ]) ifEmpty: [ ' ' ]) ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'emphasis' }
 OPUmlClassifierNameLabel >> emphasis [
 
 	| emphasis |
@@ -41,12 +41,6 @@ OPUmlClassifierNameLabel >> emphasis [
 	self modelElement isAbstract ifTrue: [
 		emphasis add: TextEmphasis italic ].
 	^ emphasis
-]
-
-{ #category : 'as yet unclassified' }
-OPUmlClassifierNameLabel >> isPositionableByUser [
-
-	^ false
 ]
 
 { #category : 'removing' }
@@ -58,7 +52,7 @@ OPUmlClassifierNameLabel >> removeRender [
 	labeled := nil
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'rendering' }
 OPUmlClassifierNameLabel >> renderBasicShape [
 
 	| targetShape |
@@ -80,6 +74,12 @@ OPUmlClassifierNameLabel >> renderBasicShape [
 OPUmlClassifierNameLabel >> roassalShape [
 
 	^ labeled
+]
+
+{ #category : 'interactions' }
+OPUmlClassifierNameLabel >> shouldBePositionableByUser [
+
+	^ false
 ]
 
 { #category : 'actions' }
