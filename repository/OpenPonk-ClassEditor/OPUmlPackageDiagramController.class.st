@@ -1,5 +1,5 @@
 "
-I am controller for managing the main class diagram presentation and handling items contained in the canvas.
+I am the primary diagram controller for the UML Class Diagram editor. I manage the palette, canvas interactions, profile applications, and the rendering of classes, packages, and their relationships.
 "
 Class {
 	#name : 'OPUmlPackageDiagramController',
@@ -11,84 +11,31 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'enumerating' }
+{ #category : 'accessing' }
+OPUmlPackageDiagramController class >> viewModelClass [
+
+	^ OPUmlPackageViewModel
+]
+
+{ #category : 'deprecation' }
 OPUmlPackageDiagramController >> allGeneralizationSets [
-
-	^ self allPackages flatCollectAsSet: [ :eachPackage |
-		  (eachPackage packagedElements select: [ :each |
-			   each oclIsKindOf: #GeneralizationSet ])
-		  , (((eachPackage packagedElements select: [ :any |
-				     any oclIsKindOf: #Classifier ]) flatCollect: [
-				    :eachClassifier | eachClassifier generalizations ])
-				   flatCollect: [ :each | each generalizationSets ]) ]
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver allGeneralizationSets' -> '`@receiver viewModel allGeneralizationSets'.
+	^ self viewModel allGeneralizationSets
 ]
 
-{ #category : 'enumerating' }
-OPUmlPackageDiagramController >> allModelElementsWithPossibleController [
-	"all elements that could be directly hidden on diagram"
-
-	^ (Array streamContents: [ :stream |
-		   self
-			   allModelElementsWithPossibleControllerIn: self model
-			   on: stream ]) asSet
-]
-
-{ #category : 'enumerating' }
-OPUmlPackageDiagramController >> allModelElementsWithPossibleControllerIn: aPackage on: aCollectionStream [
-	"Should return all elements that could be directly hidden on diagram"
-
-	| elementsToShow |
-	elementsToShow := self elementsToShowInside: aPackage.
-	aCollectionStream nextPutAll: elementsToShow.
-	elementsToShow
-		select: [ :each | each oclIsKindOf: #Class ]
-		thenDo: [ :each |
-			aCollectionStream nextPutAll: each ownedAttributes.
-			aCollectionStream nextPutAll: each ownedOperations ].
-	elementsToShow
-		select: [ :each | each oclIsKindOf: #Enumeration ]
-		thenDo: [ :each | aCollectionStream nextPutAll: each ownedLiterals ].
-	aCollectionStream nextPutAll:
-		(aPackage packagedElements select: [ :each |
-			 each oclIsKindOf: #Association ]).
-	aPackage packagedElements
-		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each |
-		self allModelElementsWithPossibleControllerIn: each on: aCollectionStream ]
-]
-
-{ #category : 'enumerating' }
-OPUmlPackageDiagramController >> allModelElementsWithPossibleDiagramElement [
-	"all model elements that can have diagram elements (even if cannot have controller)"
-
-	| onesWithPossibleController |
-	onesWithPossibleController := self
-		                              allModelElementsWithPossibleController.
-	^ onesWithPossibleController
-	  , ((onesWithPossibleController select: [ :each |
-			    each oclIsKindOf: #Association ]) flatCollect: [ :each |
-			   each ownedEnds ])
-]
-
-{ #category : 'enumerating' }
+{ #category : 'deprecation' }
 OPUmlPackageDiagramController >> allPackages [
-
-	^ (Set with: self model) , (self allPackagesIn: self model)
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver allPackages' -> '`@receiver viewModel allPackages'.
+	^ self viewModel allPackages
 ]
 
-{ #category : 'enumerating' }
+{ #category : 'deprecation' }
 OPUmlPackageDiagramController >> allPackagesIn: aPackage [
-
-	| innerPackages |
-	innerPackages := aPackage packagedElements select: [ :each |
-		                 each oclIsKindOf: #Package ].
-	^ innerPackages asSet
-	  ,
-	  (innerPackages flatCollectAsSet: [ :each |
-		   self allPackagesIn: each ])
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver allPackagesIn: `@arg1' -> '`@receiver viewModel allPackagesIn: `@arg1'.
+	^ self viewModel allPackagesIn: aPackage
 ]
 
-{ #category : 'adding' }
+{ #category : 'connecting' }
 OPUmlPackageDiagramController >> canBeTargetFor: aController [
 	^ (super canBeTargetFor: aController)
 		or: [ (aController isKindOf: OPUmlClassController)
@@ -97,88 +44,38 @@ OPUmlPackageDiagramController >> canBeTargetFor: aController [
 ]
 
 { #category : 'accessing' }
-OPUmlPackageDiagramController >> commonModelClassPrefix [
-	^ 'OPUML'
-]
-
-{ #category : 'adding' }
 OPUmlPackageDiagramController >> controllerFactory [
-	^ super controllerFactory
-		register: OPUmlClassController forModel: OPUMLClass;
-		register: OPUmlAttributeController forModel: OPUMLProperty;
-		register: OPUmlOperationController forModel: OPUMLOperation;
-		register: OPUmlGeneralizationController
-			forModel: OPUMLGeneralization;
-		register: OPUmlAssociationController forModel: OPUMLAssociation;
-		register: OPUmlPackageController forModel: OPUMLPackage;
-		register: OPUmlPackageController forModel: OPUMLProfile;
-		register: OPUmlExtensionController forModel: OPUMLExtension;
-		register: OPUmlAttributeController forModel: OPUMLExtensionEnd;
-		register: OPUmlEnumerationController forModel: OPUMLEnumeration;
-		register: OPUmlEnumerationLiteralController
-			forModel: OPUMLEnumerationLiteral;
-		register: OPUmlStereotypeController forModel: OPUMLStereotype;
-		register: OPUmlPackageImportController forModel: OPUMLPackageImport
+			"Configure controller factory with explicit conditions for UML elements."
+			^ super controllerFactory
+				register: OPUmlClassController forModel: OPUMLClass;
+				register: OPUmlAttributeController 
+					forModel: OPUMLProperty 
+					condition: [ :prop | prop owningAssociation isNil ];
+				register: OPUmlOperationController forModel: OPUMLOperation;
+				register: OPUmlGeneralizationController forModel: OPUMLGeneralization;
+				register: OPUmlAssociationController forModel: OPUMLAssociation;
+				register: OPUmlPackageController forModel: OPUMLPackage;
+				register: OPUmlPackageController forModel: OPUMLProfile;
+				register: OPUmlExtensionController forModel: OPUMLExtension;
+				register: OPUmlAttributeController 
+					forModel: OPUMLExtensionEnd 
+					condition: [ :prop | prop owningAssociation isNil ];
+				register: OPUmlEnumerationController forModel: OPUMLEnumeration;
+				register: OPUmlEnumerationLiteralController forModel: OPUMLEnumerationLiteral;
+				register: OPUmlStereotypeController forModel: OPUMLStereotype;
+				register: OPUmlPackageImportController forModel: OPUMLPackageImport
 ]
 
-{ #category : 'forms' }
+{ #category : 'deprecation' }
 OPUmlPackageDiagramController >> descriptionAppliedProfiles [
-
-	<magritteDescription>
-	| profiles options |
-	(self model oclIsKindOf: #Profile) ifTrue: [ ^ nil ].
-	profiles := OPUmlCustomProfile allSubclasses collect: #profile.
-
-	options := profiles collect: [ :each | each -> each name ].
-	^ MAMultipleOptionDescription new
-		  optionsAndLabels: options;
-		  distinct: true;
-		  reference: MAStringDescription new;
-		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   me model profileApplications collect: #appliedProfile ]
-				   write: [ :me :selectedProfiles |
-					   me model profileApplications:
-							   (me model profileApplications select: [ :any |
-									    selectedProfiles includes: any appliedProfile ]).
-					   me model profileApplications:
-							   me model profileApplications , (selectedProfiles
-									    select: [ :eachSelectedProfile |
-										    me model profileApplications noneSatisfy: [
-												    :eachExistingProfileApplication |
-												    eachExistingProfileApplication = eachSelectedProfile ] ]
-									    thenCollect: [ :each |
-										    OPUMLProfileApplication new appliedProfile:
-												    each yourself ]).
-					   self rebuildPalette.
-					   self modelChanged ]);
-		  label: 'Applied Profiles';
-		  priority: 10;
-		  beSorted;
-		  yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionAppliedProfiles' -> '`@receiver viewModel descriptionAppliedProfiles'.
+	^ self viewModel descriptionAppliedProfiles
 ]
 
-{ #category : 'forms' }
+{ #category : 'deprecation' }
 OPUmlPackageDiagramController >> descriptionGeneralizationSets [
-
-	<magritteDescription>
-	^ MAToManyRelationDescription new
-		  readOnly: true;
-		  accessor: (MAPluggableAccessor
-				   read: [ :me | self allGeneralizationSets ]
-				   write: [ :me :newValue |
-					   self error: 'Direct manipulation only via '
-							   , OPUmlAllGeneralizationSetsEditor name ]);
-		  label: 'Generalization Sets';
-		  priority: 20;
-		  yourself
-]
-
-{ #category : 'forms' }
-OPUmlPackageDiagramController >> descriptionStereotype [
-
-	<magritteDescription>
-	^ self descriptionStereotypeContent
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionGeneralizationSets' -> '`@receiver viewModel descriptionGeneralizationSets'.
+	^ self viewModel descriptionGeneralizationSets
 ]
 
 { #category : 'userinterface' }
@@ -196,55 +93,6 @@ OPUmlPackageDiagramController >> disableRefresh [
 				control: #instead.
 			(cls >> #modelChanged) ast link: link ] ].
 	OPUmlElementController withAllSubAndSuperclassesDo: [ :each | install value: each ]
-]
-
-{ #category : 'figures' }
-OPUmlPackageDiagramController >> elementsToShowInside [
-
-	^ self elementsToShowInside: self model
-]
-
-{ #category : 'figures' }
-OPUmlPackageDiagramController >> elementsToShowInside: aPackage [
-
-	| queue priority |
-	queue := OrderedCollection new.
-	priority := {
-		            (OPUMLPackage -> 1).
-		            (OPUMLProfile -> 1).
-		            (OPUMLClass -> 2).
-		            (OPUMLStereotype -> 3).
-		            (OPUMLEnumeration -> 4) } asDictionary.
-	queue addAll: (aPackage packagedElements reject: [ :each |
-			 each oclIsKindOf: #Association ]).
-	aPackage packagedElements
-		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each |
-			each packageImports do: [ :import |
-				queue addIfNotPresent: import importedPackage.
-				queue add: import ] ].
-	aPackage packagedElements
-		select: [ :each |
-			(each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ]
-		thenDo: [ :each |
-			each generalizations do: [ :gen |
-				queue addIfNotPresent: gen general.
-				queue add: gen ].
-			(each ownedAttributes select: [ :attr |
-				 (attr isKindOf: OPUMLProperty) and: [ attr association isNotNil ] ])
-				do: [ :attr | queue addIfNotPresent: attr association ] ].
-	aPackage packagedElements
-		select: [ :each | each isKindOf: OPUMLStereotype ]
-		thenDo: [ :each |
-			each ownedAttributes
-				select: [ :attr |
-					attr association isNotNil and: [
-						attr association isKindOf: OPUMLExtension ] ]
-				thenDo: [ :attr | queue add: attr type ] ].
-	^ (queue asSet asArray sorted: [ :a :b |
-		   (priority at: a class ifAbsent: [ 100 ])
-		   < (priority at: b class ifAbsent: [ 100 ]) ]) select: [ :each |
-		  self hasSupportForModel: each ]
 ]
 
 { #category : 'userinterface' }
@@ -269,17 +117,13 @@ OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 		label: 'Package';
 		icon: OPUmlIcons packageIcon;
 		whenCreatedSetup.
-	(aPalette newCreationEntry: [ OPUmlPackageController new beForModel ])
-		label: 'Model';
-		icon: OPUmlIcons modelIcon;
-		whenCreatedSetup.
 	(aPalette newCreationEntry: [ OPUmlPackageController new beForProfile ])
 		label: 'Profile';
 		icon: OPUmlIcons profileIcon;
 		whenCreatedSetup
 ]
 
-{ #category : 'palette' }
+{ #category : 'ui interaction' }
 OPUmlPackageDiagramController >> initializePalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlClassController new ])
 		label: 'Class';
@@ -443,15 +287,12 @@ OPUmlPackageDiagramController >> rebuildPalette [
 		rebuildWidget
 ]
 
-{ #category : 'accessing' }
-OPUmlPackageDiagramController >> typeOfModel: aModel [
-	^ OPModelObjectType
-		named: (aModel umlClassName splitCamelCase joinUsing: ' ')
-		withSubtype:
-			(aModel appliedStereotypes
-				ifEmpty: [ OPModelObjectType named: '(without stereotype)' ]
-				ifNotEmpty: [ OPModelObjectType
-						named:
-							(aModel appliedStereotypes first umlClassName splitCamelCase
-								joinUsing: ' ') ])
+{ #category : 'announcements' }
+OPUmlPackageDiagramController >> subscribeToViewModel [
+
+	super subscribeToViewModel.
+	(self viewModel ifNil: [ ^ self ]) announcer weak
+		when: OPUmlProfileApplied
+		send: #rebuildPalette
+		to: self
 ]

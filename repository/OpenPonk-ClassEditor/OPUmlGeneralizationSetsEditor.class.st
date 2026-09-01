@@ -1,3 +1,6 @@
+"
+I am a Spec presenter displaying and editing the Generalization Sets associated with a specific generalization. I handle the creation, modification, and removal of generalization sets from the model.
+"
 Class {
 	#name : 'OPUmlGeneralizationSetsEditor',
 	#superclass : 'SpPresenter',
@@ -89,12 +92,12 @@ OPUmlGeneralizationSetsEditor >> processDoRemove: setsToRemove [
 
 	| uuids generalizations |
 	uuids := setsToRemove collect: [ :each | each uuid ].
-	controller diagramController allPackages do: [ :each |
-		each packagedElements:
-			(each packagedElements reject: [ :any | uuids includes: any uuid ]) ].
+	controller diagramController viewModel allPackages do: [ :each |
+			each packagedElements:
+				(each packagedElements reject: [ :any | uuids includes: any uuid ]) ].
 	setsToRemove do: [ :each |
-		generalizations := each generalizations asSet.
-		each generalizations: #(  ) ]
+			generalizations := each generalizations asSet.
+			each generalizations: #(  ) ]
 ]
 
 { #category : 'actions' }
@@ -151,7 +154,7 @@ OPUmlGeneralizationSetsEditor >> save [
 	self updateShapesOf: affectedGeneralizations
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'updating' }
 OPUmlGeneralizationSetsEditor >> updateShapesOf: generalizations [
 
 	generalizations do: [ :eachGeneralization |

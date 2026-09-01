@@ -1,3 +1,6 @@
+"
+I am a container shape representing a specific compartment (e.g., for attributes or operations) within a structured UML classifier shape. I automatically sort, layout, and accommodate my inner contents.
+"
 Class {
 	#name : 'OPUmlCompartment',
 	#superclass : 'OPUmlCompartmentableContent',
@@ -38,7 +41,7 @@ OPUmlCompartment >> updateRenderFromModel [
 	self accomodateContents
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'geometry' }
 OPUmlCompartment >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle left + (self width / 2)

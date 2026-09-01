@@ -1,5 +1,5 @@
 "
-I manage layouts available for UML Editor and apply them.
+I am a specialized layout manager for UML Class Diagrams. I expose specific graph layout algorithms (like tree, grid, circle, and Sugiyama) and apply them to the current UML diagram canvas.
 "
 Class {
 	#name : 'OPUmlLayouter',

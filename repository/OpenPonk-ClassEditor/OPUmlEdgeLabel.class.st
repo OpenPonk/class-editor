@@ -1,3 +1,6 @@
+"
+I am a specialized text label designed to be attached to UML relationship edges. I calculate default minimum distances to ensure labels (like role names and multiplicities) do not overlap with the edge line.
+"
 Class {
 	#name : 'OPUmlEdgeLabel',
 	#superclass : 'OPEdgeLabel',

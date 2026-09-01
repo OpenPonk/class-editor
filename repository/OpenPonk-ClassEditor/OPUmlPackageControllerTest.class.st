@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlPackageController, checking diagram targets, creation from palettes, and rendering nested elements.
+"
 Class {
 	#name : 'OPUmlPackageControllerTest',
 	#superclass : 'OPUmlElementControllerTest',
@@ -6,18 +9,18 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlPackageControllerTest >> controllerClass [
-	^ OPUmlPackageController
-]
-
-{ #category : 'construction' }
-OPUmlPackageControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlPackageControllerTest class >> diagramElementClass [
 
 	^ OPUmlPackageShape
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
+OPUmlPackageControllerTest >> controllerClass [
+	^ OPUmlPackageController
+]
+
+{ #category : 'constants' }
 OPUmlPackageControllerTest >> modelClass [
 	^ OPUMLPackage
 ]

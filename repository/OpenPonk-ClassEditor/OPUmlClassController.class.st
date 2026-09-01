@@ -1,5 +1,5 @@
 "
-I am a controller for a Class(ifier)
+I am the controller for UML Classes. I manage canvas rendering, handle association and generalization creation adornments, and coordinate with ViewModels for property updates.
 "
 Class {
 	#name : 'OPUmlClassController',
@@ -9,14 +9,25 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'adding' }
+{ #category : 'construction' }
+OPUmlClassController class >> diagramElementClass [
+
+	^ OPUmlClassShape
+]
+
+{ #category : 'accessing' }
+OPUmlClassController class >> viewModelClass [
+	^ OPUmlClassViewModel
+]
+
+{ #category : 'connecting' }
 OPUmlClassController >> canBeSourceFor: aController [
 	^ (aController isKindOf: OPUmlGeneralizationController)
 		| (super canBeSourceFor: aController)
 		| (aController isKindOf: OPUmlExtensionController)
 ]
 
-{ #category : 'adding' }
+{ #category : 'connecting' }
 OPUmlClassController >> canBeTargetFor: aController [
 
 	^ (aController isKindOf: OPUmlAttributeController) or: [
@@ -75,82 +86,14 @@ OPUmlClassController >> createGeneralizationAdornmentBy: builder [
 		tool selectedControllers: { self } ]
 ]
 
-{ #category : 'accessing' }
-OPUmlClassController >> dependentElements [
-
-	| ownGeneralizations generalizationsFromSets otherClassesGeneralizations |
-	ownGeneralizations := self model generalizations.
-	generalizationsFromSets := nil.
-	generalizationsFromSets := self
-		                           parentPackageDo: [ :parentPackage |
-			                           (parentPackage packagedElements select: [
-				                            :eachPackageElement |
-				                            eachPackageElement oclIsKindOf:
-					                            #GeneralizationSet ])
-				                           flatCollectAsSet: [ :eachSet |
-					                           eachSet generalizations select: [
-						                           :eachGeneralization |
-						                           eachGeneralization general
-						                           = self model or: [
-							                           eachGeneralization specific
-							                           = self model ] ] ] ]
-		                           ifNone: [ #(  ) ].
-	otherClassesGeneralizations := self
-		                               parentPackageDo: [ :parentPackage |
-			                               (parentPackage packagedElements
-				                                select: [ :eachPackageElement |
-				                                eachPackageElement oclIsKindOf:
-					                                #Class ]) flatCollectAsSet: [
-				                               :eachClass |
-				                               eachClass generalizations select: [
-					                               :eachGeneralization |
-					                               eachGeneralization general
-					                               = self model or: [
-						                               eachGeneralization specific
-						                               = self model ] ] ] ]
-		                               ifNone: [ #(  ) ].
-
-	^ super dependentElements , ownGeneralizations
-	  , generalizationsFromSets , otherClassesGeneralizations
-]
-
 { #category : 'forms' }
 OPUmlClassController >> descriptionIsAbstract [
-
-	<magritteDescription>
-	^ MABooleanDescription new
-		  accessor: (self descriptionAccessor: #isAbstract);
-		  label: 'Is Abstract';
-		  priority: 5;
-		  yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsAbstract' -> '`@receiver viewModel descriptionIsAbstract'.
+	^ self viewModel descriptionIsAbstract
 ]
 
 { #category : 'forms' }
 OPUmlClassController >> descriptionStereotype [
-
-	<magritteDescription>
-	^ self descriptionStereotypeContent
-]
-
-{ #category : 'figures' }
-OPUmlClassController >> diagramElementClass [
-
-	^ OPUmlClassShape
-]
-
-{ #category : 'accessing' }
-OPUmlClassController >> elementsToShowInside [
-
-	^ self model ownedOperations asSet , self model ownedAttributes
-]
-
-{ #category : 'accessing' }
-OPUmlClassController >> modelClass [
-	^ OPUMLClass
-]
-
-{ #category : 'accessing' }
-OPUmlClassController >> modelClassName [
-
-	^ 'Class'
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionStereotype' -> '`@receiver viewModel descriptionStereotype'.
+	^ self viewModel descriptionStereotype
 ]

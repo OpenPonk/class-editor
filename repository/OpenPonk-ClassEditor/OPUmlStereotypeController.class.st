@@ -1,5 +1,5 @@
 "
-I am a controller for a Stereotype.
+I am the controller for UML Stereotypes within a profile diagram. I extend standard class controller behavior to handle the unique visual and structural rules of defining stereotypes.
 "
 Class {
 	#name : 'OPUmlStereotypeController',
@@ -10,18 +10,12 @@ Class {
 }
 
 { #category : 'construction' }
-OPUmlStereotypeController >> diagramElementClass [
+OPUmlStereotypeController class >> diagramElementClass [
 
 	^ OPUmlStereotypeShape
 ]
 
 { #category : 'accessing' }
-OPUmlStereotypeController >> modelClass [
-	^ OPUMLStereotype
-]
-
-{ #category : 'accessing' }
-OPUmlStereotypeController >> modelClassName [
-
-	^ 'Stereotype'
+OPUmlStereotypeController class >> viewModelClass [
+	^ OPUmlStereotypeViewModel
 ]

@@ -1,3 +1,6 @@
+"
+I am a specialized edge label for UML Associations. I represent the role name (or other end-specific text) at either the source or target end of the association edge, calculating my layout accordingly.
+"
 Class {
 	#name : 'OPUmlAssociationEndLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -17,7 +20,7 @@ OPUmlAssociationEndLabel class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #atSource )
 ]
 
-{ #category : 'accessing' }
+{ #category : 'actions' }
 OPUmlAssociationEndLabel >> atSource [
 
 	atSource := true

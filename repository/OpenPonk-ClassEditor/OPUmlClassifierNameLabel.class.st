@@ -1,3 +1,6 @@
+"
+I am a specialized label for rendering the main name of a UML Classifier. I handle specific emphasis rendering, such as italicizing the text when the represented classifier is abstract.
+"
 Class {
 	#name : 'OPUmlClassifierNameLabel',
 	#superclass : 'OPUmlNameLabel',
@@ -9,7 +12,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'removing' }
+{ #category : 'accessing' }
 OPUmlClassifierNameLabel >> attachedShapes [
 
 	labeled ifNil: [ ^ super attachedShapes ].
@@ -70,7 +73,7 @@ OPUmlClassifierNameLabel >> renderBasicShape [
 	^ labeled labelShape
 ]
 
-{ #category : 'accessing' }
+{ #category : 'rendering' }
 OPUmlClassifierNameLabel >> roassalShape [
 
 	^ labeled

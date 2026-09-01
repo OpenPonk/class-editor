@@ -1,3 +1,6 @@
+"
+I am an abstract base test class verifying common structural and interaction behaviors, such as canvas removal and end detachment, for UML edge shapes.
+"
 Class {
 	#name : 'OPAbstractUmlEdgeTest',
 	#superclass : 'OPAbstractEdgeTest',

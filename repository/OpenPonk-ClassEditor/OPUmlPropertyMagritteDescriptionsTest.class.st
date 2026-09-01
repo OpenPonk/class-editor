@@ -1,9 +1,11 @@
+"
+I am a unit test class verifying the accurate generation of Magritte form descriptions for configuring UML Properties.
+"
 Class {
 	#name : 'OPUmlPropertyMagritteDescriptionsTest',
 	#superclass : 'TestCase',
 	#instVars : [
 		'property',
-		'prefix',
 		'desc',
 		'reader'
 	],

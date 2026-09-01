@@ -1,9 +1,12 @@
+"
+I am a concrete context menu command that hides end labels on a UML relationship shape if they match the default naming convention derived from the connected class names.
+"
 Class {
 	#name : 'OPUmlHideSameAsClassEndLabelsRoassalShapeCommand',
 	#superclass : 'OPUmlSetEndLabelsRoassalShapeCommand',
-	#category : 'OpenPonk-ClassEditor-Commands',
+	#category : 'OpenPonk-ClassEditor-Commands-RoassalShape',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Commands'
+	#tag : 'Commands-RoassalShape'
 }
 
 { #category : 'hooks' }

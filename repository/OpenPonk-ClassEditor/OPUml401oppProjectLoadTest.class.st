@@ -1,3 +1,6 @@
+"
+I am a backward compatibility test class verifying that UML projects saved in OpenPonk version 4.0.1 load correctly without data loss.
+"
 Class {
 	#name : 'OPUml401oppProjectLoadTest',
 	#superclass : 'OPLegacyProjectLoadTest',

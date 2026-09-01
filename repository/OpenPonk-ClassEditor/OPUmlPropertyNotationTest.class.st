@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the correct string formatting of UML Properties, including modifiers, visibility, types, derived status, constraints, and default values.
+"
 Class {
 	#name : 'OPUmlPropertyNotationTest',
 	#superclass : 'TestCase',

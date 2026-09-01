@@ -1,5 +1,5 @@
 "
-I am a plugin for UML Class Diagram
+I am the core plugin for the OpenPonk UML Class Diagram editor. I register the necessary controllers, serializers, layouters, and default profiles (like standard UML primitive types) into the OpenPonk environment.
 "
 Class {
 	#name : 'OPUmlClassEditorPlugin',
@@ -9,7 +9,7 @@ Class {
 	#tag : 'Plugin'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin class >> defaultProfiles [
 	^ {}
 ]

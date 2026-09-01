@@ -1,5 +1,5 @@
 "
-I am a base class for diagram element controllers.
+I am the base controller for UML diagram elements. I provide common logic for property validation, stereotype management, and Magritte form generation.
 "
 Class {
 	#name : 'OPUmlElementController',
@@ -11,18 +11,9 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlElementController >> magritteDescription [
-	| container |
-	container := MAPragmaBuilder for: self.
-	container addAll: self stereotypeMagritteDescription.
-	^ container
-]
-
 { #category : 'connecting' }
 OPUmlElementController >> parentWhenTargetFor: aCreatedController [
-
 	^ aCreatedController isTargetUsedAsContainer
 		  ifTrue: [ self model ]
-		  ifFalse: [ aCreatedController source parentContainerModel ]
+		  ifFalse: [ aCreatedController source viewModel parentContainerModel ]
 ]

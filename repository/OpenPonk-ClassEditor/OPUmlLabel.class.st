@@ -1,3 +1,6 @@
+"
+I am the abstract base label shape for UML elements. I establish priority levels for label placement within UML compartments or edge adornments.
+"
 Class {
 	#name : 'OPUmlLabel',
 	#superclass : 'OPLabel',

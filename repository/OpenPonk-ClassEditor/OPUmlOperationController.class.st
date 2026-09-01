@@ -1,5 +1,5 @@
 "
-I am a controller for Operation.
+I am the controller for UML Operations. I manage UI form descriptions (like the `isAbstract` modifier) and handle the lifecycle of operation shapes within a class compartment.
 "
 Class {
 	#name : 'OPUmlOperationController',
@@ -9,57 +9,27 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
-OPUmlOperationController >> addDiagramElementToOwner [
-
-	self ownerDiagramElement addOperation: self diagramElement
-]
-
 { #category : 'construction' }
-OPUmlOperationController >> createModelIn: aParentModel [
-
-	^ (super createModelIn: aParentModel)
-		  name: 'operation';
-		  yourself
-]
-
-{ #category : 'forms' }
-OPUmlOperationController >> descriptionIsAbstract [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isAbstract);
-		label: 'Is Abstract';
-		priority: 5;
-		yourself
-]
-
-{ #category : 'figures' }
-OPUmlOperationController >> diagramElementClass [
+OPUmlOperationController class >> diagramElementClass [
 
 	^ OPUmlOperationLabel
 ]
 
 { #category : 'accessing' }
-OPUmlOperationController >> modelClass [
-	^ OPUMLOperation
+OPUmlOperationController class >> viewModelClass [
+	^ OPUmlOperationViewModel
 ]
 
-{ #category : 'diagram elements' }
-OPUmlOperationController >> owner [
+{ #category : 'adding' }
+OPUmlOperationController >> addDiagramElementToOwner [
 
-	^ diagramController controllerForModel: self model owningClass
+	self intendedOwningDiagramElement addOperation: self diagramElement
 ]
 
-{ #category : 'hooks' }
-OPUmlOperationController >> placeholderName [
-
-	^ 'operation'
-]
-
-{ #category : 'construction' }
-OPUmlOperationController >> registerModelInContainer: aParentModel [
-
-	aParentModel ownedOperations add: self model
+{ #category : 'forms' }
+OPUmlOperationController >> descriptionIsAbstract [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsAbstract' -> '`@receiver viewModel descriptionIsAbstract'.
+	^ self viewModel descriptionIsAbstract
 ]
 
 { #category : 'destruction' }
@@ -69,15 +39,4 @@ OPUmlOperationController >> removeDiagramElement [
 	self diagramElementOwnerWithPossibleController ifNotNil: [ :owner |
 		owner removeOperation: self diagramElement ].
 	self diagramElement: nil
-]
-
-{ #category : 'validation' }
-OPUmlOperationController >> validate [
-
-	super validate.
-	self model ifNil: [ ^ self ].
-	self model owningClass ifNotNil: [ ^ self ].
-	OPModelInvalid signal: (String streamContents: [ :s |
-			 self model printOn: s.
-			 s << ' has no owning class' ])
 ]

@@ -1,5 +1,5 @@
 "
-I take a model element and provide a list of magritte descriptions for all the properties added by stereotypes applied to the model element.
+I dynamically generate Magritte descriptions for the extended properties injected by UML stereotypes applied to a model element. I integrate profile-specific metadata into the standard property editing forms.
 "
 Class {
 	#name : 'OPUmlStereotypeDescriptions',

@@ -1,3 +1,6 @@
+"
+I am a trait used by UML shapes (such as classes or packages) that need to automatically adjust their spatial extent to fit their contained elements (like attributes or inner shapes). I provide methods for padding and minimum extent calculations.
+"
 Trait {
 	#name : 'OPTUmlAutoAccomodatingShape',
 	#category : 'OpenPonk-ClassEditor-DiagramElements',
@@ -40,11 +43,13 @@ OPTUmlAutoAccomodatingShape >> extentToFitContents [
 	| totalHeight maxWidth |
 	totalHeight := 0.
 	maxWidth := 0.
-	self ownedElements do: [ :each | 
-		| extentOfEachContents |
-		extentOfEachContents := self extentToFit: each.
-		maxWidth := maxWidth max: extentOfEachContents x.
-		totalHeight := totalHeight + extentOfEachContents y ].
+	self ownedElements
+		select: [ :each | each isRendered ]
+		thenDo: [ :each |
+				| extentOfEachContents |
+				extentOfEachContents := self extentToFit: each.
+				maxWidth := maxWidth max: extentOfEachContents x.
+				totalHeight := totalHeight + extentOfEachContents y ].
 
 	^ maxWidth + self leftPadding + self rightPadding
 	  @ (totalHeight + self topPadding + self bottomPadding)

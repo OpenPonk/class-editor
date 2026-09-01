@@ -1,3 +1,6 @@
+"
+I am the abstract base label for items contained within a classifier's compartments (such as attributes, operations, or literals). I manage selection behavior and strict layout constraints within my owner compartment.
+"
 Class {
 	#name : 'OPUmlClassifierItemLabel',
 	#superclass : 'OPUmlNameLabel',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'rendering' }
 OPUmlClassifierItemLabel >> addedByMouseClickTo: aPoint [
 
 	"do nothing"
@@ -26,7 +29,7 @@ OPUmlClassifierItemLabel >> modelChanged [
 	self owningElement modelChanged
 ]
 
-{ #category : 'rendering' }
+{ #category : 'interactions' }
 OPUmlClassifierItemLabel >> selectableInteraction [
 
 	^ OPRSSelectable highlightColorBlue

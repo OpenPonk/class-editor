@@ -1,3 +1,6 @@
+"
+I am the base controller for UML Associations (both directed and bidirectional). I subscribe to property navigability changes and update the relationship arrow markers accordingly.
+"
 Class {
 	#name : 'OPUmlAbstractAssociationController',
 	#superclass : 'OPUmlRelationshipController',
@@ -12,15 +15,8 @@ OPUmlAbstractAssociationController >> classAttributeChanged [
 	super modelChanged
 ]
 
-{ #category : 'accessing' }
-OPUmlAbstractAssociationController >> elementsToShowInside [
-
-	^ super elementsToShowInside , self model memberEnds
-]
-
 { #category : 'announcements' }
 OPUmlAbstractAssociationController >> modelChanged [
-
 	super modelChanged.
 	self model memberEnds
 		select: [ :each | each owningClass isNotNil ]
@@ -30,49 +26,29 @@ OPUmlAbstractAssociationController >> modelChanged [
 				ifFound: [ :controller | controller associationChanged ] ]
 ]
 
-{ #category : 'accessing' }
-OPUmlAbstractAssociationController >> modelSource [
-
-	^ self model memberEnds ifNotEmpty: [ :memberEnds |
-		  memberEnds first type ]
+{ #category : 'announcements' }
+OPUmlAbstractAssociationController >> navigabilityChanged: anAnnouncement [
+	| prop |
+	prop := anAnnouncement property.
+	prop owningClass
+		ifNotNil: [ 
+			self diagramController showInDiagramModel: prop.
+			self diagramController controllerForModel: prop ifFound: [ :c | c associationChanged ] ]
+		ifNil: [ 
+			self diagramController controllerForModel: prop ifFound: [ :c | c removeControllerAndDiagramElement ] ]
 ]
 
-{ #category : 'accessing' }
-OPUmlAbstractAssociationController >> modelTarget [
-
-	^ self model memberEnds size > 1
-		  ifTrue: [ self model memberEnds second type ]
-		  ifFalse: [ nil ]
-]
-
-{ #category : 'removing' }
-OPUmlAbstractAssociationController >> removeModel [
-
-	[ self model memberEnds isNotEmpty ] whileTrue: [
-		| end |
-		end := self model memberEnds anyOne.
-		end association: nil.
-		end owningClass: nil.
-		end owningAssociation: nil ].
-	super removeModel
-]
-
-{ #category : 'validation' }
-OPUmlAbstractAssociationController >> validate [
-
-	super validate.
-	self validateMemberEndCount.
-	self model memberEnds do: [ :each | self validateProperty: each ].
-	self model attributes do: [ :each | self validateProperty: each ]
+{ #category : 'announcements' }
+OPUmlAbstractAssociationController >> subscribeToViewModel [
+	super subscribeToViewModel.
+	self viewModel announcer weak
+		when: OPUmlNavigabilityChanged
+		send: #navigabilityChanged:
+		to: self
 ]
 
 { #category : 'validation' }
 OPUmlAbstractAssociationController >> validateMemberEndCount [
-
-	self model memberEnds size = 2 ifTrue: [ ^ self ].
-
-	OPModelInvalid signal: (String streamContents: [ :s |
-			 s << self model asString << '" has '
-			 << self model memberEnds size asString
-			 << ' memberEnds instead of 2' ])
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver validateMemberEndCount' -> '`@receiver viewModel validateMemberEndCount'.
+	^ self viewModel validateMemberEndCount
 ]

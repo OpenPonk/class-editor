@@ -1,5 +1,5 @@
 "
-I am a controller for an Enumeration
+I am the controller for UML Enumerations. I manage canvas interactions and provide specific adornment handles for creating new enumeration literals directly from the UI.
 "
 Class {
 	#name : 'OPUmlEnumerationController',
@@ -9,7 +9,18 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'adding' }
+{ #category : 'construction' }
+OPUmlEnumerationController class >> diagramElementClass [
+
+	^ OPUmlEnumerationShape
+]
+
+{ #category : 'accessing' }
+OPUmlEnumerationController class >> viewModelClass [
+	^ OPUmlEnumerationViewModel
+]
+
+{ #category : 'connecting' }
 OPUmlEnumerationController >> canBeTargetFor: aController [
 	^ (aController isKindOf: OPUmlEnumerationLiteralController)
 		| (aController isKindOf: OPUmlAssociationController)
@@ -41,26 +52,4 @@ OPUmlEnumerationController >> createModel [
 	^ self modelClass new
 		name: 'Enumeration';
 		yourself
-]
-
-{ #category : 'construction' }
-OPUmlEnumerationController >> diagramElementClass [
-
-	^ OPUmlEnumerationShape
-]
-
-{ #category : 'figures' }
-OPUmlEnumerationController >> elementsToShowInside [
-	^ self model ownedLiterals asSet
-]
-
-{ #category : 'accessing' }
-OPUmlEnumerationController >> modelClass [
-	^ OPUMLEnumeration
-]
-
-{ #category : 'accessing' }
-OPUmlEnumerationController >> modelClassName [
-
-	^ 'Enumeration'
 ]

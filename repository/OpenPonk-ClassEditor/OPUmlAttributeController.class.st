@@ -1,5 +1,5 @@
 "
-I am a controller for an attribute of a classifier.
+I am the controller for UML Properties (Attributes). I manage UI form descriptions for type, multiplicity, uniqueness, and ordering, and handle diagram interactions when attributes are re-assigned or moved to associations.
 "
 Class {
 	#name : 'OPUmlAttributeController',
@@ -9,10 +9,21 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
+{ #category : 'construction' }
+OPUmlAttributeController class >> diagramElementClass [
+
+	^ OPUmlAttributeLabel
+]
+
+{ #category : 'accessing' }
+OPUmlAttributeController class >> viewModelClass [
+	^ OPUmlClassPropertyViewModel
+]
+
+{ #category : 'adding' }
 OPUmlAttributeController >> addDiagramElementToOwner [
 
-	self ownerDiagramElement addAttribute: self diagramElement
+	self intendedOwningDiagramElement addAttribute: self diagramElement
 ]
 
 { #category : 'announcements' }
@@ -21,152 +32,54 @@ OPUmlAttributeController >> associationChanged [
 	super modelChanged
 ]
 
-{ #category : 'figures' }
+{ #category : 'construction' }
 OPUmlAttributeController >> createDiagramElement [
 
 	(self model name isNil or: [ self model name trim isEmpty ]) ifTrue: [
-		self model name: self placeholderName ].
+		self model name: self viewModel placeholderName ].
 	^ super createDiagramElement
-]
-
-{ #category : 'construction' }
-OPUmlAttributeController >> createModelIn: aClass [
-
-	^ (super createModelIn: aClass)
-		  name: self placeholderName;
-		  yourself
-]
-
-{ #category : 'construction' }
-OPUmlAttributeController >> dependingOnElements [
-
-	| asSetOrEmpty |
-	asSetOrEmpty := [ :nullableElement |
-	                nullableElement
-		                ifNil: [ Set empty ]
-		                ifNotNil: [ :element | Set with: element ] ].
-
-	^ super dependingOnElements
-	  , (asSetOrEmpty value: self model owningAssociation)
 ]
 
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionDefaultValue [
-
-	<magritteDescription>
-	^ MAStringDescription new
-		  accessor: (self descriptionAccessor: #defaultValue);
-		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   me model defaultValue ifNil: [ '' ] ifNotNil: [
-							   (me model defaultValue isKindOf: OPUMLOpaqueExpression)
-								   ifTrue: [ me model defaultValue bodies first ]
-								   ifFalse: [ '' ] ] ]
-				   write: [ :me :newValue |
-					   me model defaultValue ifNil: [
-							   me model defaultValue: OPUMLOpaqueExpression new ].
-					   (me model defaultValue isKindOf: OPUMLOpaqueExpression)
-						   ifTrue: [
-							   me model defaultValue bodies:
-									   (newValue ifEmpty: [ {  } ] ifNotEmpty: [ { newValue } ]) ].
-					   self modelChanged ]);
-		  label: 'Default Value';
-		  priority: 42;
-		  yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionDefaultValue' -> '`@receiver viewModel descriptionDefaultValue'.
+	^ self viewModel descriptionDefaultValue
 ]
 
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionIsDerived [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isDerived);
-		label: 'Is Derived';
-		priority: 15;
-		yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsDerived' -> '`@receiver viewModel descriptionIsDerived'.
+	^ self viewModel descriptionIsDerived
 ]
 
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionIsOrdered [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isOrdered);
-		label: 'Is Ordered';
-		priority: 35;
-		yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsOrdered' -> '`@receiver viewModel descriptionIsOrdered'.
+	^ self viewModel descriptionIsOrdered
 ]
 
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionIsReadOnly [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isReadOnly);
-		label: 'Is Read Only';
-		priority: 14;
-		yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsReadOnly' -> '`@receiver viewModel descriptionIsReadOnly'.
+	^ self viewModel descriptionIsReadOnly
 ]
 
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionIsUnique [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isUnique);
-		label: 'Is Unique';
-		priority: 36;
-		yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsUnique' -> '`@receiver viewModel descriptionIsUnique'.
+	^ self viewModel descriptionIsUnique
 ]
 
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionMultiplicity [
-
-	<magritteDescription>
-	^ MASingleOptionDescription new
-		  beExtensible;
-		  options: #( '0..1' '1..1' '0..*' '1..*' );
-		  reference: MAStringDescription new;
-		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   me model lowerBound asString , '..'
-					   , me model upperBound asString ]
-				   write: [ :me :newValue |
-					   self writeMultiplicityFrom: newValue to: me model.
-					   self modelChanged ]);
-		  label: 'Multiplicity';
-		  priority: 9;
-		  beSorted;
-		  yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionMultiplicity' -> '`@receiver viewModel descriptionMultiplicity'.
+	^ self viewModel descriptionMultiplicity
 ]
 
 { #category : 'forms' }
 OPUmlAttributeController >> descriptionType [
-
-	<magritteDescription>
-	| description writeBlock |
-	description := MAStringDescription new.
-	writeBlock := self model association
-		              ifNotNil: [
-			              description beReadOnly.
-			              [ :me :newValue |  ] ]
-		              ifNil: [
-			              [ :me :newValue |
-			              newValue
-				              ifEmpty: [ me model type: nil ]
-				              ifNotEmpty: [
-				              me model type: (self typeNamed: newValue) ].
-			              self modelChanged ] ].
-	description
-		accessor: (MAPluggableAccessor
-				 read: [ :me |
-					 me model type ifNil: [ '' ] ifNotNil: [ :type | type name ] ]
-				 write: writeBlock);
-		label: 'Type';
-		priority: 5.
-	^ description
-]
-
-{ #category : 'figures' }
-OPUmlAttributeController >> diagramElementClass [
-
-	^ OPUmlAttributeLabel
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionType' -> '`@receiver viewModel descriptionType'.
+	^ self viewModel descriptionType
 ]
 
 { #category : 'announcements' }
@@ -179,43 +92,6 @@ OPUmlAttributeController >> modelChanged [
 			ifFound: [ :controller | controller classAttributeChanged ] ]
 ]
 
-{ #category : 'accessing' }
-OPUmlAttributeController >> modelClass [
-	^ OPUMLProperty
-]
-
-{ #category : 'diagram elements' }
-OPUmlAttributeController >> owner [
-
-	^ diagramController controllerForModel:
-		  (self model owningClass ifNil: [
-			   (self model owningAssociation memberEnds detect: [ :any |
-				    any ~= self model ]) type ])
-]
-
-{ #category : 'hooks' }
-OPUmlAttributeController >> placeholderName [
-
-	(self model isNil or: [
-		 self model type isNil or: [
-			 self model type name isNil or: [ self model type name isEmpty ] ] ])
-		ifTrue: [ ^ 'attribute' ].
-	^ String streamContents: [ :s |
-		  | words |
-		  words := (self model type name select: [ :each |
-			            each isAlphaNumeric or: [ each isSeparator ] ])
-			           splitOn: [ :each | each isSeparator ].
-		  s << words first first asLowercase asString.
-		  s << words first allButFirst asString.
-		  words allButFirstDo: [ :eachWord | s << eachWord capitalized ] ]
-]
-
-{ #category : 'construction' }
-OPUmlAttributeController >> registerModelInContainer: aClass [
-
-	aClass ownedAttributes add: self model
-]
-
 { #category : 'destruction' }
 OPUmlAttributeController >> removeDiagramElement [
 
@@ -226,53 +102,22 @@ OPUmlAttributeController >> removeDiagramElement [
 ]
 
 { #category : 'removing' }
-OPUmlAttributeController >> removeModel [
-	"could be any of those, so just nil all of them"
-
-	self model association ifNotNil: [ ^ self switchOwnerToAssociation ].
-	self model owningAssociation: nil.
-	super removeModel
-]
-
-{ #category : 'removing' }
 OPUmlAttributeController >> switchOwnerToAssociation [
 
 	self model owningClass: nil.
 	self model owningAssociation: self model association
 ]
 
-{ #category : 'accessing' }
+{ #category : 'deprecation' }
 OPUmlAttributeController >> typeNamed: aName [
-	OPUMLXMISpecsStorage primitivesMap at: aName ifPresent: [ :prim | ^ prim ].
-	(diagramController model packagedElements select: [ :each | each oclIsKindOf: #Type ])
-		detect: [ :each | each name = aName ]
-		ifFound: [ :type | ^ type ].
-	^ OPUMLClass new name: aName
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver typeNamed: `@arg1' -> '`@receiver viewModel typeNamed: `@arg1'.
+	^ self viewModel typeNamed: aName
 ]
 
-{ #category : 'validation' }
-OPUmlAttributeController >> validate [
-
-	super validate.
-	self validateProperty: self model
-]
-
-{ #category : 'forms' }
+{ #category : 'parsing' }
 OPUmlAttributeController >> writeMultiplicityFrom: aString to: aProperty [
-	| values |
-	(aString includesSubstring: '..')
-		ifTrue: [ | split |
-			split := aString splitOn: '..'.
-			values := {split first asNumber.
-			split second = '*'
-				ifTrue: [ '*' ]
-				ifFalse: [ split second asNumber ]} ]
-		ifFalse: [ aString = '*'
-				ifTrue: [ values := #(0 '*') ]
-				ifFalse: [ values := {aString asNumber.
-					aString asNumber} ] ].
-	aProperty lowerValue ifNil: [ aProperty lowerValue: OPUMLLiteralInteger new ].
-	aProperty upperValue ifNil: [ aProperty upperValue: OPUMLLiteralUnlimitedNatural new ].
-	aProperty lowerValue value: values first.
-	aProperty upperValue value: values second
+	self
+		deprecated: 'Use viewModel instead'
+		transformWith: '`@receiver writeMultiplicityFrom: `@arg1 to: `@arg2' -> '`@receiver viewModel writeMultiplicityFrom: `@arg1 to: `@arg2'.
+	^ self viewModel writeMultiplicityFrom: aString to: aProperty
 ]

@@ -1,3 +1,6 @@
+"
+I am an edge label used to display specific property constraints on a UML Association end, such as `{ordered}` or `{readOnly}`.
+"
 Class {
 	#name : 'OPUmlAssociationPropertiesLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationPropertiesLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5

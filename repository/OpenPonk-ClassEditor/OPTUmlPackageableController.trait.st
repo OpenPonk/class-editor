@@ -1,87 +1,51 @@
+"
+I am a trait for controllers representing UML elements that can be packaged (like classes, data types, or sub-packages). I manage logic related to hidden packages and resolving the closest rendered parent package controller.
+"
 Trait {
 	#name : 'OPTUmlPackageableController',
-	#instVars : [
-		'packages'
-	],
+	#traits : 'OPTUmlBaseController',
+	#classTraits : 'OPTUmlBaseController classTrait',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
 }
 
 { #category : 'accessing' }
-OPTUmlPackageableController >> closestRenderedPackageControllerDo: aBlock [
+OPTUmlPackageableController >> closestRenderedParentPackageControllerDo: aBlock [
 
-	self packageHierarchy reverseDo: [ :any |
-		self diagramController
-			controllerForModel: any
-			ifFound: [ :parentPackageController |
-				parentPackageController isRendered ifTrue: [
-					^ aBlock value: parentPackageController ] ] ]
-]
-
-{ #category : 'accessing' }
-OPTUmlPackageableController >> findPackageHierarchyIn: packagesList [
-
-	| packagedElements |
-	packagedElements := packagesList last packagedElements.
-	(packagedElements identityIncludes: self packagedModel) ifTrue: [
-		^ packagesList ].
-	packagedElements
-		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :each |
-			(self findPackageHierarchyIn: (packagesList copyWith: each))
-				ifNotEmpty: [ :foundList | ^ foundList ] ].
-	^ #(  )
+	| closestPackageViewModel controller |
+	closestPackageViewModel := self viewModel parentPackageViewModel.
+	controller := nil.
+	[
+		closestPackageViewModel isNil or: [
+				self diagramController
+					controllerForModel: closestPackageViewModel model
+					ifFound: [ :parentPackageController |
+						(controller := parentPackageController) isRendered ]
+					ifNone: [ false ] ] ] whileFalse: [
+			closestPackageViewModel := closestPackageViewModel
+				                           parentPackageViewModel ].
+	closestPackageViewModel ifNil: [ ^ self ].
+	^ aBlock value: controller
 ]
 
 { #category : 'accessing' }
 OPTUmlPackageableController >> hiddenPackages [
 
-	| hiddenPackages |
-	hiddenPackages := LinkedList new.
-	self packageHierarchy reverseDo: [ :each |
-		self diagramController
-			controllerForModel: each
-			ifFound: [ :ctrl | ctrl isRendered ifTrue: [ ^ hiddenPackages ] ].
-		hiddenPackages addFirst: each ].
-	^ hiddenPackages
-]
+	| closestPackageViewModel hiddenPackages |
+	closestPackageViewModel := self viewModel packageViewModel.
+	hiddenPackages := OrderedCollection new.
 
-{ #category : 'accessing' }
-OPTUmlPackageableController >> packageHierarchy [
+	[
+		closestPackageViewModel isNotNil and: [
+				self diagramController
+					controllerForModel: closestPackageViewModel model
+					ifFound: [ :parentPackageController |
+					parentPackageController isRendered not ]
+					ifNone: [ true ] ] ] whileTrue: [
+			hiddenPackages add: closestPackageViewModel.
+			closestPackageViewModel := closestPackageViewModel
+				                           parentPackageViewModel ].
 
-	^ packages ifNil: [
-		  packages := self findPackageHierarchyIn: { self diagramController model } ]
-]
-
-{ #category : 'accessing' }
-OPTUmlPackageableController >> packagedModel [
-
-	^ self model
-]
-
-{ #category : 'removing' }
-OPTUmlPackageableController >> parentContainerModel [
-
-	^ self parentPackageDo: [ :parentPackage | parentPackage ]
-]
-
-{ #category : 'enumerating' }
-OPTUmlPackageableController >> parentPackageDo: aBlock [
-
-	^ aBlock value: (self packageHierarchy ifEmpty: [ ^ nil ]) last
-]
-
-{ #category : 'accessing' }
-OPTUmlPackageableController >> parentPackageDo: aBlock ifNone: noneBlock [
-
-	^ aBlock value: (self packageHierarchy ifEmpty: [ ^ noneBlock value ]) last
-]
-
-{ #category : 'removing' }
-OPTUmlPackageableController >> removeModel [
-
-	self parentPackageDo: [ :parentPackage |
-		parentPackage packagedElements remove: self model ifAbsent: [  ] ].
-	super removeModel
+	^ hiddenPackages reversed
 ]

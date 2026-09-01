@@ -1,3 +1,6 @@
+"
+I am a Spec wizard presenter guiding the user through the process of compiling and generating Pharo classes and extension methods from a designed UML Profile model.
+"
 Class {
 	#name : 'OPUmlProfileGeneratorWizard',
 	#superclass : 'SpPresenter',

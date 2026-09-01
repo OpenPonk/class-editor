@@ -1,3 +1,6 @@
+"
+I am a UI integration test class verifying the OpenPonk UML editor workbench interactions, such as opening the editor and inserting classes via the palette.
+"
 Class {
 	#name : 'OPUmlEditorWorkbenchTest',
 	#superclass : 'TestCase',

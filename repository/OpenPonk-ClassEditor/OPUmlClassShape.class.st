@@ -1,5 +1,5 @@
 "
-I am a classifier shape composition to accomodate for the most common UML Class Diagram shape.
+I am the primary diagram shape for a UML Class. I compose a bounding box with specific compartments for attributes and operations, handling the addition, removal, and sorting of these inner elements.
 "
 Class {
 	#name : 'OPUmlClassShape',

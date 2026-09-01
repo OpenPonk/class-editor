@@ -1,3 +1,6 @@
+"
+I am an edge label for UML Generalizations. I typically display textual constraints relating to Generalization Sets, such as `{overlapping, incomplete}`.
+"
 Class {
 	#name : 'OPUmlGeneralizationLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlGeneralizationLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5

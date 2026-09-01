@@ -1,3 +1,6 @@
+"
+I am the base bounding shape for UML Classifiers (like Classes and Data Types). I inherit compartment layout capabilities and manage stereotype labels, comment icons, and adornment creation handles.
+"
 Class {
 	#name : 'OPUmlClassifierShape',
 	#superclass : 'OPUmlCompartmentableShape',
@@ -59,13 +62,13 @@ OPUmlClassifierShape >> hasModelComments [
 			  any body isNotNil and: [ any body isNotEmpty ] ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'rendering' }
 OPUmlClassifierShape >> minExtent [
 
 	^ 100 @ 61
 ]
 
-{ #category : 'hooks' }
+{ #category : 'interactions' }
 OPUmlClassifierShape >> selectableInteraction [
 
 	| selectableInteraction |

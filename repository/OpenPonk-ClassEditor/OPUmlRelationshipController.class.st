@@ -1,5 +1,5 @@
 "
-I am an abstract controller for relationship-type elements.
+I am the abstract base controller for directed UML relationships (like associations or generalizations). I integrate stereotyped properties and package visibility into the relationship logic.
 "
 Class {
 	#name : 'OPUmlRelationshipController',
@@ -10,19 +10,3 @@ Class {
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
 }
-
-{ #category : 'accessing' }
-OPUmlRelationshipController >> magritteDescription [
-	| container |
-	container := MAPragmaBuilder for: self.
-	container addAll: self stereotypeMagritteDescription.
-	^ container
-]
-
-{ #category : 'construction' }
-OPUmlRelationshipController >> registerModelInContainer: aParentModel [
-
-	(aParentModel ifNil: [
-		 (diagramController ifNil: [ source ifNil: [ target ] ])
-			 diagramController model ]) packagedElements add: self model
-]

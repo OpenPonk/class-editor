@@ -1,3 +1,6 @@
+"
+I am an edge label responsible for displaying the applied stereotypes (e.g., `<<create>>`) along a UML Association edge.
+"
 Class {
 	#name : 'OPUmlAssociationStereotypesLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -6,13 +9,13 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationStereotypesLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationStereotypesLabel >> defaultMinDistance [
 
 	^ 0

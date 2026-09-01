@@ -1,3 +1,6 @@
+"
+I am the abstract base Roassal node for content that can be placed inside a structured UML compartment. I manage basic layout and spatial positioning relative to my owner.
+"
 Class {
 	#name : 'OPUmlCompartmentableContent',
 	#superclass : 'OPNode',
@@ -32,7 +35,7 @@ OPUmlCompartmentableContent >> translateTopTo: aCoordinateY [
 	self layoutOwnedElements
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'geometry' }
 OPUmlCompartmentableContent >> xCoordinateForOwner [
 
 	^ self subclassResponsibility

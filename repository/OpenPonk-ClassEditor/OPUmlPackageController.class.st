@@ -1,5 +1,5 @@
 "
-I am a controller for Package/Model/Profile
+I am the controller for UML Packages, Models, and Profiles. I manage nested elements, generalization sets, visibility configurations, and canvas rendering for package-like elements.
 "
 Class {
 	#name : 'OPUmlPackageController',
@@ -14,9 +14,24 @@ Class {
 	#tag : 'Controllers'
 }
 
+{ #category : 'construction' }
+OPUmlPackageController class >> diagramElementClass [
+
+	^ OPUmlPackageShape
+]
+
+{ #category : 'accessing' }
+OPUmlPackageController class >> viewModelClass [
+	^ OPUmlPackageViewModel
+]
+
 { #category : 'configuration' }
 OPUmlPackageController >> beForModel [
-	modelClass := OPUMLPackage
+
+	self
+		deprecated: 'Use beForPackage instead'
+		transformWith: '`@receiver beForModel' -> '`@receiver beForPackage'.
+	^ self beForPackage
 ]
 
 { #category : 'configuration' }
@@ -29,53 +44,18 @@ OPUmlPackageController >> beForProfile [
 	modelClass := OPUMLProfile
 ]
 
-{ #category : 'testing' }
+{ #category : 'connecting' }
 OPUmlPackageController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlPackageImportController
 ]
 
-{ #category : 'testing' }
+{ #category : 'connecting' }
 OPUmlPackageController >> canBeTargetFor: aController [
 
 	^ (aController isKindOf: OPUmlPackageImportController) or: [ 
 		  (aController isKindOf: OPUmlClassController) or: [ 
 			  (aController isKindOf: OPUmlPackageController) or: [ 
 				  aController isKindOf: OPUmlEnumerationController ] ] ]
-]
-
-{ #category : 'construction' }
-OPUmlPackageController >> createModelIn: aParentModel [
-
-	super createModelIn: aParentModel.
-	self model name: (self model oclClassifierNameFrom: self model class).
-	^ self model
-]
-
-{ #category : 'accessing' }
-OPUmlPackageController >> dependentElements [
-
-	| mainTypes imports importsOfMe |
-	mainTypes := (self model packagedElements select: [ :each |
-		              { #Class. #Package. #Enumeration } anySatisfy: [ :any |
-			              each oclIsKindOf: any ] ]) asSet.
-	imports := self model packageImports.
-
-	importsOfMe := self
-		               parentPackageDo: [ :parentPackage |
-			               (parentPackage packagedElements select: [ :each |
-				                each oclIsKindOf: #Package ]) flatCollectAsSet: [
-				               :eachPackagedElement |
-				               eachPackagedElement packageImports select: [
-					               :eachImport |
-					               eachImport importingNamespace = self model ] ] ]
-		               ifNone: [ #(  ) ].
-	^ mainTypes , imports , importsOfMe
-]
-
-{ #category : 'figures' }
-OPUmlPackageController >> diagramElementClass [
-
-	^ OPUmlPackageShape
 ]
 
 { #category : 'construction' }
@@ -93,12 +73,6 @@ OPUmlPackageController >> hookDiagramElement [
 	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
-{ #category : 'accessing' }
-OPUmlPackageController >> modelClass [
-	modelClass ifNil: [ self beForPackage ].
-	^ modelClass
-]
-
 { #category : 'updating' }
 OPUmlPackageController >> packageRenderChanged [
 
@@ -112,14 +86,8 @@ OPUmlPackageController >> packageRenderChanged [
 OPUmlPackageController >> pushBack [
 
 	self diagramElement pushBack.
-	self closestRenderedPackageControllerDo: [ :packageController |
+	self closestRenderedParentPackageControllerDo: [ :packageController |
 		^ packageController pushBack ]
-]
-
-{ #category : 'construction' }
-OPUmlPackageController >> registerModelInContainer: aParentModel [
-
-	aParentModel packagedElements add: self model
 ]
 
 { #category : 'destruction' }

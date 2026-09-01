@@ -1,12 +1,15 @@
+"
+I am a context menu command to toggle or configure the visibility of end labels (such as multiplicities and role names) on UML relationship shapes.
+"
 Class {
 	#name : 'OPUmlEndLabelsRoassalShapeCommand',
 	#superclass : 'OPRoassalShapeCommand',
 	#instVars : [
 		'relevantDiagramElements'
 	],
-	#category : 'OpenPonk-ClassEditor-Commands',
+	#category : 'OpenPonk-ClassEditor-Commands-RoassalShape',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Commands'
+	#tag : 'Commands-RoassalShape'
 }
 
 { #category : 'testing' }

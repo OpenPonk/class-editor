@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlGeneralizationController, focusing on source/target assignments and description configurations.
+"
 Class {
 	#name : 'OPUmlGeneralizationControllerTest',
 	#superclass : 'OPUmlRelationshipControllerTest',
@@ -6,18 +9,28 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlGeneralizationControllerTest >> controllerClass [
-	^ OPUmlGeneralizationController
-]
-
-{ #category : 'construction' }
-OPUmlGeneralizationControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlGeneralizationControllerTest class >> diagramElementClass [
 
 	^ OPUmlGeneralizationShape
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
+OPUmlGeneralizationControllerTest >> assignModelSource [
+	model specific: sourceModel
+]
+
+{ #category : 'initialization' }
+OPUmlGeneralizationControllerTest >> assignModelTarget [
+	model general: targetModel
+]
+
+{ #category : 'constants' }
+OPUmlGeneralizationControllerTest >> controllerClass [
+	^ OPUmlGeneralizationController
+]
+
+{ #category : 'constants' }
 OPUmlGeneralizationControllerTest >> modelClass [
 	^ OPUMLGeneralization
 ]
@@ -25,5 +38,6 @@ OPUmlGeneralizationControllerTest >> modelClass [
 { #category : 'tests' }
 OPUmlGeneralizationControllerTest >> testDescriptionName [
 
-	self assert: controller descriptionName equals: nil
+	self prepareToShow.
+	self assert: controller viewModel descriptionName equals: nil
 ]

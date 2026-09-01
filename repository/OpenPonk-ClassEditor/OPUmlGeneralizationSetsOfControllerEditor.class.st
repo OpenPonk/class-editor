@@ -1,3 +1,6 @@
+"
+I am a specialized Spec presenter extending OPUmlGeneralizationSetsEditor. I am scoped to a specific UML Generalization controller, allowing the user to add, remove, and manage the generalization sets specifically associated with that single generalization.
+"
 Class {
 	#name : 'OPUmlGeneralizationSetsOfControllerEditor',
 	#superclass : 'OPUmlGeneralizationSetsEditor',
@@ -118,8 +121,8 @@ OPUmlGeneralizationSetsOfControllerEditor >> processNewIn: originalSets basedOn:
 	setsToCreate := newSetCopies select: [ :each |
 		                originalSets noneSatisfy: [ :none |
 			                none uuid = each uuid ] ].
-	controller source parentPackageDo: [ :package |
-		package packagedElements addAll: setsToCreate ].
+	controller source viewModel parentPackageViewModel packagedElements
+		addAll: setsToCreate.
 	^ originalSets , setsToCreate
 ]
 
@@ -148,7 +151,7 @@ OPUmlGeneralizationSetsOfControllerEditor >> removeFromSet: aSet [
 	partOfSets removeAllSuchThat: [ :each | each uuid = aSet uuid ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'updating' }
 OPUmlGeneralizationSetsOfControllerEditor >> updateShapesOf: generalizations [
 
 	super updateShapesOf: (generalizations copyWith: controller model)

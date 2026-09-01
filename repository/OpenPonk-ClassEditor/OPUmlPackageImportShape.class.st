@@ -1,5 +1,5 @@
 "
-I represent a import line from importing to imported package.
+I am an edge shape representing a UML PackageImport. I render the visual line (typically dashed) connecting an importing namespace to the imported package.
 "
 Class {
 	#name : 'OPUmlPackageImportShape',
@@ -9,7 +9,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'hooks' }
+{ #category : 'Roassal2 - accessing' }
 OPUmlPackageImportShape >> headMarker [
 
 	^ OPRSMarkerBuilder arrow

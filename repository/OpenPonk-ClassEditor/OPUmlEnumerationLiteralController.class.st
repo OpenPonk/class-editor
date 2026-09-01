@@ -1,5 +1,5 @@
 "
-I am a controller for an EnumerationLiteral.
+I am the controller for UML EnumerationLiterals. I ensure that new literal visuals are appropriately added to the parent Enumeration's compartment rather than the root canvas.
 "
 Class {
 	#name : 'OPUmlEnumerationLiteralController',
@@ -9,54 +9,21 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'figures' }
-OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
-
-	self ownerDiagramElement addLiteral: self diagramElement
-]
-
 { #category : 'construction' }
-OPUmlEnumerationLiteralController >> createModelIn: aParentModel [
-
-	^ (super createModelIn: aParentModel)
-		  name: self placeholderName;
-		  yourself
-]
-
-{ #category : 'construction' }
-OPUmlEnumerationLiteralController >> dependingOnElements [
-
-	^ super dependingOnElements , (Set with: self model enumeration)
-]
-
-{ #category : 'construction' }
-OPUmlEnumerationLiteralController >> diagramElementClass [
+OPUmlEnumerationLiteralController class >> diagramElementClass [
 
 	^ OPUmlEnumerationLiteralLabel
 ]
 
 { #category : 'accessing' }
-OPUmlEnumerationLiteralController >> modelClass [
-	^ OPUMLEnumerationLiteral
+OPUmlEnumerationLiteralController class >> viewModelClass [
+	^ OPUmlEnumerationLiteralViewModel
 ]
 
-{ #category : 'diagram elements' }
-OPUmlEnumerationLiteralController >> owner [
+{ #category : 'adding' }
+OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
 
-	^ diagramController showWithoutDependentInDiagramModel:
-		  self model enumeration
-]
-
-{ #category : 'hooks' }
-OPUmlEnumerationLiteralController >> placeholderName [
-
-	^ 'literal'
-]
-
-{ #category : 'construction' }
-OPUmlEnumerationLiteralController >> registerModelInContainer: aParentModel [
-
-	aParentModel ownedLiterals add: self model
+	self intendedOwningDiagramElement addLiteral: self diagramElement
 ]
 
 { #category : 'destruction' }
@@ -65,23 +32,4 @@ OPUmlEnumerationLiteralController >> removeDiagramElement [
 	self diagramElement ifNotExists: [ ^ self ].
 	self diagramElementOwnerWithPossibleController removeLiteral: self diagramElement.
 	self diagramElement: nil
-]
-
-{ #category : 'removing' }
-OPUmlEnumerationLiteralController >> removeModel [
-	"could be any of those, so just nil all of them"
-
-	self model enumeration: nil.
-	super removeModel
-]
-
-{ #category : 'validation' }
-OPUmlEnumerationLiteralController >> validate [
-
-	super validate.
-	self model ifNil: [ ^ self ].
-	self model enumeration ifNotNil: [ ^ self ].
-	OPModelInvalid signal: (String streamContents: [ :s |
-			 self model printOn: s.
-			 s << ' has no owning enumeration' ])
 ]

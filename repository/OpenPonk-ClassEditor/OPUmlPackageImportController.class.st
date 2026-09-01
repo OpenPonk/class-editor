@@ -1,5 +1,5 @@
 "
-I am a controller for a PackageImport.
+I am a controller for UML PackageImports. I manage the directed relationship where an importing namespace gains visibility into an imported package.
 "
 Class {
 	#name : 'OPUmlPackageImportController',
@@ -9,85 +9,25 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'forms' }
-OPUmlPackageImportController >> descriptionGeneral [
-	"<magritteDescription>
-	^ MAStringDescription new
-		beReadonly;
-		accessor:
-			(MAPluggableAccessor read: [ :me | me model general name ] write: [ :me :newValue |  ]);
-		label: 'General';
-		priority: 1;
-		yourself"
-]
-
-{ #category : 'forms' }
-OPUmlPackageImportController >> descriptionName [
-	^ nil
-]
-
-{ #category : 'forms' }
-OPUmlPackageImportController >> descriptionSpecific [
-"	<magritteDescription>
-	^ MAStringDescription new
-		beReadonly;
-		accessor:
-			(MAPluggableAccessor read: [ :me | me model specific name ] write: [ :me :newValue |  ]);
-		label: 'Specific';
-		priority: 2;
-		yourself"
-]
-
-{ #category : 'forms' }
-OPUmlPackageImportController >> descriptionVisibility [
-	^ nil
-]
-
-{ #category : 'figures' }
-OPUmlPackageImportController >> diagramElementClass [
+{ #category : 'construction' }
+OPUmlPackageImportController class >> diagramElementClass [
 
 	^ OPUmlPackageImportShape
 ]
 
 { #category : 'accessing' }
-OPUmlPackageImportController >> modelClass [
-	^ OPUMLPackageImport
+OPUmlPackageImportController class >> viewModelClass [
+	^ OPUmlPackageImportViewModel
 ]
 
 { #category : 'forms' }
-OPUmlPackageImportController >> modelSource [
-
-	^ self model importingNamespace
-]
-
-{ #category : 'figures' }
-OPUmlPackageImportController >> modelSource: aModel in: aParentModel [
-	"answers whether model's source has been changed"
-
-	self modelSource = aModel ifTrue: [ ^ false ].
-	self model importingNamespace: aModel.
-	^ true
+OPUmlPackageImportController >> descriptionGeneral [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionGeneral' -> '`@receiver viewModel descriptionGeneral'.
+	^ self viewModel descriptionGeneral
 ]
 
 { #category : 'forms' }
-OPUmlPackageImportController >> modelTarget [
-
-	^ self model importedPackage
-]
-
-{ #category : 'figures' }
-OPUmlPackageImportController >> modelTarget: aModel in: aParentModel [
-	"answers whether model's target has been changed"
-
-	self modelTarget = aModel ifTrue: [ ^ false ].
-	self model importedPackage: aModel.
-	^ true
-]
-
-{ #category : 'removing' }
-OPUmlPackageImportController >> removeModel [
-
-	self model importedPackage: nil.
-	self model importingNamespace: nil.
-	super removeModel
+OPUmlPackageImportController >> descriptionSpecific [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionSpecific' -> '`@receiver viewModel descriptionSpecific'.
+	^ self viewModel descriptionSpecific
 ]

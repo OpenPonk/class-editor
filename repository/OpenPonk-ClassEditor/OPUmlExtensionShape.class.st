@@ -1,5 +1,5 @@
 "
-I represent an Extension shape
+I am a specialized edge shape representing a UML Extension relationship, typically drawn between a Stereotype and a base metaclass. I customize the end markers (e.g., filled solid arrow) and disable certain standard association labels.
 "
 Class {
 	#name : 'OPUmlExtensionShape',

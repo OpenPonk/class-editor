@@ -1,3 +1,6 @@
+"
+I am an abstract base test class verifying the behavior of UML shapes containing compartments, focusing on rendering figures, extent recalculations, and nested element ownership.
+"
 Class {
 	#name : 'OPAbstractUmlCompartmentableShapeTest',
 	#superclass : 'OPAbstractUmlShapeTest',
@@ -97,11 +100,11 @@ OPAbstractUmlCompartmentableShapeTest >> testRemoveFromOwnership [
 { #category : 'tests' }
 OPAbstractUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
 
-	| canvas |
-	canvas := RSCanvas new.
-	shape renderIn: canvas.
+	| emptyCanvas |
+	emptyCanvas := RSCanvas new.
+	shape renderIn: emptyCanvas.
 	shape remove.
-	self assert: canvas nodes asArray equals: #(  )
+	self assert: emptyCanvas nodes asArray equals: #(  )
 ]
 
 { #category : 'tests' }

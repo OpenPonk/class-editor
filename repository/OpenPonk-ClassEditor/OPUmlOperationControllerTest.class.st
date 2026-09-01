@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlOperationController, ensuring correct diagram element creation and canvas removal.
+"
 Class {
 	#name : 'OPUmlOperationControllerTest',
 	#superclass : 'OPUmlClassifierItemControllerTest',
@@ -6,23 +9,23 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlOperationControllerTest >> controllerClass [
-	^ OPUmlOperationController
-]
-
-{ #category : 'construction' }
-OPUmlOperationControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlOperationControllerTest class >> diagramElementClass [
 
 	^ OPUmlOperationLabel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
+OPUmlOperationControllerTest >> controllerClass [
+	^ OPUmlOperationController
+]
+
+{ #category : 'constants' }
 OPUmlOperationControllerTest >> modelClass [
 	^ OPUMLOperation
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests - creation' }
 OPUmlOperationControllerTest >> testCreateDiagramElement [
 
 	model owningClass: OPUMLClass new.

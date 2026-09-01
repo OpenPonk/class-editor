@@ -1,3 +1,6 @@
+"
+I am the diagram shape for a UML Enumeration. I compose a bounding box with a specific compartment designed to hold and manage enumeration literal shapes.
+"
 Class {
 	#name : 'OPUmlEnumerationShape',
 	#superclass : 'OPUmlClassifierShape',

@@ -1,11 +1,5 @@
 "
-I provide a range of examples for Uml Class Diagrams:
-	- direct class instantiation
-	- parsing from DSL
-	- importing from Smalltalk code
-
-!! Examples
-see class-side
+I provide a collection of executable examples demonstrating the OpenPonk UML Class Diagram editor. I can generate sample models (like classes, generalizations, enumerations, and profiles) to populate the canvas for testing or demonstration.
 "
 Class {
 	#name : 'OPUmlExamples',

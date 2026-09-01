@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the visual rendering of UML Association shapes, particularly focusing on end decorators for aggregation, composition, and navigability.
+"
 Class {
 	#name : 'OPUmlAssociationShapeTest',
 	#superclass : 'OPAbstractUmlEdgeTest',
@@ -18,7 +21,7 @@ OPUmlAssociationShapeTest >> modelClass [
 	^ OPUMLAssociation
 ]
 
-{ #category : 'running' }
+{ #category : 'instance creation' }
 OPUmlAssociationShapeTest >> newModelInstance [
 
 	| association |

@@ -1,5 +1,5 @@
 "
-I am a collection of magritte descriptions for an association end.
+I act as a builder for Magritte descriptions specifically targeted at UML properties (attributes and association ends). I generate form fields for configuring multiplicity, default values, aggregation, navigability, and types.
 "
 Class {
 	#name : 'OPUmlPropertyMagritteDescriptions',
@@ -100,8 +100,10 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsNavigable [
 		  accessor: (MAPluggableAccessor
 				   read: [ :me | (reader value: me) isNavigable ]
 				   write: [ :me :newValue |
-					   me writeNavigability: newValue to: (reader value: me).
-					   me modelChanged ]);
+						   me viewModel
+							   writeNavigability: newValue
+							   to: (reader value: me).
+						   me modelChanged ]);
 		  label: 'Is Navigable';
 		  priority: 10;
 		  yourself

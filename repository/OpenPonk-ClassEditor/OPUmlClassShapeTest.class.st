@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the rendering and containment behavior of OPUmlClassShape, inheriting compartment testing from OPAbstractUmlCompartmentableShapeTest.
+"
 Class {
 	#name : 'OPUmlClassShapeTest',
 	#superclass : 'OPAbstractUmlCompartmentableShapeTest',
@@ -21,8 +24,7 @@ OPUmlClassShapeTest >> shapeClass [
 { #category : 'tests' }
 OPUmlClassShapeTest >> testName [
 
-	| model labels label |
-	model := OPUMLClass new.
+	| labels label |
 	model name: 'ClassName'.
 	model isAbstract: false.
 	shape modelElement: model.
@@ -31,7 +33,7 @@ OPUmlClassShapeTest >> testName [
 	labels := canvas deepShapes select: #isLabel.
 	self assert: labels size equals: 1.
 	label := labels anyOne.
-	
+
 	self assert: label text equals: 'ClassName'.
 	self assert: label isNormal.
 

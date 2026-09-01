@@ -1,5 +1,5 @@
 "
-I represent a package box.
+I am a bounded container shape representing a UML Package. I render as a tabbed folder icon (with a name tab or ""ear"") and manage the visualization of hidden packages and nested content blocks.
 "
 Class {
 	#name : 'OPUmlPackageShape',
@@ -17,7 +17,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'rendering' }
+{ #category : 'interactions' }
 OPUmlPackageShape >> addSelectionDraggableInteraction [
 
 	roassalShape
@@ -25,7 +25,7 @@ OPUmlPackageShape >> addSelectionDraggableInteraction [
 			 innerRoassalShapesBlock)
 ]
 
-{ #category : 'removing' }
+{ #category : 'accessing' }
 OPUmlPackageShape >> attachedShapes [
 
 	^ super attachedShapes , {
@@ -72,7 +72,7 @@ OPUmlPackageShape >> padding [
 	^ 40
 ]
 
-{ #category : 'update' }
+{ #category : 'actions' }
 OPUmlPackageShape >> pushBack [
 
 	roassalShape ifNil: [ ^ self ].
@@ -82,7 +82,7 @@ OPUmlPackageShape >> pushBack [
 	ear pushBack
 ]
 
-{ #category : 'update' }
+{ #category : 'actions' }
 OPUmlPackageShape >> pushFront [
 
 	roassalShape ifNil: [ ^ self ].
@@ -157,7 +157,7 @@ OPUmlPackageShape >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : 'rendering' }
+{ #category : 'interactions' }
 OPUmlPackageShape >> selectableInteraction [
 
 	^ OPRSSelectable

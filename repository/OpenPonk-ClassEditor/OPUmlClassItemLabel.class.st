@@ -1,3 +1,6 @@
+"
+I am the base label for items explicitly within a UML Class (like attributes and operations). I inherit color and font styling traits to respect diagram-level style configurations.
+"
 Class {
 	#name : 'OPUmlClassItemLabel',
 	#superclass : 'OPUmlClassifierItemLabel',

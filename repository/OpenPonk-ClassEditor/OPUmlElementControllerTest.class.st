@@ -1,3 +1,6 @@
+"
+I am an abstract base test class verifying the initialization, rendering delegation, and element retrieval mechanisms of UML element controllers.
+"
 Class {
 	#name : 'OPUmlElementControllerTest',
 	#superclass : 'OPAbstractElementControllerTest',
@@ -59,13 +62,13 @@ OPUmlElementControllerTest >> allElementsOf: aPackage [
 	^ elements
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlElementControllerTest >> diagramControllerClass [
 
 	^ OPUmlPackageDiagramController
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlElementControllerTest >> diagramModelClass [
 
 	^ OPUMLPackage

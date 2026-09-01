@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlAttributeController, ensuring correct UI description accessors, multiplicity formatting, and label rendering.
+"
 Class {
 	#name : 'OPUmlAttributeControllerTest',
 	#superclass : 'OPUmlClassifierItemControllerTest',
@@ -6,18 +9,18 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlAttributeControllerTest >> controllerClass [
-	^ OPUmlAttributeController
-]
-
-{ #category : 'construction' }
-OPUmlAttributeControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlAttributeControllerTest class >> diagramElementClass [
 
 	^ OPUmlAttributeLabel
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
+OPUmlAttributeControllerTest >> controllerClass [
+	^ OPUmlAttributeController
+]
+
+{ #category : 'constants' }
 OPUmlAttributeControllerTest >> modelClass [
 	^ OPUMLProperty
 ]
@@ -31,27 +34,29 @@ OPUmlAttributeControllerTest >> testCanClassBeTarget [
 
 { #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
-
-	| accessor |
-	accessor := controller descriptionAccessor: #isDerived.
+	| accessor vm |
+	controller model: model.
+	vm := controller viewModel.
+	accessor := vm descriptionAccessor: #isDerived.
 	controller diagramElement: Mock new.
 	model isDerived: true.
-	controller model: model.
-	self assert: (accessor read: controller).
+
+	self assert: (accessor read: vm).
 	model isDerived: false.
-	self deny: (accessor read: controller)
+	self deny: (accessor read: vm)
 ]
 
 { #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
-
-	| accessor |
-	accessor := controller descriptionAccessor: #isDerived.
+	| accessor vm |
 	controller model: model.
+	vm := controller viewModel.
+	accessor := vm descriptionAccessor: #isDerived.
+
 	controller diagramElement: Mock new.
-	accessor write: true to: controller.
+	accessor write: true to: vm.
 	self assert: model isDerived.
-	accessor write: false to: controller.
+	accessor write: false to: vm.
 	self deny: model isDerived
 ]
 
@@ -61,10 +66,9 @@ OPUmlAttributeControllerTest >> testDescriptions [
 	controller
 		diagramController: diagramController;
 		model: OPUMLProperty new.
-	container := controller magritteDescription.
+	container := controller viewModel magritteDescription.
 	self assert: (container anySatisfy: [ :each | each label = 'Name' ]).
-	self
-		assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
+	self assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
 ]
 
 { #category : 'tests' }
@@ -122,7 +126,8 @@ OPUmlAttributeControllerTest >> testRemoveFromView [
 OPUmlAttributeControllerTest >> testWriteMultiplicity [
 	| prop |
 	prop := OPUMLProperty new.
-	controller writeMultiplicityFrom: '3..*' to: prop.
+	controller model: model.
+	controller viewModel writeMultiplicityFrom: '3..*' to: prop.
 	self assert: prop lowerBound value equals: 3.
 	self assert: prop upperBound value equals: '*'
 ]
@@ -131,13 +136,14 @@ OPUmlAttributeControllerTest >> testWriteMultiplicity [
 OPUmlAttributeControllerTest >> testWriteMultiplicityMany [
 	| prop pairs |
 	prop := OPUMLProperty new.
-	pairs := {'0..1' -> #(0 1).
-	'4' -> #(4 4).
-	'3..*' -> #(3 '*').
-	'*' -> #(0 '*')}.
-	pairs
-		do: [ :pair | 
-			controller writeMultiplicityFrom: pair key to: prop.
-			self assert: prop lowerBound equals: pair value first.
-			self assert: prop upperBound value equals: pair value second ]
+	controller model: model.
+	pairs := {
+		('0..1' -> #( 0 1 )).
+		('4' -> #( 4 4 )).
+		('3..*' -> #( 3 '*' )).
+		('*' -> #( 0 '*' )) }.
+	pairs do: [ :pair |
+		controller viewModel writeMultiplicityFrom: pair key to: prop.
+		self assert: prop lowerBound equals: pair value first.
+		self assert: prop upperBound value equals: pair value second ]
 ]

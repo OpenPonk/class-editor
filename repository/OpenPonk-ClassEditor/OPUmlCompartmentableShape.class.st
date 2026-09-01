@@ -1,3 +1,6 @@
+"
+I am a bounded node shape representing a structured UML element (like a Class) that contains multiple compartments. I manage the layout of these compartments, separate them with visual dividers, and automatically adjust my overall extent to fit them.
+"
 Class {
 	#name : 'OPUmlCompartmentableShape',
 	#superclass : 'OPBoundNode',
@@ -11,7 +14,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'accessing' }
+{ #category : 'adding' }
 OPUmlCompartmentableShape >> addSeparator [
 
 	| newSeparator |
@@ -21,7 +24,7 @@ OPUmlCompartmentableShape >> addSeparator [
 	separators add: newSeparator
 ]
 
-{ #category : 'removing' }
+{ #category : 'accessing' }
 OPUmlCompartmentableShape >> attachedShapes [
 
 	^ super attachedShapes , separators
@@ -61,9 +64,9 @@ OPUmlCompartmentableShape >> layoutOwnedElements [
 	^ (self ownedElements select: #isRendered)
 		  inject:
 		  self roassalShape encompassingRectangle top + self topPadding
-		  into: [ :prevHeight :each | 
-			  each translateTopTo: prevHeight.
-			  prevHeight + each height + 1 ]
+		  into: [ :prevHeight :each |
+				  each translateTopTo: prevHeight.
+				  prevHeight + each height + 1 ]
 ]
 
 { #category : 'rendering' }
@@ -85,7 +88,7 @@ OPUmlCompartmentableShape >> layoutSeparators [
 				(right @ y) } ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 OPUmlCompartmentableShape >> recursivelyOwnedElement: aShape renderedIn: aCanvas [
 
 	super recursivelyOwnedElement: aShape renderedIn: aCanvas.
@@ -101,7 +104,7 @@ OPUmlCompartmentableShape >> removeRender [
 	separators removeAll
 ]
 
-{ #category : 'accessing' }
+{ #category : 'removing' }
 OPUmlCompartmentableShape >> removeSeparator [
 
 	separators removeLast remove
@@ -125,7 +128,7 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : 'rendering' }
+{ #category : 'interactions' }
 OPUmlCompartmentableShape >> selectableInteraction [
 
 	^ OPRSSelectable highlightBorderColorBlue

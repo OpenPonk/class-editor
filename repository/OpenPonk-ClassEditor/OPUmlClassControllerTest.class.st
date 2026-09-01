@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlClassController, focusing on class rendering, attribute removal cascades, and the spatial positioning of inner compartment contents.
+"
 Class {
 	#name : 'OPUmlClassControllerTest',
 	#superclass : 'OPUmlClassifierControllerTest',
@@ -6,18 +9,18 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlClassControllerTest >> controllerClass [
-	^ OPUmlClassController
-]
-
-{ #category : 'construction' }
-OPUmlClassControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlClassControllerTest class >> diagramElementClass [
 
 	^ OPUmlClassShape
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
+OPUmlClassControllerTest >> controllerClass [
+	^ OPUmlClassController
+]
+
+{ #category : 'constants' }
 OPUmlClassControllerTest >> modelClass [
 	^ OPUMLClass
 ]
@@ -30,29 +33,32 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 	operation name: 'anOperation'.
 	model ownedOperations add: operation.
 	operationController := OPUmlOperationController new.
+	operationController viewModelRegistry:
+		diagramController viewModelRegistry.
 	operationController model: operation.
 	diagramController model packagedElements add: model.
+
 	controller model: model.
 	controller showInDiagram: diagramController.
 	operationController showInDiagram: diagramController.
 	elements := diagramController canvas nodes.
-	nameLabelRectangle := (elements detect: [ :any | 
-		                       (any model isKindOf: OPUmlClassifierNameLabel) 
-			                       or: [ 
-				                       any model ownedElements anySatisfy: [ 
-					                       :anyInner | 
-					                       anyInner isKindOf:
-						                       OPUmlClassifierNameLabel ] ] ])
+	nameLabelRectangle := (elements detect: [ :any |
+			                       (any model isKindOf:
+				                        OPUmlClassifierNameLabel) or: [
+					                       any model ownedElements anySatisfy: [
+						                       :anyInner |
+						                       anyInner isKindOf:
+							                       OPUmlClassifierNameLabel ] ] ])
 		                      encompassingRectangle.
-	operationLabelRectangle := (elements detect: [ :any | 
-		                            (any model isKindOf: OPUmlOperationLabel) 
-			                            or: [ 
-				                            any model ownedElements anySatisfy: [ 
-					                            :anyInner | 
-					                            anyInner isKindOf:
-						                            OPUmlOperationLabel ] ] ])
+	operationLabelRectangle := (elements detect: [ :any |
+			                            (any model isKindOf:
+				                             OPUmlOperationLabel) or: [
+					                            any model ownedElements anySatisfy: [
+						                            :anyInner |
+						                            anyInner isKindOf:
+							                            OPUmlOperationLabel ] ] ])
 		                           encompassingRectangle.
-	classRectangle := (elements detect: [ :any | 
+	classRectangle := (elements detect: [ :any |
 		                   any model isKindOf: OPUmlClassShape ])
 		                  encompassingRectangle.
 	self
@@ -75,6 +81,7 @@ OPUmlClassControllerTest >> testRemoveWithAttribute [
 	| class |
 	class := OPUMLClass new.
 	class ownedAttributes add: OPUMLProperty new.
+
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.

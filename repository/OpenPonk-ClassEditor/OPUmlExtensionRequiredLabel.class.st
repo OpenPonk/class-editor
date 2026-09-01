@@ -1,3 +1,6 @@
+"
+I am a specialized edge label for UML Extensions. I am used to visually indicate whether the extension is required by displaying `{required}` near the stereotype end.
+"
 Class {
 	#name : 'OPUmlExtensionRequiredLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -6,13 +9,13 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlExtensionRequiredLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintEndDistanceReference distance: 10
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlExtensionRequiredLabel >> defaultMinDistance [
 
 	^ super defaultMinDistance negated

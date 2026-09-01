@@ -1,3 +1,6 @@
+"
+I am a Spec presenter acting as a dedicated editor for a specific UML Generalization. I provide a UI to view the specific and general classifiers, and edit comments and generalization sets.
+"
 Class {
 	#name : 'OPUmlGeneralizationEditor',
 	#superclass : 'SpPresenter',
@@ -88,6 +91,7 @@ OPUmlGeneralizationEditor >> initializePresenters [
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> initializeWindow: aWindow [
 
+	super initializeWindow: aWindow.
 	aWindow
 		title: 'Edit Generalization';
 		initialExtent: 700 @ 500;
