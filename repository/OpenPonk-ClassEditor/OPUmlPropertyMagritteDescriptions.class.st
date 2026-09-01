@@ -36,12 +36,14 @@ OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
 OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
 
 	<magritteDescription>
-	| property association isDependentOnMultiplicity |
+	
+	self flag: 'The commented out code used to work a LONG time ago'
+	"| property association isDependentOnMultiplicity |
 	property := reader value: reader receiver.
 	association := property association.
 	isDependentOnMultiplicity := association appliedStereotypes 
 		                             anySatisfy: [ :any | 
-		                             any oclIsKindOf: #SubQuantityOf ].
+		                             any oclIsKindOf: #SubQuantityOf ]".
 	^ MASingleOptionDescription new
 		  visible: true "isDependentOnMultiplicity not";
 		  optionsAndLabels: { 
