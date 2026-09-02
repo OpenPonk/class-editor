@@ -191,21 +191,15 @@ OPUmlElementViewModel >> modelDisplayStringOn: aStream [
 ]
 
 { #category : 'accessing' }
-OPUmlElementViewModel >> nameOfType [
+OPUmlElementViewModel >> modelType [
 
-	^ String streamContents: [ :s |
-			  self model umlClassName splitCamelCase
-				  do: [ :each | s nextPutAll: each ]
-				  separatedBy: [ s space ].
-			  self model appliedStereotypes ifNotEmpty: [ :stereotypes |
-					  s nextPutAll: ' «'.
-					  self model appliedStereotypes
-						  do: [ :eachStereotype |
-								  eachStereotype umlClassName splitCamelCase
-									  do: [ :each | s nextPutAll: each ]
-									  separatedBy: [ s space ] ]
-						  separatedBy: '» «'.
-					  s nextPut: $» ] ]
+	^ OPModelObjectType
+		  named: (self model umlClassName splitCamelCase joinUsing: ' ')
+		  withSubtypes: ((self model appliedStereotypes collect: [ :eachStereotype |
+					    OPModelObjectType named: (String streamContents: [ :s |
+								     s nextPut: $«.
+								     s nextPutAll: eachStereotype umlClassName.
+								     s nextPut: $» ]) ]) ifEmpty: [ { (OPModelObjectType named: '(without stereotypes)') } ])
 ]
 
 { #category : 'accessing' }
@@ -216,7 +210,7 @@ OPUmlElementViewModel >> packageViewModel [
 				  parent packageViewModel ] ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlElementViewModel >> parentPackageViewModel [
 
 	^ self parentViewModel ifNotNil: [ :parent |

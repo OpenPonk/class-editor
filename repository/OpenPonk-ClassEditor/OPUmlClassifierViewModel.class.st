@@ -35,30 +35,21 @@ OPUmlClassifierViewModel >> createModelIn: aParentModel [
 OPUmlClassifierViewModel >> dependentElements [
 
 	| deps traverse |
-	deps := super dependentElements asSet.
+	deps := super dependentElements asSet reject: [ :any | (any isKindOf: OPUMLProperty) and: [ any association isNotNil ] ].
 
 	traverse := [ :element |
 		            (element respondsTo: #memberEnds) ifTrue: [
-				            (element memberEnds anySatisfy: [ :end |
-					             end type = self model or: [
-						             end owningClass = self model ] ]) ifTrue: [
+				            (element memberEnds anySatisfy: [ :end | end type = self model or: [ end owningClass = self model ] ]) ifTrue: [
 					            deps add: element ] ].
 
 		            (element respondsTo: #specific) ifTrue: [
-				            (element general = self model or: [
-					             element specific = self model ]) ifTrue: [
-					            deps add: element ] ].
+			            (element general = self model or: [ element specific = self model ]) ifTrue: [ deps add: element ] ].
 
-		            (element respondsTo: #packagedElements) ifTrue: [
-			            element packagedElements do: [ :child |
-				            traverse value: child ] ].
+		            (element respondsTo: #packagedElements) ifTrue: [ element packagedElements do: [ :child | traverse value: child ] ].
 
-		            (element respondsTo: #ownedElements) ifTrue: [
-			            element ownedElements do: [ :child |
-				            traverse value: child ] ] ].
+		            (element respondsTo: #ownedElements) ifTrue: [ element ownedElements do: [ :child | traverse value: child ] ] ].
 
-	self registry project models do: [ :rootModel |
-		traverse value: rootModel ].
+	self registry project models do: [ :rootModel | traverse value: rootModel ].
 
 	^ deps asArray
 ]

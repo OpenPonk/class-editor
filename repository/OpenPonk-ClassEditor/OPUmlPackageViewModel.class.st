@@ -66,22 +66,19 @@ OPUmlPackageViewModel >> createModelIn: aParentModel [
 
 { #category : 'accessing' }
 OPUmlPackageViewModel >> dependentElements [
+
 	| deps rootModel |
 	"super dependentElements correctly resolves through childrenModels down to packagedElements"
-	deps := super dependentElements asSet.
-	
+	deps := super dependentElements asSet reject: [ :any | any oclIsKindOf: #Association ].
+
 	rootModel := self model owner.
-	[ rootModel isNotNil and: [ (rootModel isKindOf: OPUMLPackage) not ] ] whileTrue: [
-		rootModel := rootModel owner ].
-	
+	[ rootModel isNotNil and: [ (rootModel isKindOf: OPUMLPackage) not ] ] whileTrue: [ rootModel := rootModel owner ].
+
 	rootModel ifNotNil: [
-		rootModel packagedElements do: [ :each |
-			((#(OPUMLPackage OPUMLProfile OPUMLModel) anySatisfy: [ :type | each isKindOf: (Smalltalk at: type) ])
-				and: [ each respondsTo: #packageImports ])
-				ifTrue: [
-					deps addAll: (each packageImports select: [ :import |
-						import importedPackage = self model ]) ] ]
-	].
+			rootModel packagedElements do: [ :each |
+					((#( OPUMLPackage OPUMLProfile OPUMLModel ) anySatisfy: [ :type | each isKindOf: (Smalltalk at: type) ]) and: [
+						 each respondsTo: #packageImports ]) ifTrue: [
+						deps addAll: (each packageImports select: [ :import | import importedPackage = self model ]) ] ] ].
 	^ deps asArray
 ]
 
