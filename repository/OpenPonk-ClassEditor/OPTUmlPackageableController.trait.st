@@ -43,7 +43,7 @@ OPTUmlPackageableController >> hiddenPackages [
 					ifFound: [ :parentPackageController |
 					parentPackageController isRendered not ]
 					ifNone: [ true ] ] ] whileTrue: [
-			hiddenPackages add: closestPackageViewModel.
+			hiddenPackages add: closestPackageViewModel model.
 			closestPackageViewModel := closestPackageViewModel
 				                           parentPackageViewModel ].
 
