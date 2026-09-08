@@ -33,7 +33,6 @@ OPUmlClassifierViewModel >> createModelIn: aParentModel [
 
 { #category : 'accessing' }
 OPUmlClassifierViewModel >> dependentElements [
-
 	| deps traverse |
 	deps := super dependentElements asSet reject: [ :any | (any isKindOf: OPUMLProperty) and: [ any association isNotNil ] ].
 
@@ -41,12 +40,10 @@ OPUmlClassifierViewModel >> dependentElements [
 		            (element respondsTo: #memberEnds) ifTrue: [
 				            (element memberEnds anySatisfy: [ :end | end type = self model or: [ end owningClass = self model ] ]) ifTrue: [
 					            deps add: element ] ].
-
 		            (element respondsTo: #specific) ifTrue: [
 			            (element general = self model or: [ element specific = self model ]) ifTrue: [ deps add: element ] ].
-
 		            (element respondsTo: #packagedElements) ifTrue: [ element packagedElements do: [ :child | traverse value: child ] ].
-
+		            (element respondsTo: #generalizations) ifTrue: [ element generalizations do: [ :child | traverse value: child ] ].
 		            (element respondsTo: #ownedElements) ifTrue: [ element ownedElements do: [ :child | traverse value: child ] ] ].
 
 	self registry project models do: [ :rootModel | traverse value: rootModel ].

@@ -12,24 +12,23 @@ Class {
 		'specific',
 		'commentLabel',
 		'commentTextArea',
-		'generalizationSetsEditor'
+		'generalizationSetsEditor',
+		'viewModel'
 	],
 	#category : 'OpenPonk-ClassEditor-UI',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'UI'
 }
 
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> commentTextArea [
+	^ commentTextArea
+]
+
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> controller: aGeneralizationController [
-
 	controller := aGeneralizationController.
-
-	general label: (controller model general name ifNil: [ '' ]).
-	specific label: (controller model specific name ifNil: [ '' ]).
-	commentTextArea text: (controller model ownedComments
-			 ifEmpty: [ '' ]
-			 ifNotEmpty: [ :comments | comments first body asString ]).
-	generalizationSetsEditor generalizationController: controller
+	aGeneralizationController ifNotNil: [ self viewModel: aGeneralizationController viewModel ]
 ]
 
 { #category : 'layout' }
@@ -69,6 +68,11 @@ OPUmlGeneralizationEditor >> defaultLayout [
 		  yourself
 ]
 
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> generalizationSetsEditor [
+	^ generalizationSetsEditor
+]
+
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> initializePresenters [
 
@@ -99,15 +103,38 @@ OPUmlGeneralizationEditor >> initializeWindow: aWindow [
 		whenClosedDo: [ aWindow isCancelled ifFalse: [ self save ] ]
 ]
 
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> model [
+	^ self viewModel ifNotNil: #model
+]
+
 { #category : 'actions' }
 OPUmlGeneralizationEditor >> save [
-
 	generalizationSetsEditor save.
 	commentTextArea text trim ifEmpty: [
-		^ controller model ownedComments
-			  do: [ :each | each annotatedElements removeAll ];
-			  removeAll ].
-	controller model ownedComments ifEmpty: [
-		controller model ownedComments add: OPUMLComment new ].
-	controller model ownedComments first body: commentTextArea text trim
+		self model ownedComments
+			do: [ :each | each annotatedElements removeAll ];
+			removeAll.
+		self viewModel ifNotNil: #modelChanged.
+		^ self ].
+	self model ownedComments ifEmpty: [
+		self model ownedComments add: OPUMLComment new ].
+	self model ownedComments first body: commentTextArea text trim.
+	self viewModel ifNotNil: #modelChanged
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> viewModel [
+	^ viewModel
+]
+
+{ #category : 'initialization' }
+OPUmlGeneralizationEditor >> viewModel: aGeneralizationViewModel [
+	viewModel := aGeneralizationViewModel.
+	general label: (viewModel model general name ifNil: [ '' ]).
+	specific label: (viewModel model specific name ifNil: [ '' ]).
+	commentTextArea text: (viewModel model ownedComments
+		ifEmpty: [ '' ]
+		ifNotEmpty: [ :comments | comments first body asString ]).
+	generalizationSetsEditor viewModel: viewModel
 ]

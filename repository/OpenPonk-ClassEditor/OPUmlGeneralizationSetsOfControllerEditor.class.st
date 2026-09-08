@@ -52,7 +52,7 @@ OPUmlGeneralizationSetsOfControllerEditor >> deleteSet: aSet [
 
 { #category : 'accessing' }
 OPUmlGeneralizationSetsOfControllerEditor >> generalizationController: aController [
-
+	"Backward compatibility setter"
 	self controller: aController
 ]
 
@@ -104,44 +104,39 @@ OPUmlGeneralizationSetsOfControllerEditor >> processEmptyIn: originalSets [
 
 { #category : 'actions' }
 OPUmlGeneralizationSetsOfControllerEditor >> processInclusionsIn: originalSets [
-
 	originalSets do: [ :each |
 		| isPartOf |
 		isPartOf := partOfSets anySatisfy: [ :any | any uuid = each uuid ].
 		isPartOf
-			ifTrue: [ each generalizations addIfNotPresent: controller model ]
-			ifFalse: [
-			each generalizations remove: controller model ifAbsent: [  ] ] ]
+			ifTrue: [ each generalizations addIfNotPresent: self model ]
+			ifFalse: [ each generalizations remove: self model ifAbsent: [  ] ] ]
 ]
 
 { #category : 'actions' }
 OPUmlGeneralizationSetsOfControllerEditor >> processNewIn: originalSets basedOn: newSetCopies [
-
 	| setsToCreate |
 	setsToCreate := newSetCopies select: [ :each |
 		                originalSets noneSatisfy: [ :none |
 			                none uuid = each uuid ] ].
-	controller source viewModel parentPackageViewModel packagedElements
-		addAll: setsToCreate.
+	setsToCreate ifNotEmpty: [
+		self packageViewModel model packagedElements addAll: setsToCreate ].
 	^ originalSets , setsToCreate
 ]
 
 { #category : 'initialization' }
 OPUmlGeneralizationSetsOfControllerEditor >> relevantGeneralizationSets [
-
 	^ super relevantGeneralizationSets select: [ :each |
 		  each generalizations anySatisfy: [ :any |
-			  any general = controller model general ] ]
+			  any general = self model general ] ]
 ]
 
 { #category : 'initialization' }
 OPUmlGeneralizationSetsOfControllerEditor >> reloadGeneralizationSets [
-
 	| relevantSets |
 	relevantSets := self relevantGeneralizationSets collect: [ :each |
 		                each copy ].
 	partOfSets := relevantSets select: [ :each |
-		              each generalizations includes: controller model ].
+		              each generalizations includes: self model ].
 	table items: relevantSets asOrderedCollection
 ]
 
@@ -153,6 +148,5 @@ OPUmlGeneralizationSetsOfControllerEditor >> removeFromSet: aSet [
 
 { #category : 'updating' }
 OPUmlGeneralizationSetsOfControllerEditor >> updateShapesOf: generalizations [
-
-	super updateShapesOf: (generalizations copyWith: controller model)
+	super updateShapesOf: (generalizations copyWith: self model)
 ]

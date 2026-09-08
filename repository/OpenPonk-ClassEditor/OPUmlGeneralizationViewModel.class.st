@@ -22,15 +22,21 @@ OPUmlGeneralizationViewModel >> attachModelFrom: sourceViewModel to: targetViewM
 
 { #category : 'private' }
 OPUmlGeneralizationViewModel >> basicRemoveModel [
+	| targetPackageModel specificClassifier |
+	targetPackageModel := self parentPackageViewModel ifNotNil: #model.
+	specificClassifier := self model specific.
+
+	self model generalizationSets do: [ :eachSet |
+		eachSet generalizations remove: self model ifAbsent: [  ].
+		eachSet generalizations ifEmpty: [
+			targetPackageModel ifNotNil: [ :pkgModel |
+				pkgModel packagedElements remove: eachSet ifAbsent: [  ] ] ] ].
+
+	specificClassifier ifNotNil: [ :spec |
+		spec generalizations remove: self model ifAbsent: [  ] ].
 
 	self model general: nil.
-	self model specific: nil.
-	self model generalizationSets do: [ :eachSet |
-			eachSet generalizations remove: self model ifAbsent: [ ].
-			eachSet generalizations ifEmpty: [
-					self parentPackageViewModel ifNotNil: [ :pkgVM |
-							pkgVM model ifNotNil: [ :pkgModel |
-								pkgModel packagedElements remove: eachSet ifAbsent: [ ] ] ] ] ]
+	self model specific: nil
 ]
 
 { #category : 'accessing' }

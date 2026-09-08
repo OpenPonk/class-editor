@@ -102,6 +102,28 @@ OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 ]
 
 { #category : 'tests' }
+OPUmlAssociationControllerTest >> testRemoveAssociationViaCommandDoesNotFailOnDependentPropertyControllers [
+	"Verify that deleting an association via OPRemoveModelOfRoassalShapeCommand does not attempt to create controllers for its non-navigable member ends"
+	| assocShape command context |
+	diagramController canvasPresenter attachController: diagramController.
+
+	diagramController model packagedElements
+		add: sourceModel;
+		add: targetModel;
+		add: model.
+
+	diagramController showAllElements.
+	assocShape := diagramController roassalShapeForModel: model.
+
+	context := OPRoassalShapeContext for: diagramController canvasPresenter of: { assocShape }.
+	command := OPRemoveModelOfRoassalShapeCommand new.
+	command readParametersFromContext: context.
+
+	self shouldnt: [ command executeWithoutConfirmation ] raise: Error.
+	self deny: (diagramController isVisibleInDiagram: model)
+]
+
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testShowAllElementsIgnoresNonNavigableEnds [
 	"Verify that non-navigable association ends do not spawn diagram controllers, but remain logically in the ViewModel tree."
 

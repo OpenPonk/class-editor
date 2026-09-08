@@ -6,7 +6,8 @@ Class {
 	#superclass : 'SpPresenter',
 	#instVars : [
 		'table',
-		'controller'
+		'controller',
+		'viewModel'
 	],
 	#category : 'OpenPonk-ClassEditor-UI',
 	#package : 'OpenPonk-ClassEditor',
@@ -15,9 +16,9 @@ Class {
 
 { #category : 'accessing' }
 OPUmlGeneralizationSetsEditor >> controller: aController [
-
+	"Backward compatibility adapter for controller-based usage"
 	controller := aController.
-	self reloadGeneralizationSets
+	aController ifNotNil: [ self viewModel: aController viewModel ]
 ]
 
 { #category : 'private - actions' }
@@ -75,6 +76,16 @@ OPUmlGeneralizationSetsEditor >> initializeTable [
 				 action: [ :gSet | self deleteSet: gSet ])
 ]
 
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> model [
+	^ self viewModel ifNotNil: #model
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> packageViewModel [
+	^ self viewModel ifNotNil: #packageViewModel
+]
+
 { #category : 'actions' }
 OPUmlGeneralizationSetsEditor >> processChangesIn: originalSets basedOn: newSetCopies [
 
@@ -89,15 +100,14 @@ OPUmlGeneralizationSetsEditor >> processChangesIn: originalSets basedOn: newSetC
 
 { #category : 'actions' }
 OPUmlGeneralizationSetsEditor >> processDoRemove: setsToRemove [
-
-	| uuids generalizations |
+	| uuids |
 	uuids := setsToRemove collect: [ :each | each uuid ].
-	controller diagramController viewModel allPackages do: [ :each |
-			each packagedElements:
-				(each packagedElements reject: [ :any | uuids includes: any uuid ]) ].
+	self packageViewModel ifNotNil: [ :pkgVM |
+		pkgVM allPackages do: [ :eachPkgModel |
+			eachPkgModel packagedElements:
+				(eachPkgModel packagedElements reject: [ :any | uuids includes: any uuid ]) ] ].
 	setsToRemove do: [ :each |
-			generalizations := each generalizations asSet.
-			each generalizations: #(  ) ]
+		each generalizations: #(  ) ]
 ]
 
 { #category : 'actions' }
@@ -114,19 +124,10 @@ OPUmlGeneralizationSetsEditor >> processRemovalIn: originalSets basedOn: newSetC
 
 { #category : 'initialization' }
 OPUmlGeneralizationSetsEditor >> relevantGeneralizationSets [
-
-	| allElements packagedSets usedSets allSets |
-	allElements := controller diagramController allModelElementsWithPossibleController.
-	packagedSets := (allElements select: [ :each |
-		                 each oclIsKindOf: #GeneralizationSet ]) asSet.
-	usedSets := (allElements select: [ :each |
-		             each respondsTo: #generalizations ]) flatCollectAsSet: [
-		            :each |
-		            each generalizations flatCollect: [ :eachGeneralization |
-			            eachGeneralization generalizationSets ] ].
-	allSets := packagedSets , usedSets.
-	allSets do: [ :each | "make sure the uuid is set before making a copy"
-		each uuid ].
+	| allSets |
+	self packageViewModel ifNil: [ ^ #(  ) ].
+	allSets := self packageViewModel allGeneralizationSets.
+	allSets do: [ :each | each uuid ].
 	^ allSets
 ]
 
@@ -156,10 +157,24 @@ OPUmlGeneralizationSetsEditor >> save [
 
 { #category : 'updating' }
 OPUmlGeneralizationSetsEditor >> updateShapesOf: generalizations [
-
+	"Notify diagram listeners via ViewModel announcements instead of searching for diagram controllers"
 	generalizations do: [ :eachGeneralization |
-		controller diagramController
-			controllerForModel: eachGeneralization
-			ifFound: [ :generalizationController |
-			generalizationController modelChanged ] ]
+		self viewModelRegistry ifNotNil: [ :registry |
+			(registry viewModelFor: eachGeneralization) modelChanged ] ]
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> viewModel [
+	^ viewModel
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> viewModel: aViewModel [
+	viewModel := aViewModel.
+	self reloadGeneralizationSets
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> viewModelRegistry [
+	^ self viewModel ifNotNil: #registry
 ]
