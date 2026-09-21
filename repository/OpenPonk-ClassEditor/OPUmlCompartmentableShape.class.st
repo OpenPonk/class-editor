@@ -71,21 +71,19 @@ OPUmlCompartmentableShape >> layoutOwnedElements [
 
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> layoutSeparators [
-
 	| yCoordinates left right |
 	yCoordinates := (self compartments ifEmpty: [ ^ self ])
-		                select: #isRendered
-		                thenCollect: [ :each | each top ].
-
+		select: #isRendered
+		thenCollect: [ :each | each top ].
 	left := self roassalShape encompassingRectangle left.
 	right := self roassalShape encompassingRectangle right.
-
-	self separators withIndexDo: [ :each :index | 
-		| y |
-		y := yCoordinates at: index.
-		each controlPoints: { 
+	self separators withIndexDo: [ :each :index |
+		index <= yCoordinates size ifTrue: [
+			| y |
+			y := yCoordinates at: index.
+			each controlPoints: {
 				(left @ y).
-				(right @ y) } ]
+				(right @ y) } ] ]
 ]
 
 { #category : 'initialization' }
@@ -154,10 +152,10 @@ OPUmlCompartmentableShape >> updateRenderFromModel [
 
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> updateSeparators [
-
-	[ self separators size < self compartments size ] whileTrue: [ 
+	| renderedCompartmentsCount |
+	renderedCompartmentsCount := (self compartments select: #isRendered) size.
+	[ self separators size < renderedCompartmentsCount ] whileTrue: [
 		self addSeparator ].
-
-	[ self separators size > self compartments size ] whileTrue: [ 
+	[ self separators size > renderedCompartmentsCount ] whileTrue: [
 		self removeSeparator ]
 ]

@@ -59,19 +59,19 @@ OPUmlClassController >> createAssociationAdornmentBy: builder [
 		tool selectedControllers: { self } ]
 ]
 
-{ #category : 'figures' }
+{ #category : 'adornments' }
 OPUmlClassController >> createAttributeAdornmentBy: builder [
-
 	builder addIconForm: OPUmlIcons attributeIcon action: [
-		| tool |
-		tool := OPCreationTool new
-			        palette: self diagramController editor palette;
-			        factory: [ OPUmlAttributeController new ].
-		self diagramController editor palette selectTool: tool.
-		tool whenCreated: [ :ctrl |
-			OPRenameElementCommand executeOn: ctrl.
-			ctrl modelChanged ].
-		tool selectedControllers: { self } ]
+		| creationToolInstance |
+		creationToolInstance := OPCreationTool new
+			palette: self diagramController editor palette;
+			factory: [ OPUmlAttributeController new ].
+		self diagramController editor palette selectTool: creationToolInstance.
+		creationToolInstance whenCreated: [ :attributeCtrl |
+			attributeCtrl modelChanged.
+			attributeCtrl diagramController ifNotNil: [ :owningDiagramCtrl |
+				owningDiagramCtrl form ifNotNil: #focusFirstInput ] ].
+		creationToolInstance selectedControllers: { self } ]
 ]
 
 { #category : 'figures' }

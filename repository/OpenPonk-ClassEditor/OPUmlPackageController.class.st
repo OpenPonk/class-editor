@@ -6,9 +6,6 @@ Class {
 	#superclass : 'OPUmlElementController',
 	#traits : 'OPTUmlPackageableController',
 	#classTraits : 'OPTUmlPackageableController classTrait',
-	#instVars : [
-		'modelClass'
-	],
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -27,21 +24,20 @@ OPUmlPackageController class >> viewModelClass [
 
 { #category : 'configuration' }
 OPUmlPackageController >> beForModel [
-
-	self
-		deprecated: 'Use beForPackage instead'
-		transformWith: '`@receiver beForModel' -> '`@receiver beForPackage'.
-	^ self beForPackage
+	self deprecated: 'Use OPUmlPackageController directly.'.
+	^ self
 ]
 
 { #category : 'configuration' }
 OPUmlPackageController >> beForPackage [
-	modelClass := OPUMLPackage
+	self deprecated: 'OPUmlPackageController is dedicated to packages. Use OPUmlProfileController for profiles.'.
+	^ self
 ]
 
 { #category : 'configuration' }
 OPUmlPackageController >> beForProfile [
-	modelClass := OPUMLProfile
+	self deprecated: 'OPUmlPackageController cannot be converted to profile. Instantiate OPUmlProfileController directly.'.
+	^ self
 ]
 
 { #category : 'connecting' }

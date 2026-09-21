@@ -46,6 +46,18 @@ OPUmlPackageViewModel >> allTypeElements [
 		  (self registry viewModelFor: each) allTypeElements ]
 ]
 
+{ #category : 'removing' }
+OPUmlPackageViewModel >> basicRemoveModel [
+	self parentPackageViewModel
+		ifNotNil: [ :packageViewModel |
+			packageViewModel model ifNotNil: [ :packageModel |
+				packageModel packagedElements remove: self model ifAbsent: [ ] ] ]
+		ifNil: [
+			self projectViewModel ifNotNil: [ :projectViewModel |
+				projectViewModel model ifNotNil: [ :project |
+					project removeModel: self model ] ] ]
+]
+
 { #category : 'accessing' }
 OPUmlPackageViewModel >> childrenModels [
 
@@ -163,6 +175,26 @@ OPUmlPackageViewModel >> essentialChildrenModels [
 OPUmlPackageViewModel >> icon [ ^ OPUmlIcons packageIcon
 ]
 
+{ #category : 'actions' }
+OPUmlPackageViewModel >> maEdit [
+	| editor |
+	editor := OPUmlAllGeneralizationSetsEditor new.
+	editor viewModel: self.
+	editor openModal.
+	self modelChanged
+]
+
+{ #category : 'actions' }
+OPUmlPackageViewModel >> openEditorWithApplication: anApplication undoManager: anUndoManager [
+	| editor |
+	editor := OPUmlAllGeneralizationSetsEditor new.
+	anApplication ifNotNil: [ :activeApplication | editor application: activeApplication ].
+	anUndoManager ifNotNil: [ :activeUndoManager | editor undoManager: activeUndoManager ].
+	editor viewModel: self.
+	editor openModal.
+	self modelChanged
+]
+
 { #category : 'accessing' }
 OPUmlPackageViewModel >> packageViewModel [
 
@@ -171,6 +203,10 @@ OPUmlPackageViewModel >> packageViewModel [
 
 { #category : 'construction' }
 OPUmlPackageViewModel >> registerModelIn: aParentModel [
-
-	aParentModel packagedElements add: self model
+	(aParentModel respondsTo: #packagedElements)
+		ifTrue: [ aParentModel packagedElements add: self model ]
+		ifFalse: [
+			(aParentModel respondsTo: #addModel:)
+				ifTrue: [ aParentModel addModel: self model ]
+				ifFalse: [ aParentModel add: self model ] ]
 ]

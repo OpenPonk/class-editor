@@ -15,21 +15,21 @@ Class {
 OPUmlAssociationViewModel class >> modelClass [ ^ OPUMLAssociation
 ]
 
-{ #category : 'construction' }
+{ #category : 'initialization' }
 OPUmlAssociationViewModel >> attachModelFrom: sourceViewModel to: targetViewModel [
-
+	self model memberEnds ifNotEmpty: [ ^ self ].
 	self model memberEnds add: (OPUMLProperty new
-			 owningAssociation: self model;
-			 name: (sourceViewModel model name uncapitalized
-					  copyReplaceAll: String cr
-					  with: String space);
-			 type: sourceViewModel model).
+		owningAssociation: self model;
+		name: (sourceViewModel model name uncapitalized
+			copyReplaceAll: String cr
+			with: String space);
+		type: sourceViewModel model).
 	self model memberEnds add: (OPUMLProperty new
-			 owningAssociation: self model;
-			 name: (targetViewModel model name uncapitalized
-					  copyReplaceAll: String cr
-					  with: String space);
-			 type: targetViewModel model)
+		owningAssociation: self model;
+		name: (targetViewModel model name uncapitalized
+			copyReplaceAll: String cr
+			with: String space);
+		type: targetViewModel model)
 ]
 
 { #category : 'testing' }
@@ -44,9 +44,14 @@ OPUmlAssociationViewModel >> childrenModels [
 ]
 
 { #category : 'accessing' }
-OPUmlAssociationViewModel >> dependentElements [
+OPUmlAssociationViewModel >> creationPriority [
+	"Edges must be created and rendered after connected nodes."
+	^ 20
+]
 
-	^ self model memberEnds asArray
+{ #category : 'accessing' }
+OPUmlAssociationViewModel >> dependentElements [
+	^ (self model memberEnds select: [ :each | each owningClass isNotNil ]) asArray
 ]
 
 { #category : 'accessing' }
@@ -154,6 +159,12 @@ OPUmlAssociationViewModel >> modelTarget [
 { #category : 'construction' }
 OPUmlAssociationViewModel >> registerModelIn: aParentModel [
 	aParentModel ifNotNil: [ aParentModel packagedElements add: self model ]
+]
+
+{ #category : 'initialization' }
+OPUmlAssociationViewModel >> restoreEndpointsWithSource: aSourceModel target: aTargetModel [
+	"UML association memberEnds are managed as independent properties and do not require palette-style re-attachment."
+	^ self
 ]
 
 { #category : 'actions' }

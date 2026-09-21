@@ -40,6 +40,12 @@ OPUmlGeneralizationViewModel >> basicRemoveModel [
 ]
 
 { #category : 'accessing' }
+OPUmlGeneralizationViewModel >> creationPriority [
+	"Edges must be created and rendered after connected nodes."
+	^ 20
+]
+
+{ #category : 'accessing' }
 OPUmlGeneralizationViewModel >> dependingOnElements [
 
 	^ super dependingOnElements , {
@@ -115,6 +121,15 @@ OPUmlGeneralizationViewModel >> findParentViewModel [
 OPUmlGeneralizationViewModel >> icon [ ^ OPUmlIcons generalizationIcon
 ]
 
+{ #category : 'actions' }
+OPUmlGeneralizationViewModel >> maEdit [
+	| editor |
+	editor := OPUmlGeneralizationEditor new.
+	editor viewModel: self.
+	editor openModal.
+	self modelChanged
+]
+
 { #category : 'printing' }
 OPUmlGeneralizationViewModel >> modelDisplayStringOn: aStream [
     aStream nextPutAll: (self model specific ifNotNil: #name ifNil: ['?']).
@@ -133,6 +148,17 @@ OPUmlGeneralizationViewModel >> modelSource [
 OPUmlGeneralizationViewModel >> modelTarget [
 
 	^ self model general
+]
+
+{ #category : 'actions' }
+OPUmlGeneralizationViewModel >> openEditorWithApplication: anApplication undoManager: anUndoManager [
+	| editor |
+	editor := OPUmlGeneralizationEditor new.
+	anApplication ifNotNil: [ :app | editor application: app ].
+	anUndoManager ifNotNil: [ :mgr | editor undoManager: mgr ].
+	editor viewModel: self.
+	editor openModal.
+	self modelChanged
 ]
 
 { #category : 'construction' }

@@ -34,9 +34,8 @@ OPUmlOperationController >> descriptionIsAbstract [
 
 { #category : 'destruction' }
 OPUmlOperationController >> removeDiagramElement [
-
 	self diagramElement ifNotExists: [ ^ self ].
-	self diagramElementOwnerWithPossibleController ifNotNil: [ :owner |
+	self diagramElementOwnerWithPossibleController ifExists: [ :owner |
 		owner removeOperation: self diagramElement ].
 	self diagramElement: nil
 ]

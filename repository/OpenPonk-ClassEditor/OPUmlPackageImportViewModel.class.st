@@ -28,6 +28,12 @@ OPUmlPackageImportViewModel >> basicRemoveModel [
 ]
 
 { #category : 'accessing' }
+OPUmlPackageImportViewModel >> creationPriority [
+	"Edges must be created and rendered after connected nodes."
+	^ 20
+]
+
+{ #category : 'accessing' }
 OPUmlPackageImportViewModel >> dependingOnElements [
 
 	^ super dependingOnElements , {

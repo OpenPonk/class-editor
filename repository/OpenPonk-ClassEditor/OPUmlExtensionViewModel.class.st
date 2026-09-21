@@ -51,6 +51,12 @@ OPUmlExtensionViewModel >> basicRemoveModel [
 ]
 
 { #category : 'accessing' }
+OPUmlExtensionViewModel >> creationPriority [
+	"Edges must be created and rendered after connected nodes."
+	^ 20
+]
+
+{ #category : 'accessing' }
 OPUmlExtensionViewModel >> dependingOnElements [
 
 	^ super dependingOnElements

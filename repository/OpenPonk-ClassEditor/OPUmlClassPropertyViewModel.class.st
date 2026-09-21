@@ -4,6 +4,9 @@ I am the ViewModel for UML Properties (attributes) belonging to a UML Class. I m
 Class {
 	#name : 'OPUmlClassPropertyViewModel',
 	#superclass : 'OPUmlClassItemViewModel',
+	#instVars : [
+		'savedAssociation'
+	],
 	#category : 'OpenPonk-ClassEditor-ViewModels',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'ViewModels'
@@ -13,9 +16,9 @@ Class {
 OPUmlClassPropertyViewModel class >> modelClass [ ^ OPUMLProperty
 ]
 
-{ #category : 'private' }
+{ #category : 'removing' }
 OPUmlClassPropertyViewModel >> basicRemoveModel [
-
+	savedAssociation := self model association.
 	self model owningAssociation: nil.
 	self model association: nil.
 	super basicRemoveModel
@@ -185,9 +188,19 @@ OPUmlClassPropertyViewModel >> placeholderName [
 ]
 
 { #category : 'construction' }
-OPUmlClassPropertyViewModel >> registerModelIn: aClass [
-
-	aClass ownedAttributes add: self model
+OPUmlClassPropertyViewModel >> registerModelIn: aParentModel [
+	(aParentModel respondsTo: #ownedAttributes)
+		ifTrue: [
+			aParentModel ownedAttributes add: self model.
+			savedAssociation ifNotNil: [ :assoc | self model association: assoc ].
+			^ self ].
+	(aParentModel respondsTo: #ownedEnds)
+		ifTrue: [
+			self model owningAssociation: aParentModel.
+			(aParentModel memberEnds includes: self model)
+				ifFalse: [ aParentModel memberEnds add: self model ].
+			^ self ].
+	AssertionFailure signal: 'Unsupported parent model: ' , aParentModel printString
 ]
 
 { #category : 'forms' }

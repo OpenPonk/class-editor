@@ -86,6 +86,52 @@ OPUmlAssociationControllerTest >> testNavigableRemovalOfAssociationRemovesMember
 	self denyCollection: diagramController diagram allOwnedElements includesAny: { attributeDiagramElement }
 ]
 
+{ #category : 'tests - undo/redo' }
+OPUmlAssociationControllerTest >> testRedoDeletionOfNavigableAssociation [
+	| class1 class2 assoc navProp prop2 |
+	diagramController undoManager ifNil: [
+		diagramController undoManager: OPUndoManager new ].
+
+	class1 := OPUMLClass new name: 'ClassA'.
+	class2 := OPUMLClass new name: 'ClassB'.
+	diagramController model packagedElements add: class1; add: class2.
+	diagramController showInDiagramModel: class1.
+	diagramController showInDiagramModel: class2.
+
+	assoc := OPUMLAssociation new name: 'navAssoc'.
+	navProp := OPUMLProperty new
+		name: 'bEnd';
+		type: class2;
+		owningClass: class1;
+		association: assoc.
+	prop2 := OPUMLProperty new
+		name: 'aEnd';
+		type: class1;
+		owningAssociation: assoc;
+		association: assoc.
+	assoc memberEnds add: navProp; add: prop2.
+	class1 ownedAttributes add: navProp.
+	diagramController model packagedElements add: assoc.
+	diagramController showInDiagramModel: assoc.
+
+	diagramController undoManager inTransaction: [
+		diagramController removeModelElement: assoc ].
+
+	diagramController undoManager undo.
+	self assert: (diagramController model packagedElements includes: assoc).
+	self assert: assoc memberEnds size equals: 2.
+
+	diagramController undoManager redo.
+	self deny: (diagramController model packagedElements includes: assoc).
+	self assert: navProp owningClass isNil.
+	self deny: (diagramController hasControllerForModel: assoc).
+
+	diagramController undoManager undo.
+	self assert: (diagramController model packagedElements includes: assoc).
+	self assert: assoc memberEnds size equals: 2.
+	self assert: (diagramController hasControllerForModel: assoc)
+]
+
 { #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 
@@ -104,6 +150,7 @@ OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 { #category : 'tests' }
 OPUmlAssociationControllerTest >> testRemoveAssociationViaCommandDoesNotFailOnDependentPropertyControllers [
 	"Verify that deleting an association via OPRemoveModelOfRoassalShapeCommand does not attempt to create controllers for its non-navigable member ends"
+
 	| assocShape command context |
 	diagramController canvasPresenter attachController: diagramController.
 
@@ -119,7 +166,7 @@ OPUmlAssociationControllerTest >> testRemoveAssociationViaCommandDoesNotFailOnDe
 	command := OPRemoveModelOfRoassalShapeCommand new.
 	command readParametersFromContext: context.
 
-	self shouldnt: [ command executeWithoutConfirmation ] raise: Error.
+	command executeWithoutConfirmation.
 	self deny: (diagramController isVisibleInDiagram: model)
 ]
 
@@ -142,6 +189,48 @@ OPUmlAssociationControllerTest >> testShowAllElementsIgnoresNonNavigableEnds [
 
 	"Assert that the ViewModel tree is intact and still contains the association ends"
 	self assert: (diagramController viewModelRegistry viewModelFor: model) childrenModels size equals: 2.
+]
+
+{ #category : 'tests - undo/redo' }
+OPUmlAssociationControllerTest >> testUndoDeletionOfNavigableAssociation [
+	| class1 class2 assoc navProp prop2 |
+	diagramController undoManager ifNil: [
+		diagramController undoManager: OPUndoManager new ].
+
+	class1 := OPUMLClass new name: 'ClassA'.
+	class2 := OPUMLClass new name: 'ClassB'.
+	diagramController model packagedElements add: class1; add: class2.
+	diagramController showInDiagramModel: class1.
+	diagramController showInDiagramModel: class2.
+
+	assoc := OPUMLAssociation new name: 'navAssoc'.
+	navProp := OPUMLProperty new
+		name: 'bEnd';
+		type: class2;
+		owningClass: class1;
+		association: assoc.
+	prop2 := OPUMLProperty new
+		name: 'aEnd';
+		type: class1;
+		owningAssociation: assoc;
+		association: assoc.
+	assoc memberEnds add: navProp; add: prop2.
+	class1 ownedAttributes add: navProp.
+	diagramController model packagedElements add: assoc.
+	diagramController showInDiagramModel: assoc.
+
+	diagramController undoManager inTransaction: [
+		diagramController removeModelElement: assoc ].
+
+	self deny: (diagramController model packagedElements includes: assoc).
+	self assert: navProp owningClass isNil.
+
+	diagramController undoManager undo.
+
+	self assert: (diagramController model packagedElements includes: assoc).
+	self assert: assoc memberEnds size equals: 2.
+	self assert: navProp association equals: assoc.
+	self assert: (diagramController hasControllerForModel: assoc)
 ]
 
 { #category : 'tests' }

@@ -7,12 +7,37 @@ Class {
 	#instVars : [
 		'table',
 		'controller',
-		'viewModel'
+		'viewModel',
+		'undoManager'
 	],
 	#category : 'OpenPonk-ClassEditor-UI',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'UI'
 }
+
+{ #category : 'private - actions' }
+OPUmlGeneralizationSetsEditor >> basicSave [
+	| command |
+	command := self buildUpdateCommand.
+	command isEmpty ifTrue: [ ^ self ].
+	self undoManager
+		ifNotNil: [ :mgr | mgr execute: command ]
+		ifNil: [ command execute ]
+]
+
+{ #category : 'private - actions' }
+OPUmlGeneralizationSetsEditor >> buildUpdateCommand [
+	| cmd originalSets newSetCopies affectedGens |
+	cmd := OPUmlUpdateGeneralizationSetsCommand new.
+	cmd viewModelRegistry: self viewModelRegistry.
+	originalSets := self relevantGeneralizationSets.
+	newSetCopies := table items.
+	affectedGens := (originalSets , newSetCopies flatCollectAsSet: [ :each | each generalizations ]) copy.
+	cmd affectedGeneralizations: affectedGens.
+
+	self populateCommand: cmd originalSets: originalSets newSetCopies: newSetCopies.
+	^ cmd
+]
 
 { #category : 'accessing' }
 OPUmlGeneralizationSetsEditor >> controller: aController [
@@ -23,15 +48,12 @@ OPUmlGeneralizationSetsEditor >> controller: aController [
 
 { #category : 'private - actions' }
 OPUmlGeneralizationSetsEditor >> deleteSet: aSet [
-
 	| otherGeneralizations |
-	otherGeneralizations := aSet generalizations copyWithout:
-		                        controller model.
+	otherGeneralizations := aSet generalizations copyWithout: self model.
 	otherGeneralizations ifNotEmpty: [
 		(self confirm: 'This generalization set contains '
 			 , (otherGeneralizations size pluralize: 'generalization')
-			 ,
-			 '. Those will not be removed, just no longer part of the set. Remove it?')
+			 , '. Those will not be removed, just no longer part of the set. Remove it?')
 			ifFalse: [ ^ self ] ].
 	table items: (table items reject: [ :any | any uuid = aSet uuid ])
 ]
@@ -82,8 +104,40 @@ OPUmlGeneralizationSetsEditor >> model [
 ]
 
 { #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> packageForSet: aGeneralizationSet [
+	self packageViewModel ifNotNil: [ :activePackageViewModel |
+		activePackageViewModel allPackages
+			detect: [ :eachPackage | eachPackage packagedElements includes: aGeneralizationSet ]
+			ifFound: [ :foundPackage | ^ foundPackage ] ].
+	self viewModel ifNotNil: [ :activeViewModel |
+		(activeViewModel findOwningPackageFor: aGeneralizationSet) ifNotNil: [ :foundPackage |
+			^ foundPackage ] ].
+	^ self targetPackage
+]
+
+{ #category : 'accessing' }
 OPUmlGeneralizationSetsEditor >> packageViewModel [
 	^ self viewModel ifNotNil: #packageViewModel
+]
+
+{ #category : 'private - actions' }
+OPUmlGeneralizationSetsEditor >> populateCommand: aCommand originalSets: originalSets newSetCopies: newSetCopies [
+	| setsToRemove |
+	setsToRemove := originalSets select: [ :eachOriginalSet |
+		newSetCopies noneSatisfy: [ :eachCopy | eachCopy uuid = eachOriginalSet uuid ] ].
+	setsToRemove do: [ :eachSetToRemove |
+		| owningPackage |
+		owningPackage := self packageForSet: eachSetToRemove.
+		aCommand recordRemoveSet: eachSetToRemove fromPackage: owningPackage generalizations: eachSetToRemove generalizations asArray ].
+	originalSets do: [ :eachOriginalSet |
+		newSetCopies detect: [ :eachCopy | eachCopy uuid = eachOriginalSet uuid ] ifFound: [ :matchingCopy |
+			(eachOriginalSet name ~= matchingCopy name or: [
+				eachOriginalSet isCovering ~= matchingCopy isCovering or: [
+					eachOriginalSet isDisjoint ~= matchingCopy isDisjoint ] ]) ifTrue: [
+				aCommand recordPropertyChangeOn: eachOriginalSet
+					oldName: eachOriginalSet name newName: matchingCopy name
+					oldIsCovering: eachOriginalSet isCovering newIsCovering: matchingCopy isCovering
+					oldIsDisjoint: eachOriginalSet isDisjoint newIsDisjoint: matchingCopy isDisjoint ] ] ]
 ]
 
 { #category : 'actions' }
@@ -141,18 +195,29 @@ OPUmlGeneralizationSetsEditor >> reloadGeneralizationSets [
 
 { #category : 'actions' }
 OPUmlGeneralizationSetsEditor >> save [
+	self undoManager
+		ifNotNil: [ :mgr | mgr inTransaction: [ self basicSave ] ]
+		ifNil: [ self basicSave ]
+]
 
-	| originalSets newSetCopies affectedGeneralizations |
-	originalSets := self relevantGeneralizationSets.
-	newSetCopies := table items.
-	affectedGeneralizations := originalSets , newSetCopies
-		                           flatCollectAsSet: [ :each |
-		                           each generalizations ].
-	originalSets := self
-		                processRemovalIn: originalSets
-		                basedOn: newSetCopies.
-	self processChangesIn: originalSets basedOn: newSetCopies.
-	self updateShapesOf: affectedGeneralizations
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> table [
+	^ table
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> targetPackage [
+	^ self packageViewModel ifNotNil: #model
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> undoManager [
+	^ undoManager
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationSetsEditor >> undoManager: anUndoManager [
+	undoManager := anUndoManager
 ]
 
 { #category : 'updating' }

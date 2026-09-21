@@ -43,14 +43,13 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 
 	StOpenFilePresenter new
 		title: 'Choose a XMI export of UML model';
-		okAction: [ :file | 
-			| model |
-			model := OPUMLXMIReader read: file contents.
-			(model packagedElements size = 1 and: [ 
-					 model packagedElements first oclIsKindOf: #Package ]) ifTrue: [ 
-					model := model packagedElements first ].
-			aPackage packagedElements: model packagedElements.
-			self inform: 'Imported from ' , file fullName ];
+		okAction: [ :file |
+				| model |
+				model := OPUMLXMIReader read: file contents.
+				(model packagedElements size = 1 and: [ model packagedElements first oclIsKindOf: #Package ]) ifTrue: [
+						model := model packagedElements first ].
+				aPackage packagedElements: model packagedElements.
+				InformativeNotification signal: 'Imported from ' , file fullName ];
 		extensions: #( xmi xml uml ) named: 'XMI files';
 		open
 ]

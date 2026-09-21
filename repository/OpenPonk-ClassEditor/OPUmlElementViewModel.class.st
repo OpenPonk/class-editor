@@ -40,10 +40,10 @@ OPUmlElementViewModel >> applyStereotype: aStereotypeModel to: aModel [
 	aModel applyStereotype: aStereotypeModel implementationClass new
 ]
 
-{ #category : 'ui-hooks' }
-OPUmlElementViewModel >> creationUICommandClass [
-
-	^ OPRenameElementCommand
+{ #category : 'accessing' }
+OPUmlElementViewModel >> creationPriority [
+	"Default creation priority for UML diagram nodes (lower value renders first)."
+	^ 10
 ]
 
 { #category : 'forms' }
@@ -147,14 +147,14 @@ OPUmlElementViewModel >> descriptionVisibility [
 		  yourself
 ]
 
-{ #category : 'private' }
+{ #category : 'accessing' }
 OPUmlElementViewModel >> findOwningPackageFor: aModel [
 
 	self registry project models
-		select: [ :each | each oclIsKindOf: #Package ]
-		thenDo: [ :rootPkg |
-				(self findPackageHierarchyFor: aModel in: { rootPkg })
-					ifNotEmpty: [ :path | ^ path last ] ].
+		select: [ :eachModel261 | (eachModel261 respondsTo: #oclIsKindOf:) and: [ eachModel261 oclIsKindOf: #Package ] ]
+		thenDo: [ :rootPackage261 |
+			(self findPackageHierarchyFor: aModel in: { rootPackage261 })
+				ifNotEmpty: [ :path261 | ^ path261 last ] ].
 	^ nil
 ]
 

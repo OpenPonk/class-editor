@@ -28,8 +28,8 @@ OPUmlEnumerationLiteralController >> addDiagramElementToOwner [
 
 { #category : 'destruction' }
 OPUmlEnumerationLiteralController >> removeDiagramElement [
-
 	self diagramElement ifNotExists: [ ^ self ].
-	self diagramElementOwnerWithPossibleController removeLiteral: self diagramElement.
+	self diagramElementOwnerWithPossibleController ifExists: [ :owner |
+		owner removeLiteral: self diagramElement ].
 	self diagramElement: nil
 ]

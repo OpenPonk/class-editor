@@ -72,3 +72,23 @@ OPUmlGeneralizationEditorTest >> testGeneralizationEditorDelegatesToViewModelAnd
 
 	self assert: generalization ownedComments first body equals: 'Updated test comment'
 ]
+
+{ #category : 'tests' }
+OPUmlGeneralizationEditorTest >> testSaveCommentIsUndoable [
+	| um editor generalizationVM |
+	um := OPUndoManager new.
+	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
+	editor := OPUmlGeneralizationEditor new.
+	editor undoManager: um.
+	editor viewModel: generalizationVM.
+	editor commentTextArea text: 'Initial Comment'.
+	editor save.
+	self assert: generalization ownedComments first body equals: 'Initial Comment'.
+	editor commentTextArea text: 'Updated Comment'.
+	editor save.
+	self assert: generalization ownedComments first body equals: 'Updated Comment'.
+	um undo.
+	self assert: generalization ownedComments first body equals: 'Initial Comment'.
+	um redo.
+	self assert: generalization ownedComments first body equals: 'Updated Comment'
+]

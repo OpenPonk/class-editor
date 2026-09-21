@@ -25,3 +25,13 @@ OPUmlClassifierItemController >> createDiagramElement [
 
 	^ self diagramElement
 ]
+
+{ #category : 'construction' }
+OPUmlClassifierItemController >> showWithoutDependentInDiagram: aDiagramController [
+	self validate.
+	self ensureShownDependenciesInDiagram: aDiagramController.
+	aDiagramController addController: self.
+	self ensureDiagramElement.
+	self addDiagramElementToOwner.
+	self renderDiagramElement
+]

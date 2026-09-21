@@ -59,6 +59,41 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> tearDown [
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithViewModelWithoutController [
+	"Verifies that deleting a generalization set works with viewModel only, when controller is nil."
+	| generalizationVM editor |
+	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
+
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor viewModel: generalizationVM.
+
+	editor deleteSet: generalizationSet.
+
+	self deny: (editor table items anySatisfy: [ :each | each uuid = generalizationSet uuid ])
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testSaveExecutesInsideUndoManagerTransaction [
+	"Verifies that saving changes in generalization sets editor runs inside an undo transaction."
+	| generalizationVM editor undoManager |
+	undoManager := OPUndoManager new.
+	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
+
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor undoManager: undoManager.
+	editor viewModel: generalizationVM.
+
+	editor removeFromSet: generalizationSet.
+	editor save.
+
+	self assert: undoManager undoStack isNotEmpty.
+	self deny: (generalizationSet generalizations includes: generalization).
+
+	undoManager undo.
+	self assert: (generalizationSet generalizations includes: generalization)
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testSetsEditorWorksPurelyWithViewModelWithoutDiagramController [
 	"Verifies that OPUmlGeneralizationSetsOfControllerEditor initializes and saves using only OPUmlGeneralizationViewModel"
 	| generalizationVM editor |

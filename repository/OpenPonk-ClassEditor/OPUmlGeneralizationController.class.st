@@ -38,14 +38,10 @@ OPUmlGeneralizationController >> descriptionSpecific [
 	^ self viewModel descriptionSpecific
 ]
 
-{ #category : 'forms' }
+{ #category : 'actions' }
 OPUmlGeneralizationController >> maEdit [
-
-	| editor |
-	editor := OPUmlGeneralizationEditor new.
-	editor
-		application: self diagramController editor application;
-		controller: self;
-		openModal.
+	self viewModel
+		openEditorWithApplication: self diagramController canvasPresenter application
+		undoManager: self diagramController undoManager.
 	self diagramController openInForm: self
 ]

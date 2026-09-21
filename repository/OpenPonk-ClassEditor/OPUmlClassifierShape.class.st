@@ -68,6 +68,19 @@ OPUmlClassifierShape >> minExtent [
 	^ 100 @ 61
 ]
 
+{ #category : 'removing' }
+OPUmlClassifierShape >> remove [
+	"Reset internal references to owned diagram elements before destruction."
+	stereotypeLabel := nil.
+	super remove
+]
+
+{ #category : 'rendering' }
+OPUmlClassifierShape >> removeRender [
+	super removeRender.
+	commentIcon := nil
+]
+
 { #category : 'interactions' }
 OPUmlClassifierShape >> selectableInteraction [
 
@@ -84,6 +97,11 @@ OPUmlClassifierShape >> selectableInteraction [
 		builder directionDown.
 		adornmentCreationBlock value: builder ].
 	^ selectableInteraction
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierShape >> stereotypeLabel [
+	^ stereotypeLabel
 ]
 
 { #category : 'accessing' }

@@ -45,25 +45,25 @@ OPUmlPackageDiagramController >> canBeTargetFor: aController [
 
 { #category : 'accessing' }
 OPUmlPackageDiagramController >> controllerFactory [
-			"Configure controller factory with explicit conditions for UML elements."
-			^ super controllerFactory
-				register: OPUmlClassController forModel: OPUMLClass;
-				register: OPUmlAttributeController 
-					forModel: OPUMLProperty 
-					condition: [ :prop | prop owningAssociation isNil ];
-				register: OPUmlOperationController forModel: OPUMLOperation;
-				register: OPUmlGeneralizationController forModel: OPUMLGeneralization;
-				register: OPUmlAssociationController forModel: OPUMLAssociation;
-				register: OPUmlPackageController forModel: OPUMLPackage;
-				register: OPUmlPackageController forModel: OPUMLProfile;
-				register: OPUmlExtensionController forModel: OPUMLExtension;
-				register: OPUmlAttributeController 
-					forModel: OPUMLExtensionEnd 
-					condition: [ :prop | prop owningAssociation isNil ];
-				register: OPUmlEnumerationController forModel: OPUMLEnumeration;
-				register: OPUmlEnumerationLiteralController forModel: OPUMLEnumerationLiteral;
-				register: OPUmlStereotypeController forModel: OPUMLStereotype;
-				register: OPUmlPackageImportController forModel: OPUMLPackageImport
+	"Configure controller factory with explicit conditions for UML elements."
+	^ super controllerFactory
+		register: OPUmlClassController forModel: OPUMLClass;
+		register: OPUmlAttributeController 
+			forModel: OPUMLProperty 
+			condition: [ :prop | prop owningAssociation isNil ];
+		register: OPUmlOperationController forModel: OPUMLOperation;
+		register: OPUmlGeneralizationController forModel: OPUMLGeneralization;
+		register: OPUmlAssociationController forModel: OPUMLAssociation;
+		register: OPUmlPackageController forModel: OPUMLPackage;
+		register: OPUmlProfileController forModel: OPUMLProfile;
+		register: OPUmlExtensionController forModel: OPUMLExtension;
+		register: OPUmlAttributeController 
+			forModel: OPUMLExtensionEnd 
+			condition: [ :prop | prop owningAssociation isNil ];
+		register: OPUmlEnumerationController forModel: OPUMLEnumeration;
+		register: OPUmlEnumerationLiteralController forModel: OPUMLEnumerationLiteral;
+		register: OPUmlStereotypeController forModel: OPUMLStereotype;
+		register: OPUmlPackageImportController forModel: OPUMLPackageImport
 ]
 
 { #category : 'deprecation' }
@@ -113,11 +113,11 @@ OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 	(aPalette newConnectionCreationTool: [ OPUmlPackageImportController new ])
 		label: 'Package Import';
 		icon: OPUmlIcons directedAssociationIcon.
-	(aPalette newCreationEntry: [ OPUmlPackageController new beForPackage ])
+	(aPalette newCreationEntry: [ OPUmlPackageController new ])
 		label: 'Package';
 		icon: OPUmlIcons packageIcon;
 		whenCreatedSetup.
-	(aPalette newCreationEntry: [ OPUmlPackageController new beForProfile ])
+	(aPalette newCreationEntry: [ OPUmlProfileController new ])
 		label: 'Profile';
 		icon: OPUmlIcons profileIcon;
 		whenCreatedSetup
@@ -165,49 +165,42 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 
 { #category : 'palette' }
 OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
-
 	| stereotypes elements relationships isForRelationship isForClass |
 	stereotypes := (aProfile ownedStereotype reject: #isAbstract)
-		               sorted: [ :a :b | a name < b name ].
+		sorted: [ :stereotypeA :stereotypeB | stereotypeA name < stereotypeB name ].
 	isForRelationship := [ :attr |
-	                     (OPUMLXMISpecsStorage metaClassNamed:
-		                      attr type name) allParents anySatisfy: [
-		                     :parent | parent name = 'Relationship' ] ].
+		(OPUMLXMISpecsStorage metaClassNamed: attr type name) allParents anySatisfy: [ :parentMetaClass |
+			parentMetaClass name = 'Relationship' ] ].
 	isForClass := [ :attr |
-	              | metaclass |
-	              metaclass := OPUMLXMISpecsStorage metaClassNamed:
-		                           attr type name.
-	              metaclass name = 'Class' or: [
-		              metaclass allParents anySatisfy: [ :parent |
-			              parent name = 'Class' ] ] ].
-	elements := stereotypes select: [ :each |
-		            each allAttributes anySatisfy: [ :attr |
-			            (attr name beginsWith: 'base_') and: [
-				            isForClass value: attr ] ] ].
-	relationships := stereotypes select: [ :each |
-		                 each allAttributes anySatisfy: [ :attr |
-			                 (attr name beginsWith: 'base_') and: [
-				                 isForRelationship value: attr ] ] ].
+		| metaclassObj |
+		metaclassObj := OPUMLXMISpecsStorage metaClassNamed: attr type name.
+		metaclassObj name = 'Class' or: [
+			metaclassObj allParents anySatisfy: [ :parentClass | parentClass name = 'Class' ] ] ].
+	elements := stereotypes select: [ :eachStereotype |
+		eachStereotype allAttributes anySatisfy: [ :attributeProp |
+			(attributeProp name beginsWith: 'base_') and: [ isForClass value: attributeProp ] ] ].
+	relationships := stereotypes select: [ :eachStereotype |
+		eachStereotype allAttributes anySatisfy: [ :attributeProp |
+			(attributeProp name beginsWith: 'base_') and: [ isForRelationship value: attributeProp ] ] ].
 	elements ifNotEmpty: [ aPalette newSeparator ].
-	elements do: [ :stereotype |
+	elements do: [ :stereotypeElement |
 		(aPalette newCreationEntry: [ OPUmlClassController new ])
-			label: stereotype name;
+			label: stereotypeElement name;
 			icon: OPUmlIcons classIcon;
-			whenCreated: [ :ctrl |
-				ctrl model applyStereotype: stereotype implementationClass new.
-				ctrl model name: stereotype name.
-				ctrl modelChanged.
-				OPInitialSetElementCommand executeOn: ctrl.
-				ctrl modelChanged ] ].
+			whenCreated: [ :classCtrl |
+				classCtrl model applyStereotype: stereotypeElement implementationClass new.
+				classCtrl model name: stereotypeElement name.
+				classCtrl modelChanged.
+				classCtrl diagramController ifNotNil: [ :diagramCtrl |
+					diagramCtrl form ifNotNil: #focusFirstInput ] ] ].
 	relationships ifNotEmpty: [ aPalette newSeparator ].
-	relationships do: [ :stereotype |
-		(aPalette newConnectionCreationEntry: [
-				 OPUmlAssociationController new ])
-			label: stereotype name;
+	relationships do: [ :stereotypeRelation |
+		(aPalette newConnectionCreationEntry: [ OPUmlAssociationController new ])
+			label: stereotypeRelation name;
 			icon: OPUmlIcons directedAssociationIcon;
-			whenCreated: [ :ctrl |
-				ctrl model applyStereotype: stereotype implementationClass new.
-				ctrl modelChanged ] ]
+			whenCreated: [ :assocCtrl |
+				assocCtrl model applyStereotype: stereotypeRelation implementationClass new.
+				assocCtrl modelChanged ] ]
 ]
 
 { #category : 'palette' }
@@ -231,13 +224,11 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
-{ #category : 'forms' }
+{ #category : 'actions' }
 OPUmlPackageDiagramController >> maEdit [
-
-	OPUmlAllGeneralizationSetsEditor new
-		application: self diagramController editor application;
-		controller: self;
-		openModal
+	self viewModel
+		openEditorWithApplication: self diagramController canvasPresenter application
+		undoManager: self diagramController undoManager
 ]
 
 { #category : 'destruction' }

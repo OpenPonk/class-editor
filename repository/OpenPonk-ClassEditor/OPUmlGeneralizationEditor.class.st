@@ -13,12 +13,26 @@ Class {
 		'commentLabel',
 		'commentTextArea',
 		'generalizationSetsEditor',
-		'viewModel'
+		'viewModel',
+		'undoManager'
 	],
 	#category : 'OpenPonk-ClassEditor-UI',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'UI'
 }
+
+{ #category : 'saving' }
+OPUmlGeneralizationEditor >> basicSave [
+	| commentCommand |
+	generalizationSetsEditor basicSave.
+	commentCommand := OPUmlUpdateGeneralizationCommentCommand new
+		generalization: self model
+		commentText: commentTextArea text trim.
+	self undoManager
+		ifNotNil: [ :manager | manager execute: commentCommand ]
+		ifNil: [ commentCommand execute ].
+	self viewModel ifNotNil: #modelChanged
+]
 
 { #category : 'accessing' }
 OPUmlGeneralizationEditor >> commentTextArea [
@@ -110,17 +124,20 @@ OPUmlGeneralizationEditor >> model [
 
 { #category : 'actions' }
 OPUmlGeneralizationEditor >> save [
-	generalizationSetsEditor save.
-	commentTextArea text trim ifEmpty: [
-		self model ownedComments
-			do: [ :each | each annotatedElements removeAll ];
-			removeAll.
-		self viewModel ifNotNil: #modelChanged.
-		^ self ].
-	self model ownedComments ifEmpty: [
-		self model ownedComments add: OPUMLComment new ].
-	self model ownedComments first body: commentTextArea text trim.
-	self viewModel ifNotNil: #modelChanged
+	self undoManager
+		ifNotNil: [ :mgr | mgr inTransaction: [ self basicSave ] ]
+		ifNil: [ self basicSave ]
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> undoManager [
+	^ undoManager
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> undoManager: anUndoManager [
+	undoManager := anUndoManager.
+	generalizationSetsEditor ifNotNil: [ :ed | ed undoManager: anUndoManager ]
 ]
 
 { #category : 'accessing' }
