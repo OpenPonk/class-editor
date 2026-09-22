@@ -17,6 +17,25 @@ OPUmlClassPropertyViewModelTest >> testRegisterModelInFailsOnUnsupportedParent [
 ]
 
 { #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testRemoveRenderDoesNotClearCommentIconDiagramElement [
+	| classModel shape canvas |
+	classModel := OPUMLClass new name: 'CommentTestClass'.
+	classModel ownedComments add: (OPUMLComment new body: 'Test comment').
+	shape := OPUmlClassShape in: OPNoShape instance forModelElement: classModel.
+	canvas := RSCanvas new.
+	shape renderIn: canvas.
+
+	self assert: (shape instVarNamed: #commentIcon) isNotNil.
+	self assertCollection: shape ownedElements includesAll: { shape instVarNamed: #commentIcon }.
+
+	shape removeRender.
+	"Must fail in red phase because removeRender sets commentIcon := nil"
+	self
+		assert: (shape instVarNamed: #commentIcon) isNotNil
+		description: 'removeRender must not destroy diagram element reference (Rule 4j)'
+]
+
+{ #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testUndoRestoresClassPropertyWhenParentIsAssociation [
 	| association property viewModel |
 	association := OPUMLAssociation new name: 'testAssoc'.

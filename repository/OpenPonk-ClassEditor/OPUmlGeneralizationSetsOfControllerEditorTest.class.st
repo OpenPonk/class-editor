@@ -39,6 +39,7 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> setUp [
 	registry := OPViewModelRegistry forProject: project.
 
 	diagramController := OPUmlPackageDiagramController new.
+	diagramController undoManager: OPUndoManager new.
 	diagramController viewModelRegistry: registry.
 	diagramController model: package.
 	diagramController diagramElement: (OPOpenPonkDiagram forModelElement: package).
@@ -96,11 +97,12 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testSaveExecutesInsideUndoManag
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testSetsEditorWorksPurelyWithViewModelWithoutDiagramController [
 	"Verifies that OPUmlGeneralizationSetsOfControllerEditor initializes and saves using only OPUmlGeneralizationViewModel"
-	| generalizationVM editor |
-	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
+	| generalizationViewModel editor |
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
 
 	editor := OPUmlGeneralizationSetsOfControllerEditor new.
-	editor viewModel: generalizationVM.
+	editor undoManager: OPUndoManager new.
+	editor viewModel: generalizationViewModel.
 
 	editor removeFromSet: generalizationSet.
 	editor save.

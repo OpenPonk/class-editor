@@ -13,7 +13,7 @@ Class {
 
 { #category : 'connecting' }
 OPUmlElementController >> parentWhenTargetFor: aCreatedController [
-	^ aCreatedController isTargetUsedAsContainer
-		  ifTrue: [ self model ]
-		  ifFalse: [ aCreatedController source viewModel parentContainerModel ]
+	"Delegate container resolution to the created controller to respect metamodel constraints."
+
+	^ aCreatedController parentModelInTarget: self
 ]

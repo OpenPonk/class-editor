@@ -10,3 +10,10 @@ Class {
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
 }
+
+{ #category : 'connecting' }
+OPUmlRelationshipController >> parentModelInTarget: aTargetController [
+	"UML packageable relationships are contained in the package of the source element."
+
+	^ self source viewModel parentContainerModel
+]

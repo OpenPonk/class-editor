@@ -39,6 +39,16 @@ OPUmlGeneralizationViewModel >> basicRemoveModel [
 	self model specific: nil
 ]
 
+{ #category : 'construction' }
+OPUmlGeneralizationViewModel >> createModelFrom: sourceViewModel to: targetViewModel in: aParentModel [
+	"A generalization is structurally owned by its specific classifier (source)."
+
+	self model: self modelClass new.
+	self attachModelFrom: sourceViewModel to: targetViewModel.
+	self registerModelIn: sourceViewModel model.
+	^ self model
+]
+
 { #category : 'accessing' }
 OPUmlGeneralizationViewModel >> creationPriority [
 	"Edges must be created and rendered after connected nodes."
@@ -140,14 +150,16 @@ OPUmlGeneralizationViewModel >> modelDisplayStringOn: aStream [
 
 { #category : 'accessing' }
 OPUmlGeneralizationViewModel >> modelSource [
+	"Answer the source model element (specific classifier) of this generalization."
 
-	^ self model specific
+	^ self model ifNotNil: [ :activeModel | activeModel specific ]
 ]
 
 { #category : 'accessing' }
 OPUmlGeneralizationViewModel >> modelTarget [
+	"Answer the target model element (general classifier) of this generalization."
 
-	^ self model general
+	^ self model ifNotNil: [ :activeModel | activeModel general ]
 ]
 
 { #category : 'actions' }
@@ -161,9 +173,21 @@ OPUmlGeneralizationViewModel >> openEditorWithApplication: anApplication undoMan
 	self modelChanged
 ]
 
-{ #category : 'construction' }
-OPUmlGeneralizationViewModel >> registerModelIn: aParentModel [
-	"Specific element is the owner"
+{ #category : 'accessing' }
+OPUmlGeneralizationViewModel >> parentContainerModel [
+	"Generalization is structurally owned by its specific classifier."
 
-	
+	^ self model specific
+]
+
+{ #category : 'registration' }
+OPUmlGeneralizationViewModel >> registerModelIn: aParentModel [
+	"Restore the generalization into its owning classifier container."
+
+	self
+		assert: ((aParentModel respondsTo: #oclIsKindOf:) and: [ aParentModel oclIsKindOf: #Classifier ])
+		description: 'Generalization must be contained in a classifier'.
+
+	self model specific: aParentModel.
+	aParentModel generalizations addIfNotPresent: self model
 ]

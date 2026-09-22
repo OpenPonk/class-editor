@@ -72,13 +72,13 @@ OPUmlClassifierShape >> minExtent [
 OPUmlClassifierShape >> remove [
 	"Reset internal references to owned diagram elements before destruction."
 	stereotypeLabel := nil.
+	commentIcon := nil.
 	super remove
 ]
 
 { #category : 'rendering' }
 OPUmlClassifierShape >> removeRender [
-	super removeRender.
-	commentIcon := nil
+	super removeRender
 ]
 
 { #category : 'interactions' }

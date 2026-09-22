@@ -20,6 +20,20 @@ OPUmlGeneralizationController class >> viewModelClass [
 	^ OPUmlGeneralizationViewModel
 ]
 
+{ #category : 'construction' }
+OPUmlGeneralizationController >> createModelIn: aParentModel [
+	"Ensure generalization uses its specific classifier as container even when diagram model is passed."
+
+	| containerModel |
+	containerModel := (aParentModel respondsTo: #oclIsKindOf:)
+		ifTrue: [
+			(aParentModel oclIsKindOf: #Classifier)
+				ifTrue: [ aParentModel ]
+				ifFalse: [ self source ifNotNil: [ :activeSource | activeSource model ] ] ]
+		ifFalse: [ self source ifNotNil: [ :activeSource | activeSource model ] ].
+	^ super createModelIn: containerModel
+]
+
 { #category : 'forms' }
 OPUmlGeneralizationController >> descriptionGeneral [
 	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionGeneral' -> '`@receiver viewModel descriptionGeneral'.
@@ -44,4 +58,13 @@ OPUmlGeneralizationController >> maEdit [
 		openEditorWithApplication: self diagramController canvasPresenter application
 		undoManager: self diagramController undoManager.
 	self diagramController openInForm: self
+]
+
+{ #category : 'connecting' }
+OPUmlGeneralizationController >> parentModelInTarget: aTargetController [
+	"Generalization is structurally owned by its specific classifier (source)."
+
+	^ self source
+		  ifNotNil: [ :activeSource | activeSource model ]
+		  ifNil: [ self model ifNotNil: [ :activeModel | activeModel specific ] ]
 ]

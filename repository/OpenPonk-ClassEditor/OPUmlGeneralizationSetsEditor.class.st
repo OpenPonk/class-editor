@@ -15,14 +15,18 @@ Class {
 	#tag : 'UI'
 }
 
-{ #category : 'private - actions' }
+{ #category : 'saving' }
 OPUmlGeneralizationSetsEditor >> basicSave [
-	| command |
+	| command activeUndoManager |
 	command := self buildUpdateCommand.
 	command isEmpty ifTrue: [ ^ self ].
-	self undoManager
-		ifNotNil: [ :mgr | mgr execute: command ]
-		ifNil: [ command execute ]
+
+	activeUndoManager := self undoManager.
+	self
+		assert: activeUndoManager isNotNil
+		description: 'UndoManager must be provided for basicSave'.
+
+	activeUndoManager execute: command
 ]
 
 { #category : 'private - actions' }
@@ -42,8 +46,11 @@ OPUmlGeneralizationSetsEditor >> buildUpdateCommand [
 { #category : 'accessing' }
 OPUmlGeneralizationSetsEditor >> controller: aController [
 	"Backward compatibility adapter for controller-based usage"
+
 	controller := aController.
-	aController ifNotNil: [ self viewModel: aController viewModel ]
+	aController ifNotNil: [
+		self undoManager: aController undoManager.
+		self viewModel: aController viewModel ]
 ]
 
 { #category : 'private - actions' }

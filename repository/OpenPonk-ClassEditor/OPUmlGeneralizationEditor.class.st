@@ -23,15 +23,21 @@ Class {
 
 { #category : 'saving' }
 OPUmlGeneralizationEditor >> basicSave [
-	| commentCommand |
+	| commentCommand activeUndoManager |
+	activeUndoManager := self undoManager.
+	self
+		assert: activeUndoManager isNotNil
+		description: 'UndoManager must be provided for basicSave'.
+
 	generalizationSetsEditor basicSave.
+
 	commentCommand := OPUmlUpdateGeneralizationCommentCommand new
 		generalization: self model
 		commentText: commentTextArea text trim.
-	self undoManager
-		ifNotNil: [ :manager | manager execute: commentCommand ]
-		ifNil: [ commentCommand execute ].
-	self viewModel ifNotNil: #modelChanged
+	activeUndoManager execute: commentCommand.
+
+	self viewModel ifNotNil: [ :activeViewModel |
+		activeViewModel modelChanged ]
 ]
 
 { #category : 'accessing' }
@@ -41,8 +47,11 @@ OPUmlGeneralizationEditor >> commentTextArea [
 
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> controller: aGeneralizationController [
+
 	controller := aGeneralizationController.
-	aGeneralizationController ifNotNil: [ self viewModel: aGeneralizationController viewModel ]
+	aGeneralizationController ifNotNil: [
+		self undoManager: aGeneralizationController undoManager.
+		self viewModel: aGeneralizationController viewModel ]
 ]
 
 { #category : 'layout' }
