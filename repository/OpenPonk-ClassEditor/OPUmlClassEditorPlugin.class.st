@@ -64,6 +64,33 @@ OPUmlClassEditorPlugin >> diagramControllerClass [
 	^ OPUmlPackageDiagramController
 ]
 
+{ #category : 'templates' }
+OPUmlClassEditorPlugin >> exampleProjectTemplates [
+	"Answers example project templates for UML class diagrams."
+
+	^ { 
+		(OPProjectTemplate
+			named: 'Generalization Sets'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleGeneralizationSets ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Rich Class'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleRichClass ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Simple Association'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleSimpleAssociation ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Simple Generalization'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleSimpleGeneralization ]
+			isExample: true) }
+]
+
 { #category : 'accessing' }
 OPUmlClassEditorPlugin >> icon [
 	^ OPUmlIcons packageIcon

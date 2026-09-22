@@ -149,51 +149,6 @@ OPUmlExamples class >> exampleSimpleGeneralization [
 	^ model
 ]
 
-{ #category : 'menu' }
-OPUmlExamples class >> menuCommandOn: aBuilder [
-
-	<worldMenu>
-	(aBuilder item: #UMLClassEditor)
-		icon: OPCoreIcons openponkIcon;
-		label: 'UML Class Diagram Editor';
-		action: [ self openExampleEmptyModel ];
-		parent: #MostUsedTools;
-		order: 205;
-		with: [ 
-			(aBuilder item: #UMLEmptyPackage)
-				parent: #UMLClassEditor;
-				label: 'New Empty Package';
-				icon: OPUmlIcons packageIcon;
-				action: [ self openExampleEmptyModel ].
-			(aBuilder item: #UMLEmptyProfile)
-				parent: #UMLClassEditor;
-				label: 'New Empty Profile';
-				icon: OPUmlIcons profileIcon;
-				action: [ self openExampleEmptyProfile ];
-				withSeparatorAfter.
-			(aBuilder item: #UMLCompleteClass)
-				parent: #UMLClassEditor;
-				label: 'Rich Class';
-				icon: OPUmlIcons modelIcon;
-				action: [ self openExampleRichClass ].
-			(aBuilder item: #UMLExampleSimpleAssociation)
-				parent: #UMLClassEditor;
-				label: 'Simple Association';
-				icon: OPUmlIcons modelIcon;
-				action: [ self openExampleSimpleAssociation ].
-			(aBuilder item: #UMLExampleGeneralizationSets)
-				parent: #UMLClassEditor;
-				label: 'Generalization Sets';
-				icon: OPUmlIcons modelIcon;
-				withSeparatorAfter;
-				action: [ self openExampleGeneralizationSets ].
-			(aBuilder item: #UMLMetamodelInspect)
-				parent: #UMLClassEditor;
-				label: 'Inspect UML Metamodel';
-				icon: OPUmlIcons packageIcon;
-				action: [ OPUMLXMISpecsStorage umlMetamodel inspect ] ]
-]
-
 { #category : 'examples' }
 OPUmlExamples class >> notUsedExampleCommonStructure [
 
