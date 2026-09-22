@@ -25,24 +25,21 @@ OPUmlUndoRedoRegressionTest >> setUp [
 	project addModel: model.
 	diagram := OPOpenPonkDiagram forModelElement: model.
 	project addDiagram: diagram.
-	registry := OPViewModelRegistry forProject: project.
 
 	undoManager := OPUndoManager new.
-	projectController := OPProjectController new.
-	projectController project: project.
+	projectController := OPProjectController forProject: project.
 	projectController instVarNamed: #undoManager put: undoManager.
+	registry := projectController viewModelRegistry.
 
 	plugin := OPPluginRegistry default pluginFor: model.
 	canvas := RSCanvas new.
 	diagramController := plugin diagramControllerClass new.
+	projectController addDiagramController: diagramController.
 	diagramController
 		canvasPresenter: (OPCanvasPresenter new canvas: canvas; yourself);
 		diagramElement: diagram;
-		viewModelRegistry: registry;
-		model: model;
-		undoManager: undoManager.
+		model: model.
 
-	projectController addDiagramController: diagramController.
 	diagramController showAllElements
 ]
 
@@ -277,31 +274,27 @@ OPUmlUndoRedoRegressionTest >> testUndoRedoOperationCreationInClassCompartment [
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testUndoRestoresClassCompartmentsAndLayout [
-	| richModel classModel localProject localDiagram localRegistry localCanvas localPlugin localDiagramController richController classShape restoredController restoredShape localProjectController localUndoManager |
+	| richModel classModel localProject localDiagram localCanvas localPlugin localDiagramController richController classShape restoredController restoredShape localProjectController localUndoManager |
 	richModel := OPUmlExamples exampleRichClass.
 	classModel := richModel packagedElements detect: [ :eachElement | eachElement isKindOf: OPUMLClass ].
 	localProject := OPProject new.
 	localProject addModel: richModel.
 	localDiagram := OPOpenPonkDiagram forModelElement: richModel.
 	localProject addDiagram: localDiagram.
-	localRegistry := OPViewModelRegistry forProject: localProject.
 	localUndoManager := OPUndoManager new.
 
-	localProjectController := OPProjectController new.
-	localProjectController project: localProject.
+	localProjectController := OPProjectController forProject: localProject.
 	localProjectController instVarNamed: #undoManager put: localUndoManager.
 
 	localPlugin := OPPluginRegistry default pluginFor: richModel.
 	localCanvas := RSCanvas new.
 	localDiagramController := localPlugin diagramControllerClass new.
+	localProjectController addDiagramController: localDiagramController.
 	localDiagramController
 		canvasPresenter: (OPCanvasPresenter new canvas: localCanvas; yourself);
 		diagramElement: localDiagram;
-		viewModelRegistry: localRegistry;
-		model: richModel;
-		undoManager: localUndoManager.
+		model: richModel.
 
-	localProjectController addDiagramController: localDiagramController.
 	localDiagramController showAllElements.
 
 	richController := localDiagramController controllerForModel: classModel.

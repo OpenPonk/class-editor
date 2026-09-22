@@ -11,14 +11,14 @@ Class {
 		'generalizationController',
 		'diagramController'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests',
+	#category : 'OpenPonk-ClassEditor-Tests - UI',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Tests'
+	#tag : 'Tests - UI'
 }
 
 { #category : 'running' }
 OPUmlGeneralizationEditorTest >> setUp [
-	| registry |
+	| projectController |
 	super setUp.
 	project := OPProject new.
 	package := OPUMLPackage new name: 'TestPackage'.
@@ -36,11 +36,10 @@ OPUmlGeneralizationEditorTest >> setUp [
 	generalizationSet generalizations add: generalization.
 	package packagedElements add: generalizationSet.
 
-	registry := OPViewModelRegistry forProject: project.
+	projectController := OPProjectController forProject: project.
 
 	diagramController := OPUmlPackageDiagramController new.
-	diagramController undoManager: OPUndoManager new.
-	diagramController viewModelRegistry: registry.
+	projectController addDiagramController: diagramController.
 	diagramController model: package.
 	diagramController diagramElement: (OPOpenPonkDiagram forModelElement: package).
 	(OPCanvasPresenter new canvas: RSCanvas new; yourself) attachController: diagramController.
@@ -164,4 +163,26 @@ OPUmlGeneralizationEditorTest >> testSaveCommentIsUndoable [
 	self assert: generalization ownedComments first body equals: 'Initial Comment'.
 	um redo.
 	self assert: generalization ownedComments first body equals: 'Updated Comment'
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationEditorTest >> testSaveProducesLabeledTransactionWithoutUnchangedCommentCommand [
+	| activeUndoManager generalizationViewModel editor recordedCommand |
+	activeUndoManager := diagramController undoManager.
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
+
+	editor := OPUmlGeneralizationEditor new.
+	editor undoManager: activeUndoManager.
+	editor viewModel: generalizationViewModel.
+
+	editor generalizationSetsEditor addNewSet.
+	editor save.
+
+	self assert: activeUndoManager canUndo.
+	recordedCommand := activeUndoManager undoStack last.
+	self assert: recordedCommand description equals: 'Edit Generalization'.
+	self
+		deny: (recordedCommand commands anySatisfy: [ :eachEnclosedCommand |
+			eachEnclosedCommand isKindOf: OPUmlUpdateGeneralizationCommentCommand ])
+		description: 'Unchanged comment must not produce comment command'
 ]

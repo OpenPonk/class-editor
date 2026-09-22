@@ -22,6 +22,20 @@ OPUmlUpdateGeneralizationSetsCommand >> affectedGeneralizations: aCollection [
 	affectedGeneralizations := aCollection asSet
 ]
 
+{ #category : 'accessing' }
+OPUmlUpdateGeneralizationSetsCommand >> allAffectedGeneralizations [
+	| result |
+	result := affectedGeneralizations copy.
+	membershipChanges do: [ :eachChange |
+		result addAll: (eachChange at: #added).
+		result addAll: (eachChange at: #removed) ].
+	setsToRemove do: [ :eachChange |
+		result addAll: (eachChange at: #generalizations) ].
+	propertyChanges do: [ :eachChange |
+		result addAll: (eachChange at: #set) generalizations ].
+	^ result asSet
+]
+
 { #category : 'execution' }
 OPUmlUpdateGeneralizationSetsCommand >> execute [
 	setsToAdd do: [ :eachPair |
@@ -80,12 +94,12 @@ OPUmlUpdateGeneralizationSetsCommand >> isSetMarkedForRemoval: aSet [
 	^ setsToRemove anySatisfy: [ :each | (each at: #set) uuid = aSet uuid ]
 ]
 
-{ #category : 'private - updating' }
+{ #category : 'execution' }
 OPUmlUpdateGeneralizationSetsCommand >> notifyAffectedGeneralizations [
 	viewModelRegistry ifNil: [ ^ self ].
-	affectedGeneralizations do: [ :eachGen |
-		(viewModelRegistry hasViewModelFor: eachGen) ifTrue: [
-			(viewModelRegistry viewModelFor: eachGen) modelChanged ] ]
+	self allAffectedGeneralizations do: [ :eachGeneralization |
+		(viewModelRegistry hasViewModelFor: eachGeneralization) ifTrue: [
+			(viewModelRegistry viewModelFor: eachGeneralization) modelChanged ] ]
 ]
 
 { #category : 'building' }

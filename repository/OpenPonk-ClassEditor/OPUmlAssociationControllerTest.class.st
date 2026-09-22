@@ -86,12 +86,9 @@ OPUmlAssociationControllerTest >> testNavigableRemovalOfAssociationRemovesMember
 	self denyCollection: diagramController diagram allOwnedElements includesAny: { attributeDiagramElement }
 ]
 
-{ #category : 'tests - undo/redo' }
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testRedoDeletionOfNavigableAssociation [
 	| class1 class2 assoc navProp prop2 |
-	diagramController undoManager ifNil: [
-		diagramController undoManager: OPUndoManager new ].
-
 	class1 := OPUMLClass new name: 'ClassA'.
 	class2 := OPUMLClass new name: 'ClassB'.
 	diagramController model packagedElements add: class1; add: class2.
@@ -191,12 +188,9 @@ OPUmlAssociationControllerTest >> testShowAllElementsIgnoresNonNavigableEnds [
 	self assert: (diagramController viewModelRegistry viewModelFor: model) childrenModels size equals: 2.
 ]
 
-{ #category : 'tests - undo/redo' }
+{ #category : 'tests' }
 OPUmlAssociationControllerTest >> testUndoDeletionOfNavigableAssociation [
 	| class1 class2 assoc navProp prop2 |
-	diagramController undoManager ifNil: [
-		diagramController undoManager: OPUndoManager new ].
-
 	class1 := OPUMLClass new name: 'ClassA'.
 	class2 := OPUMLClass new name: 'ClassB'.
 	diagramController model packagedElements add: class1; add: class2.

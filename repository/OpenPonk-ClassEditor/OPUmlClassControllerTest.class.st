@@ -25,16 +25,14 @@ OPUmlClassControllerTest >> modelClass [
 	^ OPUMLClass
 ]
 
-{ #category : 'tests - diagram' }
+{ #category : 'tests' }
 OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
-
 	| operation operationController nameLabelRectangle operationLabelRectangle classRectangle elements |
 	operation := OPUMLOperation new.
 	operation name: 'anOperation'.
 	model ownedOperations add: operation.
 	operationController := OPUmlOperationController new.
-	operationController viewModelRegistry:
-		diagramController viewModelRegistry.
+	operationController diagramController: diagramController.
 	operationController model: operation.
 	diagramController model packagedElements add: model.
 
@@ -43,24 +41,24 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 	operationController showInDiagram: diagramController.
 	elements := diagramController canvas nodes.
 	nameLabelRectangle := (elements detect: [ :any |
-			                       (any model isKindOf:
-				                        OPUmlClassifierNameLabel) or: [
-					                       any model ownedElements anySatisfy: [
-						                       :anyInner |
-						                       anyInner isKindOf:
-							                       OPUmlClassifierNameLabel ] ] ])
-		                      encompassingRectangle.
+									(any model isKindOf:
+										OPUmlClassifierNameLabel) or: [
+											any model ownedElements anySatisfy: [
+												:anyInner |
+												anyInner isKindOf:
+													OPUmlClassifierNameLabel ] ] ])
+								encompassingRectangle.
 	operationLabelRectangle := (elements detect: [ :any |
-			                            (any model isKindOf:
-				                             OPUmlOperationLabel) or: [
-					                            any model ownedElements anySatisfy: [
-						                            :anyInner |
-						                            anyInner isKindOf:
-							                            OPUmlOperationLabel ] ] ])
-		                           encompassingRectangle.
+										(any model isKindOf:
+											OPUmlOperationLabel) or: [
+												any model ownedElements anySatisfy: [
+													:anyInner |
+													anyInner isKindOf:
+														OPUmlOperationLabel ] ] ])
+								encompassingRectangle.
 	classRectangle := (elements detect: [ :any |
-		                   any model isKindOf: OPUmlClassShape ])
-		                  encompassingRectangle.
+							any model isKindOf: OPUmlClassShape ])
+							encompassingRectangle.
 	self
 		assert: (classRectangle containsRect: nameLabelRectangle)
 		description: 'Name of class is outside of class shape'.
@@ -71,8 +69,8 @@ OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 		deny: (operationLabelRectangle intersects: nameLabelRectangle)
 		description: 'Name of operation is overlapping name of class'.
 	^ self
-		  assert: nameLabelRectangle bottom <= operationLabelRectangle top
-		  description: 'Name of operation is not below name of class'
+			assert: nameLabelRectangle bottom <= operationLabelRectangle top
+			description: 'Name of operation is not below name of class'
 ]
 
 { #category : 'tests - removing' }

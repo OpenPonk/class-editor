@@ -224,13 +224,6 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 		self initializeProfile: each appliedProfile palette: aPalette ]
 ]
 
-{ #category : 'actions' }
-OPUmlPackageDiagramController >> maEdit [
-	self viewModel
-		openEditorWithApplication: self diagramController canvasPresenter application
-		undoManager: self diagramController undoManager
-]
-
 { #category : 'destruction' }
 OPUmlPackageDiagramController >> packageRenderChanged [
 

@@ -11,14 +11,14 @@ Class {
 		'generalizationController',
 		'diagramController'
 	],
-	#category : 'OpenPonk-ClassEditor-Tests',
+	#category : 'OpenPonk-ClassEditor-Tests - UI',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Tests'
+	#tag : 'Tests - UI'
 }
 
 { #category : 'running' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> setUp [
-	| registry |
+	| projectController |
 	super setUp.
 	project := OPProject new.
 	package := OPUMLPackage new name: 'TestPackage'.
@@ -36,11 +36,10 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> setUp [
 	generalizationSet generalizations add: generalization.
 	package packagedElements add: generalizationSet.
 
-	registry := OPViewModelRegistry forProject: project.
+	projectController := OPProjectController forProject: project.
 
 	diagramController := OPUmlPackageDiagramController new.
-	diagramController undoManager: OPUndoManager new.
-	diagramController viewModelRegistry: registry.
+	projectController addDiagramController: diagramController.
 	diagramController model: package.
 	diagramController diagramElement: (OPOpenPonkDiagram forModelElement: package).
 	(OPCanvasPresenter new canvas: RSCanvas new; yourself) attachController: diagramController.
@@ -57,6 +56,74 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> tearDown [
 	diagramController ifNotNil: [ 
 		diagramController controllers copy do: #removeControllerAndDiagramElement ].
 	super tearDown
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetAndUndoRemovesLabelFromDiagram [
+	| editor activeUndoManager labelElement labelShape |
+	activeUndoManager := diagramController undoManager.
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor undoManager: activeUndoManager.
+	editor viewModel: generalizationController viewModel.
+
+	labelElement := generalizationController diagramElement ownedElements
+		detect: [ :eachLabel | eachLabel isKindOf: OPUmlGeneralizationLabel ].
+	labelShape := labelElement roassalShape.
+
+	self assert: labelShape text equals: 'insured gs {}'.
+	self assert: generalization generalizationSets size equals: 1.
+
+	"1. Add a new generalization set for this generalization"
+	editor addNewSet.
+	editor save.
+
+	self assert: generalization generalizationSets size equals: 2.
+	self assert: labelShape text equals: 'insured gs {}; set {}'.
+
+	"2. Perform Undo"
+	activeUndoManager undo.
+
+	self assert: generalization generalizationSets size equals: 1.
+	self assert: labelShape text equals: 'insured gs {}'
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetToStandaloneGeneralizationAndUndoClearsLabel [
+	| classAnimal classCat standaloneGeneralization genController labelElement labelShape activeUndoManager editor |
+	classAnimal := OPUMLClass new name: 'Animal'.
+	classCat := OPUMLClass new name: 'Cat'.
+	package packagedElements add: classAnimal; add: classCat.
+
+	standaloneGeneralization := OPUMLGeneralization new.
+	standaloneGeneralization general: classAnimal; specific: classCat.
+	classCat generalizations add: standaloneGeneralization.
+
+	diagramController showInDiagramModel: classAnimal.
+	diagramController showInDiagramModel: classCat.
+	diagramController showInDiagramModel: standaloneGeneralization.
+
+	genController := diagramController controllerForModel: standaloneGeneralization.
+	labelElement := genController diagramElement ownedElements
+		detect: [ :eachLabel | eachLabel isKindOf: OPUmlGeneralizationLabel ].
+	labelShape := labelElement roassalShape.
+
+	self assert: labelShape text equals: ''.
+
+	activeUndoManager := diagramController undoManager.
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor undoManager: activeUndoManager.
+	editor viewModel: genController viewModel.
+
+	editor addNewSet.
+	editor save.
+
+	self assert: standaloneGeneralization generalizationSets size equals: 1.
+	self assert: labelShape text equals: 'set {}'.
+
+	activeUndoManager undo.
+
+	self assert: standaloneGeneralization generalizationSets size equals: 0.
+	self assert: labelShape text equals: ''
 ]
 
 { #category : 'tests' }

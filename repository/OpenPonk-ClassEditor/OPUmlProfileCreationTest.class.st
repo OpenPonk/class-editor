@@ -12,20 +12,20 @@ Class {
 	#tag : 'Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'running' }
 OPUmlProfileCreationTest >> setUp [
-	| registry package |
+	| package projectController |
 	super setUp.
 	project := OPProject new.
 	package := OPUMLPackage new name: 'TestPackage'.
 	project addModel: package.
 	diagram := OPOpenPonkDiagram forModelElement: package.
 	project addDiagram: diagram.
-	registry := OPViewModelRegistry forProject: project.
+	projectController := OPProjectController forProject: project.
 	diagramController := OPUmlPackageDiagramController new.
+	projectController addDiagramController: diagramController.
 	diagramController
 		workbenchAnnouncer: Announcer new;
-		viewModelRegistry: registry;
 		model: package;
 		diagramElement: diagram.
 	palette := OPPalette new.

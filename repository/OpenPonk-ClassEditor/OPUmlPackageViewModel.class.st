@@ -176,15 +176,6 @@ OPUmlPackageViewModel >> icon [ ^ OPUmlIcons packageIcon
 ]
 
 { #category : 'actions' }
-OPUmlPackageViewModel >> maEdit [
-	| editor |
-	editor := OPUmlAllGeneralizationSetsEditor new.
-	editor viewModel: self.
-	editor openModal.
-	self modelChanged
-]
-
-{ #category : 'actions' }
 OPUmlPackageViewModel >> openEditorWithApplication: anApplication undoManager: anUndoManager [
 	| editor |
 	editor := OPUmlAllGeneralizationSetsEditor new.

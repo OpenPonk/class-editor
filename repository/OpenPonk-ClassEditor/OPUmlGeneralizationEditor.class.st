@@ -21,23 +21,22 @@ Class {
 	#tag : 'UI'
 }
 
-{ #category : 'saving' }
+{ #category : 'actions' }
 OPUmlGeneralizationEditor >> basicSave [
-	| commentCommand activeUndoManager |
+
+	| activeUndoManager currentCommentText newCommentText commentCommand |
 	activeUndoManager := self undoManager.
-	self
-		assert: activeUndoManager isNotNil
-		description: 'UndoManager must be provided for basicSave'.
-
+	self assert: activeUndoManager isNotNil description: 'UndoManager must be provided for basicSave'.
 	generalizationSetsEditor basicSave.
+	currentCommentText := self model ownedComments
+		                      ifEmpty: [ '' ]
+		                      ifNotEmpty: [ :existingComments | existingComments first body asString ].
+	newCommentText := commentTextArea text trim.
 
-	commentCommand := OPUmlUpdateGeneralizationCommentCommand new
-		generalization: self model
-		commentText: commentTextArea text trim.
+	currentCommentText = newCommentText ifTrue: [ ^ self ].
+	commentCommand := OPUmlUpdateGeneralizationCommentCommand new generalization: self model commentText: newCommentText.
 	activeUndoManager execute: commentCommand.
-
-	self viewModel ifNotNil: [ :activeViewModel |
-		activeViewModel modelChanged ]
+	self viewModel ifNotNil: [ :activeViewModel | activeViewModel modelChanged ]
 ]
 
 { #category : 'accessing' }
@@ -134,7 +133,10 @@ OPUmlGeneralizationEditor >> model [
 { #category : 'actions' }
 OPUmlGeneralizationEditor >> save [
 	self undoManager
-		ifNotNil: [ :mgr | mgr inTransaction: [ self basicSave ] ]
+		ifNotNil: [ :activeUndoManager |
+			activeUndoManager
+				inTransactionLabeled: 'Edit Generalization'
+				do: [ self basicSave ] ]
 		ifNil: [ self basicSave ]
 ]
 

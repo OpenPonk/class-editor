@@ -52,14 +52,6 @@ OPUmlGeneralizationController >> descriptionSpecific [
 	^ self viewModel descriptionSpecific
 ]
 
-{ #category : 'actions' }
-OPUmlGeneralizationController >> maEdit [
-	self viewModel
-		openEditorWithApplication: self diagramController canvasPresenter application
-		undoManager: self diagramController undoManager.
-	self diagramController openInForm: self
-]
-
 { #category : 'connecting' }
 OPUmlGeneralizationController >> parentModelInTarget: aTargetController [
 	"Generalization is structurally owned by its specific classifier (source)."

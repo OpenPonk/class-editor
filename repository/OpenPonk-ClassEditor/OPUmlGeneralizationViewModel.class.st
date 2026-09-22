@@ -131,15 +131,6 @@ OPUmlGeneralizationViewModel >> findParentViewModel [
 OPUmlGeneralizationViewModel >> icon [ ^ OPUmlIcons generalizationIcon
 ]
 
-{ #category : 'actions' }
-OPUmlGeneralizationViewModel >> maEdit [
-	| editor |
-	editor := OPUmlGeneralizationEditor new.
-	editor viewModel: self.
-	editor openModal.
-	self modelChanged
-]
-
 { #category : 'printing' }
 OPUmlGeneralizationViewModel >> modelDisplayStringOn: aStream [
     aStream nextPutAll: (self model specific ifNotNil: #name ifNil: ['?']).

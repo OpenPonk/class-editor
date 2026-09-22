@@ -34,7 +34,7 @@ OPUmlAllGeneralizationSetsEditor >> initializeWindow: aWindow [
 
 	super initializeWindow: aWindow.
 	aWindow
-		title: 'Generalization Sets Editor';
+		title: 'Generalization Sets Editor (' , self targetPackage name , ')';
 		initialExtent: 500 @ 750;
 		closeOnBackdropClick: true;
 		whenClosedDo: [ aWindow isCancelled ifFalse: [ self save ] ]
