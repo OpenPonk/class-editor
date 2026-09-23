@@ -17,6 +17,12 @@ OPGenerateUmlProfileCommand >> execute [
 	OPUmlProfileGeneratorWizard openOn: self selectedViewModel model
 ]
 
+{ #category : 'accessing' }
+OPGenerateUmlProfileCommand >> iconName [
+	"Answer the icon name for launching the UML profile generation wizard."
+	^ #smallConfiguration
+]
+
 { #category : 'as yet unclassified' }
 OPGenerateUmlProfileCommand >> initialize [
 	super initialize.

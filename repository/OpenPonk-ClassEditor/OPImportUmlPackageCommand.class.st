@@ -17,6 +17,12 @@ OPImportUmlPackageCommand >> execute [
 	OPUmlClassEditorPlugin importToPackage: self selectedViewModel model
 ]
 
+{ #category : 'accessing' }
+OPImportUmlPackageCommand >> iconName [
+	"Answer the icon name for importing model elements from an XMI file."
+	^ #smallOpen
+]
+
 { #category : 'as yet unclassified' }
 OPImportUmlPackageCommand >> initialize [
 	super initialize.

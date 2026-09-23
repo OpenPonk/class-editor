@@ -17,6 +17,12 @@ OPExportUmlPackageCommand >> execute [
 	OPUmlClassEditorPlugin exportPackage: self selectedViewModel model
 ]
 
+{ #category : 'accessing' }
+OPExportUmlPackageCommand >> iconName [
+	"Answer the icon name for exporting model elements to an XMI file."
+	^ #smallSaveAs
+]
+
 { #category : 'as yet unclassified' }
 OPExportUmlPackageCommand >> initialize [
 	super initialize.
