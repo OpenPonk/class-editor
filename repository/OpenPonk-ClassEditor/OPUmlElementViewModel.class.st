@@ -179,15 +179,21 @@ OPUmlElementViewModel >> findParentViewModel [
 
 { #category : 'printing' }
 OPUmlElementViewModel >> modelDisplayStringOn: aStream [
-    self model name ifNotEmpty: [ :n | aStream nextPutAll: n; space ].
-    aStream nextPutAll: '('.
-    (self model respondsTo: #appliedStereotypes)
-        ifTrue: [
-            self model appliedStereotypes ifNotEmpty: [ :stereotypes |
-                aStream nextPutAll: stereotypes first umlClassName.
-                aStream nextPutAll: ')'.
-                ^ self ] ].
-    aStream nextPutAll: self model umlClassName; nextPutAll: ')'
+
+	self model name ifNotNil: [ :theName |
+			theName ifNotEmpty: [ :theFilledName |
+					aStream
+						nextPutAll: theFilledName;
+						space ] ].
+	aStream nextPutAll: '('.
+	(self model respondsTo: #appliedStereotypes) ifTrue: [
+			self model appliedStereotypes ifNotEmpty: [ :stereotypes |
+					aStream nextPutAll: stereotypes first umlClassName.
+					aStream nextPutAll: ')'.
+					^ self ] ].
+	aStream
+		nextPutAll: self model umlClassName;
+		nextPutAll: ')'
 ]
 
 { #category : 'accessing' }
