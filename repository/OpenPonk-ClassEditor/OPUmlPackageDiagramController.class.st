@@ -57,9 +57,6 @@ OPUmlPackageDiagramController >> controllerFactory [
 		register: OPUmlPackageController forModel: OPUMLPackage;
 		register: OPUmlProfileController forModel: OPUMLProfile;
 		register: OPUmlExtensionController forModel: OPUMLExtension;
-		register: OPUmlAttributeController 
-			forModel: OPUMLExtensionEnd 
-			condition: [ :prop | prop owningAssociation isNil ];
 		register: OPUmlEnumerationController forModel: OPUMLEnumeration;
 		register: OPUmlEnumerationLiteralController forModel: OPUMLEnumerationLiteral;
 		register: OPUmlStereotypeController forModel: OPUMLStereotype;

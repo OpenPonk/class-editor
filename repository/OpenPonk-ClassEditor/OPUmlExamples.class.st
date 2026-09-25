@@ -87,6 +87,38 @@ OPUmlExamples class >> exampleGeneralizationSets [
 	^ model
 ]
 
+{ #category : 'examples' }
+OPUmlExamples class >> examplePackageArchitecture [
+	<script: 'self examplePackageArchitecture inspect'>
+	| rootPackage clientPackage typesPackage securityProfile statusEnumeration activeLiteral pendingLiteral typesImport profileImport |
+	rootPackage := OPUMLPackage new name: 'ECommerceSystem'.
+	clientPackage := OPUMLPackage new name: 'ClientModule'.
+	typesPackage := OPUMLPackage new name: 'CommonTypes'.
+	securityProfile := OPUMLProfile new name: 'SecurityProfile'.
+
+	statusEnumeration := OPUMLEnumeration new name: 'CustomerStatus'.
+	activeLiteral := OPUMLEnumerationLiteral new name: 'Active'.
+	pendingLiteral := OPUMLEnumerationLiteral new name: 'Pending'.
+	statusEnumeration ownedLiterals add: activeLiteral; add: pendingLiteral.
+	typesPackage packagedElements add: statusEnumeration.
+
+	typesImport := OPUMLPackageImport new
+		importedPackage: typesPackage;
+		importingNamespace: clientPackage.
+	clientPackage packageImports add: typesImport.
+
+	profileImport := OPUMLPackageImport new
+		importedPackage: securityProfile;
+		importingNamespace: clientPackage.
+	clientPackage packageImports add: profileImport.
+
+	rootPackage packagedElements add: clientPackage.
+	rootPackage packagedElements add: typesPackage.
+	rootPackage packagedElements add: securityProfile.
+
+	^ rootPackage
+]
+
 { #category : 'accessing' }
 OPUmlExamples class >> exampleRichClass [
 
@@ -96,6 +128,38 @@ OPUmlExamples class >> exampleRichClass [
 	model name: 'Rich Class Model'.
 	model packagedElements add: self richClass.
 	^ model
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> exampleSecurityProfile [
+	<script: 'self exampleSecurityProfile inspect'>
+	| profile stereotype baseClass extension extensionEnd baseProperty |
+	profile := OPUMLProfile new name: 'SecurityProfile'.
+	stereotype := OPUMLStereotype new name: 'Secured'.
+	baseClass := OPUMLClass new name: 'Component'.
+
+	extension := OPUMLExtension new name: 'Secured_Component'.
+	extensionEnd := OPUMLExtensionEnd new
+		name: 'extension_Secured';
+		type: stereotype;
+		owningAssociation: extension;
+		association: extension.
+	baseProperty := OPUMLProperty new
+		name: 'base_Component';
+		type: baseClass;
+		owningClass: stereotype;
+		owningAssociation: nil;
+		association: extension.
+
+	extension memberEnds add: extensionEnd; add: baseProperty.
+	extension ownedEnd: extensionEnd.
+	stereotype ownedAttributes add: baseProperty.
+
+	profile packagedElements add: stereotype.
+	profile packagedElements add: baseClass.
+	profile packagedElements add: extension.
+
+	^ profile
 ]
 
 { #category : 'accessing' }

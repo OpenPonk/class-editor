@@ -55,6 +55,11 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 ]
 
 { #category : 'accessing' }
+OPUmlClassEditorPlugin class >> repositoryName [
+	^ #'class-editor'
+]
+
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> defaultProfiles [
 	^ self class defaultProfiles
 ]
@@ -88,6 +93,16 @@ OPUmlClassEditorPlugin >> exampleProjectTemplates [
 			named: 'Simple Generalization'
 			icon: self icon
 			modelFactory: [ OPUmlExamples exampleSimpleGeneralization ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Package Architecture'
+			icon: self icon
+			modelFactory: [ OPUmlExamples examplePackageArchitecture ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Security Profile'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleSecurityProfile ]
 			isExample: true) }
 ]
 
