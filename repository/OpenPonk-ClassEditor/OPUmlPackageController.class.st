@@ -56,16 +56,7 @@ OPUmlPackageController >> canBeTargetFor: aController [
 
 { #category : 'construction' }
 OPUmlPackageController >> hookDiagramElement [
-
 	super hookDiagramElement.
-
-	self diagramElement innerRoassalShapesBlock: [
-		Array streamContents: [ :stream |
-			self diagramController
-				propagateBlock: [ :eachController |
-					eachController roassalShape ifNotNil: [ :roassalShape |
-						stream nextPut: roassalShape ] ]
-				toNodeControllersIn: self model ] ].
 	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
@@ -100,15 +91,6 @@ OPUmlPackageController >> renderDiagramElement [
 	super renderDiagramElement.
 	self packageRenderChanged.
 	self pushBack
-]
-
-{ #category : 'diagram elements' }
-OPUmlPackageController >> unhookDiagramElement [
-
-	super unhookDiagramElement.
-
-	(self diagramElement ifNotExists: [ ^ self ])
-		innerRoassalShapesBlock: [ Array empty ]
 ]
 
 { #category : 'event handling' }

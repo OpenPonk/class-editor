@@ -1,5 +1,5 @@
 "
-I am a specialized label shape designed to be placed within a UML compartment, handling text rendering and layout relative to my container.
+A specialized label shape designed to reside inside a UML compartment, handling text rendering and layout relative to its container.
 "
 Class {
 	#name : 'OPUmlCompartmentableLabel',

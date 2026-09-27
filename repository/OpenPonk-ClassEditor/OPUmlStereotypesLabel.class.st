@@ -1,5 +1,5 @@
 "
-I am the base label for displaying UML keywords and stereotypes (e.g., `<<metaclass>>` or `<<myStereotype>>`). I typically sit directly above the main element name.
+A base label for displaying UML keywords and applied stereotypes directly above the main element name.
 "
 Class {
 	#name : 'OPUmlStereotypesLabel',

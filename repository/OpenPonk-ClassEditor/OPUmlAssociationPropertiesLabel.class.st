@@ -1,5 +1,5 @@
 "
-I am an edge label used to display specific property constraints on a UML Association end, such as `{ordered}` or `{readOnly}`.
+An edge label displaying property constraints on an association end, such as {ordered} or {readOnly}.
 "
 Class {
 	#name : 'OPUmlAssociationPropertiesLabel',

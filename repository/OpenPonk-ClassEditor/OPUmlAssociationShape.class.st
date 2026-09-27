@@ -1,5 +1,5 @@
 "
-I am a specialized edge shape designed for UML Associations. I render the relationship line, apply appropriate head/tail markers based on navigability, and manage the placement of end labels (like roles and multiplicities).
+An edge shape representing a UML association. Renders connection lines, navigability markers, and coordinates placement of end labels.
 "
 Class {
 	#name : 'OPUmlAssociationShape',

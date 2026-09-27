@@ -1,5 +1,5 @@
 "
-I am a list compartment used within structured classifiers to group general features together when they are not strictly separated into attributes and operations.
+A list compartment within structured classifiers that groups general features when not strictly separated into attributes and operations.
 "
 Class {
 	#name : 'OPUmlFeaturesListCompartment',

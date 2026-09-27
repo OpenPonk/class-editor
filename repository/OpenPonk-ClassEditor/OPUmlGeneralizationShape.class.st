@@ -1,5 +1,5 @@
 "
-I am an edge shape representing a UML Generalization. I render a solid line with a hollow triangular arrowhead pointing to the general (super) classifier.
+An edge shape representing a UML Generalization, rendering a solid line with a hollow triangular arrowhead pointing to the general classifier.
 "
 Class {
 	#name : 'OPUmlGeneralizationShape',

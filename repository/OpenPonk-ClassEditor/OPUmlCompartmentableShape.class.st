@@ -1,5 +1,5 @@
 "
-I am a bounded node shape representing a structured UML element (like a Class) that contains multiple compartments. I manage the layout of these compartments, separate them with visual dividers, and automatically adjust my overall extent to fit them.
+A bounded shape representing a structured UML element with multiple compartments. Coordinates compartment layout, visual dividers, and extent calculation.
 "
 Class {
 	#name : 'OPUmlCompartmentableShape',
@@ -45,10 +45,10 @@ OPUmlCompartmentableShape >> initialize [
 
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> layout [
-
-	self
-		accomodateContents;
-		layoutContents
+	(self compartments select: [ :eachCompartment | eachCompartment isRendered ])
+		do: [ :eachRenderedCompartment | eachRenderedCompartment accomodateContents ].
+	self accomodateContents.
+	self layoutContents
 ]
 
 { #category : 'rendering' }
@@ -60,13 +60,15 @@ OPUmlCompartmentableShape >> layoutContents [
 
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> layoutOwnedElements [
-
+	| targetWidth |
+	targetWidth := self roassalShape width - self leftPadding - self rightPadding.
+	(self compartments select: #isRendered) do: [ :eachCompartment |
+		eachCompartment width: targetWidth ].
 	^ (self ownedElements select: #isRendered)
-		  inject:
-		  self roassalShape encompassingRectangle top + self topPadding
-		  into: [ :prevHeight :each |
-				  each translateTopTo: prevHeight.
-				  prevHeight + each height + 1 ]
+		inject: self roassalShape encompassingRectangle top + self topPadding
+		into: [ :prevHeight :each |
+			each translateTopTo: prevHeight.
+			prevHeight + each height + 1 ]
 ]
 
 { #category : 'rendering' }
@@ -136,6 +138,12 @@ OPUmlCompartmentableShape >> selectableInteraction [
 OPUmlCompartmentableShape >> separators [
 
 	^ separators
+]
+
+{ #category : 'roassal' }
+OPUmlCompartmentableShape >> updateRenderFromBounds [
+	super updateRenderFromBounds.
+	self isRendered ifTrue: [ self layoutContents ]
 ]
 
 { #category : 'rendering' }

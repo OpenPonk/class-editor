@@ -1,5 +1,5 @@
 "
-I am a specific class item label designed to render the text representation of a UML Property (Attribute) inside a class attribute compartment.
+A classifier item label rendering the textual representation of a UML Property inside a class attribute compartment.
 "
 Class {
 	#name : 'OPUmlAttributeLabel',

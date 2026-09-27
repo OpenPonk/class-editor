@@ -6,13 +6,13 @@ Class {
 	#tag : 'Commands-ProjectTree'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 OPImportUmlPackageCommand >> canBeExecuted [
 	self selectedViewModel ifNil: [ ^ false ].
 	^ self selectedViewModel isKindOf: OPUmlPackageViewModel
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'executing' }
 OPImportUmlPackageCommand >> execute [
 	OPUmlClassEditorPlugin importToPackage: self selectedViewModel model
 ]
@@ -23,7 +23,7 @@ OPImportUmlPackageCommand >> iconName [
 	^ #smallOpen
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 OPImportUmlPackageCommand >> initialize [
 	super initialize.
 	self name: 'Import from XMI...'

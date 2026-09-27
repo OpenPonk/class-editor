@@ -1,5 +1,5 @@
 "
-I am an edge shape representing a UML PackageImport. I render the visual line (typically dashed) connecting an importing namespace to the imported package.
+An edge shape representing a UML PackageImport, rendering a dashed line connecting an importing namespace to an imported package.
 "
 Class {
 	#name : 'OPUmlPackageImportShape',

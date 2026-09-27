@@ -1,5 +1,5 @@
 "
-I am an edge label for UML PackageImports. I render the required keyword, typically `<<import>>` or `<<access>>`, along the dashed import edge.
+An edge label for UML package imports rendering keywords such as <<import>> or <<access>> along the dashed import line.
 "
 Class {
 	#name : 'OPUmlPackageImportLabel',

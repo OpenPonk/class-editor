@@ -1,5 +1,5 @@
 "
-I am a specialized label for rendering the main name of a UML Classifier. I handle specific emphasis rendering, such as italicizing the text when the represented classifier is abstract.
+A specialized label rendering the name of a UML classifier, supporting typographical styling such as italics for abstract classifiers.
 "
 Class {
 	#name : 'OPUmlClassifierNameLabel',

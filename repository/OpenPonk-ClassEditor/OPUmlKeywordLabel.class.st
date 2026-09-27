@@ -1,5 +1,5 @@
 "
-I am a specialized label shape used to display UML keywords (like `<<interface>>` or `<<stereotype>>`) above the name of a classifier.
+A specialized label displaying UML keywords above the classifier name.
 "
 Class {
 	#name : 'OPUmlKeywordLabel',

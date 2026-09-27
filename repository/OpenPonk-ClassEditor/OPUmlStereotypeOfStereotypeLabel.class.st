@@ -1,5 +1,5 @@
 "
-I am a specific stereotypes label that explicitly ensures the standard `<<stereotype>>` keyword is displayed above a Stereotype definition's name in a profile diagram.
+A stereotype label ensuring the standard <<stereotype>> keyword is rendered above a Stereotype definition name in profile diagrams.
 "
 Class {
 	#name : 'OPUmlStereotypeOfStereotypeLabel',

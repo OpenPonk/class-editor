@@ -1,5 +1,5 @@
 "
-I am a specialized edge label designed to display the multiplicity bounds (e.g., `0..1` or `1..*`) at a specific end (source or target) of a UML relationship edge.
+An edge label displaying multiplicity bounds at a specific end of a UML relationship edge.
 "
 Class {
 	#name : 'OPUmlMultiplicityLabel',

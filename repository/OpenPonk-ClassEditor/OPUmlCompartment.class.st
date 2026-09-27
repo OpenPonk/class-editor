@@ -1,5 +1,5 @@
 "
-I am a container shape representing a specific compartment (e.g., for attributes or operations) within a structured UML classifier shape. I automatically sort, layout, and accommodate my inner contents.
+A container shape representing a distinct compartment within a structured UML classifier shape, handling content layout and extent accommodation.
 "
 Class {
 	#name : 'OPUmlCompartment',
@@ -39,6 +39,14 @@ OPUmlCompartment >> updateRenderFromModel [
 	super updateRenderFromModel.
 
 	self accomodateContents
+]
+
+{ #category : 'accessing' }
+OPUmlCompartment >> width: aNumber [
+	"Sets the width of the underlying compartment Roassal shape."
+
+	self roassalShape ifNotNil: [ :currentShape |
+		currentShape width: aNumber ]
 ]
 
 { #category : 'geometry' }

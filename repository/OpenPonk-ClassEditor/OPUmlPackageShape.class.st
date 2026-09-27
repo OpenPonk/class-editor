@@ -1,5 +1,5 @@
 "
-I am a bounded container shape representing a UML Package. I render as a tabbed folder icon (with a name tab or ""ear"") and manage the visualization of hidden packages and nested content blocks.
+A bounded shape representing a UML Package, rendered as a tabbed folder container that manages nested elements and hidden package visualizations.
 "
 Class {
 	#name : 'OPUmlPackageShape',
@@ -10,19 +10,26 @@ Class {
 		'nameLabel',
 		'stereotypeLabel',
 		'ear',
-		'innerRoassalShapesBlock'
+		'hiddenPackages'
 	],
 	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'DiagramElements'
 }
 
+{ #category : 'layout' }
+OPUmlPackageShape >> adaptBoundsToInnerBounds: anInnerRectangle [
+	"Resizes package shape to safely encompass direct children and centers it with ear/header offset."
+	| requiredWidth requiredHeight |
+	requiredWidth := (anInnerRectangle width + 80) max: 240.
+	requiredHeight := (anInnerRectangle height + 90) max: 120.
+	self roassalShape extent: requiredWidth @ requiredHeight.
+	self roassalShape translateTo: anInnerRectangle center x @ (anInnerRectangle center y - 20)
+]
+
 { #category : 'interactions' }
 OPUmlPackageShape >> addSelectionDraggableInteraction [
-
-	roassalShape
-	@ (OPRSSelectionDraggable thatAlsoDragsShapesProvidedByBlock:
-			 innerRoassalShapesBlock)
+	roassalShape @ (OPRSSelectionDraggable thatAlsoDragsShapesProvidedByBlock: [ self innerDraggableRoassalShapes ])
 ]
 
 { #category : 'accessing' }
@@ -34,17 +41,9 @@ OPUmlPackageShape >> attachedShapes [
 		  ear }
 ]
 
-{ #category : 'initialization' }
-OPUmlPackageShape >> initialize [
-
-	super initialize.
-	innerRoassalShapesBlock := [ :allNodes | allNodes ]
-]
-
-{ #category : 'accessing' }
-OPUmlPackageShape >> innerRoassalShapesBlock: aBlock [
-
-	innerRoassalShapesBlock := aBlock
+{ #category : 'testing' }
+OPUmlPackageShape >> isContainer [
+	^ true
 ]
 
 { #category : 'creating - subelements' }

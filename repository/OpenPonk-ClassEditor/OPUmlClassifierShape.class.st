@@ -1,5 +1,5 @@
 "
-I am the base bounding shape for UML Classifiers (like Classes and Data Types). I inherit compartment layout capabilities and manage stereotype labels, comment icons, and adornment creation handles.
+The base shape for UML classifiers, coordinating compartments, stereotype labels, comment icons, and connection handles.
 "
 Class {
 	#name : 'OPUmlClassifierShape',

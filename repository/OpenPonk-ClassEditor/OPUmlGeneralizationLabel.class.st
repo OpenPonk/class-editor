@@ -1,5 +1,5 @@
 "
-I am an edge label for UML Generalizations. I typically display textual constraints relating to Generalization Sets, such as `{overlapping, incomplete}`.
+An edge label for UML generalizations displaying generalization set constraints, such as {overlapping, incomplete}.
 "
 Class {
 	#name : 'OPUmlGeneralizationLabel',

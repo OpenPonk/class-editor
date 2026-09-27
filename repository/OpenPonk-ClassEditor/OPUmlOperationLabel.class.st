@@ -1,5 +1,5 @@
 "
-I am a specific class item label designed to render the text representation of a UML Operation inside a class operation compartment. I also handle specific emphasis, such as italicizing abstract operations.
+A classifier item label rendering a UML Operation inside an operation compartment, supporting italics for abstract operations.
 "
 Class {
 	#name : 'OPUmlOperationLabel',

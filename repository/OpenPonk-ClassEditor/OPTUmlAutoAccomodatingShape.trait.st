@@ -1,5 +1,5 @@
 "
-I am a trait used by UML shapes (such as classes or packages) that need to automatically adjust their spatial extent to fit their contained elements (like attributes or inner shapes). I provide methods for padding and minimum extent calculations.
+A trait for UML shapes (such as classes and packages) that automatically adjust spatial extent to fit contained elements. Provides methods for padding and minimum extent calculations.
 "
 Trait {
 	#name : 'OPTUmlAutoAccomodatingShape',

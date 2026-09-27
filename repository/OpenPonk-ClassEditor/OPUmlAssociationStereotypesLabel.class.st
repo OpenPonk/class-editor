@@ -1,5 +1,5 @@
 "
-I am an edge label responsible for displaying the applied stereotypes (e.g., `<<create>>`) along a UML Association edge.
+An edge label that displays applied stereotypes along a UML association line.
 "
 Class {
 	#name : 'OPUmlAssociationStereotypesLabel',

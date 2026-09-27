@@ -1,5 +1,5 @@
 "
-I am the abstract base label shape for UML elements. I establish priority levels for label placement within UML compartments or edge adornments.
+An abstract base label shape establishing priority levels and placement rules for UML annotations and adornments.
 "
 Class {
 	#name : 'OPUmlLabel',

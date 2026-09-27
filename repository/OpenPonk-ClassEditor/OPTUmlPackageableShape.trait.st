@@ -1,5 +1,5 @@
 "
-I am a trait for Roassal shapes representing UML elements that can hide their containing package path (e.g., displaying `MyClass` instead of `MyPackage::MyClass`).
+A trait for Roassal shapes representing UML elements capable of hiding the containing package path qualification.
 "
 Trait {
 	#name : 'OPTUmlPackageableShape',

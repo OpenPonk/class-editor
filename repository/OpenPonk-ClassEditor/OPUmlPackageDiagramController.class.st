@@ -75,35 +75,6 @@ OPUmlPackageDiagramController >> descriptionGeneralizationSets [
 	^ self viewModel descriptionGeneralizationSets
 ]
 
-{ #category : 'userinterface' }
-OPUmlPackageDiagramController >> disableRefresh [
-	| install |
-	self flag: #todo.
-	install := [ :cls | 
-	| link |
-	(cls includesSelector: #modelChanged)
-		ifTrue:
-			[ link := MetaLink new
-				metaObject: self;
-				selector: #yourself;
-				arguments: #();
-				control: #instead.
-			(cls >> #modelChanged) ast link: link ] ].
-	OPUmlElementController withAllSubAndSuperclassesDo: [ :each | install value: each ]
-]
-
-{ #category : 'userinterface' }
-OPUmlPackageDiagramController >> enableRefresh [
-	| uninstall |
-	self flag: #todo.
-	uninstall := [ :cls | 
-	(cls includesSelector: #modelChanged)
-		ifTrue: [ (cls >> #modelChanged) ast links
-				ifNotNil: [ :l | l asSet do: #uninstall ] ] ].
-	OPUmlElementController
-		withAllSubAndSuperclassesDo: [ :each | uninstall value: each ]
-]
-
 { #category : 'palette' }
 OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 	aPalette newSeparator.

@@ -1,5 +1,5 @@
 "
-I am a visual UI component representing a comment icon, designed to be embedded within a compartment or attached to a shape.
+A visual component representing a comment icon embedded within a compartment or attached to a classifier shape.
 "
 Class {
 	#name : 'OPUmlCommentIcon',

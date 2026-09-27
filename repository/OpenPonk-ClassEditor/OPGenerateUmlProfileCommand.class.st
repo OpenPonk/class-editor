@@ -6,13 +6,13 @@ Class {
 	#tag : 'Commands-ProjectTree'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 OPGenerateUmlProfileCommand >> canBeExecuted [
 	self selectedViewModel ifNil: [ ^ false ].
 	^ self selectedViewModel isKindOf: OPUmlProfileViewModel
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'executing' }
 OPGenerateUmlProfileCommand >> execute [
 	OPUmlProfileGeneratorWizard openOn: self selectedViewModel model
 ]
@@ -23,7 +23,7 @@ OPGenerateUmlProfileCommand >> iconName [
 	^ #smallConfiguration
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 OPGenerateUmlProfileCommand >> initialize [
 	super initialize.
 	self name: 'Generate Profile...'

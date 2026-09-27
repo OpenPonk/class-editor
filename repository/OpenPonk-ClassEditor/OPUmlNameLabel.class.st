@@ -1,5 +1,5 @@
 "
-I am a specialized label shape used to display the primary name of a UML element. I provide default fallback text when the element is unnamed.
+A specialized label displaying the primary name of a UML element with fallback handling for unnamed elements.
 "
 Class {
 	#name : 'OPUmlNameLabel',

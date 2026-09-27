@@ -1,5 +1,5 @@
 "
-I am an edge label representing the primary name of a UML Association. I am typically positioned centrally along the association edge.
+An edge label representing the primary name of a UML association, positioned along the center of the association line.
 "
 Class {
 	#name : 'OPUmlAssociationLabel',

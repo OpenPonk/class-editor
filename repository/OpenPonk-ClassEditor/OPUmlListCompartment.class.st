@@ -1,5 +1,5 @@
 "
-I am a structured compartment shape that organizes its contained elements in a vertical list layout, commonly used for displaying attributes or operations inside a UML classifier.
+A structured compartment shape organizing contained elements in a vertical list layout.
 "
 Class {
 	#name : 'OPUmlListCompartment',

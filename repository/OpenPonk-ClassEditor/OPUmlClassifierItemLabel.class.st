@@ -1,5 +1,5 @@
 "
-I am the abstract base label for items contained within a classifier's compartments (such as attributes, operations, or literals). I manage selection behavior and strict layout constraints within my owner compartment.
+An abstract label for classifier compartment items (attributes, operations, literals), handling selection and relative positioning within its compartment.
 "
 Class {
 	#name : 'OPUmlClassifierItemLabel',
@@ -41,14 +41,13 @@ OPUmlClassifierItemLabel >> shouldBePositionableByUser [
 	^ false
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'geometry' }
 OPUmlClassifierItemLabel >> translateTopTo: aCoordinateY [
-
 	self translateTo:
 		self xCoordinateForOwner @ (aCoordinateY + (self height / 2))
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'geometry' }
 OPUmlClassifierItemLabel >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle left + (self width / 2)

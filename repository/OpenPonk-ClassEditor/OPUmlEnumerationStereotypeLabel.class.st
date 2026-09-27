@@ -1,5 +1,5 @@
 "
-I am a specific stereotypes label that explicitly ensures the standard `<<enumeration>>` keyword is displayed above an Enumeration's name.
+A stereotype label ensuring the standard <<enumeration>> keyword is displayed above the enumeration name.
 "
 Class {
 	#name : 'OPUmlEnumerationStereotypeLabel',

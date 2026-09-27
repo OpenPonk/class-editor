@@ -1,5 +1,5 @@
 "
-I am a specific classifier item label designed to display an EnumerationLiteral within the compartment of a UML Enumeration shape.
+A classifier item label rendering an EnumerationLiteral inside the literals compartment of a UML enumeration shape.
 "
 Class {
 	#name : 'OPUmlEnumerationLiteralLabel',

@@ -6,13 +6,13 @@ Class {
 	#tag : 'Commands-ProjectTree'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 OPExportUmlPackageCommand >> canBeExecuted [
 	self selectedViewModel ifNil: [ ^ false ].
 	^ self selectedViewModel isKindOf: OPUmlPackageViewModel
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'executing' }
 OPExportUmlPackageCommand >> execute [
 	OPUmlClassEditorPlugin exportPackage: self selectedViewModel model
 ]
@@ -23,7 +23,7 @@ OPExportUmlPackageCommand >> iconName [
 	^ #smallSaveAs
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 OPExportUmlPackageCommand >> initialize [
 	super initialize.
 	self name: 'Export as XMI...'

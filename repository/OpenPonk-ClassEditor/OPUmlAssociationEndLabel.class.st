@@ -1,5 +1,5 @@
 "
-I am a specialized edge label for UML Associations. I represent the role name (or other end-specific text) at either the source or target end of the association edge, calculating my layout accordingly.
+An edge label for UML associations that displays role names and end-specific properties at either the source or target end of the connection.
 "
 Class {
 	#name : 'OPUmlAssociationEndLabel',

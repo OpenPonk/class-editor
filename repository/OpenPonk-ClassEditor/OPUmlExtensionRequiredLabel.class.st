@@ -1,5 +1,5 @@
 "
-I am a specialized edge label for UML Extensions. I am used to visually indicate whether the extension is required by displaying `{required}` near the stereotype end.
+An edge label for UML extensions indicating whether an extension is required by displaying {required} near the stereotype end.
 "
 Class {
 	#name : 'OPUmlExtensionRequiredLabel',

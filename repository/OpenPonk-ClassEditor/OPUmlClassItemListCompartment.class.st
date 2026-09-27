@@ -1,5 +1,5 @@
 "
-I am a specialized list compartment used within UML Classes. I explicitly handle the sorting of owned elements (like attributes or operations) according to UML display conventions.
+A specialized list compartment within UML classes that handles the ordering and display of class items.
 "
 Class {
 	#name : 'OPUmlClassItemListCompartment',

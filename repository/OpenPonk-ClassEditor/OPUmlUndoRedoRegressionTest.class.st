@@ -257,17 +257,17 @@ OPUmlUndoRedoRegressionTest >> testUndoRedoOperationCreationInClassCompartment [
 	barrelController addAsTargetFor: operationController.
 
 	self assert: barrelController model ownedOperations size equals: 1.
-	compartment := barrelController diagramElement operations.
+	compartment := barrelController diagramElement operationsCompartment.
 	self assert: compartment isNotNil description: 'Operations compartment must exist after operation creation'.
 	self assert: compartment ownedElements size equals: 1.
 
 	undoManager undo.
 	self assert: barrelController model ownedOperations isEmpty description: 'Class operations must be empty after undo'.
-	self assert: (barrelController diagramElement operations ifNotNil: [ :eachCompartment | eachCompartment ownedElements size ] ifNil: [ 0 ]) equals: 0.
+	self assert: (barrelController diagramElement operationsCompartment ifNotNil: [ :eachCompartment | eachCompartment ownedElements size ] ifNil: [ 0 ]) equals: 0.
 
 	undoManager redo.
 	self assert: barrelController model ownedOperations size equals: 1.
-	compartment := barrelController diagramElement operations.
+	compartment := barrelController diagramElement operationsCompartment.
 	self assert: compartment isNotNil description: 'Operations compartment must exist after redo'.
 	self assert: compartment ownedElements size equals: 1
 ]
@@ -299,18 +299,18 @@ OPUmlUndoRedoRegressionTest >> testUndoRestoresClassCompartmentsAndLayout [
 
 	richController := localDiagramController controllerForModel: classModel.
 	classShape := richController diagramElement.
-	self assert: classShape attributes isNotNil.
-	self assert: classShape attributes ownedElements isNotEmpty.
+	self assert: classShape attributesCompartment isNotNil.
+	self assert: classShape attributesCompartment ownedElements isNotEmpty.
 
 	localDiagramController removeModelOfRoassalShape: richController roassalShape.
 	localUndoManager undo.
 
 	restoredController := localDiagramController controllerForModel: classModel.
 	restoredShape := restoredController diagramElement.
-	self assert: restoredShape attributes isNotNil description: 'Attributes compartment must not be nil after undo'.
-	self assert: restoredShape attributes ownedElements isNotEmpty description: 'Attributes compartment must contain attributes'.
-	self assert: restoredShape operations isNotNil description: 'Operations compartment must not be nil after undo'.
-	self assert: restoredShape operations ownedElements isNotEmpty description: 'Operations compartment must contain operations'.
+	self assert: restoredShape attributesCompartment isNotNil description: 'Attributes compartment must not be nil after undo'.
+	self assert: restoredShape attributesCompartment ownedElements isNotEmpty description: 'Attributes compartment must contain attributes'.
+	self assert: restoredShape operationsCompartment isNotNil description: 'Operations compartment must not be nil after undo'.
+	self assert: restoredShape operationsCompartment ownedElements isNotEmpty description: 'Operations compartment must contain operations'.
 	self assert: restoredShape roassalShape height > 100 description: 'Class height must adapt to content extent'
 ]
 

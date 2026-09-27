@@ -1,5 +1,5 @@
 "
-I am the abstract base edge shape for UML relationships. I manage line coloring, stroke styling, and head/tail marker rendering based on the underlying model properties.
+An abstract base edge shape for UML relationships, managing stroke styles, colors, and line markers according to model semantics.
 "
 Class {
 	#name : 'OPUmlEdge',

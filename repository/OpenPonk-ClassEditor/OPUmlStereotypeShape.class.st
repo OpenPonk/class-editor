@@ -1,5 +1,5 @@
 "
-I am the diagram shape representing a UML Stereotype definition in a profile diagram. I inherit the visual structure of a Class but enforce stereotype-specific keywords and constraints.
+A diagram shape representing a UML Stereotype definition, inheriting classifier structure while enforcing profile-specific styling and keywords.
 "
 Class {
 	#name : 'OPUmlStereotypeShape',

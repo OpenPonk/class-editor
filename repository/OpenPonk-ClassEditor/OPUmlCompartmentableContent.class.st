@@ -1,5 +1,5 @@
 "
-I am the abstract base Roassal node for content that can be placed inside a structured UML compartment. I manage basic layout and spatial positioning relative to my owner.
+An abstract base node for content placed inside a structured UML compartment, managing relative positioning.
 "
 Class {
 	#name : 'OPUmlCompartmentableContent',
