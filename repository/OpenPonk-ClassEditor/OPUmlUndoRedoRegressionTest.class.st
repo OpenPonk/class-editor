@@ -23,7 +23,7 @@ Class {
 OPUmlUndoRedoRegressionTest >> setUp [
 	| plugin |
 	super setUp.
-	model := OntoUMLExamples exampleSubQuantityContainment.
+	model := OPUmlExamples exampleAlcoholAndBarrel.
 	project := OPProject new.
 	project addModel: model.
 	diagram := OPOpenPonkDiagram forModelElement: model.

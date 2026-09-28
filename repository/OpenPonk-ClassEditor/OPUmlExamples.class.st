@@ -43,6 +43,63 @@ OPUmlExamples class >> enumerationWithLiterals [
 	^ enumeration
 ]
 
+{ #category : 'examples' }
+OPUmlExamples class >> exampleAlcoholAndBarrel [
+	"Answers a model containing Alcohol, Beer, and Barrel classes connected by associations with an applied stereotype, independent of OntoUML."
+	<script: 'self exampleAlcoholAndBarrel inspect'>
+	| model barrelClass beerClass alcoholClass containmentAssociation subQuantityAssociation barrelProperty beerProperty alcoholProperty beerSubProperty stereotype |
+	model := self emptyModel.
+	model name: 'Alcohol and Barrel Model'.
+
+	barrelClass := OPUMLClass new name: 'Barrel'.
+	beerClass := OPUMLClass new name: 'Beer'.
+	alcoholClass := OPUMLClass new name: 'Alcohol'.
+
+	stereotype := OPUMLStereotype new name: 'Liquid'.
+	alcoholClass appliedStereotypes add: stereotype.
+
+	containmentAssociation := OPUMLAssociation new name: 'contains'.
+	(barrelProperty := OPUMLProperty new)
+		name: 'barrel';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		owningAssociation: containmentAssociation;
+		type: barrelClass.
+	(beerProperty := OPUMLProperty new)
+		name: 'beer';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		aggregation: OPUMLAggregationKind composite;
+		owningAssociation: containmentAssociation;
+		type: beerClass.
+	containmentAssociation memberEnds addAll: containmentAssociation ownedEnds.
+
+	subQuantityAssociation := OPUMLAssociation new name: 'subQuantity'.
+	(beerSubProperty := OPUMLProperty new)
+		name: 'sourceBeer';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		owningAssociation: subQuantityAssociation;
+		type: beerClass.
+	(alcoholProperty := OPUMLProperty new)
+		name: 'alcohol';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		aggregation: OPUMLAggregationKind composite;
+		owningAssociation: subQuantityAssociation;
+		type: alcoholClass.
+	subQuantityAssociation memberEnds addAll: subQuantityAssociation ownedEnds.
+
+	model packagedElements: {
+		barrelClass .
+		beerClass .
+		alcoholClass .
+		containmentAssociation .
+		subQuantityAssociation } asOrderedCollection.
+
+	^ model
+]
+
 { #category : 'accessing' }
 OPUmlExamples class >> exampleGeneralizationSets [
 
