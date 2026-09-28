@@ -1,3 +1,6 @@
+"
+Tests dynamic creation, compilation, and registry attachment of UML profiles in the Class Editor.
+"
 Class {
 	#name : 'OPUmlProfileCreationTest',
 	#superclass : 'TestCase',

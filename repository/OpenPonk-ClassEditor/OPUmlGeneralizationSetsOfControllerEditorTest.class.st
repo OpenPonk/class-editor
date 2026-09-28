@@ -1,3 +1,6 @@
+"
+Tests UI editing and assignment of UML generalization sets across class generalization hierarchies.
+"
 Class {
 	#name : 'OPUmlGeneralizationSetsOfControllerEditorTest',
 	#superclass : 'TestCase',

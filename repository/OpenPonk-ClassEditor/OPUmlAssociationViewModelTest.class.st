@@ -1,3 +1,6 @@
+"
+Tests view model mappings, end multiplicity synchronization, and role labels for UML associations.
+"
 Class {
 	#name : 'OPUmlAssociationViewModelTest',
 	#superclass : 'TestCase',

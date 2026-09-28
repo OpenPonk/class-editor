@@ -1,3 +1,6 @@
+"
+Tests diagram controller interactions and canvas presentations for UML profile packages.
+"
 Class {
 	#name : 'OPUmlProfileControllerTest',
 	#superclass : 'OPUmlPackageControllerTest',

@@ -1,3 +1,6 @@
+"
+A diagram controller managing the graphical rendering and profile definition semantics for UML Profile packages.
+"
 Class {
 	#name : 'OPUmlProfileController',
 	#superclass : 'OPUmlPackageController',

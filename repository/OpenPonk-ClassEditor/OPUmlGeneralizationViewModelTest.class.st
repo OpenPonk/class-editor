@@ -1,3 +1,6 @@
+"
+Tests view model properties, label synchronization, and style settings for UML generalizations.
+"
 Class {
 	#name : 'OPUmlGeneralizationViewModelTest',
 	#superclass : 'TestCase',

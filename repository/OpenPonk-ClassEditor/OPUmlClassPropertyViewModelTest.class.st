@@ -1,3 +1,6 @@
+"
+Tests property bindings and synchronization between UML class attributes and form presenters.
+"
 Class {
 	#name : 'OPUmlClassPropertyViewModelTest',
 	#superclass : 'TestCase',

@@ -1,3 +1,6 @@
+"
+Verifies that complex sequences of UML structural edits maintain invariant consistency across undo and redo operations.
+"
 Class {
 	#name : 'OPUmlUndoRedoRegressionTest',
 	#superclass : 'TestCase',

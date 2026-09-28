@@ -1,3 +1,6 @@
+"
+A project tree command that imports a UML package structure into the current project hierarchy.
+"
 Class {
 	#name : 'OPImportUmlPackageCommand',
 	#superclass : 'OPProjectTreeCommand',

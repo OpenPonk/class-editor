@@ -1,3 +1,6 @@
+"
+A project tree command that serializes and exports a selected UML package to an external XMI or project file.
+"
 Class {
 	#name : 'OPExportUmlPackageCommand',
 	#superclass : 'OPProjectTreeCommand',

@@ -1,3 +1,6 @@
+"
+A project tree command that compiles and generates an active UML profile from the selected package definition.
+"
 Class {
 	#name : 'OPGenerateUmlProfileCommand',
 	#superclass : 'OPProjectTreeCommand',

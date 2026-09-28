@@ -1,3 +1,6 @@
+"
+Tests view model representations, containment semantics, and headers for UML packages.
+"
 Class {
 	#name : 'OPUmlPackageViewModelTest',
 	#superclass : 'TestCase',

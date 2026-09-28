@@ -1,3 +1,6 @@
+"
+Verifies the lifecycle, registration, and dependency resolution of the UML Class Editor plugin.
+"
 Class {
 	#name : 'OPUmlClassEditorPluginLifecycleTest',
 	#superclass : 'OPAbstractPluginExampleLifecycleTest',

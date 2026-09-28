@@ -1,3 +1,6 @@
+"
+Tests project tree contextual commands specific to UML packages, classes, and associations.
+"
 Class {
 	#name : 'OPUmlProjectTreeCommandTest',
 	#superclass : 'TestCase',

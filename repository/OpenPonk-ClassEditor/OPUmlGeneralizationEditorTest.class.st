@@ -1,3 +1,6 @@
+"
+Tests controller logic and UI editing workflows for UML generalization relationships.
+"
 Class {
 	#name : 'OPUmlGeneralizationEditorTest',
 	#superclass : 'TestCase',

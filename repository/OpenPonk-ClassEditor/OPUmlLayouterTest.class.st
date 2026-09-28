@@ -1,3 +1,6 @@
+"
+Tests automatic layout algorithms and spatial organization of class shapes and connections in UML class diagrams.
+"
 Class {
 	#name : 'OPUmlLayouterTest',
 	#superclass : 'TestCase',
