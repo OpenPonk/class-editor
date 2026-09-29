@@ -1,3 +1,6 @@
+"
+I am the base controller for items owned by a classifier (e.g., attributes or operations). I ensure that my visual representation is correctly added to my owner's diagram element rather than the main canvas.
+"
 Class {
 	#name : 'OPUmlClassifierItemController',
 	#superclass : 'OPUmlElementController',
@@ -12,7 +15,7 @@ OPUmlClassifierItemController >> addDiagramElementToOwner [
 	self subclassResponsibility
 ]
 
-{ #category : 'figures' }
+{ #category : 'construction' }
 OPUmlClassifierItemController >> createDiagramElement [
 
 	self diagramElement:
@@ -23,22 +26,12 @@ OPUmlClassifierItemController >> createDiagramElement [
 	^ self diagramElement
 ]
 
-{ #category : 'forms' }
-OPUmlClassifierItemController >> descriptionName [
-
-	<magritteDescription>
-	| description |
-	description := super descriptionName.
-	description accessor writeBlock: [ :me :newValue |
-		| text |
-		text := newValue trim ifEmpty: [ self placeholderName ].
-		me model name: text.
-		self modelChanged ].
-	^ description
-]
-
-{ #category : 'hooks' }
-OPUmlClassifierItemController >> placeholderName [
-
-	^ self subclassResponsibility
+{ #category : 'construction' }
+OPUmlClassifierItemController >> showWithoutDependentInDiagram: aDiagramController [
+	self validate.
+	self ensureShownDependenciesInDiagram: aDiagramController.
+	aDiagramController addController: self.
+	self ensureDiagramElement.
+	self addDiagramElementToOwner.
+	self renderDiagramElement
 ]

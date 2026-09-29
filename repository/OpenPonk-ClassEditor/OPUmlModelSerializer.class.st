@@ -1,5 +1,5 @@
 "
-I serialize UML models into XMI, and the diagrams into STON.
+I am responsible for serializing OpenPonk UML models. I export the underlying UML semantic model into standard XMI format and the visual diagram layout into STON format.
 "
 Class {
 	#name : 'OPUmlModelSerializer',
@@ -9,7 +9,7 @@ Class {
 	#tag : 'Persistence'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlModelSerializer class >> exportVersion [
 
 	^ 1

@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlEnumerationLiteralController, testing its attachment to and removal from parent Enumeration controllers.
+"
 Class {
 	#name : 'OPUmlEnumLiteralControllerTest',
 	#superclass : 'OPUmlClassifierItemControllerTest',
@@ -6,30 +9,30 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
+OPUmlEnumLiteralControllerTest class >> diagramElementClass [
+
+	^ OPUmlEnumerationLiteralLabel
+]
+
+{ #category : 'constants' }
 OPUmlEnumLiteralControllerTest >> controllerClass [
 	^ OPUmlEnumerationLiteralController
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlEnumLiteralControllerTest >> creationTargetControllerClass [
 
 	^ OPUmlEnumerationController
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlEnumLiteralControllerTest >> creationTargetModelClass [
 
 	^ OPUMLEnumeration
 ]
 
-{ #category : 'construction' }
-OPUmlEnumLiteralControllerTest >> diagramElementClass [
-
-	^ OPUmlEnumerationLiteralLabel
-]
-
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlEnumLiteralControllerTest >> modelClass [
 	^ OPUMLEnumerationLiteral
 ]
@@ -41,7 +44,7 @@ OPUmlEnumLiteralControllerTest >> testCanEnumerationBeTarget [
 	self assert: (classController canBeTargetFor: controller)
 ]
 
-{ #category : 'tests' }
+{ #category : 'tests - creation' }
 OPUmlEnumLiteralControllerTest >> testCreateDiagramElement [
 
 	model enumeration: OPUMLEnumeration new.

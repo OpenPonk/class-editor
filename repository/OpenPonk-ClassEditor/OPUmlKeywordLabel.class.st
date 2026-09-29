@@ -1,3 +1,6 @@
+"
+A specialized label displaying UML keywords above the classifier name.
+"
 Class {
 	#name : 'OPUmlKeywordLabel',
 	#superclass : 'OPUmlLabel',

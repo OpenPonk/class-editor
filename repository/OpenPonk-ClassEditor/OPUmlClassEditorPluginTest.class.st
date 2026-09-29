@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the configuration of OPUmlClassEditorPlugin, including its registered icon, model class, and diagram controller.
+"
 Class {
 	#name : 'OPUmlClassEditorPluginTest',
 	#superclass : 'TestCase',

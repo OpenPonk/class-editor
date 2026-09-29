@@ -1,40 +1,51 @@
 "
-I am a controller for Package/Model/Profile
+I am the controller for UML Packages, Models, and Profiles. I manage nested elements, generalization sets, visibility configurations, and canvas rendering for package-like elements.
 "
 Class {
 	#name : 'OPUmlPackageController',
 	#superclass : 'OPUmlElementController',
 	#traits : 'OPTUmlPackageableController',
 	#classTraits : 'OPTUmlPackageableController classTrait',
-	#instVars : [
-		'modelClass'
-	],
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
 }
 
+{ #category : 'construction' }
+OPUmlPackageController class >> diagramElementClass [
+
+	^ OPUmlPackageShape
+]
+
+{ #category : 'accessing' }
+OPUmlPackageController class >> viewModelClass [
+	^ OPUmlPackageViewModel
+]
+
 { #category : 'configuration' }
 OPUmlPackageController >> beForModel [
-	modelClass := OPUMLPackage
+	self deprecated: 'Use OPUmlPackageController directly.'.
+	^ self
 ]
 
 { #category : 'configuration' }
 OPUmlPackageController >> beForPackage [
-	modelClass := OPUMLPackage
+	self deprecated: 'OPUmlPackageController is dedicated to packages. Use OPUmlProfileController for profiles.'.
+	^ self
 ]
 
 { #category : 'configuration' }
 OPUmlPackageController >> beForProfile [
-	modelClass := OPUMLProfile
+	self deprecated: 'OPUmlPackageController cannot be converted to profile. Instantiate OPUmlProfileController directly.'.
+	^ self
 ]
 
-{ #category : 'testing' }
+{ #category : 'connecting' }
 OPUmlPackageController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlPackageImportController
 ]
 
-{ #category : 'testing' }
+{ #category : 'connecting' }
 OPUmlPackageController >> canBeTargetFor: aController [
 
 	^ (aController isKindOf: OPUmlPackageImportController) or: [ 
@@ -44,59 +55,9 @@ OPUmlPackageController >> canBeTargetFor: aController [
 ]
 
 { #category : 'construction' }
-OPUmlPackageController >> createModelIn: aParentModel [
-
-	super createModelIn: aParentModel.
-	self model name: (self model oclClassifierNameFrom: self model class).
-	^ self model
-]
-
-{ #category : 'accessing' }
-OPUmlPackageController >> dependentElements [
-
-	| mainTypes imports importsOfMe |
-	mainTypes := (self model packagedElements select: [ :each |
-		              { #Class. #Package. #Enumeration } anySatisfy: [ :any |
-			              each oclIsKindOf: any ] ]) asSet.
-	imports := self model packageImports.
-
-	importsOfMe := self
-		               parentPackageDo: [ :parentPackage |
-			               (parentPackage packagedElements select: [ :each |
-				                each oclIsKindOf: #Package ]) flatCollectAsSet: [
-				               :eachPackagedElement |
-				               eachPackagedElement packageImports select: [
-					               :eachImport |
-					               eachImport importingNamespace = self model ] ] ]
-		               ifNone: [ #(  ) ].
-	^ mainTypes , imports , importsOfMe
-]
-
-{ #category : 'figures' }
-OPUmlPackageController >> diagramElementClass [
-
-	^ OPUmlPackageShape
-]
-
-{ #category : 'construction' }
 OPUmlPackageController >> hookDiagramElement [
-
 	super hookDiagramElement.
-
-	self diagramElement innerRoassalShapesBlock: [
-		Array streamContents: [ :stream |
-			self diagramController
-				propagateBlock: [ :eachController |
-					eachController roassalShape ifNotNil: [ :roassalShape |
-						stream nextPut: roassalShape ] ]
-				toNodeControllersIn: self model ] ].
 	self diagramElement hiddenPackages: self hiddenPackages
-]
-
-{ #category : 'accessing' }
-OPUmlPackageController >> modelClass [
-	modelClass ifNil: [ self beForPackage ].
-	^ modelClass
 ]
 
 { #category : 'updating' }
@@ -112,14 +73,8 @@ OPUmlPackageController >> packageRenderChanged [
 OPUmlPackageController >> pushBack [
 
 	self diagramElement pushBack.
-	self closestRenderedPackageControllerDo: [ :packageController |
+	self closestRenderedParentPackageControllerDo: [ :packageController |
 		^ packageController pushBack ]
-]
-
-{ #category : 'construction' }
-OPUmlPackageController >> registerModelInContainer: aParentModel [
-
-	aParentModel packagedElements add: self model
 ]
 
 { #category : 'destruction' }
@@ -136,15 +91,6 @@ OPUmlPackageController >> renderDiagramElement [
 	super renderDiagramElement.
 	self packageRenderChanged.
 	self pushBack
-]
-
-{ #category : 'diagram elements' }
-OPUmlPackageController >> unhookDiagramElement [
-
-	super unhookDiagramElement.
-
-	(self diagramElement ifNotExists: [ ^ self ])
-		innerRoassalShapesBlock: [ Array empty ]
 ]
 
 { #category : 'event handling' }

@@ -1,3 +1,6 @@
+"
+A visual component representing a comment icon embedded within a compartment or attached to a classifier shape.
+"
 Class {
 	#name : 'OPUmlCommentIcon',
 	#superclass : 'OPUmlCompartmentableContent',
@@ -43,7 +46,7 @@ OPUmlCommentIcon >> topPadding [
 	^ 2
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'geometry' }
 OPUmlCommentIcon >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle right - (self width / 2)

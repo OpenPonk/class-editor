@@ -1,3 +1,6 @@
+"
+A stereotype label ensuring the standard <<stereotype>> keyword is rendered above a Stereotype definition name in profile diagrams.
+"
 Class {
 	#name : 'OPUmlStereotypeOfStereotypeLabel',
 	#superclass : 'OPUmlStereotypesLabel',

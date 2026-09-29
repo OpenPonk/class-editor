@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the correct string formatting of UML MultiplicityElements, including bound limits and constraints like 0..1 or 1..*.
+"
 Class {
 	#name : 'OPUmlMultiplicityElementNotationTest',
 	#superclass : 'TestCase',

@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the correct string formatting of UML Operations, encompassing visibility, parameters, and return types.
+"
 Class {
 	#name : 'OPUmlOperationNotationTest',
 	#superclass : 'TestCase',

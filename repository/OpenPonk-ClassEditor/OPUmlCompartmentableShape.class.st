@@ -1,3 +1,6 @@
+"
+A bounded shape representing a structured UML element with multiple compartments. Coordinates compartment layout, visual dividers, and extent calculation.
+"
 Class {
 	#name : 'OPUmlCompartmentableShape',
 	#superclass : 'OPBoundNode',
@@ -11,7 +14,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'accessing' }
+{ #category : 'adding' }
 OPUmlCompartmentableShape >> addSeparator [
 
 	| newSeparator |
@@ -21,7 +24,7 @@ OPUmlCompartmentableShape >> addSeparator [
 	separators add: newSeparator
 ]
 
-{ #category : 'removing' }
+{ #category : 'accessing' }
 OPUmlCompartmentableShape >> attachedShapes [
 
 	^ super attachedShapes , separators
@@ -40,18 +43,12 @@ OPUmlCompartmentableShape >> initialize [
 	separators := OrderedCollection new
 ]
 
-{ #category : 'as yet unclassified' }
-OPUmlCompartmentableShape >> isResizableByUser [
-
-	^ false
-]
-
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> layout [
-
-	self
-		accomodateContents;
-		layoutContents
+	(self compartments select: [ :eachCompartment | eachCompartment isRendered ])
+		do: [ :eachRenderedCompartment | eachRenderedCompartment accomodateContents ].
+	self accomodateContents.
+	self layoutContents
 ]
 
 { #category : 'rendering' }
@@ -63,35 +60,35 @@ OPUmlCompartmentableShape >> layoutContents [
 
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> layoutOwnedElements [
-
+	| targetWidth |
+	targetWidth := self roassalShape width - self leftPadding - self rightPadding.
+	(self compartments select: #isRendered) do: [ :eachCompartment |
+		eachCompartment width: targetWidth ].
 	^ (self ownedElements select: #isRendered)
-		  inject:
-		  self roassalShape encompassingRectangle top + self topPadding
-		  into: [ :prevHeight :each | 
-			  each translateTopTo: prevHeight.
-			  prevHeight + each height + 1 ]
+		inject: self roassalShape encompassingRectangle top + self topPadding
+		into: [ :prevHeight :each |
+			each translateTopTo: prevHeight.
+			prevHeight + each height + 1 ]
 ]
 
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> layoutSeparators [
-
 	| yCoordinates left right |
 	yCoordinates := (self compartments ifEmpty: [ ^ self ])
-		                select: #isRendered
-		                thenCollect: [ :each | each top ].
-
+		select: #isRendered
+		thenCollect: [ :each | each top ].
 	left := self roassalShape encompassingRectangle left.
 	right := self roassalShape encompassingRectangle right.
-
-	self separators withIndexDo: [ :each :index | 
-		| y |
-		y := yCoordinates at: index.
-		each controlPoints: { 
+	self separators withIndexDo: [ :each :index |
+		index <= yCoordinates size ifTrue: [
+			| y |
+			y := yCoordinates at: index.
+			each controlPoints: {
 				(left @ y).
-				(right @ y) } ]
+				(right @ y) } ] ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 OPUmlCompartmentableShape >> recursivelyOwnedElement: aShape renderedIn: aCanvas [
 
 	super recursivelyOwnedElement: aShape renderedIn: aCanvas.
@@ -107,7 +104,7 @@ OPUmlCompartmentableShape >> removeRender [
 	separators removeAll
 ]
 
-{ #category : 'accessing' }
+{ #category : 'removing' }
 OPUmlCompartmentableShape >> removeSeparator [
 
 	separators removeLast remove
@@ -131,7 +128,7 @@ OPUmlCompartmentableShape >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : 'rendering' }
+{ #category : 'interactions' }
 OPUmlCompartmentableShape >> selectableInteraction [
 
 	^ OPRSSelectable highlightBorderColorBlue
@@ -143,10 +140,10 @@ OPUmlCompartmentableShape >> separators [
 	^ separators
 ]
 
-{ #category : 'rendering' }
-OPUmlCompartmentableShape >> shouldBePositionableByUser [
-
-	^ true
+{ #category : 'roassal' }
+OPUmlCompartmentableShape >> updateRenderFromBounds [
+	super updateRenderFromBounds.
+	self isRendered ifTrue: [ self layoutContents ]
 ]
 
 { #category : 'rendering' }
@@ -163,10 +160,10 @@ OPUmlCompartmentableShape >> updateRenderFromModel [
 
 { #category : 'rendering' }
 OPUmlCompartmentableShape >> updateSeparators [
-
-	[ self separators size < self compartments size ] whileTrue: [ 
+	| renderedCompartmentsCount |
+	renderedCompartmentsCount := (self compartments select: #isRendered) size.
+	[ self separators size < renderedCompartmentsCount ] whileTrue: [
 		self addSeparator ].
-
-	[ self separators size > self compartments size ] whileTrue: [ 
+	[ self separators size > renderedCompartmentsCount ] whileTrue: [
 		self removeSeparator ]
 ]

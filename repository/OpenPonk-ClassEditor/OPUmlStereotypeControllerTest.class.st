@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlStereotypeController, specifically testing the rendering of stereotypes, their attributes, and canvas targeting.
+"
 Class {
 	#name : 'OPUmlStereotypeControllerTest',
 	#superclass : 'OPUmlElementControllerTest',
@@ -6,18 +9,18 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlStereotypeControllerTest >> controllerClass [
-	^ OPUmlStereotypeController
-]
-
-{ #category : 'construction' }
-OPUmlStereotypeControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlStereotypeControllerTest class >> diagramElementClass [
 
 	^ OPUmlStereotypeShape
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
+OPUmlStereotypeControllerTest >> controllerClass [
+	^ OPUmlStereotypeController
+]
+
+{ #category : 'constants' }
 OPUmlStereotypeControllerTest >> modelClass [
 	^ OPUMLStereotype
 ]
@@ -53,6 +56,7 @@ OPUmlStereotypeControllerTest >> testRemoveEmpty [
 
 	| class |
 	class := self newEmptyModel.
+
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.
@@ -66,6 +70,7 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 	| class |
 	class := self newEmptyModel.
 	class ownedAttributes add: OPUMLProperty new.
+
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.

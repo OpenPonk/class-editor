@@ -1,3 +1,6 @@
+"
+An abstract base label for items displayed inside a UML class shape, managing style inheritance and layout constraints.
+"
 Class {
 	#name : 'OPUmlClassItemLabel',
 	#superclass : 'OPUmlClassifierItemLabel',

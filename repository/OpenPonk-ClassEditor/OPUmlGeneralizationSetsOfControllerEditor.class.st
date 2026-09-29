@@ -1,3 +1,6 @@
+"
+I am a specialized Spec presenter extending OPUmlGeneralizationSetsEditor. I am scoped to a specific UML Generalization controller, allowing the user to add, remove, and manage the generalization sets specifically associated with that single generalization.
+"
 Class {
 	#name : 'OPUmlGeneralizationSetsOfControllerEditor',
 	#superclass : 'OPUmlGeneralizationSetsEditor',
@@ -49,7 +52,7 @@ OPUmlGeneralizationSetsOfControllerEditor >> deleteSet: aSet [
 
 { #category : 'accessing' }
 OPUmlGeneralizationSetsOfControllerEditor >> generalizationController: aController [
-
+	"Backward compatibility setter"
 	self controller: aController
 ]
 
@@ -81,6 +84,37 @@ OPUmlGeneralizationSetsOfControllerEditor >> initializeTable [
 ]
 
 { #category : 'actions' }
+OPUmlGeneralizationSetsOfControllerEditor >> populateCommand: aCommand originalSets: originalSets newSetCopies: newSetCopies [
+	| setsToCreate emptySets |
+	super populateCommand: aCommand originalSets: originalSets newSetCopies: newSetCopies.
+	setsToCreate := newSetCopies select: [ :eachCopy |
+		originalSets noneSatisfy: [ :eachOriginalSet | eachOriginalSet uuid = eachCopy uuid ] ].
+	setsToCreate do: [ :eachNewSet |
+		aCommand recordAddSet: eachNewSet toPackage: self targetPackage ].
+	originalSets do: [ :eachOriginalSet |
+		| isPartOf isCurrentlyIn |
+		isPartOf := partOfSets anySatisfy: [ :eachPartOfSet | eachPartOfSet uuid = eachOriginalSet uuid ].
+		isCurrentlyIn := eachOriginalSet generalizations includes: self model.
+		(isPartOf and: [ isCurrentlyIn not ]) ifTrue: [
+			aCommand recordMembershipChangeOn: eachOriginalSet added: { self model } removed: #( ) ].
+		(isPartOf not and: [ isCurrentlyIn ]) ifTrue: [
+			aCommand recordMembershipChangeOn: eachOriginalSet added: #( ) removed: { self model } ] ].
+	setsToCreate do: [ :eachNewSet |
+		(partOfSets anySatisfy: [ :eachPartOfSet | eachPartOfSet uuid = eachNewSet uuid ]) ifTrue: [
+			aCommand recordMembershipChangeOn: eachNewSet added: { self model } removed: #( ) ] ].
+	emptySets := originalSets select: [ :eachOriginalSet |
+		| remainingGeneralizations |
+		remainingGeneralizations := eachOriginalSet generalizations copy.
+		(partOfSets noneSatisfy: [ :eachPartOfSet | eachPartOfSet uuid = eachOriginalSet uuid ]) ifTrue: [
+			remainingGeneralizations := remainingGeneralizations copyWithout: self model ].
+		remainingGeneralizations isEmpty and: [ (aCommand isSetMarkedForRemoval: eachOriginalSet) not ] ].
+	emptySets do: [ :eachEmptySet |
+		| owningPackage |
+		owningPackage := self packageForSet: eachEmptySet.
+		aCommand recordRemoveSet: eachEmptySet fromPackage: owningPackage generalizations: eachEmptySet generalizations asArray ]
+]
+
+{ #category : 'actions' }
 OPUmlGeneralizationSetsOfControllerEditor >> processChangesIn: originalSets basedOn: newSetCopies [
 
 	| updatedSets |
@@ -101,44 +135,39 @@ OPUmlGeneralizationSetsOfControllerEditor >> processEmptyIn: originalSets [
 
 { #category : 'actions' }
 OPUmlGeneralizationSetsOfControllerEditor >> processInclusionsIn: originalSets [
-
 	originalSets do: [ :each |
 		| isPartOf |
 		isPartOf := partOfSets anySatisfy: [ :any | any uuid = each uuid ].
 		isPartOf
-			ifTrue: [ each generalizations addIfNotPresent: controller model ]
-			ifFalse: [
-			each generalizations remove: controller model ifAbsent: [  ] ] ]
+			ifTrue: [ each generalizations addIfNotPresent: self model ]
+			ifFalse: [ each generalizations remove: self model ifAbsent: [  ] ] ]
 ]
 
 { #category : 'actions' }
 OPUmlGeneralizationSetsOfControllerEditor >> processNewIn: originalSets basedOn: newSetCopies [
-
 	| setsToCreate |
 	setsToCreate := newSetCopies select: [ :each |
 		                originalSets noneSatisfy: [ :none |
 			                none uuid = each uuid ] ].
-	controller source parentPackageDo: [ :package |
-		package packagedElements addAll: setsToCreate ].
+	setsToCreate ifNotEmpty: [
+		self packageViewModel model packagedElements addAll: setsToCreate ].
 	^ originalSets , setsToCreate
 ]
 
 { #category : 'initialization' }
 OPUmlGeneralizationSetsOfControllerEditor >> relevantGeneralizationSets [
-
 	^ super relevantGeneralizationSets select: [ :each |
 		  each generalizations anySatisfy: [ :any |
-			  any general = controller model general ] ]
+			  any general = self model general ] ]
 ]
 
 { #category : 'initialization' }
 OPUmlGeneralizationSetsOfControllerEditor >> reloadGeneralizationSets [
-
 	| relevantSets |
 	relevantSets := self relevantGeneralizationSets collect: [ :each |
 		                each copy ].
 	partOfSets := relevantSets select: [ :each |
-		              each generalizations includes: controller model ].
+		              each generalizations includes: self model ].
 	table items: relevantSets asOrderedCollection
 ]
 
@@ -148,8 +177,7 @@ OPUmlGeneralizationSetsOfControllerEditor >> removeFromSet: aSet [
 	partOfSets removeAllSuchThat: [ :each | each uuid = aSet uuid ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'updating' }
 OPUmlGeneralizationSetsOfControllerEditor >> updateShapesOf: generalizations [
-
-	super updateShapesOf: (generalizations copyWith: controller model)
+	super updateShapesOf: (generalizations copyWith: self model)
 ]

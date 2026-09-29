@@ -1,3 +1,6 @@
+"
+A specialized label displaying the primary name of a UML element with fallback handling for unnamed elements.
+"
 Class {
 	#name : 'OPUmlNameLabel',
 	#superclass : 'OPUmlLabel',

@@ -1,12 +1,12 @@
 "
-I am a classifier shape composition to accomodate for the most common UML Class Diagram shape.
+The primary diagram shape for a UML Class. Composes compartments for attributes and operations, managing their layout and visual dividers.
 "
 Class {
 	#name : 'OPUmlClassShape',
 	#superclass : 'OPUmlClassifierShape',
 	#instVars : [
-		'attributes',
-		'operations'
+		'attributesCompartment',
+		'operationsCompartment'
 	],
 	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
@@ -15,79 +15,63 @@ Class {
 
 { #category : 'ston-core' }
 OPUmlClassShape class >> stonAllInstVarNames [
-
-	"Override to encode my instances using a custom set of instance variables or to define their order."
-
-	^ super stonAllInstVarNames , #( #attributes #operations )
+	^ super stonAllInstVarNames , #( #attributesCompartment #operationsCompartment )
 ]
 
 { #category : 'rendering' }
 OPUmlClassShape >> addAttribute: anAttributeShape [
-
-	attributes ifNil: [ 
-		attributes := OPUmlListCompartment in: self.
-
+	attributesCompartment ifNil: [
+		attributesCompartment := OPUmlListCompartment in: self.
 		self sortOwnedElements ].
-
-	anAttributeShape owningElement: attributes
+	anAttributeShape owningElement: attributesCompartment
 ]
 
 { #category : 'rendering' }
 OPUmlClassShape >> addOperation: anOperationShape [
-
-	operations ifNil: [
-		operations := OPUmlFeaturesListCompartment in: self.
-
+	operationsCompartment ifNil: [
+		operationsCompartment := OPUmlFeaturesListCompartment in: self.
 		self sortOwnedElements ].
-
-	anOperationShape owningElement: operations
+	anOperationShape owningElement: operationsCompartment
 ]
 
 { #category : 'accessing' }
-OPUmlClassShape >> attributes [
-	^ attributes
+OPUmlClassShape >> attributesCompartment [
+	^ attributesCompartment
 ]
 
 { #category : 'accessing' }
-OPUmlClassShape >> operations [
-	^ operations
+OPUmlClassShape >> operationsCompartment [
+	^ operationsCompartment
 ]
 
 { #category : 'rendering' }
 OPUmlClassShape >> removeAttribute: anAttributeShape [
-
 	anAttributeShape remove.
-
-	attributes ifNotNil: [ :compartment |
+	attributesCompartment ifNotNil: [ :compartment |
 		compartment ownedElements ifEmpty: [
-			attributes remove.
-			attributes := nil ] ].
-
+			attributesCompartment remove.
+			attributesCompartment := nil ] ].
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
 { #category : 'rendering' }
 OPUmlClassShape >> removeOperation: anOperationShape [
-
 	anOperationShape remove.
-
-	operations ifNotNil: [ :compartment |
+	operationsCompartment ifNotNil: [ :compartment |
 		compartment ownedElements ifEmpty: [
-			operations remove.
-			operations := nil ] ].
-
+			operationsCompartment remove.
+			operationsCompartment := nil ] ].
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
 { #category : 'sorting' }
 OPUmlClassShape >> sortOwnedElements [
-
 	| properOrder |
-	properOrder := (self ownedElements select: [ :each | 
-		                each isKindOf: OPUmlCompartmentableLabel ]) , { 
-		               attributes.
-		               operations.
-		               commentIcon } reject: #isNil.
+	properOrder := (self ownedElements select: [ :each |
+		                each isKindOf: OPUmlCompartmentableLabel ]) , {
+		               attributesCompartment.
+		               operationsCompartment.
+		               commentIcon } reject: [ :eachElement | eachElement isNil ].
 	self assert:
 		self ownedElements asIdentitySet = properOrder asIdentitySet.
 	self ownedElements: properOrder
@@ -97,4 +81,11 @@ OPUmlClassShape >> sortOwnedElements [
 OPUmlClassShape >> stereotypesLabelClass [
 
 	^ OPUmlAppliedStereotypesLabel
+]
+
+{ #category : 'ston-core' }
+OPUmlClassShape >> stonInstVarNameFor: anInstVarName [
+	anInstVarName = #attributes ifTrue: [ ^ #attributesCompartment ].
+	anInstVarName = #operations ifTrue: [ ^ #operationsCompartment ].
+	^ super stonInstVarNameFor: anInstVarName
 ]

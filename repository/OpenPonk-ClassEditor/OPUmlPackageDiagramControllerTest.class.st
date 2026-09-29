@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlPackageDiagramController, explicitly testing the correct canvas rendering of UML classes and their inner attributes.
+"
 Class {
 	#name : 'OPUmlPackageDiagramControllerTest',
 	#superclass : 'OPAbstractDiagramControllerTest',
@@ -6,18 +9,23 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
+{ #category : 'construction' }
+OPUmlPackageDiagramControllerTest class >> diagramElementClass [
+
+	^ OPOpenPonkDiagram
+]
+
+{ #category : 'constants' }
 OPUmlPackageDiagramControllerTest >> controllerClass [
 	^ OPUmlPackageDiagramController
 ]
 
 { #category : 'construction' }
 OPUmlPackageDiagramControllerTest >> diagramElementClass [
-
-	^ OPOpenPonkDiagram
+	^ self class diagramElementClass
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlPackageDiagramControllerTest >> modelClass [
 	^ OPUMLPackage
 ]

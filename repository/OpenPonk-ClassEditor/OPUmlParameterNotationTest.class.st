@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the correct string formatting of UML Parameters, covering parameter directions (in, out, inout), types, and multiplicities.
+"
 Class {
 	#name : 'OPUmlParameterNotationTest',
 	#superclass : 'TestCase',

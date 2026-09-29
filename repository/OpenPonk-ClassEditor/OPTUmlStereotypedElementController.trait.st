@@ -1,3 +1,6 @@
+"
+I am a trait for controllers managing UML elements that can have stereotypes applied. I provide form description methods and validation logic for manipulating stereotypes dynamically via Magritte.
+"
 Trait {
 	#name : 'OPTUmlStereotypedElementController',
 	#traits : 'OPTUmlBaseController',
@@ -7,67 +10,32 @@ Trait {
 	#tag : 'Controllers'
 }
 
-{ #category : 'forms' }
+{ #category : 'stereotypes' }
 OPTUmlStereotypedElementController >> applyStereotype: aStereotypeModel to: aModel [
-	(aModel appliedStereotypes
-		anySatisfy: [ :each | each umlClassName = aStereotypeModel umlClassName ])
-		ifTrue: [ ^ self ].
-	self removeStereotypesIn: aModel.
-	aModel applyStereotype: aStereotypeModel implementationClass new
+	self
+		deprecated: 'Use viewModel instead'
+		transformWith: '`@receiver applyStereotype: `@arg1 to: `@arg2' -> '`@receiver viewModel applyStereotype: `@arg1 to: `@arg2'.
+	^ self viewModel applyStereotype: aStereotypeModel to: aModel
 ]
 
 { #category : 'forms' }
 OPTUmlStereotypedElementController >> descriptionStereotypeContent [
-
-	| names stereotypes |
-	stereotypes := self diagramController model profileApplications
-		               ifEmpty: [ ^ nil ]
-		               ifNotEmpty: [ :applications |
-			               applications flatCollect: [ :each |
-				               self
-					               stereotypesIn: each appliedProfile
-					               for: self model ] ].
-	names := stereotypes asArray collect: [ :each |
-		         each name -> each name ].
-	^ MASingleOptionDescription new
-		  optionsAndLabels: { (nil -> '') } , names;
-		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   me model appliedStereotypes
-						   ifEmpty: [ nil ]
-						   ifNotEmpty: [ :col | col first umlClassName ] ]
-				   write: [ :me :newValue |
-					   newValue
-						   ifNil: [ self removeStereotypesIn: me model ]
-						   ifNotNil: [
-							   self
-								   applyStereotype:
-									   (stereotypes detect: [ :each | each name = newValue ])
-								   to: me model ].
-					   me modelChanged ]);
-		  label: 'Stereotype';
-		  priority: 4;
-		  yourself
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionStereotypeContent' -> '`@receiver viewModel descriptionStereotypeContent'.
+	^ self viewModel descriptionStereotypeContent
 ]
 
-{ #category : 'removing' }
+{ #category : 'stereotypes' }
 OPTUmlStereotypedElementController >> removeStereotypesIn: aModel [
-	[ aModel appliedStereotypes isNotEmpty ]
-		whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ]
+	self
+		deprecated: 'Use viewModel instead'
+		transformWith: '`@receiver removeStereotypesIn: `@arg1' -> '`@receiver viewModel removeStereotypesIn: `@arg1'.
+	^ self viewModel removeStereotypesIn: aModel
 ]
 
-{ #category : 'forms' }
-OPTUmlStereotypedElementController >> stereotypeMagritteDescription [
-	| descriptions |
-	descriptions := OPUmlStereotypeDescriptions new controller: self.
-	^ descriptions descriptions
-]
-
-{ #category : 'enumerating' }
+{ #category : 'stereotypes' }
 OPTUmlStereotypedElementController >> stereotypesIn: aProfile for: aModel [
-
-	^ (aProfile ownedStereotype reject: #isAbstract) select: [ :stereo | 
-		  stereo allAttributes anySatisfy: [ :each | 
-			  (each name beginsWith: 'base_') and: [ 
-				  self model oclIsKindOf: each type name ] ] ]
+	self
+		deprecated: 'Use viewModel instead'
+		transformWith: '`@receiver stereotypesIn: `@arg1 for: `@arg2' -> '`@receiver viewModel stereotypesIn: `@arg1 for: `@arg2'.
+	^ self viewModel stereotypesIn: aProfile for: aModel
 ]

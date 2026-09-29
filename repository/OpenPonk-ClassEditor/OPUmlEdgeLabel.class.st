@@ -1,3 +1,6 @@
+"
+A specialized text label attached to UML connection edges, enforcing minimum distance constraints to prevent line overlapping.
+"
 Class {
 	#name : 'OPUmlEdgeLabel',
 	#superclass : 'OPEdgeLabel',

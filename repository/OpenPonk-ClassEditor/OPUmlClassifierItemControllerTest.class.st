@@ -1,3 +1,6 @@
+"
+I am an abstract base test class verifying the behavior of controllers for items inside classifiers (like attributes and operations), ensuring they attach to the correct target model controllers.
+"
 Class {
 	#name : 'OPUmlClassifierItemControllerTest',
 	#superclass : 'OPUmlElementControllerTest',
@@ -12,13 +15,13 @@ OPUmlClassifierItemControllerTest class >> isAbstract [
 	^ self = OPUmlClassifierItemControllerTest
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlClassifierItemControllerTest >> creationTargetControllerClass [
 
 	^ OPUmlClassController
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlClassifierItemControllerTest >> creationTargetModelClass [
 
 	^ OPUMLClass

@@ -1,3 +1,6 @@
+"
+A specialized list compartment within UML classes that handles the ordering and display of class items.
+"
 Class {
 	#name : 'OPUmlClassItemListCompartment',
 	#superclass : 'OPUmlListCompartment',

@@ -1,3 +1,6 @@
+"
+I am a Spec presenter acting as a dedicated editor for a specific UML Generalization. I provide a UI to view the specific and general classifiers, and edit comments and generalization sets.
+"
 Class {
 	#name : 'OPUmlGeneralizationEditor',
 	#superclass : 'SpPresenter',
@@ -9,24 +12,45 @@ Class {
 		'specific',
 		'commentLabel',
 		'commentTextArea',
-		'generalizationSetsEditor'
+		'generalizationSetsEditor',
+		'viewModel',
+		'undoManager'
 	],
 	#category : 'OpenPonk-ClassEditor-UI',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'UI'
 }
 
+{ #category : 'actions' }
+OPUmlGeneralizationEditor >> basicSave [
+
+	| activeUndoManager currentCommentText newCommentText commentCommand |
+	activeUndoManager := self undoManager.
+	self assert: activeUndoManager isNotNil description: 'UndoManager must be provided for basicSave'.
+	generalizationSetsEditor basicSave.
+	currentCommentText := self model ownedComments
+		                      ifEmpty: [ '' ]
+		                      ifNotEmpty: [ :existingComments | existingComments first body asString ].
+	newCommentText := commentTextArea text trim.
+
+	currentCommentText = newCommentText ifTrue: [ ^ self ].
+	commentCommand := OPUmlUpdateGeneralizationCommentCommand new generalization: self model commentText: newCommentText.
+	activeUndoManager execute: commentCommand.
+	self viewModel ifNotNil: [ :activeViewModel | activeViewModel modelChanged ]
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> commentTextArea [
+	^ commentTextArea
+]
+
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> controller: aGeneralizationController [
 
 	controller := aGeneralizationController.
-
-	general label: (controller model general name ifNil: [ '' ]).
-	specific label: (controller model specific name ifNil: [ '' ]).
-	commentTextArea text: (controller model ownedComments
-			 ifEmpty: [ '' ]
-			 ifNotEmpty: [ :comments | comments first body asString ]).
-	generalizationSetsEditor generalizationController: controller
+	aGeneralizationController ifNotNil: [
+		self undoManager: aGeneralizationController undoManager.
+		self viewModel: aGeneralizationController viewModel ]
 ]
 
 { #category : 'layout' }
@@ -66,6 +90,11 @@ OPUmlGeneralizationEditor >> defaultLayout [
 		  yourself
 ]
 
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> generalizationSetsEditor [
+	^ generalizationSetsEditor
+]
+
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> initializePresenters [
 
@@ -88,6 +117,7 @@ OPUmlGeneralizationEditor >> initializePresenters [
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> initializeWindow: aWindow [
 
+	super initializeWindow: aWindow.
 	aWindow
 		title: 'Edit Generalization';
 		initialExtent: 700 @ 500;
@@ -95,15 +125,44 @@ OPUmlGeneralizationEditor >> initializeWindow: aWindow [
 		whenClosedDo: [ aWindow isCancelled ifFalse: [ self save ] ]
 ]
 
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> model [
+	^ self viewModel ifNotNil: #model
+]
+
 { #category : 'actions' }
 OPUmlGeneralizationEditor >> save [
+	self undoManager
+		ifNotNil: [ :activeUndoManager |
+			activeUndoManager
+				inTransactionLabeled: 'Edit Generalization'
+				do: [ self basicSave ] ]
+		ifNil: [ self basicSave ]
+]
 
-	generalizationSetsEditor save.
-	commentTextArea text trim ifEmpty: [
-		^ controller model ownedComments
-			  do: [ :each | each annotatedElements removeAll ];
-			  removeAll ].
-	controller model ownedComments ifEmpty: [
-		controller model ownedComments add: OPUMLComment new ].
-	controller model ownedComments first body: commentTextArea text trim
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> undoManager [
+	^ undoManager
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> undoManager: anUndoManager [
+	undoManager := anUndoManager.
+	generalizationSetsEditor ifNotNil: [ :ed | ed undoManager: anUndoManager ]
+]
+
+{ #category : 'accessing' }
+OPUmlGeneralizationEditor >> viewModel [
+	^ viewModel
+]
+
+{ #category : 'initialization' }
+OPUmlGeneralizationEditor >> viewModel: aGeneralizationViewModel [
+	viewModel := aGeneralizationViewModel.
+	general label: (viewModel model general name ifNil: [ '' ]).
+	specific label: (viewModel model specific name ifNil: [ '' ]).
+	commentTextArea text: (viewModel model ownedComments
+		ifEmpty: [ '' ]
+		ifNotEmpty: [ :comments | comments first body asString ]).
+	generalizationSetsEditor viewModel: viewModel
 ]

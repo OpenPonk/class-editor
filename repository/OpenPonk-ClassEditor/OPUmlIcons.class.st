@@ -1,7 +1,5 @@
 "
-d := 'D:\OpenPonk\icons\uml' asFileReference.
-IconFactory syncDirectory: d intoClass: #OPUmlIcons.
-OPUmlIcons resetIcons.
+I am an icon provider for the UML Class Diagram editor. I supply specific icons for UML elements such as classes, attributes, operations, generalizations, associations, and stereotypes.
 "
 Class {
 	#name : 'OPUmlIcons',

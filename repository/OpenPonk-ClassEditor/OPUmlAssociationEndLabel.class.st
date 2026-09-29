@@ -1,3 +1,6 @@
+"
+An edge label for UML associations that displays role names and end-specific properties at either the source or target end of the connection.
+"
 Class {
 	#name : 'OPUmlAssociationEndLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -17,7 +20,7 @@ OPUmlAssociationEndLabel class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #atSource )
 ]
 
-{ #category : 'accessing' }
+{ #category : 'actions' }
 OPUmlAssociationEndLabel >> atSource [
 
 	atSource := true

@@ -1,9 +1,12 @@
+"
+I am a concrete context menu command that explicitly turns ON (shows) all end labels for the currently selected UML relationship shape.
+"
 Class {
 	#name : 'OPUmlShowEndLabelsRoassalShapeCommand',
 	#superclass : 'OPUmlSetEndLabelsRoassalShapeCommand',
-	#category : 'OpenPonk-ClassEditor-Commands',
+	#category : 'OpenPonk-ClassEditor-Commands-RoassalShape',
 	#package : 'OpenPonk-ClassEditor',
-	#tag : 'Commands'
+	#tag : 'Commands-RoassalShape'
 }
 
 { #category : 'hooks' }

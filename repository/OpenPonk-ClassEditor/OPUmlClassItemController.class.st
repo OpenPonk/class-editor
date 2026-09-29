@@ -1,3 +1,6 @@
+"
+I am the base controller for items owned by a UML Class (such as attributes and operations). I handle UI properties like the `isStatic` modifier description.
+"
 Class {
 	#name : 'OPUmlClassItemController',
 	#superclass : 'OPUmlClassifierItemController',
@@ -6,36 +9,8 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'construction' }
-OPUmlClassItemController >> dependingOnElements [
-
-	| asSetOrEmpty |
-	asSetOrEmpty := [ :nullableElement |
-	                nullableElement
-		                ifNil: [ Set empty ]
-		                ifNotNil: [ :element | Set with: element ] ].
-	^ super dependingOnElements
-	  , (asSetOrEmpty value: self model owningClass)
-	  , (asSetOrEmpty value: self model interface)
-	  , (asSetOrEmpty value: self model datatype)
-]
-
-{ #category : 'forms' }
+{ #category : 'deprecation' }
 OPUmlClassItemController >> descriptionIsStatic [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isStatic);
-		label: 'Is Static';
-		priority: 10;
-		yourself
-]
-
-{ #category : 'removing' }
-OPUmlClassItemController >> removeModel [
-	"could be any of those, so just nil all of them"
-
-	self model owningClass: nil.
-	self model interface: nil.
-	self model datatype: nil.
-	super removeModel
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsStatic' -> '`@receiver viewModel descriptionIsStatic'.
+	^ self viewModel descriptionIsStatic
 ]

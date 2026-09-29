@@ -1,3 +1,6 @@
+"
+An edge label that displays applied stereotypes along a UML association line.
+"
 Class {
 	#name : 'OPUmlAssociationStereotypesLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -6,13 +9,13 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationStereotypesLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationStereotypesLabel >> defaultMinDistance [
 
 	^ 0

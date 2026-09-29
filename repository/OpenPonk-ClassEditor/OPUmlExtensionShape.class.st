@@ -1,5 +1,5 @@
 "
-I represent an Extension shape
+An edge shape representing a UML Extension between a Stereotype and a metaclass, customizing arrowheads and label visibility.
 "
 Class {
 	#name : 'OPUmlExtensionShape',

@@ -4,11 +4,13 @@
 *part of [OpenPonk](https://github.com/OpenPonk/openponk) platform*
 
 ## Installation
- 
-```smalltalk
+
+In Pharo version according to https://openponk.org/#direct-installation, run following script from the Playground:
+
+```Smalltalk
 Metacello new
 	baseline: 'OpenPonkClassEditor';
-	repository: 'github://OpenPonk/class-editor/repository';
+	repository: 'github://OpenPonk/class-editor';
 	load: 'complete'.
 ```
 

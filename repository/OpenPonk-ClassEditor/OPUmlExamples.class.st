@@ -1,11 +1,5 @@
 "
-I provide a range of examples for Uml Class Diagrams:
-	- direct class instantiation
-	- parsing from DSL
-	- importing from Smalltalk code
-
-!! Examples
-see class-side
+I provide a collection of executable examples demonstrating the OpenPonk UML Class Diagram editor. I can generate sample models (like classes, generalizations, enumerations, and profiles) to populate the canvas for testing or demonstration.
 "
 Class {
 	#name : 'OPUmlExamples',
@@ -47,6 +41,63 @@ OPUmlExamples class >> enumerationWithLiterals [
 		literal := OPUMLEnumerationLiteral new name: each.
 		enumeration ownedLiterals add: literal ].
 	^ enumeration
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> exampleAlcoholAndBarrel [
+	"Answers a model containing Alcohol, Beer, and Barrel classes connected by associations with an applied stereotype, independent of OntoUML."
+	<script: 'self exampleAlcoholAndBarrel inspect'>
+	| model barrelClass beerClass alcoholClass containmentAssociation subQuantityAssociation barrelProperty beerProperty alcoholProperty beerSubProperty stereotype |
+	model := self emptyModel.
+	model name: 'Alcohol and Barrel Model'.
+
+	barrelClass := OPUMLClass new name: 'Barrel'.
+	beerClass := OPUMLClass new name: 'Beer'.
+	alcoholClass := OPUMLClass new name: 'Alcohol'.
+
+	stereotype := OPUMLStereotype new name: 'Liquid'.
+	alcoholClass appliedStereotypes add: stereotype.
+
+	containmentAssociation := OPUMLAssociation new name: 'contains'.
+	(barrelProperty := OPUMLProperty new)
+		name: 'barrel';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		owningAssociation: containmentAssociation;
+		type: barrelClass.
+	(beerProperty := OPUMLProperty new)
+		name: 'beer';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		aggregation: OPUMLAggregationKind composite;
+		owningAssociation: containmentAssociation;
+		type: beerClass.
+	containmentAssociation memberEnds addAll: containmentAssociation ownedEnds.
+
+	subQuantityAssociation := OPUMLAssociation new name: 'subQuantity'.
+	(beerSubProperty := OPUMLProperty new)
+		name: 'sourceBeer';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		owningAssociation: subQuantityAssociation;
+		type: beerClass.
+	(alcoholProperty := OPUMLProperty new)
+		name: 'alcohol';
+		lowerValue: (OPUMLLiteralInteger new value: 1);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: 1);
+		aggregation: OPUMLAggregationKind composite;
+		owningAssociation: subQuantityAssociation;
+		type: alcoholClass.
+	subQuantityAssociation memberEnds addAll: subQuantityAssociation ownedEnds.
+
+	model packagedElements: {
+		barrelClass .
+		beerClass .
+		alcoholClass .
+		containmentAssociation .
+		subQuantityAssociation } asOrderedCollection.
+
+	^ model
 ]
 
 { #category : 'accessing' }
@@ -93,6 +144,38 @@ OPUmlExamples class >> exampleGeneralizationSets [
 	^ model
 ]
 
+{ #category : 'examples' }
+OPUmlExamples class >> examplePackageArchitecture [
+	<script: 'self examplePackageArchitecture inspect'>
+	| rootPackage clientPackage typesPackage securityProfile statusEnumeration activeLiteral pendingLiteral typesImport profileImport |
+	rootPackage := OPUMLPackage new name: 'ECommerceSystem'.
+	clientPackage := OPUMLPackage new name: 'ClientModule'.
+	typesPackage := OPUMLPackage new name: 'CommonTypes'.
+	securityProfile := OPUMLProfile new name: 'SecurityProfile'.
+
+	statusEnumeration := OPUMLEnumeration new name: 'CustomerStatus'.
+	activeLiteral := OPUMLEnumerationLiteral new name: 'Active'.
+	pendingLiteral := OPUMLEnumerationLiteral new name: 'Pending'.
+	statusEnumeration ownedLiterals add: activeLiteral; add: pendingLiteral.
+	typesPackage packagedElements add: statusEnumeration.
+
+	typesImport := OPUMLPackageImport new
+		importedPackage: typesPackage;
+		importingNamespace: clientPackage.
+	clientPackage packageImports add: typesImport.
+
+	profileImport := OPUMLPackageImport new
+		importedPackage: securityProfile;
+		importingNamespace: clientPackage.
+	clientPackage packageImports add: profileImport.
+
+	rootPackage packagedElements add: clientPackage.
+	rootPackage packagedElements add: typesPackage.
+	rootPackage packagedElements add: securityProfile.
+
+	^ rootPackage
+]
+
 { #category : 'accessing' }
 OPUmlExamples class >> exampleRichClass [
 
@@ -102,6 +185,38 @@ OPUmlExamples class >> exampleRichClass [
 	model name: 'Rich Class Model'.
 	model packagedElements add: self richClass.
 	^ model
+]
+
+{ #category : 'examples' }
+OPUmlExamples class >> exampleSecurityProfile [
+	<script: 'self exampleSecurityProfile inspect'>
+	| profile stereotype baseClass extension extensionEnd baseProperty |
+	profile := OPUMLProfile new name: 'SecurityProfile'.
+	stereotype := OPUMLStereotype new name: 'Secured'.
+	baseClass := OPUMLClass new name: 'Component'.
+
+	extension := OPUMLExtension new name: 'Secured_Component'.
+	extensionEnd := OPUMLExtensionEnd new
+		name: 'extension_Secured';
+		type: stereotype;
+		owningAssociation: extension;
+		association: extension.
+	baseProperty := OPUMLProperty new
+		name: 'base_Component';
+		type: baseClass;
+		owningClass: stereotype;
+		owningAssociation: nil;
+		association: extension.
+
+	extension memberEnds add: extensionEnd; add: baseProperty.
+	extension ownedEnd: extensionEnd.
+	stereotype ownedAttributes add: baseProperty.
+
+	profile packagedElements add: stereotype.
+	profile packagedElements add: baseClass.
+	profile packagedElements add: extension.
+
+	^ profile
 ]
 
 { #category : 'accessing' }
@@ -153,51 +268,6 @@ OPUmlExamples class >> exampleSimpleGeneralization [
 			cls.
 			cls2 } asOrderedCollection.
 	^ model
-]
-
-{ #category : 'menu' }
-OPUmlExamples class >> menuCommandOn: aBuilder [
-
-	<worldMenu>
-	(aBuilder item: #UMLClassEditor)
-		icon: OPCoreIcons openponkIcon;
-		label: 'UML Class Diagram Editor';
-		action: [ self openExampleEmptyModel ];
-		parent: #MostUsedTools;
-		order: 205;
-		with: [ 
-			(aBuilder item: #UMLEmptyPackage)
-				parent: #UMLClassEditor;
-				label: 'New Empty Package';
-				icon: OPUmlIcons packageIcon;
-				action: [ self openExampleEmptyModel ].
-			(aBuilder item: #UMLEmptyProfile)
-				parent: #UMLClassEditor;
-				label: 'New Empty Profile';
-				icon: OPUmlIcons profileIcon;
-				action: [ self openExampleEmptyProfile ];
-				withSeparatorAfter.
-			(aBuilder item: #UMLCompleteClass)
-				parent: #UMLClassEditor;
-				label: 'Rich Class';
-				icon: OPUmlIcons modelIcon;
-				action: [ self openExampleRichClass ].
-			(aBuilder item: #UMLExampleSimpleAssociation)
-				parent: #UMLClassEditor;
-				label: 'Simple Association';
-				icon: OPUmlIcons modelIcon;
-				action: [ self openExampleSimpleAssociation ].
-			(aBuilder item: #UMLExampleGeneralizationSets)
-				parent: #UMLClassEditor;
-				label: 'Generalization Sets';
-				icon: OPUmlIcons modelIcon;
-				withSeparatorAfter;
-				action: [ self openExampleGeneralizationSets ].
-			(aBuilder item: #UMLMetamodelInspect)
-				parent: #UMLClassEditor;
-				label: 'Inspect UML Metamodel';
-				icon: OPUmlIcons packageIcon;
-				action: [ OPUMLXMISpecsStorage umlMetamodel inspect ] ]
 ]
 
 { #category : 'examples' }

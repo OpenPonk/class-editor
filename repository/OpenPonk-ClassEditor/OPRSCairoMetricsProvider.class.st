@@ -1,3 +1,6 @@
+"
+A Cairo metrics provider extension for Roassal used to calculate accurate bounding boxes and text extents for UML labels.
+"
 Class {
 	#name : 'OPRSCairoMetricsProvider',
 	#superclass : 'RSCairoMetricsProvider',

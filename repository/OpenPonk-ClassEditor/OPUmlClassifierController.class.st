@@ -1,3 +1,6 @@
+"
+I am the controller for UML Classifiers (like Classes and Data Types). I manage packaging visibility, canvas hooks, validation, and stereotype adornments.
+"
 Class {
 	#name : 'OPUmlClassifierController',
 	#superclass : 'OPUmlElementController',
@@ -8,7 +11,7 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'adding' }
+{ #category : 'connecting' }
 OPUmlClassifierController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlAssociationController
 ]
@@ -17,47 +20,6 @@ OPUmlClassifierController >> canBeSourceFor: aController [
 OPUmlClassifierController >> createAdornmentsBy: builder [
 
 	"do nothing by default"
-]
-
-{ #category : 'construction' }
-OPUmlClassifierController >> createModelIn: aParentModel [
-
-	^ (super createModelIn: aParentModel)
-		  name: self modelClassName;
-		  yourself
-]
-
-{ #category : 'accessing' }
-OPUmlClassifierController >> dependentElements [
-
-	| innerElements associations |
-	innerElements := self elementsToShowInside.
-	associations := self
-		                parentPackageDo: [ :parentPackage |
-			                parentPackage packagedElements select: [ :eachAssoc |
-				                (eachAssoc oclIsKindOf: #Association) and: [
-					                eachAssoc memberEnds anySatisfy: [ :any |
-						                any type = self model or: [
-							                any owningClass = self model ] ] ] ] ]
-		                ifNone: [ #(  ) ].
-	^ innerElements , associations
-]
-
-{ #category : 'forms' }
-OPUmlClassifierController >> descriptionName [
-
-	<magritteDescription>
-	| accessor |
-	accessor := MAPluggableAccessor
-		            read: [ :me | me model name ]
-		            write: [ :me :newValue |
-			            me model name: newValue.
-			            self modelChanged ].
-	^ MAMemoDescription new
-		  accessor: accessor;
-		  label: 'Name';
-		  priority: 1;
-		  yourself
 ]
 
 { #category : 'construction' }
@@ -70,11 +32,6 @@ OPUmlClassifierController >> hookDiagramElement [
 	self diagramElement hiddenPackages: self hiddenPackages
 ]
 
-{ #category : 'accessing' }
-OPUmlClassifierController >> modelClassName [
-	^ self subclassResponsibility
-]
-
 { #category : 'updating' }
 OPUmlClassifierController >> packageRenderChanged [
 
@@ -83,13 +40,7 @@ OPUmlClassifierController >> packageRenderChanged [
 			foundDE isRendered ifTrue: [ foundDE updateRenderFromModel ] ] ]
 ]
 
-{ #category : 'construction' }
-OPUmlClassifierController >> registerModelInContainer: aParentModel [
-
-	aParentModel packagedElements add: self model
-]
-
-{ #category : 'construction' }
+{ #category : 'diagram elements' }
 OPUmlClassifierController >> unhookDiagramElement [
 
 	super unhookDiagramElement.
@@ -103,11 +54,4 @@ OPUmlClassifierController >> updateAfterDiagramFocused [
 
 	self diagramElement hiddenPackages: self hiddenPackages.
 	super updateAfterDiagramFocused
-]
-
-{ #category : 'validation' }
-OPUmlClassifierController >> validate [
-
-	super validate.
-	self model attributes do: [ :each | self validateProperty: each ]
 ]

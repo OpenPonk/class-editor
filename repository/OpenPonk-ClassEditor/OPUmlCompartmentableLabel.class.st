@@ -1,3 +1,6 @@
+"
+A specialized label shape designed to reside inside a UML compartment, handling text rendering and layout relative to its container.
+"
 Class {
 	#name : 'OPUmlCompartmentableLabel',
 	#superclass : 'OPUmlCompartmentableContent',
@@ -38,7 +41,7 @@ OPUmlCompartmentableLabel >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'geometry' }
 OPUmlCompartmentableLabel >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle center x

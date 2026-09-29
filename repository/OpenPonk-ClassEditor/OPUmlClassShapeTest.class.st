@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the rendering and containment behavior of OPUmlClassShape, inheriting compartment testing from OPAbstractUmlCompartmentableShapeTest.
+"
 Class {
 	#name : 'OPUmlClassShapeTest',
 	#superclass : 'OPAbstractUmlCompartmentableShapeTest',
@@ -21,8 +24,7 @@ OPUmlClassShapeTest >> shapeClass [
 { #category : 'tests' }
 OPUmlClassShapeTest >> testName [
 
-	| model labels label |
-	model := OPUMLClass new.
+	| labels label |
 	model name: 'ClassName'.
 	model isAbstract: false.
 	shape modelElement: model.
@@ -31,7 +33,7 @@ OPUmlClassShapeTest >> testName [
 	labels := canvas deepShapes select: #isLabel.
 	self assert: labels size equals: 1.
 	label := labels anyOne.
-	
+
 	self assert: label text equals: 'ClassName'.
 	self assert: label isNormal.
 
@@ -64,4 +66,39 @@ OPUmlClassShapeTest >> testName [
 
 	self assert: label text equals: 'Name2'.
 	self deny: label isItalic
+]
+
+{ #category : 'tests' }
+OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
+	| modelClass stereo initialStereoLabel stereoLabels |
+	modelClass := OPUMLClass new name: 'Person'.
+	stereo := OPUMLStereotype new.
+	modelClass appliedStereotypes add: stereo.
+
+	shape := OPUmlClassShape new.
+	shape modelElement: modelClass.
+
+	"1. Prvotní vykreslení"
+	shape renderIn: canvas.
+	initialStereoLabel := shape stereotypeLabel.
+	self assert: initialStereoLabel isNotNil.
+
+	stereoLabels := shape ownedElements select: [ :each |
+		(each isKindOf: OPUmlCompartmentableLabel) and: [
+			each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
+	self assert: stereoLabels size equals: 1.
+
+	"2. Simulace zavření editoru diagramu"
+	shape removeRender.
+
+	"3. Simulace opětovného otevření editoru diagramu"
+	canvas := RSCanvas new.
+	shape renderIn: canvas.
+
+	self assert: shape stereotypeLabel identicalTo: initialStereoLabel.
+
+	stereoLabels := shape ownedElements select: [ :each |
+		(each isKindOf: OPUmlCompartmentableLabel) and: [
+			each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
+	self assert: stereoLabels size equals: 1
 ]

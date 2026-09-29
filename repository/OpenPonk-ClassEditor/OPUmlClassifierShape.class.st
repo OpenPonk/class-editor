@@ -1,3 +1,6 @@
+"
+The base shape for UML classifiers, coordinating compartments, stereotype labels, comment icons, and connection handles.
+"
 Class {
 	#name : 'OPUmlClassifierShape',
 	#superclass : 'OPUmlCompartmentableShape',
@@ -59,13 +62,26 @@ OPUmlClassifierShape >> hasModelComments [
 			  any body isNotNil and: [ any body isNotEmpty ] ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'rendering' }
 OPUmlClassifierShape >> minExtent [
 
 	^ 100 @ 61
 ]
 
-{ #category : 'hooks' }
+{ #category : 'removing' }
+OPUmlClassifierShape >> remove [
+	"Reset internal references to owned diagram elements before destruction."
+	stereotypeLabel := nil.
+	commentIcon := nil.
+	super remove
+]
+
+{ #category : 'rendering' }
+OPUmlClassifierShape >> removeRender [
+	super removeRender
+]
+
+{ #category : 'interactions' }
 OPUmlClassifierShape >> selectableInteraction [
 
 	| selectableInteraction |
@@ -81,6 +97,11 @@ OPUmlClassifierShape >> selectableInteraction [
 		builder directionDown.
 		adornmentCreationBlock value: builder ].
 	^ selectableInteraction
+]
+
+{ #category : 'accessing' }
+OPUmlClassifierShape >> stereotypeLabel [
+	^ stereotypeLabel
 ]
 
 { #category : 'accessing' }
@@ -125,13 +146,6 @@ OPUmlClassifierShape >> updateRenderFromModel [
 	self updateCommentIcon.
 
 	super updateRenderFromModel
-]
-
-{ #category : 'roassal' }
-OPUmlClassifierShape >> updateRenderFromSelf [
-
-	self isRendered ifFalse: [ ^ self ].
-	super updateRenderFromSelf
 ]
 
 { #category : 'rendering' }

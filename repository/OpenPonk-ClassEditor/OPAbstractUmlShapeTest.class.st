@@ -1,3 +1,6 @@
+"
+I am an abstract base test class verifying common structural behaviors, such as attaching edges and embedding owned elements, for UML node shapes.
+"
 Class {
 	#name : 'OPAbstractUmlShapeTest',
 	#superclass : 'OPAbstractNodeTest',
@@ -46,7 +49,7 @@ OPAbstractUmlShapeTest >> testAddSelfEdge [
 	self assert: edge target equals: shape
 ]
 
-{ #category : 'tests' }
+{ #category : 'running' }
 OPAbstractUmlShapeTest >> testEmpty [
 	super testEmpty.
 	self assert: shape owningElement doesNotExist.

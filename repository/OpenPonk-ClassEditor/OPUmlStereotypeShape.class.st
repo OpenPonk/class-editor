@@ -1,3 +1,6 @@
+"
+A diagram shape representing a UML Stereotype definition, inheriting classifier structure while enforcing profile-specific styling and keywords.
+"
 Class {
 	#name : 'OPUmlStereotypeShape',
 	#superclass : 'OPUmlClassShape',

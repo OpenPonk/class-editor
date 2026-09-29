@@ -1,3 +1,6 @@
+"
+A base label for displaying UML keywords and applied stereotypes directly above the main element name.
+"
 Class {
 	#name : 'OPUmlStereotypesLabel',
 	#superclass : 'OPUmlKeywordLabel',
@@ -14,8 +17,8 @@ OPUmlStereotypesLabel >> defaultText [
 		  ifNotEmpty: [ :vals | '«' , (vals joinUsing: ', ') , '»' ]
 ]
 
-{ #category : 'testing' }
-OPUmlStereotypesLabel >> isPositionableByUser [
+{ #category : 'interactions' }
+OPUmlStereotypesLabel >> shouldBePositionableByUser [
 
 	^ false
 ]

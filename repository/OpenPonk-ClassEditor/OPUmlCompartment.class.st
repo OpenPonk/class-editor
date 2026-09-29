@@ -1,3 +1,6 @@
+"
+A container shape representing a distinct compartment within a structured UML classifier shape, handling content layout and extent accommodation.
+"
 Class {
 	#name : 'OPUmlCompartment',
 	#superclass : 'OPUmlCompartmentableContent',
@@ -38,7 +41,15 @@ OPUmlCompartment >> updateRenderFromModel [
 	self accomodateContents
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
+OPUmlCompartment >> width: aNumber [
+	"Sets the width of the underlying compartment Roassal shape."
+
+	self roassalShape ifNotNil: [ :currentShape |
+		currentShape width: aNumber ]
+]
+
+{ #category : 'geometry' }
 OPUmlCompartment >> xCoordinateForOwner [
 
 	^ self owningElement encompassingRectangle left + (self width / 2)

@@ -1,3 +1,6 @@
+"
+A structured compartment shape organizing contained elements in a vertical list layout.
+"
 Class {
 	#name : 'OPUmlListCompartment',
 	#superclass : 'OPUmlCompartment',
@@ -9,12 +12,12 @@ Class {
 { #category : 'rendering' }
 OPUmlListCompartment >> layoutOwnedElements [
 
-	self ownedElements
+	(self ownedElements select: #isRendered)
 		inject:
 		self roassalShape encompassingRectangle top + self topPadding
 		into: [ :prevHeight :each |
-			each translateTopTo: prevHeight.
-			prevHeight + each height ].
+				each translateTopTo: prevHeight.
+				prevHeight + each height ].
 	super layoutOwnedElements.
 	self roassalShape signalUpdate
 ]

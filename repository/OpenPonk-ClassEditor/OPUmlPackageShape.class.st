@@ -1,31 +1,38 @@
 "
-I represent a package box.
+A bounded shape representing a UML Package, rendered as a tabbed folder container that manages nested elements and hidden package visualizations.
 "
 Class {
 	#name : 'OPUmlPackageShape',
 	#superclass : 'OPBoundNode',
-	#traits : 'OPTColoredAsFill + OPTUmlPackageableShape',
+	#traits : 'OPTColoredAsFill @ {#updateBasicRoassalShapeColorFromStyles->#updateRoassalShapeColorFromStyles} + OPTUmlPackageableShape',
 	#classTraits : 'OPTColoredAsFill classTrait + OPTUmlPackageableShape classTrait',
 	#instVars : [
 		'nameLabel',
 		'stereotypeLabel',
 		'ear',
-		'innerRoassalShapesBlock'
+		'hiddenPackages'
 	],
 	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'rendering' }
-OPUmlPackageShape >> addSelectionDraggableInteraction [
-
-	roassalShape
-	@ (OPRSSelectionDraggable thatAlsoDragsShapesProvidedByBlock:
-			 innerRoassalShapesBlock)
+{ #category : 'layout' }
+OPUmlPackageShape >> adaptBoundsToInnerBounds: anInnerRectangle [
+	"Resizes package shape to safely encompass direct children and centers it with ear/header offset."
+	| requiredWidth requiredHeight |
+	requiredWidth := (anInnerRectangle width + 80) max: 240.
+	requiredHeight := (anInnerRectangle height + 90) max: 120.
+	self roassalShape extent: requiredWidth @ requiredHeight.
+	self roassalShape translateTo: anInnerRectangle center x @ (anInnerRectangle center y - 20)
 ]
 
-{ #category : 'removing' }
+{ #category : 'interactions' }
+OPUmlPackageShape >> addSelectionDraggableInteraction [
+	roassalShape @ (OPRSSelectionDraggable thatAlsoDragsShapesProvidedByBlock: [ self innerDraggableRoassalShapes ])
+]
+
+{ #category : 'accessing' }
 OPUmlPackageShape >> attachedShapes [
 
 	^ super attachedShapes , {
@@ -34,17 +41,9 @@ OPUmlPackageShape >> attachedShapes [
 		  ear }
 ]
 
-{ #category : 'initialization' }
-OPUmlPackageShape >> initialize [
-
-	super initialize.
-	innerRoassalShapesBlock := [ :allNodes | allNodes ]
-]
-
-{ #category : 'accessing' }
-OPUmlPackageShape >> innerRoassalShapesBlock: aBlock [
-
-	innerRoassalShapesBlock := aBlock
+{ #category : 'testing' }
+OPUmlPackageShape >> isContainer [
+	^ true
 ]
 
 { #category : 'creating - subelements' }
@@ -72,7 +71,7 @@ OPUmlPackageShape >> padding [
 	^ 40
 ]
 
-{ #category : 'update' }
+{ #category : 'actions' }
 OPUmlPackageShape >> pushBack [
 
 	roassalShape ifNil: [ ^ self ].
@@ -82,7 +81,7 @@ OPUmlPackageShape >> pushBack [
 	ear pushBack
 ]
 
-{ #category : 'update' }
+{ #category : 'actions' }
 OPUmlPackageShape >> pushFront [
 
 	roassalShape ifNil: [ ^ self ].
@@ -157,16 +156,10 @@ OPUmlPackageShape >> renderShapeDetails [
 		for: self
 ]
 
-{ #category : 'rendering' }
+{ #category : 'interactions' }
 OPUmlPackageShape >> selectableInteraction [
 
 	^ OPRSSelectable
-]
-
-{ #category : 'rendering' }
-OPUmlPackageShape >> shouldBePositionableByUser [
-
-	^ true
 ]
 
 { #category : 'interactions' }
@@ -183,23 +176,6 @@ OPUmlPackageShape >> stereotypeText [
 		  ifFalse: [ '' ]
 ]
 
-{ #category : 'initialization' }
-OPUmlPackageShape >> updateColorFromStyles [
-
-	self roassalShape
-		propertyAt: OPRSSelectable
-		ifPresent: [ :selectable |
-			| key |
-			key := selectable copyKey , 'color'.
-			self roassalShape properties at: key ifPresent: [
-				self roassalShape properties
-					at: key
-					put: (OrderedCollection with: self color).
-				^ self ] ].
-	self roassalShape color: self color.
-	ear color: self color
-]
-
 { #category : 'rendering' }
 OPUmlPackageShape >> updateRenderFromModel [
 
@@ -209,4 +185,11 @@ OPUmlPackageShape >> updateRenderFromModel [
 	super updateRenderFromModel.
 
 	roassalShape signalUpdate
+]
+
+{ #category : 'initialization' }
+OPUmlPackageShape >> updateRoassalShapeColorFromStyles [
+
+	self updateBasicRoassalShapeColorFromStyles.
+	ear color: self color
 ]

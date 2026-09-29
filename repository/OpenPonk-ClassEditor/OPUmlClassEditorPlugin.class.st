@@ -1,5 +1,5 @@
 "
-I am a plugin for UML Class Diagram
+I am the core plugin for the OpenPonk UML Class Diagram editor. I register the necessary controllers, serializers, layouters, and default profiles (like standard UML primitive types) into the OpenPonk environment.
 "
 Class {
 	#name : 'OPUmlClassEditorPlugin',
@@ -9,29 +9,31 @@ Class {
 	#tag : 'Plugin'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin class >> defaultProfiles [
 	^ {}
 ]
 
 { #category : 'toolbar' }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
-
 	StSaveFilePresenter new
 		title: 'Choose a XMI file to export to';
 		okAction: [ :file | 
+			| message |
 			file
 				ensureDelete;
 				writeStreamDo: [ :stream | 
 					stream << (OPUmlModelSerializer new serializeModel: aPackage) ].
-			UIManager default
-				inform: (String streamContents: [ :s | 
-						 s << 'Exported to ' << file pathString.
-						 s
-							 cr;
-							 cr.
-						 s << 'Click to open location' ])
-				actionOnClick: [ file openInOSFileBrowser ] ];
+			message := String streamContents: [ :s | 
+				s << 'Exported to ' << file pathString.
+				s cr; cr.
+				s << 'Click to open location' ].
+			(ProvideAnswerNotification signal: message) ifNil: [
+				(GrowlMorph 
+					openWithLabel: 'Information' translated 
+					contents: message)
+					vanishDelay: 5 seconds;
+					actionBlock: [ file openInOSFileBrowser ] ] ];
 		extensions: #( xmi xml uml ) named: 'XMI files';
 		open
 ]
@@ -41,19 +43,23 @@ OPUmlClassEditorPlugin class >> importToPackage: aPackage [
 
 	StOpenFilePresenter new
 		title: 'Choose a XMI export of UML model';
-		okAction: [ :file | 
-			| model |
-			model := OPUMLXMIReader read: file contents.
-			(model packagedElements size = 1 and: [ 
-					 model packagedElements first oclIsKindOf: #Package ]) ifTrue: [ 
-					model := model packagedElements first ].
-			aPackage packagedElements: model packagedElements.
-			self inform: 'Imported from ' , file fullName ];
+		okAction: [ :file |
+				| model |
+				model := OPUMLXMIReader read: file contents.
+				(model packagedElements size = 1 and: [ model packagedElements first oclIsKindOf: #Package ]) ifTrue: [
+						model := model packagedElements first ].
+				aPackage packagedElements: model packagedElements.
+				InformativeNotification signal: 'Imported from ' , file fullName ];
 		extensions: #( xmi xml uml ) named: 'XMI files';
 		open
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
+OPUmlClassEditorPlugin class >> repositoryName [
+	^ #'class-editor'
+]
+
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> defaultProfiles [
 	^ self class defaultProfiles
 ]
@@ -61,6 +67,43 @@ OPUmlClassEditorPlugin >> defaultProfiles [
 { #category : 'accessing' }
 OPUmlClassEditorPlugin >> diagramControllerClass [
 	^ OPUmlPackageDiagramController
+]
+
+{ #category : 'templates' }
+OPUmlClassEditorPlugin >> exampleProjectTemplates [
+	"Answers example project templates for UML class diagrams."
+
+	^ { 
+		(OPProjectTemplate
+			named: 'Generalization Sets'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleGeneralizationSets ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Rich Class'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleRichClass ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Simple Association'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleSimpleAssociation ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Simple Generalization'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleSimpleGeneralization ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Package Architecture'
+			icon: self icon
+			modelFactory: [ OPUmlExamples examplePackageArchitecture ]
+			isExample: true).
+		(OPProjectTemplate
+			named: 'Security Profile'
+			icon: self icon
+			modelFactory: [ OPUmlExamples exampleSecurityProfile ]
+			isExample: true) }
 ]
 
 { #category : 'accessing' }
@@ -72,29 +115,30 @@ OPUmlClassEditorPlugin >> icon [
 OPUmlClassEditorPlugin >> isForController: aDiagramController [
 
 	| appliedProfiles pluginClassesWithProfileCounts |
+	(super isForController: aDiagramController) ifFalse: [ ^ false ].
 	appliedProfiles := aDiagramController model
 		                   ifNil: [ #(  ) ]
-		                   ifNotNil: [ :model | 
+		                   ifNotNil: [ :model |
 		                   model profileApplications collect:
 			                   #appliedProfile ].
-	(appliedProfiles isEmpty and: [ self defaultProfiles isEmpty ]) 
+	(appliedProfiles isEmpty and: [ self defaultProfiles isEmpty ])
 		ifTrue: [ ^ true ].
-	pluginClassesWithProfileCounts := (self class withAllSubclasses 
-		                                   collect: [ :eachPluginClass | 
-			                                   eachPluginClass
-			                                   ->
-				                                   (eachPluginClass
-					                                    defaultProfiles count: [ 
-					                                    :eachDefaultPlugin | 
-					                                    appliedProfiles includes:
-						                                    eachDefaultPlugin ]) ]) 
-		                                  sorted: [ :a :b | 
+	pluginClassesWithProfileCounts := (self class withAllSubclasses
+		                                   collect: [ :eachPluginClass |
+				                                   eachPluginClass
+				                                   ->
+					                                   (eachPluginClass
+						                                    defaultProfiles count: [
+						                                    :eachDefaultPlugin |
+						                                    appliedProfiles includes:
+							                                    eachDefaultPlugin ]) ])
+		                                  sorted: [ :a :b |
 		                                  a value > b value ].
-	^ pluginClassesWithProfileCounts first value isZero or: [ 
+	^ pluginClassesWithProfileCounts first value isZero or: [
 		  pluginClassesWithProfileCounts first key = self class ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> isPluginFor: aModel [
 
 	^ ({ 
@@ -103,12 +147,12 @@ OPUmlClassEditorPlugin >> isPluginFor: aModel [
 		  self supportsProfilesOf: aModel ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> layouterClass [
 	^ OPUmlLayouter
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'model updates' }
 OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
 
 	| models targetModel otherModels |
@@ -150,7 +194,7 @@ OPUmlClassEditorPlugin >> name [
 	^ 'UML Class Editor'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsHidingElements [
 	^ true
 ]
@@ -160,7 +204,7 @@ OPUmlClassEditorPlugin >> supportsMergingModels [
 	^ true
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsProfilesOf: aModel [
 
 	^ aModel profileApplications allSatisfy: [ :each | 

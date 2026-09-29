@@ -1,8 +1,11 @@
+"
+A diagram shape representing a UML Enumeration, composing a bounding box and a dedicated compartment for enumeration literals.
+"
 Class {
 	#name : 'OPUmlEnumerationShape',
 	#superclass : 'OPUmlClassifierShape',
 	#instVars : [
-		'literals'
+		'literalsCompartment'
 	],
 	#category : 'OpenPonk-ClassEditor-DiagramElements',
 	#package : 'OpenPonk-ClassEditor',
@@ -11,34 +14,26 @@ Class {
 
 { #category : 'ston-core' }
 OPUmlEnumerationShape class >> stonAllInstVarNames [
-
-	"Override to encode my instances using a custom set of instance variables or to define their order."
-
-	^ super stonAllInstVarNames , #( #literals )
+	^ super stonAllInstVarNames , #( #literalsCompartment )
 ]
 
 { #category : 'adding' }
 OPUmlEnumerationShape >> addLiteral: aLiteralShape [
-
-	literals ifNil: [ literals := OPUmlListCompartment in: self ].
-
-	aLiteralShape owningElement: literals
+	literalsCompartment ifNil: [ literalsCompartment := OPUmlListCompartment in: self ].
+	aLiteralShape owningElement: literalsCompartment
 ]
 
 { #category : 'accessing' }
-OPUmlEnumerationShape >> literals [
-	^ literals
+OPUmlEnumerationShape >> literalsCompartment [
+	^ literalsCompartment
 ]
 
 { #category : 'removing' }
 OPUmlEnumerationShape >> removeLiteral: aLiteralShape [
-
 	aLiteralShape remove.
-
-	literals ownedElements ifEmpty: [ 
-		literals remove.
-		literals := nil ].
-
+	literalsCompartment ownedElements ifEmpty: [
+		literalsCompartment remove.
+		literalsCompartment := nil ].
 	self isRendered ifTrue: [ self updateRenderFromModel ]
 ]
 
@@ -46,4 +41,10 @@ OPUmlEnumerationShape >> removeLiteral: aLiteralShape [
 OPUmlEnumerationShape >> stereotypesLabelClass [
 
 	^ OPUmlEnumerationStereotypeLabel
+]
+
+{ #category : 'ston-core' }
+OPUmlEnumerationShape >> stonInstVarNameFor: anInstVarName [
+	anInstVarName = #literals ifTrue: [ ^ #literalsCompartment ].
+	^ super stonInstVarNameFor: anInstVarName
 ]

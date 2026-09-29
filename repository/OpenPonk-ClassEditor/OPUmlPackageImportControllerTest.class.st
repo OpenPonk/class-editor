@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlPackageImportController, verifying valid source and target package/namespace assignments.
+"
 Class {
 	#name : 'OPUmlPackageImportControllerTest',
 	#superclass : 'OPUmlRelationshipControllerTest',
@@ -6,45 +9,55 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlPackageImportControllerTest >> controllerClass [
-	^ OPUmlPackageImportController
-]
-
-{ #category : 'construction' }
-OPUmlPackageImportControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlPackageImportControllerTest class >> diagramElementClass [
 
 	^ OPUmlPackageImportShape
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
+OPUmlPackageImportControllerTest >> assignModelSource [
+	model importingNamespace: sourceModel
+]
+
+{ #category : 'initialization' }
+OPUmlPackageImportControllerTest >> assignModelTarget [
+	model importedPackage: targetModel
+]
+
+{ #category : 'constants' }
+OPUmlPackageImportControllerTest >> controllerClass [
+	^ OPUmlPackageImportController
+]
+
+{ #category : 'constants' }
 OPUmlPackageImportControllerTest >> modelClass [
 	^ OPUMLPackageImport
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'constants' }
 OPUmlPackageImportControllerTest >> sourceControllerClass [
 
 	^ OPUmlPackageController
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'constants' }
 OPUmlPackageImportControllerTest >> sourceModelClass [
 
 	^ OPUMLPackage
 ]
 
-{ #category : 'tests - construction' }
+{ #category : 'tests - creation' }
 OPUmlPackageImportControllerTest >> testCanClassBeSource [
 	self assert: (OPUmlPackageController new canBeSourceFor: controller)
 ]
 
-{ #category : 'tests - construction' }
+{ #category : 'tests - creation' }
 OPUmlPackageImportControllerTest >> testCanClassBeTarget [
 	self assert: (OPUmlPackageController new canBeTargetFor: controller)
 ]
 
-{ #category : 'tests - construction' }
+{ #category : 'tests - creation' }
 OPUmlPackageImportControllerTest >> testClassBeSource [
 	| source |
 	source := OPUmlPackageController new.
@@ -55,5 +68,6 @@ OPUmlPackageImportControllerTest >> testClassBeSource [
 { #category : 'tests' }
 OPUmlPackageImportControllerTest >> testDescriptionName [
 
-	self assert: controller descriptionName equals: nil
+	self prepareToShow.
+	self assert: controller viewModel descriptionName equals: nil
 ]

@@ -1,3 +1,6 @@
+"
+An edge label displaying multiplicity bounds at a specific end of a UML relationship edge.
+"
 Class {
 	#name : 'OPUmlMultiplicityLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -17,13 +20,13 @@ OPUmlMultiplicityLabel class >> stonAllInstVarNames [
 	^ super stonAllInstVarNames , #( #atSource )
 ]
 
-{ #category : 'accessing' }
+{ #category : 'actions' }
 OPUmlMultiplicityLabel >> atSource [
 
 	atSource := true
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlMultiplicityLabel >> defaultAnchorConstraintPosition [
 
 	^ (atSource

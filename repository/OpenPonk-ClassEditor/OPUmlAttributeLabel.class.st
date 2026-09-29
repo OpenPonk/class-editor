@@ -1,3 +1,6 @@
+"
+A classifier item label rendering the textual representation of a UML Property inside a class attribute compartment.
+"
 Class {
 	#name : 'OPUmlAttributeLabel',
 	#superclass : 'OPUmlClassItemLabel',

@@ -1,5 +1,5 @@
 "
-I am a controller for Association
+I am the controller for UML Associations. I manage form descriptions for source and target ends, multiplicity, navigability, and provide functionality to explicitly swap the source and target direction.
 "
 Class {
 	#name : 'OPUmlAssociationController',
@@ -9,162 +9,91 @@ Class {
 	#tag : 'Controllers'
 }
 
-{ #category : 'testing' }
-OPUmlAssociationController >> canSwitchSourceAndTarget [
-	^ self model isNotNil and: [ self model memberEnds size = 2 ]
-]
-
-{ #category : 'as yet unclassified' }
-OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
-
-	<magritteDescription>
-	| description |
-	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
-	description := OPMAActionDescription new.
-	description
-		action: [
-			self switchSourceAndTarget.
-			self diagramController editor openFormOn: self.
-			self modelChanged ];
-		label: 'Switch source/target';
-		priority: 9.05.
-	^ description
-]
-
-{ #category : 'forms' }
-OPUmlAssociationController >> descriptionIsDerived [
-	<magritteDescription>
-	^ MABooleanDescription new
-		accessor: (self descriptionAccessor: #isDerived);
-		label: 'Is Derived';
-		priority: 7;
-		yourself
-]
-
-{ #category : 'forms' }
-OPUmlAssociationController >> descriptionSeparator [
-	<magritteDescription>
-	^ MAPriorityContainer new priority: 9
-]
-
-{ #category : 'forms' }
-OPUmlAssociationController >> descriptionSourceEnd [
-	<magritteDescription>
-	^ MAPriorityContainer new
-		priority: 9.1;
-		addAll:
-			(OPUmlPropertyMagritteDescriptions
-				reader: [ :me | me model memberEnds first ]
-				labelPrefix: 'Source ') magritteDescription
-]
-
-{ #category : 'forms' }
-OPUmlAssociationController >> descriptionStereotype [
-
-	<magritteDescription>
-	^ self descriptionStereotypeContent
-]
-
-{ #category : 'forms' }
-OPUmlAssociationController >> descriptionTargetEnd [
-	<magritteDescription>
-	^ MAPriorityContainer new
-		priority: 9.2;
-		addAll:
-			(OPUmlPropertyMagritteDescriptions
-				reader: [ :me | me model memberEnds second ]
-				labelPrefix: 'Target ') magritteDescription
-]
-
 { #category : 'construction' }
-OPUmlAssociationController >> diagramElementClass [
+OPUmlAssociationController class >> diagramElementClass [
 
 	^ OPUmlAssociationShape
 ]
 
 { #category : 'accessing' }
-OPUmlAssociationController >> modelClass [
-	^ OPUMLAssociation
+OPUmlAssociationController class >> viewModelClass [
+	^ OPUmlAssociationViewModel
 ]
 
-{ #category : 'construction' }
-OPUmlAssociationController >> modelSource: aModel in: aParentModel [
-
-	| property |
-	self modelSource = aModel ifTrue: [ ^ false ].
-	(property := OPUMLProperty new)
-		owningAssociation: self model;
-		name: (source model name uncapitalized
-				 replaceAll: Character cr
-				 with: Character space);
-		type: source model.
-	self model memberEnds add: property.
-	^ true
+{ #category : 'deprecation' }
+OPUmlAssociationController >> descriptionActionSwitchSourceTarget [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionActionSwitchSourceTarget' -> '`@receiver viewModel descriptionActionSwitchSourceTarget'.
+	^ self viewModel descriptionActionSwitchSourceTarget
 ]
 
-{ #category : 'construction' }
-OPUmlAssociationController >> modelTarget: aModel in: aParentModel [
-
-	| property |
-	self modelTarget = aModel ifTrue: [ ^ false ].
-	(property := OPUMLProperty new)
-		owningAssociation: self model;
-		name: (target model name uncapitalized
-				 replaceAll: Character cr
-				 with: Character space);
-		type: target model.
-	self model memberEnds add: property.
-	^ true
+{ #category : 'forms' }
+OPUmlAssociationController >> descriptionIsDerived [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsDerived' -> '`@receiver viewModel descriptionIsDerived'.
+	^ self viewModel descriptionIsDerived
 ]
 
-{ #category : 'construction' }
-OPUmlAssociationController >> switchSourceAndTarget [
+{ #category : 'forms' }
+OPUmlAssociationController >> descriptionSeparator [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionSeparator' -> '`@receiver viewModel descriptionSeparator'.
+	^ self viewModel descriptionSeparator
+]
 
-	| originalModels |
-	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
-	originalModels := self model memberEnds asArray.
-	self model memberEnds removeAll.
-	self model memberEnds add: originalModels second.
-	self model memberEnds add: originalModels first.
-	3 to: originalModels size do: [ :index | 
-	self model memberEnds add: originalModels at: index ].
-	source := self diagramController controllerForModel:
-		          originalModels second type.
+{ #category : 'forms' }
+OPUmlAssociationController >> descriptionSourceEnd [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionSourceEnd' -> '`@receiver viewModel descriptionSourceEnd'.
+	^ self viewModel descriptionSourceEnd
+]
+
+{ #category : 'forms' }
+OPUmlAssociationController >> descriptionStereotype [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionStereotype' -> '`@receiver viewModel descriptionStereotype'.
+	^ self viewModel descriptionStereotype
+]
+
+{ #category : 'forms' }
+OPUmlAssociationController >> descriptionTargetEnd [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionTargetEnd' -> '`@receiver viewModel descriptionTargetEnd'.
+	^ self viewModel descriptionTargetEnd
+]
+
+{ #category : 'actions' }
+OPUmlAssociationController >> endsSwapped [
+	source := self diagramController controllerForModel: self model memberEnds second type.
 	self diagramElement switchSourceAndTarget
 ]
 
-{ #category : 'writing' }
-OPUmlAssociationController >> writeMultiplicityFrom: aString to: aProperty [
-	| values |
-	(aString includesSubstring: '..')
-		ifTrue: [ | split |
-			split := aString splitOn: '..'.
-			values := {split first asNumber.
-			split second = '*'
-				ifTrue: [ '*' ]
-				ifFalse: [ split second asNumber ]} ]
-		ifFalse: [ aString = '*'
-				ifTrue: [ values := #(0 '*') ]
-				ifFalse: [ values := {aString asNumber.
-					aString asNumber} ] ].
-	aProperty lowerValue ifNil: [ aProperty lowerValue: OPUMLLiteralInteger new ].
-	aProperty upperValue ifNil: [ aProperty upperValue: OPUMLLiteralUnlimitedNatural new ].
-	aProperty lowerValue value: values first.
-	aProperty upperValue value: values second
+{ #category : 'announcements' }
+OPUmlAssociationController >> subscribeToViewModel [
+
+	super subscribeToViewModel.
+	self viewModel announcer weak
+		when: OPAssociationEndsSwapped
+		send: #endsSwapped
+		to: self
 ]
 
-{ #category : 'writing' }
+{ #category : 'deprecation' }
+OPUmlAssociationController >> switchSourceAndTarget [
+	self deprecated: 'Use viewModel instead' transformWith: '`@receiver switchSourceAndTarget' -> '`@receiver viewModel switchSourceAndTarget'.
+	^ self viewModel switchSourceAndTarget
+]
+
+{ #category : 'parsing' }
+OPUmlAssociationController >> writeMultiplicityFrom: aString to: aProperty [
+	self
+		deprecated: 'Use viewModel instead'
+		transformWith: '`@receiver writeMultiplicityFrom: `@arg1 to: `@arg2' -> '`@receiver viewModel writeMultiplicityFrom: `@arg1 to: `@arg2'.
+	^ self viewModel writeMultiplicityFrom: aString to: aProperty
+]
+
+{ #category : 'parsing' }
 OPUmlAssociationController >> writeNavigability: isNavigable to: aProperty [
 
-	isNavigable
-		ifTrue: [
-			aProperty owningClass: aProperty opposite type.
-			aProperty owningAssociation: nil.
-			self diagramController showInDiagramModel: aProperty ]
-		ifFalse: [
-			aProperty owningClass: nil.
-			aProperty owningAssociation: aProperty association.
-			self diagramController
-				controllerForModel: aProperty
-				ifFound: [ :found | found removeControllerAndDiagramElement ] ]
+	self
+		deprecated:
+		'Use viewModel for domain logic and handle UI updates manually.'
+		transformWith: '`@receiver writeNavigability: `@arg1 to: `@arg2'
+			-> '`@receiver viewModel writeNavigability: `@arg1 to: `@arg2'.
+
+	^ self viewModel writeNavigability: isNavigable to: aProperty
 ]

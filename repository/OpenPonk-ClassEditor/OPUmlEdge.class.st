@@ -1,3 +1,6 @@
+"
+An abstract base edge shape for UML relationships, managing stroke styles, colors, and line markers according to model semantics.
+"
 Class {
 	#name : 'OPUmlEdge',
 	#superclass : 'OPEdge',

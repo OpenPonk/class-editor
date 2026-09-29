@@ -1,3 +1,6 @@
+"
+I am a UI integration test class verifying the OpenPonk UML editor workbench interactions, such as opening the editor and inserting classes via the palette.
+"
 Class {
 	#name : 'OPUmlEditorWorkbenchTest',
 	#superclass : 'TestCase',
@@ -46,29 +49,21 @@ OPUmlEditorWorkbenchTest >> tearDown [
 
 { #category : 'tests' }
 OPUmlEditorWorkbenchTest >> testAddClassFromPalette [
+	| classPaletteEntry clickPoint targetRoassalShape mouseLeftClickEvent |
+	classPaletteEntry := paletteEntries detect: [ :eachEntry | eachEntry label = 'Class' ].
+	classPaletteEntry performAction.
+	clickPoint := 0 @ 0.
 
-	| position shape ev classEntry link method |
-	classEntry := paletteEntries detect: [ :each | each label = 'Class' ].
-	classEntry performAction.
-	position := 0 @ 0.
-	shape := view canvas
-		         shapeWithAction: RSMouseLeftClick
-		         forPositionInPixels: position.
-	ev := RSMouseLeftClick new.
-	ev shape: shape.
-	ev position: position.
-	ev canvas: view canvas.
-	"Pseudo-mock OPRenameElementCommand>>execute, so there's no asking user questions for a name."
-	link := MetaLink new
-		        metaObject: [ :object | 
-			        (object instVarNamed: #controller) model name: 'Hello' ];
-		        selector: #value:;
-		        arguments: #( object );
-		        control: #instead.
-	method := OPInitialSetElementCommand >> #execute.
-	method ast link: link.
-	[ ev shape announce: ev ] ensure: [ link uninstall ].
+	targetRoassalShape := view canvas
+		shapeWithAction: RSMouseLeftClick
+		forPositionInPixels: clickPoint.
+	mouseLeftClickEvent := RSMouseLeftClick new.
+	mouseLeftClickEvent shape: targetRoassalShape.
+	mouseLeftClickEvent position: clickPoint.
+	mouseLeftClickEvent canvas: view canvas.
+	mouseLeftClickEvent shape announce: mouseLeftClickEvent.
+
 	self
 		assert: (model packagedElements asArray collect: #name)
-		equals: #( Hello )
+		equals: #( 'Class' )
 ]

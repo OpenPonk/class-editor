@@ -1,5 +1,5 @@
 "
-I represent a direct generalization line.
+An edge shape representing a UML Generalization, rendering a solid line with a hollow triangular arrowhead pointing to the general classifier.
 "
 Class {
 	#name : 'OPUmlGeneralizationShape',
@@ -16,7 +16,7 @@ OPUmlGeneralizationShape >> createOwnedElementsWithoutController [
 	OPUmlGeneralizationLabel in: self
 ]
 
-{ #category : 'hooks' }
+{ #category : 'Roassal2 - accessing' }
 OPUmlGeneralizationShape >> headMarker [
 
 	^ OPRSEmptyMarkerBuilder triangle

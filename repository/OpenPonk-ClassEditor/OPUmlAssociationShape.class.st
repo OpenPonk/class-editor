@@ -1,5 +1,5 @@
 "
-I am a shape composition to accomodate for the most common UML Association shape.
+An edge shape representing a UML association. Renders connection lines, navigability markers, and coordinates placement of end labels.
 "
 Class {
 	#name : 'OPUmlAssociationShape',
@@ -35,7 +35,7 @@ OPUmlAssociationShape >> createOwnedElementsWithoutController [
 	self createEndLabels
 ]
 
-{ #category : 'hooks' }
+{ #category : 'Roassal2 - accessing' }
 OPUmlAssociationShape >> headMarker [
 
 	^ self markerShapeFor:
@@ -103,7 +103,7 @@ OPUmlAssociationShape >> supportsHidingLabelEnds [
 	^ true
 ]
 
-{ #category : 'hooks' }
+{ #category : 'Roassal2 - accessing' }
 OPUmlAssociationShape >> tailMarker [
 
 	^ self markerShapeFor:

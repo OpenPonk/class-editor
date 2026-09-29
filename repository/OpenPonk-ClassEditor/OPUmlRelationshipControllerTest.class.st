@@ -1,3 +1,6 @@
+"
+I am an abstract base test class verifying the behavior of directional UML relationship controllers, focusing on valid source and target assignments.
+"
 Class {
 	#name : 'OPUmlRelationshipControllerTest',
 	#superclass : 'OPAbstractDirectionalRelationshipControllerTest',
@@ -11,7 +14,7 @@ OPUmlRelationshipControllerTest class >> isAbstract [
 	^ self = OPUmlRelationshipControllerTest
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlRelationshipControllerTest >> allElements [
 
 	^ self allElementsOf: diagramController model
@@ -19,7 +22,6 @@ OPUmlRelationshipControllerTest >> allElements [
 
 { #category : 'as yet unclassified' }
 OPUmlRelationshipControllerTest >> allElementsOf: aPackage [
-
 	| elements |
 	elements := Set withAll: aPackage packagedElements.
 	aPackage packagedElements
@@ -49,7 +51,7 @@ OPUmlRelationshipControllerTest >> allElementsOf: aPackage [
 				select: [ :attr |
 					attr association isNotNil and: [
 						attr association isKindOf: OPUMLExtension ] ]
-				thenDo: [ :attr | elements add: attr type ] ].
+				thenDo: [ :attr | elements add: attr association ] ].
 	^ elements
 ]
 
@@ -61,19 +63,19 @@ OPUmlRelationshipControllerTest >> assignModelSource [
 OPUmlRelationshipControllerTest >> assignModelTarget [
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlRelationshipControllerTest >> diagramControllerClass [
 
 	^ OPUmlPackageDiagramController
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
 OPUmlRelationshipControllerTest >> diagramModelClass [
 
 	^ OPUMLPackage
 ]
 
-{ #category : 'running' }
+{ #category : 'initialization' }
 OPUmlRelationshipControllerTest >> setUpSourceModel [
 
 	^ super setUpSourceModel
@@ -81,7 +83,7 @@ OPUmlRelationshipControllerTest >> setUpSourceModel [
 		  yourself
 ]
 
-{ #category : 'running' }
+{ #category : 'initialization' }
 OPUmlRelationshipControllerTest >> setUpTargetModel [
 
 	^ super setUpTargetModel
@@ -89,13 +91,13 @@ OPUmlRelationshipControllerTest >> setUpTargetModel [
 		  yourself
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'constants' }
 OPUmlRelationshipControllerTest >> sourceControllerClass [
 
 	^ OPUmlClassController
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'constants' }
 OPUmlRelationshipControllerTest >> sourceModelClass [
 
 	^ OPUMLClass

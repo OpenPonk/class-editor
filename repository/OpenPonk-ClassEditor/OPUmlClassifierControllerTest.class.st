@@ -1,3 +1,6 @@
+"
+I am an abstract base test class verifying the behavior of UML Classifier controllers, including canvas targeting, dependent element removal, and palette instantiation.
+"
 Class {
 	#name : 'OPUmlClassifierControllerTest',
 	#superclass : 'OPUmlElementControllerTest',

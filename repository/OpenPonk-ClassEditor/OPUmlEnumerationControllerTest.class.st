@@ -1,3 +1,6 @@
+"
+I am a unit test class verifying the behavior of OPUmlEnumerationController, ensuring enumerations correctly render and manage their literal items.
+"
 Class {
 	#name : 'OPUmlEnumerationControllerTest',
 	#superclass : 'OPUmlClassifierControllerTest',
@@ -6,18 +9,18 @@ Class {
 	#tag : 'Tests - Controllers'
 }
 
-{ #category : 'accessing' }
-OPUmlEnumerationControllerTest >> controllerClass [
-	^ OPUmlEnumerationController
-]
-
-{ #category : 'construction' }
-OPUmlEnumerationControllerTest >> diagramElementClass [
+{ #category : 'constants' }
+OPUmlEnumerationControllerTest class >> diagramElementClass [
 
 	^ OPUmlEnumerationShape
 ]
 
-{ #category : 'accessing' }
+{ #category : 'constants' }
+OPUmlEnumerationControllerTest >> controllerClass [
+	^ OPUmlEnumerationController
+]
+
+{ #category : 'constants' }
 OPUmlEnumerationControllerTest >> modelClass [
 	^ OPUMLEnumeration
 ]
@@ -26,6 +29,7 @@ OPUmlEnumerationControllerTest >> modelClass [
 OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 
 	model ownedLiterals add: OPUMLEnumerationLiteral new.
+
 	controller model: model.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.

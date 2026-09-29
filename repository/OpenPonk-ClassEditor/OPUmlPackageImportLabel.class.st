@@ -1,3 +1,6 @@
+"
+An edge label for UML package imports rendering keywords such as <<import>> or <<access>> along the dashed import line.
+"
 Class {
 	#name : 'OPUmlPackageImportLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlPackageImportLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5

@@ -1,5 +1,5 @@
 "
-I am a collection of magritte descriptions for an association end.
+I act as a builder for Magritte descriptions specifically targeted at UML properties (attributes and association ends). I generate form fields for configuring multiplicity, default values, aggregation, navigability, and types.
 "
 Class {
 	#name : 'OPUmlPropertyMagritteDescriptions',
@@ -22,26 +22,27 @@ OPUmlPropertyMagritteDescriptions class >> reader: aBlock labelPrefix: aLabelPre
 
 { #category : 'accessing' }
 OPUmlPropertyMagritteDescriptions >> descriptionAccessor: aSymbol [
-
 	^ MAPluggableAccessor
-		  read: [ :me | (reader value: me) perform: aSymbol ]
-		  write: [ :me :newValue |
-			  (reader value: me)
+		  read: [ :targetViewModel | (reader value: targetViewModel) perform: aSymbol ]
+		  write: [ :targetViewModel :newValue |
+			  (reader value: targetViewModel)
 				  perform: (aSymbol , ':') asSymbol
 				  with: newValue.
-			  me ifNotNil: [ me modelChanged ] ]
+			  targetViewModel ifNotNil: [ targetViewModel modelChanged ] ]
 ]
 
 { #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
 
 	<magritteDescription>
-	| property association isDependentOnMultiplicity |
+	
+	self flag: 'The commented out code used to work a LONG time ago'
+	"| property association isDependentOnMultiplicity |
 	property := reader value: reader receiver.
 	association := property association.
 	isDependentOnMultiplicity := association appliedStereotypes 
 		                             anySatisfy: [ :any | 
-		                             any oclIsKindOf: #SubQuantityOf ].
+		                             any oclIsKindOf: #SubQuantityOf ]".
 	^ MASingleOptionDescription new
 		  visible: true "isDependentOnMultiplicity not";
 		  optionsAndLabels: { 
@@ -58,25 +59,23 @@ OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
 
 { #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionDefaultValue [
-
 	<magritteDescription>
 	^ MAStringDescription new
-		  accessor: (self descriptionAccessor: #defaultValue);
 		  accessor: (MAPluggableAccessor
-				   read: [ :me | 
-					   (reader value: me) defaultValue ifNil: [ '' ] ifNotNil: [ 
-							   ((reader value: me) defaultValue isKindOf:
+				   read: [ :targetViewModel | 
+					   (reader value: targetViewModel) defaultValue ifNil: [ '' ] ifNotNil: [ 
+							   ((reader value: targetViewModel) defaultValue isKindOf:
 									    OPUMLOpaqueExpression)
-								   ifTrue: [ (reader value: me) defaultValue bodies first ]
+								   ifTrue: [ (reader value: targetViewModel) defaultValue bodies first ]
 								   ifFalse: [ '' ] ] ]
-				   write: [ :me :newValue | 
-					   (reader value: me) defaultValue ifNil: [ 
-							   (reader value: me) defaultValue: OPUMLOpaqueExpression new ].
-					   ((reader value: me) defaultValue isKindOf:
+				   write: [ :targetViewModel :newValue | 
+					   (reader value: targetViewModel) defaultValue ifNil: [ 
+							   (reader value: targetViewModel) defaultValue: OPUMLOpaqueExpression new ].
+					   ((reader value: targetViewModel) defaultValue isKindOf:
 							    OPUMLOpaqueExpression) ifTrue: [ 
-							   (reader value: me) defaultValue bodies:
+							   (reader value: targetViewModel) defaultValue bodies:
 									   (newValue ifEmpty: [ {  } ] ifNotEmpty: [ { newValue } ]) ].
-					   me modelChanged ]);
+					   targetViewModel modelChanged ]);
 		  label: labelPrefix , 'Default Value';
 		  priority: 42;
 		  yourself
@@ -94,14 +93,15 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsDerived [
 
 { #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionIsNavigable [
-
 	<magritteDescription>
 	^ MABooleanDescription new
 		  accessor: (MAPluggableAccessor
-				   read: [ :me | (reader value: me) isNavigable ]
-				   write: [ :me :newValue |
-					   me writeNavigability: newValue to: (reader value: me).
-					   me modelChanged ]);
+				   read: [ :targetViewModel | (reader value: targetViewModel) isNavigable ]
+				   write: [ :targetViewModel :newValue |
+					   targetViewModel
+						   writeNavigability: newValue
+						   to: (reader value: targetViewModel).
+					   targetViewModel modelChanged ]);
 		  label: 'Is Navigable';
 		  priority: 10;
 		  yourself
@@ -149,19 +149,18 @@ OPUmlPropertyMagritteDescriptions >> descriptionIsUnique [
 
 { #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionMultiplicity [
-
 	<magritteDescription>
 	^ MASingleOptionDescription new
 		  beExtensible;
 		  options: #( '0..1' '1..1' '0..*' '1..*' );
 		  reference: MAStringDescription new;
 		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   (reader value: me) lowerBound asString , '..'
-					   , (reader value: me) upperBound asString ]
-				   write: [ :me :newValue |
-					   me writeMultiplicityFrom: newValue to: (reader value: me).
-					   me modelChanged ]);
+				   read: [ :targetViewModel |
+					   (reader value: targetViewModel) lowerBound asString , '..'
+					   , (reader value: targetViewModel) upperBound asString ]
+				   write: [ :targetViewModel :newValue |
+					   targetViewModel writeMultiplicityFrom: newValue to: (reader value: targetViewModel).
+					   targetViewModel modelChanged ]);
 		  label: 'Multiplicity';
 		  priority: 9;
 		  beSorted;
@@ -180,16 +179,15 @@ OPUmlPropertyMagritteDescriptions >> descriptionName [
 
 { #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionType [
-
 	<magritteDescription>
 	^ MAStringDescription new
 		  beReadOnly;
 		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   (reader value: me) type
+				   read: [ :targetViewModel |
+					   (reader value: targetViewModel) type
 						   ifNil: [ '' ]
 						   ifNotNil: [ :type | type name ] ]
-				   write: [ :me :newValue |  ]);
+				   write: [ :targetViewModel :newValue |  ]);
 		  label: labelPrefix;
 		  priority: 1;
 		  yourself

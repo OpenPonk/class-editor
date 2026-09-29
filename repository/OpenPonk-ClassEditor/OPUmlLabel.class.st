@@ -1,3 +1,6 @@
+"
+An abstract base label shape establishing priority levels and placement rules for UML annotations and adornments.
+"
 Class {
 	#name : 'OPUmlLabel',
 	#superclass : 'OPLabel',

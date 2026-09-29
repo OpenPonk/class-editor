@@ -1,3 +1,6 @@
+"
+A trait for Roassal shapes representing UML elements capable of hiding the containing package path qualification.
+"
 Trait {
 	#name : 'OPTUmlPackageableShape',
 	#instVars : [

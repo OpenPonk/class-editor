@@ -1,3 +1,6 @@
+"
+A classifier item label rendering a UML Operation inside an operation compartment, supporting italics for abstract operations.
+"
 Class {
 	#name : 'OPUmlOperationLabel',
 	#superclass : 'OPUmlClassItemLabel',

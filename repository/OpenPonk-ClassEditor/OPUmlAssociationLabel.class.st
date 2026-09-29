@@ -1,3 +1,6 @@
+"
+An edge label representing the primary name of a UML association, positioned along the center of the association line.
+"
 Class {
 	#name : 'OPUmlAssociationLabel',
 	#superclass : 'OPUmlEdgeLabel',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'adding' }
 OPUmlAssociationLabel >> defaultAnchorConstraintPosition [
 
 	^ OPRSAnchorConstraintBalanceReference balance: 0.5

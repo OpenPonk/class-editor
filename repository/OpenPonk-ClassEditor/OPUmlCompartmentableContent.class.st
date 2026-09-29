@@ -1,3 +1,6 @@
+"
+An abstract base node for content placed inside a structured UML compartment, managing relative positioning.
+"
 Class {
 	#name : 'OPUmlCompartmentableContent',
 	#superclass : 'OPNode',
@@ -32,7 +35,7 @@ OPUmlCompartmentableContent >> translateTopTo: aCoordinateY [
 	self layoutOwnedElements
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'geometry' }
 OPUmlCompartmentableContent >> xCoordinateForOwner [
 
 	^ self subclassResponsibility

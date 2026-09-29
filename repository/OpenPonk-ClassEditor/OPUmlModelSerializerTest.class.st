@@ -1,5 +1,5 @@
 "
-An OPUmlSerializerTest is a test class for testing the behavior of OPUmlSerializer
+I am a unit test class verifying the correct serialization and deserialization of UML models to and from XMI and STON formats by OPUmlModelSerializer.
 "
 Class {
 	#name : 'OPUmlModelSerializerTest',
@@ -9,7 +9,7 @@ Class {
 	#tag : 'Tests'
 }
 
-{ #category : 'instance creation' }
+{ #category : 'accessing' }
 OPUmlModelSerializerTest >> newModel [
 	^ OPUmlExamples exampleSimpleAssociation
 ]
