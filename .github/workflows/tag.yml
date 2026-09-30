@@ -1,0 +1,24 @@
+name: Tag
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    tags:
+      - 'v*'
+    tags-ignore:
+      - 'v*.x'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Tag or ref to test'
+        required: false
+        default: 'v5.0.0'
+
+jobs:
+  test:
+    uses: OpenPonk/ci-scripts/.github/workflows/test-tag.yml@master
+    with:
+      ref: ${{ inputs.ref || '' }}
