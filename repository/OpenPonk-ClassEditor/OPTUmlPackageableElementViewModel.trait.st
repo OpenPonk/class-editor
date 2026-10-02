@@ -15,7 +15,7 @@ OPTUmlPackageableElementViewModel >> basicRemoveModel [
 	self basicRemovePackagedModel
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'private' }
 OPTUmlPackageableElementViewModel >> basicRemovePackagedModel [
 	"Automatically remove from owning package using the packageViewModel cache"
 
