@@ -20,17 +20,17 @@ BaselineOfOpenPonkClassEditor >> baseline: spec [
 	spec for: #common do: [
 		spec
 			baseline: 'OpenPonkUMLXMI'
-			with: [ spec repository: 'github://openponk/uml-xmi' ].
+			with: [ spec repository: 'github://OpenPonk/uml-xmi' ].
 		spec
 			baseline: 'OpenPonkUMLBootstrapGenerator'
 			with: [
-			spec repository: 'github://openponk/uml-bootstrap-generator' ].
+			spec repository: 'github://OpenPonk/uml-bootstrap-generator' ].
 		spec
 			baseline: 'OpenPonk'
-			with: [ spec repository: 'github://openponk/openponk' ].
+			with: [ spec repository: 'github://OpenPonk/openponk' ].
 		spec
 			baseline: 'OpenPonkUMLProfiles'
-			with: [ spec repository: 'github://openponk/uml-profiles' ].
+			with: [ spec repository: 'github://OpenPonk/uml-profiles' ].
 		spec package: 'OpenPonk-ClassEditor' with: [
 			spec requires: #( 'OpenPonkUMLXMI' 'OpenPonkUMLBootstrapGenerator'
 				   'OpenPonkUMLProfiles' ) ].
@@ -57,18 +57,18 @@ BaselineOfOpenPonkClassEditor >> plugins: spec [
 
 	spec baseline: 'OpenPonkOntoUMLVerifications' with: [
 		spec
-			repository: 'github://openponk/ontouml-verifications';
+			repository: 'github://OpenPonk/ontouml-verifications';
 			loads: 'plugin' ].
 	spec baseline: 'OpenPonkOntoUMLTransformations' with: [
 		spec
 			repository:
-				'github://openponk/openponk-ontouml-to-uml-transformation';
+				'github://OpenPonk/openponk-ontouml-to-uml-transformation';
 			loads: 'plugin' ].
 	spec
 		baseline: 'OpenPonkGit'
-		with: [ spec repository: 'github://openponk/openponk-git' ].
+		with: [ spec repository: 'github://OpenPonk/openponk-git' ].
 	spec baseline: 'OpenPonkOntoUMLPatterns' with: [
 		spec
-			repository: 'github://openponk/ontouml-patterns';
+			repository: 'github://OpenPonk/ontouml-patterns';
 			loads: 'plugin' ]
 ]
