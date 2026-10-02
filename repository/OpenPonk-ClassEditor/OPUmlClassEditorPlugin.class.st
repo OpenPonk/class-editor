@@ -14,28 +14,19 @@ OPUmlClassEditorPlugin class >> defaultProfiles [
 	^ {}
 ]
 
-{ #category : 'toolbar' }
+{ #category : 'exporting' }
 OPUmlClassEditorPlugin class >> exportPackage: aPackage [
-	StSaveFilePresenter new
-		title: 'Choose a XMI file to export to';
-		okAction: [ :file | 
-			| message |
-			file
-				ensureDelete;
-				writeStreamDo: [ :stream | 
-					stream << (OPUmlModelSerializer new serializeModel: aPackage) ].
-			message := String streamContents: [ :s | 
-				s << 'Exported to ' << file pathString.
-				s cr; cr.
-				s << 'Click to open location' ].
-			(ProvideAnswerNotification signal: message) ifNil: [
-				(GrowlMorph 
-					openWithLabel: 'Information' translated 
-					contents: message)
-					vanishDelay: 5 seconds;
-					actionBlock: [ file openInOSFileBrowser ] ] ];
-		extensions: #( xmi xml uml ) named: 'XMI files';
-		open
+	| baseName |
+	baseName := (aPackage respondsTo: #name)
+		ifTrue: [ aPackage name ]
+		ifFalse: [ nil ].
+	(baseName isNil or: [ baseName trimBoth isEmpty ]) ifTrue: [ baseName := 'export' ].
+	OPExportFileDialog
+		exportBlock: [ OPUmlModelSerializer new serializeModel: aPackage ]
+		defaultFileName: (FileNameSanitizer sanitize: baseName trimBoth) , '.xmi'
+		extensions: #( xmi xml uml )
+		named: 'XMI files'
+		title: 'Choose a XMI file to export to'
 ]
 
 { #category : 'toolbar' }
