@@ -1,45 +1,51 @@
 "
-I dynamically generate Magritte descriptions for the extended properties injected by UML stereotypes applied to a model element. I integrate profile-specific metadata into the standard property editing forms.
+Generates Magritte descriptions for attributes of stereotypes applied to a model element represented by a view model.
 "
 Class {
 	#name : 'OPUmlStereotypeDescriptions',
 	#superclass : 'Object',
 	#instVars : [
-		'controller'
+		'viewModel'
 	],
 	#category : 'OpenPonk-ClassEditor-Profiles',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Profiles'
 }
 
-{ #category : 'as yet unclassified' }
-OPUmlStereotypeDescriptions >> accessorFor: anAttribute of: aStereotype [
+{ #category : 'instance creation' }
+OPUmlStereotypeDescriptions class >> for: aViewModel [
+	^ self new
+		viewModel: aViewModel;
+		yourself
+]
 
+{ #category : 'accessing' }
+OPUmlStereotypeDescriptions >> accessorFor: anAttribute of: aStereotype [
 	^ MAPluggableAccessor
-		  read: [ :me | aStereotype perform: anAttribute name asSymbol ]
-		  write: [ :me :newValue |
-			  aStereotype
-				  perform: (anAttribute name , ':') asSymbol
-				  with: newValue.
-			  controller modelChanged ]
+		read: [ :aViewModel | aStereotype perform: anAttribute name asSymbol ]
+		write: [ :aViewModel :newValue |
+			aStereotype
+				perform: (anAttribute name , ':') asSymbol
+				with: newValue.
+			aViewModel modelChanged ]
 ]
 
 { #category : 'adding' }
 OPUmlStereotypeDescriptions >> addTo: aCollection attribute: anAttribute of: aStereotype [
-	anAttribute type name = #Boolean
-		ifTrue: [ aCollection
-				add:
-					(MABooleanDescription new
-						accessor: (self accessorFor: anAttribute of: aStereotype);
-						label: 'Is ' , anAttribute name capitalized;
-						yourself) ].
-	anAttribute type name = #String
-		ifTrue: [ aCollection
-				add:
-					(MAStringDescription new
-						accessor: (self accessorFor: anAttribute of: aStereotype);
-						label: anAttribute name capitalized;
-						yourself) ]
+	anAttribute type name = #Boolean ifTrue: [
+		aCollection add:
+			(MABooleanDescription new
+				accessor: (self accessorFor: anAttribute of: aStereotype);
+				label: 'Is ' , anAttribute name capitalized;
+				priority: 5;
+				yourself) ].
+	anAttribute type name = #String ifTrue: [
+		aCollection add:
+			(MAStringDescription new
+				accessor: (self accessorFor: anAttribute of: aStereotype);
+				label: anAttribute name capitalized;
+				priority: 5;
+				yourself) ]
 ]
 
 { #category : 'accessing' }
@@ -52,21 +58,30 @@ OPUmlStereotypeDescriptions >> controller: anObject [
 	controller := anObject
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlStereotypeDescriptions >> descriptions [
-	| descriptions |
+	| result |
 	self model ifNil: [ ^ #() ].
-	descriptions := OrderedCollection new.
-	self model appliedStereotypes
-		do: [ :stereo | 
-			| meta |
-			meta := stereo umlMetaClass.
-			meta allAttributes
-				do: [ :attr | self addTo: descriptions attribute: attr of: stereo ] ].
-	^ descriptions
+	result := OrderedCollection new.
+	self model appliedStereotypes do: [ :appliedStereotype |
+		| metaClass |
+		metaClass := appliedStereotype umlMetaClass.
+		metaClass allAttributes do: [ :attribute |
+			self addTo: result attribute: attribute of: appliedStereotype ] ].
+	^ result
 ]
 
 { #category : 'accessing' }
 OPUmlStereotypeDescriptions >> model [
-	^ controller model
+	^ viewModel ifNotNil: [ :activeViewModel | activeViewModel model ]
+]
+
+{ #category : 'accessing' }
+OPUmlStereotypeDescriptions >> viewModel [
+	^ viewModel
+]
+
+{ #category : 'accessing' }
+OPUmlStereotypeDescriptions >> viewModel: aViewModel [
+	viewModel := aViewModel
 ]

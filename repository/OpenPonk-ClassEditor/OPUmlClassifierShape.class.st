@@ -118,6 +118,20 @@ OPUmlClassifierShape >> stereotypesLabelClass [
 	^ self subclassResponsibility
 ]
 
+{ #category : 'accessing' }
+OPUmlClassifierShape >> styleTypeNames [
+	| names |
+	names := OrderedCollection new.
+	self stereotypes do: [ :eachStereotypeName |
+		names addIfNotPresent: '«' , eachStereotypeName asString , '»'.
+		names addIfNotPresent: eachStereotypeName asString ].
+	self modelElement ifNotNil: [ :model |
+		(model respondsTo: #umlClassName) ifTrue: [
+			names addIfNotPresent: model umlClassName asString ] ].
+	super styleTypeNames do: [ :eachName | names addIfNotPresent: eachName ].
+	^ names
+]
+
 { #category : 'rendering' }
 OPUmlClassifierShape >> updateCommentIcon [
 
@@ -140,12 +154,10 @@ OPUmlClassifierShape >> updateCommentIcon [
 OPUmlClassifierShape >> updateRenderFromModel [
 
 	self updateStereotype.
-
 	self compartments do: #sortOwnedElements.
-
 	self updateCommentIcon.
-
-	super updateRenderFromModel
+	super updateRenderFromModel.
+	self updateRenderFromStyles
 ]
 
 { #category : 'rendering' }
