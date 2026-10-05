@@ -51,6 +51,12 @@ OPUmlClassEditorPlugin class >> repositoryName [
 ]
 
 { #category : 'accessing' }
+OPUmlClassEditorPlugin >> defaultModelName [
+
+	^ 'UML Class Diagram'
+]
+
+{ #category : 'accessing' }
 OPUmlClassEditorPlugin >> defaultProfiles [
 	^ self class defaultProfiles
 ]

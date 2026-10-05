@@ -91,6 +91,18 @@ OPUmlElementViewModel >> descriptionName [
 		yourself
 ]
 
+{ #category : 'magritte-descriptions' }
+OPUmlElementViewModel >> descriptionStereotypeAttributes [
+	<magritteDescription>
+	| stereotypeDescriptions |
+	stereotypeDescriptions := (OPUmlStereotypeDescriptions for: self) descriptions.
+	stereotypeDescriptions ifEmpty: [ ^ nil ].
+	^ MAPriorityContainer new
+		priority: 5;
+		addAll: stereotypeDescriptions;
+		yourself
+]
+
 { #category : 'forms' }
 OPUmlElementViewModel >> descriptionStereotypeContent [
 
