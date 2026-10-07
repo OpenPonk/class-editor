@@ -41,6 +41,36 @@ OPUmlElementViewModel >> applyStereotype: aStereotypeModel to: aModel [
 ]
 
 { #category : 'accessing' }
+OPUmlElementViewModel >> auxiliaryRemovalCommandsIn: aProjectController [
+	| modelObj commands allElements attributesToNil |
+	modelObj := self model.
+	(modelObj isNil or: [ aProjectController isNil or: [ (modelObj oclIsKindOf: #Type) not ] ])
+		ifTrue: [ ^ #() ].
+
+	commands := OrderedCollection new.
+	allElements := IdentitySet new.
+	aProjectController project models do: [ :rootModel |
+		OPUmlCommonTypesFactory collectAllElementsFrom: rootModel into: allElements ].
+
+	"Nulovat pouze samostatné atributy tříd a datových typů. Konce asociací se nesmí nulovat, ty se mažou kaskádově s celou asociací."
+	attributesToNil := allElements select: [ :each |
+		(each isKindOf: OPUMLProperty)
+			and: [ (each respondsTo: #association)
+				and: [ each association isNil
+				and: [ each type == modelObj ] ] ] ].
+
+	attributesToNil do: [ :referencingProperty |
+		| propVm |
+		propVm := aProjectController viewModelRegistry viewModelFor: referencingProperty.
+		commands add: (OPPropertyChangeCommand
+			viewModel: propVm
+			selector: #type
+			oldValue: modelObj
+			newValue: nil) ].
+	^ commands
+]
+
+{ #category : 'accessing' }
 OPUmlElementViewModel >> creationPriority [
 	"Default creation priority for UML diagram nodes (lower value renders first)."
 	^ 10
@@ -189,6 +219,19 @@ OPUmlElementViewModel >> findParentViewModel [
 	^ self registry projectViewModel
 ]
 
+{ #category : 'testing' }
+OPUmlElementViewModel >> isSystemElement [
+	| currentViewModel |
+	currentViewModel := self.
+	[ currentViewModel isNotNil ] whileTrue: [
+		((currentViewModel model respondsTo: #oclIsKindOf:)
+			and: [ (currentViewModel model oclIsKindOf: #Package)
+			and: [ currentViewModel model name = OPUmlCommonTypesFactory commonTypesPackageName ] ])
+				ifTrue: [ ^ true ].
+		currentViewModel := currentViewModel parentViewModel ].
+	^ false
+]
+
 { #category : 'printing' }
 OPUmlElementViewModel >> modelDisplayStringOn: aStream [
 
@@ -234,6 +277,13 @@ OPUmlElementViewModel >> parentPackageViewModel [
 	^ self parentViewModel ifNotNil: [ :parent |
 			  parent = self registry projectViewModel ifFalse: [
 				  parent packageViewModel ] ]
+]
+
+{ #category : 'registering' }
+OPUmlElementViewModel >> registerModelIn: aParentModel [
+	(aParentModel respondsTo: #packagedElements)
+		ifTrue: [ ^ aParentModel packagedElements add: self model ].
+	super registerModelIn: aParentModel
 ]
 
 { #category : 'stereotypes' }

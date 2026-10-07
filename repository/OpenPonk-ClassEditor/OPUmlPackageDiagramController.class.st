@@ -75,6 +75,12 @@ OPUmlPackageDiagramController >> descriptionGeneralizationSets [
 	^ self viewModel descriptionGeneralizationSets
 ]
 
+{ #category : 'testing' }
+OPUmlPackageDiagramController >> hasSupportForModel: aModel [
+	(self isSystemModel: aModel) ifTrue: [ ^ false ].
+	^ super hasSupportForModel: aModel
+]
+
 { #category : 'palette' }
 OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 	aPalette newSeparator.
@@ -190,6 +196,17 @@ OPUmlPackageDiagramController >> initializeProfilesPalette: aPalette [
 
 	self model profileApplications do: [ :each |
 		self initializeProfile: each appliedProfile palette: aPalette ]
+]
+
+{ #category : 'testing' }
+OPUmlPackageDiagramController >> isSystemModel: aModel [
+	aModel ifNil: [ ^ false ].
+	((aModel respondsTo: #name) and: [ aModel name = OPUmlCommonTypesFactory commonTypesPackageName ])
+		ifTrue: [ ^ true ].
+	self viewModel ifNotNil: [ :activeViewModel |
+		(activeViewModel registry hasViewModelFor: aModel) ifTrue: [
+			^ (activeViewModel registry viewModelFor: aModel) isSystemElement ] ].
+	^ false
 ]
 
 { #category : 'destruction' }

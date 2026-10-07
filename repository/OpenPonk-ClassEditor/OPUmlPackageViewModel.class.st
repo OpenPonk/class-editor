@@ -38,15 +38,16 @@ OPUmlPackageViewModel >> allPackagesIn: aPackage [
 
 { #category : 'enumerating' }
 OPUmlPackageViewModel >> allTypeElements [
-
-	| packagedElements |
+	| packagedElements nestedPackages types |
 	packagedElements := self model packagedElements.
-	^ (packagedElements select: [ :each | each oclIsKindOf: #Type ])
-	  , packagedElements flatCollectAsSet: [ :each |
-		  (self registry viewModelFor: each) allTypeElements ]
+	types := (packagedElements select: [ :each | each oclIsKindOf: #Type ]) asSet.
+	nestedPackages := packagedElements select: [ :each | each oclIsKindOf: #Package ].
+	nestedPackages do: [ :eachPackage |
+		types addAll: (self registry viewModelFor: eachPackage) allTypeElements ].
+	^ types
 ]
 
-{ #category : 'removing' }
+{ #category : 'private' }
 OPUmlPackageViewModel >> basicRemoveModel [
 	self parentPackageViewModel
 		ifNotNil: [ :packageViewModel |
@@ -192,7 +193,7 @@ OPUmlPackageViewModel >> packageViewModel [
 	^ self
 ]
 
-{ #category : 'construction' }
+{ #category : 'registration' }
 OPUmlPackageViewModel >> registerModelIn: aParentModel [
 	(aParentModel respondsTo: #packagedElements)
 		ifTrue: [ aParentModel packagedElements add: self model ]
