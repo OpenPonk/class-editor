@@ -176,6 +176,18 @@ OPUmlPackageViewModel >> essentialChildrenModels [
 OPUmlPackageViewModel >> icon [ ^ OPUmlIcons packageIcon
 ]
 
+{ #category : 'testing' }
+OPUmlPackageViewModel >> isSystemElement [
+	self model name = OPUmlCommonTypesFactory commonTypesPackageName
+		ifFalse: [ ^ false ].
+	self model packagedElements ifEmpty: [ ^ false ].
+	(self model packagedElements allSatisfy: [ :eachModelElement |
+		eachModelElement oclIsTypeOf: #DataType ])
+			ifFalse: [ ^ false ].
+	^ self model packagedElements anySatisfy: [ :eachModelElement |
+		OPUmlCommonTypesFactory typeNames includes: eachModelElement name ]
+]
+
 { #category : 'actions' }
 OPUmlPackageViewModel >> openEditorWithApplication: anApplication undoManager: anUndoManager [
 	| editor |

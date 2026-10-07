@@ -66,3 +66,25 @@ OPCommonTypesReadOnlyTest >> testCommonTypesHasNoSupportInDiagramController [
 	self deny: (diagramController allModelElementsWithPossibleController includes: commonPackage)
 		description: 'CommonTypes package must not appear in allModelElementsWithPossibleController'
 ]
+
+{ #category : 'tests' }
+OPCommonTypesReadOnlyTest >> testUserPackageNamedCommonTypesWithEnumerationIsSupportedInDiagram [
+	| userPackage enumeration userPackageViewModel enumerationViewModel |
+	userPackage := OPUMLPackage new name: 'CommonTypes'.
+	enumeration := OPUMLEnumeration new name: 'CustomerStatus'.
+	userPackage packagedElements add: enumeration.
+	package packagedElements add: userPackage.
+
+	userPackageViewModel := projectController viewModelRegistry viewModelFor: userPackage.
+	enumerationViewModel := projectController viewModelRegistry viewModelFor: enumeration.
+
+	self deny: userPackageViewModel isSystemElement
+		description: 'User package named CommonTypes containing non-standard types must not be treated as system element'.
+	self deny: enumerationViewModel isSystemElement
+		description: 'Enumeration inside user package must not be treated as system element'.
+
+	self assert: (diagramController hasSupportForModel: userPackage)
+		description: 'User package named CommonTypes must be supported in diagram controller'.
+	self assert: (diagramController hasSupportForModel: enumeration)
+		description: 'Enumeration inside user package must be supported in diagram controller'
+]

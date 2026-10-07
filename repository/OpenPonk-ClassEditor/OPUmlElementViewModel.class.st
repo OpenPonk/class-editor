@@ -219,19 +219,6 @@ OPUmlElementViewModel >> findParentViewModel [
 	^ self registry projectViewModel
 ]
 
-{ #category : 'testing' }
-OPUmlElementViewModel >> isSystemElement [
-	| currentViewModel |
-	currentViewModel := self.
-	[ currentViewModel isNotNil ] whileTrue: [
-		((currentViewModel model respondsTo: #oclIsKindOf:)
-			and: [ (currentViewModel model oclIsKindOf: #Package)
-			and: [ currentViewModel model name = OPUmlCommonTypesFactory commonTypesPackageName ] ])
-				ifTrue: [ ^ true ].
-		currentViewModel := currentViewModel parentViewModel ].
-	^ false
-]
-
 { #category : 'printing' }
 OPUmlElementViewModel >> modelDisplayStringOn: aStream [
 
