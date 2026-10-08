@@ -145,63 +145,38 @@ OPUmlClassPropertyViewModel >> descriptionMultiplicity [
 		  yourself
 ]
 
-{ #category : 'magritte-descriptions' }
+{ #category : 'forms' }
 OPUmlClassPropertyViewModel >> descriptionType [
+
 	<magritteDescription>
-	| description writeBlock completion isAssociationEnd |
+	| description writeBlock isAssociationEnd |
 	description := MAStringDescription new.
 
-	isAssociationEnd := self model isNotNil and: [
-		(self model respondsTo: #association) and: [ self model association isNotNil ] ].
+	isAssociationEnd := self model isNotNil and: [ (self model respondsTo: #association) and: [ self model association isNotNil ] ].
 
 	writeBlock := isAssociationEnd
-		ifTrue: [
-			description beReadOnly.
-			[ :me :newValue | ] ]
-		ifFalse: [
-			[ :me :newValue |
-			me model ifNotNil: [ :targetModel |
-				newValue
-					ifEmpty: [ targetModel type: nil ]
-					ifNotEmpty: [ targetModel type: (self typeNamed: newValue) ].
-				self modelRootViewModel ifNotNil: [ :rootViewModel |
-					rootViewModel model ifNotNil: [ :rootModel |
-						OPUmlCommonTypesFactory removeUnusedTypesFrom: rootModel ] ].
-				self modelChanged ] ] ].
+		              ifTrue: [
+				              description beReadOnly.
+				              [ :me :newValue |  ] ]
+		              ifFalse: [
+				              [ :me :newValue |
+					              me model ifNotNil: [ :targetModel |
+							              newValue ifEmpty: [ targetModel type: nil ] ifNotEmpty: [ targetModel type: (self typeNamed: newValue) ].
+							              self modelRootViewModel ifNotNil: [ :rootViewModel |
+								              rootViewModel model ifNotNil: [ :rootModel | OPUmlCommonTypesFactory removeUnusedTypesFrom: rootModel ] ].
+							              self modelChanged ] ] ].
 
 	description
 		accessor: (MAPluggableAccessor
-			read: [ :me |
-				(me model isNotNil and: [ me model type isNotNil ])
-					ifTrue: [ me model type name ]
-					ifFalse: [ '' ] ]
-			write: writeBlock);
+				 read: [ :me |
+						 (me model isNotNil and: [ me model type isNotNil ])
+							 ifTrue: [ me model type name ]
+							 ifFalse: [ '' ] ]
+				 write: writeBlock);
 		label: 'Type';
 		priority: 5.
 
-	completion := EntryCompletion new.
-	completion dataSourceBlock: [ :currText |
-		| token allNames prefixMatches substringMatches combinedMatches |
-		token := currText asString trimBoth.
-		token ifEmpty: [ #() ] ifNotEmpty: [
-			allNames := self availableTypeNames.
-			prefixMatches := (allNames select: [ :each |
-				each beginsWith: token caseSensitive: false ]) asSortedCollection asArray.
-			substringMatches := (allNames select: [ :each |
-				(each includesSubstring: token caseSensitive: false)
-					and: [ (prefixMatches includes: each) not ] ]) asSortedCollection asArray.
-			combinedMatches := prefixMatches , substringMatches.
-			combinedMatches first: (combinedMatches size min: 30) ] ].
-
-	completion filterBlock: [ :candidate :token |
-		| cleanToken isTemporaryCandidate |
-		cleanToken := token asString trimBoth.
-		cleanToken isNotEmpty and: [
-			isTemporaryCandidate := (candidate = cleanToken) and: [ (self establishedTypeNames includes: candidate) not ].
-			isTemporaryCandidate not and: [
-				candidate includesSubstring: cleanToken caseSensitive: false ] ] ].
-
-	description propertyAt: #entryCompletion put: completion.
+	description propertyAt: #entryCompletion put: self typeCompletion.
 	^ description
 ]
 
@@ -266,6 +241,34 @@ OPUmlClassPropertyViewModel >> registerModelIn: aParentModel [
 				ifFalse: [ aParentModel memberEnds add: self model ].
 			^ self ].
 	AssertionFailure signal: 'Unsupported parent model: ' , aParentModel printString
+]
+
+{ #category : 'forms' }
+OPUmlClassPropertyViewModel >> typeCompletion [
+
+	| completion |
+	completion := EntryCompletion new.
+
+	completion dataSourceBlock: [ :currText |
+			| token allNames prefixMatches substringMatches combinedMatches |
+			token := currText asString trimBoth.
+			token ifEmpty: [ #(  ) ] ifNotEmpty: [
+					allNames := self availableTypeNames.
+					prefixMatches := (allNames select: [ :each | each beginsWith: token caseSensitive: false ]) asSortedCollection asArray.
+					substringMatches := (allNames select: [ :each |
+						                     (each includesSubstring: token caseSensitive: false) and: [ (prefixMatches includes: each) not ] ])
+						                    asSortedCollection asArray.
+					combinedMatches := prefixMatches , substringMatches.
+					combinedMatches first: (combinedMatches size min: 30) ] ].
+
+	completion filterBlock: [ :candidate :token |
+			| cleanToken isTemporaryCandidate |
+			cleanToken := token asString trimBoth.
+			cleanToken isNotEmpty and: [
+					isTemporaryCandidate := candidate = cleanToken and: [ (self establishedTypeNames includes: candidate) not ].
+					isTemporaryCandidate not and: [ candidate includesSubstring: cleanToken caseSensitive: false ] ] ].
+
+	^ completion
 ]
 
 { #category : 'accessing' }
