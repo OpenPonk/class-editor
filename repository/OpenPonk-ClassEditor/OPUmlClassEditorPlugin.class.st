@@ -191,6 +191,14 @@ OPUmlClassEditorPlugin >> name [
 	^ 'UML Class Editor'
 ]
 
+{ #category : 'instance creation' }
+OPUmlClassEditorPlugin >> newModel [
+	| model |
+	model := super newModel.
+	model packagedElements add: OPUmlCommonTypesFactory new commonTypesPackage.
+	^ model
+]
+
 { #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsHidingElements [
 	^ true

@@ -10,6 +10,54 @@ Class {
 }
 
 { #category : 'tests' }
+OPUmlPackageViewModelTest >> testAllTypeElementsWithGeneralizationSet [
+	| project package genSet types packageViewModel registry |
+	project := OPProject new.
+	package := OPUMLPackage new.
+	package name: 'RootPackage'.
+	project addModel: package.
+
+	genSet := OPUMLGeneralizationSet new.
+	genSet name: 'PowerTypeSet'.
+	package packagedElements add: genSet.
+
+	registry := OPViewModelRegistry forProject: project.
+	packageViewModel := registry viewModelFor: package.
+
+	types := packageViewModel allTypeElements.
+	self assert: types isEmpty
+]
+
+{ #category : 'tests' }
+OPUmlPackageViewModelTest >> testAllTypeElementsWithNestedPackageAndTypes [
+	| project rootPackage subPackage classA classB genSet types packageViewModel registry |
+	project := OPProject new.
+	rootPackage := OPUMLPackage new.
+	rootPackage name: 'RootPackage'.
+	project addModel: rootPackage.
+
+	classA := OPUMLClass new.
+	classA name: 'ClassA'.
+	rootPackage packagedElements add: classA.
+
+	subPackage := OPUMLPackage new.
+	subPackage name: 'SubPackage'.
+	classB := OPUMLClass new.
+	classB name: 'ClassB'.
+	genSet := OPUMLGeneralizationSet new.
+	genSet name: 'PowerTypeSet'.
+	subPackage packagedElements add: classB.
+	subPackage packagedElements add: genSet.
+	rootPackage packagedElements add: subPackage.
+
+	registry := OPViewModelRegistry forProject: project.
+	packageViewModel := registry viewModelFor: rootPackage.
+
+	types := packageViewModel allTypeElements.
+	self assertCollection: types hasSameElements: { classA . classB }
+]
+
+{ #category : 'tests' }
 OPUmlPackageViewModelTest >> testDescriptionGeneralizationSets [
 	"Verifies that descriptionGeneralizationSets provides read-only to-many description with correct label"
 	| umlPackage packageViewModel description |

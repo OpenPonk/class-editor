@@ -16,6 +16,20 @@ Class {
 OPUmlClassPropertyViewModel class >> modelClass [ ^ OPUMLProperty
 ]
 
+{ #category : 'accessing' }
+OPUmlClassPropertyViewModel >> availableTypeNames [
+	| names |
+	names := Set new.
+	(Smalltalk globals at: #OPUMLXMISpecsStorage ifPresent: [ :storage |
+		names addAll: storage primitivesMap keys ]).
+	(self respondsTo: #establishedTypeNames) ifTrue: [
+		names addAll: self establishedTypeNames ].
+	self modelRootViewModel ifNotNil: [ :rootViewModel |
+		(rootViewModel respondsTo: #allTypeElements) ifTrue: [
+			names addAll: (rootViewModel allTypeElements collect: #name thenSelect: #isNotNil) ] ].
+	^ (names asArray sorted: [ :a :b | a <= b ])
+]
+
 { #category : 'removing' }
 OPUmlClassPropertyViewModel >> basicRemoveModel [
 	savedAssociation := self model association.
@@ -135,35 +149,61 @@ OPUmlClassPropertyViewModel >> descriptionMultiplicity [
 OPUmlClassPropertyViewModel >> descriptionType [
 
 	<magritteDescription>
-	| description writeBlock |
+	| description writeBlock isAssociationEnd |
 	description := MAStringDescription new.
-	writeBlock := self model association
-		              ifNotNil: [
-			              description beReadOnly.
-			              [ :me :newValue |  ] ]
-		              ifNil: [
-			              [ :me :newValue |
-			              newValue
-				              ifEmpty: [ me model type: nil ]
-				              ifNotEmpty: [
-				              me model type: (self typeNamed: newValue) ].
-			              self modelChanged ] ].
+
+	isAssociationEnd := self model isNotNil and: [ (self model respondsTo: #association) and: [ self model association isNotNil ] ].
+
+	writeBlock := isAssociationEnd
+		              ifTrue: [
+				              description beReadOnly.
+				              [ :me :newValue |  ] ]
+		              ifFalse: [
+				              [ :me :newValue |
+					              me model ifNotNil: [ :targetModel |
+							              newValue ifEmpty: [ targetModel type: nil ] ifNotEmpty: [ targetModel type: (self typeNamed: newValue) ].
+							              self modelRootViewModel ifNotNil: [ :rootViewModel |
+								              rootViewModel model ifNotNil: [ :rootModel | OPUmlCommonTypesFactory removeUnusedTypesFrom: rootModel ] ].
+							              self modelChanged ] ] ].
+
 	description
 		accessor: (MAPluggableAccessor
 				 read: [ :me |
-					 me model type ifNil: [ '' ] ifNotNil: [ :type | type name ] ]
+						 (me model isNotNil and: [ me model type isNotNil ])
+							 ifTrue: [ me model type name ]
+							 ifFalse: [ '' ] ]
 				 write: writeBlock);
 		label: 'Type';
 		priority: 5.
+
+	description propertyAt: #entryCompletion put: self typeCompletion.
 	^ description
 ]
 
 { #category : 'accessing' }
+OPUmlClassPropertyViewModel >> establishedTypeNames [
+	| names rootModel |
+	names := Set new.
+	names addAll: OPUMLXMISpecsStorage primitivesMap keys.
+	names addAll: OPUmlCommonTypesFactory typeNames.
+	self modelRootViewModel ifNotNil: [ :rootViewModel |
+		rootModel := rootViewModel model.
+		rootModel ifNotNil: [
+			(rootModel respondsTo: #packagedElements) ifTrue: [
+				rootModel packagedElements do: [ :each |
+					(each oclIsKindOf: #Class) ifTrue: [ names add: each name ].
+					(each oclIsKindOf: #Enumeration) ifTrue: [ names add: each name ] ] ] ] ].
+	^ names
+]
+
+{ #category : 'accessing' }
 OPUmlClassPropertyViewModel >> findParentViewModel [
-    self model owningClass ifNotNil: [ :m | ^ self registry viewModelFor: m ].
-    self model owningAssociation ifNotNil: [ :m | ^ self registry viewModelFor: m ].
-    self model datatype ifNotNil: [ :m | ^ self registry viewModelFor: m ].
-    ^ super findParentViewModel
+	self registry ifNil: [ ^ nil ].
+	self model ifNil: [ ^ nil ].
+	self model owningClass ifNotNil: [ :m | ^ self registry viewModelFor: m ].
+	self model owningAssociation ifNotNil: [ :m | ^ self registry viewModelFor: m ].
+	self model datatype ifNotNil: [ :m | ^ self registry viewModelFor: m ].
+	^ super findParentViewModel
 ]
 
 { #category : 'accessing' }
@@ -204,15 +244,61 @@ OPUmlClassPropertyViewModel >> registerModelIn: aParentModel [
 ]
 
 { #category : 'forms' }
-OPUmlClassPropertyViewModel >> typeNamed: aName [
+OPUmlClassPropertyViewModel >> typeCompletion [
 
+	| completion |
+	completion := EntryCompletion new.
+
+	completion dataSourceBlock: [ :currText |
+			| token allNames prefixMatches substringMatches combinedMatches |
+			token := currText asString trimBoth.
+			token ifEmpty: [ #(  ) ] ifNotEmpty: [
+					allNames := self availableTypeNames.
+					prefixMatches := (allNames select: [ :each | each beginsWith: token caseSensitive: false ]) asSortedCollection asArray.
+					substringMatches := (allNames select: [ :each |
+						                     (each includesSubstring: token caseSensitive: false) and: [ (prefixMatches includes: each) not ] ])
+						                    asSortedCollection asArray.
+					combinedMatches := prefixMatches , substringMatches.
+					combinedMatches first: (combinedMatches size min: 30) ] ].
+
+	completion filterBlock: [ :candidate :token |
+			| cleanToken isTemporaryCandidate |
+			cleanToken := token asString trimBoth.
+			cleanToken isNotEmpty and: [
+					isTemporaryCandidate := candidate = cleanToken and: [ (self establishedTypeNames includes: candidate) not ].
+					isTemporaryCandidate not and: [ candidate includesSubstring: cleanToken caseSensitive: false ] ] ].
+
+	^ completion
+]
+
+{ #category : 'accessing' }
+OPUmlClassPropertyViewModel >> typeNamed: aName [
+	| rootModel commonTypesPackage newDataType |
 	OPUMLXMISpecsStorage primitivesMap
 		at: aName
-		ifPresent: [ :prim | ^ prim ].
+		ifPresent: [ :primitiveType | ^ primitiveType ].
 	self modelRootViewModel allTypeElements
 		detect: [ :each | each name = aName ]
-		ifFound: [ :type | ^ type ].
-	^ OPUMLClass new name: aName
+		ifFound: [ :foundType | ^ foundType ].
+	rootModel := self modelRootViewModel ifNotNil: [ :viewModel | viewModel model ].
+	(rootModel isNotNil and: [ rootModel respondsTo: #packagedElements ]) ifTrue: [
+		commonTypesPackage := rootModel packagedElements
+			detect: [ :each | (each oclIsKindOf: #Package) and: [ each name = OPUmlCommonTypesFactory commonTypesPackageName ] ]
+			ifNone: [
+				| createdPackage |
+				createdPackage := OPUmlCommonTypesFactory new commonTypesPackage.
+				rootModel packagedElements add: createdPackage.
+				createdPackage ].
+		commonTypesPackage packagedElements
+			detect: [ :each | each name = aName ]
+			ifFound: [ :existingType | ^ existingType ].
+		newDataType := OPUMLDataType new.
+		newDataType name: aName.
+		commonTypesPackage packagedElements add: newDataType.
+		^ newDataType ].
+	newDataType := OPUMLDataType new.
+	newDataType name: aName.
+	^ newDataType
 ]
 
 { #category : 'validation' }

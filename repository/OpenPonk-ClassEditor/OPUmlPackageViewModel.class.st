@@ -38,15 +38,16 @@ OPUmlPackageViewModel >> allPackagesIn: aPackage [
 
 { #category : 'enumerating' }
 OPUmlPackageViewModel >> allTypeElements [
-
-	| packagedElements |
+	| packagedElements nestedPackages types |
 	packagedElements := self model packagedElements.
-	^ (packagedElements select: [ :each | each oclIsKindOf: #Type ])
-	  , packagedElements flatCollectAsSet: [ :each |
-		  (self registry viewModelFor: each) allTypeElements ]
+	types := (packagedElements select: [ :each | each oclIsKindOf: #Type ]) asSet.
+	nestedPackages := packagedElements select: [ :each | each oclIsKindOf: #Package ].
+	nestedPackages do: [ :eachPackage |
+		types addAll: (self registry viewModelFor: eachPackage) allTypeElements ].
+	^ types
 ]
 
-{ #category : 'removing' }
+{ #category : 'private' }
 OPUmlPackageViewModel >> basicRemoveModel [
 	self parentPackageViewModel
 		ifNotNil: [ :packageViewModel |
@@ -175,6 +176,18 @@ OPUmlPackageViewModel >> essentialChildrenModels [
 OPUmlPackageViewModel >> icon [ ^ OPUmlIcons packageIcon
 ]
 
+{ #category : 'testing' }
+OPUmlPackageViewModel >> isSystemElement [
+	self model name = OPUmlCommonTypesFactory commonTypesPackageName
+		ifFalse: [ ^ false ].
+	self model packagedElements ifEmpty: [ ^ false ].
+	(self model packagedElements allSatisfy: [ :eachModelElement |
+		eachModelElement oclIsTypeOf: #DataType ])
+			ifFalse: [ ^ false ].
+	^ self model packagedElements anySatisfy: [ :eachModelElement |
+		OPUmlCommonTypesFactory typeNames includes: eachModelElement name ]
+]
+
 { #category : 'actions' }
 OPUmlPackageViewModel >> openEditorWithApplication: anApplication undoManager: anUndoManager [
 	| editor |
@@ -192,7 +205,7 @@ OPUmlPackageViewModel >> packageViewModel [
 	^ self
 ]
 
-{ #category : 'construction' }
+{ #category : 'registration' }
 OPUmlPackageViewModel >> registerModelIn: aParentModel [
 	(aParentModel respondsTo: #packagedElements)
 		ifTrue: [ aParentModel packagedElements add: self model ]

@@ -37,3 +37,26 @@ OPUmlClassEditorPluginTest >> testModelClass [
 OPUmlClassEditorPluginTest >> testName [
 	self assert: plugin name equals: 'UML Class Editor'
 ]
+
+{ #category : 'tests' }
+OPUmlClassEditorPluginTest >> testNewModelContainsCommonTypesPackage [
+	| plugin model commonTypesPkg expectedTypeNames foundTypeNames |
+	plugin := OPUmlClassEditorPlugin new.
+	model := plugin newModel.
+	commonTypesPkg := model packagedElements
+		detect: [ :each | (each oclIsKindOf: #Package) and: [ each name = 'CommonTypes' ] ]
+		ifNone: [ nil ].
+	self assert: commonTypesPkg isNotNil description: 'Model must contain CommonTypes package'.
+	expectedTypeNames := #(
+		'Date' 'DateTime' 'DateAndTime' 'Time' 'Timestamp' 'Duration'
+		'Decimal' 'Float' 'Double' 'Long' 'Number'
+		'Char' 'Text' 'Clob'
+		'Byte' 'ByteArray' 'Blob'
+		'UUID' 'URI' 'URL' 'Email'
+		'JSON' 'XML'
+	).
+	foundTypeNames := (commonTypesPkg packagedElements
+		select: [ :each | each oclIsKindOf: #DataType ]
+		thenCollect: #name) asSet.
+	self assertCollection: foundTypeNames includesAll: expectedTypeNames
+]
