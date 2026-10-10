@@ -22,7 +22,7 @@ OPUmlClassEditorPlugin class >> exportPackage: aPackage [
 		ifFalse: [ nil ].
 	(baseName isNil or: [ baseName trimBoth isEmpty ]) ifTrue: [ baseName := 'export' ].
 	OPExportFileDialog
-		exportBlock: [ OPUmlModelSerializer new serializeModel: aPackage ]
+		exportBlock: [ OPUmlModelWithAltSpecURIsSerializer new serializeModel: aPackage ]
 		defaultFileName: (FileNameSanitizer sanitize: baseName trimBoth) , '.xmi'
 		extensions: #( xmi xml uml )
 		named: 'XMI files'
@@ -183,7 +183,7 @@ OPUmlClassEditorPlugin >> modelClass [
 
 { #category : 'accessing' }
 OPUmlClassEditorPlugin >> modelSerializerClass [
-	^ OPUmlModelSerializer
+	^ OPUmlModelWithAltSpecURIsSerializer
 ]
 
 { #category : 'accessing' }

@@ -16,7 +16,7 @@ OPUmlModelSerializerTest >> newModel [
 
 { #category : 'accessing' }
 OPUmlModelSerializerTest >> serializerClass [
-	^ OPUmlModelSerializer
+	^ OPUmlModelWithAltSpecURIsSerializer
 ]
 
 { #category : 'tests' }
