@@ -30,32 +30,21 @@ OPUmlStereotypeDescriptions >> accessorFor: anAttribute of: aStereotype [
 			aViewModel modelChanged ]
 ]
 
-{ #category : 'adding' }
+{ #category : 'private' }
 OPUmlStereotypeDescriptions >> addTo: aCollection attribute: anAttribute of: aStereotype [
-	anAttribute type name = #Boolean ifTrue: [
-		aCollection add:
-			(MABooleanDescription new
-				accessor: (self accessorFor: anAttribute of: aStereotype);
-				label: 'Is ' , anAttribute name capitalized;
-				priority: 5;
-				yourself) ].
-	anAttribute type name = #String ifTrue: [
-		aCollection add:
-			(MAStringDescription new
-				accessor: (self accessorFor: anAttribute of: aStereotype);
-				label: anAttribute name capitalized;
-				priority: 5;
-				yourself) ]
-]
 
-{ #category : 'accessing' }
-OPUmlStereotypeDescriptions >> controller [
-	^ controller
-]
-
-{ #category : 'accessing' }
-OPUmlStereotypeDescriptions >> controller: anObject [
-	controller := anObject
+	| typeMapping uiName descriptionType |
+	typeMapping := {
+		               (#Boolean -> MABooleanDescription).
+		               (#String -> MAStringDescription) } asDictionary.
+	descriptionType := typeMapping at: anAttribute type name ifAbsent: [ ^ self ].
+	uiName := (anAttribute name splitCamelCase collect: [ :each | each capitalized ]) joinUsing: ' '.
+	anAttribute type name = #Boolean ifTrue: [ uiName := 'Is ' , uiName ].
+	aCollection add: (descriptionType new
+			 accessor: (self accessorFor: anAttribute of: aStereotype);
+			 label: uiName capitalized;
+			 priority: 5;
+			 yourself)
 ]
 
 { #category : 'accessing' }

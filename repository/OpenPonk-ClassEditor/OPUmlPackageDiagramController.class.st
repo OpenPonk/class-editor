@@ -139,42 +139,49 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 
 { #category : 'palette' }
 OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
+
 	| stereotypes elements relationships isForRelationship isForClass |
-	stereotypes := (aProfile ownedStereotype reject: #isAbstract)
-		sorted: [ :stereotypeA :stereotypeB | stereotypeA name < stereotypeB name ].
+	stereotypes := (aProfile ownedStereotype reject: #isAbstract) sorted: [ :stereotypeA :stereotypeB |
+		               stereotypeA name < stereotypeB name ].
 	isForRelationship := [ :attr |
-		(OPUMLXMISpecsStorage metaClassNamed: attr type name) allParents anySatisfy: [ :parentMetaClass |
-			parentMetaClass name = 'Relationship' ] ].
+		                     (OPUMLXMISpecsStorage metaClassNamed: attr type name) allParents anySatisfy: [ :parentMetaClass |
+			                     parentMetaClass name = 'Relationship' ] ].
 	isForClass := [ :attr |
-		| metaclassObj |
-		metaclassObj := OPUMLXMISpecsStorage metaClassNamed: attr type name.
-		metaclassObj name = 'Class' or: [
-			metaclassObj allParents anySatisfy: [ :parentClass | parentClass name = 'Class' ] ] ].
+		              | metaclassObj |
+		              metaclassObj := OPUMLXMISpecsStorage metaClassNamed: attr type name.
+		              metaclassObj name = 'Class' or: [
+			              metaclassObj allParents anySatisfy: [ :parentClass | parentClass name = 'Class' ] ] ].
 	elements := stereotypes select: [ :eachStereotype |
-		eachStereotype allAttributes anySatisfy: [ :attributeProp |
-			(attributeProp name beginsWith: 'base_') and: [ isForClass value: attributeProp ] ] ].
+			            eachStereotype allAttributes anySatisfy: [ :attributeProp |
+				            (attributeProp name beginsWith: 'base_') and: [ isForClass value: attributeProp ] ] ].
 	relationships := stereotypes select: [ :eachStereotype |
-		eachStereotype allAttributes anySatisfy: [ :attributeProp |
-			(attributeProp name beginsWith: 'base_') and: [ isForRelationship value: attributeProp ] ] ].
+			                 eachStereotype allAttributes anySatisfy: [ :attributeProp |
+				                 (attributeProp name beginsWith: 'base_') and: [ isForRelationship value: attributeProp ] ] ].
 	elements ifNotEmpty: [ aPalette newSeparator ].
 	elements do: [ :stereotypeElement |
-		(aPalette newCreationEntry: [ OPUmlClassController new ])
-			label: stereotypeElement name;
-			icon: OPUmlIcons classIcon;
-			whenCreated: [ :classCtrl |
-				classCtrl model applyStereotype: stereotypeElement implementationClass new.
-				classCtrl model name: stereotypeElement name.
-				classCtrl modelChanged.
-				classCtrl diagramController ifNotNil: [ :diagramCtrl |
-					diagramCtrl form ifNotNil: #focusFirstInput ] ] ].
+			(aPalette newCreationEntry: [ OPUmlClassController new ])
+				label: stereotypeElement name;
+				icon: OPUmlIcons classIcon;
+				whenCreated: [ :classCtrl |
+						classCtrl viewModel
+							ifNotNil: [ :vm |
+									vm applyStereotype: stereotypeElement to: classCtrl model.
+									classCtrl model name: stereotypeElement name ]
+							ifNil: [
+									classCtrl model applyStereotype: stereotypeElement implementationClass new.
+									classCtrl model name: stereotypeElement name ].
+						classCtrl modelChanged.
+						classCtrl diagramController ifNotNil: [ :diagramCtrl | diagramCtrl form ifNotNil: [ :theForm | theForm focusFirstInput ] ] ] ].
 	relationships ifNotEmpty: [ aPalette newSeparator ].
 	relationships do: [ :stereotypeRelation |
-		(aPalette newConnectionCreationEntry: [ OPUmlAssociationController new ])
-			label: stereotypeRelation name;
-			icon: OPUmlIcons directedAssociationIcon;
-			whenCreated: [ :assocCtrl |
-				assocCtrl model applyStereotype: stereotypeRelation implementationClass new.
-				assocCtrl modelChanged ] ]
+			(aPalette newConnectionCreationEntry: [ OPUmlAssociationController new ])
+				label: stereotypeRelation name;
+				icon: OPUmlIcons directedAssociationIcon;
+				whenCreated: [ :assocCtrl |
+						assocCtrl viewModel
+							ifNotNil: [ :vm | vm applyStereotype: stereotypeRelation to: assocCtrl model ]
+							ifNil: [ assocCtrl model applyStereotype: stereotypeRelation implementationClass new ].
+						assocCtrl modelChanged ] ]
 ]
 
 { #category : 'palette' }

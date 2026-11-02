@@ -33,11 +33,17 @@ OPUmlElementViewModel >> allTypeElements [
 
 { #category : 'stereotypes' }
 OPUmlElementViewModel >> applyStereotype: aStereotypeModel to: aModel [
+	| stereotypeInstance |
 	(aModel appliedStereotypes
 		anySatisfy: [ :each | each umlClassName = aStereotypeModel umlClassName ])
 		ifTrue: [ ^ self ].
-	self removeStereotypesIn: aModel.
-	aModel applyStereotype: aStereotypeModel implementationClass new
+	[ aModel appliedStereotypes isNotEmpty ]
+		whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ].
+	stereotypeInstance := (aStereotypeModel respondsTo: #implementationClass)
+		ifTrue: [ aStereotypeModel implementationClass new ]
+		ifFalse: [ aStereotypeModel ].
+	aModel applyStereotype: stereotypeInstance.
+	self announcer announce: OPElementFormNeedsRebuild new
 ]
 
 { #category : 'accessing' }
@@ -135,36 +141,34 @@ OPUmlElementViewModel >> descriptionStereotypeAttributes [
 
 { #category : 'forms' }
 OPUmlElementViewModel >> descriptionStereotypeContent [
-
 	| names stereotypes |
 	stereotypes := self modelRootViewModel model profileApplications
-		               ifEmpty: [ ^ nil ]
-		               ifNotEmpty: [ :applications |
-				               applications flatCollect: [ :each |
-					               self
-						               stereotypesIn: each appliedProfile
-						               for: self model ] ].
+		ifEmpty: [ ^ nil ]
+		ifNotEmpty: [ :applications |
+			applications flatCollect: [ :each |
+				self
+					stereotypesIn: each appliedProfile
+					for: self model ] ].
 	names := stereotypes asArray collect: [ :each |
-		         each name -> each name ].
+		each name -> each name ].
 	^ MASingleOptionDescription new
-		  optionsAndLabels: { (nil -> '') } , names;
-		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-						   me model appliedStereotypes
-							   ifEmpty: [ nil ]
-							   ifNotEmpty: [ :col | col first umlClassName ] ]
-				   write: [ :me :newValue |
-						   newValue
-							   ifNil: [ self removeStereotypesIn: me model ]
-							   ifNotNil: [
-									   self
-										   applyStereotype:
-											   (stereotypes detect: [ :each | each name = newValue ])
-										   to: me model ].
-						   me modelChanged ]);
-		  label: 'Stereotype';
-		  priority: 4;
-		  yourself
+		optionsAndLabels: { (nil -> '') } , names;
+		accessor: (MAPluggableAccessor
+			read: [ :me |
+				me model appliedStereotypes
+					ifEmpty: [ nil ]
+					ifNotEmpty: [ :col | col first umlClassName ] ]
+			write: [ :me :newValue |
+				newValue
+					ifNil: [ me removeStereotypesIn: me model ]
+					ifNotNil: [
+						me
+							applyStereotype:
+								(stereotypes detect: [ :each | each name = newValue ])
+							to: me model ] ]);
+		label: 'Stereotype';
+		priority: 4;
+		yourself
 ]
 
 { #category : 'forms' }
@@ -275,8 +279,10 @@ OPUmlElementViewModel >> registerModelIn: aParentModel [
 
 { #category : 'stereotypes' }
 OPUmlElementViewModel >> removeStereotypesIn: aModel [
+	aModel appliedStereotypes ifEmpty: [ ^ self ].
 	[ aModel appliedStereotypes isNotEmpty ]
-		whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ]
+		whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ].
+	self announcer announce: OPElementFormNeedsRebuild new
 ]
 
 { #category : 'stereotypes' }

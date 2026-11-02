@@ -212,6 +212,6 @@ OPUmlClassEditorPlugin >> supportsMergingModels [
 { #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsProfilesOf: aModel [
 
-	^ aModel profileApplications allSatisfy: [ :each | 
-		  self defaultProfiles includes: each appliedProfile ]
+	^ aModel profileApplications allSatisfy: [ :each |
+		  self defaultProfiles anySatisfy: [ :any | any == each appliedProfile or: [ any URI = each appliedProfile URI ] ] ]
 ]
