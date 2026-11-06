@@ -27,7 +27,6 @@ OPUmlEditorWorkbenchTest >> createAndOpenEmptyEditor [
 	project name: 'Click Project'.
 	project addModel: model.
 	workbench := OPWorkbench new.
-	window := workbench open.
 	workbench openProject: project.
 	editor := (workbench instVarNamed: #editors) values first at: #editor.
 	view := editor canvasPresenter canvas.
@@ -43,7 +42,7 @@ OPUmlEditorWorkbenchTest >> setUp [
 { #category : 'running' }
 OPUmlEditorWorkbenchTest >> tearDown [
 
-	window ifNotNil: [ window close ].
+	workbench ifNotNil: [ :theWorkbench | theWorkbench close ].
 	super tearDown
 ]
 
