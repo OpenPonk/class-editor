@@ -233,3 +233,39 @@ OPUmlLayouterTest >> testPackageEncompassesInnerClassesAfterDefaultLayout [
 
 	self assert: (packageShape encompassingRectangle containsRect: classShape encompassingRectangle)
 ]
+
+{ #category : 'tests' }
+OPUmlLayouterTest >> testSugiyamaLayoutWithSelfLoopAssociation [
+	| parentClass childClass generalization selfAssociation sourceEnd targetEnd layouter parentShape childShape |
+	parentClass := OPUMLClass new name: 'Person'.
+	childClass := OPUMLClass new name: 'Nurse'.
+	model packagedElements
+		add: parentClass;
+		add: childClass.
+
+	generalization := OPUMLGeneralization new
+		general: parentClass;
+		specific: childClass.
+	childClass generalizations add: generalization.
+
+	selfAssociation := OPUMLAssociation new name: 'isCompatibleDonor'.
+	sourceEnd := OPUMLProperty new
+		name: 'donor';
+		owningAssociation: selfAssociation;
+		type: parentClass.
+	targetEnd := OPUMLProperty new
+		name: 'recipient';
+		owningAssociation: selfAssociation;
+		type: parentClass.
+	selfAssociation memberEnds addAll: selfAssociation ownedEnds.
+	model packagedElements add: selfAssociation.
+
+	diagramController showAllElements.
+
+	layouter := OPUmlLayouter new diagramController: diagramController.
+	layouter sugiyamaLayout.
+
+	parentShape := (diagramController controllerForModel: parentClass) roassalShape.
+	childShape := (diagramController controllerForModel: childClass) roassalShape.
+	self assert: parentShape position y < childShape position y
+]

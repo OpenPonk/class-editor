@@ -71,7 +71,8 @@ OPUmlLayouter >> applyLayout: aThreeArgBlock [
 			(eachController respondsTo: #model) and: [
 				eachController model isNotNil and: [
 					(eachController model oclIsKindOf: #Relationship) and: [
-						(eachController model oclIsKindOf: #Extension) not ] ] ] ]
+						(eachController model oclIsKindOf: #Generalization) not and: [
+							(eachController model oclIsKindOf: #Extension) not ] ] ] ] ]
 		thenCollect: #roassalShape) asGroup.
 
 	invertedExtensionShapes := extensions collect: [ :eachEdge |
@@ -84,9 +85,13 @@ OPUmlLayouter >> applyLayout: aThreeArgBlock [
 			yourself ].
 
 	filteredHierarchy := ((generalizations , invertedExtensionShapes) select: [ :eachEdge |
-		(topLevelBoxes includes: eachEdge from) and: [ topLevelBoxes includes: eachEdge to ] ]) asGroup.
+		eachEdge to ~= eachEdge from and: [
+			(topLevelBoxes includes: eachEdge from) and: [
+				topLevelBoxes includes: eachEdge to ] ] ]) asGroup.
 	filteredLinks := (linkRelationships select: [ :eachEdge |
-		(topLevelBoxes includes: eachEdge from) and: [ topLevelBoxes includes: eachEdge to ] ]) asGroup.
+		eachEdge to ~= eachEdge from and: [
+			(topLevelBoxes includes: eachEdge from) and: [
+				topLevelBoxes includes: eachEdge to ] ] ]) asGroup.
 
 	aThreeArgBlock
 		value: topLevelBoxes
