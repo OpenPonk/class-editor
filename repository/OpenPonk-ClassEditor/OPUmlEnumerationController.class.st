@@ -36,14 +36,14 @@ OPUmlEnumerationController >> createAdornmentsBy: builder [
 OPUmlEnumerationController >> createLiteralAdornmentBy: builder [
 	builder addIconForm: OPUmlIcons literalIcon action: [
 		| literalCreationTool |
-		literalCreationTool := OPCreationTool new
+		literalCreationTool := OPNodeCreationTool new
 			palette: self diagramController editor palette;
 			factory: [ OPUmlEnumerationLiteralController new ].
 		self diagramController editor palette selectTool: literalCreationTool.
 		literalCreationTool whenCreated: [ :literalCtrl |
 			literalCtrl modelChanged.
 			literalCtrl diagramController ifNotNil: [ :targetDiagramCtrl |
-				targetDiagramCtrl form ifNotNil: #focusFirstInput ] ].
+				targetDiagramCtrl form ifNotNil: [ :form | form focusFirstInput ] ] ].
 		literalCreationTool selectedControllers: { self } ]
 ]
 

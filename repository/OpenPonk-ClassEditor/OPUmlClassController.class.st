@@ -63,14 +63,14 @@ OPUmlClassController >> createAssociationAdornmentBy: builder [
 OPUmlClassController >> createAttributeAdornmentBy: builder [
 	builder addIconForm: OPUmlIcons attributeIcon action: [
 		| creationToolInstance |
-		creationToolInstance := OPCreationTool new
+		creationToolInstance := OPNodeCreationTool new
 			palette: self diagramController editor palette;
 			factory: [ OPUmlAttributeController new ].
 		self diagramController editor palette selectTool: creationToolInstance.
 		creationToolInstance whenCreated: [ :attributeCtrl |
 			attributeCtrl modelChanged.
 			attributeCtrl diagramController ifNotNil: [ :owningDiagramCtrl |
-				owningDiagramCtrl form ifNotNil: #focusFirstInput ] ].
+				owningDiagramCtrl form ifNotNil: [ :form | form focusFirstInput ] ] ].
 		creationToolInstance selectedControllers: { self } ]
 ]
 

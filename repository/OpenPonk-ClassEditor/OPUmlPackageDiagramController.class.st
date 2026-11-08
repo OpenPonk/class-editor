@@ -89,12 +89,10 @@ OPUmlPackageDiagramController >> initializePackagePalette: aPalette [
 		icon: OPUmlIcons directedAssociationIcon.
 	(aPalette newCreationEntry: [ OPUmlPackageController new ])
 		label: 'Package';
-		icon: OPUmlIcons packageIcon;
-		whenCreatedSetup.
+		icon: OPUmlIcons packageIcon.
 	(aPalette newCreationEntry: [ OPUmlProfileController new ])
 		label: 'Profile';
-		icon: OPUmlIcons profileIcon;
-		whenCreatedSetup
+		icon: OPUmlIcons profileIcon
 ]
 
 { #category : 'ui interaction' }
@@ -102,18 +100,15 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 	(aPalette newCreationEntry: [ OPUmlClassController new ])
 		label: 'Class';
 		icon: OPUmlIcons classIcon;
-		shortcut: $c asShortcut;
-		whenCreatedSetup.
+		shortcut: $c asShortcut.
 	(aPalette newCreationEntry: [ OPUmlAttributeController new ])
 		label: 'Attribute';
 		icon: OPUmlIcons attributeIcon;
-		shortcut: $a asShortcut;
-		whenCreatedSetup.
+		shortcut: $a asShortcut.
 	(aPalette newCreationEntry: [ OPUmlOperationController new ])
 		label: 'Operation';
 		icon: OPUmlIcons operationIcon;
-		shortcut: $o asShortcut;
-		whenCreatedSetup.
+		shortcut: $o asShortcut.
 	aPalette newSeparator.
 	(aPalette newConnectionCreationTool: [ OPUmlAssociationController new ])
 		label: 'Association';
@@ -126,12 +121,10 @@ OPUmlPackageDiagramController >> initializePalette: aPalette [
 	aPalette newSeparator.
 	(aPalette newCreationEntry: [ OPUmlEnumerationController new ])
 		label: 'Enumeration';
-		icon: OPUmlIcons enumIcon;
-		whenCreatedSetup.
+		icon: OPUmlIcons enumIcon.
 	(aPalette newCreationEntry: [ OPUmlEnumerationLiteralController new ])
 		label: 'Enumeration Literal';
-		icon: OPUmlIcons literalIcon;
-		whenCreatedSetup.
+		icon: OPUmlIcons literalIcon.
 	self initializeProfileModelingPalette: aPalette.
 	self initializeProfilesPalette: aPalette.
 	self initializePackagePalette: aPalette
@@ -191,8 +184,7 @@ OPUmlPackageDiagramController >> initializeProfileModelingPalette: aPalette [
 	aPalette newSeparator.
 	(aPalette newCreationEntry: [ OPUmlStereotypeController new ])
 		label: 'Stereotype';
-		icon: OPUmlIcons stereotypeIcon;
-		whenCreatedSetup.
+		icon: OPUmlIcons stereotypeIcon.
 	(aPalette newConnectionCreationTool: [ OPUmlExtensionController new ])
 		label: 'Extension';
 		icon: OPUmlIcons extensionIcon

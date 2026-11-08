@@ -59,7 +59,7 @@ OPUmlProfileCreationTest >> testProfilePaletteEntryCreatesProfileModelAndViewMod
 	profileEntry := palette entries detect: [ :eachEntry | eachEntry label = 'Profile' ].
 	profileEntry select.
 	tool := profileEntry tool.
-	createdController := tool instVarNamed: #objectController.
+	createdController := tool instVarNamed: #controller.
 	createdController diagramController: diagramController.
 	createdController createModelIn: diagramController model.
 
