@@ -277,6 +277,7 @@ OPUmlUndoRedoRegressionTest >> testUndoRedoOperationCreationInClassCompartment [
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testUndoRestoresClassCompartmentsAndLayout [
+
 	| richModel classModel localProject localDiagram localCanvas localPlugin localDiagramController richController classShape restoredController restoredShape localProjectController localUndoManager |
 	richModel := OPUmlExamples exampleRichClass.
 	classModel := richModel packagedElements detect: [ :eachElement | eachElement isKindOf: OPUMLClass ].
@@ -294,7 +295,9 @@ OPUmlUndoRedoRegressionTest >> testUndoRestoresClassCompartmentsAndLayout [
 	localDiagramController := localPlugin diagramControllerClass new.
 	localProjectController addDiagramController: localDiagramController.
 	localDiagramController
-		canvasPresenter: (OPCanvasPresenter new canvas: localCanvas; yourself);
+		canvasPresenter: (OPCanvasPresenter new
+				 canvas: localCanvas;
+				 yourself);
 		diagramElement: localDiagram;
 		model: richModel.
 
@@ -303,7 +306,7 @@ OPUmlUndoRedoRegressionTest >> testUndoRestoresClassCompartmentsAndLayout [
 	richController := localDiagramController controllerForModel: classModel.
 	classShape := richController diagramElement.
 	self assert: classShape attributesCompartment isNotNil.
-	self assert: classShape attributesCompartment ownedElements isNotEmpty.
+	self denyEmpty: classShape attributesCompartment ownedElements.
 
 	localDiagramController removeModelOfRoassalShape: richController roassalShape.
 	localUndoManager undo.
@@ -311,19 +314,24 @@ OPUmlUndoRedoRegressionTest >> testUndoRestoresClassCompartmentsAndLayout [
 	restoredController := localDiagramController controllerForModel: classModel.
 	restoredShape := restoredController diagramElement.
 	self assert: restoredShape attributesCompartment isNotNil description: 'Attributes compartment must not be nil after undo'.
-	self assert: restoredShape attributesCompartment ownedElements isNotEmpty description: 'Attributes compartment must contain attributes'.
+	self
+		assert: restoredShape attributesCompartment ownedElements isNotEmpty
+		description: 'Attributes compartment must contain attributes'.
 	self assert: restoredShape operationsCompartment isNotNil description: 'Operations compartment must not be nil after undo'.
-	self assert: restoredShape operationsCompartment ownedElements isNotEmpty description: 'Operations compartment must contain operations'.
+	self
+		assert: restoredShape operationsCompartment ownedElements isNotEmpty
+		description: 'Operations compartment must contain operations'.
 	self assert: restoredShape roassalShape height > 100 description: 'Class height must adapt to content extent'
 ]
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testUndoRestoresStereotypeLabel [
+
 	| alcoholModel alcoholController classShape restoredController restoredShape stereotypeLabel |
 	alcoholModel := model packagedElements detect: [ :eachElement | eachElement name = 'Alcohol' ].
 	alcoholController := diagramController controllerForModel: alcoholModel.
 	classShape := alcoholController diagramElement.
-	self assert: classShape stereotypes isNotEmpty.
+	self denyEmpty: classShape stereotypes.
 
 	diagramController removeModelOfRoassalShape: alcoholController roassalShape.
 	self deny: alcoholController isRendered.

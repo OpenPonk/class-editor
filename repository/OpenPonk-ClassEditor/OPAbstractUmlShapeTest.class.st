@@ -11,16 +11,17 @@ Class {
 
 { #category : 'tests' }
 OPAbstractUmlShapeTest >> testAddEdge [
+
 	| source target edge |
 	source := self newShapeInstance.
 	target := self newShapeInstance.
 	edge := OPUmlEdge new.
 	edge source: source.
 	edge target: target.
-	self assertCollection: source sourceEdges hasSameElements: {edge}.
-	self assertCollection: target targetEdges hasSameElements: {edge}.
-	self assert: source targetEdges isEmpty.
-	self assert: target sourceEdges isEmpty.
+	self assertCollection: source sourceEdges hasSameElements: { edge }.
+	self assertCollection: target targetEdges hasSameElements: { edge }.
+	self assertEmpty: source targetEdges.
+	self assertEmpty: target sourceEdges.
 	self assert: edge source equals: source.
 	self assert: edge target equals: target
 ]
@@ -51,9 +52,10 @@ OPAbstractUmlShapeTest >> testAddSelfEdge [
 
 { #category : 'running' }
 OPAbstractUmlShapeTest >> testEmpty [
+
 	super testEmpty.
 	self assert: shape owningElement doesNotExist.
-	self assert: shape ownedElements isEmpty.
-	self assert: shape sourceEdges isEmpty.
-	self assert: shape targetEdges isEmpty
+	self assertEmpty: shape ownedElements.
+	self assertEmpty: shape sourceEdges.
+	self assertEmpty: shape targetEdges
 ]

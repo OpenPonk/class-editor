@@ -33,7 +33,7 @@ OPAbstractUmlEdgeTest >> testRemove [
 	(lbl := OPUmlLabel new) owningElement: shape.
 	self assert: shape ownedElements asArray equals: { lbl }.
 	lbl owningElement: OPNoShape new.
-	self assert: shape ownedElements isEmpty
+	self assertEmpty: shape ownedElements
 ]
 
 { #category : 'tests' }

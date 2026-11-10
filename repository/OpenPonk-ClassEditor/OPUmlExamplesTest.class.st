@@ -27,9 +27,10 @@ OPUmlExamplesTest >> testAll [
 
 { #category : 'tests' }
 OPUmlExamplesTest >> testExample: anExampleSelector [
+
 	| window |
 	self assert: anExampleSelector isSymbol.
-	self assert: (OPUmlExamples class selectors includes: anExampleSelector).
+	self assertCollection: OPUmlExamples class selectors includesAll: { anExampleSelector }.
 	window := OPUmlExamples perform: anExampleSelector.
 	self assert: (window isKindOf: OPWorkbench).
 	window delete

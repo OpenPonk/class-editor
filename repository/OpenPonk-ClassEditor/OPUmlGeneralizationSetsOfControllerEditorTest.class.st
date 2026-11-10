@@ -146,6 +146,7 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithVie
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testSaveExecutesInsideUndoManagerTransaction [
 	"Verifies that saving changes in generalization sets editor runs inside an undo transaction."
+
 	| generalizationVM editor undoManager |
 	undoManager := OPUndoManager new.
 	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
@@ -156,17 +157,17 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testSaveExecutesInsideUndoManag
 
 	editor removeFromSet: generalizationSet.
 	editor save.
-
-	self assert: undoManager undoStack isNotEmpty.
-	self deny: (generalizationSet generalizations includes: generalization).
+	self denyEmpty: undoManager undoStack.
+	self denyCollection: generalizationSet generalizations includesAny: { generalization }.
 
 	undoManager undo.
-	self assert: (generalizationSet generalizations includes: generalization)
+	self assertCollection: generalizationSet generalizations includesAll: { generalization }
 ]
 
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testSetsEditorWorksPurelyWithViewModelWithoutDiagramController [
 	"Verifies that OPUmlGeneralizationSetsOfControllerEditor initializes and saves using only OPUmlGeneralizationViewModel"
+
 	| generalizationViewModel editor |
 	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
 
@@ -176,19 +177,18 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testSetsEditorWorksPurelyWithVi
 
 	editor removeFromSet: generalizationSet.
 	editor save.
-
-	self deny: (generalizationSet generalizations includes: generalization)
+	self denyCollection: generalizationSet generalizations includesAny: { generalization }
 ]
 
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testUncheckPartOfDoesNotFailWithDNU [
 	"Verify that saving changes after unchecking Part of does not raise DNU #packagedElements"
+
 	| editor |
 	editor := OPUmlGeneralizationSetsOfControllerEditor new.
 	editor generalizationController: generalizationController.
 
 	editor removeFromSet: generalizationSet.
 	editor save.
-
-	self deny: (generalizationSet generalizations includes: generalization)
+	self denyCollection: generalizationSet generalizations includesAny: { generalization }
 ]

@@ -79,7 +79,7 @@ OPUmlAttributeControllerTest >> testDoesNotShowNilName [
 	self testCreateDiagramElement.
 
 	self assert: controller diagramElement text isNotNil.
-	self assert: controller diagramElement text isNotEmpty
+	self denyEmpty: controller diagramElement text
 ]
 
 { #category : 'tests' }

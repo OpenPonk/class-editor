@@ -24,31 +24,35 @@ OPUmlTypeRemovalUndoRedoTest >> setUp [
 
 { #category : 'tests' }
 OPUmlTypeRemovalUndoRedoTest >> testRemoveClassNilsReferencingPropertiesAndUndoRedoRestores [
+
 	| targetClass userClass prop cmd |
 	targetClass := OPUMLClass new name: 'TargetClass'.
 	userClass := OPUMLClass new name: 'UserClass'.
 	prop := OPUMLProperty new name: 'ref'.
 	prop type: targetClass.
 	userClass ownedAttributes: { prop }.
-	package packagedElements addAll: { targetClass . userClass }.
+	package packagedElements addAll: {
+			targetClass.
+			userClass }.
 
 	cmd := OPRemoveModelElementCommand model: targetClass projectController: projectController.
 	undoManager inTransaction: [ undoManager execute: cmd ].
 
 	self assert: prop type isNil.
-	self deny: (package packagedElements includes: targetClass).
+	self denyCollection: package packagedElements includesAny: { targetClass }.
 
 	undoManager undo.
 	self assert: prop type identicalTo: targetClass.
-	self assert: (package packagedElements includes: targetClass).
+	self assertCollection: package packagedElements includesAll: { targetClass }.
 
 	undoManager redo.
 	self assert: prop type isNil.
-	self deny: (package packagedElements includes: targetClass)
+	self denyCollection: package packagedElements includesAny: { targetClass }
 ]
 
 { #category : 'tests' }
 OPUmlTypeRemovalUndoRedoTest >> testRemoveDataTypeNilsReferencingPropertiesAndUndoRedoRestores [
+
 	| commonPkg dataType userClass prop cmd |
 	commonPkg := package packagedElements detect: [ :each | each name = 'CommonTypes' ].
 	dataType := commonPkg packagedElements detect: [ :each | each name = 'Number' ].
@@ -63,15 +67,15 @@ OPUmlTypeRemovalUndoRedoTest >> testRemoveDataTypeNilsReferencingPropertiesAndUn
 	undoManager inTransaction: [ undoManager execute: cmd ].
 
 	self assert: prop type isNil.
-	self deny: (commonPkg packagedElements includes: dataType).
+	self denyCollection: commonPkg packagedElements includesAny: { dataType }.
 
 	undoManager undo.
 	self assert: prop type identicalTo: dataType.
-	self assert: (commonPkg packagedElements includes: dataType).
+	self assertCollection: commonPkg packagedElements includesAll: { dataType }.
 
 	undoManager redo.
 	self assert: prop type isNil.
-	self deny: (commonPkg packagedElements includes: dataType)
+	self denyCollection: commonPkg packagedElements includesAny: { dataType }
 ]
 
 { #category : 'tests' }

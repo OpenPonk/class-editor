@@ -88,43 +88,47 @@ OPUmlAssociationControllerTest >> testNavigableRemovalOfAssociationRemovesMember
 
 { #category : 'tests' }
 OPUmlAssociationControllerTest >> testRedoDeletionOfNavigableAssociation [
+
 	| class1 class2 assoc navProp prop2 |
 	class1 := OPUMLClass new name: 'ClassA'.
 	class2 := OPUMLClass new name: 'ClassB'.
-	diagramController model packagedElements add: class1; add: class2.
+	diagramController model packagedElements
+		add: class1;
+		add: class2.
 	diagramController showInDiagramModel: class1.
 	diagramController showInDiagramModel: class2.
 
 	assoc := OPUMLAssociation new name: 'navAssoc'.
 	navProp := OPUMLProperty new
-		name: 'bEnd';
-		type: class2;
-		owningClass: class1;
-		association: assoc.
+		           name: 'bEnd';
+		           type: class2;
+		           owningClass: class1;
+		           association: assoc.
 	prop2 := OPUMLProperty new
-		name: 'aEnd';
-		type: class1;
-		owningAssociation: assoc;
-		association: assoc.
-	assoc memberEnds add: navProp; add: prop2.
+		         name: 'aEnd';
+		         type: class1;
+		         owningAssociation: assoc;
+		         association: assoc.
+	assoc memberEnds
+		add: navProp;
+		add: prop2.
 	class1 ownedAttributes add: navProp.
 	diagramController model packagedElements add: assoc.
 	diagramController showInDiagramModel: assoc.
 
-	diagramController undoManager inTransaction: [
-		diagramController removeModelElement: assoc ].
+	diagramController undoManager inTransaction: [ diagramController removeModelElement: assoc ].
 
 	diagramController undoManager undo.
-	self assert: (diagramController model packagedElements includes: assoc).
+	self assertCollection: diagramController model packagedElements includesAll: { assoc }.
 	self assert: assoc memberEnds size equals: 2.
 
 	diagramController undoManager redo.
-	self deny: (diagramController model packagedElements includes: assoc).
+	self denyCollection: diagramController model packagedElements includesAny: { assoc }.
 	self assert: navProp owningClass isNil.
 	self deny: (diagramController hasControllerForModel: assoc).
 
 	diagramController undoManager undo.
-	self assert: (diagramController model packagedElements includes: assoc).
+	self assertCollection: diagramController model packagedElements includesAll: { assoc }.
 	self assert: assoc memberEnds size equals: 2.
 	self assert: (diagramController hasControllerForModel: assoc)
 ]
@@ -190,38 +194,40 @@ OPUmlAssociationControllerTest >> testShowAllElementsIgnoresNonNavigableEnds [
 
 { #category : 'tests' }
 OPUmlAssociationControllerTest >> testUndoDeletionOfNavigableAssociation [
+
 	| class1 class2 assoc navProp prop2 |
 	class1 := OPUMLClass new name: 'ClassA'.
 	class2 := OPUMLClass new name: 'ClassB'.
-	diagramController model packagedElements add: class1; add: class2.
+	diagramController model packagedElements
+		add: class1;
+		add: class2.
 	diagramController showInDiagramModel: class1.
 	diagramController showInDiagramModel: class2.
 
 	assoc := OPUMLAssociation new name: 'navAssoc'.
 	navProp := OPUMLProperty new
-		name: 'bEnd';
-		type: class2;
-		owningClass: class1;
-		association: assoc.
+		           name: 'bEnd';
+		           type: class2;
+		           owningClass: class1;
+		           association: assoc.
 	prop2 := OPUMLProperty new
-		name: 'aEnd';
-		type: class1;
-		owningAssociation: assoc;
-		association: assoc.
-	assoc memberEnds add: navProp; add: prop2.
+		         name: 'aEnd';
+		         type: class1;
+		         owningAssociation: assoc;
+		         association: assoc.
+	assoc memberEnds
+		add: navProp;
+		add: prop2.
 	class1 ownedAttributes add: navProp.
 	diagramController model packagedElements add: assoc.
 	diagramController showInDiagramModel: assoc.
 
-	diagramController undoManager inTransaction: [
-		diagramController removeModelElement: assoc ].
-
-	self deny: (diagramController model packagedElements includes: assoc).
+	diagramController undoManager inTransaction: [ diagramController removeModelElement: assoc ].
+	self denyCollection: diagramController model packagedElements includesAny: { assoc }.
 	self assert: navProp owningClass isNil.
 
 	diagramController undoManager undo.
-
-	self assert: (diagramController model packagedElements includes: assoc).
+	self assertCollection: diagramController model packagedElements includesAll: { assoc }.
 	self assert: assoc memberEnds size equals: 2.
 	self assert: navProp association equals: assoc.
 	self assert: (diagramController hasControllerForModel: assoc)

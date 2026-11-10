@@ -11,6 +11,7 @@ Class {
 
 { #category : 'tests' }
 OPUmlPackageViewModelTest >> testAllTypeElementsWithGeneralizationSet [
+
 	| project package genSet types packageViewModel registry |
 	project := OPProject new.
 	package := OPUMLPackage new.
@@ -25,7 +26,7 @@ OPUmlPackageViewModelTest >> testAllTypeElementsWithGeneralizationSet [
 	packageViewModel := registry viewModelFor: package.
 
 	types := packageViewModel allTypeElements.
-	self assert: types isEmpty
+	self assertEmpty: types
 ]
 
 { #category : 'tests' }

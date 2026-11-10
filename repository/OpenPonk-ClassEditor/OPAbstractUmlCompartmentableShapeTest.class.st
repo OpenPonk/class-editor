@@ -27,8 +27,7 @@ OPAbstractUmlCompartmentableShapeTest >> testEmptyRoassalShape [
 OPAbstractUmlCompartmentableShapeTest >> testFigures [
 
 	shape renderIn: RSCanvas new.
-
-	self assert: shape canvas nodes isNotEmpty
+	self denyEmpty: shape canvas nodes
 ]
 
 { #category : 'tests' }
@@ -90,11 +89,9 @@ OPAbstractUmlCompartmentableShapeTest >> testRemoveFromOwnership [
 
 	| lbl |
 	(lbl := OPUmlLabel new) owningElement: shape.
-	self
-		assertCollection: shape ownedElements asArray
-		hasSameElements: { lbl }.
+	self assertCollection: shape ownedElements asArray hasSameElements: { lbl }.
 	lbl remove.
-	self assert: shape ownedElements isEmpty
+	self assertEmpty: shape ownedElements
 ]
 
 { #category : 'tests' }
@@ -114,5 +111,5 @@ OPAbstractUmlCompartmentableShapeTest >> testRemoveOwnedElement [
 	(lbl := OPUmlLabel new) owningElement: shape.
 	self assertCollection: shape ownedElements hasSameElements: { lbl }.
 	lbl owningElement: OPNoShape new.
-	self assert: shape ownedElements isEmpty
+	self assertEmpty: shape ownedElements
 ]
