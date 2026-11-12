@@ -1,25 +1,1 @@
-SmalltalkCISpec {
-	#loading : [
-		SCIMetacelloLoadSpec {
-			#platforms : [
-				#pharo
-			],
-			#baseline : 'OpenPonkClassEditor',
-			#directory : 'repository',
-			#onConflict : #useIncoming,
-			#load : [ 'complete' ]
-		}
-	],
-	#preLoading : 'ci-scripts/.github/scripts/preLoad.st',
-	#postLoading : 'ci-scripts/.github/scripts/postLoad.st',
-	#testing : {
-		#packages : [
-			'OpenPonk*'
-		],
-		#coverage : {
-			#packages : [
-				'OpenPonk-ClassEditor*'
-			]
-		}
-	}
-}
+SmalltalkCISpec {	#loading : [		SCIMetacelloLoadSpec {			#platforms : [				#pharo			],			#baseline : 'OpenPonkClassEditor',			#directory : 'repository',			#onConflict : #useIncoming,			#load : [ 'complete' ]		}	],	#preLoading : 'ci-scripts/.github/scripts/preLoad.st',	#postLoading : 'ci-scripts/.github/scripts/postLoad.st',	#testing : {		#packages : [			'OpenPonk*'		],		#coverage : {			#packages : [				'OpenPonk-ClassEditor',				'OpenPonk-ClassEditor-Plugins'			]		}	}}
