@@ -1,0 +1,58 @@
+"
+I am a unit test class verifying the correct string formatting of UML MultiplicityElements, including bound limits and constraints like 0..1 or 1..*.
+"
+Class {
+	#name : 'OPUmlMultiplicityElementNotationTest',
+	#superclass : 'TestCase',
+	#instVars : [
+		'multiplicity'
+	],
+	#category : 'OpenPonk-ClassEditor-Tests-ViewModels',
+	#package : 'OpenPonk-ClassEditor-Tests',
+	#tag : 'ViewModels'
+}
+
+{ #category : 'instance creation' }
+OPUmlMultiplicityElementNotationTest >> multiplicityOn: aPair [
+	| el |
+	el := OPUMLMultiplicityElement new.
+	aPair first ifNotNil: [ el lowerValue: (OPUMLLiteralInteger new value: aPair first) ].
+	aPair second
+		ifNotNil: [ el upperValue: (OPUMLLiteralUnlimitedNatural new value: aPair second) ].
+	^ el
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testDifferentLowerUpper [
+	self assert: (self multiplicityOn: #(2 5)) notationMultiplicityRange equals: '2..5'
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testNoUpper [
+	self assert: (self multiplicityOn: #(1 nil)) notationMultiplicityRange equals: ''
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testNoUpperZero [
+	self assert: (self multiplicityOn: #(0 nil)) notationMultiplicityRange equals: '0..1'
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testSameLowerUpper [
+	self assert: (self multiplicityOn: #(3 3)) notationMultiplicityRange equals: '3'
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testSameLowerUpperOne [
+	self assert: (self multiplicityOn: #(1 1)) notationMultiplicityRange equals: ''
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testUpperUnlimited [
+	self assert: (self multiplicityOn: #(4 '*')) notationMultiplicityRange equals: '4..*'
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testZeroUnlimited [
+	self assert: (self multiplicityOn: #(0 '*')) notationMultiplicityRange equals: '*'
+]

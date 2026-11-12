@@ -34,8 +34,10 @@ BaselineOfOpenPonkClassEditor >> baseline: spec [
 		spec package: 'OpenPonk-ClassEditor' with: [
 			spec requires: #( 'OpenPonkUMLXMI' 'OpenPonkUMLBootstrapGenerator'
 				   'OpenPonkUMLProfiles' ) ].
+		spec package: 'OpenPonk-ClassEditor-Tests' with: [
+			spec requires: #( 'OpenPonk-ClassEditor' ) ].
 
-		spec group: 'plugin' with: #( 'OpenPonk-ClassEditor' ).
+		spec group: 'plugin' with: #( 'OpenPonk-ClassEditor' 'OpenPonk-ClassEditor-Tests' ).
 		(Smalltalk globals includesKey:
 			 #BaselineOfOpenPonkOntoUMLVerifications)
 			ifTrue: [ spec group: 'complete-plugin' with: #( plugin ) ]
