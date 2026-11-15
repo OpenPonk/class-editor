@@ -53,36 +53,48 @@ OPUmlAssociationControllerTest >> newModel [
 
 { #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testNavigableRemovalOfAssociationRemovesMemberEnds [
+
 	| first second attributeController attributeDiagramElement |
 	self showInDiagram.
 	first := model memberEnds first.
 	second := model memberEnds second.
-	
+
 	"Ensure initial state is non-navigable"
 	controller viewModel writeNavigability: false to: second.
-	self deny: (diagramController isVisibleInDiagram: second).
-	
+	self deny: (diagramController isVisibleInDiagram: second) description: 'Non-navigable member end must not be visible in diagram'.
+
 	"Toggle navigability back and forth and check if it is visible when it should"
 	controller viewModel writeNavigability: true to: second.
-	self assert: (diagramController isVisibleInDiagram: second).
-	
+	self assert: (diagramController isVisibleInDiagram: second) description: 'Navigable member end must be visible in diagram'.
+
 	controller viewModel writeNavigability: false to: second.
-	self deny: (diagramController isVisibleInDiagram: second).
-	
+	self
+		deny: (diagramController isVisibleInDiagram: second)
+		description: 'Member end set to non-navigable must be hidden from diagram'.
+
 	controller viewModel writeNavigability: true to: second.
-	self assert: (diagramController isVisibleInDiagram: second).
-	
+	self
+		assert: (diagramController isVisibleInDiagram: second)
+		description: 'Member end set back to navigable must be visible in diagram'.
+
 	attributeController := diagramController controllerForModel: second.
 	self assert: attributeController class equals: OPUmlAttributeController.
-	
+
 	attributeDiagramElement := attributeController diagramElement.
-	self assert: attributeDiagramElement isRendered.
+	self assert: attributeDiagramElement isRendered description: 'Attribute diagram element must be rendered when navigable'.
 	self assertCollection: diagramController diagram allOwnedElements includesAny: { attributeDiagramElement }.
-	
+
 	"Cascaded removal via ViewModel safely cleans up endpoints"
 	controller removeControllerAndModel.
-	self deny: (diagramController isVisibleInDiagram: controller).
-	self deny: (diagramController isVisibleInDiagram: second).
+	self
+		deny: (diagramController isVisibleInDiagram: model)
+		description: 'Association model must no longer be visible in diagram after removal'.
+	self
+		deny: (diagramController isVisibleInDiagram: second)
+		description: 'Navigable member end must no longer be visible in diagram after association removal'.
+	self denyCollection: diagramController controllers includesAny: {
+			controller.
+			attributeController }.
 	self denyCollection: diagramController diagram allOwnedElements includesAny: { attributeDiagramElement }
 ]
 
@@ -120,32 +132,33 @@ OPUmlAssociationControllerTest >> testRedoDeletionOfNavigableAssociation [
 
 	diagramController undoManager undo.
 	self assertCollection: diagramController model packagedElements includesAll: { assoc }.
-	self assert: assoc memberEnds size equals: 2.
+	self assertCollection: assoc memberEnds hasSameElements: {
+			navProp.
+			prop2 }.
 
 	diagramController undoManager redo.
 	self denyCollection: diagramController model packagedElements includesAny: { assoc }.
-	self assert: navProp owningClass isNil.
-	self deny: (diagramController hasControllerForModel: assoc).
+	self assert: navProp owningClass identicalTo: nil.
+	self deny: (diagramController hasControllerForModel: assoc) description: 'Association controller must be removed on redo'.
 
 	diagramController undoManager undo.
 	self assertCollection: diagramController model packagedElements includesAll: { assoc }.
-	self assert: assoc memberEnds size equals: 2.
-	self assert: (diagramController hasControllerForModel: assoc)
+	self assertCollection: assoc memberEnds hasSameElements: {
+			navProp.
+			prop2 }.
+	self
+		assert: (diagramController hasControllerForModel: assoc)
+		description: 'Association controller must be restored on second undo'
 ]
 
 { #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testRemovalOfAssociationRemovesMemberEnds [
 
 	self showInDiagram.
-	(diagramController controllerForModel: model)
-		removeControllerAndModel.
-	(diagramController controllerForModel: sourceModel)
-		removeControllerAndModel.
-	(diagramController controllerForModel: targetModel)
-		removeControllerAndModel.
-	self
-		assertCollection: diagramController controllers
-		hasSameElements: #(  )
+	(diagramController controllerForModel: model) removeControllerAndModel.
+	(diagramController controllerForModel: sourceModel) removeControllerAndModel.
+	(diagramController controllerForModel: targetModel) removeControllerAndModel.
+	self assertEmpty: diagramController controllers
 ]
 
 { #category : 'tests' }
@@ -168,7 +181,10 @@ OPUmlAssociationControllerTest >> testRemoveAssociationViaCommandDoesNotFailOnDe
 	command readParametersFromContext: context.
 
 	command executeWithoutConfirmation.
-	self deny: (diagramController isVisibleInDiagram: model)
+	self
+		deny: (diagramController isVisibleInDiagram: model)
+		description: 'Association must no longer be visible in diagram after command removal'.
+	self denyCollection: (diagramController controllers collect: #model) includesAny: { model } , model memberEnds
 ]
 
 { #category : 'tests' }
@@ -184,12 +200,16 @@ OPUmlAssociationControllerTest >> testShowAllElementsIgnoresNonNavigableEnds [
 	diagramController showAllElements.
 
 	"Assert that no controllers were created for the non-navigable association ends"
-	self deny: (diagramController controllers anySatisfy: [ :ctrl |
-		ctrl model = model memberEnds first or: [ ctrl model = model memberEnds second ] ])
-		description: 'Controllers should not be created for non-navigable association ends'.
+	self denyCollection: (diagramController controllers collect: #model) includesAny: model memberEnds.
+	self assertCollection: (diagramController controllers collect: #model) hasSameElements: {
+			sourceModel.
+			targetModel.
+			model.
+			model memberEnds first type.
+			model memberEnds second type }.
 
 	"Assert that the ViewModel tree is intact and still contains the association ends"
-	self assert: (diagramController viewModelRegistry viewModelFor: model) childrenModels size equals: 2.
+	self assertCollection: (diagramController viewModelRegistry viewModelFor: model) childrenModels hasSameElements: model memberEnds
 ]
 
 { #category : 'tests' }
@@ -224,13 +244,15 @@ OPUmlAssociationControllerTest >> testUndoDeletionOfNavigableAssociation [
 
 	diagramController undoManager inTransaction: [ diagramController removeModelElement: assoc ].
 	self denyCollection: diagramController model packagedElements includesAny: { assoc }.
-	self assert: navProp owningClass isNil.
+	self assert: navProp owningClass identicalTo: nil.
 
 	diagramController undoManager undo.
 	self assertCollection: diagramController model packagedElements includesAll: { assoc }.
-	self assert: assoc memberEnds size equals: 2.
-	self assert: navProp association equals: assoc.
-	self assert: (diagramController hasControllerForModel: assoc)
+	self assertCollection: assoc memberEnds hasSameElements: {
+			navProp.
+			prop2 }.
+	self assert: navProp association identicalTo: assoc.
+	self assert: (diagramController hasControllerForModel: assoc) description: 'Association controller must be restored on undo'
 ]
 
 { #category : 'tests' }
@@ -242,8 +264,9 @@ OPUmlAssociationControllerTest >> testWriteNavigabilityAssocOwnedToClassOwned [
 	first := model memberEnds first.
 	second := model memberEnds second.
 	controller viewModel writeNavigability: true to: second.
-	self assert: second isNavigable.
-	self assert: second owningClass equals: first type
+	self assert: second isNavigable description: 'Second member end must become navigable'.
+	self assert: second owningClass identicalTo: first type.
+	self assertCollection: first type ownedAttributes includesAll: { second }
 ]
 
 { #category : 'tests' }
@@ -254,7 +277,7 @@ OPUmlAssociationControllerTest >> testWriteNavigabilityClassOwnedToAssocOwned [
 	controller diagramController: diagramController.
 	first := model memberEnds first.
 	controller viewModel writeNavigability: false to: first.
-	self deny: first isNavigable.
-	self assert: first owningClass equals: nil.
-	self assert: first owningAssociation equals: model
+	self deny: first isNavigable description: 'First member end must become non-navigable'.
+	self assert: first owningClass identicalTo: nil.
+	self assert: first owningAssociation identicalTo: model
 ]

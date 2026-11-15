@@ -49,12 +49,18 @@ OPUmlPackageImportControllerTest >> sourceModelClass [
 
 { #category : 'tests - creation' }
 OPUmlPackageImportControllerTest >> testCanClassBeSource [
-	self assert: (OPUmlPackageController new canBeSourceFor: controller)
+
+	self
+		assert: (OPUmlPackageController new canBeSourceFor: controller)
+		description: 'Package controller must be allowed as source for package import'
 ]
 
 { #category : 'tests - creation' }
 OPUmlPackageImportControllerTest >> testCanClassBeTarget [
-	self assert: (OPUmlPackageController new canBeTargetFor: controller)
+
+	self
+		assert: (OPUmlPackageController new canBeTargetFor: controller)
+		description: 'Package controller must be allowed as target for package import'
 ]
 
 { #category : 'tests - creation' }
@@ -69,5 +75,5 @@ OPUmlPackageImportControllerTest >> testClassBeSource [
 OPUmlPackageImportControllerTest >> testDescriptionName [
 
 	self prepareToShow.
-	self assert: controller viewModel descriptionName equals: nil
+	self assert: controller viewModel descriptionName identicalTo: nil
 ]

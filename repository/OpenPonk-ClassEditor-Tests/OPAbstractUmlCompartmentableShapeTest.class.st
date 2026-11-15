@@ -73,15 +73,18 @@ OPAbstractUmlCompartmentableShapeTest >> testRemoveExtentChanged [
 	labelContainer := OPUmlCompartmentableLabel in: shape.
 	OPUmlNameLabel in: labelContainer.
 	compartment := OPUmlCompartment in: shape.
-	5 timesRepeat: [ 
-		compLbl := (OPUmlLabel in: compartment)
-			           text: 'testx';
-			           yourself ].
+	5 timesRepeat: [
+			compLbl := (OPUmlLabel in: compartment)
+				           text: 'testx';
+				           yourself ].
 	shape renderIn: canvas.
 	fullExtent := shape extent.
 	compLbl remove.
 	shape modelChanged.
-	self assert: shape extent y < fullExtent y
+	self assert: shape extent x equals: fullExtent x.
+	self
+		assert: shape extent y < fullExtent y
+		description: 'Removing a compartment label must reduce the vertical extent of the shape'
 ]
 
 { #category : 'tests' }
@@ -101,7 +104,7 @@ OPAbstractUmlCompartmentableShapeTest >> testRemoveFromViewEmpty [
 	emptyCanvas := RSCanvas new.
 	shape renderIn: emptyCanvas.
 	shape remove.
-	self assert: emptyCanvas nodes asArray equals: #(  )
+	self assertEmpty: emptyCanvas nodes
 ]
 
 { #category : 'tests' }

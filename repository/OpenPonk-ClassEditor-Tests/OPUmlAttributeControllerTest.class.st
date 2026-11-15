@@ -27,13 +27,17 @@ OPUmlAttributeControllerTest >> modelClass [
 
 { #category : 'tests - creation' }
 OPUmlAttributeControllerTest >> testCanClassBeTarget [
+
 	| classController |
 	classController := OPUmlClassController new.
-	self assert: (classController canBeTargetFor: controller)
+	self
+		assert: (classController canBeTargetFor: controller)
+		description: 'Class controller must accept attribute controller as target'
 ]
 
 { #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
+
 	| accessor vm |
 	controller model: model.
 	vm := controller viewModel.
@@ -41,13 +45,14 @@ OPUmlAttributeControllerTest >> testDescriptionAccessorRead [
 	controller diagramElement: Mock new.
 	model isDerived: true.
 
-	self assert: (accessor read: vm).
+	self assert: (accessor read: vm) description: 'Accessor must read true when property isDerived is true'.
 	model isDerived: false.
-	self deny: (accessor read: vm)
+	self deny: (accessor read: vm) description: 'Accessor must read false when property isDerived is false'
 ]
 
 { #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
+
 	| accessor vm |
 	controller model: model.
 	vm := controller viewModel.
@@ -55,20 +60,20 @@ OPUmlAttributeControllerTest >> testDescriptionAccessorWrite [
 
 	controller diagramElement: Mock new.
 	accessor write: true to: vm.
-	self assert: model isDerived.
+	self assert: model isDerived description: 'Accessor write: true must set model isDerived to true'.
 	accessor write: false to: vm.
-	self deny: model isDerived
+	self deny: model isDerived description: 'Accessor write: false must set model isDerived to false'
 ]
 
 { #category : 'tests' }
 OPUmlAttributeControllerTest >> testDescriptions [
+
 	| container |
 	controller
 		diagramController: diagramController;
 		model: OPUMLProperty new.
 	container := controller viewModel magritteDescription.
-	self assert: (container anySatisfy: [ :each | each label = 'Name' ]).
-	self assert: (container anySatisfy: [ :each | each label = 'Is Derived' ])
+	self assertCollection: (container children collect: #label) includesAll: #( 'Name' 'Is Derived' )
 ]
 
 { #category : 'tests' }
@@ -78,8 +83,8 @@ OPUmlAttributeControllerTest >> testDoesNotShowNilName [
 
 	self testCreateDiagramElement.
 
-	self assert: controller diagramElement text isNotNil.
-	self denyEmpty: controller diagramElement text
+	self assert: model name equals: 'attribute'.
+	self assert: controller diagramElement text equals: 'attribute'
 ]
 
 { #category : 'tests' }
@@ -88,7 +93,11 @@ OPUmlAttributeControllerTest >> testDoesShowsBlankLabel [
 	model name: ' '.
 	self showInDiagram.
 
-	self assert: controller roassalShape width > 5
+	self assert: controller diagramElement text equals: 'attribute'.
+	self assert: controller roassalShape text equals: 'attribute'.
+	self
+		assert: controller roassalShape width > 5
+		description: 'Rendered attribute label with blank name must use non-empty placeholder width'
 ]
 
 { #category : 'tests' }
@@ -97,7 +106,9 @@ OPUmlAttributeControllerTest >> testDoesShowsLabel [
 	model name: 'attribute'.
 	self showInDiagram.
 
-	self assert: controller roassalShape width > 5
+	self assert: controller diagramElement text equals: 'attribute'.
+	self assert: controller roassalShape text equals: 'attribute'.
+	self assert: controller roassalShape width > 5 description: 'Rendered attribute label must have positive text width'
 ]
 
 { #category : 'tests' }
@@ -106,11 +117,16 @@ OPUmlAttributeControllerTest >> testDoesShowsNilLabel [
 	model name: nil.
 	self showInDiagram.
 
-	self assert: controller roassalShape width > 5
+	self assert: controller diagramElement text equals: 'attribute'.
+	self assert: controller roassalShape text equals: 'attribute'.
+	self
+		assert: controller roassalShape width > 5
+		description: 'Rendered attribute label with nil name must use non-empty placeholder width'
 ]
 
 { #category : 'tests - removing' }
 OPUmlAttributeControllerTest >> testRemoveFromView [
+
 	| class compartment prop |
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
@@ -119,7 +135,7 @@ OPUmlAttributeControllerTest >> testRemoveFromView [
 	controller := diagramController controllerForModel: prop.
 	compartment := controller diagramElement owningElement.
 	controller removeControllerAndDiagramElement.
-	self assert: compartment ownedElements asArray equals: #()
+	self assertEmpty: compartment ownedElements
 ]
 
 { #category : 'tests' }

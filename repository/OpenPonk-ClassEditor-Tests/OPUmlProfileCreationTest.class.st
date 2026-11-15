@@ -46,15 +46,17 @@ OPUmlProfileCreationTest >> tearDown [
 
 { #category : 'tests' }
 OPUmlProfileCreationTest >> testControllerFactoryCreatesProfileControllerForProfileModel [
+
 	| profileModel createdController |
 	profileModel := OPUMLProfile new.
 	createdController := diagramController controllerFactory newControllerFor: profileModel.
 
-	self assert: (createdController isKindOf: OPUmlProfileController)
+	self assert: createdController class equals: OPUmlProfileController
 ]
 
 { #category : 'tests' }
 OPUmlProfileCreationTest >> testProfilePaletteEntryCreatesProfileModelAndViewModel [
+
 	| profileEntry tool createdController |
 	profileEntry := palette entries detect: [ :eachEntry | eachEntry label = 'Profile' ].
 	profileEntry select.
@@ -63,7 +65,7 @@ OPUmlProfileCreationTest >> testProfilePaletteEntryCreatesProfileModelAndViewMod
 	createdController diagramController: diagramController.
 	createdController createModelIn: diagramController model.
 
-	self assert: (createdController model isKindOf: OPUMLProfile).
-	self assert: (createdController viewModel isKindOf: OPUmlProfileViewModel).
-	self assert: (createdController isKindOf: OPUmlProfileController)
+	self assert: createdController model class equals: OPUMLProfile.
+	self assert: createdController viewModel class equals: OPUmlProfileViewModel.
+	self assert: createdController class equals: OPUmlProfileController
 ]

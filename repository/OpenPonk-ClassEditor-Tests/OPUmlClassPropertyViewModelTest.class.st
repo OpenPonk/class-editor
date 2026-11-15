@@ -11,6 +11,7 @@ Class {
 
 { #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testDescriptionTypeCleanupUnusedTemporaryTypes [
+
 	| project package class prop registry propViewModel desc commonPkg typeNames |
 	project := OPProject new.
 	package := OPUmlClassEditorPlugin new newModel.
@@ -31,7 +32,7 @@ OPUmlClassPropertyViewModelTest >> testDescriptionTypeCleanupUnusedTemporaryType
 	typeNames := commonPkg packagedElements collect: #name.
 
 	self assertCollection: typeNames includesAll: #( 'WholeBlood' ).
-	self deny: (typeNames includes: 'Wh') description: 'Intermediate type Wh must be removed from CommonTypes'
+	self denyCollection: typeNames includesAny: #( 'Wh' )
 ]
 
 { #category : 'tests' }
@@ -69,21 +70,21 @@ OPUmlClassPropertyViewModelTest >> testRegisterModelInFailsOnUnsupportedParent [
 
 { #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testRemoveRenderDoesNotClearCommentIconDiagramElement [
-	| classModel shape canvas |
+
+	| classModel shape canvas commentIcon |
 	classModel := OPUMLClass new name: 'CommentTestClass'.
 	classModel ownedComments add: (OPUMLComment new body: 'Test comment').
 	shape := OPUmlClassShape in: OPNoShape instance forModelElement: classModel.
 	canvas := RSCanvas new.
 	shape renderIn: canvas.
 
-	self assert: (shape instVarNamed: #commentIcon) isNotNil.
-	self assertCollection: shape ownedElements includesAll: { shape instVarNamed: #commentIcon }.
+	commentIcon := shape instVarNamed: #commentIcon.
+	self assert: commentIcon class equals: OPUmlCommentIcon.
+	self assertCollection: shape ownedElements includesAll: { commentIcon }.
 
 	shape removeRender.
 	"Must fail in red phase because removeRender sets commentIcon := nil"
-	self
-		assert: (shape instVarNamed: #commentIcon) isNotNil
-		description: 'removeRender must not destroy diagram element reference (Rule 4j)'
+	self assert: (shape instVarNamed: #commentIcon) identicalTo: commentIcon
 ]
 
 { #category : 'tests' }

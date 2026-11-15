@@ -89,42 +89,46 @@ OPUmlUndoRedoRegressionTest >> testAssociationMemberEndsCountOnUndoRedoUndo [
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testEdgeLabelDragCreatesUndoCommandWithoutSelectionDraggable [
+
 	| associationModel associationController labelElement labelShape |
 	associationModel := model packagedElements detect: [ :eachElement | eachElement isKindOf: OPUMLAssociation ].
 	associationController := diagramController controllerForModel: associationModel.
 	labelElement := associationController diagramElement ownedElements
-		detect: [ :eachElement | eachElement isKindOf: OPEdgeLabel ]
-		ifNone: [ self fail: 'OPEdgeLabel not found on association' ].
+		                detect: [ :eachElement | eachElement isKindOf: OPEdgeLabel ]
+		                ifNone: [ self fail: 'OPEdgeLabel not found on association' ].
 	labelShape := labelElement roassalShape.
 
 	self deny: labelShape isSelectionDraggable description: 'Label must not have isSelectionDraggable property due to snapping'.
 
 	labelShape announce: (RSMouseDragStart new
-		position: labelShape position;
-		shape: labelShape;
-		canvas: canvas;
-		yourself).
+			 position: labelShape position;
+			 shape: labelShape;
+			 canvas: canvas;
+			 yourself).
 	labelShape announce: (RSMouseDragging new
-		step: 20 @ 20;
-		position: labelShape position + (20 @ 20);
-		shape: labelShape;
-		canvas: canvas;
-		yourself).
+			 step: 20 @ 20;
+			 position: labelShape position + (20 @ 20);
+			 shape: labelShape;
+			 canvas: canvas;
+			 yourself).
 	labelShape announce: (RSMouseDragEnd new
-		position: labelShape position + (20 @ 20);
-		shape: labelShape;
-		canvas: canvas;
-		yourself).
+			 position: labelShape position + (20 @ 20);
+			 shape: labelShape;
+			 canvas: canvas;
+			 yourself).
 
 	self assert: undoManager canUndo description: 'Dragging an anchored label must record an undo command'.
-	self assert: undoManager undoStack first leafCount > 0
+	self assert: undoManager undoStack first class equals: OPCompositeCommand.
+	self assert: undoManager undoStack first leafCount equals: 1.
+	self assert: undoManager undoStack first commands first class equals: OPChangeAnchoredBoundsCommand
 ]
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testShowAssociationTransitivelyShowsDependenciesInSingleUndoTransaction [
+
 	| association sourceClass targetClass diagramExplorer |
 	association := model packagedElements detect: [ :eachModelElement |
-		(eachModelElement isKindOf: OPUMLAssociation) and: [ eachModelElement memberEnds size = 2 ] ].
+		               (eachModelElement isKindOf: OPUMLAssociation) and: [ eachModelElement memberEnds size = 2 ] ].
 	sourceClass := association memberEnds first type.
 	targetClass := association memberEnds second type.
 
@@ -133,46 +137,75 @@ OPUmlUndoRedoRegressionTest >> testShowAssociationTransitivelyShowsDependenciesI
 	diagramController hideModelFromDiagram: targetClass.
 	undoManager clear.
 
-	self deny: (diagramController hasControllerForModel: association).
-	self deny: (diagramController hasControllerForModel: sourceClass).
-	self deny: (diagramController hasControllerForModel: targetClass).
+	self
+		deny: (diagramController hasControllerForModel: association)
+		description: 'Association controller must be hidden before showElements:'.
+	self
+		deny: (diagramController hasControllerForModel: sourceClass)
+		description: 'Source class controller must be hidden before showElements:'.
+	self
+		deny: (diagramController hasControllerForModel: targetClass)
+		description: 'Target class controller must be hidden before showElements:'.
 
 	diagramExplorer := OPDiagramExplorer on: diagramController.
 	diagramExplorer showElements: { association }.
 
-	self assert: (diagramController hasControllerForModel: association).
-	self assert: (diagramController hasControllerForModel: sourceClass).
-	self assert: (diagramController hasControllerForModel: targetClass).
+	self
+		assert: (diagramController hasControllerForModel: association)
+		description: 'Association controller must be created by showElements:'.
+	self
+		assert: (diagramController hasControllerForModel: sourceClass)
+		description: 'Source class dependency controller must be created by showElements:'.
+	self
+		assert: (diagramController hasControllerForModel: targetClass)
+		description: 'Target class dependency controller must be created by showElements:'.
 
 	undoManager undo.
 
-	self deny: (diagramController hasControllerForModel: association)
-		description: 'Association controller must be removed on Undo'.
-	self deny: (diagramController hasControllerForModel: sourceClass)
+	self deny: (diagramController hasControllerForModel: association) description: 'Association controller must be removed on Undo'.
+	self
+		deny: (diagramController hasControllerForModel: sourceClass)
 		description: 'Source class must not remain as an orphan after Undo'.
-	self deny: (diagramController hasControllerForModel: targetClass)
+	self
+		deny: (diagramController hasControllerForModel: targetClass)
 		description: 'Target class must not remain as an orphan after Undo'.
 
 	undoManager redo.
 
-	self assert: (diagramController hasControllerForModel: sourceClass).
-	self assert: (diagramController hasControllerForModel: targetClass).
-	self assert: (diagramController hasControllerForModel: association).
-	self assert: (diagramController controllerForModel: association) roassalShape isNotNil
+	self
+		assert: (diagramController hasControllerForModel: sourceClass)
+		description: 'Source class controller must be restored on Redo'.
+	self
+		assert: (diagramController hasControllerForModel: targetClass)
+		description: 'Target class controller must be restored on Redo'.
+	self
+		assert: (diagramController hasControllerForModel: association)
+		description: 'Association controller must be restored on Redo'.
+	self assert: (diagramController controllerForModel: association) roassalShape class equals: OPRSPolyline.
+	self
+		assert: (diagramController controllerForModel: association) isRendered
+		description: 'Association controller must be rendered on Redo'
 ]
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testShowElementsWithBoundaryAndNoteRespectsCreationPriority [
+
 	| boundaryElement noteElement classElement explorer |
 	boundaryElement := OPBoundary new.
 	noteElement := OPNote new.
 	classElement := model packagedElements detect: [ :eachModelElement | eachModelElement isKindOf: OPUMLClass ].
 	explorer := OPDiagramExplorer on: diagramController.
 
-	explorer showElements: { boundaryElement . noteElement }.
+	explorer showElements: {
+			boundaryElement.
+			noteElement }.
 
-	self assert: (diagramController hasControllerForModel: boundaryElement).
-	self assert: (diagramController hasControllerForModel: noteElement).
+	self
+		assert: (diagramController hasControllerForModel: boundaryElement)
+		description: 'Boundary element must have a controller after showElements:'.
+	self
+		assert: (diagramController hasControllerForModel: noteElement)
+		description: 'Note element must have a controller after showElements:'.
 	self assert: (registry viewModelFor: boundaryElement) creationPriority equals: 5.
 	self assert: (registry viewModelFor: noteElement) creationPriority equals: 10.
 	self assert: (registry viewModelFor: classElement) creationPriority equals: 10
@@ -180,6 +213,7 @@ OPUmlUndoRedoRegressionTest >> testShowElementsWithBoundaryAndNoteRespectsCreati
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testUndoHideClassRestoresNavigableAssociationAttribute [
+
 	| customerClass orderClass placesAssociation customerProperty ordersProperty diagramExplorer |
 	customerClass := OPUMLClass new name: 'Customer'.
 	orderClass := OPUMLClass new name: 'Order'.
@@ -188,17 +222,19 @@ OPUmlUndoRedoRegressionTest >> testUndoHideClassRestoresNavigableAssociationAttr
 
 	placesAssociation := OPUMLAssociation new name: 'places'.
 	customerProperty := OPUMLProperty new
-		name: 'customer';
-		type: customerClass;
-		association: placesAssociation.
+		                    name: 'customer';
+		                    type: customerClass;
+		                    association: placesAssociation.
 	ordersProperty := OPUMLProperty new
-		name: 'orders';
-		type: orderClass;
-		association: placesAssociation;
-		owningClass: customerClass.
+		                  name: 'orders';
+		                  type: orderClass;
+		                  association: placesAssociation;
+		                  owningClass: customerClass.
 	customerClass ownedAttributes add: ordersProperty.
 
-	placesAssociation memberEnds: { customerProperty . ordersProperty }.
+	placesAssociation memberEnds: {
+			customerProperty.
+			ordersProperty }.
 	placesAssociation ownedEnds: { customerProperty }.
 	placesAssociation navigableOwnedEnds: { ordersProperty }.
 	model packagedElements add: placesAssociation.
@@ -208,70 +244,80 @@ OPUmlUndoRedoRegressionTest >> testUndoHideClassRestoresNavigableAssociationAttr
 	diagramController showInDiagramModel: placesAssociation.
 	undoManager clear.
 
-	self assert: (diagramController hasControllerForModel: ordersProperty)
+	self
+		assert: (diagramController hasControllerForModel: ordersProperty)
 		description: 'Orders property must have a controller before hide'.
 
 	diagramExplorer := OPDiagramExplorer on: diagramController.
 	diagramExplorer hideElement: customerClass.
 
-	self deny: (diagramController hasControllerForModel: customerClass)
+	self
+		deny: (diagramController hasControllerForModel: customerClass)
 		description: 'Customer class controller must be removed on hide'.
-	self deny: (diagramController hasControllerForModel: placesAssociation)
+	self
+		deny: (diagramController hasControllerForModel: placesAssociation)
 		description: 'Association controller must be removed on hide'.
-	self deny: (diagramController hasControllerForModel: ordersProperty)
+	self
+		deny: (diagramController hasControllerForModel: ordersProperty)
 		description: 'Orders property controller must be removed on hide'.
 
 	undoManager undo.
 
-	self assert: (diagramController hasControllerForModel: customerClass)
-		description: 'Customer class must be restored on undo'.
-	self assert: (diagramController hasControllerForModel: placesAssociation)
-		description: 'Association must be restored on undo'.
-	self assert: (diagramController hasControllerForModel: ordersProperty)
+	self assert: (diagramController hasControllerForModel: customerClass) description: 'Customer class must be restored on undo'.
+	self assert: (diagramController hasControllerForModel: placesAssociation) description: 'Association must be restored on undo'.
+	self
+		assert: (diagramController hasControllerForModel: ordersProperty)
 		description: 'Orders property must be restored in Customer class on undo'.
-	self assert: (diagramController controllerForModel: ordersProperty) isRendered
+	self
+		assert: (diagramController controllerForModel: ordersProperty) isRendered
 		description: 'Orders property controller must be rendered on undo'.
 
 	undoManager redo.
 
-	self deny: (diagramController hasControllerForModel: customerClass)
-		description: 'Customer class must be removed on redo'.
-	self deny: (diagramController hasControllerForModel: placesAssociation)
-		description: 'Association must be removed on redo'.
-	self deny: (diagramController hasControllerForModel: ordersProperty)
-		description: 'Orders property must be removed on redo'.
+	self deny: (diagramController hasControllerForModel: customerClass) description: 'Customer class must be removed on redo'.
+	self deny: (diagramController hasControllerForModel: placesAssociation) description: 'Association must be removed on redo'.
+	self deny: (diagramController hasControllerForModel: ordersProperty) description: 'Orders property must be removed on redo'.
 
 	undoManager undo.
 
-	self assert: (diagramController hasControllerForModel: customerClass).
-	self assert: (diagramController hasControllerForModel: placesAssociation).
-	self assert: (diagramController hasControllerForModel: ordersProperty).
-	self assert: (diagramController controllerForModel: ordersProperty) isRendered
+	self
+		assert: (diagramController hasControllerForModel: customerClass)
+		description: 'Customer class must be restored on second undo'.
+	self
+		assert: (diagramController hasControllerForModel: placesAssociation)
+		description: 'Association must be restored on second undo'.
+	self
+		assert: (diagramController hasControllerForModel: ordersProperty)
+		description: 'Orders property must be restored on second undo'.
+	self
+		assert: (diagramController controllerForModel: ordersProperty) isRendered
+		description: 'Orders property controller must be rendered on second undo'
 ]
 
 { #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testUndoRedoOperationCreationInClassCompartment [
+
 	| barrelModel barrelController operationController compartment |
 	barrelModel := model packagedElements detect: [ :eachElement | eachElement name = 'Barrel' ].
 	barrelController := diagramController controllerForModel: barrelModel.
-	self assert: barrelController model ownedOperations isEmpty description: 'Class must initially have no operations'.
+	self assertEmpty: barrelController model ownedOperations.
 
 	operationController := OPUmlOperationController new.
 	barrelController addAsTargetFor: operationController.
 
 	self assert: barrelController model ownedOperations size equals: 1.
 	compartment := barrelController diagramElement operationsCompartment.
-	self assert: compartment isNotNil description: 'Operations compartment must exist after operation creation'.
+	self assert: compartment class equals: OPUmlFeaturesListCompartment.
 	self assert: compartment ownedElements size equals: 1.
 
 	undoManager undo.
-	self assert: barrelController model ownedOperations isEmpty description: 'Class operations must be empty after undo'.
-	self assert: (barrelController diagramElement operationsCompartment ifNotNil: [ :eachCompartment | eachCompartment ownedElements size ] ifNil: [ 0 ]) equals: 0.
+	self assertEmpty: barrelController model ownedOperations.
+	self assert: barrelController diagramElement operationsCompartment identicalTo: nil.
 
 	undoManager redo.
 	self assert: barrelController model ownedOperations size equals: 1.
 	compartment := barrelController diagramElement operationsCompartment.
-	self assert: compartment isNotNil description: 'Operations compartment must exist after redo'.
+	self assert: compartment class equals: OPUmlFeaturesListCompartment.
 	self assert: compartment ownedElements size equals: 1
 ]
 
@@ -305,23 +351,19 @@ OPUmlUndoRedoRegressionTest >> testUndoRestoresClassCompartmentsAndLayout [
 
 	richController := localDiagramController controllerForModel: classModel.
 	classShape := richController diagramElement.
-	self assert: classShape attributesCompartment isNotNil.
-	self denyEmpty: classShape attributesCompartment ownedElements.
+	self assert: classShape attributesCompartment class equals: OPUmlListCompartment.
+	self assert: classShape attributesCompartment ownedElements size equals: 8.
 
 	localDiagramController removeModelOfRoassalShape: richController roassalShape.
 	localUndoManager undo.
 
 	restoredController := localDiagramController controllerForModel: classModel.
 	restoredShape := restoredController diagramElement.
-	self assert: restoredShape attributesCompartment isNotNil description: 'Attributes compartment must not be nil after undo'.
-	self
-		assert: restoredShape attributesCompartment ownedElements isNotEmpty
-		description: 'Attributes compartment must contain attributes'.
-	self assert: restoredShape operationsCompartment isNotNil description: 'Operations compartment must not be nil after undo'.
-	self
-		assert: restoredShape operationsCompartment ownedElements isNotEmpty
-		description: 'Operations compartment must contain operations'.
-	self assert: restoredShape roassalShape height > 100 description: 'Class height must adapt to content extent'
+	self assert: restoredShape attributesCompartment class equals: OPUmlListCompartment.
+	self assert: restoredShape attributesCompartment ownedElements size equals: 8.
+	self assert: restoredShape operationsCompartment class equals: OPUmlFeaturesListCompartment.
+	self assert: restoredShape operationsCompartment ownedElements size equals: 2.
+	self assert: restoredShape roassalShape height closeTo: classShape roassalShape height precision: 0.01
 ]
 
 { #category : 'tests' }
@@ -334,14 +376,15 @@ OPUmlUndoRedoRegressionTest >> testUndoRestoresStereotypeLabel [
 	self denyEmpty: classShape stereotypes.
 
 	diagramController removeModelOfRoassalShape: alcoholController roassalShape.
-	self deny: alcoholController isRendered.
+	self deny: alcoholController isRendered description: 'Alcohol controller must not be rendered after removal'.
 
 	undoManager undo.
 
 	restoredController := diagramController controllerForModel: alcoholModel.
 	restoredShape := restoredController diagramElement.
 	stereotypeLabel := restoredShape instVarNamed: #stereotypeLabel.
-	self assert: stereotypeLabel isNotNil description: 'StereotypeLabel must not be nil after undo'.
+	self assert: stereotypeLabel class equals: OPUmlCompartmentableLabel.
+	self assertCollection: restoredShape ownedElements includesAll: { stereotypeLabel }.
 	self assert: stereotypeLabel isRendered description: 'StereotypeLabel must be rendered after undo'.
 	self assert: stereotypeLabel roassalShape isInACanvas description: 'StereotypeLabel roassalShape must be inside canvas'
 ]

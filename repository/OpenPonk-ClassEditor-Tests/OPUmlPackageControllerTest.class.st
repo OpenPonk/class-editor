@@ -38,12 +38,18 @@ OPUmlPackageControllerTest >> testAddDiagramAsTargetForModel [
 
 { #category : 'tests - creation' }
 OPUmlPackageControllerTest >> testCanDiagramBeTargetForModel [
-	self assert: (diagramController canBeTargetFor: controller)
+
+	self
+		assert: (diagramController canBeTargetFor: controller)
+		description: 'Diagram controller must accept package controller as target'
 ]
 
 { #category : 'tests - creation' }
 OPUmlPackageControllerTest >> testCreateFromPalette [
-	self assert: (diagramController canBeTargetFor: controller)
+
+	self
+		assert: (diagramController canBeTargetFor: controller)
+		description: 'Diagram controller must allow creating package from palette'
 ]
 
 { #category : 'tests - removing' }
@@ -61,21 +67,27 @@ OPUmlPackageControllerTest >> testRemoveEmpty [
 { #category : 'tests - diagram' }
 OPUmlPackageControllerTest >> testShowClassInDiagram [
 
-	| class |
+	| class renderedModels |
 	class := OPUMLClass new.
 	diagramController showWithoutDependentInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = class ] ])
+	renderedModels := diagramController canvas nodes
+		                  select: [ :each | each model isNotNil ]
+		                  thenCollect: [ :each | each model modelElement ].
+	self assertCollection: renderedModels includesAll: { class }.
+	self assert: (diagramController hasControllerForModel: class) description: 'Diagram controller must register class controller'
 ]
 
 { #category : 'tests - diagram' }
 OPUmlPackageControllerTest >> testShowClassWithAttributeInDiagram [
 
-	| class prop |
+	| class prop renderedModels |
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
 	diagramController showInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = prop ] ])
+	renderedModels := diagramController canvas nodes
+		                  select: [ :each | each model isNotNil ]
+		                  thenCollect: [ :each | each model modelElement ].
+	self assertCollection: renderedModels includesAll: { prop }.
+	self assert: (diagramController hasControllerForModel: prop) description: 'Diagram controller must register attribute controller'
 ]

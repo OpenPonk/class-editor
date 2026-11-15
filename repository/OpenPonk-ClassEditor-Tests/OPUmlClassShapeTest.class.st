@@ -35,7 +35,7 @@ OPUmlClassShapeTest >> testName [
 	label := labels anyOne.
 
 	self assert: label text equals: 'ClassName'.
-	self assert: label isNormal.
+	self assert: label emphasis equals: TextEmphasis normal.
 
 	model isAbstract: true.
 	shape modelChanged.
@@ -45,7 +45,7 @@ OPUmlClassShapeTest >> testName [
 	label := labels anyOne.
 
 	self assert: label text equals: 'ClassName'.
-	self assert: label isItalic.
+	self assert: label emphasis equals: TextEmphasis italic.
 
 	model name: 'Name2'.
 	shape modelChanged.
@@ -55,7 +55,7 @@ OPUmlClassShapeTest >> testName [
 	label := labels anyOne.
 
 	self assert: label text equals: 'Name2'.
-	self assert: label isItalic.
+	self assert: label emphasis equals: TextEmphasis italic.
 
 	model isAbstract: false.
 	shape modelChanged.
@@ -65,11 +65,12 @@ OPUmlClassShapeTest >> testName [
 	label := labels anyOne.
 
 	self assert: label text equals: 'Name2'.
-	self deny: label isItalic
+	self assert: label emphasis equals: TextEmphasis normal
 ]
 
 { #category : 'tests' }
 OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
+
 	| modelClass stereo initialStereoLabel stereoLabels |
 	modelClass := OPUMLClass new name: 'Person'.
 	stereo := OPUMLStereotype new.
@@ -81,11 +82,12 @@ OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
 	"1. Prvotní vykreslení"
 	shape renderIn: canvas.
 	initialStereoLabel := shape stereotypeLabel.
-	self assert: initialStereoLabel isNotNil.
+	self assert: initialStereoLabel class equals: OPUmlCompartmentableLabel.
+	self assertCollection: shape ownedElements includesAll: { initialStereoLabel }.
 
 	stereoLabels := shape ownedElements select: [ :each |
-		(each isKindOf: OPUmlCompartmentableLabel) and: [
-			each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
+			                (each isKindOf: OPUmlCompartmentableLabel) and: [
+				                each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
 	self assert: stereoLabels size equals: 1.
 
 	"2. Simulace zavření editoru diagramu"
@@ -98,7 +100,8 @@ OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
 	self assert: shape stereotypeLabel identicalTo: initialStereoLabel.
 
 	stereoLabels := shape ownedElements select: [ :each |
-		(each isKindOf: OPUmlCompartmentableLabel) and: [
-			each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
-	self assert: stereoLabels size equals: 1
+			                (each isKindOf: OPUmlCompartmentableLabel) and: [
+				                each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
+	self assert: stereoLabels size equals: 1.
+	self assert: stereoLabels anyOne identicalTo: initialStereoLabel
 ]

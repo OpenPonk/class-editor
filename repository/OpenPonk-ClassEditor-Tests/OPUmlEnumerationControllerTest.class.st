@@ -33,17 +33,22 @@ OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 	controller model: model.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.
-	self assert: diagramController canvas nodes asArray equals: #(  ).
-	self assert: diagramController controllers asArray equals: #(  )
+	self assertEmpty: diagramController canvas nodes.
+	self assertEmpty: diagramController controllers
 ]
 
 { #category : 'tests - diagram' }
 OPUmlEnumerationControllerTest >> testShowWithLiteralsInDiagram [
 
-	| literal |
+	| literal renderedModels |
 	literal := OPUMLEnumerationLiteral new name: 'enumLiteral'.
 	model ownedLiterals add: literal.
 	diagramController showInDiagramModel: model.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = literal ] ])
+	renderedModels := diagramController canvas nodes
+		                  select: [ :each | each model isNotNil ]
+		                  thenCollect: [ :each | each model modelElement ].
+	self assertCollection: renderedModels includesAll: { literal }.
+	self
+		assert: (diagramController hasControllerForModel: literal)
+		description: 'Diagram controller must register literal controller when showing enumeration'
 ]

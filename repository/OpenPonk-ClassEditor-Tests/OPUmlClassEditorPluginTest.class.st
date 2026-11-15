@@ -25,7 +25,10 @@ OPUmlClassEditorPluginTest >> testDiagramControlllerClass [
 
 { #category : 'tests' }
 OPUmlClassEditorPluginTest >> testIcon [
-	self assert: plugin icon isForm
+
+	self assert: plugin icon class equals: Form.
+	self assert: plugin icon extent equals: OPUmlIcons packageIcon extent.
+	self assert: plugin icon bits equals: OPUmlIcons packageIcon bits
 ]
 
 { #category : 'tests' }
@@ -40,23 +43,16 @@ OPUmlClassEditorPluginTest >> testName [
 
 { #category : 'tests' }
 OPUmlClassEditorPluginTest >> testNewModelContainsCommonTypesPackage [
-	| plugin model commonTypesPkg expectedTypeNames foundTypeNames |
-	plugin := OPUmlClassEditorPlugin new.
+
+	| model commonTypesPkg expectedTypeNames foundTypeNames |
 	model := plugin newModel.
 	commonTypesPkg := model packagedElements
-		detect: [ :each | (each oclIsKindOf: #Package) and: [ each name = 'CommonTypes' ] ]
-		ifNone: [ nil ].
-	self assert: commonTypesPkg isNotNil description: 'Model must contain CommonTypes package'.
-	expectedTypeNames := #(
-		'Date' 'DateTime' 'DateAndTime' 'Time' 'Timestamp' 'Duration'
-		'Decimal' 'Float' 'Double' 'Long' 'Number'
-		'Char' 'Text' 'Clob'
-		'Byte' 'ByteArray' 'Blob'
-		'UUID' 'URI' 'URL' 'Email'
-		'JSON' 'XML'
-	).
-	foundTypeNames := (commonTypesPkg packagedElements
-		select: [ :each | each oclIsKindOf: #DataType ]
-		thenCollect: #name) asSet.
+		                  detect: [ :each | (each oclIsKindOf: #Package) and: [ each name = 'CommonTypes' ] ]
+		                  ifNone: [ nil ].
+	self assert: commonTypesPkg class equals: OPUMLPackage.
+	self assert: commonTypesPkg name equals: 'CommonTypes'.
+	expectedTypeNames := #( 'Date' 'DateTime' 'DateAndTime' 'Time' 'Timestamp' 'Duration' 'Decimal' 'Float' 'Double' 'Long' 'Number'
+	                        'Char' 'Text' 'Clob' 'Byte' 'ByteArray' 'Blob' 'UUID' 'URI' 'URL' 'Email' 'JSON' 'XML' ).
+	foundTypeNames := (commonTypesPkg packagedElements select: [ :each | each oclIsKindOf: #DataType ] thenCollect: #name) asSet.
 	self assertCollection: foundTypeNames includesAll: expectedTypeNames
 ]

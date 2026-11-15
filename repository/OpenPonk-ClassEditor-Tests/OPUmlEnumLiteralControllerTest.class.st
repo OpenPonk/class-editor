@@ -39,9 +39,12 @@ OPUmlEnumLiteralControllerTest >> modelClass [
 
 { #category : 'tests - creation' }
 OPUmlEnumLiteralControllerTest >> testCanEnumerationBeTarget [
+
 	| classController |
 	classController := OPUmlEnumerationController new.
-	self assert: (classController canBeTargetFor: controller)
+	self
+		assert: (classController canBeTargetFor: controller)
+		description: 'Enumeration controller must accept literal controller as target'
 ]
 
 { #category : 'tests - creation' }
@@ -76,5 +79,5 @@ OPUmlEnumLiteralControllerTest >> testRemoveFromView [
 	controller := diagramController controllerForModel: prop.
 	compartment := controller diagramElement owningElement.
 	controller removeControllerAndDiagramElement.
-	self assert: compartment ownedElements asArray equals: #(  )
+	self assertEmpty: compartment ownedElements
 ]

@@ -43,12 +43,18 @@ OPUmlStereotypeControllerTest >> testAddDiagramAsTargetForClass [
 
 { #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testCanDiagramBeTargetForClass [
-	self assert: (diagramController canBeTargetFor: controller)
+
+	self
+		assert: (diagramController canBeTargetFor: controller)
+		description: 'Diagram controller must accept stereotype controller as target'
 ]
 
 { #category : 'tests - creation' }
 OPUmlStereotypeControllerTest >> testCreateFromPalette [
-	self assert: (diagramController canBeTargetFor: controller)
+
+	self
+		assert: (diagramController canBeTargetFor: controller)
+		description: 'Diagram controller must allow creating stereotype from palette'
 ]
 
 { #category : 'tests - removing' }
@@ -60,8 +66,8 @@ OPUmlStereotypeControllerTest >> testRemoveEmpty [
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.
-	self assert: diagramController canvas nodes asArray equals: #(  ).
-	self assert: diagramController controllers asArray equals: #(  )
+	self assertEmpty: diagramController canvas nodes.
+	self assertEmpty: diagramController controllers
 ]
 
 { #category : 'tests - removing' }
@@ -74,28 +80,38 @@ OPUmlStereotypeControllerTest >> testRemoveWithAttribute [
 	controller model: class.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.
-	self assert: diagramController canvas nodes asArray equals: #(  ).
-	self assert: diagramController controllers asArray equals: #(  )
+	self assertEmpty: diagramController canvas nodes.
+	self assertEmpty: diagramController controllers
 ]
 
 { #category : 'tests - diagram' }
 OPUmlStereotypeControllerTest >> testShowClassInDiagram [
 
-	| class |
+	| class renderedModels |
 	class := self newEmptyModel.
 	diagramController showWithoutDependentInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = class ] ])
+	renderedModels := diagramController canvas nodes
+		                  select: [ :each | each model isNotNil ]
+		                  thenCollect: [ :each | each model modelElement ].
+	self assertCollection: renderedModels includesAll: { class }.
+	self
+		assert: (diagramController hasControllerForModel: class)
+		description: 'Diagram controller must register stereotype controller'
 ]
 
 { #category : 'tests - diagram' }
 OPUmlStereotypeControllerTest >> testShowClassWithAttributeInDiagram [
 
-	| class prop |
+	| class prop renderedModels |
 	class := self newEmptyModel.
 	prop := OPUMLProperty new.
 	class ownedAttributes add: prop.
 	diagramController showInDiagramModel: class.
-	self assert: (diagramController canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = prop ] ])
+	renderedModels := diagramController canvas nodes
+		                  select: [ :each | each model isNotNil ]
+		                  thenCollect: [ :each | each model modelElement ].
+	self assertCollection: renderedModels includesAll: { prop }.
+	self
+		assert: (diagramController hasControllerForModel: prop)
+		description: 'Diagram controller must register attribute controller for stereotype property'
 ]

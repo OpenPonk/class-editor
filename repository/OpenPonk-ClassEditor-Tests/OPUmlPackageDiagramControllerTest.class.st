@@ -33,22 +33,28 @@ OPUmlPackageDiagramControllerTest >> modelClass [
 { #category : 'tests' }
 OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 
-	| class |
+	| class renderedModels |
 	class := OPUMLClass new.
 	controller showWithoutDependentInDiagramModel: class.
-	self assert: (controller canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = class ] ])
+	renderedModels := controller canvas nodes
+		                  select: [ :each | each model isNotNil ]
+		                  thenCollect: [ :each | each model modelElement ].
+	self assertCollection: renderedModels includesAll: { class }.
+	self assert: (controller hasControllerForModel: class) description: 'Diagram controller must register class controller'
 ]
 
 { #category : 'tests' }
 OPUmlPackageDiagramControllerTest >> testShowClassWithAttributeInDiagram [
 
-	| class prop |
+	| class prop renderedModels |
 	class := OPUMLClass new.
 	prop := OPUMLProperty new.
 	prop name: 'prop'.
 	class ownedAttributes add: prop.
 	controller showInDiagramModel: class.
-	self assert: (controller canvas nodes anySatisfy: [ :each | 
-			 each model isNotNil and: [ each model modelElement = prop ] ])
+	renderedModels := controller canvas nodes
+		                  select: [ :each | each model isNotNil ]
+		                  thenCollect: [ :each | each model modelElement ].
+	self assertCollection: renderedModels includesAll: { prop }.
+	self assert: (controller hasControllerForModel: prop) description: 'Diagram controller must register attribute controller'
 ]

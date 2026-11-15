@@ -92,13 +92,18 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetAndUndoRemovesLabe
 
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetToStandaloneGeneralizationAndUndoClearsLabel [
+
 	| classAnimal classCat standaloneGeneralization genController labelElement labelShape activeUndoManager editor |
 	classAnimal := OPUMLClass new name: 'Animal'.
 	classCat := OPUMLClass new name: 'Cat'.
-	package packagedElements add: classAnimal; add: classCat.
+	package packagedElements
+		add: classAnimal;
+		add: classCat.
 
 	standaloneGeneralization := OPUMLGeneralization new.
-	standaloneGeneralization general: classAnimal; specific: classCat.
+	standaloneGeneralization
+		general: classAnimal;
+		specific: classCat.
 	classCat generalizations add: standaloneGeneralization.
 
 	diagramController showInDiagramModel: classAnimal.
@@ -106,8 +111,7 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetToStandaloneGenera
 	diagramController showInDiagramModel: standaloneGeneralization.
 
 	genController := diagramController controllerForModel: standaloneGeneralization.
-	labelElement := genController diagramElement ownedElements
-		detect: [ :eachLabel | eachLabel isKindOf: OPUmlGeneralizationLabel ].
+	labelElement := genController diagramElement ownedElements detect: [ :eachLabel | eachLabel isKindOf: OPUmlGeneralizationLabel ].
 	labelShape := labelElement roassalShape.
 
 	self assert: labelShape text equals: ''.
@@ -125,13 +129,14 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetToStandaloneGenera
 
 	activeUndoManager undo.
 
-	self assert: standaloneGeneralization generalizationSets size equals: 0.
+	self assertEmpty: standaloneGeneralization generalizationSets.
 	self assert: labelShape text equals: ''
 ]
 
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithViewModelWithoutController [
 	"Verifies that deleting a generalization set works with viewModel only, when controller is nil."
+
 	| generalizationVM editor |
 	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
 
@@ -140,7 +145,7 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithVie
 
 	editor deleteSet: generalizationSet.
 
-	self deny: (editor table items anySatisfy: [ :each | each uuid = generalizationSet uuid ])
+	self denyCollection: (editor table items collect: #uuid) includesAny: { generalizationSet uuid }
 ]
 
 { #category : 'tests' }

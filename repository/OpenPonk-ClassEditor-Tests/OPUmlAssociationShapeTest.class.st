@@ -118,7 +118,7 @@ OPUmlAssociationShapeTest >> testAssociationLabelDefaultTextIncludesProperties [
 { #category : 'tests' }
 OPUmlAssociationShapeTest >> testAssociationLabelIncludesPropertiesAndHasNoSeparatePropertiesLabel [
 
-	| assoc end1 end2 |
+	| assoc end1 end2 ownedElementClasses |
 	assoc := OPUMLAssociation new name: 'donatesWith'.
 	end1 := OPUMLProperty new name: 'sourceEnd'.
 	end2 := OPUMLProperty new name: 'targetEnd'.
@@ -130,7 +130,9 @@ OPUmlAssociationShapeTest >> testAssociationLabelIncludesPropertiesAndHasNoSepar
 	shape createOwnedElementsWithoutController.
 
 	"1. Shape nesmí mít samostatný OPUmlAssociationPropertiesLabel"
-	self deny: (shape ownedElements anySatisfy: [ :each | each isKindOf: OPUmlAssociationPropertiesLabel ])
+	ownedElementClasses := shape ownedElements collect: #class.
+	self assertCollection: ownedElementClasses includesAll: { OPUmlAssociationLabel }.
+	self denyCollection: ownedElementClasses includesAny: { OPUmlAssociationPropertiesLabel }
 ]
 
 { #category : 'tests' }
@@ -197,13 +199,8 @@ OPUmlAssociationShapeTest >> testEndComposite [
 { #category : 'tests' }
 OPUmlAssociationShapeTest >> testEndOneNavigable [
 
-	self
-		assert:
-		(OPUmlAssociationShape new markerShapeFor: ownedComment) shape class
-		equals: OPRSMarkerBuilder arrowShape class.
-	self
-		assert: (OPUmlAssociationShape new markerShapeFor: owningElement)
-		equals: nil
+	self assert: (OPUmlAssociationShape new markerShapeFor: ownedComment) shape class equals: OPRSMarkerBuilder arrowShape class.
+	self assert: (OPUmlAssociationShape new markerShapeFor: owningElement) identicalTo: nil
 ]
 
 { #category : 'tests' }

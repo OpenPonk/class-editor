@@ -84,24 +84,25 @@ OPUmlPropertyMagritteDescriptionsTest >> testWriteMultiplicityAndDefaultValue [
 	self assert: (defDesc accessor read: viewModel) equals: 'initVal'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 OPUmlPropertyMagritteDescriptionsTest >> testWriteNavigabilityUpdatesModelWithoutDnu [
+
 	| description accessor |
 	description := descriptions descriptionIsNavigable.
 	accessor := description accessor.
 
-	self deny: (accessor read: viewModel).
-	self deny: secondEnd isNavigable.
+	self deny: (accessor read: viewModel) description: 'Target end must initially not be navigable'.
+	self deny: secondEnd isNavigable description: 'Target property must initially not be navigable'.
 
 	accessor write: true to: viewModel.
 
-	self assert: (accessor read: viewModel).
-	self assert: secondEnd isNavigable.
-	self assert: secondEnd owningClass equals: classA.
+	self assert: (accessor read: viewModel) description: 'Accessor must read true after enabling navigability'.
+	self assert: secondEnd isNavigable description: 'Target property must become navigable after write: true'.
+	self assert: secondEnd owningClass identicalTo: classA.
 
 	accessor write: false to: viewModel.
 
-	self deny: (accessor read: viewModel).
-	self deny: secondEnd isNavigable.
-	self assert: secondEnd owningAssociation equals: association
+	self deny: (accessor read: viewModel) description: 'Accessor must read false after disabling navigability'.
+	self deny: secondEnd isNavigable description: 'Target property must become non-navigable after write: false'.
+	self assert: secondEnd owningAssociation identicalTo: association
 ]

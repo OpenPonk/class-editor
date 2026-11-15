@@ -105,12 +105,18 @@ OPUmlRelationshipControllerTest >> sourceModelClass [
 
 { #category : 'tests - creation' }
 OPUmlRelationshipControllerTest >> testCanClassBeSource [
-	self assert: (OPUmlClassController new canBeSourceFor: controller)
+
+	self
+		assert: (OPUmlClassController new canBeSourceFor: controller)
+		description: 'Class controller must be allowed as source for UML relationship'
 ]
 
 { #category : 'tests - creation' }
 OPUmlRelationshipControllerTest >> testCanClassBeTarget [
-	self assert: (OPUmlClassController new canBeTargetFor: controller)
+
+	self
+		assert: (OPUmlClassController new canBeTargetFor: controller)
+		description: 'Class controller must be allowed as target for UML relationship'
 ]
 
 { #category : 'tests - creation' }

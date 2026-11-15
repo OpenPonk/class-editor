@@ -61,10 +61,11 @@ OPCommonTypesReadOnlyTest >> testCommonTypesCannotBeRemovedFromProjectTree [
 
 { #category : 'tests' }
 OPCommonTypesReadOnlyTest >> testCommonTypesHasNoSupportInDiagramController [
-	self deny: (diagramController hasSupportForModel: commonPackage)
+
+	self
+		deny: (diagramController hasSupportForModel: commonPackage)
 		description: 'Diagram controller must not support CommonTypes package'.
-	self deny: (diagramController allModelElementsWithPossibleController includes: commonPackage)
-		description: 'CommonTypes package must not appear in allModelElementsWithPossibleController'
+	self denyCollection: diagramController allModelElementsWithPossibleController includesAny: { commonPackage }
 ]
 
 { #category : 'tests' }

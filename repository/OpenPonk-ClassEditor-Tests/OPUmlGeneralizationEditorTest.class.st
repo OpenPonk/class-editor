@@ -170,6 +170,7 @@ OPUmlGeneralizationEditorTest >> testSaveCommentIsUndoable [
 
 { #category : 'tests' }
 OPUmlGeneralizationEditorTest >> testSaveProducesLabeledTransactionWithoutUnchangedCommentCommand [
+
 	| activeUndoManager generalizationViewModel editor recordedCommand |
 	activeUndoManager := diagramController undoManager.
 	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
@@ -181,11 +182,9 @@ OPUmlGeneralizationEditorTest >> testSaveProducesLabeledTransactionWithoutUnchan
 	editor generalizationSetsEditor addNewSet.
 	editor save.
 
-	self assert: activeUndoManager canUndo.
+	self assert: activeUndoManager canUndo description: 'Saving generalization editor must record an undoable transaction'.
 	recordedCommand := activeUndoManager undoStack last.
 	self assert: recordedCommand description equals: 'Edit Generalization'.
-	self
-		deny: (recordedCommand commands anySatisfy: [ :eachEnclosedCommand |
-			eachEnclosedCommand isKindOf: OPUmlUpdateGeneralizationCommentCommand ])
-		description: 'Unchanged comment must not produce comment command'
+	self assertCollection: (recordedCommand commands collect: #class) hasSameElements: { OPUmlUpdateGeneralizationSetsCommand }.
+	self denyCollection: (recordedCommand commands collect: #class) includesAny: { OPUmlUpdateGeneralizationCommentCommand }
 ]

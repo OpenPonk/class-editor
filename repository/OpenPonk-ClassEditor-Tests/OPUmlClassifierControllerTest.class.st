@@ -22,12 +22,18 @@ OPUmlClassifierControllerTest >> testAddDiagramAsTargetForClass [
 
 { #category : 'tests - creation' }
 OPUmlClassifierControllerTest >> testCanDiagramBeTargetForClass [
-	self assert: (diagramController canBeTargetFor: controller)
+
+	self
+		assert: (diagramController canBeTargetFor: controller)
+		description: 'Diagram controller must accept classifier controller as target'
 ]
 
 { #category : 'tests - creation' }
 OPUmlClassifierControllerTest >> testCreateFromPalette [
-	self assert: (diagramController canBeTargetFor: controller)
+
+	self
+		assert: (diagramController canBeTargetFor: controller)
+		description: 'Diagram controller must allow creating classifier from palette'
 ]
 
 { #category : 'tests - removing' }
@@ -36,8 +42,8 @@ OPUmlClassifierControllerTest >> testRemoveEmpty [
 	controller model: model.
 	controller showWithoutDependentInDiagram: diagramController.
 	controller removeControllerAndDiagramElement.
-	self assert: diagramController canvas nodes asArray equals: #(  ).
-	self assert: diagramController controllers asArray equals: #(  )
+	self assertEmpty: diagramController canvas nodes.
+	self assertEmpty: diagramController controllers
 ]
 
 { #category : 'tests - removing' }

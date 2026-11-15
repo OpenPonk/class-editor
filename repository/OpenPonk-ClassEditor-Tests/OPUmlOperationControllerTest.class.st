@@ -45,5 +45,5 @@ OPUmlOperationControllerTest >> testRemoveFromView [
 	controller := diagramController controllerForModel: op.
 	compartment := controller diagramElement owningElement.
 	controller removeControllerAndDiagramElement.
-	self assert: compartment ownedElements asArray equals: #(  )
+	self assertEmpty: compartment ownedElements
 ]

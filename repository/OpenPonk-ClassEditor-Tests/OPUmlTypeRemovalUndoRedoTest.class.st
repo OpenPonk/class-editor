@@ -38,7 +38,7 @@ OPUmlTypeRemovalUndoRedoTest >> testRemoveClassNilsReferencingPropertiesAndUndoR
 	cmd := OPRemoveModelElementCommand model: targetClass projectController: projectController.
 	undoManager inTransaction: [ undoManager execute: cmd ].
 
-	self assert: prop type isNil.
+	self assert: prop type identicalTo: nil.
 	self denyCollection: package packagedElements includesAny: { targetClass }.
 
 	undoManager undo.
@@ -46,7 +46,7 @@ OPUmlTypeRemovalUndoRedoTest >> testRemoveClassNilsReferencingPropertiesAndUndoR
 	self assertCollection: package packagedElements includesAll: { targetClass }.
 
 	undoManager redo.
-	self assert: prop type isNil.
+	self assert: prop type identicalTo: nil.
 	self denyCollection: package packagedElements includesAny: { targetClass }
 ]
 
@@ -66,7 +66,7 @@ OPUmlTypeRemovalUndoRedoTest >> testRemoveDataTypeNilsReferencingPropertiesAndUn
 	cmd := OPRemoveModelElementCommand model: dataType projectController: projectController.
 	undoManager inTransaction: [ undoManager execute: cmd ].
 
-	self assert: prop type isNil.
+	self assert: prop type identicalTo: nil.
 	self denyCollection: commonPkg packagedElements includesAny: { dataType }.
 
 	undoManager undo.
@@ -74,25 +74,35 @@ OPUmlTypeRemovalUndoRedoTest >> testRemoveDataTypeNilsReferencingPropertiesAndUn
 	self assertCollection: commonPkg packagedElements includesAll: { dataType }.
 
 	undoManager redo.
-	self assert: prop type isNil.
+	self assert: prop type identicalTo: nil.
 	self denyCollection: commonPkg packagedElements includesAny: { dataType }
 ]
 
 { #category : 'tests' }
 OPUmlTypeRemovalUndoRedoTest >> testRemoveTypeDoesNotAffectUnrelatedProperties [
+
 	| targetClass otherType userClass propTarget propOther cmd |
 	targetClass := OPUMLClass new name: 'TargetClass'.
 	otherType := OPUMLClass new name: 'OtherClass'.
 	userClass := OPUMLClass new name: 'UserClass'.
-	propTarget := OPUMLProperty new name: 'targetRef'; type: targetClass.
-	propOther := OPUMLProperty new name: 'otherRef'; type: otherType.
-	userClass ownedAttributes: { propTarget . propOther }.
-	package packagedElements addAll: { targetClass . otherType . userClass }.
+	propTarget := OPUMLProperty new
+		              name: 'targetRef';
+		              type: targetClass.
+	propOther := OPUMLProperty new
+		             name: 'otherRef';
+		             type: otherType.
+	userClass ownedAttributes: {
+			propTarget.
+			propOther }.
+	package packagedElements addAll: {
+			targetClass.
+			otherType.
+			userClass }.
 
 	cmd := OPRemoveModelElementCommand model: targetClass projectController: projectController.
 	undoManager inTransaction: [ undoManager execute: cmd ].
 
-	self assert: propTarget type isNil.
+	self assert: propTarget type identicalTo: nil.
 	self assert: propOther type identicalTo: otherType.
 
 	undoManager undo.

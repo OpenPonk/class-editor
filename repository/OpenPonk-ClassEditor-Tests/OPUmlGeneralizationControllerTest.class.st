@@ -58,22 +58,20 @@ OPUmlGeneralizationControllerTest >> testDeleteGeneralizationSetWithMultipleGene
 	editor table items: (editor table items reject: [ :eachTableItem | eachTableItem uuid = generalizationSet uuid ]).
 	editor save.
 
-	self assert: generalizationSet generalizations isEmpty description: 'Deleted set must not retain any generalizations'.
-	self assert: generalization1 generalizationSets isEmpty description: 'First generalization must be unlinked from set'.
-	self assert: generalization2 generalizationSets isEmpty description: 'Second generalization must be unlinked from set'.
-	self deny: (package packagedElements includes: generalizationSet) description: 'Package must not contain deleted set'.
+	self assertEmpty: generalizationSet generalizations.
+	self assertEmpty: generalization1 generalizationSets.
+	self assertEmpty: generalization2 generalizationSets.
+	self denyCollection: package packagedElements includesAny: { generalizationSet }.
 	self assert: activeUndoManager canUndo description: 'Deletion must be recorded in undo manager'.
 
 	activeUndoManager undo.
 
-	self assert: (package packagedElements includes: generalizationSet) description: 'Set must be restored to package upon undo'.
-	self assert: generalizationSet generalizations size equals: 2.
-	self
-		assert: (generalization1 generalizationSets includes: generalizationSet)
-		description: 'First generalization must be restored upon undo'.
-	self
-		assert: (generalization2 generalizationSets includes: generalizationSet)
-		description: 'Second generalization must be restored upon undo'.
+	self assertCollection: package packagedElements includesAll: { generalizationSet }.
+	self assertCollection: generalizationSet generalizations hasSameElements: {
+			generalization1.
+			generalization2 }.
+	self assertCollection: generalization1 generalizationSets includesAll: { generalizationSet }.
+	self assertCollection: generalization2 generalizationSets includesAll: { generalizationSet }.
 
 	activeUndoManager redo.
 	self assertEmpty: generalizationSet generalizations.
@@ -86,11 +84,12 @@ OPUmlGeneralizationControllerTest >> testDeleteGeneralizationSetWithMultipleGene
 OPUmlGeneralizationControllerTest >> testDescriptionName [
 
 	self prepareToShow.
-	self assert: controller viewModel descriptionName equals: nil
+	self assert: controller viewModel descriptionName identicalTo: nil
 ]
 
 { #category : 'tests' }
 OPUmlGeneralizationControllerTest >> testExecuteRemovesAllGeneralizationsFromDeletedSet [
+
 	| package generalizationSet generalization1 generalization2 command |
 	package := OPUMLPackage new name: 'TestPkg'.
 	generalizationSet := OPUMLGeneralizationSet new name: 'TestSet'.
@@ -104,25 +103,23 @@ OPUmlGeneralizationControllerTest >> testExecuteRemovesAllGeneralizationsFromDel
 	command recordRemoveSet: generalizationSet fromPackage: package generalizations: generalizationSet generalizations asArray.
 	command execute.
 
-	self assert: generalizationSet generalizations isEmpty
-		description: 'GeneralizationSet must have all generalizations removed upon deletion'.
-	self assert: generalization1 generalizationSets isEmpty
-		description: 'First generalization must not belong to removed set'.
-	self assert: generalization2 generalizationSets isEmpty
-		description: 'Second generalization must not belong to removed set'.
-	self deny: (package packagedElements includes: generalizationSet)
-		description: 'Package must not contain removed generalization set'
+	self assertEmpty: generalizationSet generalizations.
+	self assertEmpty: generalization1 generalizationSets.
+	self assertEmpty: generalization2 generalizationSets.
+	self denyCollection: package packagedElements includesAny: { generalizationSet }
 ]
 
 { #category : 'tests' }
 OPUmlGeneralizationControllerTest >> testRemovingGeneralClassifierRemovesGeneralizationAndController [
 	"Verifies that removing the general classifier cascades to the generalization and its diagram controller"
 
+	| generalizationDiagramElements |
 	self showInDiagram.
 
-	self assert: (diagramController hasControllerForModel: model).
-	self assert: (targetModel generalizations includes: model) not.
+	self assert: (diagramController hasControllerForModel: model) description: 'Generalization controller must exist before removal'.
+	self denyCollection: targetModel generalizations includesAny: { model }.
 	self assertCollection: sourceModel generalizations includesAll: { model }.
+	generalizationDiagramElements := { controller diagramElement } , controller diagramElement ownedElements.
 
 	"Delete the general classifier via its controller"
 	self targetController removeControllerAndModel.
@@ -131,12 +128,12 @@ OPUmlGeneralizationControllerTest >> testRemovingGeneralClassifierRemovesGeneral
 	self denyCollection: sourceModel generalizations includesAny: { model }.
 
 	"2. Generalization controller must be removed from the diagram"
-	self deny: (diagramController hasControllerForModel: model).
+	self deny: (diagramController hasControllerForModel: model) description: 'Generalization controller must be removed from diagram'.
 
 	"3. Canvas must not contain any shapes or labels referencing the generalization"
-	self deny: (diagramController canvas shapes anySatisfy: [ :shape |
-				 shape model = model or: [
-					 shape model isNotNil and: [ (shape model respondsTo: #generalization) and: [ shape model generalization = model ] ] ] ])
+	self denyCollection: (diagramController canvas shapes collect: #model) includesAny: generalizationDiagramElements.
+	self assertEmpty:
+		(diagramController canvas shapes select: [ :shape | shape model isNotNil and: [ shape model modelElement == model ] ])
 ]
 
 { #category : 'tests' }
@@ -162,6 +159,7 @@ OPUmlGeneralizationControllerTest >> testRemovingGeneralizationCleansUpEmptyGene
 
 { #category : 'tests' }
 OPUmlGeneralizationControllerTest >> testUndoRestoresGeneralizationsOfDeletedSet [
+
 	| package generalizationSet generalization1 generalization2 command |
 	package := OPUMLPackage new name: 'TestPkg'.
 	generalizationSet := OPUMLGeneralizationSet new name: 'TestSet'.
@@ -176,11 +174,10 @@ OPUmlGeneralizationControllerTest >> testUndoRestoresGeneralizationsOfDeletedSet
 	command execute.
 	command undo.
 
-	self assert: (package packagedElements includes: generalizationSet)
-		description: 'Package must contain restored generalization set after undo'.
-	self assert: generalizationSet generalizations size equals: 2.
-	self assert: (generalization1 generalizationSets includes: generalizationSet)
-		description: 'First generalization must be restored to generalization set'.
-	self assert: (generalization2 generalizationSets includes: generalizationSet)
-		description: 'Second generalization must be restored to generalization set'
+	self assertCollection: package packagedElements includesAll: { generalizationSet }.
+	self assertCollection: generalizationSet generalizations hasSameElements: {
+			generalization1.
+			generalization2 }.
+	self assertCollection: generalization1 generalizationSets includesAll: { generalizationSet }.
+	self assertCollection: generalization2 generalizationSets includesAll: { generalizationSet }
 ]

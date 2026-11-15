@@ -75,6 +75,7 @@ OPUmlLayouterTest >> testClassCompartmentWidthMatchesClassWidth [
 
 { #category : 'tests' }
 OPUmlLayouterTest >> testClassCompartmentsHaveNoOverlapsAndAreMonotonicallyOrdered [
+
 	| richModel richProject richDiagram projectController richDiagramController classController classShape attributesCompartment operationsCompartment attributeItems operationItems allLabels |
 	richModel := OPUmlExamples exampleRichClass.
 	richProject := OPProject new.
@@ -86,7 +87,9 @@ OPUmlLayouterTest >> testClassCompartmentsHaveNoOverlapsAndAreMonotonicallyOrder
 	richDiagramController := OPUmlPackageDiagramController new.
 	projectController addDiagramController: richDiagramController.
 	richDiagramController
-		canvasPresenter: (OPCanvasPresenter new canvas: RSCanvas new; yourself);
+		canvasPresenter: (OPCanvasPresenter new
+				 canvas: RSCanvas new;
+				 yourself);
 		diagramElement: richDiagram;
 		model: richModel.
 
@@ -94,56 +97,66 @@ OPUmlLayouterTest >> testClassCompartmentsHaveNoOverlapsAndAreMonotonicallyOrder
 	richDiagramController showAllElements.
 	richDiagramController applyDefaultLayout.
 
-	classController := richDiagramController controllers detect: [ :eachController |
-		eachController isKindOf: OPUmlClassController ].
+	classController := richDiagramController controllers detect: [ :eachController | eachController isKindOf: OPUmlClassController ].
 	classShape := classController diagramElement.
 	attributesCompartment := classShape attributesCompartment.
 	operationsCompartment := classShape operationsCompartment.
 
-	self assert: attributesCompartment isNotNil.
-	self assert: operationsCompartment isNotNil.
+	self assert: attributesCompartment class equals: OPUmlListCompartment.
+	self assert: operationsCompartment class equals: OPUmlFeaturesListCompartment.
 
 	attributeItems := attributesCompartment ownedElements asArray.
 	operationItems := operationsCompartment ownedElements asArray.
 
 	"1. Verify vertical monotonic ordering and absence of overlaps inside attributes"
 	1 to: attributeItems size - 1 do: [ :index |
-		| currentItem nextItem currentRectangle nextRectangle |
-		currentItem := attributeItems at: index.
-		nextItem := attributeItems at: index + 1.
-		currentRectangle := currentItem roassalShape encompassingRectangle.
-		nextRectangle := nextItem roassalShape encompassingRectangle.
-		self assert: nextRectangle top >= (currentRectangle bottom - 0.01).
-		self deny: ((currentRectangle intersects: nextRectangle) and: [
-			(currentRectangle intersect: nextRectangle) height > 0.5 ]) ].
+			| currentItem nextItem currentRectangle nextRectangle |
+			currentItem := attributeItems at: index.
+			nextItem := attributeItems at: index + 1.
+			currentRectangle := currentItem roassalShape encompassingRectangle.
+			nextRectangle := nextItem roassalShape encompassingRectangle.
+			self
+				assert: nextRectangle top >= (currentRectangle bottom - 0.01)
+				description: 'Attribute compartment items must be vertically ordered from top to bottom'.
+			self
+				deny: ((currentRectangle intersects: nextRectangle) and: [ (currentRectangle intersect: nextRectangle) height > 0.5 ])
+				description: 'Adjacent attribute compartment items must not vertically overlap' ].
 
 	"2. Verify vertical monotonic ordering and absence of overlaps inside operations"
 	1 to: operationItems size - 1 do: [ :index |
-		| currentItem nextItem currentRectangle nextRectangle |
-		currentItem := operationItems at: index.
-		nextItem := operationItems at: index + 1.
-		currentRectangle := currentItem roassalShape encompassingRectangle.
-		nextRectangle := nextItem roassalShape encompassingRectangle.
-		self assert: nextRectangle top >= (currentRectangle bottom - 0.01).
-		self deny: ((currentRectangle intersects: nextRectangle) and: [
-			(currentRectangle intersect: nextRectangle) height > 0.5 ]) ].
+			| currentItem nextItem currentRectangle nextRectangle |
+			currentItem := operationItems at: index.
+			nextItem := operationItems at: index + 1.
+			currentRectangle := currentItem roassalShape encompassingRectangle.
+			nextRectangle := nextItem roassalShape encompassingRectangle.
+			self
+				assert: nextRectangle top >= (currentRectangle bottom - 0.01)
+				description: 'Operation compartment items must be vertically ordered from top to bottom'.
+			self
+				deny: ((currentRectangle intersects: nextRectangle) and: [ (currentRectangle intersect: nextRectangle) height > 0.5 ])
+				description: 'Adjacent operation compartment items must not vertically overlap' ].
 
 	"3. Verify operations compartment is placed strictly below attributes compartment"
-	self assert: operationsCompartment roassalShape encompassingRectangle top
-		>= (attributesCompartment roassalShape encompassingRectangle bottom - 0.01).
+	self
+		assert: operationsCompartment roassalShape encompassingRectangle top
+			>= (attributesCompartment roassalShape encompassingRectangle bottom - 0.01)
+		description: 'Operations compartment must be placed below attributes compartment'.
 
 	"4. Verify cross-compartment pairwise non-intersection"
 	allLabels := attributeItems , operationItems.
 	1 to: allLabels size do: [ :indexA |
-		(indexA + 1) to: allLabels size do: [ :indexB |
-			| rectA rectB |
-			rectA := (allLabels at: indexA) roassalShape encompassingRectangle.
-			rectB := (allLabels at: indexB) roassalShape encompassingRectangle.
-			self deny: ((rectA intersects: rectB) and: [ (rectA intersect: rectB) height > 0.5 ]) ] ]
+			indexA + 1 to: allLabels size do: [ :indexB |
+					| rectA rectB |
+					rectA := (allLabels at: indexA) roassalShape encompassingRectangle.
+					rectB := (allLabels at: indexB) roassalShape encompassingRectangle.
+					self
+						deny: ((rectA intersects: rectB) and: [ (rectA intersect: rectB) height > 0.5 ])
+						description: 'Labels across attribute and operation compartments must not vertically overlap' ] ]
 ]
 
 { #category : 'tests' }
 OPUmlLayouterTest >> testDefaultLayoutIsUndoable [
+
 	| innerPackage innerClass layouter packageController classController initialPackagePosition initialClassPosition |
 	innerPackage := OPUMLPackage new name: 'SubPackage'.
 	innerClass := OPUMLClass new name: 'SubClass'.
@@ -153,10 +166,8 @@ OPUmlLayouterTest >> testDefaultLayoutIsUndoable [
 
 	diagramController showAllElements.
 
-	packageController := diagramController controllers detect: [ :eachController |
-		eachController model == innerPackage ].
-	classController := diagramController controllers detect: [ :eachController |
-		eachController model == innerClass ].
+	packageController := diagramController controllers detect: [ :eachController | eachController model == innerPackage ].
+	classController := diagramController controllers detect: [ :eachController | eachController model == innerClass ].
 
 	initialPackagePosition := packageController roassalShape position copy.
 	initialClassPosition := classController roassalShape position copy.
@@ -164,7 +175,7 @@ OPUmlLayouterTest >> testDefaultLayoutIsUndoable [
 	layouter := OPUmlLayouter new diagramController: diagramController.
 	layouter defaultLayout.
 
-	self assert: undoManager canUndo.
+	self assert: undoManager canUndo description: 'Applying default layout must record an undoable command'.
 
 	diagramController undo.
 
@@ -174,6 +185,7 @@ OPUmlLayouterTest >> testDefaultLayoutIsUndoable [
 
 { #category : 'tests' }
 OPUmlLayouterTest >> testMultiLevelPackageEncompassesInnerClassesAfterDefaultLayout [
+
 	| outerPackage innerPackage classA classB generalization layouter outerPackageController innerPackageController classAController classBController |
 	outerPackage := OPUMLPackage new name: 'PkgOuter'.
 	innerPackage := OPUMLPackage new name: 'PkgInner'.
@@ -186,8 +198,8 @@ OPUmlLayouterTest >> testMultiLevelPackageEncompassesInnerClassesAfterDefaultLay
 	innerPackage packagedElements add: classB.
 
 	generalization := OPUMLGeneralization new
-		general: classB;
-		specific: classA.
+		                  general: classB;
+		                  specific: classA.
 	classA generalizations add: generalization.
 
 	innerPackage nestingPackage: outerPackage.
@@ -204,13 +216,24 @@ OPUmlLayouterTest >> testMultiLevelPackageEncompassesInnerClassesAfterDefaultLay
 	layouter := OPUmlLayouter new diagramController: diagramController.
 	layouter defaultLayout.
 
-	self assert: (innerPackageController roassalShape encompassingRectangle containsRect: classAController roassalShape encompassingRectangle).
-	self assert: (innerPackageController roassalShape encompassingRectangle containsRect: classBController roassalShape encompassingRectangle).
-	self assert: (outerPackageController roassalShape encompassingRectangle containsRect: innerPackageController roassalShape encompassingRectangle)
+	self
+		assert:
+		(innerPackageController roassalShape encompassingRectangle containsRect: classAController roassalShape encompassingRectangle)
+		description: 'Inner package bounds must encompass ClassA after default layout'.
+	self
+		assert:
+		(innerPackageController roassalShape encompassingRectangle containsRect: classBController roassalShape encompassingRectangle)
+		description: 'Inner package bounds must encompass ClassB after default layout'.
+	self
+		assert:
+		(outerPackageController roassalShape encompassingRectangle containsRect:
+			 innerPackageController roassalShape encompassingRectangle)
+		description: 'Outer package bounds must encompass inner package after default layout'
 ]
 
 { #category : 'tests' }
 OPUmlLayouterTest >> testPackageEncompassesInnerClassesAfterDefaultLayout [
+
 	| innerPackage innerClass layouter packageController classController packageShape classShape |
 	innerPackage := OPUMLPackage new name: 'SubPackage'.
 	innerClass := OPUMLClass new name: 'SubClass'.
@@ -220,10 +243,8 @@ OPUmlLayouterTest >> testPackageEncompassesInnerClassesAfterDefaultLayout [
 
 	diagramController showAllElements.
 
-	packageController := diagramController controllers detect: [ :eachController |
-		eachController model == innerPackage ].
-	classController := diagramController controllers detect: [ :eachController |
-		eachController model == innerClass ].
+	packageController := diagramController controllers detect: [ :eachController | eachController model == innerPackage ].
+	classController := diagramController controllers detect: [ :eachController | eachController model == innerClass ].
 
 	packageShape := packageController roassalShape.
 	classShape := classController roassalShape.
@@ -231,11 +252,14 @@ OPUmlLayouterTest >> testPackageEncompassesInnerClassesAfterDefaultLayout [
 	layouter := OPUmlLayouter new diagramController: diagramController.
 	layouter defaultLayout.
 
-	self assert: (packageShape encompassingRectangle containsRect: classShape encompassingRectangle)
+	self
+		assert: (packageShape encompassingRectangle containsRect: classShape encompassingRectangle)
+		description: 'Package bounds must encompass inner class after default layout'
 ]
 
 { #category : 'tests' }
 OPUmlLayouterTest >> testSugiyamaLayoutWithSelfLoopAssociation [
+
 	| parentClass childClass generalization selfAssociation sourceEnd targetEnd layouter parentShape childShape |
 	parentClass := OPUMLClass new name: 'Person'.
 	childClass := OPUMLClass new name: 'Nurse'.
@@ -244,19 +268,19 @@ OPUmlLayouterTest >> testSugiyamaLayoutWithSelfLoopAssociation [
 		add: childClass.
 
 	generalization := OPUMLGeneralization new
-		general: parentClass;
-		specific: childClass.
+		                  general: parentClass;
+		                  specific: childClass.
 	childClass generalizations add: generalization.
 
 	selfAssociation := OPUMLAssociation new name: 'isCompatibleDonor'.
 	sourceEnd := OPUMLProperty new
-		name: 'donor';
-		owningAssociation: selfAssociation;
-		type: parentClass.
+		             name: 'donor';
+		             owningAssociation: selfAssociation;
+		             type: parentClass.
 	targetEnd := OPUMLProperty new
-		name: 'recipient';
-		owningAssociation: selfAssociation;
-		type: parentClass.
+		             name: 'recipient';
+		             owningAssociation: selfAssociation;
+		             type: parentClass.
 	selfAssociation memberEnds addAll: selfAssociation ownedEnds.
 	model packagedElements add: selfAssociation.
 
@@ -267,5 +291,7 @@ OPUmlLayouterTest >> testSugiyamaLayoutWithSelfLoopAssociation [
 
 	parentShape := (diagramController controllerForModel: parentClass) roassalShape.
 	childShape := (diagramController controllerForModel: childClass) roassalShape.
-	self assert: parentShape position y < childShape position y
+	self
+		assert: parentShape position y < childShape position y
+		description: 'Parent class must be positioned above child class in Sugiyama layout'
 ]

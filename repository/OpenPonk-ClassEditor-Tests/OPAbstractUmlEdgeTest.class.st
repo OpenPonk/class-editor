@@ -45,8 +45,8 @@ OPAbstractUmlEdgeTest >> testRemoveDetachFromEnds [
 	shape source: source.
 	shape target: target.
 	shape remove.
-	self assert: source sourceEdges asArray equals: #(  ).
-	self assert: target targetEdges asArray equals: #(  )
+	self assertEmpty: source sourceEdges.
+	self assertEmpty: target targetEdges
 ]
 
 { #category : 'tests' }

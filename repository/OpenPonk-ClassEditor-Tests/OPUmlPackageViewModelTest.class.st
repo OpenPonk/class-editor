@@ -61,6 +61,7 @@ OPUmlPackageViewModelTest >> testAllTypeElementsWithNestedPackageAndTypes [
 { #category : 'tests' }
 OPUmlPackageViewModelTest >> testDescriptionGeneralizationSets [
 	"Verifies that descriptionGeneralizationSets provides read-only to-many description with correct label"
+
 	| umlPackage packageViewModel description |
 	umlPackage := OPUMLPackage new name: 'TestPackage'.
 	packageViewModel := OPUmlPackageViewModel new.
@@ -69,13 +70,14 @@ OPUmlPackageViewModelTest >> testDescriptionGeneralizationSets [
 	description := packageViewModel descriptionGeneralizationSets.
 
 	self assert: description label equals: 'Generalization Sets'.
-	self assert: description isReadOnly.
+	self assert: description isReadOnly description: 'Generalization Sets description must be read-only'.
 	self assert: description priority equals: 20
 ]
 
 { #category : 'tests' }
 OPUmlPackageViewModelTest >> testVisitorBuildsGeneralizationSetsEditButtonForPackageViewModel [
 	"Verifies that OPPropertiesFormMagritteVisitor produces Edit Generalization Sets button for OPUmlPackageViewModel description"
+
 	| umlPackage packageViewModel form visitor editButton |
 	umlPackage := OPUMLPackage new name: 'TestPackage'.
 	packageViewModel := OPUmlPackageViewModel new.
@@ -88,8 +90,11 @@ OPUmlPackageViewModelTest >> testVisitorBuildsGeneralizationSetsEditButtonForPac
 
 	visitor visitToManyRelationDescription: packageViewModel descriptionGeneralizationSets.
 
-	editButton := form components detect: [ :eachComponent |
-		(eachComponent respondsTo: #label) and: [ eachComponent label = 'Edit Generalization Sets' ] ].
+	editButton := form components
+		              detect: [ :eachComponent |
+		              eachComponent class == SpButtonPresenter and: [ eachComponent label = 'Edit Generalization Sets' ] ]
+		              ifNone: [ nil ].
 
-	self assert: editButton isNotNil
+	self assert: editButton class equals: SpButtonPresenter.
+	self assert: editButton label equals: 'Edit Generalization Sets'
 ]

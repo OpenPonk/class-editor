@@ -54,22 +54,28 @@ OPUmlAssociationViewModelTest >> tearDown [
 
 { #category : 'tests' }
 OPUmlAssociationViewModelTest >> testCreationPriorityIsHigherThanClassifierPriority [
+
 	| classifierViewModel associationViewModel |
 	classifierViewModel := OPUmlClassifierViewModel new.
 	associationViewModel := OPUmlAssociationViewModel new.
+	self assert: classifierViewModel creationPriority equals: 10.
+	self assert: associationViewModel creationPriority equals: 20.
 	self
 		assert: classifierViewModel creationPriority < associationViewModel creationPriority
-		description: 'Classifier creation priority must be strictly lower than association priority to ensure nodes render before edges during Redo'.
+		description:
+		'Classifier creation priority must be strictly lower than association priority to ensure nodes render before edges during Redo'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
 OPUmlAssociationViewModelTest >> testDescriptionIsNavigableWriteUpdatesNavigability [
 	"Verifies that descriptionIsNavigable writes navigability directly to the view model without calling #viewModel."
+
 	| descriptions desc |
 	descriptions := OPUmlPropertyMagritteDescriptions
-		reader: [ :aViewModel | aViewModel model memberEnds second ]
-		labelPrefix: 'Target: '.
+		                reader: [ :aViewModel | aViewModel model memberEnds second ]
+		                labelPrefix: 'Target: '.
 	desc := descriptions descriptionIsNavigable.
 	desc accessor write: true to: viewModel.
-	self assert: endB isNavigable
+	self assert: endB isNavigable description: 'Target association end must become navigable after write: true'.
+	self assert: endB owningClass identicalTo: classA
 ]

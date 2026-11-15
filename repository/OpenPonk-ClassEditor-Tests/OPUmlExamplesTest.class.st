@@ -4,15 +4,29 @@ I am a unit test class verifying that all predefined UML model examples generate
 Class {
 	#name : 'OPUmlExamplesTest',
 	#superclass : 'TestCase',
+	#instVars : [
+		'openedWindowsBeforeTest'
+	],
 	#category : 'OpenPonk-ClassEditor-Tests-Examples',
 	#package : 'OpenPonk-ClassEditor-Tests',
 	#tag : 'Examples'
 }
 
 { #category : 'running' }
+OPUmlExamplesTest >> setUp [
+
+	super setUp.
+	openedWindowsBeforeTest := (self currentWorld submorphs select: [ :each | each isSystemWindow ]) asIdentitySet
+]
+
+{ #category : 'running' }
 OPUmlExamplesTest >> tearDown [
 
-	Smalltalk garbageCollect.
+	[
+		openedWindowsBeforeTest ifNotNil: [ :baselineWindows |
+				(self currentWorld submorphs select: [ :each | each isSystemWindow ])
+					reject: [ :each | baselineWindows includes: each ]
+					thenDo: [ :eachWindow | eachWindow delete ] ] ] ensure: [ Smalltalk garbageCollect ].
 	super tearDown
 ]
 
@@ -29,9 +43,8 @@ OPUmlExamplesTest >> testAll [
 OPUmlExamplesTest >> testExample: anExampleSelector [
 
 	| window |
-	self assert: anExampleSelector isSymbol.
+	self assert: anExampleSelector class equals: ByteSymbol.
 	self assertCollection: OPUmlExamples class selectors includesAll: { anExampleSelector }.
 	window := OPUmlExamples perform: anExampleSelector.
-	self assert: (window isKindOf: OPWorkbench).
-	window delete
+	[ self assert: window class equals: OPWorkbench ] ensure: [ window delete ]
 ]
