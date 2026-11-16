@@ -17,7 +17,8 @@ OPGenerateUmlProfileCommand >> canBeExecuted [
 
 { #category : 'executing' }
 OPGenerateUmlProfileCommand >> execute [
-	OPUmlProfileGeneratorWizard openOn: self selectedViewModel model
+
+	^ OPUmlProfileGeneratorWizard openOn: self selectedViewModel model
 ]
 
 { #category : 'accessing' }
