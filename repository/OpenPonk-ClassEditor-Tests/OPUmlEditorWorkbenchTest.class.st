@@ -3,12 +3,11 @@ I am a UI integration test class verifying the OpenPonk UML editor workbench int
 "
 Class {
 	#name : 'OPUmlEditorWorkbenchTest',
-	#superclass : 'TestCase',
+	#superclass : 'OPAbstractUITest',
 	#instVars : [
 		'model',
 		'project',
 		'workbench',
-		'window',
 		'editor',
 		'view',
 		'paletteEntries'

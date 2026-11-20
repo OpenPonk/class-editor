@@ -3,7 +3,7 @@ Unit tests verifying the Spec 2 UML profile generator wizard inputs, validation,
 "
 Class {
 	#name : 'OPUmlProfileGeneratorWizardTest',
-	#superclass : 'TestCase',
+	#superclass : 'OPAbstractUITest',
 	#instVars : [
 		'preexistingWindows'
 	],
