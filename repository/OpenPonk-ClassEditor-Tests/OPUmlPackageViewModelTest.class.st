@@ -3,27 +3,49 @@ Tests view model representations, containment semantics, and headers for UML pac
 "
 Class {
 	#name : 'OPUmlPackageViewModelTest',
-	#superclass : 'TestCase',
+	#superclass : 'OPAbstractViewModelTest',
 	#category : 'OpenPonk-ClassEditor-Tests-ViewModels',
 	#package : 'OpenPonk-ClassEditor-Tests',
 	#tag : 'ViewModels'
 }
 
+{ #category : 'constants' }
+OPUmlPackageViewModelTest >> modelClass [
+
+	^ OPUMLPackage
+]
+
+{ #category : 'initialization' }
+OPUmlPackageViewModelTest >> newModel [
+
+	^ OPUMLPackage new
+		  name: 'SubPackage';
+		  yourself
+]
+
+{ #category : 'initialization' }
+OPUmlPackageViewModelTest >> newRootModel [
+
+	^ OPUMLPackage new
+		  name: 'RootPackage';
+		  yourself
+]
+
 { #category : 'tests' }
 OPUmlPackageViewModelTest >> testAllTypeElementsWithGeneralizationSet [
 
-	| project package genSet types packageViewModel registry |
-	project := OPProject new.
+	| testProject package genSet types packageViewModel testRegistry |
+	testProject := OPProject new.
 	package := OPUMLPackage new.
 	package name: 'RootPackage'.
-	project addModel: package.
+	testProject addModel: package.
 
 	genSet := OPUMLGeneralizationSet new.
 	genSet name: 'PowerTypeSet'.
 	package packagedElements add: genSet.
 
-	registry := OPViewModelRegistry forProject: project.
-	packageViewModel := registry viewModelFor: package.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	packageViewModel := testRegistry viewModelFor: package.
 
 	types := packageViewModel allTypeElements.
 	self assertEmpty: types
@@ -31,11 +53,12 @@ OPUmlPackageViewModelTest >> testAllTypeElementsWithGeneralizationSet [
 
 { #category : 'tests' }
 OPUmlPackageViewModelTest >> testAllTypeElementsWithNestedPackageAndTypes [
-	| project rootPackage subPackage classA classB genSet types packageViewModel registry |
-	project := OPProject new.
+
+	| testProject rootPackage subPackage classA classB genSet types packageViewModel testRegistry |
+	testProject := OPProject new.
 	rootPackage := OPUMLPackage new.
 	rootPackage name: 'RootPackage'.
-	project addModel: rootPackage.
+	testProject addModel: rootPackage.
 
 	classA := OPUMLClass new.
 	classA name: 'ClassA'.
@@ -51,11 +74,13 @@ OPUmlPackageViewModelTest >> testAllTypeElementsWithNestedPackageAndTypes [
 	subPackage packagedElements add: genSet.
 	rootPackage packagedElements add: subPackage.
 
-	registry := OPViewModelRegistry forProject: project.
-	packageViewModel := registry viewModelFor: rootPackage.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	packageViewModel := testRegistry viewModelFor: rootPackage.
 
 	types := packageViewModel allTypeElements.
-	self assertCollection: types hasSameElements: { classA . classB }
+	self assertCollection: types hasSameElements: {
+			classA.
+			classB }
 ]
 
 { #category : 'tests' }
@@ -97,4 +122,10 @@ OPUmlPackageViewModelTest >> testVisitorBuildsGeneralizationSetsEditButtonForPac
 
 	self assert: editButton class equals: SpButtonPresenter.
 	self assert: editButton label equals: 'Edit Generalization Sets'
+]
+
+{ #category : 'constants' }
+OPUmlPackageViewModelTest >> viewModelClass [
+
+	^ OPUmlPackageViewModel
 ]

@@ -10,6 +10,17 @@ Class {
 }
 
 { #category : 'tests' }
+OPUmlClassifierViewModelTest >> testAbstractClassifierItemViewModelsAreAbstract [
+
+	self
+		assert: OPUmlClassifierItemViewModel isAbstract
+		description: 'OPUmlClassifierItemViewModel is a base class and must report as abstract'.
+	self
+		assert: OPUmlClassItemViewModel isAbstract
+		description: 'OPUmlClassItemViewModel is a base class and must report as abstract'
+]
+
+{ #category : 'tests' }
 OPUmlClassifierViewModelTest >> testClassViewModelChildrenModelsIncludesAttributesOperationsAndGeneralizations [
 
 	| umlClass superClass attribute operation generalization classViewModel children |

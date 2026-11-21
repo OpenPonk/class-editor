@@ -9,6 +9,12 @@ Class {
 	#tag : 'ViewModels'
 }
 
+{ #category : 'testing' }
+OPUmlClassifierItemViewModel class >> isAbstract [
+
+	^ self = OPUmlClassifierItemViewModel
+]
+
 { #category : 'accessing' }
 OPUmlClassifierItemViewModel >> creationPriority [
 	"Classifier items (attributes, operations, literals) must be created after classifiers (10) and before edges (20)."

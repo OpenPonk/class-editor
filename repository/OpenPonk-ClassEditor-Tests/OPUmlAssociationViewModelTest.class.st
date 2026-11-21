@@ -3,53 +3,52 @@ Tests view model mappings, end multiplicity synchronization, and role labels for
 "
 Class {
 	#name : 'OPUmlAssociationViewModelTest',
-	#superclass : 'TestCase',
-	#instVars : [
-		'project',
-		'registry',
-		'association',
-		'endA',
-		'endB',
-		'classA',
-		'classB',
-		'viewModel'
-	],
+	#superclass : 'OPAbstractDirectionalRelationshipViewModelTest',
 	#category : 'OpenPonk-ClassEditor-Tests-ViewModels',
 	#package : 'OpenPonk-ClassEditor-Tests',
 	#tag : 'ViewModels'
 }
 
-{ #category : 'as yet unclassified' }
-OPUmlAssociationViewModelTest >> setUp [
-	super setUp.
-	project := OPProject new.
-	classA := OPUMLClass new name: 'ClassA'.
-	classB := OPUMLClass new name: 'ClassB'.
-	endA := OPUMLProperty new name: 'roleA'; type: classA.
-	endB := OPUMLProperty new name: 'roleB'; type: classB.
-	association := OPUMLAssociation new name: 'AssocAB'.
-	endA association: association.
-	endB association: association.
-	association memberEnds add: endA; add: endB.
-	endA owningAssociation: association.
-	endB owningAssociation: association.
-	project addModel: (OPUMLPackage new name: 'RootPkg'; yourself).
-	project models first packagedElements addAll: { classA . classB . association }.
-	registry := OPViewModelRegistry forProject: project.
-	viewModel := registry viewModelFor: association
+{ #category : 'constants' }
+OPUmlAssociationViewModelTest >> modelClass [
+
+	^ OPUMLAssociation
 ]
 
-{ #category : 'as yet unclassified' }
-OPUmlAssociationViewModelTest >> tearDown [
-	viewModel := nil.
-	registry := nil.
-	classA := nil.
-	classB := nil.
-	endA := nil.
-	endB := nil.
-	association := nil.
-	project := nil.
-	super tearDown
+{ #category : 'initialization' }
+OPUmlAssociationViewModelTest >> newRootModel [
+
+	^ OPUMLPackage new
+		  name: 'RootPackage';
+		  yourself
+]
+
+{ #category : 'initialization' }
+OPUmlAssociationViewModelTest >> newSourceModel [
+
+	^ OPUMLClass new
+		  name: 'ClassA';
+		  yourself
+]
+
+{ #category : 'initialization' }
+OPUmlAssociationViewModelTest >> newTargetModel [
+
+	^ OPUMLClass new
+		  name: 'ClassB';
+		  yourself
+]
+
+{ #category : 'constants' }
+OPUmlAssociationViewModelTest >> sourceModelClass [
+
+	^ OPUMLClass
+]
+
+{ #category : 'constants' }
+OPUmlAssociationViewModelTest >> targetModelClass [
+
+	^ OPUMLClass
 ]
 
 { #category : 'tests' }
@@ -70,12 +69,19 @@ OPUmlAssociationViewModelTest >> testCreationPriorityIsHigherThanClassifierPrior
 OPUmlAssociationViewModelTest >> testDescriptionIsNavigableWriteUpdatesNavigability [
 	"Verifies that descriptionIsNavigable writes navigability directly to the view model without calling #viewModel."
 
-	| descriptions desc |
+	| descriptions desc targetEnd |
 	descriptions := OPUmlPropertyMagritteDescriptions
 		                reader: [ :aViewModel | aViewModel model memberEnds second ]
 		                labelPrefix: 'Target: '.
 	desc := descriptions descriptionIsNavigable.
 	desc accessor write: true to: viewModel.
-	self assert: endB isNavigable description: 'Target association end must become navigable after write: true'.
-	self assert: endB owningClass identicalTo: classA
+	targetEnd := model memberEnds second.
+	self assert: targetEnd isNavigable description: 'Target association end must become navigable after write: true'.
+	self assert: targetEnd owningClass identicalTo: sourceModel
+]
+
+{ #category : 'constants' }
+OPUmlAssociationViewModelTest >> viewModelClass [
+
+	^ OPUmlAssociationViewModel
 ]

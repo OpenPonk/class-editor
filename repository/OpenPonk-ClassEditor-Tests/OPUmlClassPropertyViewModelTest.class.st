@@ -3,28 +3,60 @@ Tests property bindings and synchronization between UML class attributes and for
 "
 Class {
 	#name : 'OPUmlClassPropertyViewModelTest',
-	#superclass : 'TestCase',
+	#superclass : 'OPAbstractViewModelTest',
 	#category : 'OpenPonk-ClassEditor-Tests-ViewModels',
 	#package : 'OpenPonk-ClassEditor-Tests',
 	#tag : 'ViewModels'
 }
 
+{ #category : 'constants' }
+OPUmlClassPropertyViewModelTest >> modelClass [
+
+	^ OPUMLProperty
+]
+
+{ #category : 'initialization' }
+OPUmlClassPropertyViewModelTest >> newModel [
+
+	^ OPUMLProperty new
+		  name: 'sampleAttribute';
+		  yourself
+]
+
+{ #category : 'initialization' }
+OPUmlClassPropertyViewModelTest >> newRootModel [
+
+	^ OPUMLPackage new
+		  name: 'RootPackage';
+		  yourself
+]
+
+{ #category : 'initialization' }
+OPUmlClassPropertyViewModelTest >> setUpParentModel [
+
+	| ownerClass |
+	ownerClass := OPUMLClass new
+		              name: 'OwnerClass';
+		              yourself.
+	rootModel packagedElements add: ownerClass.
+	^ ownerClass
+]
+
 { #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testDescriptionTypeCleanupUnusedTemporaryTypes [
 
-	| project package class prop registry propViewModel desc commonPkg typeNames |
-	project := OPProject new.
+	| testProject package umlClass prop testRegistry propViewModel desc commonPkg typeNames |
+	testProject := OPProject new.
 	package := OPUmlClassEditorPlugin new newModel.
-	project addModel: package.
-	class := OPUMLClass new name: 'Car'.
+	testProject addModel: package.
+	umlClass := OPUMLClass new name: 'Car'.
 	prop := OPUMLProperty new name: 'speed'.
-	class ownedAttributes: { prop }.
-	package packagedElements add: class.
-	registry := OPViewModelRegistry forProject: project.
-	propViewModel := registry viewModelFor: prop.
+	umlClass ownedAttributes: { prop }.
+	package packagedElements add: umlClass.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	propViewModel := testRegistry viewModelFor: prop.
 	desc := propViewModel descriptionType.
 
-	"Simulace psaní znaku po znaku"
 	desc write: 'Wh' to: propViewModel.
 	desc write: 'WholeBlood' to: propViewModel.
 
@@ -37,16 +69,17 @@ OPUmlClassPropertyViewModelTest >> testDescriptionTypeCleanupUnusedTemporaryType
 
 { #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testDescriptionTypeHasEntryCompletion [
-	| project package class prop registry propViewModel desc completion |
-	project := OPProject new.
+
+	| testProject package umlClass prop testRegistry propViewModel desc completion |
+	testProject := OPProject new.
 	package := OPUmlClassEditorPlugin new newModel.
-	project addModel: package.
-	class := OPUMLClass new name: 'Order'.
+	testProject addModel: package.
+	umlClass := OPUMLClass new name: 'Order'.
 	prop := OPUMLProperty new name: 'created'.
-	class ownedAttributes: { prop }.
-	package packagedElements add: class.
-	registry := OPViewModelRegistry forProject: project.
-	propViewModel := registry viewModelFor: prop.
+	umlClass ownedAttributes: { prop }.
+	package packagedElements add: umlClass.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	propViewModel := testRegistry viewModelFor: prop.
 
 	desc := propViewModel descriptionType.
 	self assert: (desc hasProperty: #entryCompletion) description: 'descriptionType must define #entryCompletion property'.
@@ -60,12 +93,13 @@ OPUmlClassPropertyViewModelTest >> testDescriptionTypeHasEntryCompletion [
 
 { #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testRegisterModelInFailsOnUnsupportedParent [
-	| viewModel unsupportedParent |
-	viewModel := OPUmlClassPropertyViewModel new.
-	viewModel model: OPUMLProperty new.
+
+	| propertyViewModel unsupportedParent |
+	propertyViewModel := OPUmlClassPropertyViewModel new.
+	propertyViewModel model: OPUMLProperty new.
 	unsupportedParent := Object new.
 
-	self should: [ viewModel registerModelIn: unsupportedParent ] raise: AssertionFailure
+	self should: [ propertyViewModel registerModelIn: unsupportedParent ] raise: AssertionFailure
 ]
 
 { #category : 'tests' }
@@ -89,18 +123,22 @@ OPUmlClassPropertyViewModelTest >> testRemoveRenderDoesNotClearCommentIconDiagra
 
 { #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testTypeNamedUnknownTypeReturnsDataTypeInCommonTypes [
-	| project package commonTypesPkg prop propViewModel registry resolvedType |
-	project := OPProject new.
+
+	| testProject package commonTypesPkg prop propViewModel testRegistry resolvedType |
+	testProject := OPProject new.
 	package := OPUMLPackage new name: 'RootPackage'.
-	project addModel: package.
+	testProject addModel: package.
 	commonTypesPkg := OPUMLPackage new name: 'CommonTypes'.
 	package packagedElements add: commonTypesPkg.
 
 	prop := OPUMLProperty new name: 'testAttr'.
-	package packagedElements add: (OPUMLClass new name: 'TestClass'; ownedAttributes: { prop }; yourself).
+	package packagedElements add: (OPUMLClass new
+			 name: 'TestClass';
+			 ownedAttributes: { prop };
+			 yourself).
 
-	registry := OPViewModelRegistry forProject: project.
-	propViewModel := registry viewModelFor: prop.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	propViewModel := testRegistry viewModelFor: prop.
 
 	resolvedType := propViewModel typeNamed: 'CustomStudentType'.
 	self assert: (resolvedType oclIsKindOf: #DataType) description: 'Unknown type must be a DataType'.
@@ -111,16 +149,23 @@ OPUmlClassPropertyViewModelTest >> testTypeNamedUnknownTypeReturnsDataTypeInComm
 
 { #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testUndoRestoresClassPropertyWhenParentIsAssociation [
-	| association property viewModel |
+
+	| association property propertyViewModel |
 	association := OPUMLAssociation new name: 'testAssoc'.
 	property := OPUMLProperty new name: 'testEnd'.
 	property owningAssociation: association.
-	viewModel := OPUmlClassPropertyViewModel new.
-	viewModel model: property.
+	propertyViewModel := OPUmlClassPropertyViewModel new.
+	propertyViewModel model: property.
 
-	viewModel registerModelIn: association.
+	propertyViewModel registerModelIn: association.
 
 	self assertCollection: association ownedEnds hasSameElements: { property }.
 	self assertCollection: association memberEnds hasSameElements: { property }.
 	self assert: property owningAssociation equals: association
+]
+
+{ #category : 'constants' }
+OPUmlClassPropertyViewModelTest >> viewModelClass [
+
+	^ OPUmlClassPropertyViewModel
 ]

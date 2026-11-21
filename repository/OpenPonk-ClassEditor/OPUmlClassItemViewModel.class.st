@@ -9,6 +9,12 @@ Class {
 	#tag : 'ViewModels'
 }
 
+{ #category : 'testing' }
+OPUmlClassItemViewModel class >> isAbstract [
+
+	^ self = OPUmlClassItemViewModel
+]
+
 { #category : 'private' }
 OPUmlClassItemViewModel >> basicRemoveModel [
 	"could be any of those, so just nil all of them"
