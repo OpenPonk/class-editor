@@ -14,9 +14,9 @@ OPUmlEnumerationViewModel class >> modelClass [ ^ OPUMLEnumeration
 ]
 
 { #category : 'accessing' }
-OPUmlEnumerationViewModel >> essentialChildrenModels [
+OPUmlEnumerationViewModel >> childrenModels [
 
-	^ self model ownedLiterals asArray
+	^ self model ownedLiterals asArray , super childrenModels
 ]
 
 { #category : 'accessing' }

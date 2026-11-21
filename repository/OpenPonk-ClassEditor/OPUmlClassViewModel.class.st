@@ -1,5 +1,5 @@
 "
-I am the ViewModel for UML Classes. I provide descriptions for abstract modifiers, stereotypes, and essential children models (attributes and operations).
+View model for UML classes, providing form bindings for abstract modifiers and stereotypes and exposing attributes, operations, and generalizations as child models.
 "
 Class {
 	#name : 'OPUmlClassViewModel',
@@ -11,6 +11,15 @@ Class {
 
 { #category : 'accessing' }
 OPUmlClassViewModel class >> modelClass [ ^ OPUMLClass
+]
+
+{ #category : 'accessing' }
+OPUmlClassViewModel >> childrenModels [
+
+	^ Array streamContents: [ :stream |
+			  stream nextPutAll: self model ownedAttributes.
+			  stream nextPutAll: self model ownedOperations.
+			  stream nextPutAll: super childrenModels ]
 ]
 
 { #category : 'forms' }
@@ -29,13 +38,6 @@ OPUmlClassViewModel >> descriptionStereotype [
 
 	<magritteDescription>
 	^ self descriptionStereotypeContent
-]
-
-{ #category : 'accessing' }
-OPUmlClassViewModel >> essentialChildrenModels [
-
-	^ self model ownedAttributes asArray
-	  , self model ownedOperations asArray
 ]
 
 { #category : 'accessing' }

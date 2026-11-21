@@ -146,33 +146,6 @@ OPUmlPackageViewModel >> descriptionStereotype [
 ]
 
 { #category : 'accessing' }
-OPUmlPackageViewModel >> essentialChildrenModels [
-	| queue priority |
-	"Only return inner elements if this package is acting as the root model/diagram"
-	self modelRootViewModel == self ifFalse: [ ^ #() ].
-	
-	queue := OrderedCollection new.
-	priority := { (OPUMLPackage -> 1). (OPUMLProfile -> 1). (OPUMLClass -> 2). (OPUMLStereotype -> 3). (OPUMLEnumeration -> 4) } asDictionary.
-	
-	queue addAll: (self model packagedElements reject: [ :each | each oclIsKindOf: #Association ]).
-	
-	self model packagedElements select: [ :each | each oclIsKindOf: #Package ] thenDo: [ :each |
-		each packageImports do: [ :import | queue addIfNotPresent: import importedPackage. queue add: import ] ].
-				
-	self model packagedElements select: [ :each | (each isKindOf: OPUMLClass) | (each isKindOf: OPUMLStereotype) ] thenDo: [ :each |
-		each generalizations do: [ :gen | queue addIfNotPresent: gen general. queue add: gen ].
-		(each ownedAttributes select: [ :attr | (attr isKindOf: OPUMLProperty) and: [ attr association isNotNil ] ])
-			do: [ :attr | queue addIfNotPresent: attr association ] ].
-				
-	self model packagedElements select: [ :each | each isKindOf: OPUMLStereotype ] thenDo: [ :each |
-		each ownedAttributes select: [ :attr | attr association isNotNil and: [ attr association isKindOf: OPUMLExtension ] ]
-			thenDo: [ :attr | queue add: attr type ] ].
-				
-	^ (queue asSet asArray sorted: [ :a :b |
-		(priority at: a class ifAbsent: [ 100 ]) < (priority at: b class ifAbsent: [ 100 ]) ])
-]
-
-{ #category : 'accessing' }
 OPUmlPackageViewModel >> icon [ ^ OPUmlIcons packageIcon
 ]
 
