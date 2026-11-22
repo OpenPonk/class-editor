@@ -59,23 +59,25 @@ OPUmlPropertyMagritteDescriptions >> descriptionAggregation [
 
 { #category : 'descriptions' }
 OPUmlPropertyMagritteDescriptions >> descriptionDefaultValue [
+
 	<magritteDescription>
 	^ MAStringDescription new
 		  accessor: (MAPluggableAccessor
-				   read: [ :targetViewModel | 
-					   (reader value: targetViewModel) defaultValue ifNil: [ '' ] ifNotNil: [ 
-							   ((reader value: targetViewModel) defaultValue isKindOf:
-									    OPUMLOpaqueExpression)
-								   ifTrue: [ (reader value: targetViewModel) defaultValue bodies first ]
-								   ifFalse: [ '' ] ] ]
-				   write: [ :targetViewModel :newValue | 
-					   (reader value: targetViewModel) defaultValue ifNil: [ 
-							   (reader value: targetViewModel) defaultValue: OPUMLOpaqueExpression new ].
-					   ((reader value: targetViewModel) defaultValue isKindOf:
-							    OPUMLOpaqueExpression) ifTrue: [ 
-							   (reader value: targetViewModel) defaultValue bodies:
-									   (newValue ifEmpty: [ {  } ] ifNotEmpty: [ { newValue } ]) ].
-					   targetViewModel modelChanged ]);
+				   read: [ :targetViewModel |
+						   | defaultValue |
+						   defaultValue := (reader value: targetViewModel) defaultValue.
+						   ((defaultValue isKindOf: OPUMLOpaqueExpression) and: [ defaultValue bodies isNotEmpty ])
+							   ifTrue: [ defaultValue bodies first ]
+							   ifFalse: [ '' ] ]
+				   write: [ :targetViewModel :newValue |
+						   | property |
+						   property := reader value: targetViewModel.
+						   property defaultValue ifNil: [ property defaultValue: OPUMLOpaqueExpression new ].
+						   (property defaultValue isKindOf: OPUMLOpaqueExpression) ifTrue: [
+									   property defaultValue bodies: ((newValue isNil or: [ newValue isEmpty ])
+												    ifTrue: [ #(  ) ]
+												    ifFalse: [ { newValue } ]) ].
+						   targetViewModel modelChanged ]);
 		  label: labelPrefix , 'Default Value';
 		  priority: 42;
 		  yourself

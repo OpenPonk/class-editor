@@ -20,6 +20,17 @@ OPUmlModelSerializerTest >> serializerClass [
 ]
 
 { #category : 'tests' }
+OPUmlModelSerializerTest >> testMetadataAndFormatIdentifiers [
+
+	self assert: OPUmlModelSerializer exportVersion equals: 1.
+	self assert: OPUmlModelSerializer formatName equals: #xmi.
+	self assert: OPUmlModelSerializer minImportVersion equals: 1.
+	self assertCollection: OPUmlModelSerializer fileExtensions hasSameElements: #( #xml #xmi ).
+	self assert: OPUmlModelUmlXmiSerializer formatName equals: #'uml-xmi'.
+	self assert: OPUmlModelWithAltSpecURIsSerializer exportVersion equals: 2
+]
+
+{ #category : 'tests' }
 OPUmlModelSerializerTest >> testNoNames [
 
 	serializer serializeModel: model to: stream.
@@ -27,28 +38,24 @@ OPUmlModelSerializerTest >> testNoNames [
 	self
 		should: [ serializer serializeModel: model to: stream ]
 		raise: AssertionFailure
-		description:
-		'Serialization should fail because model must have a name'.
+		description: 'Serialization should fail because model must have a name'.
 	model name: ''.
 	self
 		should: [ serializer serializeModel: model to: stream ]
 		raise: AssertionFailure
-		description:
-		'Serialization should fail because model must have a name'.
+		description: 'Serialization should fail because model must have a name'.
 	model name: 'Test'.
 	serializer serializeModel: model to: stream.
 	model packagedElements first name: nil.
 	self
 		should: [ serializer serializeModel: model to: stream ]
 		raise: AssertionFailure
-		description:
-		'Serialization should fail because classes must have a name'.
+		description: 'Serialization should fail because classes must have a name'.
 	model packagedElements first name: ''.
 	self
 		should: [ serializer serializeModel: model to: stream ]
 		raise: AssertionFailure
-		description:
-		'Serialization should fail because model must have a name'
+		description: 'Serialization should fail because classes must have a name'
 ]
 
 { #category : 'tests' }

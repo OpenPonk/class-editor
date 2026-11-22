@@ -50,6 +50,26 @@ OPUmlPropertyNotationTest >> testPropertyNilName [
 ]
 
 { #category : 'tests' }
+OPUmlPropertyNotationTest >> testPropertyNotationStringAsRoleName [
+
+	property := OPUMLProperty new.
+	self assert: property notationStringAsRoleName equals: ''.
+
+	property
+		visibility: OPUMLVisibilityKind public;
+		isDerived: true;
+		name: 'owner';
+		type: (OPUMLClass new name: 'Account');
+		lowerValue: (OPUMLLiteralInteger new value: 0);
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: '*');
+		defaultValue: (OPUMLOpaqueExpression new bodies: #( 'none' ));
+		isReadOnly: true;
+		isOrdered: true;
+		isUnique: false.
+	self assert: property notationStringAsRoleName equals: '+ /owner = none {readOnly, ordered, nonunique}'
+]
+
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyType [
 	(property := OPUMLProperty new)
 		name: 'op';
@@ -68,6 +88,16 @@ OPUmlPropertyNotationTest >> testPropertyTypeMultiplicity [
 ]
 
 { #category : 'tests' }
+OPUmlPropertyNotationTest >> testPropertyTypeWithoutName [
+
+	property := OPUMLProperty new
+		            name: 'attribute';
+		            type: OPUMLClass new;
+		            yourself.
+	self assert: property notationString equals: 'attribute'
+]
+
+{ #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyUniqueMultivalued [
 	"isUnique has no semantic effect on non-multivalued element (specs)"
 
@@ -80,12 +110,13 @@ OPUmlPropertyNotationTest >> testPropertyUniqueMultivalued [
 
 { #category : 'tests' }
 OPUmlPropertyNotationTest >> testPropertyUniqueMultivalued2 [
-	"isUnique has no semantic effect on non-multivalued element (specs)"
+	"isUnique defaults to true on multivalued elements, so no {nonunique} modifier is printed"
 
 	(property := OPUMLProperty new)
 		name: 'op';
-		isUnique: false.
-	self assert: property notationString equals: 'op'
+		isUnique: true;
+		upperValue: (OPUMLLiteralUnlimitedNatural new value: '*').
+	self assert: property notationString equals: 'op[1..*]'
 ]
 
 { #category : 'tests' }
@@ -114,4 +145,15 @@ OPUmlPropertyNotationTest >> testPropertyVisibility [
 		name: 'op';
 		visibility: OPUMLVisibilityKind protected.
 	self assert: property notationString equals: '# op'
+]
+
+{ #category : 'tests' }
+OPUmlPropertyNotationTest >> testVisibilityKindNotationFor [
+
+	self assert: (OPUMLVisibilityKind notationFor: nil) equals: ''.
+	self assert: (OPUMLVisibilityKind notationFor: '') equals: ''.
+	self assert: (OPUMLVisibilityKind notationFor: OPUMLVisibilityKind public) equals: '+'.
+	self assert: (OPUMLVisibilityKind notationFor: OPUMLVisibilityKind private) equals: '-'.
+	self assert: (OPUMLVisibilityKind notationFor: OPUMLVisibilityKind protected) equals: '#'.
+	self assert: (OPUMLVisibilityKind notationFor: OPUMLVisibilityKind new package) equals: '~'
 ]

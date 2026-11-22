@@ -43,9 +43,10 @@ OPUmlParameterNotationTest >> testParameterDirectionOut [
 ]
 
 { #category : 'tests' }
-OPUmlParameterNotationTest >> testParameterName [
-	(parameter := OPUMLParameter new) name: 'param'.
-	self assert: parameter notationString equals: 'param'
+OPUmlParameterNotationTest >> testParameterNilName [
+
+	parameter := OPUMLParameter new.
+	self assert: parameter notationString equals: ''
 ]
 
 { #category : 'tests' }
@@ -64,4 +65,14 @@ OPUmlParameterNotationTest >> testParameterTypeExpressionWithMultiplicity [
 		lowerValue: (OPUMLLiteralInteger new value: 3);
 		upperValue: (OPUMLLiteralUnlimitedNatural new value: '*').
 	self assert: parameter notationString equals: 'param : String[3..*]'
+]
+
+{ #category : 'tests' }
+OPUmlParameterNotationTest >> testParameterTypeWithoutName [
+
+	parameter := OPUMLParameter new
+		             name: 'argument';
+		             type: OPUMLClass new;
+		             yourself.
+	self assert: parameter notationString equals: 'argument'
 ]

@@ -64,21 +64,22 @@ OPUmlClassPropertyViewModel >> descriptionDefaultValue [
 
 	<magritteDescription>
 	^ MAStringDescription new
-		  accessor: (self descriptionAccessor: #defaultValue);
 		  accessor: (MAPluggableAccessor
-				   read: [ :me |
-					   me model defaultValue ifNil: [ '' ] ifNotNil: [
-							   (me model defaultValue isKindOf: OPUMLOpaqueExpression)
-								   ifTrue: [ me model defaultValue bodies first ]
-								   ifFalse: [ '' ] ] ]
-				   write: [ :me :newValue |
-					   me model defaultValue ifNil: [
-							   me model defaultValue: OPUMLOpaqueExpression new ].
-					   (me model defaultValue isKindOf: OPUMLOpaqueExpression)
-						   ifTrue: [
-							   me model defaultValue bodies:
-									   (newValue ifEmpty: [ {  } ] ifNotEmpty: [ { newValue } ]) ].
-					   self modelChanged ]);
+				   read: [ :propertyViewModel |
+						   | defaultValue |
+						   defaultValue := propertyViewModel model defaultValue.
+						   ((defaultValue isKindOf: OPUMLOpaqueExpression) and: [ defaultValue bodies isNotEmpty ])
+							   ifTrue: [ defaultValue bodies first ]
+							   ifFalse: [ '' ] ]
+				   write: [ :propertyViewModel :newValue |
+						   | property |
+						   property := propertyViewModel model.
+						   property defaultValue ifNil: [ property defaultValue: OPUMLOpaqueExpression new ].
+						   (property defaultValue isKindOf: OPUMLOpaqueExpression) ifTrue: [
+									   property defaultValue bodies: ((newValue isNil or: [ newValue isEmpty ])
+												    ifTrue: [ #(  ) ]
+												    ifFalse: [ { newValue } ]) ].
+						   self modelChanged ]);
 		  label: 'Default Value';
 		  priority: 42;
 		  yourself

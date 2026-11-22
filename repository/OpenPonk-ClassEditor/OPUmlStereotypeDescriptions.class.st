@@ -33,13 +33,15 @@ OPUmlStereotypeDescriptions >> accessorFor: anAttribute of: aStereotype [
 { #category : 'private' }
 OPUmlStereotypeDescriptions >> addTo: aCollection attribute: anAttribute of: aStereotype [
 
-	| typeMapping uiName descriptionType |
-	typeMapping := {
-		               (#Boolean -> MABooleanDescription).
-		               (#String -> MAStringDescription) } asDictionary.
-	descriptionType := typeMapping at: anAttribute type name ifAbsent: [ ^ self ].
+	| typeMapping typeName uiName descriptionType |
+	anAttribute type ifNil: [ ^ self ].
+	typeName := anAttribute type name.
+	typeMapping := Dictionary newFrom: {
+			               (#Boolean -> MABooleanDescription).
+			               (#String -> MAStringDescription) }.
+	descriptionType := typeMapping at: typeName ifAbsent: [ ^ self ].
 	uiName := (anAttribute name splitCamelCase collect: [ :each | each capitalized ]) joinUsing: ' '.
-	anAttribute type name = #Boolean ifTrue: [ uiName := 'Is ' , uiName ].
+	typeName = #Boolean ifTrue: [ uiName := 'Is ' , uiName ].
 	aCollection add: (descriptionType new
 			 accessor: (self accessorFor: anAttribute of: aStereotype);
 			 label: uiName capitalized;

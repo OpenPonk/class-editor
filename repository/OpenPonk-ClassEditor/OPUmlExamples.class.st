@@ -271,16 +271,6 @@ OPUmlExamples class >> exampleSimpleGeneralization [
 ]
 
 { #category : 'examples' }
-OPUmlExamples class >> notUsedExampleCommonStructure [
-
-	| uml cs |
-	uml := OPUMLXMISpecsStorage umlMetamodel.
-	cs := uml packagedElements detect: [ :each | 
-		      each name = 'CommonStructure' ].
-	^ (OPProject openOnModel: cs) showAllElementsInAllDiagrams
-]
-
-{ #category : 'examples' }
 OPUmlExamples class >> openExample: aModel [
 
 	| project |

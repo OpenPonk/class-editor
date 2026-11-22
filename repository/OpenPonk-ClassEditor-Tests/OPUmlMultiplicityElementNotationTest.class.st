@@ -4,9 +4,6 @@ I am a unit test class verifying the correct string formatting of UML Multiplici
 Class {
 	#name : 'OPUmlMultiplicityElementNotationTest',
 	#superclass : 'TestCase',
-	#instVars : [
-		'multiplicity'
-	],
 	#category : 'OpenPonk-ClassEditor-Tests-ViewModels',
 	#package : 'OpenPonk-ClassEditor-Tests',
 	#tag : 'ViewModels'
@@ -20,6 +17,17 @@ OPUmlMultiplicityElementNotationTest >> multiplicityOn: aPair [
 	aPair second
 		ifNotNil: [ el upperValue: (OPUMLLiteralUnlimitedNatural new value: aPair second) ].
 	^ el
+]
+
+{ #category : 'tests' }
+OPUmlMultiplicityElementNotationTest >> testAssociationMultiplicityRange [
+
+	self assert: (self multiplicityOn: #( 1 1 )) notationAssociationMultiplicityRange equals: '1'.
+	self assert: (self multiplicityOn: #( 3 3 )) notationAssociationMultiplicityRange equals: '3'.
+	self assert: (self multiplicityOn: #( 0 '*' )) notationAssociationMultiplicityRange equals: '*'.
+	self assert: (self multiplicityOn: #( 2 5 )) notationAssociationMultiplicityRange equals: '2..5'.
+	self assert: (self multiplicityOn: #( 4 '*' )) notationAssociationMultiplicityRange equals: '4..*'.
+	self assert: (self multiplicityOn: #( 0 1 )) notationAssociationMultiplicityRange equals: '0..1'
 ]
 
 { #category : 'tests' }

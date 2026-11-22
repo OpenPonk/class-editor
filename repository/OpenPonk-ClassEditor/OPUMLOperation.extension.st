@@ -4,29 +4,24 @@ Extension { #name : 'OPUMLOperation' }
 OPUMLOperation >> notationString [
 
 	^ String streamContents: [ :stream |
-			  (OPUMLVisibilityKind notationFor: self visibility) ifNotEmpty: [
-					  :v |
-					  stream
-						  nextPutAll: v;
-						  nextPutAll: ' ' ].
-			  self name ifNotNil: [ stream << self name ].
+			  (OPUMLVisibilityKind notationFor: self visibility) ifNotEmpty: [ :visibilitySymbol |
+					  stream nextPutAll: visibilitySymbol.
+					  stream nextPutAll: ' ' ].
+			  self name ifNotNil: [ :operationName | stream << operationName ].
 			  stream << '('.
-			  (self ownedParameters reject: [ :param |
-				   param direction = OPUMLParameterDirectionKind return ])
-				  do: [ :param | stream << param notationString ]
+			  (self ownedParameters reject: [ :parameter | parameter direction = OPUMLParameterDirectionKind return ])
+				  do: [ :parameter | stream << parameter notationString ]
 				  separatedBy: [ stream << ', ' ].
 			  stream << ')'.
 			  self ownedParameters
-				  detect: [ :param |
-				  param direction = OPUMLParameterDirectionKind return ]
-				  ifFound: [ :param |
-						  param type ifNotNil: [
-								  stream
-									  << ' : ';
-									  << param type name.
-								  param notationMultiplicityRange ifNotEmpty: [ :range |
-										  stream
-											  nextPutAll: '[';
-											  nextPutAll: range;
-											  nextPutAll: ']' ] ] ] ]
+				  detect: [ :parameter | parameter direction = OPUMLParameterDirectionKind return ]
+				  ifFound: [ :returnParameter |
+						  returnParameter type ifNotNil: [ :returnType |
+								  returnType name ifNotNil: [ :typeName |
+										  stream << ' : '.
+										  stream << typeName.
+										  returnParameter notationMultiplicityRange ifNotEmpty: [ :range |
+												  stream nextPutAll: '['.
+												  stream nextPutAll: range.
+												  stream nextPutAll: ']' ] ] ] ] ]
 ]

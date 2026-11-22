@@ -20,7 +20,7 @@ Class {
 	#tag : 'Forms'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'running' }
 OPUmlPropertyMagritteDescriptionsTest >> setUp [
 	| registry |
 	super setUp.
@@ -47,7 +47,7 @@ OPUmlPropertyMagritteDescriptionsTest >> setUp [
 		labelPrefix: 'Target '.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'running' }
 OPUmlPropertyMagritteDescriptionsTest >> tearDown [
 	descriptions := nil.
 	viewModel := nil.
@@ -63,15 +63,76 @@ OPUmlPropertyMagritteDescriptionsTest >> tearDown [
 
 { #category : 'tests' }
 OPUmlPropertyMagritteDescriptionsTest >> testDescriptionAccessor [
-	| property reader desc |
+
+	| property reader propertyDescriptions nameAccessor changeCount |
 	property := OPUMLProperty new.
-	reader := [ :nope | property ].
-	desc := OPUmlPropertyMagritteDescriptions reader: reader labelPrefix: ''.
-	(desc descriptionAccessor: #name) write: 'hello' to: nil.
-	self assert: ((desc descriptionAccessor: #name) read: nil) equals: 'hello'
+	reader := [ :ignored | property ].
+	propertyDescriptions := OPUmlPropertyMagritteDescriptions reader: reader labelPrefix: ''.
+	(propertyDescriptions descriptionAccessor: #name) write: 'hello' to: nil.
+	self assert: ((propertyDescriptions descriptionAccessor: #name) read: nil) equals: 'hello'.
+
+	changeCount := 0.
+	viewModel announcer when: OPModelChanged do: [ changeCount := changeCount + 1 ] for: self.
+	nameAccessor := descriptions descriptionAccessor: #name.
+	nameAccessor write: 'renamedEnd' to: viewModel.
+
+	self assert: (nameAccessor read: viewModel) equals: 'renamedEnd'.
+	self assert: secondEnd name equals: 'renamedEnd'.
+	self assert: changeCount equals: 1
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests' }
+OPUmlPropertyMagritteDescriptionsTest >> testDescriptionDefaultValueClearAndNilWrite [
+
+	| defaultValueDescription accessor |
+	defaultValueDescription := descriptions descriptionDefaultValue.
+	accessor := defaultValueDescription accessor.
+
+	accessor write: 'initial' to: viewModel.
+	self assert: (accessor read: viewModel) equals: 'initial'.
+
+	accessor write: '' to: viewModel.
+	self assert: (accessor read: viewModel) equals: ''.
+
+	accessor write: nil to: viewModel.
+	self assert: (accessor read: viewModel) equals: ''
+]
+
+{ #category : 'tests' }
+OPUmlPropertyMagritteDescriptionsTest >> testDescriptionDefaultValueEdgeCases [
+
+	| defaultValueDescription accessor literalDefaultValue |
+	defaultValueDescription := descriptions descriptionDefaultValue.
+	accessor := defaultValueDescription accessor.
+
+	self assert: (accessor read: viewModel) equals: ''.
+
+	literalDefaultValue := OPUMLLiteralString new value: 'literal'.
+	secondEnd defaultValue: literalDefaultValue.
+	self assert: (accessor read: viewModel) equals: ''.
+
+	accessor write: 'ignoredForLiteral' to: viewModel.
+	self assert: secondEnd defaultValue identicalTo: literalDefaultValue
+]
+
+{ #category : 'tests' }
+OPUmlPropertyMagritteDescriptionsTest >> testDescriptionType [
+
+	| typeDescription accessor |
+	typeDescription := descriptions descriptionType.
+	accessor := typeDescription accessor.
+
+	self assert: typeDescription isReadOnly description: 'Association end type description must be read-only'.
+	self assert: (accessor read: viewModel) equals: 'ClassB'.
+
+	accessor write: 'OtherClass' to: viewModel.
+	self assert: secondEnd type identicalTo: classB.
+
+	secondEnd type: nil.
+	self assert: (accessor read: viewModel) equals: ''
+]
+
+{ #category : 'tests' }
 OPUmlPropertyMagritteDescriptionsTest >> testWriteMultiplicityAndDefaultValue [
 	| multDesc defDesc |
 	multDesc := descriptions descriptionMultiplicity.

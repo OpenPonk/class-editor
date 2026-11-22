@@ -43,6 +43,28 @@ OPUmlClassPropertyViewModelTest >> setUpParentModel [
 ]
 
 { #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testDescriptionDefaultValueClearAndNilWrite [
+
+	| defaultValueDescription accessor |
+	defaultValueDescription := viewModel descriptionDefaultValue.
+	accessor := defaultValueDescription accessor.
+
+	self assert: (accessor read: viewModel) equals: ''.
+
+	accessor write: 'initial' to: viewModel.
+	self assert: (accessor read: viewModel) equals: 'initial'.
+
+	accessor write: '' to: viewModel.
+	self assert: (accessor read: viewModel) equals: ''.
+
+	accessor write: nil to: viewModel.
+	self assert: (accessor read: viewModel) equals: ''.
+
+	viewModel model defaultValue: (OPUMLLiteralString new value: 'literal').
+	self assert: (accessor read: viewModel) equals: ''
+]
+
+{ #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testDescriptionTypeCleanupUnusedTemporaryTypes [
 
 	| testProject package umlClass prop testRegistry propViewModel desc commonPkg typeNames |

@@ -59,6 +59,19 @@ OPUmlOperationNotationTest >> testOperationReturnTypeWithMultiplicity [
 ]
 
 { #category : 'tests' }
+OPUmlOperationNotationTest >> testOperationReturnTypeWithoutName [
+
+	operation := OPUMLOperation new
+		             name: 'compute';
+		             ownedParameters: { (OPUMLParameter new
+				              type: OPUMLClass new;
+				              direction: OPUMLParameterDirectionKind return;
+				              yourself) };
+		             yourself.
+	self assert: operation notationString equals: 'compute()'
+]
+
+{ #category : 'tests' }
 OPUmlOperationNotationTest >> testOperationVisibility [
 	(operation := OPUMLOperation new)
 		name: 'op';

@@ -40,6 +40,28 @@ OPUmlExamplesTest >> testAll [
 ]
 
 { #category : 'tests' }
+OPUmlExamplesTest >> testEmptyEnumeration [
+
+	| enumeration |
+	enumeration := OPUmlExamples emptyEnumeration.
+
+	self assert: enumeration class identicalTo: OPUMLEnumeration.
+	self assert: enumeration name equals: 'VisibilityKind'.
+	self assertEmpty: enumeration ownedLiterals
+]
+
+{ #category : 'tests' }
+OPUmlExamplesTest >> testEnumerationWithLiterals [
+
+	| enumeration |
+	enumeration := OPUmlExamples enumerationWithLiterals.
+
+	self assert: enumeration class identicalTo: OPUMLEnumeration.
+	self assert: enumeration name equals: 'VisibilityKind'.
+	self assert: (enumeration ownedLiterals collect: #name as: Array) equals: #( #public #private #protected #package )
+]
+
+{ #category : 'tests' }
 OPUmlExamplesTest >> testExample: anExampleSelector [
 
 	| window |
