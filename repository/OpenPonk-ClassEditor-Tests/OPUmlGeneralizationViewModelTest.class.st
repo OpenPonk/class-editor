@@ -74,6 +74,48 @@ OPUmlGeneralizationViewModelTest >> testBasicRemoveModelRemovesEmptyGeneralizati
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testBasicRemoveModelWithMultipleGeneralizationSetsAndOwningSubpackage [
+
+	| subPackage emptySet sharedSet otherSpecific otherGeneralization |
+	subPackage := OPUMLPackage new
+		              name: 'SubPackage';
+		              yourself.
+	rootModel packagedElements add: subPackage.
+
+	emptySet := OPUMLGeneralizationSet new
+		            name: 'EmptySet';
+		            yourself.
+	emptySet generalizations add: model.
+	subPackage packagedElements add: emptySet.
+
+	otherSpecific := OPUMLClass new
+		                 name: 'OtherSpecific';
+		                 yourself.
+	rootModel packagedElements add: otherSpecific.
+	otherGeneralization := OPUMLGeneralization new
+		                       general: targetModel;
+		                       specific: otherSpecific;
+		                       yourself.
+	otherSpecific generalizations add: otherGeneralization.
+
+	sharedSet := OPUMLGeneralizationSet new
+		             name: 'SharedSet';
+		             yourself.
+	sharedSet generalizations add: model.
+	sharedSet generalizations add: otherGeneralization.
+	rootModel packagedElements add: sharedSet.
+
+	viewModel removeModel.
+
+	self assertEmpty: emptySet generalizations.
+	self denyCollection: subPackage packagedElements includesAny: { emptySet }.
+	self assertCollection: sharedSet generalizations hasSameElements: { otherGeneralization }.
+	self assertCollection: rootModel packagedElements includesAll: { sharedSet }.
+	self assert: model general isNil description: 'General must be cleared on removal'.
+	self assert: model specific isNil description: 'Specific must be cleared on removal'
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationViewModelTest >> testDescriptionGeneralAndSpecificReadNames [
 
 	self assert: (viewModel descriptionGeneral accessor read: viewModel) equals: 'GeneralClass'.

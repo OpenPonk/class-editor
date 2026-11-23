@@ -9,12 +9,6 @@ Class {
 	#tag : 'UI'
 }
 
-{ #category : 'initialize-release' }
-OPUmlAllGeneralizationSetsEditor >> close [
-
-	self withWindowDo: [ :window | window close ]
-]
-
 { #category : 'layout' }
 OPUmlAllGeneralizationSetsEditor >> defaultLayout [
 
@@ -23,18 +17,17 @@ OPUmlAllGeneralizationSetsEditor >> defaultLayout [
 		  yourself
 ]
 
-{ #category : 'accessing' }
-OPUmlAllGeneralizationSetsEditor >> diagramController: aController [
-
-	self controller: aController
-]
-
 { #category : 'initialization' }
 OPUmlAllGeneralizationSetsEditor >> initializeWindow: aWindow [
 
+	| packageName |
 	super initializeWindow: aWindow.
+	packageName := (self targetPackage ifNotNil: [ :package | package name ]) ifNil: [ '' ].
 	aWindow
-		title: 'Generalization Sets Editor (' , self targetPackage name , ')';
+		title: (String streamContents: [ :stream |
+						 stream << 'Generalization Sets Editor ('.
+						 stream << packageName.
+						 stream << ')' ]);
 		initialExtent: 500 @ 750;
 		closeOnBackdropClick: true;
 		whenClosedDo: [ aWindow isCancelled ifFalse: [ self save ] ]

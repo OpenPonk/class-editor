@@ -62,74 +62,26 @@ OPUmlGeneralizationEditorTest >> tearDown [
 ]
 
 { #category : 'tests' }
-OPUmlGeneralizationEditorTest >> testBasicSaveRejectsMissingUndoManager [
-	| specificClassifier generalClassifier generalization project projectController viewModelRegistry generalizationViewModel editor |
-	specificClassifier := OPUMLClass new name: 'SpecificClass'.
-	generalClassifier := OPUMLClass new name: 'GeneralClass'.
-	generalization := OPUMLGeneralization new
-		specific: specificClassifier;
-		general: generalClassifier;
-		yourself.
-	specificClassifier generalizations add: generalization.
-
-	project := OPProject named: 'GenEditorContractTestProject'.
-	project addModel: specificClassifier.
-	project addModel: generalClassifier.
-	projectController := project controllerClass new
-		project: project;
-		yourself.
-	viewModelRegistry := projectController viewModelRegistry.
-	generalizationViewModel := viewModelRegistry viewModelFor: generalization.
-
-	editor := OPUmlGeneralizationEditor new.
-	editor viewModel: generalizationViewModel.
-	editor commentTextArea text: 'Test Comment'.
-
-	"Rule 4h: basicSave must strictly reject execution when undoManager is missing"
-	editor undoManager: nil.
-	self
-		should: [ editor basicSave ]
-		raise: AssertionFailure
-		description: 'basicSave must strictly reject execution without undoManager'
-]
-
-{ #category : 'tests' }
 OPUmlGeneralizationEditorTest >> testBasicSaveRequiresUndoManagerAndExecutesThroughIt [
-	| package specificClassifier generalClassifier generalization project projectController viewModelRegistry generalizationViewModel editor loggingUndoManager |
-	package := OPUMLPackage new name: 'PkgTest'.
-	specificClassifier := OPUMLClass new name: 'SpecificClass'.
-	generalClassifier := OPUMLClass new name: 'GeneralClass'.
-	package packagedElements addAll: { specificClassifier . generalClassifier }.
-	generalization := OPUMLGeneralization new
-		specific: specificClassifier;
-		general: generalClassifier;
-		yourself.
-	specificClassifier generalizations add: generalization.
 
-	project := OPProject named: 'GenEditorTestProject'.
-	project addModel: package.
-	projectController := project controllerClass new project: project; yourself.
-	viewModelRegistry := projectController viewModelRegistry.
-	generalizationViewModel := viewModelRegistry viewModelFor: generalization.
-
+	| generalizationViewModel editor loggingUndoManager |
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
 	editor := OPUmlGeneralizationEditor new.
 	editor viewModel: generalizationViewModel.
 	editor commentTextArea text: 'New Test Comment'.
 
-	"Contract 1: Execution without undoManager must fail assertion"
 	editor undoManager: nil.
 	self
 		should: [ editor basicSave ]
 		raise: AssertionFailure
-		description: 'basicSave must strictly reject execution without undoManager (Rule 4h)'.
+		description: 'basicSave must strictly reject execution without undoManager'.
+	self should: [ editor save ] raise: AssertionFailure description: 'save without undoManager must reject execution via basicSave'.
 
-	"Contract 2: Execution with undoManager must be recorded in history"
 	loggingUndoManager := OPUndoManager new.
 	editor undoManager: loggingUndoManager.
 	editor basicSave.
-	self
-		assert: loggingUndoManager canUndo
-		description: 'Command must be recorded in undo history'
+	self assert: loggingUndoManager canUndo description: 'Command must be recorded in undo history'.
+	self assert: generalization ownedComments first body equals: 'New Test Comment'
 ]
 
 { #category : 'tests' }
@@ -149,22 +101,74 @@ OPUmlGeneralizationEditorTest >> testGeneralizationEditorDelegatesToViewModelAnd
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationEditorTest >> testGeneralizationViewModelOpenEditorWithApplicationAndUndoManager [
+
+	| generalizationViewModel application openedTitles changeCount |
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
+	openedTitles := OrderedCollection new.
+	changeCount := 0.
+	generalizationViewModel announcer when: OPModelChanged do: [ changeCount := changeCount + 1 ] for: self.
+
+	application := SpApplication new.
+	(application stub registerWindow: Any) will: [ :aWindow |
+			openedTitles add: aWindow title.
+			aWindow whenOpenedDo: [ aWindow close ] ].
+
+	[ generalizationViewModel openEditorWithApplication: application undoManager: diagramController undoManager ] ensure: [
+		application closeAllWindows ].
+
+	self assertCollection: openedTitles hasSameElements: { 'Edit Generalization' }.
+	self assert: changeCount equals: 1
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationEditorTest >> testModalWindowCloseSavesAndCancelDiscardsChanges [
+
+	| generalizationViewModel cancelEditor saveEditor cancelApplication saveApplication |
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
+	cancelApplication := SpApplication new.
+	cancelEditor := OPUmlGeneralizationEditor new.
+	cancelEditor application: cancelApplication.
+	cancelEditor undoManager: diagramController undoManager.
+	cancelEditor viewModel: generalizationViewModel.
+	cancelEditor commentTextArea text: 'Modal Comment'.
+	(cancelApplication stub registerWindow: Any) will: [ :aWindow |
+		cancelEditor announcer when: SpWidgetDisplayed do: [ aWindow triggerCancelAction ] for: self ].
+
+	[ cancelEditor openModal ] ensure: [ cancelApplication closeAllWindows ].
+	self assertEmpty: generalization ownedComments.
+
+	saveApplication := SpApplication new.
+	saveEditor := OPUmlGeneralizationEditor new.
+	saveEditor application: saveApplication.
+	saveEditor undoManager: diagramController undoManager.
+	saveEditor viewModel: generalizationViewModel.
+	saveEditor commentTextArea text: 'Modal Comment'.
+	(saveApplication stub registerWindow: Any) will: [ :aWindow |
+		saveEditor announcer when: SpWidgetDisplayed do: [ aWindow triggerOkAction ] for: self ].
+
+	[ saveEditor openModal ] ensure: [ saveApplication closeAllWindows ].
+	self assert: generalization ownedComments first body equals: 'Modal Comment'
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationEditorTest >> testSaveCommentIsUndoable [
-	| um editor generalizationVM |
-	um := OPUndoManager new.
-	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
+
+	| activeUndoManager editor generalizationViewModel |
+	activeUndoManager := OPUndoManager new.
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
 	editor := OPUmlGeneralizationEditor new.
-	editor undoManager: um.
-	editor viewModel: generalizationVM.
+	editor undoManager: activeUndoManager.
+	editor viewModel: generalizationViewModel.
 	editor commentTextArea text: 'Initial Comment'.
 	editor save.
 	self assert: generalization ownedComments first body equals: 'Initial Comment'.
 	editor commentTextArea text: 'Updated Comment'.
 	editor save.
 	self assert: generalization ownedComments first body equals: 'Updated Comment'.
-	um undo.
+	activeUndoManager undo.
 	self assert: generalization ownedComments first body equals: 'Initial Comment'.
-	um redo.
+	activeUndoManager redo.
 	self assert: generalization ownedComments first body equals: 'Updated Comment'
 ]
 
@@ -187,4 +191,57 @@ OPUmlGeneralizationEditorTest >> testSaveProducesLabeledTransactionWithoutUnchan
 	self assert: recordedCommand description equals: 'Edit Generalization'.
 	self assertCollection: (recordedCommand commands collect: #class) hasSameElements: { OPUmlUpdateGeneralizationSetsCommand }.
 	self denyCollection: (recordedCommand commands collect: #class) includesAny: { OPUmlUpdateGeneralizationCommentCommand }
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationEditorTest >> testViewModelHandlesNilCommentBodyAsEmptyString [
+
+	| nilBodyComment generalizationViewModel editor |
+	nilBodyComment := OPUMLComment new.
+	nilBodyComment annotatedElements add: generalization.
+	generalization ownedComments add: nilBodyComment.
+
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
+	editor := OPUmlGeneralizationEditor new.
+	editor undoManager: diagramController undoManager.
+	editor viewModel: generalizationViewModel.
+
+	self assert: editor commentTextArea text equals: ''.
+	editor save.
+	self deny: diagramController undoManager canUndo description: 'Saving unchanged nil-body comment must not record a command'
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationEditorTest >> testViewModelPopulatesUnnamedClassifiersAndExistingComment [
+
+	| unnamedGeneral unnamedSpecific unnamedGeneralization existingComment generalizationViewModel editor |
+	unnamedGeneral := OPUMLClass new.
+	unnamedSpecific := OPUMLClass new.
+	package packagedElements
+		add: unnamedGeneral;
+		add: unnamedSpecific.
+	unnamedGeneralization := OPUMLGeneralization new
+		                         general: unnamedGeneral;
+		                         specific: unnamedSpecific;
+		                         yourself.
+	unnamedSpecific generalizations add: unnamedGeneralization.
+	existingComment := OPUMLComment new
+		                   body: 'Existing note';
+		                   yourself.
+	existingComment annotatedElements add: unnamedGeneralization.
+	unnamedGeneralization ownedComments add: existingComment.
+
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: unnamedGeneralization.
+	editor := OPUmlGeneralizationEditor new.
+	editor undoManager: diagramController undoManager.
+	editor viewModel: generalizationViewModel.
+
+	self assert: editor commentTextArea text equals: 'Existing note'.
+	editor commentTextArea text: ''.
+	editor save.
+	self assertEmpty: unnamedGeneralization ownedComments.
+
+	diagramController undoManager undo.
+	self assert: unnamedGeneralization ownedComments first identicalTo: existingComment.
+	self assert: unnamedGeneralization ownedComments first body equals: 'Existing note'
 ]

@@ -59,6 +59,19 @@ OPUmlProfileGeneratorWizardTest >> testDefaultInputsPreserveConfiguredProfileMet
 ]
 
 { #category : 'tests' }
+OPUmlProfileGeneratorWizardTest >> testDefaultPackageNameIsEmptyForBlankProfileName [
+
+	| profile wizard |
+	profile := OPUMLProfile new
+		           name: '';
+		           yourself.
+	wizard := OPUmlProfileGeneratorWizard on: profile.
+
+	self assertEmpty: wizard packageInput text.
+	self deny: wizard generateButton isEnabled description: 'Generate button must be disabled when profile name is blank'
+]
+
+{ #category : 'tests' }
 OPUmlProfileGeneratorWizardTest >> testGenerateButtonClickOpensChangesBrowserAndClosesWizardWindow [
 
 	| profile stereotypePair wizard wizardWindow |
@@ -171,6 +184,18 @@ OPUmlProfileGeneratorWizardTest >> testProfileSetterAndUnnamedProfileDefaults [
 	self
 		deny: wizard generateButton isEnabled
 		description: 'Generate button must be disabled for an unnamed profile without prefix or package'
+]
+
+{ #category : 'tests' }
+OPUmlProfileGeneratorWizardTest >> testWindowOpensWithEmptySuffixForUnnamedProfile [
+
+	| unnamedProfile wizard window |
+	unnamedProfile := OPUMLProfile new.
+	wizard := OPUmlProfileGeneratorWizard on: unnamedProfile.
+	window := wizard open.
+	[
+		self assert: window title equals: 'Generate code for profile '.
+		self assert: window initialExtent equals: 420 @ 140 ] ensure: [ window close ]
 ]
 
 { #category : 'tests' }

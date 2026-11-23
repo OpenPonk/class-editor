@@ -5,7 +5,6 @@ Class {
 	#name : 'OPUmlGeneralizationEditor',
 	#superclass : 'SpPresenter',
 	#instVars : [
-		'controller',
 		'generalLabel',
 		'general',
 		'specificLabel',
@@ -30,27 +29,20 @@ OPUmlGeneralizationEditor >> basicSave [
 	generalizationSetsEditor basicSave.
 	currentCommentText := self model ownedComments
 		                      ifEmpty: [ '' ]
-		                      ifNotEmpty: [ :existingComments | existingComments first body asString ].
+		                      ifNotEmpty: [ :existingComments | (existingComments first body ifNil: [ '' ]) asString ].
 	newCommentText := commentTextArea text trim.
 
 	currentCommentText = newCommentText ifTrue: [ ^ self ].
-	commentCommand := OPUmlUpdateGeneralizationCommentCommand new generalization: self model commentText: newCommentText.
-	activeUndoManager execute: commentCommand.
-	self viewModel ifNotNil: [ :activeViewModel | activeViewModel modelChanged ]
+	commentCommand := OPUmlUpdateGeneralizationCommentCommand new
+		                  viewModelRegistry: (self viewModel ifNotNil: [ :activeViewModel | activeViewModel registry ]);
+		                  generalization: self model commentText: newCommentText;
+		                  yourself.
+	activeUndoManager execute: commentCommand
 ]
 
 { #category : 'accessing' }
 OPUmlGeneralizationEditor >> commentTextArea [
 	^ commentTextArea
-]
-
-{ #category : 'initialization' }
-OPUmlGeneralizationEditor >> controller: aGeneralizationController [
-
-	controller := aGeneralizationController.
-	aGeneralizationController ifNotNil: [
-		self undoManager: aGeneralizationController undoManager.
-		self viewModel: aGeneralizationController viewModel ]
 ]
 
 { #category : 'layout' }
@@ -158,11 +150,11 @@ OPUmlGeneralizationEditor >> viewModel [
 
 { #category : 'initialization' }
 OPUmlGeneralizationEditor >> viewModel: aGeneralizationViewModel [
+
 	viewModel := aGeneralizationViewModel.
 	general label: (viewModel model general name ifNil: [ '' ]).
 	specific label: (viewModel model specific name ifNil: [ '' ]).
-	commentTextArea text: (viewModel model ownedComments
-		ifEmpty: [ '' ]
-		ifNotEmpty: [ :comments | comments first body asString ]).
+	commentTextArea text:
+		(viewModel model ownedComments ifEmpty: [ '' ] ifNotEmpty: [ :comments | (comments first body ifNil: [ '' ]) asString ]).
 	generalizationSetsEditor viewModel: viewModel
 ]

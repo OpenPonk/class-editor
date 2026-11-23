@@ -6,7 +6,6 @@ Class {
 	#superclass : 'SpPresenter',
 	#instVars : [
 		'table',
-		'controller',
 		'viewModel',
 		'undoManager'
 	],
@@ -31,38 +30,43 @@ OPUmlGeneralizationSetsEditor >> basicSave [
 
 { #category : 'private - actions' }
 OPUmlGeneralizationSetsEditor >> buildUpdateCommand [
+
 	| cmd originalSets newSetCopies affectedGens |
 	cmd := OPUmlUpdateGeneralizationSetsCommand new.
 	cmd viewModelRegistry: self viewModelRegistry.
 	originalSets := self relevantGeneralizationSets.
 	newSetCopies := table items.
-	affectedGens := (originalSets , newSetCopies flatCollectAsSet: [ :each | each generalizations ]) copy.
+	affectedGens := (originalSets flatCollectAsSet: [ :each | each generalizations ]) copy.
 	cmd affectedGeneralizations: affectedGens.
 
 	self populateCommand: cmd originalSets: originalSets newSetCopies: newSetCopies.
 	^ cmd
 ]
 
-{ #category : 'accessing' }
-OPUmlGeneralizationSetsEditor >> controller: aController [
-	"Backward compatibility adapter for controller-based usage"
+{ #category : 'private - actions' }
+OPUmlGeneralizationSetsEditor >> copyGeneralizationSet: aGeneralizationSet [
 
-	controller := aController.
-	aController ifNotNil: [
-		self undoManager: aController undoManager.
-		self viewModel: aController viewModel ]
+	^ OPUMLGeneralizationSet new
+		  uuid: aGeneralizationSet uuid;
+		  name: aGeneralizationSet name;
+		  isCovering: aGeneralizationSet isCovering;
+		  isDisjoint: aGeneralizationSet isDisjoint;
+		  yourself
 ]
 
 { #category : 'private - actions' }
 OPUmlGeneralizationSetsEditor >> deleteSet: aSet [
-	| otherGeneralizations |
-	otherGeneralizations := aSet generalizations copyWithout: self model.
+
+	| sourceSet otherGeneralizations |
+	sourceSet := self relevantGeneralizationSets detect: [ :each | each uuid = aSet uuid ] ifNone: [ aSet ].
+	otherGeneralizations := sourceSet generalizations copyWithout: self model.
 	otherGeneralizations ifNotEmpty: [
-		(self confirm: 'This generalization set contains '
-			 , (otherGeneralizations size pluralize: 'generalization')
-			 , '. Those will not be removed, just no longer part of the set. Remove it?')
-			ifFalse: [ ^ self ] ].
-	table items: (table items reject: [ :any | any uuid = aSet uuid ])
+			(self confirm: (String streamContents: [ :stream |
+						  stream << 'This generalization set contains '.
+						  stream << (otherGeneralizations size pluralize: 'generalization').
+						  stream << '. Those will not be removed, just no longer part of the set. Remove it?' ])) ifFalse: [ ^ false ] ].
+	table items: (table items reject: [ :any | any uuid = aSet uuid ]).
+	^ true
 ]
 
 { #category : 'initialization' }
@@ -147,42 +151,6 @@ OPUmlGeneralizationSetsEditor >> populateCommand: aCommand originalSets: origina
 					oldIsDisjoint: eachOriginalSet isDisjoint newIsDisjoint: matchingCopy isDisjoint ] ] ]
 ]
 
-{ #category : 'actions' }
-OPUmlGeneralizationSetsEditor >> processChangesIn: originalSets basedOn: newSetCopies [
-
-	originalSets do: [ :eachOriginalSet |
-		| relevantCopy |
-		relevantCopy := newSetCopies detect: [ :any |
-			                any uuid = eachOriginalSet uuid ].
-		eachOriginalSet name: relevantCopy name.
-		eachOriginalSet isCovering: relevantCopy isCovering.
-		eachOriginalSet isDisjoint: relevantCopy isDisjoint ]
-]
-
-{ #category : 'actions' }
-OPUmlGeneralizationSetsEditor >> processDoRemove: setsToRemove [
-	| uuids |
-	uuids := setsToRemove collect: [ :each | each uuid ].
-	self packageViewModel ifNotNil: [ :pkgVM |
-		pkgVM allPackages do: [ :eachPkgModel |
-			eachPkgModel packagedElements:
-				(eachPkgModel packagedElements reject: [ :any | uuids includes: any uuid ]) ] ].
-	setsToRemove do: [ :each |
-		each generalizations: #(  ) ]
-]
-
-{ #category : 'actions' }
-OPUmlGeneralizationSetsEditor >> processRemovalIn: originalSets basedOn: newSetCopies [
-
-	| setsToRemove |
-	setsToRemove := originalSets select: [ :each |
-		                newSetCopies noneSatisfy: [ :any |
-			                any uuid = each uuid ] ].
-	self processDoRemove: setsToRemove.
-	^ originalSets reject: [ :each |
-		  setsToRemove anySatisfy: [ :any | any uuid = each uuid ] ]
-]
-
 { #category : 'initialization' }
 OPUmlGeneralizationSetsEditor >> relevantGeneralizationSets [
 	| allSets |
@@ -195,9 +163,7 @@ OPUmlGeneralizationSetsEditor >> relevantGeneralizationSets [
 { #category : 'initialization' }
 OPUmlGeneralizationSetsEditor >> reloadGeneralizationSets [
 
-	table items: (self relevantGeneralizationSets
-			 collect: [ :each | each copy ]
-			 as: OrderedCollection)
+	table items: (self relevantGeneralizationSets collect: [ :each | self copyGeneralizationSet: each ] as: OrderedCollection)
 ]
 
 { #category : 'actions' }
@@ -225,14 +191,6 @@ OPUmlGeneralizationSetsEditor >> undoManager [
 { #category : 'accessing' }
 OPUmlGeneralizationSetsEditor >> undoManager: anUndoManager [
 	undoManager := anUndoManager
-]
-
-{ #category : 'updating' }
-OPUmlGeneralizationSetsEditor >> updateShapesOf: generalizations [
-	"Notify diagram listeners via ViewModel announcements instead of searching for diagram controllers"
-	generalizations do: [ :eachGeneralization |
-		self viewModelRegistry ifNotNil: [ :registry |
-			(registry viewModelFor: eachGeneralization) modelChanged ] ]
 ]
 
 { #category : 'accessing' }

@@ -62,6 +62,57 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> tearDown [
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testAddGeneralizationSetButtonAndPartOfColumnCallbacks [
+
+	| otherSpecific otherGeneralization otherSet editor partOfColumn otherSetCopy activeUndoManager addButton |
+	otherSpecific := OPUMLClass new
+		                 name: 'OtherHouse';
+		                 yourself.
+	package packagedElements add: otherSpecific.
+	otherGeneralization := OPUMLGeneralization new
+		                       general: classGeneral;
+		                       specific: otherSpecific;
+		                       yourself.
+	otherSpecific generalizations add: otherGeneralization.
+	otherSet := OPUMLGeneralizationSet new
+		            name: 'other gs';
+		            yourself.
+	otherSet generalizations add: otherGeneralization.
+	package packagedElements add: otherSet.
+
+	activeUndoManager := diagramController undoManager.
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor undoManager: activeUndoManager.
+	editor viewModel: generalizationController viewModel.
+
+	self assert: editor defaultLayout class identicalTo: SpBoxLayout.
+
+	partOfColumn := editor table columns first.
+	otherSetCopy := editor table items detect: [ :each | each uuid = otherSet uuid ].
+	self deny: (partOfColumn evaluation value: otherSetCopy) description: 'Generalization must not initially be part of otherSet'.
+
+	partOfColumn onActivation value: otherSetCopy.
+	self assert: (partOfColumn evaluation value: otherSetCopy) description: 'Activating Part of must include generalization'.
+
+	partOfColumn onDeactivation value: otherSetCopy.
+	self deny: (partOfColumn evaluation value: otherSetCopy) description: 'Deactivating Part of must exclude generalization'.
+
+	partOfColumn onActivation value: otherSetCopy.
+	addButton := editor instVarNamed: #addGeneralizationSetButton.
+	addButton click.
+	editor save.
+
+	self assertCollection: otherSet generalizations includesAll: {
+			otherGeneralization.
+			generalization }.
+	self assert: generalization generalizationSets size equals: 3.
+
+	activeUndoManager undo.
+	self denyCollection: otherSet generalizations includesAny: { generalization }.
+	self assert: generalization generalizationSets size equals: 1
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetAndUndoRemovesLabelFromDiagram [
 	| editor activeUndoManager labelElement labelShape |
 	activeUndoManager := diagramController undoManager.
@@ -134,14 +185,43 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testAddNewSetToStandaloneGenera
 ]
 
 { #category : 'tests' }
-OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithViewModelWithoutController [
-	"Verifies that deleting a generalization set works with viewModel only, when controller is nil."
+OPUmlGeneralizationSetsOfControllerEditorTest >> testCancelledDeleteSetPreservesMembership [
 
-	| generalizationVM editor |
-	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
+	| otherSpecific otherGeneralization editor setCopy |
+	otherSpecific := OPUMLClass new
+		                 name: 'OtherHouse';
+		                 yourself.
+	package packagedElements add: otherSpecific.
+	otherGeneralization := OPUMLGeneralization new
+		                       general: classGeneral;
+		                       specific: otherSpecific;
+		                       yourself.
+	otherSpecific generalizations add: otherGeneralization.
+	generalizationSet generalizations add: otherGeneralization.
 
 	editor := OPUmlGeneralizationSetsOfControllerEditor new.
-	editor viewModel: generalizationVM.
+	editor undoManager: diagramController undoManager.
+	editor viewModel: generalizationController viewModel.
+	(editor stub confirm: Any) willReturn: false.
+
+	setCopy := editor table items first.
+	editor deleteSet: setCopy.
+	editor save.
+
+	self assertCollection: (editor table items collect: #uuid) includesAll: { generalizationSet uuid }.
+	self assertCollection: generalizationSet generalizations includesAll: {
+			generalization.
+			otherGeneralization }
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithViewModelWithoutController [
+
+	| generalizationViewModel editor |
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
+
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor viewModel: generalizationViewModel.
 
 	editor deleteSet: generalizationSet.
 
@@ -150,22 +230,21 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithVie
 
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testSaveExecutesInsideUndoManagerTransaction [
-	"Verifies that saving changes in generalization sets editor runs inside an undo transaction."
 
-	| generalizationVM editor undoManager |
-	undoManager := OPUndoManager new.
-	generalizationVM := diagramController viewModelRegistry viewModelFor: generalization.
+	| generalizationViewModel editor activeUndoManager |
+	activeUndoManager := OPUndoManager new.
+	generalizationViewModel := diagramController viewModelRegistry viewModelFor: generalization.
 
 	editor := OPUmlGeneralizationSetsOfControllerEditor new.
-	editor undoManager: undoManager.
-	editor viewModel: generalizationVM.
+	editor undoManager: activeUndoManager.
+	editor viewModel: generalizationViewModel.
 
 	editor removeFromSet: generalizationSet.
 	editor save.
-	self denyEmpty: undoManager undoStack.
+	self denyEmpty: activeUndoManager undoStack.
 	self denyCollection: generalizationSet generalizations includesAny: { generalization }.
 
-	undoManager undo.
+	activeUndoManager undo.
 	self assertCollection: generalizationSet generalizations includesAll: { generalization }
 ]
 
@@ -187,13 +266,31 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testSetsEditorWorksPurelyWithVi
 
 { #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testUncheckPartOfDoesNotFailWithDNU [
-	"Verify that saving changes after unchecking Part of does not raise DNU #packagedElements"
 
 	| editor |
 	editor := OPUmlGeneralizationSetsOfControllerEditor new.
-	editor generalizationController: generalizationController.
+	editor undoManager: diagramController undoManager.
+	editor viewModel: generalizationController viewModel.
 
 	editor removeFromSet: generalizationSet.
 	editor save.
 	self denyCollection: generalizationSet generalizations includesAny: { generalization }
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testUncheckedNewSetIsNotAddedToPackage [
+
+	| editor addedSet initialElementCount |
+	initialElementCount := package packagedElements size.
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor undoManager: diagramController undoManager.
+	editor viewModel: generalizationController viewModel.
+
+	editor addNewSet.
+	addedSet := editor table items first.
+	editor removeFromSet: addedSet.
+	editor save.
+
+	self assert: package packagedElements size equals: initialElementCount.
+	self denyCollection: package packagedElements includesAny: { addedSet }
 ]

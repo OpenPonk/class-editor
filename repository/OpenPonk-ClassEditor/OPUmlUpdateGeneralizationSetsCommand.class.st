@@ -36,7 +36,7 @@ OPUmlUpdateGeneralizationSetsCommand >> allAffectedGeneralizations [
 	^ result asSet
 ]
 
-{ #category : 'execution' }
+{ #category : 'executing' }
 OPUmlUpdateGeneralizationSetsCommand >> execute [
 	setsToAdd do: [ :eachPair |
 		| generalizationSet owningPackage |
@@ -94,7 +94,7 @@ OPUmlUpdateGeneralizationSetsCommand >> isSetMarkedForRemoval: aSet [
 	^ setsToRemove anySatisfy: [ :each | (each at: #set) uuid = aSet uuid ]
 ]
 
-{ #category : 'execution' }
+{ #category : 'executing' }
 OPUmlUpdateGeneralizationSetsCommand >> notifyAffectedGeneralizations [
 	viewModelRegistry ifNil: [ ^ self ].
 	self allAffectedGeneralizations do: [ :eachGeneralization |
@@ -138,7 +138,7 @@ OPUmlUpdateGeneralizationSetsCommand >> recordRemoveSet: aSet fromPackage: aPack
 		yourself)
 ]
 
-{ #category : 'execution' }
+{ #category : 'executing' }
 OPUmlUpdateGeneralizationSetsCommand >> undo [
 	setsToRemove reverseDo: [ :eachChange |
 		| generalizationSet owningPackage originalGeneralizations |

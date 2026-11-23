@@ -22,18 +22,19 @@ OPUmlGeneralizationViewModel >> attachModelFrom: sourceViewModel to: targetViewM
 
 { #category : 'private' }
 OPUmlGeneralizationViewModel >> basicRemoveModel [
+
 	| targetPackageModel specificClassifier |
-	targetPackageModel := self parentPackageViewModel ifNotNil: #model.
+	targetPackageModel := self parentPackageViewModel ifNotNil: [ :parentPackageViewModel | parentPackageViewModel model ].
 	specificClassifier := self model specific.
 
-	self model generalizationSets do: [ :eachSet |
-		eachSet generalizations remove: self model ifAbsent: [  ].
-		eachSet generalizations ifEmpty: [
-			targetPackageModel ifNotNil: [ :pkgModel |
-				pkgModel packagedElements remove: eachSet ifAbsent: [  ] ] ] ].
+	self model generalizationSets copy do: [ :eachSet |
+			eachSet generalizations remove: self model ifAbsent: [ ].
+			eachSet generalizations ifEmpty: [
+					| owningPackageModel |
+					owningPackageModel := (self registry ifNotNil: [ self findOwningPackageFor: eachSet ]) ifNil: [ targetPackageModel ].
+					owningPackageModel ifNotNil: [ :packageModel | packageModel packagedElements remove: eachSet ifAbsent: [ ] ] ] ].
 
-	specificClassifier ifNotNil: [ :spec |
-		spec generalizations remove: self model ifAbsent: [  ] ].
+	specificClassifier ifNotNil: [ :specific | specific generalizations remove: self model ifAbsent: [ ] ].
 
 	self model general: nil.
 	self model specific: nil
@@ -173,14 +174,14 @@ OPUmlGeneralizationViewModel >> openEditorWithApplication: anApplication undoMan
 	self modelChanged
 ]
 
-{ #category : 'accessing' }
+{ #category : 'connecting' }
 OPUmlGeneralizationViewModel >> parentContainerModel [
 	"Generalization is structurally owned by its specific classifier."
 
 	^ self model specific
 ]
 
-{ #category : 'registration' }
+{ #category : 'registering' }
 OPUmlGeneralizationViewModel >> registerModelIn: aParentModel [
 	"Restore the generalization into its owning classifier container."
 
