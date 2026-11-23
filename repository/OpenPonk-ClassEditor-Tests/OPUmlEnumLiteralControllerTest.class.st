@@ -71,12 +71,13 @@ OPUmlEnumLiteralControllerTest >> testEnumerationBeTarget [
 { #category : 'tests - removing' }
 OPUmlEnumLiteralControllerTest >> testRemoveFromView [
 
-	| class compartment prop |
-	class := OPUMLClass new.
-	prop := OPUMLProperty new.
-	class ownedAttributes add: prop.
-	diagramController showInDiagramModel: class.
-	controller := diagramController controllerForModel: prop.
+	| enumeration compartment literal |
+	enumeration := OPUMLEnumeration new name: 'Status'.
+	literal := OPUMLEnumerationLiteral new name: 'Active'.
+	enumeration ownedLiterals add: literal.
+	diagramController showInDiagramModel: enumeration.
+	controller := diagramController controllerForModel: literal.
+	self assert: controller class identicalTo: OPUmlEnumerationLiteralController.
 	compartment := controller diagramElement owningElement.
 	controller removeControllerAndDiagramElement.
 	self assertEmpty: compartment ownedElements

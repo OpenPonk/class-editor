@@ -158,6 +158,30 @@ OPUmlElementViewModelTest >> testStereotypesInForUsesPassedModelArgument [
 ]
 
 { #category : 'tests' }
+OPUmlElementViewModelTest >> testValidateChecksOwnedAttributesOfClassifier [
+
+	| ownerClass association dualOwnerProperty classViewModel warnings |
+	ownerClass := OPUMLClass new name: 'OwnerClass'.
+	association := OPUMLAssociation new name: 'Assoc'.
+	dualOwnerProperty := OPUMLProperty new
+		                     name: 'dualOwner';
+		                     owningClass: ownerClass;
+		                     owningAssociation: association;
+		                     yourself.
+	classViewModel := OPUmlClassViewModel new model: ownerClass.
+	warnings := OrderedCollection new.
+
+	[ classViewModel validate ]
+		on: OPModelInvalid
+		do: [ :warning |
+				warnings add: warning messageText.
+				warning resume ].
+
+	self assert: warnings size equals: 1.
+	self assert: dualOwnerProperty owningAssociation identicalTo: nil
+]
+
+{ #category : 'tests' }
 OPUmlElementViewModelTest >> testValidatePropertyAllFailureBranchesAndRepairs [
 
 	| classA classB association endA endB classViewModel twoOwnersProp orphanTypedProp orphanUntypedProp warnings |

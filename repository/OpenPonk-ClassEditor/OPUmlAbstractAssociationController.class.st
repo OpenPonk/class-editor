@@ -46,9 +46,3 @@ OPUmlAbstractAssociationController >> subscribeToViewModel [
 		send: #navigabilityChanged:
 		to: self
 ]
-
-{ #category : 'validation' }
-OPUmlAbstractAssociationController >> validateMemberEndCount [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver validateMemberEndCount' -> '`@receiver viewModel validateMemberEndCount'.
-	^ self viewModel validateMemberEndCount
-]

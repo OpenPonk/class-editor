@@ -85,15 +85,3 @@ OPUmlClassController >> createGeneralizationAdornmentBy: builder [
 		self diagramController editor palette selectTool: tool.
 		tool selectedControllers: { self } ]
 ]
-
-{ #category : 'forms' }
-OPUmlClassController >> descriptionIsAbstract [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsAbstract' -> '`@receiver viewModel descriptionIsAbstract'.
-	^ self viewModel descriptionIsAbstract
-]
-
-{ #category : 'forms' }
-OPUmlClassController >> descriptionStereotype [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionStereotype' -> '`@receiver viewModel descriptionStereotype'.
-	^ self viewModel descriptionStereotype
-]

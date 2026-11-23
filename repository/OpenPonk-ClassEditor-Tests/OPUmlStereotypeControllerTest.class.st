@@ -26,11 +26,6 @@ OPUmlStereotypeControllerTest >> modelClass [
 ]
 
 { #category : 'instance creation' }
-OPUmlStereotypeControllerTest >> newEmptyClass [
-	^ OPUMLStereotype new name: 'Something'
-]
-
-{ #category : 'instance creation' }
 OPUmlStereotypeControllerTest >> newEmptyModel [
 	^ OPUMLStereotype new name: 'Something'
 ]

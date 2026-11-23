@@ -3,7 +3,7 @@ I am the controller for UML Properties (Attributes). I manage UI form descriptio
 "
 Class {
 	#name : 'OPUmlAttributeController',
-	#superclass : 'OPUmlClassItemController',
+	#superclass : 'OPUmlClassifierItemController',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -40,48 +40,6 @@ OPUmlAttributeController >> createDiagramElement [
 	^ super createDiagramElement
 ]
 
-{ #category : 'forms' }
-OPUmlAttributeController >> descriptionDefaultValue [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionDefaultValue' -> '`@receiver viewModel descriptionDefaultValue'.
-	^ self viewModel descriptionDefaultValue
-]
-
-{ #category : 'forms' }
-OPUmlAttributeController >> descriptionIsDerived [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsDerived' -> '`@receiver viewModel descriptionIsDerived'.
-	^ self viewModel descriptionIsDerived
-]
-
-{ #category : 'forms' }
-OPUmlAttributeController >> descriptionIsOrdered [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsOrdered' -> '`@receiver viewModel descriptionIsOrdered'.
-	^ self viewModel descriptionIsOrdered
-]
-
-{ #category : 'forms' }
-OPUmlAttributeController >> descriptionIsReadOnly [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsReadOnly' -> '`@receiver viewModel descriptionIsReadOnly'.
-	^ self viewModel descriptionIsReadOnly
-]
-
-{ #category : 'forms' }
-OPUmlAttributeController >> descriptionIsUnique [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsUnique' -> '`@receiver viewModel descriptionIsUnique'.
-	^ self viewModel descriptionIsUnique
-]
-
-{ #category : 'forms' }
-OPUmlAttributeController >> descriptionMultiplicity [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionMultiplicity' -> '`@receiver viewModel descriptionMultiplicity'.
-	^ self viewModel descriptionMultiplicity
-]
-
-{ #category : 'forms' }
-OPUmlAttributeController >> descriptionType [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionType' -> '`@receiver viewModel descriptionType'.
-	^ self viewModel descriptionType
-]
-
 { #category : 'announcements' }
 OPUmlAttributeController >> modelChanged [
 
@@ -99,25 +57,4 @@ OPUmlAttributeController >> removeDiagramElement [
 	self diagramElementOwnerWithPossibleController ifExists: [ :owner |
 		owner removeAttribute: self diagramElement ].
 	self diagramElement: nil
-]
-
-{ #category : 'removing' }
-OPUmlAttributeController >> switchOwnerToAssociation [
-
-	self model owningClass: nil.
-	self model owningAssociation: self model association
-]
-
-{ #category : 'deprecation' }
-OPUmlAttributeController >> typeNamed: aName [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver typeNamed: `@arg1' -> '`@receiver viewModel typeNamed: `@arg1'.
-	^ self viewModel typeNamed: aName
-]
-
-{ #category : 'parsing' }
-OPUmlAttributeController >> writeMultiplicityFrom: aString to: aProperty [
-	self
-		deprecated: 'Use viewModel instead'
-		transformWith: '`@receiver writeMultiplicityFrom: `@arg1 to: `@arg2' -> '`@receiver viewModel writeMultiplicityFrom: `@arg1 to: `@arg2'.
-	^ self viewModel writeMultiplicityFrom: aString to: aProperty
 ]

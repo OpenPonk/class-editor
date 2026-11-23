@@ -3,7 +3,7 @@ I am the controller for UML Operations. I manage UI form descriptions (like the 
 "
 Class {
 	#name : 'OPUmlOperationController',
-	#superclass : 'OPUmlClassItemController',
+	#superclass : 'OPUmlClassifierItemController',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -24,12 +24,6 @@ OPUmlOperationController class >> viewModelClass [
 OPUmlOperationController >> addDiagramElementToOwner [
 
 	self intendedOwningDiagramElement addOperation: self diagramElement
-]
-
-{ #category : 'forms' }
-OPUmlOperationController >> descriptionIsAbstract [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionIsAbstract' -> '`@receiver viewModel descriptionIsAbstract'.
-	^ self viewModel descriptionIsAbstract
 ]
 
 { #category : 'destruction' }

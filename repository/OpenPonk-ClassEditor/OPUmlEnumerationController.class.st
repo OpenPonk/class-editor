@@ -46,10 +46,3 @@ OPUmlEnumerationController >> createLiteralAdornmentBy: builder [
 				targetDiagramCtrl form ifNotNil: [ :form | form focusFirstInput ] ] ].
 		literalCreationTool selectedControllers: { self } ]
 ]
-
-{ #category : 'model' }
-OPUmlEnumerationController >> createModel [
-	^ self modelClass new
-		name: 'Enumeration';
-		yourself
-]

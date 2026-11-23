@@ -25,6 +25,39 @@ OPUmlEnumerationControllerTest >> modelClass [
 	^ OPUMLEnumeration
 ]
 
+{ #category : 'tests - diagram' }
+OPUmlEnumerationControllerTest >> testLiteralAdornmentCreatesLiteral [
+
+	| mockWorkbench mockForm editor palette selectable adornmentBoxes |
+	controller createModelIn: diagramController model.
+	diagramController addController: controller.
+	controller
+		createDiagramElement;
+		renderDiagramElement.
+
+	mockForm := Mock new.
+	mockForm stub focusFirstInput willReturn: nil.
+	mockWorkbench := Mock new.
+	(mockWorkbench stub openFormOn: Any) willReturn: nil.
+	mockWorkbench stub form willReturn: mockForm.
+	mockWorkbench stub projectController willReturn: diagramController projectController.
+	editor := (OPEditor on: OPUmlClassEditorPlugin new)
+		          workbench: mockWorkbench;
+		          yourself.
+	palette := editor palette.
+	diagramController editor: editor.
+	palette createPaletteFor: diagramController.
+
+	selectable := controller roassalShape propertyAt: OPRSSelectable.
+	selectable fakeClicked: controller roassalShape.
+	adornmentBoxes := diagramController canvas shapes select: [ :eachShape |
+		                  eachShape class == RSBox and: [ eachShape model == controller roassalShape ] ].
+	self assert: adornmentBoxes size equals: 1.
+
+	adornmentBoxes first announce: RSMouseLeftClick new.
+	self assert: controller model ownedLiterals size equals: 1
+]
+
 { #category : 'tests - removing' }
 OPUmlEnumerationControllerTest >> testRemoveWithLiteral [
 

@@ -52,6 +52,48 @@ OPUmlAssociationControllerTest >> newModel [
 ]
 
 { #category : 'tests - diagram' }
+OPUmlAssociationControllerTest >> testEndsSwappedUpdatesSourceTargetAndShape [
+
+	| originalSource originalTarget originalSourceShape originalTargetShape |
+	self showInDiagram.
+	originalSource := controller source.
+	originalTarget := controller target.
+	originalSourceShape := controller diagramElement source.
+	originalTargetShape := controller diagramElement target.
+
+	controller viewModel switchSourceAndTarget.
+
+	self assert: controller source identicalTo: originalTarget.
+	self assert: controller target identicalTo: originalSource.
+	self assert: controller diagramElement source identicalTo: originalTargetShape.
+	self assert: controller diagramElement target identicalTo: originalSourceShape.
+
+	controller diagramElement: OPNoShape instance.
+	controller viewModel switchSourceAndTarget.
+
+	self assert: controller source identicalTo: originalSource.
+	self assert: controller target identicalTo: originalTarget
+]
+
+{ #category : 'tests' }
+OPUmlAssociationControllerTest >> testModelChangedSynchronizesNavigableAttributeAndAssociation [
+
+	| second attributeController |
+	self showInDiagram.
+	second := model memberEnds second.
+	controller viewModel writeNavigability: true to: second.
+	attributeController := diagramController controllerForModel: second.
+
+	second name: 'renamedNavigableEnd'.
+	attributeController modelChanged.
+	self assert: attributeController diagramElement text equals: 'renamedNavigableEnd : TargetModel'.
+
+	second name: 'updatedViaAssociation'.
+	controller modelChanged.
+	self assert: attributeController diagramElement text equals: 'updatedViaAssociation : TargetModel'
+]
+
+{ #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testNavigableRemovalOfAssociationRemovesMemberEnds [
 
 	| first second attributeController attributeDiagramElement |
@@ -272,10 +314,15 @@ OPUmlAssociationControllerTest >> testWriteNavigabilityAssocOwnedToClassOwned [
 { #category : 'tests' }
 OPUmlAssociationControllerTest >> testWriteNavigabilityClassOwnedToAssocOwned [
 
-	| first |
+	| first second |
 	self prepareToShow.
 	controller diagramController: diagramController.
 	first := model memberEnds first.
+	second := model memberEnds second.
+	controller viewModel writeNavigability: true to: first.
+	self assert: first isNavigable description: 'First member end must become navigable before reverting'.
+	self assert: first owningClass identicalTo: second type.
+
 	controller viewModel writeNavigability: false to: first.
 	self deny: first isNavigable description: 'First member end must become non-navigable'.
 	self assert: first owningClass identicalTo: nil.

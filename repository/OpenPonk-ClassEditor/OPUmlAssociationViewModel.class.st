@@ -194,8 +194,7 @@ OPUmlAssociationViewModel >> validate [
 
 	super validate.
 	self validateMemberEndCount.
-	self model memberEnds do: [ :each | self validateProperty: each ].
-	self model attributes do: [ :each | self validateProperty: each ]
+	self model memberEnds do: [ :each | self validateProperty: each ]
 ]
 
 { #category : 'validation' }

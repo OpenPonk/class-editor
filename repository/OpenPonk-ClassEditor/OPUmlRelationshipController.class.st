@@ -4,8 +4,8 @@ I am the abstract base controller for directed UML relationships (like associati
 Class {
 	#name : 'OPUmlRelationshipController',
 	#superclass : 'OPDirectionalRelationshipController',
-	#traits : 'OPTUmlStereotypedElementController + OPTUmlPackageableController',
-	#classTraits : 'OPTUmlStereotypedElementController classTrait + OPTUmlPackageableController classTrait',
+	#traits : 'OPTUmlPackageableController',
+	#classTraits : 'OPTUmlPackageableController classTrait',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'

@@ -63,6 +63,7 @@ OPUmlClassifierViewModel >> registerModelIn: aParentModel [
 
 { #category : 'validation' }
 OPUmlClassifierViewModel >> validate [
+
 	super validate.
-	self model attributes do: [ :each | self validateProperty: each ]
+	self model ownedAttributes do: [ :each | self validateProperty: each ]
 ]

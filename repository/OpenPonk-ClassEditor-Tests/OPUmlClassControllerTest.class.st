@@ -25,6 +25,70 @@ OPUmlClassControllerTest >> modelClass [
 	^ OPUMLClass
 ]
 
+{ #category : 'tests - diagram' }
+OPUmlClassControllerTest >> testAdornmentsAndUnhookDiagramElement [
+
+	| mockWorkbench mockForm editor palette targetController selectable adornmentBoxes builder baseBuilder |
+	controller createModelIn: diagramController model.
+	diagramController addController: controller.
+	controller
+		createDiagramElement;
+		renderDiagramElement.
+
+	targetController := OPUmlClassController new.
+	targetController diagramController: diagramController.
+	targetController createModelIn: diagramController model.
+	diagramController addController: targetController.
+	targetController
+		createDiagramElement;
+		renderDiagramElement.
+
+	mockForm := Mock new.
+	mockForm stub focusFirstInput willReturn: nil.
+	mockWorkbench := Mock new.
+	(mockWorkbench stub openFormOn: Any) willReturn: nil.
+	mockWorkbench stub form willReturn: mockForm.
+	mockWorkbench stub projectController willReturn: diagramController projectController.
+	editor := (OPEditor on: OPUmlClassEditorPlugin new)
+		          workbench: mockWorkbench;
+		          yourself.
+	palette := editor palette.
+	diagramController editor: editor.
+	palette createPaletteFor: diagramController.
+
+	selectable := controller roassalShape propertyAt: OPRSSelectable.
+	selectable fakeClicked: controller roassalShape.
+	adornmentBoxes := diagramController canvas shapes select: [ :eachShape |
+		                  eachShape class == RSBox and: [ eachShape model == controller roassalShape ] ].
+	self assert: adornmentBoxes size equals: 3.
+
+	adornmentBoxes first announce: RSMouseLeftClick new.
+	self assert: controller model ownedAttributes size equals: 1.
+
+	adornmentBoxes second announce: RSMouseLeftClick new.
+	self assert: palette selectedTool class identicalTo: OPConnectionCreationTool.
+	palette selectedTool selectedControllers: { targetController }.
+	self assert: (diagramController model packagedElements count: [ :each | each isKindOf: OPUMLAssociation ]) equals: 1.
+
+	adornmentBoxes third announce: RSMouseLeftClick new.
+	self assert: palette selectedTool class identicalTo: OPConnectionCreationTool.
+	palette selectedTool selectedControllers: { targetController }.
+	self assert: controller model generalizations size equals: 1.
+
+	baseBuilder := OPRSAdornmentBuilder new.
+	OPUmlClassifierController new createAdornmentsBy: baseBuilder.
+	self assertEmpty: (baseBuilder instVarNamed: #adornments).
+
+	controller unhookDiagramElement.
+	builder := OPRSAdornmentBuilder new.
+	(controller diagramElement instVarNamed: #adornmentCreationBlock) value: builder.
+	self assertEmpty: (builder instVarNamed: #adornments).
+
+	controller diagramElement: OPNoShape instance.
+	controller unhookDiagramElement.
+	self deny: controller diagramElement exists description: 'Unhooking with OPNoShape must leave diagramElement non-existent'
+]
+
 { #category : 'tests' }
 OPUmlClassControllerTest >> testPositionsOfContentOfAClass [
 

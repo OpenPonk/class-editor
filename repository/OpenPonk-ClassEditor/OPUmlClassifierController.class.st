@@ -35,9 +35,9 @@ OPUmlClassifierController >> hookDiagramElement [
 { #category : 'updating' }
 OPUmlClassifierController >> packageRenderChanged [
 
-	self diagramElement ifNotNil: [ :foundDE |
-		(foundDE hiddenPackages: self hiddenPackages) ifTrue: [
-			foundDE isRendered ifTrue: [ foundDE updateRenderFromModel ] ] ]
+	self diagramElement ifExists: [ :foundDiagramElement |
+			(foundDiagramElement hiddenPackages: self hiddenPackages) ifTrue: [
+				foundDiagramElement isRendered ifTrue: [ foundDiagramElement updateRenderFromModel ] ] ]
 ]
 
 { #category : 'diagram elements' }

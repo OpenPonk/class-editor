@@ -36,6 +36,37 @@ OPUmlGeneralizationControllerTest >> modelClass [
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationControllerTest >> testCreateModelInWithClassifierAndNonClassifierParent [
+
+	| firstController secondController thirdController |
+	self prepareToShow.
+	firstController := OPUmlGeneralizationController new
+		                   diagramController: diagramController;
+		                   source: self sourceController;
+		                   target: self targetController;
+		                   yourself.
+	firstController createModelIn: sourceModel.
+	self assert: firstController model specific identicalTo: sourceModel.
+	self assert: firstController model general identicalTo: targetModel.
+
+	secondController := OPUmlGeneralizationController new
+		                    diagramController: diagramController;
+		                    source: self sourceController;
+		                    target: self targetController;
+		                    yourself.
+	secondController createModelIn: diagramController model.
+	self assert: secondController model specific identicalTo: sourceModel.
+
+	thirdController := OPUmlGeneralizationController new
+		                   diagramController: diagramController;
+		                   source: self sourceController;
+		                   target: self targetController;
+		                   yourself.
+	thirdController createModelIn: Object new.
+	self assert: thirdController model specific identicalTo: sourceModel
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationControllerTest >> testDeleteGeneralizationSetWithMultipleGeneralizationsInEditorAndUndoRedo [
 
 	| package generalizationSet generalization1 generalization2 editor activeUndoManager packageViewModel |
@@ -107,6 +138,18 @@ OPUmlGeneralizationControllerTest >> testExecuteRemovesAllGeneralizationsFromDel
 	self assertEmpty: generalization1 generalizationSets.
 	self assertEmpty: generalization2 generalizationSets.
 	self denyCollection: package packagedElements includesAny: { generalizationSet }
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationControllerTest >> testParentModelInTargetWithoutSource [
+
+	| detachedController |
+	self prepareToShow.
+	controller source: nil.
+	self assert: (controller parentModelInTarget: self targetController) identicalTo: sourceModel.
+
+	detachedController := OPUmlGeneralizationController new.
+	self assert: (detachedController parentModelInTarget: self targetController) identicalTo: nil
 ]
 
 { #category : 'tests' }

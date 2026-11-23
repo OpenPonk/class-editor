@@ -4,8 +4,6 @@ I am the primary diagram controller for the UML Class Diagram editor. I manage t
 Class {
 	#name : 'OPUmlPackageDiagramController',
 	#superclass : 'OPDiagramController',
-	#traits : 'OPTUmlStereotypedElementController',
-	#classTraits : 'OPTUmlStereotypedElementController classTrait',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
@@ -15,24 +13,6 @@ Class {
 OPUmlPackageDiagramController class >> viewModelClass [
 
 	^ OPUmlPackageViewModel
-]
-
-{ #category : 'deprecation' }
-OPUmlPackageDiagramController >> allGeneralizationSets [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver allGeneralizationSets' -> '`@receiver viewModel allGeneralizationSets'.
-	^ self viewModel allGeneralizationSets
-]
-
-{ #category : 'deprecation' }
-OPUmlPackageDiagramController >> allPackages [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver allPackages' -> '`@receiver viewModel allPackages'.
-	^ self viewModel allPackages
-]
-
-{ #category : 'deprecation' }
-OPUmlPackageDiagramController >> allPackagesIn: aPackage [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver allPackagesIn: `@arg1' -> '`@receiver viewModel allPackagesIn: `@arg1'.
-	^ self viewModel allPackagesIn: aPackage
 ]
 
 { #category : 'connecting' }
@@ -61,18 +41,6 @@ OPUmlPackageDiagramController >> controllerFactory [
 		register: OPUmlEnumerationLiteralController forModel: OPUMLEnumerationLiteral;
 		register: OPUmlStereotypeController forModel: OPUMLStereotype;
 		register: OPUmlPackageImportController forModel: OPUMLPackageImport
-]
-
-{ #category : 'deprecation' }
-OPUmlPackageDiagramController >> descriptionAppliedProfiles [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionAppliedProfiles' -> '`@receiver viewModel descriptionAppliedProfiles'.
-	^ self viewModel descriptionAppliedProfiles
-]
-
-{ #category : 'deprecation' }
-OPUmlPackageDiagramController >> descriptionGeneralizationSets [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionGeneralizationSets' -> '`@receiver viewModel descriptionGeneralizationSets'.
-	^ self viewModel descriptionGeneralizationSets
 ]
 
 { #category : 'testing' }
@@ -136,45 +104,40 @@ OPUmlPackageDiagramController >> initializeProfile: aProfile palette: aPalette [
 	| stereotypes elements relationships isForRelationship isForClass |
 	stereotypes := (aProfile ownedStereotype reject: #isAbstract) sorted: [ :stereotypeA :stereotypeB |
 		               stereotypeA name < stereotypeB name ].
-	isForRelationship := [ :attr |
-		                     (OPUMLXMISpecsStorage metaClassNamed: attr type name) allParents anySatisfy: [ :parentMetaClass |
+	isForRelationship := [ :attribute |
+		                     (OPUMLXMISpecsStorage metaClassNamed: attribute type name) allParents anySatisfy: [ :parentMetaClass |
 			                     parentMetaClass name = 'Relationship' ] ].
-	isForClass := [ :attr |
+	isForClass := [ :attribute |
 		              | metaclassObj |
-		              metaclassObj := OPUMLXMISpecsStorage metaClassNamed: attr type name.
+		              metaclassObj := OPUMLXMISpecsStorage metaClassNamed: attribute type name.
 		              metaclassObj name = 'Class' or: [
 			              metaclassObj allParents anySatisfy: [ :parentClass | parentClass name = 'Class' ] ] ].
 	elements := stereotypes select: [ :eachStereotype |
-			            eachStereotype allAttributes anySatisfy: [ :attributeProp |
-				            (attributeProp name beginsWith: 'base_') and: [ isForClass value: attributeProp ] ] ].
+			            eachStereotype allAttributes anySatisfy: [ :attributeProperty |
+				            (attributeProperty name beginsWith: 'base_') and: [ isForClass value: attributeProperty ] ] ].
 	relationships := stereotypes select: [ :eachStereotype |
-			                 eachStereotype allAttributes anySatisfy: [ :attributeProp |
-				                 (attributeProp name beginsWith: 'base_') and: [ isForRelationship value: attributeProp ] ] ].
+			                 eachStereotype allAttributes anySatisfy: [ :attributeProperty |
+				                 (attributeProperty name beginsWith: 'base_') and: [ isForRelationship value: attributeProperty ] ] ].
 	elements ifNotEmpty: [ aPalette newSeparator ].
 	elements do: [ :stereotypeElement |
 			(aPalette newCreationEntry: [ OPUmlClassController new ])
 				label: stereotypeElement name;
 				icon: OPUmlIcons classIcon;
-				whenCreated: [ :classCtrl |
-						classCtrl viewModel
-							ifNotNil: [ :vm |
-									vm applyStereotype: stereotypeElement to: classCtrl model.
-									classCtrl model name: stereotypeElement name ]
-							ifNil: [
-									classCtrl model applyStereotype: stereotypeElement implementationClass new.
-									classCtrl model name: stereotypeElement name ].
-						classCtrl modelChanged.
-						classCtrl diagramController ifNotNil: [ :diagramCtrl | diagramCtrl form ifNotNil: [ :theForm | theForm focusFirstInput ] ] ] ].
+				whenCreated: [ :classController |
+						classController viewModel applyStereotype: stereotypeElement to: classController model.
+						classController model name: stereotypeElement name.
+						classController modelChanged.
+						classController diagramController ifNotNil: [ :activeDiagramController |
+									activeDiagramController editor ifNotNil: [ :activeEditor |
+											activeEditor form ifNotNil: [ :activeForm | activeForm focusFirstInput ] ] ] ] ].
 	relationships ifNotEmpty: [ aPalette newSeparator ].
 	relationships do: [ :stereotypeRelation |
 			(aPalette newConnectionCreationEntry: [ OPUmlAssociationController new ])
 				label: stereotypeRelation name;
 				icon: OPUmlIcons directedAssociationIcon;
-				whenCreated: [ :assocCtrl |
-						assocCtrl viewModel
-							ifNotNil: [ :vm | vm applyStereotype: stereotypeRelation to: assocCtrl model ]
-							ifNil: [ assocCtrl model applyStereotype: stereotypeRelation implementationClass new ].
-						assocCtrl modelChanged ] ]
+				whenCreated: [ :associationController |
+						associationController viewModel applyStereotype: stereotypeRelation to: associationController model.
+						associationController modelChanged ] ]
 ]
 
 { #category : 'palette' }
@@ -245,17 +208,15 @@ OPUmlPackageDiagramController >> pushBack [
 { #category : 'palette' }
 OPUmlPackageDiagramController >> rebuildPalette [
 
-	self editor palette
-		createPaletteFor: self;
-		rebuildWidget
+	self editor ifNotNil: [ :activeEditor |
+			activeEditor palette
+				createPaletteFor: self;
+				rebuildWidget ]
 ]
 
 { #category : 'announcements' }
 OPUmlPackageDiagramController >> subscribeToViewModel [
 
 	super subscribeToViewModel.
-	(self viewModel ifNil: [ ^ self ]) announcer weak
-		when: OPUmlProfileApplied
-		send: #rebuildPalette
-		to: self
+	self viewModel announcer weak when: OPUmlProfileApplied send: #rebuildPalette to: self
 ]

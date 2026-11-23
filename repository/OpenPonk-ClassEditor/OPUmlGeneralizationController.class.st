@@ -25,31 +25,10 @@ OPUmlGeneralizationController >> createModelIn: aParentModel [
 	"Ensure generalization uses its specific classifier as container even when diagram model is passed."
 
 	| containerModel |
-	containerModel := (aParentModel respondsTo: #oclIsKindOf:)
-		ifTrue: [
-			(aParentModel oclIsKindOf: #Classifier)
-				ifTrue: [ aParentModel ]
-				ifFalse: [ self source ifNotNil: [ :activeSource | activeSource model ] ] ]
-		ifFalse: [ self source ifNotNil: [ :activeSource | activeSource model ] ].
+	containerModel := ((aParentModel isKindOf: OPUMLMetaElement) and: [ aParentModel oclIsKindOf: #Classifier ])
+		                  ifTrue: [ aParentModel ]
+		                  ifFalse: [ self source ifNotNil: [ :activeSource | activeSource model ] ].
 	^ super createModelIn: containerModel
-]
-
-{ #category : 'forms' }
-OPUmlGeneralizationController >> descriptionGeneral [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionGeneral' -> '`@receiver viewModel descriptionGeneral'.
-	^ self viewModel descriptionGeneral
-]
-
-{ #category : 'forms' }
-OPUmlGeneralizationController >> descriptionGeneralizationSets [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionGeneralizationSets' -> '`@receiver viewModel descriptionGeneralizationSets'.
-	^ self viewModel descriptionGeneralizationSets
-]
-
-{ #category : 'forms' }
-OPUmlGeneralizationController >> descriptionSpecific [
-	self deprecated: 'Use viewModel instead' transformWith: '`@receiver descriptionSpecific' -> '`@receiver viewModel descriptionSpecific'.
-	^ self viewModel descriptionSpecific
 ]
 
 { #category : 'connecting' }

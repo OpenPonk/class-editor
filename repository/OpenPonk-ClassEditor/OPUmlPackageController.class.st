@@ -22,24 +22,6 @@ OPUmlPackageController class >> viewModelClass [
 	^ OPUmlPackageViewModel
 ]
 
-{ #category : 'configuration' }
-OPUmlPackageController >> beForModel [
-	self deprecated: 'Use OPUmlPackageController directly.'.
-	^ self
-]
-
-{ #category : 'configuration' }
-OPUmlPackageController >> beForPackage [
-	self deprecated: 'OPUmlPackageController is dedicated to packages. Use OPUmlProfileController for profiles.'.
-	^ self
-]
-
-{ #category : 'configuration' }
-OPUmlPackageController >> beForProfile [
-	self deprecated: 'OPUmlPackageController cannot be converted to profile. Instantiate OPUmlProfileController directly.'.
-	^ self
-]
-
 { #category : 'connecting' }
 OPUmlPackageController >> canBeSourceFor: aController [
 	^ aController isKindOf: OPUmlPackageImportController

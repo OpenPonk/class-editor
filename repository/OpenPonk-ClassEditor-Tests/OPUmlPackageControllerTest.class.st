@@ -37,6 +37,26 @@ OPUmlPackageControllerTest >> testAddDiagramAsTargetForModel [
 ]
 
 { #category : 'tests - creation' }
+OPUmlPackageControllerTest >> testCanBeTargetForAllSupportedAndUnsupportedControllers [
+
+	self
+		assert: (controller canBeTargetFor: OPUmlPackageImportController new)
+		description: 'Package controller must accept package import controller as target'.
+	self
+		assert: (controller canBeTargetFor: OPUmlClassController new)
+		description: 'Package controller must accept class controller as target'.
+	self
+		assert: (controller canBeTargetFor: OPUmlPackageController new)
+		description: 'Package controller must accept nested package controller as target'.
+	self
+		assert: (controller canBeTargetFor: OPUmlEnumerationController new)
+		description: 'Package controller must accept enumeration controller as target'.
+	self
+		deny: (controller canBeTargetFor: OPUmlAttributeController new)
+		description: 'Package controller must reject attribute controller as target'
+]
+
+{ #category : 'tests - creation' }
 OPUmlPackageControllerTest >> testCanDiagramBeTargetForModel [
 
 	self
@@ -50,6 +70,41 @@ OPUmlPackageControllerTest >> testCreateFromPalette [
 	self
 		assert: (diagramController canBeTargetFor: controller)
 		description: 'Diagram controller must allow creating package from palette'
+]
+
+{ #category : 'tests - diagram' }
+OPUmlPackageControllerTest >> testPackageRenderChangedUpdatesHiddenPackagesAcrossNestedPackagesAndHandlesNoShape [
+
+	| outerPackage innerPackage nestedClass nestedClassController innerPackageController closestParent |
+	diagramController projectController project addModel: diagramController model.
+	outerPackage := OPUMLPackage new name: 'Outer'.
+	innerPackage := OPUMLPackage new name: 'Inner'.
+	nestedClass := OPUMLClass new name: 'NestedClass'.
+	diagramController model packagedElements add: outerPackage.
+	outerPackage packagedElements add: innerPackage.
+	innerPackage packagedElements add: nestedClass.
+
+	diagramController showWithoutDependentInDiagramModel: outerPackage.
+	diagramController showWithoutDependentInDiagramModel: nestedClass.
+	nestedClassController := diagramController controllerForModel: nestedClass.
+	innerPackageController := diagramController controllerForModel: innerPackage.
+
+	innerPackageController removeDiagramElement.
+	self assert: nestedClassController diagramElement hiddenPackages asArray equals: { innerPackage }.
+	closestParent := nil.
+	nestedClassController closestRenderedParentPackageControllerDo: [ :parentController | closestParent := parentController ].
+	self assert: closestParent identicalTo: (diagramController controllerForModel: outerPackage).
+
+	innerPackageController
+		createDiagramElement;
+		renderDiagramElement.
+	self assertEmpty: nestedClassController diagramElement hiddenPackages.
+
+	nestedClassController diagramElement: OPNoShape instance.
+	diagramController packageRenderChanged.
+	self
+		deny: nestedClassController diagramElement exists
+		description: 'Package render change must safely ignore classifier controllers without a shape'
 ]
 
 { #category : 'tests - removing' }

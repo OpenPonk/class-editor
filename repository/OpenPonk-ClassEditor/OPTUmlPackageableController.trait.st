@@ -3,8 +3,6 @@ I am a trait for controllers representing UML elements that can be packaged (lik
 "
 Trait {
 	#name : 'OPTUmlPackageableController',
-	#traits : 'OPTUmlBaseController',
-	#classTraits : 'OPTUmlBaseController classTrait',
 	#category : 'OpenPonk-ClassEditor-Controllers',
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'Controllers'
