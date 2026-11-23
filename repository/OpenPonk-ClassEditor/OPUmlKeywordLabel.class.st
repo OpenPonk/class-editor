@@ -8,8 +8,3 @@ Class {
 	#package : 'OpenPonk-ClassEditor',
 	#tag : 'DiagramElements'
 }
-
-{ #category : 'accessing' }
-OPUmlKeywordLabel class >> priority [
-	^ 1
-]

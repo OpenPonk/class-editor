@@ -13,9 +13,10 @@ Class {
 OPUmlClassItemListCompartment >> sortOwnedElements [
 
 	ownedElements sort: [ :a :b |
-		(a modelElement isStatic and: [ b modelElement isStatic not ]) or: [
-			(a modelElement isStatic or: [ b modelElement isStatic not ]) and: [
-				a modelElement name < b modelElement name or: [
-					a modelElement name = b modelElement name and: [
-						a modelElement uuid < b modelElement uuid ] ] ] ] ]
+			(a modelElement isStatic and: [ b modelElement isStatic not ]) or: [
+					(a modelElement isStatic or: [ b modelElement isStatic not ]) and: [
+							| nameA nameB |
+							nameA := a modelElement name ifNil: [ '' ].
+							nameB := b modelElement name ifNil: [ '' ].
+							nameA < nameB or: [ nameA = nameB and: [ a modelElement uuid < b modelElement uuid ] ] ] ] ]
 ]

@@ -76,15 +76,25 @@ OPUmlAssociationShape >> ontoUmlDecoratorFor: aProperty [
 	^ nil
 ]
 
-{ #category : 'accessing' }
-OPUmlAssociationShape >> propertiesOfModel: aModelElement [
-	^ (OPUmlAssociationLabel new modelElement: aModelElement) properties
-]
-
 { #category : 'testing' }
 OPUmlAssociationShape >> supportsHidingLabelEnds [
 
 	^ true
+]
+
+{ #category : 'Roassal2 - manipulation' }
+OPUmlAssociationShape >> switchSourceAndTarget [
+
+	| memberEnds firstEnd secondEnd |
+	super switchSourceAndTarget.
+	memberEnds := self modelElement memberEnds asArray.
+	memberEnds size < 2 ifTrue: [ ^ self ].
+	firstEnd := memberEnds first.
+	secondEnd := memberEnds second.
+	self ownedElements do: [ :each |
+			each modelElement = firstEnd
+				ifTrue: [ each modelElement: secondEnd ]
+				ifFalse: [ each modelElement = secondEnd ifTrue: [ each modelElement: firstEnd ] ] ]
 ]
 
 { #category : 'Roassal2 - accessing' }

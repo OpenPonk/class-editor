@@ -9,14 +9,6 @@ Class {
 	#tag : 'DiagramElements'
 }
 
-{ #category : 'rendering' }
-OPUmlClassifierItemLabel >> addedByMouseClickTo: aPoint [
-
-	"do nothing"
-
-	
-]
-
 { #category : 'accessing' }
 OPUmlClassifierItemLabel >> canHaveController [
 

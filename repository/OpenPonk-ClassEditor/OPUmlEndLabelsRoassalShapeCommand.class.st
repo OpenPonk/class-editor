@@ -29,7 +29,7 @@ OPUmlEndLabelsRoassalShapeCommand class >> contextMenuActivation [
 		  for: OPCanvasPresenter
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlEndLabelsRoassalShapeCommand class >> defaultResultingShowState [
 
 	^ OPUmlHideSameAsClassEndLabelsRoassalShapeCommand
@@ -42,7 +42,7 @@ OPUmlEndLabelsRoassalShapeCommand class >> isAbstract [
 	^ self = OPUmlEndLabelsRoassalShapeCommand
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 OPUmlEndLabelsRoassalShapeCommand >> applicableDiagramElements [
 
 	^ relevantDiagramElements ifNil: [
@@ -67,11 +67,6 @@ OPUmlEndLabelsRoassalShapeCommand >> defaultMenuItemName [
 	self isCurrentlyActive ifTrue: [ ^ basicName , ' (active)' ].
 
 	^ basicName
-]
-
-{ #category : 'as yet unclassified' }
-OPUmlEndLabelsRoassalShapeCommand >> defaultResultingShowState [
-	^ self class defaultResultingShowState
 ]
 
 { #category : 'testing' }

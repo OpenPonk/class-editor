@@ -24,8 +24,17 @@ OPUmlSetEndLabelsRoassalShapeCommand class >> styleState [
 { #category : 'execution' }
 OPUmlSetEndLabelsRoassalShapeCommand >> execute [
 
-	self applicableDiagramElements do: [ :each |
-		each showAssociationEndLabels: self styleState ]
+	| commands |
+	commands := self applicableDiagramElements collect: [ :each |
+		            OPChangeDiagramElementStylePropertyCommand
+			            element: each
+			            property: each showAssociationEndLabelsKey
+			            value: self styleState ].
+	commands ifEmpty: [ ^ self ].
+	self undoManager
+		ifNotNil: [ :activeUndoManager |
+			activeUndoManager inTransaction: [ commands do: [ :eachCommand | activeUndoManager execute: eachCommand ] ] ]
+		ifNil: [ commands do: #execute ]
 ]
 
 { #category : 'testing' }
@@ -39,9 +48,9 @@ OPUmlSetEndLabelsRoassalShapeCommand >> isCurrentlyActive [
 OPUmlSetEndLabelsRoassalShapeCommand >> isCurrentlySelected [
 
 	^ super isCurrentlySelected or: [
-		  self applicableDiagramElements allSatisfy: [ :each |
-			  each owningElement exists not and: [
-				  each showAssociationEndLabels = self styleState ] ] ]
+			  self applicableDiagramElements isNotEmpty and: [
+					  self applicableDiagramElements allSatisfy: [ :each |
+						  each owningElement exists not and: [ each showAssociationEndLabels = self styleState ] ] ] ]
 ]
 
 { #category : 'testing' }

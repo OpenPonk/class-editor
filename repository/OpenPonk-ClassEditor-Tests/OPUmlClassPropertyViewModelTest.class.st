@@ -258,25 +258,6 @@ OPUmlClassPropertyViewModelTest >> testRegisterModelInFailsOnUnsupportedParent [
 ]
 
 { #category : 'tests' }
-OPUmlClassPropertyViewModelTest >> testRemoveRenderDoesNotClearCommentIconDiagramElement [
-
-	| classModel shape canvas commentIcon |
-	classModel := OPUMLClass new name: 'CommentTestClass'.
-	classModel ownedComments add: (OPUMLComment new body: 'Test comment').
-	shape := OPUmlClassShape in: OPNoShape instance forModelElement: classModel.
-	canvas := RSCanvas new.
-	shape renderIn: canvas.
-
-	commentIcon := shape instVarNamed: #commentIcon.
-	self assert: commentIcon class equals: OPUmlCommentIcon.
-	self assertCollection: shape ownedElements includesAll: { commentIcon }.
-
-	shape removeRender.
-	"Must fail in red phase because removeRender sets commentIcon := nil"
-	self assert: (shape instVarNamed: #commentIcon) identicalTo: commentIcon
-]
-
-{ #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testTypeCompletionEmptyAndFilterBlock [
 
 	| completion |

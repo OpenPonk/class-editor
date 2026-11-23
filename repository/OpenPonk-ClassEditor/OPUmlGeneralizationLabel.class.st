@@ -38,15 +38,3 @@ OPUmlGeneralizationLabel >> defaultTextForSet: aGeneralizationSet on: aStream [
 	props do: [ :p | aStream << p ] separatedBy: [ aStream << ', ' ].
 	aStream << '}'
 ]
-
-{ #category : 'testing' }
-OPUmlGeneralizationLabel >> showIncomplete [
-
-	^ false
-]
-
-{ #category : 'testing' }
-OPUmlGeneralizationLabel >> showOverlapping [
-
-	^ false
-]

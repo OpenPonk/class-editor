@@ -42,22 +42,17 @@ OPUmlEdge >> renderBasicShape [
 { #category : 'Roassal2 - manipulation' }
 OPUmlEdge >> switchSourceAndTarget [
 
-	| originalSource originalFrom originalTo memberEnds |
+	| originalSource originalFrom originalTo |
 	originalSource := self source.
 	self source: self target.
 	self target: originalSource.
+	self isRendered ifFalse: [ ^ self ].
 	originalFrom := self roassalShape from.
 	originalTo := self roassalShape to.
 	self roassalShape to: RSBox new. "otherwise old to == new from and old to gets removed"
 	self roassalShape from: originalTo.
 	self roassalShape to: originalFrom.
-	memberEnds := self modelElement memberEnds asArray.
-	self ownedElements
-		select: [ :each | memberEnds includes: each modelElement ]
-		thenDo: [ :each |
-			each modelElement:
-				(memberEnds at: 3 - (memberEnds indexOf: each modelElement)) ].
-	self roassalShape update.
+	self roassalShape update
 ]
 
 { #category : 'Roassal2 - accessing' }

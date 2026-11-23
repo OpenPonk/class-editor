@@ -22,6 +22,79 @@ OPUmlClassShapeTest >> shapeClass [
 ]
 
 { #category : 'tests' }
+OPUmlClassShapeTest >> testClassItemListCompartmentSortHandlesNilNamesAndTieBreaksByUuid [
+
+	| compartment staticItem unnamedItem namedFirst namedSecond sortedModels |
+	compartment := OPUmlClassItemListCompartment new.
+	staticItem := OPUMLProperty new
+		              name: 'zeta';
+		              isStatic: true;
+		              yourself.
+	unnamedItem := OPUMLProperty new.
+	namedFirst := OPUMLProperty new
+		              name: 'alpha';
+		              uuid: (UUID fromString: '00000000-0000-0000-0000-000000000001');
+		              yourself.
+	namedSecond := OPUMLProperty new
+		               name: 'alpha';
+		               uuid: (UUID fromString: '00000000-0000-0000-0000-000000000002');
+		               yourself.
+	{
+		namedSecond.
+		namedFirst.
+		unnamedItem.
+		staticItem } do: [ :eachProperty | OPUmlAttributeLabel in: compartment forModelElement: eachProperty ].
+
+	compartment sortOwnedElements.
+	sortedModels := compartment ownedElements collect: #modelElement.
+	self assert: sortedModels asArray equals: {
+			staticItem.
+			unnamedItem.
+			namedFirst.
+			namedSecond }
+]
+
+{ #category : 'tests' }
+OPUmlClassShapeTest >> testClassifierNameLabelAndStereotypesLabel [
+
+	| nameLabel hiddenPackage stereotypeLabel stereotypeClass |
+	model name: nil.
+	shape modelElement: model.
+	nameLabel := OPUmlClassifierNameLabel in: shape forModelElement: model.
+	self assertEmpty: nameLabel attachedShapes.
+	self assert: nameLabel defaultText equals: ' '.
+
+	model name: ''.
+	self assert: nameLabel defaultText equals: ' '.
+
+	hiddenPackage := OPUMLPackage new name: 'HiddenPkg'.
+	shape hiddenPackages: { hiddenPackage }.
+	model name: 'VisibleClass'.
+	self assert: nameLabel defaultText equals: 'HiddenPkg::VisibleClass'.
+
+	nameLabel translateTo: 100 @ 100.
+	self assert: nameLabel defaultText equals: 'HiddenPkg::VisibleClass'.
+
+	stereotypeLabel := OPUmlAppliedStereotypesLabel new
+		                   modelElement: model;
+		                   yourself.
+	self assert: stereotypeLabel defaultText equals: ''.
+
+	stereotypeClass := Object newAnonymousSubclass.
+	stereotypeClass addSlot: #umlClassName => InstanceVariableSlot.
+	stereotypeClass compile: 'umlClassName ^ umlClassName' classified: 'accessing'.
+	stereotypeClass compile: 'umlClassName: aSymbol umlClassName := aSymbol' classified: 'accessing'.
+	model appliedStereotypes
+		add: (stereotypeClass new
+				 umlClassName: #Kind;
+				 yourself);
+		add: (stereotypeClass new
+				 umlClassName: #Subkind;
+				 yourself).
+	self assert: stereotypeLabel defaultText equals: '«Kind, Subkind»'
+]
+
+{ #category : 'tests' }
 OPUmlClassShapeTest >> testName [
 
 	| labels label |
@@ -69,6 +142,23 @@ OPUmlClassShapeTest >> testName [
 ]
 
 { #category : 'tests' }
+OPUmlClassShapeTest >> testRemoveRenderDoesNotClearCommentIconDiagramElement [
+
+	| classModel classShape commentIcon |
+	classModel := OPUMLClass new name: 'CommentTestClass'.
+	classModel ownedComments add: (OPUMLComment new body: 'Test comment').
+	classShape := OPUmlClassShape in: OPNoShape instance forModelElement: classModel.
+	classShape renderIn: canvas.
+
+	commentIcon := classShape instVarNamed: #commentIcon.
+	self assert: commentIcon class equals: OPUmlCommentIcon.
+	self assertCollection: classShape ownedElements includesAll: { commentIcon }.
+
+	classShape removeRender.
+	self assert: (classShape instVarNamed: #commentIcon) identicalTo: commentIcon
+]
+
+{ #category : 'tests' }
 OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
 
 	| modelClass stereo initialStereoLabel stereoLabels |
@@ -79,7 +169,7 @@ OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
 	shape := OPUmlClassShape new.
 	shape modelElement: modelClass.
 
-	"1. Prvotní vykreslení"
+	"1. Initial render"
 	shape renderIn: canvas.
 	initialStereoLabel := shape stereotypeLabel.
 	self assert: initialStereoLabel class equals: OPUmlCompartmentableLabel.
@@ -90,10 +180,10 @@ OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
 				                each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
 	self assert: stereoLabels size equals: 1.
 
-	"2. Simulace zavření editoru diagramu"
+	"2. Simulate closing the diagram editor"
 	shape removeRender.
 
-	"3. Simulace opětovného otevření editoru diagramu"
+	"3. Simulate reopening the diagram editor"
 	canvas := RSCanvas new.
 	shape renderIn: canvas.
 
@@ -104,4 +194,48 @@ OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
 				                each ownedElements anySatisfy: [ :child | child isKindOf: OPUmlAppliedStereotypesLabel ] ] ].
 	self assert: stereoLabels size equals: 1.
 	self assert: stereoLabels anyOne identicalTo: initialStereoLabel
+]
+
+{ #category : 'tests' }
+OPUmlClassShapeTest >> testStonInstVarNameForAndCompartmentSizing [
+
+	| outerCompartment innerCompartment |
+	self assert: (shape stonInstVarNameFor: #attributes) equals: #attributesCompartment.
+	self assert: (shape stonInstVarNameFor: #operations) equals: #operationsCompartment.
+	self assert: (shape stonInstVarNameFor: #bounds) equals: #bounds.
+	self assert: OPUmlCompartmentableShape new minExtent equals: 20 @ 10.
+
+	outerCompartment := OPUmlCompartment new.
+	innerCompartment := OPUmlCompartment in: outerCompartment.
+	self assert: (outerCompartment extentToFit: innerCompartment) equals: innerCompartment extentToFitContents
+]
+
+{ #category : 'tests' }
+OPUmlClassShapeTest >> testUpdateCommentIconAndUpdateStereotypeBranches [
+
+	| classModel stereotype commentIcon |
+	classModel := OPUMLClass new name: 'Person'.
+	classModel ownedComments add: (OPUMLComment new body: 'Has comment').
+	stereotype := OPUMLStereotype new.
+	classModel appliedStereotypes add: stereotype.
+
+	shape modelElement: classModel.
+	shape updateCommentIcon.
+	commentIcon := shape instVarNamed: #commentIcon.
+	self assert: commentIcon class equals: OPUmlCommentIcon.
+	self deny: commentIcon isRendered description: 'Comment icon must not be rendered while owning classifier shape is unrendered'.
+
+	shape renderIn: canvas.
+	self assert: commentIcon isRendered description: 'Comment icon must be rendered after owning classifier shape renders'.
+	shape updateCommentIcon.
+	self assert: (shape instVarNamed: #commentIcon) identicalTo: commentIcon.
+
+	classModel ownedComments removeAll.
+	shape updateCommentIcon.
+	self assert: (shape instVarNamed: #commentIcon) identicalTo: nil.
+
+	self assert: shape stereotypeLabel class equals: OPUmlCompartmentableLabel.
+	classModel appliedStereotypes removeAll.
+	shape updateStereotype.
+	self assert: shape stereotypeLabel identicalTo: nil
 ]

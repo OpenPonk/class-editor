@@ -13,8 +13,7 @@ Class {
 OPUmlUnsetEndLabelsRoassalShapeCommand class >> canBeExecutedInContext: aToolContext [
 
 	^ (super canBeExecutedInContext: aToolContext) and: [
-		  aToolContext diagramElements anySatisfy: [ :any |
-			  any owningElement exists ] ]
+		  aToolContext diagramElements anySatisfy: [ :any | any supportsHidingLabelEnds and: [ any owningElement exists ] ] ]
 ]
 
 { #category : 'accessing' }
@@ -32,9 +31,16 @@ OPUmlUnsetEndLabelsRoassalShapeCommand >> description [
 { #category : 'execution' }
 OPUmlUnsetEndLabelsRoassalShapeCommand >> execute [
 
-	self applicableDiagramElements
-		select: [ :each | each owningElement exists ]
-		thenDo: [ :each | each unsetAssociationEndLabels ]
+	| commands |
+	commands := self applicableDiagramElements
+		            select: [ :each | each owningElement exists ]
+		            thenCollect: [ :each |
+		            OPChangeDiagramElementStylePropertyCommand element: each property: each showAssociationEndLabelsKey value: nil ].
+	commands ifEmpty: [ ^ self ].
+	self undoManager
+		ifNotNil: [ :activeUndoManager |
+			activeUndoManager inTransaction: [ commands do: [ :eachCommand | activeUndoManager execute: eachCommand ] ] ]
+		ifNil: [ commands do: #execute ]
 ]
 
 { #category : 'testing' }

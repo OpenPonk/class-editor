@@ -78,6 +78,9 @@ OPUmlAssociationEndLabel >> supportsHidingLabelEnds [
 { #category : 'initialization' }
 OPUmlAssociationEndLabel >> updateRenderFromStyles [
 
+	self isRendered ifFalse: [ ^ self ].
 	super updateRenderFromStyles.
-	roassalShape text: self text
+	roassalShape text: self text.
+	(roassalShape propertyAt: OPRSAnchorConstraint ifAbsent: [ nil ]) ifNotNil: [ :constraint | constraint moveShape ].
+	roassalShape signalUpdate
 ]

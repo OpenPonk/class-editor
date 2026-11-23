@@ -12,7 +12,7 @@ Class {
 { #category : 'hooks' }
 OPUmlShowEndLabelsRoassalShapeCommand class >> styleState [
 
-	^ #hide
+	^ #show
 ]
 
 { #category : 'accessing' }
