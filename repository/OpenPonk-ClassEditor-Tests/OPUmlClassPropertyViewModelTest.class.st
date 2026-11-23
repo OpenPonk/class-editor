@@ -65,6 +65,31 @@ OPUmlClassPropertyViewModelTest >> testDescriptionDefaultValueClearAndNilWrite [
 ]
 
 { #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testDescriptionMultiplicityReadAndWrite [
+
+	| description |
+	description := viewModel descriptionMultiplicity.
+	description accessor write: '1..*' to: viewModel.
+
+	self assert: (description accessor read: viewModel) equals: '1..*'.
+	self assert: model lowerBound equals: 1.
+	self assert: model upperBound equals: '*'
+]
+
+{ #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testDescriptionNameBlankUsesPlaceholderName [
+
+	| nameDescription |
+	model type: (OPUMLClass new
+			 name: 'Account';
+			 yourself).
+	nameDescription := viewModel descriptionName.
+	nameDescription accessor write: '   ' to: viewModel.
+
+	self assert: model name equals: 'account'
+]
+
+{ #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testDescriptionTypeCleanupUnusedTemporaryTypes [
 
 	| testProject package umlClass prop testRegistry propViewModel desc commonPkg typeNames |
@@ -90,6 +115,34 @@ OPUmlClassPropertyViewModelTest >> testDescriptionTypeCleanupUnusedTemporaryType
 ]
 
 { #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testDescriptionTypeClearAndReadOnlyForAssociationEnd [
+
+	| description association assocEnd assocEndViewModel |
+	description := viewModel descriptionType.
+	description accessor write: 'String' to: viewModel.
+	self assert: (description accessor read: viewModel) equals: 'String'.
+
+	description accessor write: '' to: viewModel.
+	self assert: model type isNil description: 'Writing empty string must clear property type'.
+	self assert: (description accessor read: viewModel) equals: ''.
+
+	association := OPUMLAssociation new name: 'Assoc'.
+	assocEnd := OPUMLProperty new
+		            name: 'endA';
+		            association: association;
+		            type: (OPUMLClass new
+				             name: 'Target';
+				             yourself);
+		            yourself.
+	assocEndViewModel := OPUmlClassPropertyViewModel new model: assocEnd.
+	description := assocEndViewModel descriptionType.
+
+	self assert: description isReadOnly description: 'Association end type description must be read-only'.
+	description accessor write: 'String' to: assocEndViewModel.
+	self assert: assocEnd type name equals: 'Target'
+]
+
+{ #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testDescriptionTypeHasEntryCompletion [
 
 	| testProject package umlClass prop testRegistry propViewModel desc completion |
@@ -111,6 +164,86 @@ OPUmlClassPropertyViewModelTest >> testDescriptionTypeHasEntryCompletion [
 	self assertCollection: (completion filteredValuesWith: 'dat') hasSameElements: #( 'Date' 'DateTime' 'DateAndTime' ).
 	self assertCollection: (completion filteredValuesWith: 'DEC') hasSameElements: #( 'Decimal' ).
 	self assertCollection: (completion filteredValuesWith: 'order') hasSameElements: #( 'Order' )
+]
+
+{ #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testEstablishedTypeNamesIncludesEnumerations [
+
+	| enumModel names |
+	enumModel := OPUMLEnumeration new name: 'OrderStatus'.
+	rootModel packagedElements add: enumModel.
+
+	names := viewModel establishedTypeNames.
+	self assertCollection: names includesAll: #( 'OrderStatus' 'String' 'Date' )
+]
+
+{ #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testFindParentViewModelCases [
+
+	| detachedViewModel noModelViewModel association assocProperty dataType dataTypeProperty |
+	detachedViewModel := OPUmlClassPropertyViewModel new model: model.
+	self assert: detachedViewModel findParentViewModel isNil description: 'Detached view model without registry has nil parent'.
+
+	noModelViewModel := OPUmlClassPropertyViewModel new registry: registry.
+	self assert: noModelViewModel findParentViewModel isNil description: 'View model without model has nil parent'.
+
+	self assert: viewModel findParentViewModel model identicalTo: parentModel.
+
+	association := OPUMLAssociation new name: 'Assoc'.
+	assocProperty := OPUMLProperty new
+		                 name: 'endProp';
+		                 owningAssociation: association;
+		                 yourself.
+	rootModel packagedElements add: association.
+	self assert: (registry viewModelFor: assocProperty) findParentViewModel model identicalTo: association.
+
+	dataType := OPUMLDataType new name: 'Money'.
+	dataTypeProperty := OPUMLProperty new
+		                    name: 'amount';
+		                    datatype: dataType;
+		                    yourself.
+	rootModel packagedElements add: dataType.
+	self assert: (registry viewModelFor: dataTypeProperty) findParentViewModel model identicalTo: dataType
+]
+
+{ #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testPlaceholderNameCases [
+
+	| propertyViewModel |
+	propertyViewModel := OPUmlClassPropertyViewModel new.
+	self assert: propertyViewModel placeholderName equals: 'attribute'.
+
+	propertyViewModel model: OPUMLProperty new.
+	self assert: propertyViewModel placeholderName equals: 'attribute'.
+
+	propertyViewModel model type: (OPUMLClass new
+			 name: '';
+			 yourself).
+	self assert: propertyViewModel placeholderName equals: 'attribute'.
+
+	propertyViewModel model type: (OPUMLClass new
+			 name: 'Order Item';
+			 yourself).
+	self assert: propertyViewModel placeholderName equals: 'orderItem'.
+
+	propertyViewModel model type: (OPUMLClass new
+			 name: 'Customer';
+			 yourself).
+	self assert: propertyViewModel placeholderName equals: 'customer'
+]
+
+{ #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testPlaceholderNameFallsBackToAttributeForPunctuationOnlyTypeName [
+
+	| property propertyViewModel |
+	property := OPUMLProperty new
+		            type: (OPUMLClass new
+				             name: '---';
+				             yourself);
+		            yourself.
+	propertyViewModel := OPUmlClassPropertyViewModel new model: property.
+
+	self assert: propertyViewModel placeholderName equals: 'attribute'
 ]
 
 { #category : 'tests' }
@@ -141,6 +274,42 @@ OPUmlClassPropertyViewModelTest >> testRemoveRenderDoesNotClearCommentIconDiagra
 	shape removeRender.
 	"Must fail in red phase because removeRender sets commentIcon := nil"
 	self assert: (shape instVarNamed: #commentIcon) identicalTo: commentIcon
+]
+
+{ #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testTypeCompletionEmptyAndFilterBlock [
+
+	| completion |
+	completion := viewModel typeCompletion.
+	self assertEmpty: (completion filteredValuesWith: '   ').
+	self
+		deny: (completion filterBlock value: 'BrandNewTempType' value: 'BrandNewTempType')
+		description: 'Exact unestablished temporary token must be filtered out'.
+	self
+		assert: (completion filterBlock value: 'DateTime' value: 'Date')
+		description: 'Established matching candidate must pass filterBlock'
+]
+
+{ #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testTypeNamedCases [
+
+	| primitiveType existingClass createdCustomType reusedCustomType standaloneViewModel standaloneType |
+	primitiveType := viewModel typeNamed: 'String'.
+	self assert: primitiveType identicalTo: (OPUMLXMISpecsStorage primitivesMap at: 'String').
+
+	existingClass := OPUMLClass new name: 'Invoice'.
+	rootModel packagedElements add: existingClass.
+	self assert: (viewModel typeNamed: 'Invoice') identicalTo: existingClass.
+
+	createdCustomType := viewModel typeNamed: 'CustomCode'.
+	self assert: createdCustomType name equals: 'CustomCode'.
+	reusedCustomType := viewModel typeNamed: 'CustomCode'.
+	self assert: reusedCustomType identicalTo: createdCustomType.
+
+	standaloneViewModel := OPUmlClassPropertyViewModel new model: OPUMLProperty new.
+	standaloneType := standaloneViewModel typeNamed: 'DetachedType'.
+	self assert: standaloneType class equals: OPUMLDataType.
+	self assert: standaloneType name equals: 'DetachedType'
 ]
 
 { #category : 'tests' }

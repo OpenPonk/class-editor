@@ -42,32 +42,8 @@ OPUmlPackageImportViewModel >> dependingOnElements [
 ]
 
 { #category : 'forms' }
-OPUmlPackageImportViewModel >> descriptionGeneral [
-	"<magritteDescription>
-	^ MAStringDescription new
-		beReadonly;
-		accessor:
-			(MAPluggableAccessor read: [ :me | me model general name ] write: [ :me :newValue |  ]);
-		label: 'General';
-		priority: 1;
-		yourself"
-]
-
-{ #category : 'forms' }
 OPUmlPackageImportViewModel >> descriptionName [
 	^ nil
-]
-
-{ #category : 'forms' }
-OPUmlPackageImportViewModel >> descriptionSpecific [
-"	<magritteDescription>
-	^ MAStringDescription new
-		beReadonly;
-		accessor:
-			(MAPluggableAccessor read: [ :me | me model specific name ] write: [ :me :newValue |  ]);
-		label: 'Specific';
-		priority: 2;
-		yourself"
 ]
 
 { #category : 'forms' }
@@ -83,10 +59,15 @@ OPUmlPackageImportViewModel >> icon [
 
 { #category : 'printing' }
 OPUmlPackageImportViewModel >> modelDisplayStringOn: aStream [
-    aStream nextPutAll: (self model importedPackage ifNotNil: #name ifNil: ['?']).
-    aStream nextPutAll: ' --> '.
-    aStream nextPutAll: (self model importingNamespace ifNotNil: #name ifNil: ['?']).
-    aStream space; nextPutAll: '(PackageImport)'
+
+	| importedName importingName |
+	importedName := (self model importedPackage ifNotNil: [ :package | package name ]) ifNil: [ '?' ].
+	importingName := (self model importingNamespace ifNotNil: [ :namespace | namespace name ]) ifNil: [ '?' ].
+	aStream nextPutAll: importedName.
+	aStream nextPutAll: ' --> '.
+	aStream nextPutAll: importingName.
+	aStream space.
+	aStream nextPutAll: '(PackageImport)'
 ]
 
 { #category : 'accessing' }

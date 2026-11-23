@@ -34,7 +34,8 @@ OPUmlAssociationViewModel >> attachModelFrom: sourceViewModel to: targetViewMode
 
 { #category : 'testing' }
 OPUmlAssociationViewModel >> canSwitchSourceAndTarget [
-	^ true
+
+	^ self model isNotNil and: [ self model memberEnds size >= 2 ]
 ]
 
 { #category : 'accessing' }
@@ -63,9 +64,10 @@ OPUmlAssociationViewModel >> dependingOnElements [
 
 { #category : 'forms' }
 OPUmlAssociationViewModel >> descriptionActionSwitchSourceTarget [
+
 	<magritteDescription>
 	| description |
-	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
+	self canSwitchSourceAndTarget ifFalse: [ ^ nil ].
 	description := OPMAActionDescription new.
 	description
 		action: [ self switchSourceAndTarget ];
@@ -125,20 +127,24 @@ OPUmlAssociationViewModel >> icon [ ^ OPUmlIcons directedAssociationIcon
 
 { #category : 'printing' }
 OPUmlAssociationViewModel >> modelDisplayStringOn: aStream [
-    self model name ifNotNil: [ :n | n ifNotEmpty: [ aStream nextPutAll: n; space ] ].
-    self model memberEnds size = 2 ifTrue: [
-        | n1 n2 |
-        n1 := self model memberEnds first type ifNotNil: #name ifNil: ['?'].
-        n2 := self model memberEnds second type ifNotNil: #name ifNil: ['?'].
-        aStream nextPutAll: '['.
-        aStream nextPutAll: (n1 truncateWithElipsisTo: 20).
-        aStream nextPutAll: ' -> '.
-        aStream nextPutAll: (n2 truncateWithElipsisTo: 20).
-        aStream nextPutAll: ']' ].
-    aStream space.
-    aStream nextPutAll: '('.
-    aStream nextPutAll: self model umlClassName.
-    aStream nextPutAll: ')'
+
+	self model name ifNotNil: [ :name |
+			name ifNotEmpty: [
+					aStream nextPutAll: name.
+					aStream space ] ].
+	self model memberEnds size = 2 ifTrue: [
+			| sourceName targetName |
+			sourceName := (self model memberEnds first type ifNotNil: [ :type | type name ]) ifNil: [ '?' ].
+			targetName := (self model memberEnds second type ifNotNil: [ :type | type name ]) ifNil: [ '?' ].
+			aStream nextPutAll: '['.
+			aStream nextPutAll: (sourceName truncateWithElipsisTo: 20).
+			aStream nextPutAll: ' -> '.
+			aStream nextPutAll: (targetName truncateWithElipsisTo: 20).
+			aStream nextPutAll: ']' ].
+	aStream space.
+	aStream nextPutAll: '('.
+	aStream nextPutAll: self model umlClassName.
+	aStream nextPutAll: ')'
 ]
 
 { #category : 'accessing' }
@@ -169,15 +175,15 @@ OPUmlAssociationViewModel >> restoreEndpointsWithSource: aSourceModel target: aT
 
 { #category : 'actions' }
 OPUmlAssociationViewModel >> switchSourceAndTarget [
+
 	| originalModels |
 	self canSwitchSourceAndTarget ifFalse: [ ^ self ].
 	originalModels := self model memberEnds asArray.
 	self model memberEnds removeAll.
 	self model memberEnds add: originalModels second.
 	self model memberEnds add: originalModels first.
-	3 to: originalModels size do: [ :index |
-		self model memberEnds add: originalModels at: index ].
-		
+	3 to: originalModels size do: [ :index | self model memberEnds add: (originalModels at: index) ].
+
 	self announcer announce: OPAssociationEndsSwapped new.
 	self announcer announce: OPElementFormNeedsRebuild new.
 	self modelChanged

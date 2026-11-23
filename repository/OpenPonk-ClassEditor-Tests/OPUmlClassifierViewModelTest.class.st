@@ -21,6 +21,22 @@ OPUmlClassifierViewModelTest >> testAbstractClassifierItemViewModelsAreAbstract 
 ]
 
 { #category : 'tests' }
+OPUmlClassifierViewModelTest >> testBasicRemovePackagedModelRemovesFromOwningPackage [
+
+	| testProject rootPackage umlClass testRegistry classViewModel |
+	testProject := OPProject new.
+	rootPackage := OPUMLPackage new name: 'Root'.
+	umlClass := OPUMLClass new name: 'TempClass'.
+	rootPackage packagedElements add: umlClass.
+	testProject addModel: rootPackage.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	classViewModel := testRegistry viewModelFor: umlClass.
+
+	classViewModel removeModel.
+	self assertEmpty: rootPackage packagedElements
+]
+
+{ #category : 'tests' }
 OPUmlClassifierViewModelTest >> testClassViewModelChildrenModelsIncludesAttributesOperationsAndGeneralizations [
 
 	| umlClass superClass attribute operation generalization classViewModel children |
@@ -43,6 +59,47 @@ OPUmlClassifierViewModelTest >> testClassViewModelChildrenModelsIncludesAttribut
 	self assertCollection: children hasSameElements: {
 			attribute.
 			operation.
+			generalization }
+]
+
+{ #category : 'tests' }
+OPUmlClassifierViewModelTest >> testDependentElementsIncludesAssociationsGeneralizationsAndNestedElements [
+
+	| testProject rootPackage subPackage classA classB association generalization testRegistry classViewModel dependents |
+	testProject := OPProject new.
+	rootPackage := OPUMLPackage new name: 'Root'.
+	subPackage := OPUMLPackage new name: 'Sub'.
+	classA := OPUMLClass new name: 'ClassA'.
+	classB := OPUMLClass new name: 'ClassB'.
+	association := OPUMLAssociation new name: 'Assoc'.
+	association memberEnds
+		add: (OPUMLProperty new
+				 type: classA;
+				 owningAssociation: association;
+				 association: association;
+				 yourself);
+		add: (OPUMLProperty new
+				 type: classB;
+				 owningAssociation: association;
+				 association: association;
+				 yourself).
+	generalization := OPUMLGeneralization new
+		                  specific: classB;
+		                  general: classA;
+		                  yourself.
+	classB generalizations add: generalization.
+	subPackage packagedElements add: classB.
+	subPackage packagedElements add: association.
+	rootPackage packagedElements add: classA.
+	rootPackage packagedElements add: subPackage.
+	testProject addModel: rootPackage.
+
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	classViewModel := testRegistry viewModelFor: classA.
+	dependents := classViewModel dependentElements.
+
+	self assertCollection: dependents includesAll: {
+			association.
 			generalization }
 ]
 
@@ -93,4 +150,28 @@ OPUmlClassifierViewModelTest >> testStereotypeViewModelChildrenModelsIncludesAtt
 			attribute.
 			operation.
 			generalization }
+]
+
+{ #category : 'tests' }
+OPUmlClassifierViewModelTest >> testValidateChecksOwnedAttributes [
+
+	| umlClass association invalidProperty classViewModel warnings |
+	umlClass := OPUMLClass new name: 'BrokenClass'.
+	association := OPUMLAssociation new name: 'Assoc'.
+	invalidProperty := OPUMLProperty new
+		                   name: 'brokenAttr';
+		                   owningClass: umlClass;
+		                   association: association;
+		                   yourself.
+	umlClass attributes add: invalidProperty.
+	classViewModel := OPUmlClassViewModel new model: umlClass.
+	warnings := OrderedCollection new.
+
+	[ classViewModel validate ]
+		on: OPModelInvalid
+		do: [ :warning |
+				warnings add: warning messageText.
+				warning resume ].
+
+	self assert: warnings size equals: 1
 ]

@@ -80,49 +80,47 @@ OPUmlPackageViewModel >> createModelIn: aParentModel [
 { #category : 'accessing' }
 OPUmlPackageViewModel >> dependentElements [
 
-	| deps rootModel |
+	| deps rootViewModel |
 	"super dependentElements correctly resolves through childrenModels down to packagedElements"
 	deps := super dependentElements asSet reject: [ :any | any oclIsKindOf: #Association ].
-
-	rootModel := self model owner.
-	[ rootModel isNotNil and: [ (rootModel isKindOf: OPUMLPackage) not ] ] whileTrue: [ rootModel := rootModel owner ].
-
-	rootModel ifNotNil: [
-			rootModel packagedElements do: [ :each |
-					((#( OPUMLPackage OPUMLProfile OPUMLModel ) anySatisfy: [ :type | each isKindOf: (Smalltalk at: type) ]) and: [
-						 each respondsTo: #packageImports ]) ifTrue: [
-						deps addAll: (each packageImports select: [ :import | import importedPackage = self model ]) ] ] ].
+	rootViewModel := self modelRootViewModel.
+	(rootViewModel isKindOf: OPUmlPackageViewModel) ifTrue: [
+			rootViewModel allPackages do: [ :eachPackage |
+				deps addAll: (eachPackage packageImports select: [ :import | import importedPackage = self model ]) ] ].
 	^ deps asArray
 ]
 
 { #category : 'forms' }
 OPUmlPackageViewModel >> descriptionAppliedProfiles [
+
 	<magritteDescription>
 	| profiles options |
 	(self model oclIsKindOf: #Profile) ifTrue: [ ^ nil ].
 	profiles := OPUmlCustomProfile allSubclasses collect: #profile.
 	options := profiles collect: [ :each | each -> each name ].
 	^ MAMultipleOptionDescription new
-		optionsAndLabels: options;
-		distinct: true;
-		reference: MAStringDescription new;
-		accessor: (MAPluggableAccessor
-			read: [ :me | me model profileApplications collect: #appliedProfile ]
-			write: [ :me :selectedProfiles |
-				me model profileApplications: (me model profileApplications select: [ :any | selectedProfiles includes: any appliedProfile ]).
-				me model profileApplications: me model profileApplications , (selectedProfiles
-					select: [ :eachSelectedProfile |
-						me model profileApplications noneSatisfy: [ :eachExistingProfileApplication |
-							eachExistingProfileApplication = eachSelectedProfile ] ]
-					thenCollect: [ :each | OPUMLProfileApplication new appliedProfile: each yourself ]).
-				
-				self announcer announce: OPUmlProfileApplied new.
-				self announcer announce: OPElementFormNeedsRebuild new.
-				self modelChanged ]);
-		label: 'Applied Profiles';
-		priority: 10;
-		beSorted;
-		yourself
+		  optionsAndLabels: options;
+		  distinct: true;
+		  reference: MAStringDescription new;
+		  accessor:
+			  (MAPluggableAccessor read: [ :me | me model profileApplications collect: #appliedProfile ] write: [ :me :selectedProfiles |
+						   me model profileApplications:
+								   (me model profileApplications select: [ :any | selectedProfiles includes: any appliedProfile ]).
+						   me model profileApplications: me model profileApplications , (selectedProfiles
+										    select: [ :eachSelectedProfile |
+												    me model profileApplications noneSatisfy: [ :eachExistingProfileApplication |
+														    eachExistingProfileApplication appliedProfile = eachSelectedProfile ] ]
+										    thenCollect: [ :each |
+												    OPUMLProfileApplication new
+													    appliedProfile: each;
+													    yourself ]).
+						   self announcer announce: OPUmlProfileApplied new.
+						   self announcer announce: OPElementFormNeedsRebuild new.
+						   self modelChanged ]);
+		  label: 'Applied Profiles';
+		  priority: 10;
+		  beSorted;
+		  yourself
 ]
 
 { #category : 'forms' }
@@ -176,14 +174,4 @@ OPUmlPackageViewModel >> openEditorWithApplication: anApplication undoManager: a
 OPUmlPackageViewModel >> packageViewModel [
 
 	^ self
-]
-
-{ #category : 'registration' }
-OPUmlPackageViewModel >> registerModelIn: aParentModel [
-	(aParentModel respondsTo: #packagedElements)
-		ifTrue: [ aParentModel packagedElements add: self model ]
-		ifFalse: [
-			(aParentModel respondsTo: #addModel:)
-				ifTrue: [ aParentModel addModel: self model ]
-				ifFalse: [ aParentModel add: self model ] ]
 ]

@@ -33,15 +33,16 @@ OPUmlElementViewModel >> allTypeElements [
 
 { #category : 'stereotypes' }
 OPUmlElementViewModel >> applyStereotype: aStereotypeModel to: aModel [
-	| stereotypeInstance |
-	(aModel appliedStereotypes
-		anySatisfy: [ :each | each umlClassName = aStereotypeModel umlClassName ])
-		ifTrue: [ ^ self ].
-	[ aModel appliedStereotypes isNotEmpty ]
-		whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ].
-	stereotypeInstance := (aStereotypeModel respondsTo: #implementationClass)
-		ifTrue: [ aStereotypeModel implementationClass new ]
-		ifFalse: [ aStereotypeModel ].
+
+	| targetStereotypeName stereotypeInstance |
+	targetStereotypeName := (aStereotypeModel isKindOf: OPUMLStereotype)
+		                        ifTrue: [ aStereotypeModel name ]
+		                        ifFalse: [ aStereotypeModel umlClassName ].
+	(aModel appliedStereotypes anySatisfy: [ :each | each umlClassName = targetStereotypeName ]) ifTrue: [ ^ self ].
+	[ aModel appliedStereotypes isNotEmpty ] whileTrue: [ aModel unapplyStereotype: aModel appliedStereotypes first ].
+	stereotypeInstance := (aStereotypeModel isKindOf: OPUMLStereotype)
+		                      ifTrue: [ aStereotypeModel implementationClass new ]
+		                      ifFalse: [ aStereotypeModel ].
 	aModel applyStereotype: stereotypeInstance.
 	self announcer announce: OPElementFormNeedsRebuild new
 ]
@@ -287,10 +288,11 @@ OPUmlElementViewModel >> removeStereotypesIn: aModel [
 
 { #category : 'stereotypes' }
 OPUmlElementViewModel >> stereotypesIn: aProfile for: aModel [
-	^ (aProfile ownedStereotype reject: #isAbstract) select: [ :stereo | 
-		  stereo allAttributes anySatisfy: [ :each | 
-			  (each name beginsWith: 'base_') and: [ 
-				  self model oclIsKindOf: each type name ] ] ]
+
+	^ (aProfile ownedStereotype reject: #isAbstract) select: [ :stereo |
+			  stereo allAttributes anySatisfy: [ :each |
+				  each name isNotNil and: [
+					  (each name beginsWith: 'base_') and: [ each type isNotNil and: [ aModel oclIsKindOf: each type name ] ] ] ] ]
 ]
 
 { #category : 'validation' }
@@ -312,12 +314,12 @@ OPUmlElementViewModel >> validateProperty: aProperty [
 
 { #category : 'validation' }
 OPUmlElementViewModel >> validationFailedAssociationPropertyWithoutClassifierType: aProperty [
+
 	OPModelInvalid signal: (String streamContents: [ :s |
-			 s << 'Property "' << aProperty name asString << '" has type '
-			 << aProperty type asString << ' although it is part of '
-			 << aProperty association asString ]).
-	aProperty opposite owningClass ifNotNil: [ :oppositeOwner |
-		aProperty type: oppositeOwner ]
+				 s << 'Property "' << aProperty name asString << '" has type ' << aProperty type asString << ' although it is part of '
+				 << aProperty association asString ]).
+	aProperty opposite ifNotNil: [ :oppositeEnd |
+		oppositeEnd owningClass ifNotNil: [ :oppositeOwner | aProperty type: oppositeOwner ] ]
 ]
 
 { #category : 'validation' }

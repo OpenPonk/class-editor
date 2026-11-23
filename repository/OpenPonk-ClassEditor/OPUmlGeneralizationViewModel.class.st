@@ -65,14 +65,16 @@ OPUmlGeneralizationViewModel >> dependingOnElements [
 
 { #category : 'forms' }
 OPUmlGeneralizationViewModel >> descriptionGeneral [
+
 	<magritteDescription>
 	^ MAStringDescription new
-		beReadOnly;
-		accessor:
-			(MAPluggableAccessor read: [ :me | me model general name ] write: [ :me :newValue |  ]);
-		label: 'General';
-		priority: 1;
-		yourself
+		  beReadOnly;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | me model general ifNotNil: [ :general | general name ] ifNil: [ '' ] ]
+				   write: [ :me :newValue |  ]);
+		  label: 'General';
+		  priority: 1;
+		  yourself
 ]
 
 { #category : 'forms' }
@@ -106,14 +108,16 @@ OPUmlGeneralizationViewModel >> descriptionName [
 
 { #category : 'forms' }
 OPUmlGeneralizationViewModel >> descriptionSpecific [
+
 	<magritteDescription>
 	^ MAStringDescription new
-		beReadOnly;
-		accessor:
-			(MAPluggableAccessor read: [ :me | me model specific name ] write: [ :me :newValue |  ]);
-		label: 'Specific';
-		priority: 2;
-		yourself
+		  beReadOnly;
+		  accessor: (MAPluggableAccessor
+				   read: [ :me | me model specific ifNotNil: [ :specific | specific name ] ifNil: [ '' ] ]
+				   write: [ :me :newValue |  ]);
+		  label: 'Specific';
+		  priority: 2;
+		  yourself
 ]
 
 { #category : 'forms' }
@@ -133,10 +137,15 @@ OPUmlGeneralizationViewModel >> icon [ ^ OPUmlIcons generalizationIcon
 
 { #category : 'printing' }
 OPUmlGeneralizationViewModel >> modelDisplayStringOn: aStream [
-    aStream nextPutAll: (self model specific ifNotNil: #name ifNil: ['?']).
-    aStream nextPutAll: ' => '.
-    aStream nextPutAll: (self model general ifNotNil: #name ifNil: ['?']).
-    aStream space; nextPutAll: '(Generalization)'
+
+	| specificName generalName |
+	specificName := (self model specific ifNotNil: [ :specific | specific name ]) ifNil: [ '?' ].
+	generalName := (self model general ifNotNil: [ :general | general name ]) ifNil: [ '?' ].
+	aStream nextPutAll: specificName.
+	aStream nextPutAll: ' => '.
+	aStream nextPutAll: generalName.
+	aStream space.
+	aStream nextPutAll: '(Generalization)'
 ]
 
 { #category : 'accessing' }

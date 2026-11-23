@@ -58,6 +58,80 @@ OPUmlGeneralizationViewModelTest >> targetModelClass [
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testBasicRemoveModelRemovesEmptyGeneralizationSet [
+
+	| genSet |
+	genSet := OPUMLGeneralizationSet new name: 'TempSet'.
+	genSet generalizations add: model.
+	rootModel packagedElements add: genSet.
+
+	viewModel removeModel.
+
+	self assertEmpty: genSet generalizations.
+	self denyCollection: rootModel packagedElements includesAny: { genSet }.
+	self assert: model general isNil description: 'General must be cleared on removal'.
+	self assert: model specific isNil description: 'Specific must be cleared on removal'
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testDescriptionGeneralAndSpecificReadNames [
+
+	self assert: (viewModel descriptionGeneral accessor read: viewModel) equals: 'GeneralClass'.
+	self assert: (viewModel descriptionSpecific accessor read: viewModel) equals: 'SpecificClass'
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testDescriptionGeneralAndSpecificReturnEmptyStringWhenNil [
+
+	| emptyGeneralization emptyViewModel |
+	emptyGeneralization := OPUMLGeneralization new.
+	emptyViewModel := OPUmlGeneralizationViewModel new model: emptyGeneralization.
+
+	self assert: (emptyViewModel descriptionGeneral accessor read: emptyViewModel) equals: ''.
+	self assert: (emptyViewModel descriptionSpecific accessor read: emptyViewModel) equals: ''
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testDescriptionGeneralizationSetsDisplayAndWriteError [
+
+	| description namedSet unnamedSet |
+	description := viewModel descriptionGeneralizationSets.
+	namedSet := OPUMLGeneralizationSet new name: 'Kinds'.
+	namedSet generalizations add: model.
+	unnamedSet := OPUMLGeneralizationSet new name: '   '.
+
+	self assert: (description displayStringFor: namedSet) equals: ' - Kinds (1 generalization)'.
+	self assert: (description displayStringFor: unnamedSet) equals: ' - generalization set (0 generalizations)'.
+	self assertCollection: (description accessor read: viewModel) hasSameElements: { namedSet }.
+	self should: [ description accessor write: #(  ) to: viewModel ] raise: Error
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testModelDisplayStringWithNilEndpoints [
+
+	| emptyGeneralization emptyViewModel displayString |
+	emptyGeneralization := OPUMLGeneralization new.
+	emptyViewModel := OPUmlGeneralizationViewModel new model: emptyGeneralization.
+
+	displayString := String streamContents: [ :stream | emptyViewModel modelDisplayStringOn: stream ].
+	self assert: displayString equals: '? => ? (Generalization)'
+]
+
+{ #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testModelDisplayStringWithUnnamedClassifiers [
+
+	| unnamedGeneralization unnamedViewModel displayString |
+	unnamedGeneralization := OPUMLGeneralization new
+		                         specific: OPUMLClass new;
+		                         general: OPUMLClass new;
+		                         yourself.
+	unnamedViewModel := OPUmlGeneralizationViewModel new model: unnamedGeneralization.
+
+	displayString := String streamContents: [ :stream | unnamedViewModel modelDisplayStringOn: stream ].
+	self assert: displayString equals: '? => ? (Generalization)'
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationViewModelTest >> testRegisterModelInRejectsNonClassifierParent [
 
 	| specificClassifier generalClassifier generalization testProject projectController viewModelRegistry generalizationViewModel invalidParent |

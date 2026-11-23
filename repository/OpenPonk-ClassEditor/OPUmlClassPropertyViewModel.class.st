@@ -18,16 +18,12 @@ OPUmlClassPropertyViewModel class >> modelClass [ ^ OPUMLProperty
 
 { #category : 'accessing' }
 OPUmlClassPropertyViewModel >> availableTypeNames [
+
 	| names |
-	names := Set new.
-	(Smalltalk globals at: #OPUMLXMISpecsStorage ifPresent: [ :storage |
-		names addAll: storage primitivesMap keys ]).
-	(self respondsTo: #establishedTypeNames) ifTrue: [
-		names addAll: self establishedTypeNames ].
+	names := self establishedTypeNames copy.
 	self modelRootViewModel ifNotNil: [ :rootViewModel |
-		(rootViewModel respondsTo: #allTypeElements) ifTrue: [
-			names addAll: (rootViewModel allTypeElements collect: #name thenSelect: #isNotNil) ] ].
-	^ (names asArray sorted: [ :a :b | a <= b ])
+		names addAll: (rootViewModel allTypeElements collect: #name thenSelect: #isNotNil) ].
+	^ names asArray sorted: [ :a :b | a <= b ]
 ]
 
 { #category : 'removing' }
@@ -214,18 +210,16 @@ OPUmlClassPropertyViewModel >> icon [ ^ OPUmlIcons attributeIcon
 { #category : 'accessing' }
 OPUmlClassPropertyViewModel >> placeholderName [
 
-	(self model isNil or: [
-		 self model type isNil or: [
-			 self model type name isNil or: [ self model type name isEmpty ] ] ])
-		ifTrue: [ ^ 'attribute' ].
+	| words |
+	(self model isNil or: [ self model type isNil or: [ self model type name isNil or: [ self model type name isEmpty ] ] ]) ifTrue: [
+		^ 'attribute' ].
+	words := ((self model type name select: [ :each | each isAlphaNumeric or: [ each isSeparator ] ]) splitOn: [ :each |
+		          each isSeparator ]) reject: #isEmpty.
+	words ifEmpty: [ ^ 'attribute' ].
 	^ String streamContents: [ :s |
-		  | words |
-		  words := (self model type name select: [ :each |
-			            each isAlphaNumeric or: [ each isSeparator ] ])
-			           splitOn: [ :each | each isSeparator ].
-		  s << words first first asLowercase asString.
-		  s << words first allButFirst asString.
-		  words allButFirstDo: [ :eachWord | s << eachWord capitalized ] ]
+			  s << words first first asLowercase asString.
+			  s << words first allButFirst asString.
+			  words allButFirstDo: [ :eachWord | s << eachWord capitalized ] ]
 ]
 
 { #category : 'construction' }
