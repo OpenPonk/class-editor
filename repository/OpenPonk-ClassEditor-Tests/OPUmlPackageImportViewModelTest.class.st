@@ -10,6 +10,23 @@ Class {
 }
 
 { #category : 'tests' }
+OPUmlPackageImportViewModelTest >> testBasicRemoveModelHandlesImportAbsentFromImportingNamespace [
+
+	| importingPackage importedPackage packageImport importViewModel |
+	importingPackage := OPUMLPackage new name: 'Importing'.
+	importedPackage := OPUMLPackage new name: 'Imported'.
+	packageImport := OPUMLPackageImport new
+		                 importedPackage: importedPackage;
+		                 yourself.
+	packageImport instVarNamed: #importingNamespace put: importingPackage.
+	importViewModel := OPUmlPackageImportViewModel new
+		                   model: packageImport;
+		                   yourself.
+	importViewModel basicRemoveModel.
+	self assertEmpty: importingPackage packageImports
+]
+
+{ #category : 'tests' }
 OPUmlPackageImportViewModelTest >> testBasicRemoveModelRemovesFromImportingNamespace [
 
 	| testProject sourcePackage targetPackage packageImport testRegistry importViewModel |

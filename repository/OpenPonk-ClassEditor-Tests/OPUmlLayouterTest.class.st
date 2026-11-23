@@ -47,6 +47,63 @@ OPUmlLayouterTest >> tearDown [
 ]
 
 { #category : 'tests' }
+OPUmlLayouterTest >> testAllNodesReturnsRenderedNodeShapes [
+
+	| classA classB layouter nodes |
+	classA := OPUMLClass new name: 'ClassA'.
+	classB := OPUMLClass new name: 'ClassB'.
+	model packagedElements
+		add: classA;
+		add: classB.
+	diagramController showAllElements.
+
+	layouter := OPUmlLayouter new diagramController: diagramController.
+	nodes := layouter allNodes.
+	self assert: nodes size equals: 2.
+	self assertCollection: nodes hasSameElements: {
+			(diagramController controllerForModel: classA) roassalShape.
+			(diagramController controllerForModel: classB) roassalShape }
+]
+
+{ #category : 'tests' }
+OPUmlLayouterTest >> testCircleLayoutGridLayoutAndTreeLayoutPositionNodes [
+
+	| parentClass childClass siblingClass generalization1 generalization2 layouter parentShape childShape |
+	parentClass := OPUMLClass new name: 'Parent'.
+	childClass := OPUMLClass new name: 'Child'.
+	siblingClass := OPUMLClass new name: 'Sibling'.
+	generalization1 := OPUMLGeneralization new
+		                   general: parentClass;
+		                   specific: childClass;
+		                   yourself.
+	childClass generalizations add: generalization1.
+	generalization2 := OPUMLGeneralization new
+		                   general: parentClass;
+		                   specific: siblingClass;
+		                   yourself.
+	siblingClass generalizations add: generalization2.
+	model packagedElements
+		add: parentClass;
+		add: childClass;
+		add: siblingClass.
+	diagramController showAllElements.
+
+	layouter := OPUmlLayouter new diagramController: diagramController.
+	layouter circleLayout.
+	self assert: undoManager canUndo description: 'Circle layout must record an undoable command'.
+
+	layouter gridLayout.
+	self assert: undoManager canUndo description: 'Grid layout must record an undoable command'.
+
+	layouter treeLayout.
+	parentShape := (diagramController controllerForModel: parentClass) roassalShape.
+	childShape := (diagramController controllerForModel: childClass) roassalShape.
+	self
+		assert: parentShape position y < childShape position y
+		description: 'Parent class must be positioned above child class in acyclic tree layout'
+]
+
+{ #category : 'tests' }
 OPUmlLayouterTest >> testClassCompartmentWidthMatchesClassWidth [
 	| richModel richProject richDiagram projectCtrl richDiagramCtrl classCtrl classShape expectedInnerWidth |
 	richModel := OPUmlExamples exampleRichClass.
@@ -152,6 +209,83 @@ OPUmlLayouterTest >> testClassCompartmentsHaveNoOverlapsAndAreMonotonicallyOrder
 					self
 						deny: ((rectA intersects: rectB) and: [ (rectA intersect: rectB) height > 0.5 ])
 						description: 'Labels across attribute and operation compartments must not vertically overlap' ] ]
+]
+
+{ #category : 'tests' }
+OPUmlLayouterTest >> testCyclicDominanceTreeLayoutWithInnerPackageIsUndoable [
+
+	| innerPackage innerClass classA classB generalizationAB generalizationBA layouter innerClassShape initialInnerClassPosition |
+	innerPackage := OPUMLPackage new name: 'InnerPkg'.
+	innerClass := OPUMLClass new name: 'InnerCls'.
+	innerClass package: innerPackage.
+	innerPackage packagedElements add: innerClass.
+
+	classA := OPUMLClass new name: 'ClassA'.
+	classB := OPUMLClass new name: 'ClassB'.
+	generalizationAB := OPUMLGeneralization new
+		                    general: classB;
+		                    specific: classA;
+		                    yourself.
+	classA generalizations add: generalizationAB.
+	generalizationBA := OPUMLGeneralization new
+		                    general: classA;
+		                    specific: classB;
+		                    yourself.
+	classB generalizations add: generalizationBA.
+
+	model packagedElements
+		add: innerPackage;
+		add: classA;
+		add: classB.
+
+	diagramController showAllElements.
+	innerClassShape := (diagramController controllerForModel: innerClass) roassalShape.
+	initialInnerClassPosition := innerClassShape position copy.
+
+	layouter := OPUmlLayouter new diagramController: diagramController.
+	layouter dominanceTreeLayout.
+	self assert: undoManager canUndo description: 'Cyclic dominance tree layout fallback must be undoable'.
+
+	diagramController undo.
+	self assert: innerClassShape position equals: initialInnerClassPosition
+]
+
+{ #category : 'tests' }
+OPUmlLayouterTest >> testCyclicSugiyamaLayoutFallsBackToGridLayoutAndIsUndoable [
+
+	| innerPackage innerClass classA classB generalizationAB generalizationBA layouter innerClassShape initialInnerClassPosition |
+	innerPackage := OPUMLPackage new name: 'InnerPkg'.
+	innerClass := OPUMLClass new name: 'InnerCls'.
+	innerClass package: innerPackage.
+	innerPackage packagedElements add: innerClass.
+
+	classA := OPUMLClass new name: 'ClassA'.
+	classB := OPUMLClass new name: 'ClassB'.
+	generalizationAB := OPUMLGeneralization new
+		                    general: classB;
+		                    specific: classA;
+		                    yourself.
+	classA generalizations add: generalizationAB.
+	generalizationBA := OPUMLGeneralization new
+		                    general: classA;
+		                    specific: classB;
+		                    yourself.
+	classB generalizations add: generalizationBA.
+
+	model packagedElements
+		add: innerPackage;
+		add: classA;
+		add: classB.
+	diagramController showAllElements.
+	innerClassShape := (diagramController controllerForModel: innerClass) roassalShape.
+	initialInnerClassPosition := innerClassShape position copy.
+
+	layouter := OPUmlLayouter new diagramController: diagramController.
+	layouter sugiyamaLayout.
+	self assert: undoManager canUndo description: 'Cyclic Sugiyama layout fallback must be undoable'.
+
+	diagramController undo.
+	self assert: innerClassShape position equals: initialInnerClassPosition
 ]
 
 { #category : 'tests' }
@@ -294,4 +428,48 @@ OPUmlLayouterTest >> testSugiyamaLayoutWithSelfLoopAssociation [
 	self
 		assert: parentShape position y < childShape position y
 		description: 'Parent class must be positioned above child class in Sugiyama layout'
+]
+
+{ #category : 'tests' }
+OPUmlLayouterTest >> testTreeLayoutWithGeneralizationCycleFallsBackToGridLayout [
+
+	| classA classB classC generalizationAB generalizationBA generalizationCA layouter shapeA shapeB shapeC distinctYCount |
+	classA := OPUMLClass new name: 'ClassA'.
+	classB := OPUMLClass new name: 'ClassB'.
+	classC := OPUMLClass new name: 'ClassC'.
+	generalizationAB := OPUMLGeneralization new
+		                    general: classB;
+		                    specific: classA;
+		                    yourself.
+	classA generalizations add: generalizationAB.
+	generalizationBA := OPUMLGeneralization new
+		                    general: classA;
+		                    specific: classB;
+		                    yourself.
+	classB generalizations add: generalizationBA.
+	generalizationCA := OPUMLGeneralization new
+		                    general: classA;
+		                    specific: classC;
+		                    yourself.
+	classC generalizations add: generalizationCA.
+
+	model packagedElements
+		add: classA;
+		add: classB;
+		add: classC.
+
+	diagramController showAllElements.
+	layouter := OPUmlLayouter new diagramController: diagramController.
+	layouter treeLayout.
+
+	shapeA := (diagramController controllerForModel: classA) roassalShape.
+	shapeB := (diagramController controllerForModel: classB) roassalShape.
+	shapeC := (diagramController controllerForModel: classC) roassalShape.
+	distinctYCount := {
+		                  shapeA position y rounded.
+		                  shapeB position y rounded.
+		                  shapeC position y rounded } asSet size.
+	self
+		assert: distinctYCount <= 2
+		description: 'Grid layout fallback on 3 classes must arrange them in at most 2 rows rather than a 3-level tree'
 ]

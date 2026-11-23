@@ -159,6 +159,32 @@ OPUmlClassShapeTest >> testRemoveRenderDoesNotClearCommentIconDiagramElement [
 ]
 
 { #category : 'tests' }
+OPUmlClassShapeTest >> testSortOwnedElementsOrdersStaticBeforeNonStaticAndHandlesNilNames [
+
+	| nilNameAttribute alphaAttribute staticAttribute compartment sortedModels |
+	nilNameAttribute := OPUMLProperty new.
+	alphaAttribute := OPUMLProperty new name: 'alpha'.
+	staticAttribute := OPUMLProperty new
+		                   name: 'zeta';
+		                   isStatic: true;
+		                   yourself.
+	compartment := OPUmlClassItemListCompartment new.
+	{
+		nilNameAttribute.
+		alphaAttribute.
+		staticAttribute } do: [ :eachAttribute |
+			compartment ownedElements add: (OPUmlLabel new
+					 modelElement: eachAttribute;
+					 yourself) ].
+	compartment sortOwnedElements.
+	sortedModels := compartment ownedElements collect: #modelElement as: Array.
+	self assert: sortedModels equals: {
+			staticAttribute.
+			nilNameAttribute.
+			alphaAttribute }
+]
+
+{ #category : 'tests' }
 OPUmlClassShapeTest >> testStereotypeLabelNotDuplicatedOnReRender [
 
 	| modelClass stereo initialStereoLabel stereoLabels |

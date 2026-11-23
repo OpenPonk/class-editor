@@ -77,9 +77,7 @@ OPUmlExtensionViewModel >> modelSource [
 OPUmlExtensionViewModel >> modelTarget [
 
 	| baseEnds |
-	self model memberEnds ifNil: [ ^ nil ].
-	baseEnds := self model memberEnds reject: [ :each |
-		            each == self model ownedEnd ].
+	baseEnds := self model memberEnds reject: [ :each | each == self model ownedEnd ].
 	^ baseEnds ifEmpty: [ nil ] ifNotEmpty: [ baseEnds first type ]
 ]
 

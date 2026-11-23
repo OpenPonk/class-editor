@@ -104,6 +104,28 @@ OPUmlClassifierViewModelTest >> testDependentElementsIncludesAssociationsGeneral
 ]
 
 { #category : 'tests' }
+OPUmlClassifierViewModelTest >> testDependentElementsTraversesOwnedElements [
+
+	| testProject rootPackage targetClass nestedClass ownedGeneralization testRegistry targetViewModel |
+	testProject := OPProject named: 'OwnedElementsDeps'.
+	rootPackage := OPUMLPackage new name: 'Root'.
+	targetClass := OPUMLClass new name: 'Target'.
+	nestedClass := OPUMLClass new name: 'Nested'.
+	nestedClass owner: rootPackage.
+	ownedGeneralization := OPUMLGeneralization new
+		                       general: targetClass;
+		                       specific: nestedClass;
+		                       yourself.
+	ownedGeneralization owner: nestedClass.
+	rootPackage packagedElements add: targetClass.
+	testProject addModel: rootPackage.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+
+	targetViewModel := testRegistry viewModelFor: targetClass.
+	self assertCollection: targetViewModel dependentElements includesAll: { ownedGeneralization }
+]
+
+{ #category : 'tests' }
 OPUmlClassifierViewModelTest >> testEnumerationViewModelChildrenModelsIncludesLiteralsAndGeneralizations [
 
 	| enumeration superEnumeration literal generalization enumerationViewModel children |

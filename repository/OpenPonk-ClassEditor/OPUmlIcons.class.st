@@ -44,24 +44,6 @@ SUVORK5CYII='
 ]
 
 { #category : 'accessing - icons' }
-OPUmlIcons class >> commentIcon [
-
-	^ Form fromBinaryStream: self commentIconContents base64Decoded asByteArray readStream
-]
-
-{ #category : 'private - contents' }
-OPUmlIcons class >> commentIconContents [
-	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\comment.png"
-	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
-SFlzAAAG7AAABuwBHnU4NQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
-AADhSURBVDiN1ZBPTsJgEEff1A8pGxOuwaYKaxMMEtoYE2/CGVh4BK/g2o1i0pY0IXFHYg9C
-cNmS0mFlQ0A+YIe/5fx5eTPw7yMAD1NtFjmdvwZMndn7rSz2ARyAVYbngLfTLfFWGS9BrI9W
-Az/ULsBnX5LN5m9dHBoC/Vx5ju9lvmNwKOOejJclo0sYBpE+nQQQh2s/1K6BG1UmJbT8UF+D
-D70CMLZl1/CdFVtA5Qsh0xptILEC3u7kB0i2636ox59wKJWBCJ1BpFajahY8VWYV4MIlLXL7
-PzZTQmpc0lNtzzRr8+ZDj+Ftn2YAAAAASUVORK5CYII='
-]
-
-{ #category : 'accessing - icons' }
 OPUmlIcons class >> constraintIcon [
 
 	^ Form fromBinaryStream: self constraintIconContents base64Decoded asByteArray readStream
@@ -185,40 +167,6 @@ rkJggg=='
 ]
 
 { #category : 'accessing - icons' }
-OPUmlIcons class >> modelIcon [
-
-	^ Form fromBinaryStream: self modelIconContents base64Decoded asByteArray readStream
-]
-
-{ #category : 'private - contents' }
-OPUmlIcons class >> modelIconContents [
-	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\model.png"
-	^ 'iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABHNCSVQICAgIfAhkiAAAAAlw
-SFlzAAAG7AAABuwBHnU4NQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
-AADPSURBVCiRjZIxSgNREIa/eWxjLwTSpvAGVgFXNsXbDdrlCqkEQbtUS24QyFmSwO5L0lh4
-i5xBBEFxfysh4u5Lvm7mnw9mYCwP2lvDng7kSNeZpf+ColLZJcVyF5NiWF7rgDhEh/h7ihzp
-yVXbKCqVnav6oIkPmnTlraKvNDToOdEf17o9S8yDBgZ+ndlyNbKFxI3f6ioq3u10ScPDR0L5
-27t+YU7D9L5W73g2OS6+vnky4+2i4TkPAuAVMPH+CY/ArFXcjGzGmdipl2tDjvQHUzNJCCO5
-kEcAAAAASUVORK5CYII='
-]
-
-{ #category : 'accessing - icons' }
-OPUmlIcons class >> objectIcon [
-
-	^ Form fromBinaryStream: self objectIconContents base64Decoded asByteArray readStream
-]
-
-{ #category : 'private - contents' }
-OPUmlIcons class >> objectIconContents [
-	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\object.png"
-	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
-SFlzAAAG7AAABuwBHnU4NQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
-AAB7SURBVDiNY2AYaMDIwMDA4Ln3/wHGfwwHSNH4n4nBYbszowMDAwMDg9fu/w3YFPnu/i/n
-u/u/HDY5mB4WfLZsdmV8RMglTPgk8bkABlBcgO6VvwhxFE3bXBnh6lhwSRAL8Hph1ADiAAsD
-AyRZ4kqNuMB/JgYHSi2nDgAAgJAkGGm/rBQAAAAASUVORK5CYII='
-]
-
-{ #category : 'accessing - icons' }
 OPUmlIcons class >> operationIcon [
 
 	^ Form fromBinaryStream: self operationIconContents base64Decoded asByteArray readStream
@@ -253,23 +201,6 @@ PnSaAAAAAElFTkSuQmCC'
 ]
 
 { #category : 'accessing - icons' }
-OPUmlIcons class >> primitiveIcon [
-
-	^ Form fromBinaryStream: self primitiveIconContents base64Decoded asByteArray readStream
-]
-
-{ #category : 'private - contents' }
-OPUmlIcons class >> primitiveIconContents [
-	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\primitive.png"
-	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
-SFlzAAAG7AAABuwBHnU4NQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
-AACjSURBVDiNxZKhDcJgEEbf/W3AYtkFUdIa2AHdMSCsgGILFBVA0iEYgQRbg8D0Q5CKFgFH
-SXj+vbtcDv6NAcxOKq2m9IgKJEVqCQDzg1beyY0TvGKXuFuVMQYuw4jNbmrVu0BrAwUmRWa5
-jPO9Zu3eoCESlWDgD4jR7KitjFsslv6AURWp5Z+IDa0bmLh65JfAPrNFr8A3xPB8S+83KpD0
-Hf4bHpd5LsedZt3CAAAAAElFTkSuQmCC'
-]
-
-{ #category : 'accessing - icons' }
 OPUmlIcons class >> profileIcon [
 
 	^ Form fromBinaryStream: self profileIconContents base64Decoded asByteArray readStream
@@ -289,24 +220,6 @@ IAVTLBHKBMOoFiEemG1piTouG9cw9lLESxHXMO64bEpLFA/M9hwCx0v61tuJu98AFfxLv1IF
 ]
 
 { #category : 'accessing - icons' }
-OPUmlIcons class >> ruleIcon [
-
-	^ Form fromBinaryStream: self ruleIconContents base64Decoded asByteArray readStream
-]
-
-{ #category : 'private - contents' }
-OPUmlIcons class >> ruleIconContents [
-	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\rule.png"
-	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
-SFlzAAAG7AAABuwBHnU4NQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
-AADZSURBVDiN1Y4xTgJRFEXP/WqJBYmJtTU7UBMjvxhEKUjYgA007IHYkNi7CRfgZOJMQkEi
-xoqCLUhh7AnJ59kQCjKaGQoTTnnfe+dd2HuUF0avdiHHOYCMRXCMkmtN83bdL6HHuMc4M6i7
-FR9RZp3CgjVvsVc39moBQ2f0ywo2yJgZnO4kGAzMIe6AWd788I/bdiO1y3dRwfgKgduyDSYr
-6AIPiBMdcVy2wWfilQJpI7WqM4bATZkGG5bwBFw1E6vtJMi8voHncECvkCCIsYyXrfhRYl7k
-4f/yA4IROmIGi1YJAAAAAElFTkSuQmCC'
-]
-
-{ #category : 'accessing - icons' }
 OPUmlIcons class >> stereotypeIcon [
 
 	^ Form fromBinaryStream: self stereotypeIconContents base64Decoded asByteArray readStream
@@ -321,22 +234,4 @@ AADBSURBVDiN3ZGxDgFhEIS/3VxzqFQe54RwJ6KjUXgNlfAoCo1ScycIlWdRqQ6JyL8qImgu
 JBLTbTHf7GTg1xKAaGUbcWyyGE0J4ooEADQWNsyafPNoVuOzPgZ4j0d7a356ZOidGF18BnFV
 +o2lNU04i8N3RprUZPX2g3pixfTIRGB98Zk4YQqQ3xPjiJxQUqUVLq331Qp3wDyUfSFH16Ds
 neiq0QE4FIlQYjV2zjFLqjJ+ofzBjKYEWWuYEnwa/h1dATYvRy5RNn8sAAAAAElFTkSuQmCC'
-]
-
-{ #category : 'accessing - icons' }
-OPUmlIcons class >> unknownIcon [
-
-	^ Form fromBinaryStream: self unknownIconContents base64Decoded asByteArray readStream
-]
-
-{ #category : 'private - contents' }
-OPUmlIcons class >> unknownIconContents [
-	"Private - Method generated with the content of the file File @ D:\OpenPonk\icons\uml\unknown.png"
-	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
-SFlzAAAG7AAABuwBHnU4NQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
-AADySURBVDiNxZEhTkNBGIS/2S60CIrAYxA4XBMEpgXBC2lSheUMCAQX4BacAEHThkdCGxKK
-ggOAwqBxkIJ47I+qYOnbJjUduzNfZv6FRUtlD4dDa/6IlmCdwIv/5qLf1jj2uWnhg4GdBugq
-sC1jFXFerDDKcqvGXj8N4CqMKmKz39Q7QDa0DnCFZwe4nwnIW3qMdhYGOM9n7C29wUTtgW0U
-4gF4utnjCMn+tE2Fs9zqhbg1ePVfHMfh0gkTWZUTGfXlGo3e/v8fmNnABbYQz71dfZR50g3E
-tRm1lCcJCPDmxNLcAAdnZqwBd3MBJC4J6QmL1y+Fj0GJF17n4AAAAABJRU5ErkJggg=='
 ]

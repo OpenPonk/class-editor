@@ -53,6 +53,19 @@ OPUmlAdditionalViewModelsTest >> testDataTypeViewModelMetadataAndIsSystemElement
 ]
 
 { #category : 'tests' }
+OPUmlAdditionalViewModelsTest >> testDataTypeViewModelWithoutParentIsNotSystemElement [
+
+	| testProject testRegistry orphanDataType orphanViewModel |
+	testProject := OPProject named: 'OrphanDataTypeTest'.
+	testRegistry := OPViewModelRegistry forProject: testProject.
+	orphanDataType := OPUMLDataType new name: 'OrphanType'.
+	orphanViewModel := testRegistry viewModelFor: orphanDataType.
+	self
+		deny: orphanViewModel isSystemElement
+		description: 'DataType view model without a parent view model must not be a system element'
+]
+
+{ #category : 'tests' }
 OPUmlAdditionalViewModelsTest >> testEnumerationLiteralViewModelValidation [
 
 	| nilModelViewModel unownedViewModel |

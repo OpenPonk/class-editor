@@ -294,6 +294,27 @@ OPUmlClassPropertyViewModelTest >> testTypeNamedCases [
 ]
 
 { #category : 'tests' }
+OPUmlClassPropertyViewModelTest >> testTypeNamedReusesCanonicalTypeWhenLazilyCreatingCommonTypesPackage [
+
+	| bareProject barePackage ownerClass property bareRegistry propertyViewModel resolvedType commonTypesPackage |
+	bareProject := OPProject named: 'BareProject'.
+	barePackage := OPUMLPackage new name: 'BareRoot'.
+	ownerClass := OPUMLClass new name: 'Event'.
+	property := OPUMLProperty new name: 'createdAt'.
+	ownerClass ownedAttributes add: property.
+	barePackage packagedElements add: ownerClass.
+	bareProject addModel: barePackage.
+	bareRegistry := OPViewModelRegistry forProject: bareProject.
+
+	propertyViewModel := bareRegistry viewModelFor: property.
+	resolvedType := propertyViewModel typeNamed: 'Date'.
+	self assert: resolvedType name equals: 'Date'.
+	commonTypesPackage := barePackage packagedElements detect: [ :each |
+		                      (each oclIsKindOf: #Package) and: [ each name = OPUmlCommonTypesFactory commonTypesPackageName ] ].
+	self assert: (commonTypesPackage packagedElements count: [ :each | each name = 'Date' ]) equals: 1
+]
+
+{ #category : 'tests' }
 OPUmlClassPropertyViewModelTest >> testTypeNamedUnknownTypeReturnsDataTypeInCommonTypes [
 
 	| testProject package commonTypesPkg prop propViewModel testRegistry resolvedType |

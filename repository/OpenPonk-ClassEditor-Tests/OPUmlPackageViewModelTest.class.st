@@ -111,6 +111,18 @@ OPUmlPackageViewModelTest >> testBasicRemoveModelFromParentPackageAndProject [
 ]
 
 { #category : 'tests' }
+OPUmlPackageViewModelTest >> testBasicRemoveModelHandlesNestedPackageAbsentFromParent [
+
+	| childPackage parentPackageViewModel childViewModel |
+	childPackage := OPUMLPackage new name: 'UnlistedChild'.
+	parentPackageViewModel := registry viewModelFor: rootModel.
+	childViewModel := registry viewModelFor: childPackage.
+	childViewModel instVarNamed: #parentViewModel put: parentPackageViewModel.
+	childViewModel basicRemoveModel.
+	self denyCollection: rootModel packagedElements includesAny: { childPackage }
+]
+
+{ #category : 'tests' }
 OPUmlPackageViewModelTest >> testDependentElementsIncludesImportsFromSiblingProfile [
 
 	| ownerProfile targetPackage importingProfile packageImport testProject testRegistry packageViewModel |

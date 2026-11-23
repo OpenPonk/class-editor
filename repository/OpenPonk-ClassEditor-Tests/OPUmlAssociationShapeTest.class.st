@@ -504,3 +504,37 @@ OPUmlAssociationShapeTest >> testSwitchSourceAndTargetOnUnrenderedAssociationAnd
 	self assert: plainEdge source identicalTo: targetShape.
 	self assert: plainEdge target identicalTo: sourceShape
 ]
+
+{ #category : 'tests' }
+OPUmlAssociationShapeTest >> testSwitchSourceAndTargetWithFewerThanTwoMemberEndsSwapsEndpointsOnly [
+
+	| originalSource originalTarget |
+	shape modelElement: (OPUMLAssociation new
+			 name: 'Incomplete';
+			 yourself).
+	originalSource := shape source.
+	originalTarget := shape target.
+	shape switchSourceAndTarget.
+	self assert: shape source identicalTo: originalTarget.
+	self assert: shape target identicalTo: originalSource
+]
+
+{ #category : 'tests' }
+OPUmlAssociationShapeTest >> testUpdateRenderFromStylesHandlesMissingAnchorConstraintProperty [
+
+	| association end1 end2 label |
+	association := OPUMLAssociation new name: 'Assoc'.
+	end1 := OPUMLProperty new name: 'roleA'.
+	end2 := OPUMLProperty new name: 'roleB'.
+	association memberEnds
+		add: end1;
+		add: end2.
+	shape source renderIn: canvas.
+	shape target renderIn: canvas.
+	shape modelElement: association.
+	shape renderIn: canvas.
+	label := shape ownedElements detect: [ :each | each isKindOf: OPUmlAssociationEndLabel ].
+	label roassalShape removePropertyAt: OPRSAnchorConstraint.
+	label updateRenderFromStyles.
+	self assert: label roassalShape text equals: label text
+]

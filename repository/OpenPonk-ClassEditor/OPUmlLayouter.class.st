@@ -41,6 +41,14 @@ OPUmlLayouter >> allRenderedNodeShapes [
 		thenCollect: #roassalShape) asGroup
 ]
 
+{ #category : 'private' }
+OPUmlLayouter >> applyGridLayoutOn: aGroupOfBoxes [
+
+	RSGridLayout new
+		gapSize: 140;
+		on: aGroupOfBoxes
+]
+
 { #category : 'userinterface' }
 OPUmlLayouter >> applyLayout: aThreeArgBlock [
 	| allTargetNodes snapshot activeContainers topLevelBoxes generalizations extensions linkRelationships invertedExtensionShapes filteredHierarchy filteredLinks commands |
@@ -124,22 +132,20 @@ OPUmlLayouter >> dominanceTreeLayout [
 	"Applies a dominance tree layout to boxes and relationships, falling back silently to grid layout on cycles."
 
 	self applyLayout: [ :boxes :hierarchy :links |
-		(OPLayoutLoopDetector haveLoopsBoxes: boxes links: hierarchy , links)
-			ifTrue: [ ^ self gridLayout ].
-		RSDominanceTreeLayout new
-			verticallyReverse;
-			verticalGap: 100;
-			horizontalGap: 100;
-			on: boxes edges: hierarchy , links ]
+			(OPLayoutLoopDetector haveLoopsBoxes: boxes links: hierarchy , links)
+				ifTrue: [ self applyGridLayoutOn: boxes ]
+				ifFalse: [
+						RSDominanceTreeLayout new
+							verticallyReverse;
+							verticalGap: 100;
+							horizontalGap: 100;
+							on: boxes edges: hierarchy , links ] ]
 ]
 
 { #category : 'layouts' }
 OPUmlLayouter >> gridLayout [
-	self
-		applyLayout: [ :boxes :hierarchy :links | 
-			RSGridLayout new
-				gapSize: 140;
-				on: boxes ]
+
+	self applyLayout: [ :boxes :hierarchy :links | self applyGridLayoutOn: boxes ]
 ]
 
 { #category : 'layouts' }
@@ -160,16 +166,16 @@ OPUmlLayouter >> sugiyamaLayout [
 	"Applies a Sugiyama layout to boxes and relationships, falling back silently to grid layout on cycles."
 
 	self applyLayout: [ :boxes :hierarchy :links |
-		| centerY |
-		(OPLayoutLoopDetector haveLoopsBoxes: boxes links: hierarchy , links)
-			ifTrue: [ ^ self gridLayout ].
-		RSSugiyamaLayout new
-			verticalGap: 100;
-			horizontalGap: 100;
-			on: boxes edges: hierarchy , links.
-		centerY := (RSGroup withAll: boxes) encompassingRectangle center y.
-		boxes do: [ :each |
-			each translateBy: 0 @ 2 * (centerY - each position y) ] ]
+			(OPLayoutLoopDetector haveLoopsBoxes: boxes links: hierarchy , links)
+				ifTrue: [ self applyGridLayoutOn: boxes ]
+				ifFalse: [
+						| centerY |
+						RSSugiyamaLayout new
+							verticalGap: 100;
+							horizontalGap: 100;
+							on: boxes edges: hierarchy , links.
+						centerY := (RSGroup withAll: boxes) encompassingRectangle center y.
+						boxes do: [ :each | each translateBy: 0 @ 2 * (centerY - each position y) ] ] ]
 ]
 
 { #category : 'layouts' }
@@ -177,14 +183,14 @@ OPUmlLayouter >> treeLayout [
 	"Applies a tree layout to boxes and relationships, falling back silently to grid layout on cycles."
 
 	self applyLayout: [ :boxes :hierarchy :links |
-		| centerY |
-		(OPLayoutLoopDetector haveLoopsBoxes: boxes links: links)
-			ifTrue: [ ^ self gridLayout ].
-		RSTreeLayout new
-			verticalGap: 100;
-			horizontalGap: 100;
-			on: boxes edges: hierarchy , links.
-		centerY := (RSGroup withAll: boxes) encompassingRectangle center y.
-		boxes do: [ :each |
-			each translateBy: 0 @ 2 * (centerY - each position y) ] ]
+			(OPLayoutLoopDetector haveLoopsBoxes: boxes links: hierarchy , links)
+				ifTrue: [ self applyGridLayoutOn: boxes ]
+				ifFalse: [
+						| centerY |
+						RSTreeLayout new
+							verticalGap: 100;
+							horizontalGap: 100;
+							on: boxes edges: hierarchy , links.
+						centerY := (RSGroup withAll: boxes) encompassingRectangle center y.
+						boxes do: [ :each | each translateBy: 0 @ 2 * (centerY - each position y) ] ] ]
 ]

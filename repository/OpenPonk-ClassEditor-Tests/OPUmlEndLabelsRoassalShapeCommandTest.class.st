@@ -226,6 +226,16 @@ OPUmlEndLabelsRoassalShapeCommandTest >> testDefaultMenuItemNameStatesDiagramInh
 ]
 
 { #category : 'tests' }
+OPUmlEndLabelsRoassalShapeCommandTest >> testIsCurrentlySelectedByStyleReturnsFalseWhenKeyIsAbsent [
+
+	| command |
+	command := OPUmlShowEndLabelsRoassalShapeCommand new.
+	self
+		deny: (command isCurrentlySelectedByStyle: Dictionary new)
+		description: 'Style without showAssociationEndLabelsKey must not report the command as selected'
+]
+
+{ #category : 'tests' }
 OPUmlEndLabelsRoassalShapeCommandTest >> testSetAndUnsetCommandsAreUndoableAndRedoable [
 
 	| associationShape endLabel toolContext hideCommand unsetCommand |

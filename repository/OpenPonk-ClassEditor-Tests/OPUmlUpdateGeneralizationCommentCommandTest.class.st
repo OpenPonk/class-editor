@@ -117,6 +117,35 @@ OPUmlUpdateGeneralizationCommentCommandTest >> testCommentWithNilBodyIsTreatedAs
 ]
 
 { #category : 'tests' }
+OPUmlUpdateGeneralizationCommentCommandTest >> testExecuteAndUndoHandleOwnedCommentWithoutGeneralizationInAnnotatedElements [
+
+	| orphanComment clearCommand updateCommand createCommand |
+	orphanComment := OPUMLComment new
+		                 body: 'Existing';
+		                 yourself.
+	generalization ownedComments add: orphanComment.
+	clearCommand := OPUmlUpdateGeneralizationCommentCommand new generalization: generalization commentText: ''.
+	clearCommand execute.
+	self assertEmpty: generalization ownedComments.
+
+	clearCommand undo.
+	self assert: generalization ownedComments size equals: 1.
+	orphanComment annotatedElements remove: generalization ifAbsent: [ ].
+	updateCommand := OPUmlUpdateGeneralizationCommentCommand new generalization: generalization commentText: 'Updated'.
+	updateCommand execute.
+	generalization ownedComments first annotatedElements remove: generalization ifAbsent: [ ].
+	updateCommand undo.
+	self assert: generalization ownedComments first body equals: 'Existing'.
+
+	generalization ownedComments removeAll.
+	createCommand := OPUmlUpdateGeneralizationCommentCommand new generalization: generalization commentText: 'Fresh'.
+	createCommand execute.
+	generalization ownedComments first annotatedElements remove: generalization ifAbsent: [ ].
+	createCommand undo.
+	self assertEmpty: generalization ownedComments
+]
+
+{ #category : 'tests' }
 OPUmlUpdateGeneralizationCommentCommandTest >> testExecuteAndUndoNotifyViewModelRegistry [
 
 	| generalizationViewModel changeCount command |

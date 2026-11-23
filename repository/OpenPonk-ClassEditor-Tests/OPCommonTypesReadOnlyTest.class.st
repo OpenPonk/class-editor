@@ -69,6 +69,20 @@ OPCommonTypesReadOnlyTest >> testCommonTypesHasNoSupportInDiagramController [
 ]
 
 { #category : 'tests' }
+OPCommonTypesReadOnlyTest >> testRemoveUnusedTypesIgnoresNilNonPackageAndPackageWithoutCommonTypes [
+
+	| plainPackage classElement |
+	OPUmlCommonTypesFactory removeUnusedTypesFrom: nil.
+	OPUmlCommonTypesFactory removeUnusedTypesFrom: Object new.
+
+	plainPackage := OPUMLPackage new name: 'Plain'.
+	classElement := OPUMLClass new name: 'KeepMe'.
+	plainPackage packagedElements add: classElement.
+	OPUmlCommonTypesFactory removeUnusedTypesFrom: plainPackage.
+	self assertCollection: plainPackage packagedElements hasSameElements: { classElement }
+]
+
+{ #category : 'tests' }
 OPCommonTypesReadOnlyTest >> testUserPackageNamedCommonTypesWithEnumerationIsSupportedInDiagram [
 	| userPackage enumeration userPackageViewModel enumerationViewModel |
 	userPackage := OPUMLPackage new name: 'CommonTypes'.

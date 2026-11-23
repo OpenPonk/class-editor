@@ -58,6 +58,28 @@ OPUmlGeneralizationViewModelTest >> targetModelClass [
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationViewModelTest >> testBasicRemoveModelFallsBackToParentPackageAndHandlesAbsentLinks [
+
+	| generalClass specificClass isolatedGeneralization isolatedSet parentPackageViewModel detachedViewModel |
+	generalClass := OPUMLClass new name: 'General'.
+	specificClass := OPUMLClass new name: 'Specific'.
+	parentPackageViewModel := registry viewModelFor: rootModel.
+
+	isolatedGeneralization := OPUMLGeneralization new
+		                          general: generalClass;
+		                          specific: specificClass;
+		                          yourself.
+	isolatedSet := OPUMLGeneralizationSet new name: 'OrphanSet'.
+	isolatedGeneralization instVarNamed: #generalizationSets put: (OrderedCollection with: isolatedSet).
+
+	detachedViewModel := registry viewModelFor: isolatedGeneralization.
+	detachedViewModel instVarNamed: #parentViewModel put: parentPackageViewModel.
+	detachedViewModel basicRemoveModel.
+	self assert: isolatedGeneralization general identicalTo: nil.
+	self assert: isolatedGeneralization specific identicalTo: nil
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationViewModelTest >> testBasicRemoveModelRemovesEmptyGeneralizationSet [
 
 	| genSet |

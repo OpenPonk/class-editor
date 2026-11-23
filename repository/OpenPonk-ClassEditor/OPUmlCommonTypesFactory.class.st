@@ -38,11 +38,12 @@ OPUmlCommonTypesFactory class >> commonTypesPackageName [
 
 { #category : 'cleaning' }
 OPUmlCommonTypesFactory class >> removeUnusedTypesFrom: aRootModel [
+
 	| commonPkg allElements allTypedElements usedTypes canonicalNames typesToRemove |
 	(aRootModel isNil or: [ (aRootModel respondsTo: #packagedElements) not ]) ifTrue: [ ^ self ].
 	commonPkg := aRootModel packagedElements
-		detect: [ :each | (each oclIsKindOf: #Package) and: [ each name = self commonTypesPackageName ] ]
-		ifNone: [ ^ self ].
+		             detect: [ :each | (each oclIsKindOf: #Package) and: [ each name = self commonTypesPackageName ] ]
+		             ifNone: [ ^ self ].
 
 	allElements := IdentitySet new.
 	self collectAllElementsFrom: aRootModel into: allElements.
@@ -52,12 +53,10 @@ OPUmlCommonTypesFactory class >> removeUnusedTypesFrom: aRootModel [
 
 	canonicalNames := self typeNames asSet.
 	typesToRemove := commonPkg packagedElements select: [ :each |
-		(each oclIsKindOf: #DataType)
-			and: [ (canonicalNames includes: each name) not
-			and: [ (usedTypes includes: each) not ] ] ].
+		                 (each oclIsKindOf: #DataType) and: [
+			                 (canonicalNames includes: each name) not and: [ (usedTypes includes: each) not ] ] ].
 
-	typesToRemove do: [ :eachType |
-		commonPkg packagedElements remove: eachType ifAbsent: [ ] ]
+	typesToRemove do: [ :eachType | commonPkg packagedElements remove: eachType ]
 ]
 
 { #category : 'accessing' }

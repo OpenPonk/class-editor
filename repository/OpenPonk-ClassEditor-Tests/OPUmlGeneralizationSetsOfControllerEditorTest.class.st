@@ -229,6 +229,23 @@ OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteSetWorksPurelyWithVie
 ]
 
 { #category : 'tests' }
+OPUmlGeneralizationSetsOfControllerEditorTest >> testDeleteUnsavedSetAndRelevantSetsWithoutPackageViewModel [
+
+	| editor unsavedSet removed unattachedEditor |
+	editor := OPUmlGeneralizationSetsOfControllerEditor new.
+	editor undoManager: diagramController undoManager.
+	editor viewModel: generalizationController viewModel.
+	unsavedSet := OPUMLGeneralizationSet new name: 'UnsavedSet'.
+	editor table items: (editor table items copyWith: unsavedSet).
+	removed := editor deleteSet: unsavedSet.
+	self assert: removed description: 'Deleting an unsaved generalization set must succeed without confirmation'.
+	self denyCollection: editor table items includesAny: { unsavedSet }.
+
+	unattachedEditor := OPUmlGeneralizationSetsOfControllerEditor new.
+	self assertEmpty: unattachedEditor relevantGeneralizationSets
+]
+
+{ #category : 'tests' }
 OPUmlGeneralizationSetsOfControllerEditorTest >> testSaveExecutesInsideUndoManagerTransaction [
 
 	| generalizationViewModel editor activeUndoManager |

@@ -2,7 +2,6 @@ Class {
 	#name : 'OPUmlTypeRemovalUndoRedoTest',
 	#superclass : 'TestCase',
 	#instVars : [
-		'project',
 		'package',
 		'projectController',
 		'undoManager'
@@ -14,11 +13,15 @@ Class {
 
 { #category : 'running' }
 OPUmlTypeRemovalUndoRedoTest >> setUp [
+
+	| project |
 	super setUp.
 	project := OPProject new.
 	package := OPUmlClassEditorPlugin new newModel.
 	project addModel: package.
-	projectController := OPProjectController new project: project; yourself.
+	projectController := OPProjectController new
+		                     project: project;
+		                     yourself.
 	undoManager := projectController undoManager
 ]
 

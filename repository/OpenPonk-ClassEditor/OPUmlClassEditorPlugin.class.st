@@ -111,28 +111,8 @@ OPUmlClassEditorPlugin >> icon [
 { #category : 'testing' }
 OPUmlClassEditorPlugin >> isForController: aDiagramController [
 
-	| appliedProfiles pluginClassesWithProfileCounts |
 	(super isForController: aDiagramController) ifFalse: [ ^ false ].
-	appliedProfiles := aDiagramController model
-		                   ifNil: [ #(  ) ]
-		                   ifNotNil: [ :model |
-		                   model profileApplications collect:
-			                   #appliedProfile ].
-	(appliedProfiles isEmpty and: [ self defaultProfiles isEmpty ])
-		ifTrue: [ ^ true ].
-	pluginClassesWithProfileCounts := (self class withAllSubclasses
-		                                   collect: [ :eachPluginClass |
-				                                   eachPluginClass
-				                                   ->
-					                                   (eachPluginClass
-						                                    defaultProfiles count: [
-						                                    :eachDefaultPlugin |
-						                                    appliedProfiles includes:
-							                                    eachDefaultPlugin ]) ])
-		                                  sorted: [ :a :b |
-		                                  a value > b value ].
-	^ pluginClassesWithProfileCounts first value isZero or: [
-		  pluginClassesWithProfileCounts first key = self class ]
+	^ self supportsProfilesOf: aDiagramController model
 ]
 
 { #category : 'testing' }
@@ -153,26 +133,26 @@ OPUmlClassEditorPlugin >> layouterClass [
 OPUmlClassEditorPlugin >> mergeModels: aModelsCollection [
 
 	| models targetModel otherModels |
-	models := aModelsCollection asSet asArray.
-	aModelsCollection ifEmpty: [ ^ OPUMLPackage new ].
-	aModelsCollection size = 1 ifTrue: [ ^ aModelsCollection anyOne ].
+	models := OrderedCollection new.
+	aModelsCollection do: [ :eachModel | models addIfNotPresent: eachModel ].
+	models ifEmpty: [ ^ OPUMLPackage new ].
+	models size = 1 ifTrue: [ ^ models first ].
 	targetModel := models first.
 	otherModels := models copyWithoutFirst.
-	(otherModels flatCollect: [ :eachModel | 
-		 eachModel profileApplications ])
-		reject: [ :eachProfileApplication | 
-			targetModel profileApplications anySatisfy: [ 
-				:anyTargetProfileApplication | 
-				anyTargetProfileApplication appliedProfile name
-				= eachProfileApplication appliedProfile name ] ]
-		thenDo: [ :eachProfileApplication | 
-			targetModel profileApplications add: (OPUMLProfileApplication new
-					 uuid: eachProfileApplication uuid;
-					 appliedProfile: eachProfileApplication appliedProfile) ].
-	otherModels do: [ :eachModel | 
-		eachModel packagedElements do: [ :eachElement | 
-			eachElement owner: targetModel.
-			targetModel packagedElements add: eachElement ] ].
+	(otherModels flatCollect: [ :eachModel | eachModel profileApplications ])
+		reject: [ :eachProfileApplication |
+				eachProfileApplication appliedProfile isNil or: [
+						targetModel profileApplications anySatisfy: [ :anyTargetProfileApplication |
+								anyTargetProfileApplication appliedProfile isNotNil and: [
+									anyTargetProfileApplication appliedProfile name = eachProfileApplication appliedProfile name ] ] ] ]
+		thenDo: [ :eachProfileApplication |
+				targetModel profileApplications add: (OPUMLProfileApplication new
+						 uuid: eachProfileApplication uuid;
+						 appliedProfile: eachProfileApplication appliedProfile) ].
+	otherModels do: [ :eachModel |
+			eachModel packagedElements copy do: [ :eachElement |
+					eachElement owner: targetModel.
+					targetModel packagedElements add: eachElement ] ].
 	^ targetModel
 ]
 
@@ -212,6 +192,22 @@ OPUmlClassEditorPlugin >> supportsMergingModels [
 { #category : 'testing' }
 OPUmlClassEditorPlugin >> supportsProfilesOf: aModel [
 
-	^ aModel profileApplications allSatisfy: [ :each |
-		  self defaultProfiles anySatisfy: [ :any | any == each appliedProfile or: [ any URI = each appliedProfile URI ] ] ]
+	| appliedProfiles pluginClassesWithProfileCounts |
+	appliedProfiles := aModel
+		                   ifNil: [ #(  ) ]
+		                   ifNotNil: [ aModel profileApplications collect: #appliedProfile thenSelect: #isNotNil ].
+	(appliedProfiles isEmpty and: [ self defaultProfiles isEmpty ]) ifTrue: [ ^ true ].
+	pluginClassesWithProfileCounts := (self class withAllSubclasses
+		                                   reject: [ :eachPluginClass |
+		                                   eachPluginClass ~= self class and: [
+			                                   eachPluginClass isAbstract or: [ eachPluginClass isTestingOnly ] ] ]
+		                                   thenCollect: [ :eachPluginClass |
+				                                   eachPluginClass -> (eachPluginClass defaultProfiles count: [ :eachDefaultProfile |
+						                                    appliedProfiles anySatisfy: [ :eachAppliedProfile |
+								                                    eachDefaultProfile == eachAppliedProfile or: [
+									                                    eachDefaultProfile URI isNotNil and: [
+										                                    eachDefaultProfile URI = eachAppliedProfile URI ] ] ] ]) ]) sorted: [ :a :b |
+		                                  a value > b value ].
+	^ (pluginClassesWithProfileCounts first value isZero and: [ self defaultProfiles isEmpty ]) or: [
+		  pluginClassesWithProfileCounts first value > 0 and: [ pluginClassesWithProfileCounts first key = self class ] ]
 ]

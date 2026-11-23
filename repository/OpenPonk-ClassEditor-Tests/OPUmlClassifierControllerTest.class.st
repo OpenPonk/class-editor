@@ -36,6 +36,25 @@ OPUmlClassifierControllerTest >> testCreateFromPalette [
 		description: 'Diagram controller must allow creating classifier from palette'
 ]
 
+{ #category : 'tests' }
+OPUmlClassifierControllerTest >> testPackageRenderChangedUpdatesRenderedShapeWhenParentPackageIsHidden [
+
+	| innerPackage innerClass packageController classController |
+	innerPackage := OPUMLPackage new name: 'InnerPkg'.
+	innerClass := OPUMLClass new name: 'InnerCls'.
+	innerClass package: innerPackage.
+	innerPackage packagedElements add: innerClass.
+	diagramController model packagedElements add: innerPackage.
+
+	packageController := diagramController showInDiagramModel: innerPackage.
+	classController := diagramController showInDiagramModel: innerClass.
+	self assertEmpty: classController hiddenPackages.
+
+	packageController diagramElement removeRender.
+	classController packageRenderChanged.
+	self assertCollection: classController diagramElement hiddenPackages hasSameElements: { innerPackage }
+]
+
 { #category : 'tests - removing' }
 OPUmlClassifierControllerTest >> testRemoveEmpty [
 

@@ -30,6 +30,35 @@ OPUmlProjectTreeCommandTest >> tearDown [
 ]
 
 { #category : 'tests' }
+OPUmlProjectTreeCommandTest >> testExportUmlPackageCommandCanBeExecutedAndExecuteDelegatesToPlugin [
+
+	| command context classViewModel packageModel packageViewModel exportedPackage |
+	command := OPExportUmlPackageCommand new.
+	context := Mock new.
+	command context: context.
+
+	context stub selectedItem willReturn: nil.
+	self deny: command canBeExecuted description: 'Export command must not execute without selection'.
+
+	classViewModel := OPUmlClassViewModel new
+		                  model: (OPUMLClass new name: 'C');
+		                  yourself.
+	context stub selectedItem willReturn: classViewModel.
+	self deny: command canBeExecuted description: 'Export command must not execute for non-package selection'.
+
+	packageModel := OPUMLPackage new name: 'Root'.
+	packageViewModel := OPUmlPackageViewModel new
+		                    model: packageModel;
+		                    yourself.
+	context stub selectedItem willReturn: packageViewModel.
+	self assert: command canBeExecuted description: 'Export command must execute for OPUmlPackageViewModel'.
+
+	(OPUmlClassEditorPlugin stub exportPackage: Any) will: [ :arg | exportedPackage := arg ].
+	command execute.
+	self assert: exportedPackage identicalTo: packageModel
+]
+
+{ #category : 'tests' }
 OPUmlProjectTreeCommandTest >> testExportUmlPackageCommandHasSaveAsIcon [
 	| exportCommand specCommand |
 	exportCommand := OPExportUmlPackageCommand new.
@@ -86,6 +115,35 @@ OPUmlProjectTreeCommandTest >> testGenerateUmlProfileCommandHasConfigurationIcon
 	generateCommand := OPGenerateUmlProfileCommand new.
 	specCommand := generateCommand asSpecCommand.
 	self assert: specCommand iconName equals: #smallConfiguration
+]
+
+{ #category : 'tests' }
+OPUmlProjectTreeCommandTest >> testImportUmlPackageCommandCanBeExecutedAndExecuteDelegatesToPlugin [
+
+	| command context classViewModel packageModel packageViewModel importedPackage |
+	command := OPImportUmlPackageCommand new.
+	context := Mock new.
+	command context: context.
+
+	context stub selectedItem willReturn: nil.
+	self deny: command canBeExecuted description: 'Import command must not execute without selection'.
+
+	classViewModel := OPUmlClassViewModel new
+		                  model: (OPUMLClass new name: 'C');
+		                  yourself.
+	context stub selectedItem willReturn: classViewModel.
+	self deny: command canBeExecuted description: 'Import command must not execute for non-package selection'.
+
+	packageModel := OPUMLPackage new name: 'Root'.
+	packageViewModel := OPUmlPackageViewModel new
+		                    model: packageModel;
+		                    yourself.
+	context stub selectedItem willReturn: packageViewModel.
+	self assert: command canBeExecuted description: 'Import command must execute for OPUmlPackageViewModel'.
+
+	(OPUmlClassEditorPlugin stub importToPackage: Any) will: [ :arg | importedPackage := arg ].
+	command execute.
+	self assert: importedPackage identicalTo: packageModel
 ]
 
 { #category : 'tests' }
