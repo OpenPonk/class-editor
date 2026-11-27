@@ -159,6 +159,79 @@ OPUmlPackageDiagramControllerTest >> testProfileAppliedRebuildsPaletteWhenEditor
 ]
 
 { #category : 'tests' }
+OPUmlPackageDiagramControllerTest >> testShowAllElementsExcludesNavigableAssociationAndExtensionEnds [
+
+	| customerClass orderClass regularAttribute association customerEnd ordersEnd stereotype stereotypeAttribute extension extensionEnd baseEnd renderedModels |
+	customerClass := OPUMLClass new name: 'Customer'.
+	orderClass := OPUMLClass new name: 'Order'.
+	regularAttribute := OPUMLProperty new name: 'code'.
+	customerClass ownedAttributes add: regularAttribute.
+
+	association := OPUMLAssociation new name: 'places'.
+	customerEnd := OPUMLProperty new
+		               name: 'customer';
+		               type: customerClass;
+		               owningAssociation: association;
+		               association: association;
+		               yourself.
+	ordersEnd := OPUMLProperty new
+		             name: 'orders';
+		             type: orderClass;
+		             owningClass: customerClass;
+		             association: association;
+		             yourself.
+	association memberEnds
+		add: customerEnd;
+		add: ordersEnd.
+
+	stereotype := OPUMLStereotype new name: 'Audited'.
+	stereotypeAttribute := OPUMLProperty new name: 'author'.
+	stereotype ownedAttributes add: stereotypeAttribute.
+
+	extension := OPUMLExtension new.
+	extensionEnd := OPUMLExtensionEnd new
+		                name: 'extension_Audited';
+		                type: stereotype;
+		                owningAssociation: extension;
+		                association: extension;
+		                yourself.
+	baseEnd := OPUMLProperty new
+		           name: 'base_Class';
+		           type: customerClass;
+		           owningClass: stereotype;
+		           association: extension;
+		           yourself.
+	extension memberEnds
+		add: extensionEnd;
+		add: baseEnd.
+	extension ownedEnd: extensionEnd.
+
+	controller model packagedElements
+		add: customerClass;
+		add: orderClass;
+		add: association;
+		add: stereotype;
+		add: extension.
+
+	controller showAllElements.
+
+	renderedModels := controller controllers collect: #model.
+	self assertCollection: renderedModels includesAll: {
+			customerClass.
+			orderClass.
+			regularAttribute.
+			association.
+			stereotype.
+			stereotypeAttribute.
+			extension }.
+	self denyCollection: renderedModels includesAny: {
+			customerEnd.
+			ordersEnd.
+			extensionEnd.
+			baseEnd }
+]
+
+{ #category : 'tests' }
 OPUmlPackageDiagramControllerTest >> testShowClassInDiagram [
 
 	| class renderedModels |
@@ -185,4 +258,72 @@ OPUmlPackageDiagramControllerTest >> testShowClassWithAttributeInDiagram [
 		                  thenCollect: [ :each | each model modelElement ].
 	self assertCollection: renderedModels includesAll: { prop }.
 	self assert: (controller hasControllerForModel: prop) description: 'Diagram controller must register attribute controller'
+]
+
+{ #category : 'tests' }
+OPUmlPackageDiagramControllerTest >> testShowDiagramElementPrunesLegacyAssociationEndAttributeLabel [
+
+	| sourceClass targetClass regularAttribute association sourceEnd targetEnd sourceShape targetShape legacyTargetLabel legacySourceLabel regularLabel |
+	sourceClass := OPUMLClass new name: 'Element'.
+	targetClass := OPUMLClass new name: 'Comment'.
+	regularAttribute := OPUMLProperty new name: 'title'.
+	sourceClass ownedAttributes add: regularAttribute.
+
+	association := OPUMLAssociation new name: 'comments'.
+	sourceEnd := OPUMLProperty new
+		             name: 'owningElement';
+		             type: sourceClass;
+		             owningClass: targetClass;
+		             association: association;
+		             yourself.
+	targetEnd := OPUMLProperty new
+		             name: 'ownedComment';
+		             type: targetClass;
+		             owningClass: sourceClass;
+		             association: association;
+		             yourself.
+	association memberEnds
+		add: sourceEnd;
+		add: targetEnd.
+
+	controller model packagedElements
+		add: sourceClass;
+		add: targetClass;
+		add: association.
+
+	sourceShape := OPUmlClassShape new
+		               modelElement: sourceClass;
+		               owningElement: controller diagramElement;
+		               yourself.
+	legacyTargetLabel := OPUmlAttributeLabel new
+		                     modelElement: targetEnd;
+		                     yourself.
+	sourceShape addAttribute: legacyTargetLabel.
+	regularLabel := OPUmlAttributeLabel new
+		                modelElement: regularAttribute;
+		                yourself.
+	sourceShape addAttribute: regularLabel.
+
+	targetShape := OPUmlClassShape new
+		               modelElement: targetClass;
+		               owningElement: controller diagramElement;
+		               yourself.
+	legacySourceLabel := OPUmlAttributeLabel new
+		                     modelElement: sourceEnd;
+		                     yourself.
+	targetShape addAttribute: legacySourceLabel.
+
+	controller diagramFocused.
+
+	self
+		deny: (controller hasControllerForModel: targetEnd)
+		description: 'Legacy association end attribute must not create a controller'.
+	self
+		deny: (controller hasControllerForModel: sourceEnd)
+		description: 'Legacy bidirectional association end attribute must not create a controller'.
+	self
+		assert: (controller hasControllerForModel: regularAttribute)
+		description: 'Regular class attribute must still create a controller'.
+	self assert: sourceShape attributesCompartment ownedElements asArray equals: { regularLabel }.
+	self assert: targetShape attributesCompartment identicalTo: nil
 ]

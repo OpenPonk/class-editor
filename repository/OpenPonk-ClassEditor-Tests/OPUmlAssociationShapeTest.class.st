@@ -202,6 +202,15 @@ OPUmlAssociationShapeTest >> testAssociationLabelsHaveDistinctDefaultAnchorBalan
 ]
 
 { #category : 'tests' }
+OPUmlAssociationShapeTest >> testAssociationOwnedNavigableEndUsesPlainArrowMarker [
+
+	| marker |
+	model navigableOwnedEnds add: owningElement.
+	marker := OPUmlAssociationShape new markerShapeFor: owningElement.
+	self assert: marker shape class equals: OPRSMarkerBuilder arrowShape class
+]
+
+{ #category : 'tests' }
 OPUmlAssociationShapeTest >> testAssociationShapeDoesNotCreateSeparatePropertiesLabel [
 
 	| association sourceEnd targetEnd ownedElementClasses |
@@ -248,17 +257,38 @@ OPUmlAssociationShapeTest >> testAssociationStereotypesLabelDefaultText [
 { #category : 'tests' }
 OPUmlAssociationShapeTest >> testBothNavigable [
 
+	| firstMarker secondMarker |
 	owningElement
 		owningAssociation: nil;
 		owningClass: comment.
+	firstMarker := OPUmlAssociationShape new markerShapeFor: ownedComment.
+	secondMarker := OPUmlAssociationShape new markerShapeFor: owningElement.
+	self assert: firstMarker shape class equals: OPRSBorderColoringComposite.
+	self assert: secondMarker shape class equals: OPRSBorderColoringComposite.
+	self assertCollection: (firstMarker shape shapes collect: #class) hasSameElements: {
+			RSCircle.
+			RSPolygon }.
+	self assertCollection: (secondMarker shape shapes collect: #class) hasSameElements: {
+			RSCircle.
+			RSPolygon }
+]
+
+{ #category : 'tests' }
+OPUmlAssociationShapeTest >> testDiamondPriorityPreservedOverClassOwnedNavigableArrowWithDot [
+
+	owningElement
+		owningAssociation: nil;
+		owningClass: comment.
+	ownedComment aggregation: OPUMLAggregationKind composite.
+	self assert: (OPUmlAssociationShape new markerShapeFor: owningElement) shape class equals: OPRSMarkerBuilder diamondShape class.
+	self assert: (OPUmlAssociationShape new markerShapeFor: ownedComment) shape class equals: OPRSBorderColoringComposite.
+
+	ownedComment aggregation: OPUMLAggregationKind shared.
+	self assert: (OPUmlAssociationShape new markerShapeFor: owningElement) shape class equals: OPRSEmptyShapeProxy.
 	self
-		assert:
-		(OPUmlAssociationShape new markerShapeFor: ownedComment) shape class
-		equals: OPRSMarkerBuilder arrowShape class.
-	self
-		assert:
-		(OPUmlAssociationShape new markerShapeFor: owningElement) shape class
-		equals: OPRSMarkerBuilder arrowShape class
+		assert: (OPUmlAssociationShape new markerShapeFor: owningElement) shape shape class
+		equals: OPRSMarkerBuilder diamondShape class.
+	self assert: (OPUmlAssociationShape new markerShapeFor: ownedComment) shape class equals: OPRSBorderColoringComposite
 ]
 
 { #category : 'tests' }
@@ -274,7 +304,12 @@ OPUmlAssociationShapeTest >> testEndComposite [
 { #category : 'tests' }
 OPUmlAssociationShapeTest >> testEndOneNavigable [
 
-	self assert: (OPUmlAssociationShape new markerShapeFor: ownedComment) shape class equals: OPRSMarkerBuilder arrowShape class.
+	| marker |
+	marker := OPUmlAssociationShape new markerShapeFor: ownedComment.
+	self assert: marker shape class equals: OPRSBorderColoringComposite.
+	self assertCollection: (marker shape shapes collect: #class) hasSameElements: {
+			RSCircle.
+			RSPolygon }.
 	self assert: (OPUmlAssociationShape new markerShapeFor: owningElement) identicalTo: nil
 ]
 

@@ -44,11 +44,10 @@ OPUmlAssociationShape >> headMarker [
 OPUmlAssociationShape >> markerShapeFor: aProperty [
 
 	(self ontoUmlDecoratorFor: aProperty) ifNotNil: [ :marker | ^ marker ].
-	aProperty opposite aggregation = OPUMLAggregationKind composite 
-		ifTrue: [ ^ OPRSMarkerBuilder diamond ].
-	aProperty opposite aggregation = OPUMLAggregationKind shared ifTrue: [ 
-		^ OPRSMarkerBuilder diamond asEmptyMarker ].
-	aProperty isNavigable ifTrue: [ ^ OPRSMarkerBuilder arrow ].
+	aProperty opposite aggregation = OPUMLAggregationKind composite ifTrue: [ ^ OPRSMarkerBuilder diamond ].
+	aProperty opposite aggregation = OPUMLAggregationKind shared ifTrue: [ ^ OPRSMarkerBuilder diamond asEmptyMarker ].
+	aProperty isNavigable ifTrue: [
+		^ aProperty owningClass ifNotNil: [ OPRSMarkerBuilder arrowWithDot ] ifNil: [ OPRSMarkerBuilder arrow ] ].
 	^ nil
 ]
 

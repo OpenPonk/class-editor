@@ -26,28 +26,12 @@ OPUmlAttributeController >> addDiagramElementToOwner [
 	self intendedOwningDiagramElement addAttribute: self diagramElement
 ]
 
-{ #category : 'announcements' }
-OPUmlAttributeController >> associationChanged [
-
-	super modelChanged
-]
-
 { #category : 'construction' }
 OPUmlAttributeController >> createDiagramElement [
 
 	(self model name isNil or: [ self model name trim isEmpty ]) ifTrue: [
 		self model name: self viewModel placeholderName ].
 	^ super createDiagramElement
-]
-
-{ #category : 'announcements' }
-OPUmlAttributeController >> modelChanged [
-
-	super modelChanged.
-	self model association ifNotNil: [ :association |
-		self diagramController
-			controllerForModel: association
-			ifFound: [ :controller | controller classAttributeChanged ] ]
 ]
 
 { #category : 'destruction' }

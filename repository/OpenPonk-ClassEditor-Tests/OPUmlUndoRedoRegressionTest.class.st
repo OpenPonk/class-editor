@@ -224,19 +224,17 @@ OPUmlUndoRedoRegressionTest >> testUndoHideClassRestoresNavigableAssociationAttr
 	customerProperty := OPUMLProperty new
 		                    name: 'customer';
 		                    type: customerClass;
+		                    owningAssociation: placesAssociation;
 		                    association: placesAssociation.
 	ordersProperty := OPUMLProperty new
 		                  name: 'orders';
 		                  type: orderClass;
 		                  association: placesAssociation;
 		                  owningClass: customerClass.
-	customerClass ownedAttributes add: ordersProperty.
 
 	placesAssociation memberEnds: {
 			customerProperty.
 			ordersProperty }.
-	placesAssociation ownedEnds: { customerProperty }.
-	placesAssociation navigableOwnedEnds: { ordersProperty }.
 	model packagedElements add: placesAssociation.
 
 	diagramController showInDiagramModel: customerClass.
@@ -245,8 +243,9 @@ OPUmlUndoRedoRegressionTest >> testUndoHideClassRestoresNavigableAssociationAttr
 	undoManager clear.
 
 	self
-		assert: (diagramController hasControllerForModel: ordersProperty)
-		description: 'Orders property must have a controller before hide'.
+		deny: (diagramController hasControllerForModel: ordersProperty)
+		description: 'Navigable association end must not spawn an attribute controller on the diagram'.
+	self assertCollection: customerClass ownedAttributes includesAll: { ordersProperty }.
 
 	diagramExplorer := OPDiagramExplorer on: diagramController.
 	diagramExplorer hideElement: customerClass.
@@ -257,26 +256,20 @@ OPUmlUndoRedoRegressionTest >> testUndoHideClassRestoresNavigableAssociationAttr
 	self
 		deny: (diagramController hasControllerForModel: placesAssociation)
 		description: 'Association controller must be removed on hide'.
-	self
-		deny: (diagramController hasControllerForModel: ordersProperty)
-		description: 'Orders property controller must be removed on hide'.
 
 	undoManager undo.
 
 	self assert: (diagramController hasControllerForModel: customerClass) description: 'Customer class must be restored on undo'.
 	self assert: (diagramController hasControllerForModel: placesAssociation) description: 'Association must be restored on undo'.
 	self
-		assert: (diagramController hasControllerForModel: ordersProperty)
-		description: 'Orders property must be restored in Customer class on undo'.
-	self
-		assert: (diagramController controllerForModel: ordersProperty) isRendered
-		description: 'Orders property controller must be rendered on undo'.
+		deny: (diagramController hasControllerForModel: ordersProperty)
+		description: 'Association end must remain off the diagram on undo'.
+	self assertCollection: customerClass ownedAttributes includesAll: { ordersProperty }.
 
 	undoManager redo.
 
 	self deny: (diagramController hasControllerForModel: customerClass) description: 'Customer class must be removed on redo'.
 	self deny: (diagramController hasControllerForModel: placesAssociation) description: 'Association must be removed on redo'.
-	self deny: (diagramController hasControllerForModel: ordersProperty) description: 'Orders property must be removed on redo'.
 
 	undoManager undo.
 
@@ -287,11 +280,8 @@ OPUmlUndoRedoRegressionTest >> testUndoHideClassRestoresNavigableAssociationAttr
 		assert: (diagramController hasControllerForModel: placesAssociation)
 		description: 'Association must be restored on second undo'.
 	self
-		assert: (diagramController hasControllerForModel: ordersProperty)
-		description: 'Orders property must be restored on second undo'.
-	self
-		assert: (diagramController controllerForModel: ordersProperty) isRendered
-		description: 'Orders property controller must be rendered on second undo'
+		deny: (diagramController hasControllerForModel: ordersProperty)
+		description: 'Association end must remain off the diagram on second undo'
 ]
 
 { #category : 'tests' }

@@ -26,21 +26,20 @@ OPUmlPackageDiagramController >> canBeTargetFor: aController [
 { #category : 'accessing' }
 OPUmlPackageDiagramController >> controllerFactory [
 	"Configure controller factory with explicit conditions for UML elements."
+
 	^ super controllerFactory
-		register: OPUmlClassController forModel: OPUMLClass;
-		register: OPUmlAttributeController 
-			forModel: OPUMLProperty 
-			condition: [ :prop | prop owningAssociation isNil ];
-		register: OPUmlOperationController forModel: OPUMLOperation;
-		register: OPUmlGeneralizationController forModel: OPUMLGeneralization;
-		register: OPUmlAssociationController forModel: OPUMLAssociation;
-		register: OPUmlPackageController forModel: OPUMLPackage;
-		register: OPUmlProfileController forModel: OPUMLProfile;
-		register: OPUmlExtensionController forModel: OPUMLExtension;
-		register: OPUmlEnumerationController forModel: OPUMLEnumeration;
-		register: OPUmlEnumerationLiteralController forModel: OPUMLEnumerationLiteral;
-		register: OPUmlStereotypeController forModel: OPUMLStereotype;
-		register: OPUmlPackageImportController forModel: OPUMLPackageImport
+		  register: OPUmlClassController forModel: OPUMLClass;
+		  register: OPUmlAttributeController forModel: OPUMLProperty condition: [ :property | property association isNil ];
+		  register: OPUmlOperationController forModel: OPUMLOperation;
+		  register: OPUmlGeneralizationController forModel: OPUMLGeneralization;
+		  register: OPUmlAssociationController forModel: OPUMLAssociation;
+		  register: OPUmlPackageController forModel: OPUMLPackage;
+		  register: OPUmlProfileController forModel: OPUMLProfile;
+		  register: OPUmlExtensionController forModel: OPUMLExtension;
+		  register: OPUmlEnumerationController forModel: OPUMLEnumeration;
+		  register: OPUmlEnumerationLiteralController forModel: OPUMLEnumerationLiteral;
+		  register: OPUmlStereotypeController forModel: OPUMLStereotype;
+		  register: OPUmlPackageImportController forModel: OPUMLPackageImport
 ]
 
 { #category : 'testing' }
@@ -198,6 +197,15 @@ OPUmlPackageDiagramController >> propagatePackageRenderChangedIn: aPackage [
 		toNodeControllersIn: aPackage
 ]
 
+{ #category : 'showing elements' }
+OPUmlPackageDiagramController >> pruneLegacyAssociationEndAttributesIn: aClassShape [
+
+	aClassShape attributesCompartment ifNotNil: [ :compartment |
+			compartment ownedElements copy do: [ :eachLabel |
+					(eachLabel ownModelElement isNotNil and: [ (self hasSupportForModel: eachLabel ownModelElement) not ]) ifTrue: [
+						aClassShape removeAttribute: eachLabel ] ] ]
+]
+
 { #category : 'actions' }
 OPUmlPackageDiagramController >> pushBack [
 	"do nothing"
@@ -212,6 +220,13 @@ OPUmlPackageDiagramController >> rebuildPalette [
 			activeEditor palette
 				createPaletteFor: self;
 				rebuildWidget ]
+]
+
+{ #category : 'showing elements' }
+OPUmlPackageDiagramController >> showDiagramElement: aDiagramElement [
+
+	(aDiagramElement isKindOf: OPUmlClassShape) ifTrue: [ self pruneLegacyAssociationEndAttributesIn: aDiagramElement ].
+	super showDiagramElement: aDiagramElement
 ]
 
 { #category : 'announcements' }

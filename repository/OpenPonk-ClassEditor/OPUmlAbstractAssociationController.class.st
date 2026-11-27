@@ -10,32 +10,9 @@ Class {
 }
 
 { #category : 'announcements' }
-OPUmlAbstractAssociationController >> classAttributeChanged [
-
-	super modelChanged
-]
-
-{ #category : 'announcements' }
-OPUmlAbstractAssociationController >> modelChanged [
-	super modelChanged.
-	self model memberEnds
-		select: [ :each | each owningClass isNotNil ]
-		thenDo: [ :each |
-			self diagramController
-				controllerForModel: each
-				ifFound: [ :controller | controller associationChanged ] ]
-]
-
-{ #category : 'announcements' }
 OPUmlAbstractAssociationController >> navigabilityChanged: anAnnouncement [
-	| prop |
-	prop := anAnnouncement property.
-	prop owningClass
-		ifNotNil: [ 
-			self diagramController showInDiagramModel: prop.
-			self diagramController controllerForModel: prop ifFound: [ :c | c associationChanged ] ]
-		ifNil: [ 
-			self diagramController controllerForModel: prop ifFound: [ :c | c removeControllerAndDiagramElement ] ]
+
+	self modelChanged
 ]
 
 { #category : 'announcements' }

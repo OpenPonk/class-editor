@@ -75,69 +75,44 @@ OPUmlAssociationControllerTest >> testEndsSwappedUpdatesSourceTargetAndShape [
 	self assert: controller target identicalTo: originalTarget
 ]
 
-{ #category : 'tests' }
-OPUmlAssociationControllerTest >> testModelChangedSynchronizesNavigableAttributeAndAssociation [
-
-	| second attributeController |
-	self showInDiagram.
-	second := model memberEnds second.
-	controller viewModel writeNavigability: true to: second.
-	attributeController := diagramController controllerForModel: second.
-
-	second name: 'renamedNavigableEnd'.
-	attributeController modelChanged.
-	self assert: attributeController diagramElement text equals: 'renamedNavigableEnd : TargetModel'.
-
-	second name: 'updatedViaAssociation'.
-	controller modelChanged.
-	self assert: attributeController diagramElement text equals: 'updatedViaAssociation : TargetModel'
-]
-
 { #category : 'tests - diagram' }
 OPUmlAssociationControllerTest >> testNavigableRemovalOfAssociationRemovesMemberEnds [
 
-	| first second attributeController attributeDiagramElement |
+	| first second |
 	self showInDiagram.
 	first := model memberEnds first.
 	second := model memberEnds second.
 
-	"Ensure initial state is non-navigable"
 	controller viewModel writeNavigability: false to: second.
-	self deny: (diagramController isVisibleInDiagram: second) description: 'Non-navigable member end must not be visible in diagram'.
+	self
+		deny: (diagramController isVisibleInDiagram: second)
+		description: 'Non-navigable member end must not be visible as attribute in diagram'.
 
-	"Toggle navigability back and forth and check if it is visible when it should"
 	controller viewModel writeNavigability: true to: second.
-	self assert: (diagramController isVisibleInDiagram: second) description: 'Navigable member end must be visible in diagram'.
+	self
+		deny: (diagramController isVisibleInDiagram: second)
+		description: 'Navigable association end must not appear as attribute in diagram'.
+	self assertCollection: first type ownedAttributes includesAll: { second }.
 
 	controller viewModel writeNavigability: false to: second.
 	self
 		deny: (diagramController isVisibleInDiagram: second)
-		description: 'Member end set to non-navigable must be hidden from diagram'.
+		description: 'Member end set to non-navigable must remain hidden from diagram'.
+	self denyCollection: first type ownedAttributes includesAny: { second }.
 
 	controller viewModel writeNavigability: true to: second.
 	self
-		assert: (diagramController isVisibleInDiagram: second)
-		description: 'Member end set back to navigable must be visible in diagram'.
+		deny: (diagramController isVisibleInDiagram: second)
+		description: 'Member end set back to navigable must not spawn an attribute controller'.
+	self assertCollection: first type ownedAttributes includesAll: { second }.
 
-	attributeController := diagramController controllerForModel: second.
-	self assert: attributeController class equals: OPUmlAttributeController.
-
-	attributeDiagramElement := attributeController diagramElement.
-	self assert: attributeDiagramElement isRendered description: 'Attribute diagram element must be rendered when navigable'.
-	self assertCollection: diagramController diagram allOwnedElements includesAny: { attributeDiagramElement }.
-
-	"Cascaded removal via ViewModel safely cleans up endpoints"
 	controller removeControllerAndModel.
 	self
 		deny: (diagramController isVisibleInDiagram: model)
 		description: 'Association model must no longer be visible in diagram after removal'.
-	self
-		deny: (diagramController isVisibleInDiagram: second)
-		description: 'Navigable member end must no longer be visible in diagram after association removal'.
-	self denyCollection: diagramController controllers includesAny: {
-			controller.
-			attributeController }.
-	self denyCollection: diagramController diagram allOwnedElements includesAny: { attributeDiagramElement }
+	self denyCollection: first type ownedAttributes includesAny: { second }.
+	self assert: second owningClass identicalTo: nil.
+	self denyCollection: diagramController controllers includesAny: { controller }
 ]
 
 { #category : 'tests' }
@@ -327,4 +302,34 @@ OPUmlAssociationControllerTest >> testWriteNavigabilityClassOwnedToAssocOwned [
 	self deny: first isNavigable description: 'First member end must become non-navigable'.
 	self assert: first owningClass identicalTo: nil.
 	self assert: first owningAssociation identicalTo: model
+]
+
+{ #category : 'tests - diagram' }
+OPUmlAssociationControllerTest >> testWriteNavigabilityUpdatesRenderedAssociationMarkersWithoutAttributeController [
+
+	| first second |
+	self showInDiagram.
+	first := model memberEnds first.
+	second := model memberEnds second.
+
+	self assert: controller diagramElement roassalShape markerStart identicalTo: nil.
+	self assert: controller diagramElement roassalShape markerEnd identicalTo: nil.
+
+	controller viewModel writeNavigability: true to: second.
+	self
+		deny: (diagramController hasControllerForModel: second)
+		description: 'Navigable target end must not create an attribute controller'.
+	self assert: controller diagramElement roassalShape markerEnd shape class equals: OPRSBorderColoringComposite.
+	self assert: controller diagramElement roassalShape markerStart identicalTo: nil.
+
+	controller viewModel writeNavigability: true to: first.
+	self
+		deny: (diagramController hasControllerForModel: first)
+		description: 'Navigable source end must not create an attribute controller'.
+	self assert: controller diagramElement roassalShape markerStart shape class equals: OPRSBorderColoringComposite.
+	self assert: controller diagramElement roassalShape markerEnd shape class equals: OPRSBorderColoringComposite.
+
+	controller viewModel writeNavigability: false to: second.
+	self assert: controller diagramElement roassalShape markerStart shape class equals: OPRSBorderColoringComposite.
+	self assert: controller diagramElement roassalShape markerEnd identicalTo: nil
 ]
