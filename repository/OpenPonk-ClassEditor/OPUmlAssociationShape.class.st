@@ -36,8 +36,7 @@ OPUmlAssociationShape >> createOwnedElementsWithoutController [
 { #category : 'Roassal2 - accessing' }
 OPUmlAssociationShape >> headMarker [
 
-	^ self markerShapeFor:
-		  (self modelElement ifNil: [ ^ nil ]) memberEnds second
+	^ self modelElement ifNotNil: [ :model | self markerShapeFor: model memberEnds second ]
 ]
 
 { #category : 'accessing' }
@@ -99,6 +98,5 @@ OPUmlAssociationShape >> switchSourceAndTarget [
 { #category : 'Roassal2 - accessing' }
 OPUmlAssociationShape >> tailMarker [
 
-	^ self markerShapeFor:
-		  (self modelElement ifNil: [ ^ nil ]) memberEnds first
+	^ self modelElement ifNotNil: [ :model | self markerShapeFor: model memberEnds first ]
 ]

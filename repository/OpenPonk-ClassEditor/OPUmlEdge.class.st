@@ -14,9 +14,8 @@ Class {
 { #category : 'accessing' }
 OPUmlEdge >> colorMarker: aMarker [
 
-	aMarker ifNil: [ ^ aMarker ].
-	self isRendered ifFalse: [ ^ aMarker ].
-	aMarker shape color: self roassalShape color.
+	aMarker ifNotNil: [ :theMarker |
+		aMarker shape color: (self roassalShape ifNil: [ Color black ] ifNotNil: [ :theShape | theShape color ]) ].
 	^ aMarker
 ]
 
@@ -36,6 +35,8 @@ OPUmlEdge >> renderBasicShape [
 		  color: Color black;
 		  from: self source roassalShape;
 		  to: self target roassalShape;
+		  markerStart: (self colorMarker: self tailMarker);
+		  markerEnd: (self colorMarker: self headMarker);
 		  yourself
 ]
 
