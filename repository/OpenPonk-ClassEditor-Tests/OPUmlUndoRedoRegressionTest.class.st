@@ -124,6 +124,61 @@ OPUmlUndoRedoRegressionTest >> testEdgeLabelDragCreatesUndoCommandWithoutSelecti
 ]
 
 { #category : 'tests' }
+OPUmlUndoRedoRegressionTest >> testRemoveAssociationCascadesToUncachedNavigableClassOwnedEndAndUndoRestoresIt [
+
+	| customerClass orderClass placesAssociation customerProperty ordersProperty associationController |
+	customerClass := OPUMLClass new name: 'Customer'.
+	orderClass := OPUMLClass new name: 'Order'.
+	model packagedElements add: customerClass.
+	model packagedElements add: orderClass.
+
+	placesAssociation := OPUMLAssociation new name: 'places'.
+	customerProperty := OPUMLProperty new
+		                    name: 'customer';
+		                    type: customerClass;
+		                    owningAssociation: placesAssociation;
+		                    association: placesAssociation.
+	ordersProperty := OPUMLProperty new
+		                  name: 'orders';
+		                  type: orderClass;
+		                  association: placesAssociation;
+		                  owningClass: customerClass.
+	placesAssociation memberEnds: {
+			customerProperty.
+			ordersProperty }.
+	model packagedElements add: placesAssociation.
+
+	diagramController showInDiagramModel: customerClass.
+	diagramController showInDiagramModel: orderClass.
+	diagramController showInDiagramModel: placesAssociation.
+	undoManager clear.
+
+	self
+		deny: (registry hasViewModelFor: ordersProperty)
+		description: 'Class-owned navigable association end must not be cached in registry before removal'.
+	self assertCollection: customerClass ownedAttributes includesAll: { ordersProperty }.
+
+	associationController := diagramController controllerForModel: placesAssociation.
+	diagramController removeModelOfRoassalShape: associationController roassalShape.
+
+	self denyCollection: model packagedElements includesAny: { placesAssociation }.
+	self denyCollection: customerClass ownedAttributes includesAny: { ordersProperty }.
+	self assert: ordersProperty association identicalTo: nil.
+
+	undoManager undo.
+
+	self assertCollection: model packagedElements includesAll: { placesAssociation }.
+	self assertCollection: customerClass ownedAttributes includesAll: { ordersProperty }.
+	self assert: ordersProperty association identicalTo: placesAssociation.
+	self assert: placesAssociation memberEnds size equals: 2.
+
+	undoManager redo.
+
+	self denyCollection: model packagedElements includesAny: { placesAssociation }.
+	self denyCollection: customerClass ownedAttributes includesAny: { ordersProperty }
+]
+
+{ #category : 'tests' }
 OPUmlUndoRedoRegressionTest >> testShowAssociationTransitivelyShowsDependenciesInSingleUndoTransaction [
 
 	| association sourceClass targetClass diagramExplorer |
