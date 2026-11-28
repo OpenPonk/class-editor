@@ -21,7 +21,6 @@ OPUmlDataTypeViewModel >> icon [ ^ OPUmlIcons dataTypeIcon
 
 { #category : 'testing' }
 OPUmlDataTypeViewModel >> isSystemElement [
-	^ self parentViewModel
-		ifNotNil: [ :parentViewModelInstance | parentViewModelInstance isSystemElement ]
-		ifNil: [ false ]
+
+	^ self parentViewModel isSystemElement
 ]

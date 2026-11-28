@@ -70,9 +70,9 @@ OPUmlGeneralizationViewModel >> descriptionGeneral [
 	<magritteDescription>
 	^ MAStringDescription new
 		  beReadOnly;
-		  accessor: (MAPluggableAccessor
-				   read: [ :me | me model general ifNotNil: [ :general | general name ] ifNil: [ '' ] ]
-				   write: [ :me :newValue |  ]);
+		  accessor: (MAPluggableAccessor new
+				   readBlock: [ :me | me model general ifNotNil: [ :general | general name ] ifNil: [ '' ] ];
+				   yourself);
 		  label: 'General';
 		  priority: 1;
 		  yourself
@@ -113,9 +113,9 @@ OPUmlGeneralizationViewModel >> descriptionSpecific [
 	<magritteDescription>
 	^ MAStringDescription new
 		  beReadOnly;
-		  accessor: (MAPluggableAccessor
-				   read: [ :me | me model specific ifNotNil: [ :specific | specific name ] ifNil: [ '' ] ]
-				   write: [ :me :newValue |  ]);
+		  accessor: (MAPluggableAccessor new
+				   readBlock: [ :me | me model specific ifNotNil: [ :specific | specific name ] ifNil: [ '' ] ];
+				   yourself);
 		  label: 'Specific';
 		  priority: 2;
 		  yourself

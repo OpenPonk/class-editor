@@ -48,9 +48,13 @@ OPUmlClassifierControllerTest >> testPackageRenderChangedUpdatesRenderedShapeWhe
 
 	packageController := diagramController showInDiagramModel: innerPackage.
 	classController := diagramController showInDiagramModel: innerClass.
+	classController diagramElement owningElement: diagramController diagramElement.
 	self assertEmpty: classController hiddenPackages.
 
 	packageController diagramElement removeRender.
+	self
+		assert: classController diagramElement isRendered
+		description: 'Classifier diagram element must remain rendered when parent package is hidden'.
 	classController packageRenderChanged.
 	self assertCollection: classController diagramElement hiddenPackages hasSameElements: { innerPackage }
 ]

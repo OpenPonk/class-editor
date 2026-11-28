@@ -62,7 +62,7 @@ OPUmlAdditionalViewModelsTest >> testDataTypeViewModelWithoutParentIsNotSystemEl
 	orphanViewModel := testRegistry viewModelFor: orphanDataType.
 	self
 		deny: orphanViewModel isSystemElement
-		description: 'DataType view model without a parent view model must not be a system element'
+		description: 'DataType view model without a parent package must not be a system element'
 ]
 
 { #category : 'tests' }

@@ -141,7 +141,13 @@ OPUmlGeneralizationViewModelTest >> testBasicRemoveModelWithMultipleGeneralizati
 OPUmlGeneralizationViewModelTest >> testDescriptionGeneralAndSpecificReadNames [
 
 	self assert: (viewModel descriptionGeneral accessor read: viewModel) equals: 'GeneralClass'.
-	self assert: (viewModel descriptionSpecific accessor read: viewModel) equals: 'SpecificClass'
+	self assert: (viewModel descriptionSpecific accessor read: viewModel) equals: 'SpecificClass'.
+	self
+		deny: (viewModel descriptionGeneral accessor canWrite: viewModel)
+		description: 'General description accessor must be read-only'.
+	self
+		deny: (viewModel descriptionSpecific accessor canWrite: viewModel)
+		description: 'Specific description accessor must be read-only'
 ]
 
 { #category : 'tests' }

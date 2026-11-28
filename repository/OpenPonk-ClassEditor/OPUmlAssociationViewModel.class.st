@@ -230,12 +230,13 @@ OPUmlAssociationViewModel >> writeMultiplicityFrom: aString to: aProperty [
 
 { #category : 'parsing' }
 OPUmlAssociationViewModel >> writeNavigability: isNavigable to: aProperty [
+
 	isNavigable
 		ifTrue: [
-			aProperty owningClass: aProperty opposite type.
-			aProperty owningAssociation: nil ]
+				aProperty owningClass: aProperty opposite type.
+				aProperty owningAssociation: nil ]
 		ifFalse: [
-			aProperty owningClass: nil.
-			aProperty owningAssociation: aProperty association ].
-	self announcer announce: (OPUmlNavigabilityChanged property: aProperty)
+				aProperty owningClass: nil.
+				aProperty owningAssociation: aProperty association ].
+	self announcer announce: OPUmlNavigabilityChanged new
 ]

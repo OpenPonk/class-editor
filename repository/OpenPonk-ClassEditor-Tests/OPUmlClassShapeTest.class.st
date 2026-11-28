@@ -161,25 +161,31 @@ OPUmlClassShapeTest >> testRemoveRenderDoesNotClearCommentIconDiagramElement [
 { #category : 'tests' }
 OPUmlClassShapeTest >> testSortOwnedElementsOrdersStaticBeforeNonStaticAndHandlesNilNames [
 
-	| nilNameAttribute alphaAttribute staticAttribute compartment sortedModels |
+	| nilNameAttribute alphaAttribute staticZetaAttribute staticAlphaAttribute compartment sortedModels |
 	nilNameAttribute := OPUMLProperty new.
 	alphaAttribute := OPUMLProperty new name: 'alpha'.
-	staticAttribute := OPUMLProperty new
-		                   name: 'zeta';
-		                   isStatic: true;
-		                   yourself.
+	staticZetaAttribute := OPUMLProperty new
+		                       name: 'zeta';
+		                       isStatic: true;
+		                       yourself.
+	staticAlphaAttribute := OPUMLProperty new
+		                        name: 'alpha';
+		                        isStatic: true;
+		                        yourself.
 	compartment := OPUmlClassItemListCompartment new.
 	{
+		staticZetaAttribute.
 		nilNameAttribute.
 		alphaAttribute.
-		staticAttribute } do: [ :eachAttribute |
+		staticAlphaAttribute } do: [ :eachAttribute |
 			compartment ownedElements add: (OPUmlLabel new
 					 modelElement: eachAttribute;
 					 yourself) ].
 	compartment sortOwnedElements.
 	sortedModels := compartment ownedElements collect: #modelElement as: Array.
 	self assert: sortedModels equals: {
-			staticAttribute.
+			staticAlphaAttribute.
+			staticZetaAttribute.
 			nilNameAttribute.
 			alphaAttribute }
 ]
